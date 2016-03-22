@@ -1,0 +1,92 @@
+@extends('admin/layouts/default')
+
+{{-- Page title --}}
+@section('title')
+%%crudNamePlural%% List
+@parent
+@stop
+
+{{-- Page content --}}
+@section('content')
+<section class="content-header">
+    <h1>%%crudNamePluralCap%%</h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{ route('dashboard') }}">
+                <i class="fa fa-fw fa-home"></i>
+                Dashboard
+            </a>
+        </li>
+        <li> %%crudNamePlural%%</li>
+        <li> %%crudNamePlural%%</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary ">
+                <div class="panel-heading clearfix">
+                    <h4 class="panel-title pull-left"> <i class="fa fa-fw fa-list"></i>
+                        %%crudNamePluralCap%% List
+                    </h4>
+                    <div class="pull-right">
+                        <a href="{{ route('admin.%%crudNamePlural%%.create') }}" class="btn btn-sm btn-default"><i class="fa fa-plus"></i> @lang('button.create')</a>
+                    </div>
+                </div>
+                <br />
+                <div class="panel-body">
+                    @if ($%%crudNamePlural%%->count() >= 1)
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    %%tableHeads%%
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach ($%%crudNamePlural%% as $%%crudNameSingular%%)
+                                <tr>
+                                    <td>{!! $%%crudNameSingular%%->id !!}</td>
+                                    %%tableData%%
+                                    <td>
+                                        <a href="{{ route('admin.%%crudNamePlural%%.show', $%%crudNameSingular%%->id) }}">
+                                            <i class="fa fa-fw fa-star text-primary" title="view %%crudNameSingular%%"></i>
+                                        </a>
+                                        <a href="{{ route('admin.%%crudNamePlural%%.edit', $%%crudNameSingular%%->id) }}">
+                                            <i class="fa fa-fw fa-pencil text-warning" title="edit %%crudNameSingular%%"></i>
+                                        </a>
+                                        <a href="{{ route('admin.%%crudNamePlural%%.confirm-delete', $%%crudNameSingular%%->id) }}" data-toggle="modal" data-target="#delete_confirm">
+                                            <i class="fa fa-fw fa-times text-danger" title="delete %%crudNameSingular%%"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @else
+                        @lang('general.noresults')
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- row-->
+</section>
+
+@stop
+
+{{-- Body Bottom confirm modal --}}
+@section('footer_scripts')
+<div class="modal fade" id="delete_confirm" tabindex="-1" role="dialog" aria-labelledby="user_delete_confirm_title" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+<script>$(function () {$('body').on('hidden.bs.modal', '.modal', function () {$(this).removeData('bs.modal');});});</script>
+@stop

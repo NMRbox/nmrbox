@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html">
+  <title>Animated Page Elements using CSS3 - Design Shack Demo</title>
+  <meta name="author" content="Jake Rocheleau">
+  <link rel="shortcut icon" href="http://designshack.net/favicon.ico">
+  <link rel="icon" href="http://designshack.net/favicon.ico">
+  <link rel="stylesheet" type="text/css" media="all" href="css/styles.css">
+  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="js/scrollview.js"></script>
+</head>
+
+<body>
+  <div id="topbar">
+  <a href="http://designshack.net">Back to Design Shack</a>
+  </div>
+  
+  <div id="w">
+    <div id="content">
+      <h1>Animated Sliding Page Elements</h1>
+      <p>As you scroll down the page, individual blocks will animate into view. These only happen once per pageload and only when the viewport provides enough room for the whole element.</p>
+      
+      <p>We append a new class onto the container which then animates using CSS3 transitions.</p>
+      
+      <p>But what fun would this be if all the elements were above the fold?</p>
+      
+      <p>So now we can add a tiny bit of spacing... How about this filler image?</p>
+      
+      <p><img src="img/iphone4-models.jpg" alt="iphone4 black" width="700" height="450"></p>
+      <p><em><a href="http://www.flickr.com/photos/ivyfield/5431657055/">image source</a></em></p>
+      
+      <p>Our new iPhone application is amazing. It has a responsive web-based interface.</p>
+      
+      <section class="clearfix">
+        <div id="devices" data-position="left" class="notViewed animBlock floatl">
+          <img src="img/mac-product-graphics.png" alt="apple devices">
+          <!-- http://pixelsdaily.com/resources/photoshop/psds/mac-product-graphics/ -->
+        </div>
+      
+        <div id="devicesTxt" data-position="right" class="notViewed animBlock floatr">
+          <h3>The New Product</h3>
+          <p>It works on <a href="http://pixelsdaily.com/resources/photoshop/psds/mac-product-graphics/">all devices</a>, I'm so serious. The responsive layout adapts to all screen resolutions.</p>
+        </div>
+      </section>
+      
+      <hr>
+      
+      <h2>Kinda cool, huh?</h2>
+      
+      <p>There's a couple more animated sections below:</p>
+      
+      <section>
+        <div id="iphonePerspective" data-position="right" data-offset="250" class="notViewed animBlock">
+          <img src="img/white-iphone-mockup.png" alt="white iphone flat ui">
+          <!-- http://www.pixeden.com/psd-mock-up-templates/iphone-5-psd-flat-design-mockup -->
+        </div>
+      </section>
+      
+      <br>
+      <hr>
+      <br>
+      
+      <section class="clearfix">
+        <div id="appIcon" data-position="left" data-offset="60" class="notViewed animBlock floatl">
+          <img src="img/ios-app-icon.png" alt="blue generic ios app icon">
+          <!-- http://dribbble.com/shots/895640-App-Store-iOS-Icon-PSD -->
+        </div>
+        
+        <div id="downloadTxt" data-position="right" data-offset="60" class="notViewed animBlock floatr">
+          <h3>Grab Your Copy Today!</h3>
+          <p>What are you waiting for?</p>
+          <p><a href="javascript:void(0)" class="bigdl">Download Now</a></p>
+        </div>
+      </section>
+    </div><!-- @end #content -->
+  </div><!-- @end #w -->
+</body>
+</html>

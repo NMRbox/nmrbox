@@ -1,0 +1,11 @@
+/vendor
+/node_modules
+Homestead.yaml
+.env
+composer.lock
+.idea/
+_ide_helper.php
+.DS_store
+composer.phar
+laravel.log
+.svn
