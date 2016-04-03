@@ -4,7 +4,12 @@
 ----------------------------*/
 body {
 	font-family: 'Open Sans' !important;
+<<<<<<< HEAD
 	background:url(../../img/light_grey.png);
+=======
+	/*background:url(../../img/light_grey.png);*/
+	background: #FEFEFE;
+>>>>>>> bf08211b65155cf57a45bdac2074af6c3fb46652
 	height:100%;
 	padding-top:5%;
 	

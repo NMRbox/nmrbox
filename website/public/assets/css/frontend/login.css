@@ -8,7 +8,12 @@ html{
 body {
     font-family: 'Open Sans', sans-serif;
     /*background:url('../../images/login-bg.png')no-repeat center center fixed;*/
+<<<<<<< HEAD
     background:url(../../img/light_grey.png);
+=======
+    /*background:url(../../img/light_grey.png);*/
+    background: #FEFEFE;
+>>>>>>> bf08211b65155cf57a45bdac2074af6c3fb46652
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

@@ -1,7 +1,11 @@
 /vendor
 /node_modules
 Homestead.yaml
+<<<<<<< HEAD
 .env
+=======
+.env*
+>>>>>>> bf08211b65155cf57a45bdac2074af6c3fb46652
 composer.lock
 .idea/
 _ide_helper.php

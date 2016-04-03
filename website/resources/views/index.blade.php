@@ -61,6 +61,7 @@ Home
                             {{--Feel free to add text in the format of the grant abstracts below--}}
                             {{--Put an <hr> and <br> between posts for visual separation, see above--}}
 
+<<<<<<< HEAD
                             {{--<h2>Grant Abstracts</h2>--}}
                             {{--<p class="text-left">--}}
                                 {{--Computation plays a critical role in biomolecular applications of nuclear magnetic--}}
@@ -82,6 +83,29 @@ Home
                                 {{--the reproducibility of bio-NMR studies. An extensive array of collaborations will provide specific challenges as--}}
                                 {{--exemplars of biomedical applications of NMR and drive the technology development.--}}
                             {{--</p>--}}
+=======
+                            <h2>Grant Abstracts</h2>
+                            <p class="text-left">
+                                Computation plays a critical role in biomolecular applications of nuclear magnetic
+                                resonance spectroscopy (NMR), such as structural biology, metabolic studies, disease diagnosis, and drug
+                                discovery. Powerful software packages from a variety of sources facilitate computation in bio-NMR, but
+                                challenges include the difficulty of disseminating and maintaining a diverse set of software for a diverse set of
+                                computer platforms, communication between software packages, and the lack of persistence of software. The
+                                aim of this proposal is to establish a national Center for NMR Data Processing and Analysis that will simplify
+                                discovery, dissemination, support, and use of a broad range of widely-used NMR software, develop tools for
+                                data capture, abstraction, interoperation and workflow management, and provide novel analysis tools, all with
+                                the goal of enhancing reproducibility of bio-NMR studies. An archive of the software platform will ensure
+                                persistence that is essential for reproducible research. The Center will establish a publically accessible website
+                                for discovery, evaluation, and access to a diverse set of NMR software. In addition to a single, unified
+                                downloadable package, all the resources will be made available as a cloud-based platform. Three technology
+                                research and development components encompass the computing platform, data, and analytic resources for
+                                bio-NMR to be developed by the proposed Center. By facilitating the deployment, utilization, interoperation,
+                                and persistence of advanced software for biomolecular NMR, the proposed resource will advance the
+                                application of biomolecular NMR for a wide range of challenging applications in biomedicine, and help ensure
+                                the reproducibility of bio-NMR studies. An extensive array of collaborations will provide specific challenges as
+                                exemplars of biomedical applications of NMR and drive the technology development.
+                            </p>
+>>>>>>> bf08211b65155cf57a45bdac2074af6c3fb46652
 
                             {{--<p class="text-left">--}}
                                 {{--The broad aim of this proposal is to simplify and integrate dissemination,--}}
