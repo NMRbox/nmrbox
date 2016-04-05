@@ -8,5 +8,5 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 
 abstract class NmrModel extends Model
 {
-    public $timestamps = false; // Gerard doesn't like timestamps...'
+    public $timestamps = false;
 }

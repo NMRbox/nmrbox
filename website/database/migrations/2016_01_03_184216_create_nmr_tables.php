@@ -20,7 +20,6 @@ class CreateNmrTables extends Migration
             $table->string("institution", 64);
             $table->string("pi", 64);
             $table->string("nmrbox_acct", 32)->nullable();
-//            $table->timestamps(); // Gerard doesn't like timestamps
         });
 
         Schema::create('software', function (Blueprint $table) {
@@ -41,7 +40,6 @@ class CreateNmrTables extends Migration
             $table->string("devel_redistrib_doc", 16);
             $table->string("devel_active", 16);
             $table->string("devel_status", 16);
-//            $table->timestamps(); // Gerard doesn't like timestamps
         });
 
         Schema::create('svn_documents', function (Blueprint $table) {
@@ -49,13 +47,11 @@ class CreateNmrTables extends Migration
             $table->string("type", 255)->nullable();
             $table->smallInteger("display")->nullable();
             $table->binary("bdata")->nullable();
-//            $table->timestamps(); // Gerard doesn't like timestamps
         });
 
         Schema::create('citation_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string("name", 32);
-//            $table->timestamps(); // Gerard doesn't like timestamps
         });
 
         Schema::create('citations', function (Blueprint $table) {
@@ -73,7 +69,6 @@ class CreateNmrTables extends Migration
             $table->string("publisher", 64);
             $table->integer("pubmed")->nullable();
             $table->string("note", 1000)->nullable();
-//            $table->timestamps(); // Gerard doesn't like timestamps
         });
 
         Schema::create('files', function (Blueprint $table) {
@@ -90,19 +85,16 @@ class CreateNmrTables extends Migration
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
             $table->integer('role_id')->unsigned();
             $table->foreign("role_id")->references("id")->on("roles")->onDelete("cascade");
-//            $table->timestamps(); // Gerard doesn't like timestamps
         });
 
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string("keyword", 128)->unique();
-//            $table->timestamps(); // Gerard doesn't like timestamps
         });
 
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id');
             $table->string("label", 32);
-//            $table->timestamps(); // Gerard doesn't like timestamps
         });
 
         Schema::create('labs', function (Blueprint $table) {
@@ -110,14 +102,12 @@ class CreateNmrTables extends Migration
             $table->string("name", 80);
             $table->string("institution", 80)->nullable();
             $table->string("pi", 80)->nullable();
-//            $table->timestamps(); // Gerard doesn't like timestamps
         });
 
         Schema::create('lab_roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string("name", 80);
             $table->string("slug", 90)->nullable();
-//            $table->timestamps(); // Gerard doesn't like timestamps
         });
 
         Schema::create('vms', function (Blueprint $table) {
@@ -126,7 +116,6 @@ class CreateNmrTables extends Migration
             $table->smallInteger("major");
             $table->smallInteger("minor");
             $table->smallInteger("variant");
-//            $table->timestamps(); // Gerard doesn't like timestamps
             $table->unique(['major', 'minor']);
         });
 
@@ -135,7 +124,6 @@ class CreateNmrTables extends Migration
             $table->integer("software_id")->unsigned();
             $table->foreign("software_id")->references("id")->on("software")->onDelete("cascade");
             $table->string("version", 60);
-//            $table->timestamps(); // Gerard doesn't like timestamps
             $table->unique(['software_id', 'version']);
         });
 

@@ -38,8 +38,6 @@ Route::group(array('prefix' => 'admin'), function() {
     Route::get('logout', array('as' => 'logout','uses' => 'AuthController@getLogout'));
 });
 
-<<<<<<< HEAD
-=======
 Route::model('software', 'App\Software');
 Route::group(array('prefix' => 'registry'), function() {
     //All basic routes defined here
@@ -58,7 +56,6 @@ Route::group(array('prefix' => 'files'), function() {
 });
 
 // protected routes
->>>>>>> bf08211b65155cf57a45bdac2074af6c3fb46652
 Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), function () {
 
     Route::get('/', array('as' => 'dashboard','uses' => 'ChandraController@showHome'));
@@ -115,17 +112,10 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
     });
 
     # Software Management
-<<<<<<< HEAD
-    Route::model('software', 'App\Software');
-    Route::model('software_version', 'App\SoftwareVersion');
-    Route::model('vm', 'App\VM');
-    Route::model('file', 'App\File');
-=======
 //    Route::model('software', 'App\Software'); // already included above
     Route::model('software_version', 'App\SoftwareVersion');
     Route::model('vm', 'App\VM');
 //    Route::model('file', 'App\File'); // already included above
->>>>>>> bf08211b65155cf57a45bdac2074af6c3fb46652
     Route::group(array('prefix' => 'software'), function () {
         Route::get('/', array('as' => 'adminSoftware', 'uses' => 'SoftwareController@index'));
         Route::get('create', array('as' => 'software.create', 'uses' => 'SoftwareController@create'));

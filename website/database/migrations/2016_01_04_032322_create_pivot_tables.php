@@ -17,7 +17,7 @@ class CreatePivotTables extends Migration
                 $table->foreign("person_id")->references("id")->on("persons")->onDelete("cascade");
             $table->integer('lab_role_id')->unsigned();
                 $table->foreign("lab_role_id")->references("id")->on("lab_roles")->onDelete("cascade");
-            $table->nullableTimestamps();
+//            $table->nullableTimestamps();
             $table->integer('software_id')->unsigned();
                 $table->foreign("software_id")->references("id")->on("software")->onDelete("cascade");
             $table->primary(['person_id', 'lab_role_id', "software_id"]);
@@ -28,7 +28,7 @@ class CreatePivotTables extends Migration
             $table->foreign("person_id")->references("id")->on("persons")->onDelete("cascade");
             $table->integer('citation_id')->unsigned();
             $table->foreign("citation_id")->references("id")->on("citations")->onDelete("cascade");
-            $table->nullableTimestamps();
+//            $table->nullableTimestamps();
             $table->primary(['person_id', 'citation_id']);
         });
 
@@ -37,7 +37,7 @@ class CreatePivotTables extends Migration
             $table->foreign("person_id")->references("id")->on("persons")->onDelete("cascade");
             $table->integer('software_id')->unsigned();
             $table->foreign("software_id")->references("id")->on("software")->onDelete("cascade");
-            $table->nullableTimestamps();
+//            $table->nullableTimestamps();
             $table->primary(['person_id', 'software_id']);
         });
 
@@ -46,7 +46,7 @@ class CreatePivotTables extends Migration
             $table->foreign("person_id")->references("id")->on("persons")->onDelete("cascade");
             $table->integer('lab_id')->unsigned();
             $table->foreign("lab_id")->references("id")->on("labs")->onDelete("cascade");
-            $table->nullableTimestamps();
+//            $table->nullableTimestamps();
             $table->primary(['person_id', 'lab_id']);
         });
 
@@ -55,7 +55,7 @@ class CreatePivotTables extends Migration
             $table->foreign("software_id")->references("id")->on("software")->onDelete("cascade");
             $table->integer('citation_id')->unsigned();
             $table->foreign("citation_id")->references("id")->on("citations")->onDelete("cascade");
-            $table->nullableTimestamps();
+//            $table->nullableTimestamps();
             $table->primary(['software_id', 'citation_id']);
         });
 
@@ -64,7 +64,7 @@ class CreatePivotTables extends Migration
             $table->foreign("software_id")->references("id")->on("software")->onDelete("cascade");
             $table->integer('tag_id')->unsigned();
             $table->foreign("tag_id")->references("id")->on("tags")->onDelete("cascade");
-            $table->nullableTimestamps();
+//            $table->nullableTimestamps();
             $table->primary(['software_id', 'tag_id']);
         });
 
@@ -73,7 +73,7 @@ class CreatePivotTables extends Migration
             $table->foreign("software_id")->references("id")->on("software")->onDelete("cascade");
             $table->integer('svn_document_id')->unsigned();
             $table->foreign("svn_document_id")->references("id")->on("svn_documents")->onDelete("cascade");
-            $table->nullableTimestamps();
+//            $table->nullableTimestamps();
             $table->primary(['software_id', 'svn_document_id']);
         });
 
@@ -82,7 +82,7 @@ class CreatePivotTables extends Migration
             $table->foreign("software_id")->references("id")->on("software")->onDelete("cascade");
             $table->integer('menu_id')->unsigned();
             $table->foreign("menu_id")->references("id")->on("menus")->onDelete("cascade");
-            $table->nullableTimestamps();
+//            $table->nullableTimestamps();
             $table->primary(['software_id', 'menu_id']);
         });
 
@@ -91,7 +91,7 @@ class CreatePivotTables extends Migration
             $table->foreign("software_id")->references("id")->on("software")->onDelete("cascade");
             $table->integer('lab_id')->unsigned();
             $table->foreign("lab_id")->references("id")->on("labs")->onDelete("cascade");
-            $table->nullableTimestamps();
+//            $table->nullableTimestamps();
             $table->primary(['software_id', 'lab_id']);
         });
 
@@ -100,7 +100,7 @@ class CreatePivotTables extends Migration
             $table->foreign("software_version_id")->references("id")->on("software_versions")->onDelete("cascade");
             $table->integer('vm_id')->unsigned();
             $table->foreign("vm_id")->references("id")->on("vms")->onDelete("cascade");
-            $table->nullableTimestamps();
+//            $table->nullableTimestamps();
             $table->primary(['software_version_id', 'vm_id'])->unique();
         });
     }
