@@ -37,7 +37,7 @@
 
                             @if ($user = Sentinel::getUser())
                                 @if(Sentinel::inRole('admin'))
-                                    <a href="{{ route('software.edit',  ['software' => $software->slug] ) }}">
+                                    <a href="{{ route('software.edit',  ['software' => $software->id] ) }}">
                                         Edit this package
                                     </a>
                                 @endif

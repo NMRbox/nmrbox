@@ -29,7 +29,7 @@
 
 
 
-{!! BootForm::open(array('url'=>route('software.add-new-person', array('software'=>$software->slug)), 'style'=>'display:none;', 'class' => 'add-person-new-form add-person-container')) !!}
+{!! BootForm::open(array('url'=>route('software.add-new-person', array('software'=>$software->id)), 'style'=>'display:none;', 'class' => 'add-person-new-form add-person-container')) !!}
 <div class="col-sm-12 col-md-8">
     {!! BootForm::text('name', "Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
     {!! BootForm::email('email', "Email", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
@@ -47,7 +47,7 @@
 
 
 
-{!! BootForm::open(array('url'=>route('software.add-existing-person', array('software'=>$software->slug)), 'style'=>'display:none;', 'class' => 'add-person-existing-form add-person-container')) !!}
+{!! BootForm::open(array('url'=>route('software.add-existing-person', array('software'=>$software->id)), 'style'=>'display:none;', 'class' => 'add-person-existing-form add-person-container')) !!}
 
 {!! BootForm::select('existing_person', "Choose a person already in the database",
     $people_for_select, null, array()) !!}
