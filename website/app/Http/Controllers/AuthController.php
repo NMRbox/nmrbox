@@ -112,13 +112,13 @@ class AuthController extends ChandraController
                 'last_name'  => Input::get('last_name'),
                 'email'      => Input::get('email'),
                 'password'   => Input::get('password'),
-                'phone'      => Input::get('phone'),
-                'dob'        => Input::get('dob'),
-                'country'    => Input::get('country'),
-                'address'    => Input::get('address'),
-                'zip'        => Input::get('zip'),
-                'gender'     => Input::get('gender'),
-                'subscribed' => Input::get('subscribed')?1:0
+//                'phone'      => Input::get('phone'),
+//                'dob'        => Input::get('dob'),
+//                'country'    => Input::get('country'),
+//                'address'    => Input::get('address'),
+//                'zip'        => Input::get('zip'),
+//                'gender'     => Input::get('gender'),
+//                'subscribed' => Input::get('subscribed')?1:0
 
             ),true);
 
