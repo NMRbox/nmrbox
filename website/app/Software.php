@@ -32,8 +32,7 @@ class Software extends NmrModel implements SluggableInterface
         'custom_license',
         'uchc_legal_approve',
         'devel_redistrib_doc',
-        'devel_active',
-        'devel_status',
+        'devel_active'
     ];
 
     protected $sluggable = [

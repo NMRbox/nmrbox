@@ -22,6 +22,6 @@ class SoftwareVersion extends NmrModel
 
     public function VMVersions()
     {
-        return $this->belongsToMany('App\VM', 'software_version_vm', 'software_version_id', 'vm_id')->withTimestamps();
+        return $this->belongsToMany('App\VM', 'software_version_vm', 'software_version_id', 'vm_id');
     }
 }
