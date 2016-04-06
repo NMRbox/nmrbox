@@ -340,6 +340,7 @@ class UsersController extends ChandraController
         $user = Sentinel::register(array(
             'first_name'    => Input::get('first_name'),
             'last_name'     => Input::get('last_name'),
+            'institution'   => Input::get('institution'),
             'email'         => Input::get('email'),
             'password'      => Input::get('password')
 //            'pic'           => isset($safeName)?$safeName:'',

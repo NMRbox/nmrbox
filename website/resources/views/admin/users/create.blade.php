@@ -108,6 +108,18 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label class="col-lg-2 control-label" for="institution">Institution</label>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-fw fa-user-md text-primary"></i>
+                                                                </span>
+                                                    <input type="text" placeholder="Institution name" name="institution" id="institution" class="form-control" value="{!! Input::old('institution') !!}" required="" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
                                             <label class="col-lg-2 control-label" for="password">Password</label>
                                             <div class="col-lg-6">
                                                 <div class="input-group">
@@ -161,12 +173,12 @@
                                             {{--</div>--}}
                                         {{--</div>--}}
 
-                                        {{--<div class="form-group">--}}
-                                            {{--<div class="col-lg-offset-2 col-lg-10">--}}
-                                                {{--<input type="submit" class="btn btn-primary" name="save" value="Save" />--}}
-                                                {{--<a href="{{ URL::previous() }}" class="btn btn-default" role="button">Cancel</a>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
+                                        <div class="form-group">
+                                            <div class="col-lg-offset-2 col-lg-10">
+                                                <input type="submit" class="btn btn-primary" name="save" value="Save" />
+                                                <a href="{{ URL::previous() }}" class="btn btn-default" role="button">Cancel</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
