@@ -61,7 +61,6 @@ Home
                             {{--Feel free to add text in the format of the grant abstracts below--}}
                             {{--Put an <hr> and <br> between posts for visual separation, see above--}}
 
-<<<<<<< HEAD
                             {{--<h2>Grant Abstracts</h2>--}}
                             {{--<p class="text-left">--}}
                                 {{--Computation plays a critical role in biomolecular applications of nuclear magnetic--}}
@@ -83,7 +82,7 @@ Home
                                 {{--the reproducibility of bio-NMR studies. An extensive array of collaborations will provide specific challenges as--}}
                                 {{--exemplars of biomedical applications of NMR and drive the technology development.--}}
                             {{--</p>--}}
-=======
+
                             <h2>Grant Abstracts</h2>
                             <p class="text-left">
                                 Computation plays a critical role in biomolecular applications of nuclear magnetic
@@ -105,7 +104,6 @@ Home
                                 the reproducibility of bio-NMR studies. An extensive array of collaborations will provide specific challenges as
                                 exemplars of biomedical applications of NMR and drive the technology development.
                             </p>
->>>>>>> bf08211b65155cf57a45bdac2074af6c3fb46652
 
                             {{--<p class="text-left">--}}
                                 {{--The broad aim of this proposal is to simplify and integrate dissemination,--}}
