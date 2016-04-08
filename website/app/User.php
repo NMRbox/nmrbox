@@ -25,25 +25,7 @@ class User extends EloquentUser {
     protected $fillable = [
         'email',
         'password',
-        'last_name',
-        'first_name',
-		'institution',
-        'permissions',
-        'phone',
-        'dob',
-        'pic',
-        'gender',
-        'phone',
-        'country',
-        'address',
-        'zip',
-        'activated',
-        'facebook',
-        'twitter',
-        'google_plus',
-        'skype',
-        'flickr',
-        'youtube',
+		'person_id'
     ];
 
 }

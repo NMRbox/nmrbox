@@ -17,8 +17,36 @@ class Person extends NmrModel
         'first_name',
         'last_name',
         'email',
-        'institution',
         'pi',
-        'nmrbox_acct'
+        'nmrbox_acct',
+        'institution',
+        'institution_type',
+        'department',
+        'position',
+        'address1',
+        'address2',
+        'address3',
+        'city',
+        'state_province',
+        'zip_code',
+        'country',
+        'time_zone_id'
+    ];
+
+    const positions = [
+        'PI',
+        'Undergraduate Student',
+        'Graduate Student',
+        'Postdoc',
+        'Faculty',
+        'Staff',
+        'Other'
+    ];
+
+    const institution_types = [
+        'Academic', 
+        'Non-profit', 
+        'Government', 
+        'Other'
     ];
 }

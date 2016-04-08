@@ -18,6 +18,7 @@ use File;
 use Hash;
 use App\User;
 use App\Person;
+use App\Timezone;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Reminder;
 
@@ -202,8 +203,21 @@ class FrontEndController extends ChandraController
      */
     public function getRegister()
     {
+        $timezones = Timezone::all();
+        $timezones = $timezones->sortBy("zone"); // want these sorted for frontend
+        $timezones_for_select = [];
+
+        // The goal here is to pair each vm's id with its friendly name, so the name can be displayed in a select
+        //  to choose the actual vm id.
+        foreach( $timezones as $tz ) {
+            $timezones_for_select[$tz->id] = $tz->zone; // pair VM ID with human friendly VM name
+        }
+
+        $person_positions = Person::positions;
+        $person_institution_types = Person::institution_types;
+        
         // Show the page
-        return View::make('register');
+        return View::make('register', compact('timezones_for_select', 'person_positions', 'person_institution_types'));
     }
 
     /**
@@ -228,30 +242,49 @@ class FrontEndController extends ChandraController
     {
         // Declare the rules for the form validation
         $rules = array(
-            'first_name' => 'required|min:3',
-            'last_name' =>  'required|min:3',
+            'first_name' => 'required|min:1',
+            'last_name' =>  'required|min:1',
             'email' => 'required|email|unique:users',
-            'institution' =>  'required|min:3'
+            'institution' =>  'required|min:1',
+            'pi' =>  'required|min:1'
         );
 
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $rules);
 
-        // If validation fails, we'll exit the operation now.
         if ($validator->fails()) {
             // Ooops.. something went wrong
-//            return Redirect::back()->withInput()->withErrors($validator);
+            return Redirect::back()->withInput()->withErrors($validator);
         }
 
         $activate = true; //make it false if you don't want to activate user automatically
 
         try {
-            // Register the user
-            $user = Sentinel::register(array(
+            // register the person
+            $person = new Person(array(
                 'first_name' => Input::get('first_name'),
                 'last_name' => Input::get('last_name'),
-                'email' => Input::get('email'),
+                'pi' => Input::get('pi'),
+//                'nmrbox_acct' => Input::get('nmrbox_acct'),
                 'institution' => Input::get('institution'),
+                'institution_type' => Input::get('institution_type'),
+                'department' => Input::get('department'),
+                'position' => Input::get('position'),
+                'address1' => Input::get('address1'),
+                'address2' => Input::get('address2'),
+                'address3' => Input::get('address3'),
+                'city' => Input::get('city'),
+                'state_province' => Input::get('state_province'),
+                'zip_code' => Input::get('zip_code'),
+                'country' => Input::get('country'),
+                'time_zone_id' => Input::get('time_zone_id'),
+            ));
+            $person->save();
+
+            // Register the user
+            $user = Sentinel::register(array(
+                'person_id' => $person->id,
+                'email' => Input::get('email'),
                 'password' => "nmrbox2016!" // TODO: good god make people change this
             ), $activate);
 

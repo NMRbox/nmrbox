@@ -24,7 +24,7 @@
                     <br>
                     <br>
                     <br>
-                    <span>Thanks! We'll be in touch.</span>
+                    <span>Thanks for registering! We'll be in touch when we're ready.</span>
                     <br>
                     <br><br>
                     <br>
@@ -54,7 +54,7 @@
 @section('footer_scripts')
     <script>
         setTimeout(function(){
-            window.location.href="{{ route("register") }}";
+            window.location.href="{{ route("home") }}";
         }, 4000);
     </script>
 @stop

@@ -48,20 +48,6 @@ class NmrSql extends Migration
             COMMENT ON EXTENSION plpgsql IS \'PL/pgSQL procedural language\';
             
             
-            
-            DO
-            $body$
-            BEGIN
-               IF NOT EXISTS (
-                  SELECT *
-                  FROM   pg_catalog.pg_user
-                  WHERE  usename = \'gweatherby\') THEN
-            
-                  CREATE ROLE gweatherby LOGIN PASSWORD \'secret\';
-               END IF;
-            END
-            $body$;
-            
             DO
             $body$
             BEGIN
@@ -119,10 +105,10 @@ class NmrSql extends Migration
             ALTER FUNCTION public.software_name_upper() OWNER TO laravel;
             
             --
-            -- Name: software_vers_proc(character varying, character varying); Type: FUNCTION; Schema: public; Owner: laravel
+            -- Name: software_vers_proc(VARCHAR, VARCHAR); Type: FUNCTION; Schema: public; Owner: laravel
             --
             
-            CREATE FUNCTION software_vers_proc(character varying, character varying) RETURNS integer
+            CREATE FUNCTION software_vers_proc(VARCHAR, VARCHAR) RETURNS integer
                 LANGUAGE plperl
                 AS $_$
                 my $softwarename = uc shift;
@@ -159,7 +145,7 @@ class NmrSql extends Migration
             $_$;
             
             
-            ALTER FUNCTION public.software_vers_proc(character varying, character varying) OWNER TO laravel;
+            ALTER FUNCTION public.software_vers_proc(VARCHAR, VARCHAR) OWNER TO laravel;
             
             SET default_tablespace = \'\';
             
@@ -172,7 +158,7 @@ class NmrSql extends Migration
             CREATE TABLE activations (
                 id integer NOT NULL,
                 user_id integer NOT NULL,
-                code character varying(255) NOT NULL,
+                code VARCHAR(255) NOT NULL,
                 completed boolean DEFAULT false NOT NULL,
                 completed_at timestamp(0) without time zone,
                 created_at timestamp(0) without time zone NOT NULL,
@@ -209,7 +195,7 @@ class NmrSql extends Migration
             
             CREATE TABLE blog_categories (
                 id integer NOT NULL,
-                title character varying(255) NOT NULL,
+                title VARCHAR(255) NOT NULL,
                 created_at timestamp(0) without time zone NOT NULL,
                 updated_at timestamp(0) without time zone NOT NULL,
                 deleted_at timestamp(0) without time zone
@@ -246,9 +232,9 @@ class NmrSql extends Migration
             CREATE TABLE blog_comments (
                 id integer NOT NULL,
                 blog_id integer NOT NULL,
-                name character varying(255) NOT NULL,
-                email character varying(255) NOT NULL,
-                website character varying(255),
+                name VARCHAR(255) NOT NULL,
+                email VARCHAR(255) NOT NULL,
+                website VARCHAR(255),
                 comment text NOT NULL,
                 created_at timestamp(0) without time zone NOT NULL,
                 updated_at timestamp(0) without time zone NOT NULL,
@@ -287,11 +273,11 @@ class NmrSql extends Migration
                 id integer NOT NULL,
                 blog_category_id integer NOT NULL,
                 user_id integer NOT NULL,
-                title character varying(255) NOT NULL,
+                title VARCHAR(255) NOT NULL,
                 content text NOT NULL,
-                image character varying(255),
+                image VARCHAR(255),
                 views integer DEFAULT 0 NOT NULL,
-                slug character varying(255),
+                slug VARCHAR(255),
                 featured smallint NOT NULL,
                 created_at timestamp(0) without time zone NOT NULL,
                 updated_at timestamp(0) without time zone NOT NULL,
@@ -352,7 +338,7 @@ class NmrSql extends Migration
             
             CREATE TABLE citation_types (
                 id integer NOT NULL,
-                name character varying(32) NOT NULL
+                name VARCHAR(32) NOT NULL
             );
             
             
@@ -386,17 +372,17 @@ class NmrSql extends Migration
             CREATE TABLE citations (
                 id integer NOT NULL,
                 citation_type_id integer NOT NULL,
-                title character varying(256),
-                author character varying(2000),
+                title VARCHAR(256),
+                author VARCHAR(2000),
                 year smallint,
-                journal character varying(128) NOT NULL,
-                volume character varying(10),
-                issue character varying(10),
-                page_start character varying(10),
-                page_end character varying(10),
-                publisher character varying(64) NOT NULL,
+                journal VARCHAR(128) NOT NULL,
+                volume VARCHAR(10),
+                issue VARCHAR(10),
+                page_start VARCHAR(10),
+                page_end VARCHAR(10),
+                publisher VARCHAR(64) NOT NULL,
                 pubmed integer,
-                note character varying(1000)
+                note VARCHAR(1000)
             );
             
             
@@ -429,12 +415,12 @@ class NmrSql extends Migration
             
             CREATE TABLE files (
                 id integer NOT NULL,
-                name character varying(255) NOT NULL,
-                slug character varying(128) NOT NULL,
-                label character varying(255) NOT NULL,
+                name VARCHAR(255) NOT NULL,
+                slug VARCHAR(128) NOT NULL,
+                label VARCHAR(255) NOT NULL,
                 bdata bytea,
                 size integer NOT NULL,
-                mime_type character varying(255),
+                mime_type VARCHAR(255),
                 software_id integer NOT NULL,
                 user_id integer NOT NULL,
                 role_id integer NOT NULL
@@ -465,7 +451,7 @@ class NmrSql extends Migration
             
             
             --
-            -- Name: institutions_id_seq; Type: SEQUENCE; Schema: public; Owner: gweatherby
+            -- Name: institutions_id_seq; Type: SEQUENCE; Schema: public; Owner: laravel
             --
             
             CREATE SEQUENCE institutions_id_seq
@@ -476,24 +462,24 @@ class NmrSql extends Migration
                 CACHE 1;
             
             
-            ALTER TABLE public.institutions_id_seq OWNER TO gweatherby;
+            ALTER TABLE public.institutions_id_seq OWNER TO laravel;
             
             --
-            -- Name: institutions; Type: TABLE; Schema: public; Owner: gweatherby; Tablespace: 
+            -- Name: institutions; Type: TABLE; Schema: public; Owner: laravel; Tablespace: 
             --
             
             CREATE TABLE institutions (
-                department character varying(32) NOT NULL,
+                department VARCHAR(32) NOT NULL,
                 id integer DEFAULT nextval(\'institutions_id_seq\'::regclass) NOT NULL,
-                institution_type character varying(32) NOT NULL,
-                name character varying(256) NOT NULL
+                institution_type VARCHAR(32) NOT NULL,
+                name VARCHAR(256) NOT NULL
             );
             
             
-            ALTER TABLE public.institutions OWNER TO gweatherby;
+            ALTER TABLE public.institutions OWNER TO laravel;
             
             --
-            -- Name: COLUMN institutions.institution_type; Type: COMMENT; Schema: public; Owner: gweatherby
+            -- Name: COLUMN institutions.institution_type; Type: COMMENT; Schema: public; Owner: laravel
             --
             
             COMMENT ON COLUMN institutions.institution_type IS \'academic, non-profit, government, other\';
@@ -531,8 +517,8 @@ class NmrSql extends Migration
             
             CREATE TABLE lab_roles (
                 id integer NOT NULL,
-                name character varying(80) NOT NULL,
-                slug character varying(90)
+                name VARCHAR(80) NOT NULL,
+                slug VARCHAR(90)
             );
             
             
@@ -577,9 +563,9 @@ class NmrSql extends Migration
             
             CREATE TABLE labs (
                 id integer NOT NULL,
-                name character varying(80) NOT NULL,
-                institution character varying(80),
-                pi character varying(80)
+                name VARCHAR(80) NOT NULL,
+                institution VARCHAR(80),
+                pi VARCHAR(80)
             );
             
             
@@ -624,7 +610,7 @@ class NmrSql extends Migration
             
             CREATE TABLE menus (
                 id integer NOT NULL,
-                label character varying(32) NOT NULL
+                label VARCHAR(32) NOT NULL
             );
             
             
@@ -657,10 +643,10 @@ class NmrSql extends Migration
             
             CREATE TABLE pages (
                 id integer NOT NULL,
-                title character varying(255) NOT NULL,
+                title VARCHAR(255) NOT NULL,
                 user_id integer NOT NULL,
                 content text NOT NULL,
-                slug character varying(255),
+                slug VARCHAR(255),
                 created_at timestamp(0) without time zone NOT NULL,
                 updated_at timestamp(0) without time zone NOT NULL,
                 deleted_at timestamp(0) without time zone
@@ -697,7 +683,7 @@ class NmrSql extends Migration
             CREATE TABLE persistences (
                 id integer NOT NULL,
                 user_id integer NOT NULL,
-                code character varying(255) NOT NULL,
+                code VARCHAR(255) NOT NULL,
                 created_at timestamp(0) without time zone NOT NULL,
                 updated_at timestamp(0) without time zone NOT NULL
             );
@@ -746,19 +732,20 @@ class NmrSql extends Migration
                 id integer NOT NULL,
                 first_name VARCHAR(32) NOT NULL,
                 last_name VARCHAR(64) NOT NULL,
-                email character varying(256) NOT NULL,
-                pi character varying(64) NOT NULL,
-                nmrbox_acct character varying(32),
+                pi VARCHAR(64) NOT NULL,
+                nmrbox_acct VARCHAR(32),
+                institution VARCHAR(256) DEFAULT NULL,
+                institution_type VARCHAR(64) DEFAULT NULL,
+                department VARCHAR(256) DEFAULT NULL,
+                position VARCHAR(32) DEFAULT NULL,
                 address1 VARCHAR(128) DEFAULT NULL,
+                address2 VARCHAR(128) DEFAULT NULL,
+                address3 VARCHAR(128) DEFAULT NULL,
                 city VARCHAR(64) DEFAULT NULL,
-                country VARCHAR(64) DEFAULT NULL,
-                institution_id integer,
-                job_title VARCHAR(32) DEFAULT NULL,
                 state_province VARCHAR(32) DEFAULT NULL,
-                time_zone_id integer DEFAULT 153 NOT NULL,
                 zip_code VARCHAR(32) DEFAULT NULL,
-                address2  character varying(128) DEFAULT NULL,
-                address3  character varying(128) DEFAULT NULL
+                country VARCHAR(64) DEFAULT NULL,
+                time_zone_id integer DEFAULT 153 NOT NULL
             );
             
             
@@ -792,7 +779,7 @@ class NmrSql extends Migration
             CREATE TABLE reminders (
                 id integer NOT NULL,
                 user_id integer NOT NULL,
-                code character varying(255) NOT NULL,
+                code VARCHAR(255) NOT NULL,
                 completed boolean DEFAULT false NOT NULL,
                 completed_at timestamp(0) without time zone,
                 created_at timestamp(0) without time zone NOT NULL,
@@ -843,8 +830,8 @@ class NmrSql extends Migration
             
             CREATE TABLE roles (
                 id integer NOT NULL,
-                slug character varying(255) NOT NULL,
-                name character varying(255) NOT NULL,
+                slug VARCHAR(255) NOT NULL,
+                name VARCHAR(255) NOT NULL,
                 permissions text,
                 created_at timestamp(0) without time zone NOT NULL,
                 updated_at timestamp(0) without time zone NOT NULL
@@ -880,10 +867,10 @@ class NmrSql extends Migration
             
             CREATE TABLE software (
                 id integer NOT NULL,
-                name character varying(32) NOT NULL,
-                short_title character varying(32),
-                long_title character varying(128) NOT NULL,
-                synopsis character varying(150) NOT NULL,
+                name VARCHAR(32) NOT NULL,
+                short_title VARCHAR(32),
+                long_title VARCHAR(128) NOT NULL,
+                synopsis VARCHAR(150) NOT NULL,
                 public_release boolean,
                 description text,
                 license_comment text DEFAULT \'\',
@@ -900,8 +887,8 @@ class NmrSql extends Migration
                 image bytea,
                 modified_license bytea,
                 original_license bytea,
-                url character varying(256) DEFAULT NULL::character varying,
-                slug character varying(128)
+                url VARCHAR(256) DEFAULT NULL::VARCHAR,
+                slug VARCHAR(128)
             );
             
             
@@ -959,7 +946,7 @@ class NmrSql extends Migration
             CREATE TABLE software_versions (
                 id integer NOT NULL,
                 software_id integer NOT NULL,
-                version character varying(60) NOT NULL
+                version VARCHAR(60) NOT NULL
             );
             
             
@@ -987,15 +974,15 @@ class NmrSql extends Migration
             
             
             --
-            -- Name: survey; Type: TABLE; Schema: public; Owner: gweatherby; Tablespace: 
+            -- Name: survey; Type: TABLE; Schema: public; Owner: laravel; Tablespace: 
             --
             
             CREATE TABLE survey (
-                comments character varying(512),
-                desired_software_packages character varying(64)[],
+                comments VARCHAR(512),
+                desired_software_packages VARCHAR(64)[],
                 id integer NOT NULL,
                 nmr_imaging boolean DEFAULT false NOT NULL,
-                nmr_other character varying(64),
+                nmr_other VARCHAR(64),
                 nmr_solid_state boolean DEFAULT false NOT NULL,
                 nmr_solution boolean DEFAULT false NOT NULL,
                 persons_id integer,
@@ -1003,14 +990,14 @@ class NmrSql extends Migration
                 study_dna boolean DEFAULT false NOT NULL,
                 study_dynamics boolean DEFAULT false NOT NULL,
                 study_metabolomics boolean DEFAULT false NOT NULL,
-                study_other character varying(64),
+                study_other VARCHAR(64),
                 study_proteins boolean DEFAULT false NOT NULL,
                 study_rna boolean DEFAULT false NOT NULL,
                 study_small_molecules boolean DEFAULT false NOT NULL
             );
             
             
-            ALTER TABLE public.survey OWNER TO gweatherby;
+            ALTER TABLE public.survey OWNER TO laravel;
             
             --
             -- Name: svn_document_software; Type: TABLE; Schema: public; Owner: laravel; Tablespace: 
@@ -1032,7 +1019,7 @@ class NmrSql extends Migration
             
             CREATE TABLE svn_documents (
                 id integer NOT NULL,
-                type character varying(255),
+                type VARCHAR(255),
                 display smallint,
                 bdata bytea
             );
@@ -1068,7 +1055,7 @@ class NmrSql extends Migration
             CREATE TABLE taggable_taggables (
                 tag_id integer NOT NULL,
                 taggable_id integer NOT NULL,
-                taggable_type character varying(255) NOT NULL,
+                taggable_type VARCHAR(255) NOT NULL,
                 created_at timestamp(0) without time zone NOT NULL,
                 updated_at timestamp(0) without time zone NOT NULL
             );
@@ -1082,8 +1069,8 @@ class NmrSql extends Migration
             
             CREATE TABLE taggable_tags (
                 tag_id integer NOT NULL,
-                name character varying(255) NOT NULL,
-                normalized character varying(255) NOT NULL,
+                name VARCHAR(255) NOT NULL,
+                normalized VARCHAR(255) NOT NULL,
                 created_at timestamp(0) without time zone NOT NULL,
                 updated_at timestamp(0) without time zone NOT NULL
             );
@@ -1118,7 +1105,7 @@ class NmrSql extends Migration
             
             CREATE TABLE tags (
                 id integer NOT NULL,
-                keyword character varying(128) NOT NULL
+                keyword VARCHAR(128) NOT NULL
             );
             
             
@@ -1152,8 +1139,8 @@ class NmrSql extends Migration
             CREATE TABLE throttle (
                 id integer NOT NULL,
                 user_id integer,
-                type character varying(255) NOT NULL,
-                ip character varying(255),
+                type VARCHAR(255) NOT NULL,
+                ip VARCHAR(255),
                 created_at timestamp(0) without time zone NOT NULL,
                 updated_at timestamp(0) without time zone NOT NULL
             );
@@ -1188,7 +1175,7 @@ class NmrSql extends Migration
             
             CREATE TABLE timezones (
                 id integer NOT NULL,
-                zone character varying(64) NOT NULL
+                zone VARCHAR(64) NOT NULL
             );
             
             
@@ -1221,15 +1208,13 @@ class NmrSql extends Migration
             
             CREATE TABLE users (
                 id integer NOT NULL,
-                email character varying(255) NOT NULL,
-                password character varying(255) NOT NULL,
+                person_id integer NOT NULL,
+                email VARCHAR(255) NOT NULL,
+                password VARCHAR(255) NOT NULL,
                 permissions text,
                 last_login timestamp(0) without time zone,
-                first_name character varying(255),
-                last_name character varying(255),
                 created_at timestamp(0) without time zone NOT NULL,
                 updated_at timestamp(0) without time zone NOT NULL,
-                institution character varying(255) NOT NULL,
                 deleted_at timestamp(0) without time zone
             );
             
@@ -1263,7 +1248,7 @@ class NmrSql extends Migration
             
             CREATE TABLE vms (
                 id integer NOT NULL,
-                name character varying(255) NOT NULL,
+                name VARCHAR(255) NOT NULL,
                 major smallint NOT NULL,
                 minor smallint NOT NULL,
                 variant smallint NOT NULL
@@ -1587,7 +1572,7 @@ class NmrSql extends Migration
             
             
             --
-            -- Data for Name: institutions; Type: TABLE DATA; Schema: public; Owner: gweatherby
+            -- Data for Name: institutions; Type: TABLE DATA; Schema: public; Owner: laravel
             --
             
             -- COPY institutions (department, id, institution_type, name) FROM stdin;
@@ -1595,7 +1580,7 @@ class NmrSql extends Migration
             
             
             --
-            -- Name: institutions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gweatherby
+            -- Name: institutions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: laravel
             --
             
             SELECT pg_catalog.setval(\'institutions_id_seq\', 1, false);
@@ -1761,7 +1746,7 @@ class NmrSql extends Migration
             -- 2	Dillon	Jones	dillons.z.jones@gmail.com	asd	NULL	NULL	153
             -- 3	Dillon	Jones	dillozn.z.jones@gmail.com	asdasd	NULL	NULL	153
             -- 4	Dillon	Jones	dilloan.z.jones@gmail.com	qwe	NULL	NULL	153
-            -- 5	Gerard	Weatherby	GWeatherby@uchc.edu	Hoch	NULL	NULL	153
+            -- 5	Gerard	Weatherby	laravel@uchc.edu	Hoch	NULL	NULL	153
             -- 7	Gerard2	Weatherby	junk@uchc.edu	Hoch	NULL	NULL	153
             -- 1	Dillon	Jones	dillon.z.jones@gmail.com	asd	2	NULL	153
             -- 8	Renhao	Li---------------	renhao.li@emory.edu	Renhao Li	NULL	NULL	153
@@ -1775,29 +1760,35 @@ class NmrSql extends Migration
             -- 16	Elliott	Stollar	elliott.stollar@enmu.edu	Elliott Stollar	NULL	NULL	153
             -- \.
                       
-            insert into persons (id, first_name, last_name, email, pi, nmrbox_acct, institution_id, time_zone_id) VALUES
-                ( 2,     \'Dillon\',      \'Jones\',        \'dillon.z.jones@gmail.com\',           \'UCHC PI\',                  NULL,    NULL,    153 ),
-                ( 3,     \'Dillon\',      \'Jones\',        \'dillozn.z.jones@gmail.com\',          \'asdasd\',               NULL,    NULL,    153 ),
-                ( 4,     \'Dillon\',      \'Jones\',        \'dilloan.z.jones@gmail.com\',          \'qwe\',                  NULL,    NULL,    153 ),
-                ( 5,     \'Gerard\',      \'Weatherby\',    \'GWeatherby@uchc.edu\',                \'Hoch\',                 NULL,    NULL,    153 ),
-                ( 7,     \'Gerard2\',     \'Weatherby\',    \'junk@uchc.edu\',                      \'Hoch\',                 NULL,    NULL,    153 ),
-                ( 1,     \'Dillon\',      \'Jones\',        \'dillon.z.jones@gmail.com\',           \'asd\',                  2,       NULL,    153 ),
-                ( 8,     \'Renhao\',      \'Li\',           \'renhao.li@emory.edu\',                \'Renhao Li\',            NULL,    NULL,    153 ),
-                ( 9,     \'Patrick\',     \'Donabedian\',   \'pdonabedian@unm.edu\',                \'Eva Chi\',              NULL,    NULL,    153 ),
-                ( 10,    \'Colin\',       \'Smith\',        \'colin.smith@mpibpc.mpg.de\',          \'Christian Griesinger\', NULL,    NULL,    153 ),
-                ( 11,    \'Ramya\',       \'Billur\',       \'r0bill01@louisville.edu\',            \'Dr. Maurer\',           NULL,    NULL,    153 ),
-                ( 12,    \'Randy\',       \'Stockbridge\',  \'stockbr@umich.edu\',                  \'Stockbridge\',          NULL,    NULL,    153 ),
-                ( 13,    \'Mike\',        \'Barber\',       \'michael.barber@chem.ox.ac.uk\',       \'AJB\',                  NULL,    NULL,    153 ),
-                ( 14,    \'Ryan\',        \'Mahling\',      \'ryan-mahling@uiowa.edu\',             \'Dr. Shea\',             NULL,    NULL,    153 ),
-                ( 15,    \'sherry\',      \'leung\',        \'ssl1@sfu.ca\',                        \'Jenifer Thewalt\',      NULL,    NULL,    153 ),
-                ( 16,    \'Elliott\',     \'Stollar\',      \'elliott.stollar@enmu.edu\',           \'Elliott Stollar\',      NULL,    NULL,    153 );
+            -- insert into persons (id, first_name, last_name, email, pi, nmrbox_acct, institution_id, time_zone_id) VALUES
+            --     ( 2,     \'Dillon\',      \'Jones\',        \'dillon.z.jones@gmail.com\',           \'UCHC PI\',                  NULL,    NULL,    153 ),
+            -- 	( 3,     \'Dillon\',      \'Jones\',        \'dillozn.z.jones@gmail.com\',          \'asdasd\',               NULL,    NULL,    153 ),
+            -- 	( 4,     \'Dillon\',      \'Jones\',        \'dilloan.z.jones@gmail.com\',          \'qwe\',                  NULL,    NULL,    153 ),
+            -- 	( 5,     \'Gerard\',      \'Weatherby\',    \'laravel@uchc.edu\',                \'Hoch\',                 NULL,    NULL,    153 ),
+            -- 	( 7,     \'Gerard2\',     \'Weatherby\',    \'junk@uchc.edu\',                      \'Hoch\',                 NULL,    NULL,    153 ),
+            -- 	( 1,     \'Dillon\',      \'Jones\',        \'dillon.z.jones@gmail.com\',           \'asd\',                  2,       NULL,    153 ),
+            -- 	( 8,     \'Renhao\',      \'Li\',           \'renhao.li@emory.edu\',                \'Renhao Li\',            NULL,    NULL,    153 ),
+            -- 	( 9,     \'Patrick\',     \'Donabedian\',   \'pdonabedian@unm.edu\',                \'Eva Chi\',              NULL,    NULL,    153 ),
+            -- 	( 10,    \'Colin\',       \'Smith\',        \'colin.smith@mpibpc.mpg.de\',          \'Christian Griesinger\', NULL,    NULL,    153 ),
+            -- 	( 11,    \'Ramya\',       \'Billur\',       \'r0bill01@louisville.edu\',            \'Dr. Maurer\',           NULL,    NULL,    153 ),
+            -- 	( 12,    \'Randy\',       \'Stockbridge\',  \'stockbr@umich.edu\',                  \'Stockbridge\',          NULL,    NULL,    153 ),
+            -- 	( 13,    \'Mike\',        \'Barber\',       \'michael.barber@chem.ox.ac.uk\',       \'AJB\',                  NULL,    NULL,    153 ),
+            -- 	( 14,    \'Ryan\',        \'Mahling\',      \'ryan-mahling@uiowa.edu\',             \'Dr. Shea\',             NULL,    NULL,    153 ),
+            -- 	( 15,    \'sherry\',      \'leung\',        \'ssl1@sfu.ca\',                        \'Jenifer Thewalt\',      NULL,    NULL,    153 ),
+            -- 	( 16,    \'Elliott\',     \'Stollar\',      \'elliott.stollar@enmu.edu\',           \'Elliott Stollar\',      NULL,    NULL,    153 );
+            
+            
+            
+                      
+            insert into persons (id, first_name, last_name, pi, time_zone_id) VALUES
+                ( 1,     \'Admin_first\',      \'Admin_last\',           \'UCHC PI\',    153 );
             
             
             --
             -- Name: persons_id_seq; Type: SEQUENCE SET; Schema: public; Owner: laravel
             --
             
-            SELECT pg_catalog.setval(\'persons_id_seq\', 16, true);
+            SELECT pg_catalog.setval(\'persons_id_seq\', 1, true);
             
             
             --
@@ -1837,7 +1828,7 @@ class NmrSql extends Migration
             -- Name: roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: laravel
             --
             
-            SELECT pg_catalog.setval(\'roles_id_seq\', 1, false);
+            SELECT pg_catalog.setval(\'roles_id_seq\', 3, true);
             
             
             --
@@ -1887,7 +1878,7 @@ class NmrSql extends Migration
             
             
             --
-            -- Data for Name: survey; Type: TABLE DATA; Schema: public; Owner: gweatherby
+            -- Data for Name: survey; Type: TABLE DATA; Schema: public; Owner: laravel
             --
             
             -- COPY survey (comments, desired_software_packages, id, nmr_imaging, nmr_other, nmr_solid_state, nmr_solution, persons_id, study_computational, study_dna, study_dynamics, study_metabolomics, study_other, study_proteins, study_rna, study_small_molecules) FROM stdin;
@@ -2406,15 +2397,15 @@ class NmrSql extends Migration
             -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: laravel
             --
             
-            insert into users (id, email, password, permissions, last_login, first_name, last_name, created_at, updated_at, institution, deleted_at) VALUES
-            ( 1,	\'admin@admin.com\',	\'$2y$10$kEO7UJHYOVhHyo90BRRoSey0BqAMnorvMSzgO8HrnAlEKGVWXj3Me\',	NULL,	\'2016-03-22 20:37:46\',	\'John\',	\'Doe\',	\'2016-02-21 20:56:31\',	\'2016-03-22 20:37:46\',	\'UCHC\',	NULL );
+            insert into users (id, person_id, email, password, permissions, last_login, created_at, updated_at, deleted_at) VALUES
+            ( 1,    1,	\'admin@admin.com\',	\'$2y$10$kEO7UJHYOVhHyo90BRRoSey0BqAMnorvMSzgO8HrnAlEKGVWXj3Me\',	NULL,	\'2016-03-22 20:37:46\',	\'2016-02-21 20:56:31\',	\'2016-03-22 20:37:46\',	NULL );
             
             
             --
             -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: laravel
             --
             
-            SELECT pg_catalog.setval(\'users_id_seq\', 1, false);
+            SELECT pg_catalog.setval(\'users_id_seq\', 1, true);
             
             
             --
@@ -2513,7 +2504,7 @@ class NmrSql extends Migration
             
             
             --
-            -- Name: instiutions_pkey; Type: CONSTRAINT; Schema: public; Owner: gweatherby; Tablespace: 
+            -- Name: instiutions_pkey; Type: CONSTRAINT; Schema: public; Owner: laravel; Tablespace: 
             --
             
             ALTER TABLE ONLY institutions
@@ -2617,7 +2608,7 @@ class NmrSql extends Migration
             
             
             --
-            -- Name: pksurvey; Type: CONSTRAINT; Schema: public; Owner: gweatherby; Tablespace: 
+            -- Name: pksurvey; Type: CONSTRAINT; Schema: public; Owner: laravel; Tablespace: 
             --
             
             ALTER TABLE ONLY survey
@@ -2785,6 +2776,14 @@ class NmrSql extends Migration
             
             
             --
+            -- Name: users_person_id_unique; Type: CONSTRAINT; Schema: public; Owner: laravel; Tablespace: 
+            --
+            
+            ALTER TABLE ONLY users
+                ADD CONSTRAINT users_person_id_unique UNIQUE (person_id);
+            
+            
+            --
             -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: laravel; Tablespace: 
             --
             
@@ -2894,7 +2893,7 @@ class NmrSql extends Migration
             
             
             --
-            -- Name: fk_survey_persons; Type: FK CONSTRAINT; Schema: public; Owner: gweatherby
+            -- Name: fk_survey_persons; Type: FK CONSTRAINT; Schema: public; Owner: laravel
             --
             
             ALTER TABLE ONLY survey
@@ -2993,8 +2992,8 @@ class NmrSql extends Migration
             -- Name: persons_institution_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: laravel
             --
             
-            ALTER TABLE ONLY persons
-                ADD CONSTRAINT persons_institution_id_fkey FOREIGN KEY (institution_id) REFERENCES institutions(id);
+            -- ALTER TABLE ONLY persons
+            --     ADD CONSTRAINT persons_institution_id_fkey FOREIGN KEY (institution_id) REFERENCES institutions(id);
             
             
             --
@@ -3084,6 +3083,13 @@ class NmrSql extends Migration
             ALTER TABLE ONLY svn_document_software
                 ADD CONSTRAINT svn_document_software_svn_document_id_foreign FOREIGN KEY (svn_document_id) REFERENCES svn_documents(id) ON DELETE CASCADE;
             
+            
+            --
+            -- Name: svn_document_software_svn_document_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: laravel
+            --
+            
+            ALTER TABLE ONLY users
+                ADD CONSTRAINT person_id_foreign FOREIGN KEY (person_id) REFERENCES persons(id) ON DELETE CASCADE;
             
             --
             -- Name: public; Type: ACL; Schema: -; Owner: postgres
@@ -3690,6 +3696,19 @@ class NmrSql extends Migration
      */
     public function down()
     {
-        //
+        DB::unprepared('
+            drop schema public cascade;
+            create schema public;
+            
+            --- get laravel to shut up about missing migrations
+            
+            CREATE TABLE migrations
+                (
+                    migration VARCHAR(255) NOT NULL,
+                    batch INTEGER NOT NULL
+                );
+            
+            INSERT INTO public.migrations (migration, batch) VALUES (\'2016_04_03_185955_nmr_sql\', 1);
+        ');
     }
 }

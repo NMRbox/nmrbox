@@ -30,28 +30,37 @@
                     <div class="text-danger">{{ $error }}</div>
                 @endforeach
             @endif
-            <form action="{{ route('register') }}" method="POST">
-                <!-- CSRF Token -->
-                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                <div class="form-group">
-                    <label for="username"> First Name</label>
-                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" value="{!! Input::old('first_name') !!}" required>
-                </div>
-                <div class="form-group">
-                    <label for="username"> Last Name</label>
-                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" value="{!! Input::old('last_name') !!}" required>
-                </div>
-                <div class="form-group">
-                    <label for="Institution"> Institution</label>
-                    <input type="text" class="form-control" id="Institution" name="institution" placeholder="Institution" value="{!! Input::old('Institution') !!}" required>
-                </div>
-                <div class="form-group">
-                    <label for="Email"> Email</label>
-                    <input type="email" class="form-control" id="Email" name="email" placeholder="Email" value="{!! Input::old('Email') !!}" required>
-                </div>
-                <input type="submit" class="btn btn-block btn-primary" value="Register" name="submit">
-                {{--Have account already? <a href="{{ route('login') }}">Sign In</a>--}}
-            </form>
+
+            {!! BootForm::open(array('url'=>route('register') )) !!}
+
+                {!! BootForm::text('first_name', "First Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
+                {!! BootForm::text('last_name', "Last Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
+                {!! BootForm::email('email', "Email", null, array('class' => 'input-lg', 'required' => 'required')) !!}
+
+                {!! BootForm::select('position', "Position",
+                        $person_positions, null, array()) !!}
+
+                {!! BootForm::text('institution', "Institution", null, array('class' => 'input-lg', 'required' => 'required'))!!}
+                {!! BootForm::select('Institution_type', "Institution Type",
+                        $person_institution_types, null, array()) !!}
+
+                {!! BootForm::text('department', "Department", null, array('class' => 'input-lg', 'required' => 'required'))!!}
+                {!! BootForm::text('pi', "PI", null, array('class' => 'input-lg', 'required' => 'required'))!!}
+
+                {!! BootForm::text('address1', "Address Line 1", null, array('class' => 'input-lg', 'maxlength'=> 128))!!}
+                {!! BootForm::text('address2', "Address Line 2", null, array('class' => 'input-lg', 'maxlength'=> 128))!!}
+                {!! BootForm::text('address3', "Address Line 3", null, array('class' => 'input-lg', 'maxlength'=> 128))!!}
+                {!! BootForm::text('city', "City", null, array('class' => 'input-lg', 'maxlength'=> 64))!!}
+                {!! BootForm::text('state_province', "State_province", null, array('class' => 'input-lg', 'maxlength'=> 32))!!}
+                {!! BootForm::text('zip_code', "Zip_code", null, array('class' => 'input-lg', 'maxlength'=> 32))!!}
+                {!! BootForm::text('country', "Country", null, array('class' => 'input-lg', 'maxlength'=> 64))!!}
+                {!! BootForm::select('time_zone_id', "Time Zone",
+                        $timezones_for_select, 153, array()) !!}
+
+                {!! BootForm::submit('Save', array('class'=>'btn btn-primary btn-lg ')) !!}
+
+            {!! BootForm::close() !!}
+
         </div>
     </div>
 </div>
