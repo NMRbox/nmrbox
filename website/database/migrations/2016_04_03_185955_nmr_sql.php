@@ -4207,8 +4207,6 @@ GRANT SELECT,UPDATE ON SEQUENCE vms_id_seq TO nmrbox;
 --
 
 
-
-        
         ');
     }
 
