@@ -1,5 +1,11 @@
 <h2>People</h2>
 
+@if($errors->has())
+    @foreach ($errors->all() as $error)
+        <div class="text-danger">{{ $error }}</div>
+    @endforeach
+@endif
+
 <ul class="people-ul">
     @forelse($people as $person)
         <li>

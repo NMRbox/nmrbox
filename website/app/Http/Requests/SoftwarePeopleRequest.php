@@ -32,7 +32,9 @@ class SoftwarePeopleRequest extends Request {
     {
 
         // not sure any rules are really necessary for the developer section
-        return [];
+//        return [
+//            'existing_person' => 'unique:person_software,person_id,NULL,software_id'
+//        ];
 
 
 //        $software = $this->route('software');

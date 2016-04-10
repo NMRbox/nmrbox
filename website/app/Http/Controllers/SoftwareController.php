@@ -10,6 +10,7 @@ use Input;
 use Redirect;
 use URL;
 use Sentinel;
+use Validator;
 use Debugbar;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -297,10 +298,11 @@ class SoftwareController extends Controller
             $software->people()->attach($new_person->id);
         }
         catch(\Illuminate\Database\QueryException $e) {
-            dd($e);
+//            dd($e);
+            return back()->withErrors($e);
         }
 
-        return back();
+//        return back();
     }
 
     /**
@@ -310,16 +312,31 @@ class SoftwareController extends Controller
      * @param  Software $software
      * @return \Illuminate\Http\Response
      */
-    public function addExistingPerson(SoftwarePeopleRequest $request, Software $software)
+    public function addExistingPerson(Request $request, Software $software)
     {
 
+        // TODO: validation doesn't actually work, but the DB won't add a dupe. Fix validation. -dj 4/9/16
+
         $existing_person_id = $request->existing_person;
+
+        $rules = array(
+            'existing_person' => 'unique:person_software,person_id,NULL,person_id, software_id,' . $software->id
+        );
+
+        $validator = Validator::make([$existing_person_id], $rules);
+
+        if ($validator->fails()) {
+            // Ooops.. something went wrong
+//            return var_dump($validator);
+            return back()->withErrors($validator);
+        }
 
         try {
             $software->people()->attach($existing_person_id);
         }
         catch(\Illuminate\Database\QueryException $e) {
-            dd($e);
+//            return var_dump($e);
+            return back()->withErrors($e);
         }
 
         return back();
