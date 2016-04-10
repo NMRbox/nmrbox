@@ -58,7 +58,6 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>User E-mail</th>
-                            <th>Status</th>
                             <th>Created At</th>
                             <th>Actions</th>
                         </tr>
@@ -66,17 +65,17 @@
                         <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td>{!! $user->first_name !!}</td>
-                                <td>{!! $user->last_name !!}</td>
+                                <td>{!! $user->person()->get()->first()->first_name !!}</td>
+                                <td>{!! $user->person()->get()->first()->last_name !!}</td>
                                 <td>{!! $user->email !!}</td>
-                                <td>
-                                    @if($activation = Activation::completed($user))
-                                        Activated
-                                    @else
-                                        Pending
-                                    @endif
-                                </td>
-                                <td></td>
+                                {{--<td>--}}
+                                    {{--@if($activation = Activation::completed($user))--}}
+                                        {{--Activated--}}
+                                    {{--@else--}}
+                                        {{--Pending--}}
+                                    {{--@endif--}}
+                                {{--</td>--}}
+                                <td>{!! $user->created_at !!}</td>
                                 <td>
                                     @if(!$user->trashed())
                                         <a href="{{ route('users.edit', $user->id) }}"><i class="fa fa-fw fa-pencil text-warning"></i></a>

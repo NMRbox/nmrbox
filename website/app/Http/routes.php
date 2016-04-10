@@ -126,9 +126,9 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{software}/edit/versions', array('as' => 'software.edit-versions', 'uses' => 'SoftwareController@edit'));
         Route::get('{software}/edit/files', array('as' => 'software.edit-files', 'uses' => 'SoftwareController@edit'));
         Route::put('{software}/edit', array('as' => 'software.update', 'uses' => 'SoftwareController@update'));
+        Route::get('{software}/edit/people/existing/{person}/remove', array('as' => 'software.detach-person', 'uses' => 'SoftwareController@detachPerson'));
         Route::post('{software}/edit/people/new/add', array('as' => 'software.add-new-person', 'uses' => 'SoftwareController@addNewPerson'));
         Route::post('{software}/edit/people/existing/add', array('as' => 'software.add-existing-person', 'uses' => 'SoftwareController@addExistingPerson'));
-        Route::post('{software}/edit/people/existing/{person}/remove', array('as' => 'software.detach-person', 'uses' => 'SoftwareController@detachPerson'));
         Route::post('{software}/edit/people/edit', array('as' => 'software.people-edit', 'uses' => 'SoftwareController@updatePeople'));
         Route::put('{software}/edit/legal', array('as' => 'software.updatelegal', 'uses' => 'SoftwareController@updateLegal'));
         Route::get('{software}/delete', array('as' => 'delete/software', 'uses' => 'SoftwareController@destroy'));

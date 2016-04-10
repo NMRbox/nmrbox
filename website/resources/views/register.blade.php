@@ -33,29 +33,29 @@
 
             {!! BootForm::open(array('url'=>route('register') )) !!}
 
-                {!! BootForm::text('first_name', "First Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
-                {!! BootForm::text('last_name', "Last Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
-                {!! BootForm::email('email', "Email", null, array('class' => 'input-lg', 'required' => 'required')) !!}
+                {!! BootForm::text('first_name', "First Name", null, array('class' => 'input-lg', 'maxlength'=> 32, 'required' => 'required'))!!}
+                {!! BootForm::text('last_name', "Last Name", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
+                {!! BootForm::email('email', "Email", null, array('class' => 'input-lg', 'maxlength'=> 255, 'required' => 'required')) !!}
 
-                {!! BootForm::select('position', "Position",
-                        $person_positions, null, array()) !!}
+                {!! BootForm::select('job_title', "Job Title",
+                        $person_positions, null, array('maxlength'=> 32, 'required' => 'required')) !!}
 
-                {!! BootForm::text('institution', "Institution", null, array('class' => 'input-lg', 'required' => 'required'))!!}
-                {!! BootForm::select('Institution_type', "Institution Type",
-                        $person_institution_types, null, array()) !!}
+                {!! BootForm::text('institution', "Institution", null, array('class' => 'input-lg', 'maxlength'=> 256, 'required' => 'required'))!!}
+                {!! BootForm::select('institution_type', "Institution Type",
+                        $person_institution_types, null, array( 'maxlength'=> 256, 'required' => 'required')) !!}
 
-                {!! BootForm::text('department', "Department", null, array('class' => 'input-lg', 'required' => 'required'))!!}
-                {!! BootForm::text('pi', "PI", null, array('class' => 'input-lg', 'required' => 'required'))!!}
+                {!! BootForm::text('department', "Department", null, array('class' => 'input-lg', 'maxlength'=> 256, 'required' => 'required'))!!}
+                {!! BootForm::text('pi', "PI", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
 
-                {!! BootForm::text('address1', "Address Line 1", null, array('class' => 'input-lg', 'maxlength'=> 128))!!}
+                {!! BootForm::text('address1', "Address Line 1", null, array('class' => 'input-lg', 'maxlength'=> 128, 'required' => 'required'))!!}
                 {!! BootForm::text('address2', "Address Line 2", null, array('class' => 'input-lg', 'maxlength'=> 128))!!}
                 {!! BootForm::text('address3', "Address Line 3", null, array('class' => 'input-lg', 'maxlength'=> 128))!!}
-                {!! BootForm::text('city', "City", null, array('class' => 'input-lg', 'maxlength'=> 64))!!}
-                {!! BootForm::text('state_province', "State_province", null, array('class' => 'input-lg', 'maxlength'=> 32))!!}
-                {!! BootForm::text('zip_code', "Zip_code", null, array('class' => 'input-lg', 'maxlength'=> 32))!!}
-                {!! BootForm::text('country', "Country", null, array('class' => 'input-lg', 'maxlength'=> 64))!!}
+                {!! BootForm::text('city', "City", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
+                {!! BootForm::text('state_province', "State_province", null, array('class' => 'input-lg', 'maxlength'=> 32, 'required' => 'required'))!!}
+                {!! BootForm::text('zip_code', "Zip_code", null, array('class' => 'input-lg', 'maxlength'=> 32, 'required' => 'required'))!!}
+                {!! BootForm::text('country', "Country", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
                 {!! BootForm::select('time_zone_id', "Time Zone",
-                        $timezones_for_select, 153, array()) !!}
+                        $timezones_for_select, 169, array('required' => 'required')) !!}
 
                 {!! BootForm::submit('Save', array('class'=>'btn btn-primary btn-lg ')) !!}
 

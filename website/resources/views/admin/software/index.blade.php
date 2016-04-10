@@ -52,11 +52,7 @@
                     <table class="table" id="table">
                         <thead>
                         <tr class="filters">
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>software E-mail</th>
-                            <th>Status</th>
-                            <th>Created At</th>
+                            <th>Name</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -64,12 +60,6 @@
                         @forelse ($all_software as $software)
                             <tr>
                                 <td>{!! $software->name !!}</td>
-                                <td>{!! $software->short_title !!}</td>
-                                <td>{!! $software->public !!}</td>
-                                <td>
-                                    Whatever
-                                </td>
-                                <td></td>
                                 <td>
                                     <a href="{{ URL::to('admin/software/' . $software->id . '/edit' ) }}"><i class="fa fa-fw fa-pencil text-warning" title="update software"></i></a>
                                     <a href="{{ URL::to('admin/software/' . $software->id . '/delete' ) }}" data-toggle="modal" data-target="#delete_confirm"><i class="fa fa-fw fa-times text-danger" title="delete software"></i></a>

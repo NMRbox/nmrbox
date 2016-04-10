@@ -3,12 +3,12 @@
 <ul class="people-ul">
     @forelse($people as $person)
         <li>
-            <span class="person-display-edit-box" data-url="{!! route("software.people-edit", array('software'=>$software,'person'=>$person->id)) !!}">{!! $person->name !!}</span>
+            <span class="person-display-edit-box" data-url="{!! route("software.people-edit", array('software'=>$software,'person'=>$person->id)) !!}">{!! $person->first_name . " " . $person->last_name !!}</span>
             <div class="btn-group inline pull-right" data-toggle="buttons-checkbox">
-                <div class="btn btn-warning btn-small edit-person">Edit</div>
+                <div class="btn btn-warning btn-small edit-person hide">Edit</div>
                 <div class="btn btn-primary btn-small save-edit-person" style="display: none;">Save</div>
                 <div class="btn btn-danger btn-small cancel-edit-person" style="display: none;">Cancel</div>
-                <div class="btn btn-danger btn-small detach-person" data-url="{!! route("software.detach-person", array('software'=>$software, 'person'=>$person->id)) !!}" data-name="{!! $person->name !!}">Detach from this Software</div>
+                <div class="btn btn-danger btn-small detach-person" data-url="{!! route("software.detach-person", array('software'=>$software, 'person'=>$person->id)) !!}" data-name="{!! $person->first_name . " " . $person->last_name !!}">Detach from this Software</div>
             </div>
         </li>
     @empty
@@ -17,16 +17,23 @@
 </ul>
 
 
+<br>
+
+
+{{--<div class="form-group person-add-buttons">--}}
+    {{--<div>--}}
+        {{--<button type="button" class="btn btn-success add-person-new"><span class="glyphicon glyphicon-plus"></span> Add a new person</button>--}}
+        {{--<span>or</span>--}}
+        {{--<button type="button" class="btn btn-success add-person-existing"><span class="glyphicon glyphicon-plus"></span> Add an existing person</button>--}}
+    {{--</div>--}}
+{{--</div>--}}
 
 
 <div class="form-group person-add-buttons">
     <div>
-        <button type="button" class="btn btn-success add-person-new"><span class="glyphicon glyphicon-plus"></span> Add a new person</button>
-        <span>or</span>
         <button type="button" class="btn btn-success add-person-existing"><span class="glyphicon glyphicon-plus"></span> Add an existing person</button>
     </div>
 </div>
-
 
 
 {!! BootForm::open(array('url'=>route('software.add-new-person', array('software'=>$software->id)), 'style'=>'display:none;', 'class' => 'add-person-new-form add-person-container')) !!}

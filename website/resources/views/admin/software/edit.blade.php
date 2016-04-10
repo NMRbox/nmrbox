@@ -14,7 +14,7 @@
     <link href="{{ asset('assets/vendors/tags/dist/bootstrap-tagsinput.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/vendors/iCheck/skins/square/blue.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/custom_css/blog.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/custom_css/edit_software.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/edit_software.css') }}" rel="stylesheet" type="text/css" />
 
 @stop
 

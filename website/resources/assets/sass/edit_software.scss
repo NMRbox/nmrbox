@@ -1,0 +1,70 @@
+td .table-comma:last-child {
+  display: none;
+}
+
+.delete-file {
+  margin: 5px 0;
+}
+
+.delete-form {
+  display: inline;
+}
+
+.file-box {
+  border: solid 1px #ccc;
+  padding: 10px;
+}
+
+.people-ul {
+  li {
+    min-height: 34px;
+    margin: 5px;
+    padding: 0 5px;
+
+    span {
+      line-height: 34px;
+    }
+  }
+}
+
+.nav-tabs {
+  margin-bottom: 15px;
+}
+
+.versions-ul {
+  max-width: 400px;
+  padding: 0;
+}
+
+.versions-ul.wide {
+  max-width: 500px;
+  padding: 0;
+}
+
+.versions-ul .form-control {
+  display: inline-block;
+  max-width: 250px;
+  min-width: 200px;
+}
+
+#software-pair-template {
+  display: none;
+}
+
+#files-tab .form-group {
+  padding: 20px 0;
+}
+
+#versions-tab hr {
+  border-top: 1px solid #BDBDBD;
+}
+
+#versions-tab li {
+  margin: 20px 0;
+  padding: 0 0 0 5px;
+  line-height: 35px;
+}
+
+#versions-tab li:hover {
+  background-color: #D5DAE0;
+}

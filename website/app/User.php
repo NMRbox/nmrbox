@@ -28,4 +28,8 @@ class User extends EloquentUser {
 		'person_id'
     ];
 
+	public function person() {
+		return $this->belongsTo('App\Person');
+	}
+
 }

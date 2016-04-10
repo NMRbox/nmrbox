@@ -49,4 +49,8 @@ class Person extends NmrModel
         'Government', 
         'Other'
     ];
+
+    public function user() {
+        return $this->hasOne('App\User');
+    }
 }

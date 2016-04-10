@@ -244,9 +244,20 @@ class FrontEndController extends ChandraController
         $rules = array(
             'first_name' => 'required|min:1',
             'last_name' =>  'required|min:1',
-            'email' => 'required|email|unique:users',
-            'institution' =>  'required|min:1',
-            'pi' =>  'required|min:1'
+            'email' => 'required|email|max:255|unique:users',
+            'job_title' =>  'required',
+            'institution' =>  'required',
+            'institution_type' =>  'required',
+            'department' =>  'required|min:1|max:256',
+            'pi' =>  'required|min:1|max:64',
+            'address1' =>  'required|min:1|max:128',
+            'address2' =>  'max:128',
+            'address3' =>  'max:128',
+            'city' =>  'required|min:1|max:64',
+            'state_province' =>  'required|min:1|max:32',
+            'zip_code' =>  'required|min:1|max:32',
+            'country' =>  'required|min:1|max:64',
+            'time_zone_id' =>  'required|integer'
         );
 
         // Create a new validator instance from our validation rules
@@ -264,12 +275,13 @@ class FrontEndController extends ChandraController
             $person = new Person(array(
                 'first_name' => Input::get('first_name'),
                 'last_name' => Input::get('last_name'),
+                'email' => Input::get('email'),
                 'pi' => Input::get('pi'),
 //                'nmrbox_acct' => Input::get('nmrbox_acct'),
                 'institution' => Input::get('institution'),
                 'institution_type' => Input::get('institution_type'),
                 'department' => Input::get('department'),
-                'position' => Input::get('position'),
+                'job_title' => Input::get('job_title'),
                 'address1' => Input::get('address1'),
                 'address2' => Input::get('address2'),
                 'address3' => Input::get('address3'),

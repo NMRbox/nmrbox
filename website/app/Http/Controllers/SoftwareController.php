@@ -167,10 +167,10 @@ class SoftwareController extends Controller
 
         // sort all people for html select element
         $all_people = Person::all();
-        $all_people = $all_people->sortBy("name");
+        $all_people = $all_people->sortBy("last_name");
         $people_for_select = [];
         foreach( $all_people as $person ) {
-            $people_for_select[$person->id] = $person->name; // pair VM ID with human friendly VM name
+            $people_for_select[$person->id] = $person->last_name . ", " . $person->first_name; // pair VM ID with human friendly VM name
         }
 
         $vm_versions = VM::all();

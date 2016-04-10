@@ -49,7 +49,6 @@ People Index
                                 <th>Last Name</th>
                                 <th>Email</th>
                                 <th>Institution</th>
-                                <th>PI</th>
                                 <th>NMRbox Account #</th>
                             </tr>
                         </thead>
@@ -61,8 +60,6 @@ People Index
                                     <td>{!! $person->last_name !!}</td>
                                     <td>{!! $person->email !!}</td>
                                     <td>{!! $person->institution !!}</td>
-                                    <td>{!! $person->pi !!}</td>
-                                    <td>{!! $person->nmrbox_acct !!}</td>
                                     <td>
                                         <a href="{!! URL::to('admin/people/' . $person->id . '/edit' ) !!}"><i class="fa fa-fw fa-pencil text-warning" title="update person"></i></a>
 

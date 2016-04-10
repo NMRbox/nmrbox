@@ -12,8 +12,9 @@ class NmrSql extends Migration
      */
     public function up()
     {
-        DB::unprepared('
-        --
+        DB::raw('
+        
+--
 -- PostgreSQL database dump
 --
 
@@ -4207,6 +4208,8 @@ GRANT SELECT,UPDATE ON SEQUENCE vms_id_seq TO nmrbox;
 --
 
 
+
+        
         ');
     }
 

@@ -14,9 +14,9 @@ $(document).ready(function() {
 
 
     function add_new_person_form(event, target, text) {
-        target.show();
-        $('#people-tab .person-add-buttons').hide();
-        $('#people-tab #add-nag').hide();
+        // target.show();
+        // $('#people-tab .person-add-buttons').hide();
+        // $('#people-tab #add-nag').hide();
     }
 
     function add_new_existing_person_form(event, target, text) {
