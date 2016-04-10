@@ -25,7 +25,13 @@
 
                 <div class="research-container">
 
+                    <p>For NMRbox support or general questions, email <a href="mailto:support@nmrbox.org">support@nmrbox.org</a></p>
 
+                    <p>For developers with questions related to provisioning NMRbox software, email <a href="mailto:developer@nmrbox.org">developer@nmrbox.org</a></p>
+
+                    <p>For questions about the NMRbox.org web site, email <a href="mailto:webmaster@nmrbox.org">webmaster@nmrbox.org</a></p>
+
+                    <p>To inquire about a possible collaboration with the NMRbox Team, email <a href="mailto:director@nmrbox.org">director@nmrbox.org</a></p>
 
                 </div>
             </div>

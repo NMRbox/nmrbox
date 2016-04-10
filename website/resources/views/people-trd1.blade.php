@@ -28,31 +28,31 @@
                     <h2>
                         Investigators
                     </h2>
-                        <ul>
-                            <li>
-                                Mark Maciejewski
-                            </li>
-                            <li>
-                                Adam Schuyler
-                            </li>
-                            <li>
-                                Ion Moraru
-                            </li>
-                        </ul>
+                    <ul>
+                        <li>
+                            Mark Maciejewski
+                        </li>
+                        <li>
+                            Adam Schuyler
+                        </li>
+                        <li>
+                            Ion Moraru
+                        </li>
+                    </ul>
                     <h2>
                         Staff
                     </h2>
-                        <ul>
-                            <li>
-                                Dillon Jones
-                            </li>
-                            <li>
-                                Gerard Weatherby
-                            </li>
-                            <li>
-                                Terry Wright
-                            </li>
-                        </ul>
+                    <ul>
+                        <li>
+                            Dillon Jones
+                        </li>
+                        <li>
+                            Gerard Weatherby
+                        </li>
+                        <li>
+                            Terry Wright
+                        </li>
+                    </ul>
 
                 </div>
             </div>

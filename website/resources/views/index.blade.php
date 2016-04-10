@@ -2,18 +2,18 @@
 
 {{-- Page title --}}
 @section('title')
-Home
-@parent
-@stop
+    Home
+    @parent
+    @stop
 
-{{-- page level styles --}}
-@section('header_styles')
-@stop
+    {{-- page level styles --}}
+    @section('header_styles')
+    @stop
 
 
-{{-- Page content --}}
-@section('content')
-    <!-- Container Section Start -->
+    {{-- Page content --}}
+    @section('content')
+            <!-- Container Section Start -->
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
@@ -35,7 +35,7 @@ Home
 
                                 <br><br>
 
-                                <p class="text-center"><a class="button button-flat" href="{{ route('register') }}" role="button">Register</a></p>
+                                <p class="text-center"><a class="button button-flat" href="{{ route('register-person') }}" role="button">Register</a></p>
                                 {{--<a class="button button-flat" href="#" role="button">Register</a>--}}
 
                             </div>
@@ -58,17 +58,16 @@ Home
                             <hr>
                             <br>
 
-                            {{--Feel free to add text in the format of the grant abstracts below--}}
-                            {{--Put an <hr> and <br> between posts for visual separation, see above--}}
 
 
-                            {{--<p class="text-left">--}}
-                                {{--The broad aim of this proposal is to simplify and integrate dissemination,--}}
-                                {{--maintenance, support, and application of NMR data processing and analysis software packages. By facilitating--}}
-                                {{--the discovery, use, and persistence of advanced software for biomolecular NMR, the proposed resource will--}}
-                                {{--advance the application of biomolecular NMR for challenging applications in biomedicine, including structural--}}
-                                {{--biology, drug discovery, and metabolomics. A unifying theme is to foster reproducible research in bio-NMR.--}}
-                            {{--</p>--}}
+                            <p class="text-left">
+                                NMRbox is a shared computational platform for NMR developed by the National Center for Biomolecular NMR Data Processing and Analysis, a collaboration among UConn Health, University of Wisconsin, and University of Illinois. The Center is a Biomedical Technology Research Resource (BTRR), supported by the National Institutes of Health (NIH) / National Institute of General Medical Sciences (NIGMS), grant 1P41GM111135.
+                            </p>
+
+                            <img class="index-image" src="{{ asset('assets/img/index-footer-logos/UCH.png') }}" alt="">
+                            <img class="index-image" src="{{ asset('assets/img/index-footer-logos/UW.png') }}" alt="">
+                            <img class="index-image" src="{{ asset('assets/img/index-footer-logos/UI.png') }}" alt="">
+                            <img class="index-image" src="{{ asset('assets/img/index-footer-logos/nigms_logo_sm.png') }}" alt="">
 
                         </div>
                     </div>

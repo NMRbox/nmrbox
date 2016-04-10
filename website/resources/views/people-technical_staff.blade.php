@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Acknowledge Us
+    EAB
     @parent
     @stop
 
@@ -19,21 +19,29 @@
             <div class="col-lg-8 col-lg-offset-2">
 
                 <div class="research-header">
-                    <h1>How to acknowledge NMRbox</h1>
+                    <h1>Technical Staff</h1>
                     <span></span>
                 </div>
 
                 <div class="research-container">
 
-                    <p>
-                        Acknowledging use of NMRbox is important for continuing financial support from NIH.
-                    </p>
+                    <br>
 
-                    <p>
-                        If you use NMRbox for a published study, please consider including the acknowledgment:
-                        <br><br>
-                        "This study made use of NMRbox, the National Center for Biomolecular NMR Data Processing and Analysis, which is supported by NIH grant P41GM111135 (NIGMS)."
-                    </p>
+
+                    <span class="bold">Sophan Iv</span>
+                    <br>
+                    <span class="bold">Dillon Jones</span>
+                    <br>
+                    <span class="bold">Steven King</span>
+                    <br>
+                    <span class="bold">Gerard Weatherby</span>
+                    <br>
+                    <span class="bold">Terry Wright</span>
+                    <br>
+
+
+
+
 
                 </div>
             </div>

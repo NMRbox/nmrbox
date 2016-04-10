@@ -19,12 +19,32 @@
             <div class="col-lg-8 col-lg-offset-2">
 
                 <div class="research-header">
-                    <h1>Administration</h1>
+                    <h1>Administrative Staff</h1>
                     <span></span>
                 </div>
 
                 <div class="research-container">
 
+
+                    <div class="contact-info">
+                        <span class="bold">Jenifer Gilman, Administrative Officer</span>
+                        <br>
+                        Department of Molecular Biology and Biophysics
+                        <br>
+                        UConn Health
+                        <br>
+                        <a href="mailto:gilman@uchc.edu">gilman@uchc.edu</a>
+                    </div>
+
+                    <div class="contact-info">
+                        <span class="bold">Oksana Gorbatyuk, Research Assistant</span>
+                        <br>
+                        Department of Molecular Biology and Biophysics
+                        <br>
+                        UConn Health
+                        <br>
+                        <a href="mailto:gorbatyuk@uchc.edu">gorbatyuk@uchc.edu</a>
+                    </div>
 
 
                 </div>

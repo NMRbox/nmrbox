@@ -5,6 +5,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .bs-docs-footer {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -52,6 +56,11 @@ body {
   line-height: 1.5em;
 }
 
+.contact-info {
+  margin: 0 0 2.5rem;
+  line-height: 2.3rem;
+}
+
 .crud-options-box {
   margin: 20px auto 0 auto;
 }
@@ -81,6 +90,10 @@ body {
   min-height: 350px;
   background-color: #f2f2f2;
   border-radius: 5px
+}
+
+.index-image {
+  margin: 15px;
 }
 
 .jumbotron .row {
@@ -249,6 +262,10 @@ body {
   max-width: 675px;
   padding: 0px 0 50px;
 
+
+  font-size: 1.9rem;
+  line-height: 2.9rem;
+
   h2 {
     margin-top: 32px;
     margin-bottom: 16px;
@@ -260,6 +277,22 @@ body {
     margin: 0 auto;
     max-width: 100%;
   }
+
+  table {
+    font-size: 1.4rem;
+  }
+
+  > ul {
+    > li {
+      > ul {
+        > li {
+          list-style-type: disc;
+          list-style-position: inside;
+        }
+      }
+    }
+  }
+
 }
 
 @media (min-width: 768px) {

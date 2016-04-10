@@ -49,9 +49,9 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Research</a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ URL::to('publications') }}">Publications</a>
-                            <li><a href="{{ URL::to('trd1') }}">TRD1</a></li>
-                            <li><a href="{{ URL::to('trd2') }}">TRD2</a></li>
-                            <li><a href="{{ URL::to('trd3') }}">TRD3</a></li>
+                            <li><a href="{{ URL::to('trd1') }}">TR&amp;D 1</a></li>
+                            <li><a href="{{ URL::to('trd2') }}">TR&amp;D 2</a></li>
+                            <li><a href="{{ URL::to('trd3') }}">TR&amp;D 3</a></li>
                             <li><a href="{{ URL::to('dbps') }}">DBPs</a>
                             </li>
                             <li><a href="{{ URL::to('c&s') }}">C&S</a>
@@ -70,17 +70,19 @@
 
                     <li class="dropdown {{ (Request::is('people-leadership') || Request::is('people-trd1') ||
                     Request::is('people-trd2') || Request::is('people-trd3') ||
-                    Request::is('people-eab') || Request::is('people-administration') ? 'active' : '') }}">
+                    Request::is('people-eab') || Request::is('people-administration') ||
+                    Request::is('people-technical-staff')? 'active' : '') }}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> People</a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ URL::to('people-leadership') }}">Leadership</a></li>
-                            <li><a href="{{ URL::to('people-trd1') }}">TRD1</a></li>
-                            <li><a href="{{ URL::to('people-trd2') }}">TRD2</a>
+                            <li><a href="{{ URL::to('people-trd1') }}">TR&amp;D 1</a></li>
+                            <li><a href="{{ URL::to('people-trd2') }}">TR&amp;D 2</a>
                             </li>
-                            <li><a href="{{ URL::to('people-trd3') }}">TRD3</a>
+                            <li><a href="{{ URL::to('people-trd3') }}">TR&amp;D 3</a>
                             </li>
                             <li><a href="{{ URL::to('people-eab') }}">EAB</a></li>
                             <li><a href="{{ URL::to('people-administration') }}">Administration</a></li>
+                            <li><a href="{{ URL::to('people-technical_staff') }}">Technical Staff</a></li>
                         </ul>
                     </li>
 
