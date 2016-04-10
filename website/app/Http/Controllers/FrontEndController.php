@@ -215,7 +215,7 @@ class FrontEndController extends ChandraController
 
         $person_positions = Person::positions;
         $person_institution_types = Person::institution_types;
-        
+
         // Show the page
         return View::make('register', compact('timezones_for_select', 'person_positions', 'person_institution_types'));
     }
