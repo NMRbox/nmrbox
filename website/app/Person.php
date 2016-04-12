@@ -20,7 +20,6 @@ class Person extends NmrModel
         'pi',
         'nmrbox_acct',
         'institution',
-        'institution_type',
         'department',
         'position',
         'address1',
@@ -43,14 +42,11 @@ class Person extends NmrModel
         'Other'
     ];
 
-    const institution_types = [
-        'Academic', 
-        'Non-profit', 
-        'Government', 
-        'Other'
-    ];
-
     public function user() {
         return $this->hasOne('App\User');
+    }
+
+    public function institution() {
+        return $this->hasOne('App\Institution');
     }
 }

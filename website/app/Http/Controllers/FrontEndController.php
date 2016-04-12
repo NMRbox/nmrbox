@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 
+use App\Institution;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Sentinel;
 use View;
@@ -102,7 +103,10 @@ class FrontEndController extends ChandraController
     public function myAccount()
     {
         $user = Sentinel::getUser();
-        return View::make('user_account', compact('user'));
+        // the person attached to the user
+        $person = $user->person()->get()->first();
+
+        return View::make('user_account', compact('user', 'person'));
     }
 
     /**
@@ -134,24 +138,32 @@ class FrontEndController extends ChandraController
         }
 
         // Update the user
-        $user->first_name = Input::get('first_name');
-        $user->last_name = Input::get('last_name');
+//        $user->first_name = Input::get('first_name');
+//        $user->last_name = Input::get('last_name');
+//        $user->email = Input::get('email');
+//        $user->gender = Input::get('gender');
+//        $user->phone = Input::get('phone');
+//        $user->dob = Input::get('dob');
+//        $user->country = Input::get('country');
+//        $user->address = Input::get('address');
+//        $user->state = Input::get('state');
+//        $user->city = Input::get('city');
+//        $user->zip = Input::get('zip');
+//        $user->facebook = Input::get('facebook');
+//        $user->twitter = Input::get('twitter');
+//        $user->google_plus = Input::get('google_plus');
+//        $user->skype = Input::get('skype');
+//        $user->flickr = Input::get('flickr');
+//        $user->youtube = Input::get('youtube');
+//        $user->subscribed = Input::get('subscribed') ? 1 : 0;
+
         $user->email = Input::get('email');
-        $user->gender = Input::get('gender');
-        $user->phone = Input::get('phone');
-        $user->dob = Input::get('dob');
-        $user->country = Input::get('country');
-        $user->address = Input::get('address');
-        $user->state = Input::get('state');
-        $user->city = Input::get('city');
-        $user->zip = Input::get('zip');
-        $user->facebook = Input::get('facebook');
-        $user->twitter = Input::get('twitter');
-        $user->google_plus = Input::get('google_plus');
-        $user->skype = Input::get('skype');
-        $user->flickr = Input::get('flickr');
-        $user->youtube = Input::get('youtube');
-        $user->subscribed = Input::get('subscribed') ? 1 : 0;
+
+        // the person attached to the user
+        $person = $user->person()->get()->first();
+
+        $person->first_name = Input::get('first_name');
+        $person->last_name = Input::get('last_name');
 
         // Do we want to update the user password?
         if ($password = Input::get('password')) {
@@ -175,6 +187,18 @@ class FrontEndController extends ChandraController
             //save new file path into db
             $user->pic = $safeName;
 
+        }
+
+        // Was the user's person record updated?
+        if ($person->save()) {
+            // if so, continue
+        }
+        else {
+            // Prepare the error message
+            $error = Lang::get('users/message.error.update');
+
+            // Redirect to the user page
+            return Redirect::route('my-account')->withInput()->with('error', $error);
         }
 
         // Was the user updated?
@@ -214,7 +238,7 @@ class FrontEndController extends ChandraController
         }
 
         $person_positions = Person::positions;
-        $person_institution_types = Person::institution_types;
+        $person_institution_types = Institution::institution_types;
 
         // Show the page
         return View::make('register', compact('timezones_for_select', 'person_positions', 'person_institution_types'));
@@ -271,6 +295,16 @@ class FrontEndController extends ChandraController
         $activate = true; //make it false if you don't want to activate user automatically
 
         try {
+
+            // save the institution
+            $institution = new Institution(array(
+                'name' => Input::get('institution'),
+                'institution_type' => Institution::institution_types[Input::get('institution_type')]
+            ));
+
+            $institution->save();
+
+
             // register the person
             $person = new Person(array(
                 'first_name' => Input::get('first_name'),
@@ -278,8 +312,7 @@ class FrontEndController extends ChandraController
                 'email' => Input::get('email'),
                 'pi' => Input::get('pi'),
 //                'nmrbox_acct' => Input::get('nmrbox_acct'),
-                'institution' => Input::get('institution'),
-                'institution_type' => Input::get('institution_type'),
+                'institution_id' => $institution->id,
                 'department' => Input::get('department'),
                 'job_title' => Input::get('job_title'),
                 'address1' => Input::get('address1'),
@@ -293,11 +326,12 @@ class FrontEndController extends ChandraController
             ));
             $person->save();
 
+
             // Register the user
             $user = Sentinel::register(array(
                 'person_id' => $person->id,
                 'email' => Input::get('email'),
-                'password' => "nmrbox2016!" // TODO: good god make people change this
+                'password' => "NMR-2016!" // TODO: good god make people change this
             ), $activate);
 
             //add user to 'User' group

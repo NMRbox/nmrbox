@@ -338,9 +338,9 @@ class UsersController extends ChandraController
 
         // Register the user
         $user = Sentinel::register(array(
-            'first_name'    => Input::get('first_name'),
-            'last_name'     => Input::get('last_name'),
-            'institution'   => Input::get('institution'),
+//            'first_name'    => Input::get('first_name'),
+//            'last_name'     => Input::get('last_name'),
+//            'institution'   => Input::get('institution'),
             'email'         => Input::get('email'),
             'password'      => Input::get('password')
 //            'pic'           => isset($safeName)?$safeName:'',
@@ -393,6 +393,7 @@ class UsersController extends ChandraController
         try {
             // Get the user information
             $user = Sentinel::findById($id);
+            $person = $user->person()->get()->first();
 
             // Get this user roles
             $userRoles = $user->getRoles()->lists('slug', 'id')->all();
@@ -409,7 +410,7 @@ class UsersController extends ChandraController
         }
         $countries = $this->countries;
         // Show the page
-        return View::make('admin/users/edit', compact('user', 'roles', 'userRoles','countries'));
+        return View::make('admin/users/edit', compact('user', 'roles', 'userRoles','countries', 'person'));
     }
 
     /**
@@ -451,8 +452,8 @@ class UsersController extends ChandraController
         }
 
         // Update the user
-        $user->first_name  = Input::get('first_name');
-        $user->last_name   = Input::get('last_name');
+//        $user->first_name  = Input::get('first_name');
+//        $user->last_name   = Input::get('last_name');
         $user->email       = Input::get('email');
 //        $user->gender      = Input::get('gender');
 //        $user->phone       = Input::get('phone');
@@ -468,8 +469,17 @@ class UsersController extends ChandraController
 
         // Do we want to update the user password?
         if ($password) {
-            $user->password = Hash::make('$password');
+//            $user->password = Hash::make('$password');
+            Sentinel::update($user, array('password' => $password));
         }
+
+
+        // the person attached to the user
+        $person = $user->person()->get()->first();
+
+        $person->first_name = Input::get('first_name');
+        $person->last_name = Input::get('last_name');
+        $person->save();
 
         // is new image uploaded?
         if ($file = Input::file('pic'))
@@ -573,6 +583,9 @@ class UsersController extends ChandraController
             }
         }
 
+        // Was the user's person record updated?
+
+        $user->save();
         // Was the user updated?
         if ($user->save()) {
             // Prepare the success message

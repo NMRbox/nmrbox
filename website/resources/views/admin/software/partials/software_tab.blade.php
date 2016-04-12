@@ -3,8 +3,8 @@
 {!! BootForm::text('name', null, null,
     array('class' => 'input-lg', 'required' => 'required', 'placeholder'=>'Software Name', "onkeyup"=>"javascript:this.value=this.value.toUpperCase();"))!!}
 
-{!! BootForm::select('public_release', "Display this package publicly on the website?",
-    array("0"=>"No", "1"=>"Yes"), $software->public_release, array()) !!}
+{!! BootForm::select('display', "Display this package publicly on the website?",
+    array("0"=>"No", "1"=>"Yes"), $software->display, array()) !!}
 
 {!! BootForm::text('short_title', "Short Title", null,
     array('class' => 'input-lg', 'required' => 'false', 'placeholder'=>'Short title for software'))!!}

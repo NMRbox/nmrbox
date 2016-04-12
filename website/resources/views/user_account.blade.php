@@ -74,7 +74,7 @@ User Account
                                             <span class="input-group-addon">
                                                 <i class="fa fa-fw fa-user-md text-primary"></i>
                                             </span>
-                                                <input type="text" placeholder=" " name="first_name" id="u-name" class="form-control" value="{!! Input::old('first_name',$user->first_name) !!}"></div>
+                                                <input type="text" placeholder=" " name="first_name" id="first_name" class="form-control" value="{!! Input::old('first_name',$person->first_name) !!}"></div>
                                             <span class="help-block">{{ $errors->first('first_name', ':message') }}</span>
                                         </div>
 
@@ -90,7 +90,7 @@ User Account
                                             <span class="input-group-addon">
                                                 <i class="fa fa-fw fa-user-md text-primary"></i>
                                             </span>
-                                                <input type="text" placeholder=" " name="last_name" id="u-name" class="form-control" value="{!! Input::old('last_name',$user->last_name) !!}"></div>
+                                                <input type="text" placeholder=" " name="last_name" id="last_name" class="form-control" value="{!! Input::old('last_name',$person->last_name) !!}"></div>
                                             <span class="help-block">{{ $errors->first('last_name', ':message') }}</span>
                                         </div>
                                     </div>

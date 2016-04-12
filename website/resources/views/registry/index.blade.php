@@ -23,6 +23,7 @@
 
 
                         @forelse ($all_software as $software)
+                            @if($software->display == true)
                             <div class="col-sm-3 registry-package">
                                 <div class="registry-package-wrapper">
                                     <h3>
@@ -39,6 +40,7 @@
                                     </a>
                                 </div>
                             </div>
+                            @endif
                         @empty
                             <h2>No software entered yet</h2>
                         @endforelse

@@ -95,7 +95,7 @@
                                                                 <span class="input-group-addon">
                                                                     <i class="fa fa-fw fa-user-md text-primary"></i>
                                                                 </span>
-                                                    <input type="text" placeholder="first name" name="first_name" id="first_name" class="form-control" value="{!! Input::old('first_name',$user->first_name) !!}" required="" />
+                                                    <input type="text" placeholder="first name" name="first_name" id="first_name" class="form-control" value="{!! Input::old('first_name',$person->first_name) !!}" required="" />
                                                 </div>
                                             </div>
                                         </div>
@@ -107,7 +107,7 @@
                                                                 <span class="input-group-addon">
                                                                     <i class="fa fa-fw fa-user-md text-primary"></i>
                                                                 </span>
-                                                    <input type="text" placeholder="last name" name="last_name" id="last_name" class="form-control" value="{!! Input::old('last_name',$user->last_name) !!}" required="" />
+                                                    <input type="text" placeholder="last name" name="last_name" id="last_name" class="form-control" value="{!! Input::old('last_name',$person->last_name) !!}" required="" />
                                                 </div>
                                             </div>
                                         </div>

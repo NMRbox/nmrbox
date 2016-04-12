@@ -24,6 +24,7 @@ class Software extends NmrModel implements SluggableInterface
         'synopsis',
         'doc',
         'public_release',
+        'display',
         'description',
         'license_comment',
         'free_to_redistribute',
