@@ -47,6 +47,6 @@ class Person extends NmrModel
     }
 
     public function institution() {
-        return $this->hasOne('App\Institution');
+        return $this->belongsTo('App\Institution');
     }
 }

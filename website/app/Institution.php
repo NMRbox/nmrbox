@@ -27,6 +27,6 @@ class Institution extends NmrModel
 
     public function persons()
     {
-        return $this->belongsToMany('App\Person');
+        return $this->hasMany('App\Person');
     }
 }

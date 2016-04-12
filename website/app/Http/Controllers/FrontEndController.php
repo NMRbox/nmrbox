@@ -296,13 +296,6 @@ class FrontEndController extends ChandraController
 
         try {
 
-            // save the institution
-            $institution = new Institution(array(
-                'name' => Input::get('institution'),
-                'institution_type' => Institution::institution_types[Input::get('institution_type')]
-            ));
-
-            $institution->save();
 
 
             // register the person
@@ -312,7 +305,7 @@ class FrontEndController extends ChandraController
                 'email' => Input::get('email'),
                 'pi' => Input::get('pi'),
 //                'nmrbox_acct' => Input::get('nmrbox_acct'),
-                'institution_id' => $institution->id,
+                'institution_id' => 9, // set to unassigned, but update immediately after saving the model
                 'department' => Input::get('department'),
                 'job_title' => Input::get('job_title'),
                 'address1' => Input::get('address1'),
@@ -322,8 +315,33 @@ class FrontEndController extends ChandraController
                 'state_province' => Input::get('state_province'),
                 'zip_code' => Input::get('zip_code'),
                 'country' => Input::get('country'),
-                'time_zone_id' => Input::get('time_zone_id'),
+                'time_zone_id' => Input::get('time_zone_id')
             ));
+            $person->save();
+
+
+            $inputInstitution = Input::get('institution');
+            $inputInstitutionType = Input::get('institution_type');
+            $existing_institution = Institution::where('name', $inputInstitution)->get();
+
+            if( $existing_institution->isEmpty() ) {
+                // then make a new institution like normal
+                $institution = new Institution(array(
+                    'name' => Input::get('institution'),
+                    'institution_type' => Institution::institution_types[Input::get('institution_type')]
+                ));
+
+                $institution->save();
+                $person->institution()->associate($institution);
+            }
+            else {
+                // use the existing institution
+                $existing_institution = $existing_institution->first();
+                $person->institution()->associate($existing_institution);
+                $existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
+                $existing_institution->save();
+            }
+
             $person->save();
 
 

@@ -19,8 +19,8 @@ Edit VM
                 Dashboard
             </a>
         </li>
-        <li> Blog Categories</li>
-        <li class="active"> Edit VM</li>
+        <li> People</li>
+        <li class="active"> Edit Person</li>
     </ol>
 </section>
 
@@ -31,7 +31,7 @@ Edit VM
             <div class="panel panel-primary ">
                 <div class="panel-heading">
                     <h4 class="panel-title"><i class="fa fa-fw fa-plus"></i>
-                        Create VM
+                        Edit Person
                     </h4>
                 </div>
                 <div class="panel-body">
@@ -41,9 +41,25 @@ Edit VM
                         {!! BootForm::text('first_name', "First Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
                         {!! BootForm::text('last_name', "Last Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
                         {!! BootForm::email('email', "Email", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
-                        {!! BootForm::text('pi', "PI", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
-                        {!! BootForm::text('institution', "Institution", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
-                        {!! BootForm::text('nmrbox_acct', "NMRbox Account Number", null, array('class' => 'form-control input-lg', 'required' => 'false')) !!}
+                        {!! BootForm::select('job_title', "Job Title",
+                            $person_positions, null, array('maxlength'=> 32, 'required' => 'required')) !!}
+
+                        {!! BootForm::text('institution', "Institution", $person->institution()->get()->first()->name, array('class' => 'input-lg', 'maxlength'=> 256, 'required' => 'required'))!!}
+                        {!! BootForm::select('institution_type', "Institution Type",
+                            $person_institution_types, $person_institution_type_number, array( 'maxlength'=> 256, 'required' => 'required')) !!}
+
+                        {!! BootForm::text('department', "Department", null, array('class' => 'input-lg', 'maxlength'=> 256, 'required' => 'required'))!!}
+                        {!! BootForm::text('pi', "PI", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
+
+                        {!! BootForm::text('address1', "Address Line 1", null, array('class' => 'input-lg', 'maxlength'=> 128, 'required' => 'required'))!!}
+                        {!! BootForm::text('address2', "Address Line 2", null, array('class' => 'input-lg', 'maxlength'=> 128))!!}
+                        {!! BootForm::text('address3', "Address Line 3", null, array('class' => 'input-lg', 'maxlength'=> 128))!!}
+                        {!! BootForm::text('city', "City", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
+                        {!! BootForm::text('state_province', "State or Province", null, array('class' => 'input-lg', 'maxlength'=> 32, 'required' => 'required'))!!}
+                        {!! BootForm::text('zip_code', "Zip Code", null, array('class' => 'input-lg', 'maxlength'=> 32, 'required' => 'required'))!!}
+                        {!! BootForm::text('country', "Country", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
+                        {!! BootForm::select('time_zone_id', "Time Zone",
+                            $timezones_for_select, 169, array('required' => 'required')) !!}
                         {!! BootForm::submit('Save') !!}
                     </div>
                     {!! Form::close() !!}

@@ -51,8 +51,8 @@
             {!! BootForm::text('address2', "Address Line 2", null, array('class' => 'input-lg', 'maxlength'=> 128))!!}
             {!! BootForm::text('address3', "Address Line 3", null, array('class' => 'input-lg', 'maxlength'=> 128))!!}
             {!! BootForm::text('city', "City", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
-            {!! BootForm::text('state_province', "State_province", null, array('class' => 'input-lg', 'maxlength'=> 32, 'required' => 'required'))!!}
-            {!! BootForm::text('zip_code', "Zip_code", null, array('class' => 'input-lg', 'maxlength'=> 32, 'required' => 'required'))!!}
+            {!! BootForm::text('state_province', "State or Province", null, array('class' => 'input-lg', 'maxlength'=> 32, 'required' => 'required'))!!}
+            {!! BootForm::text('zip_code', "Zip Code", null, array('class' => 'input-lg', 'maxlength'=> 32, 'required' => 'required'))!!}
             {!! BootForm::text('country', "Country", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
             {!! BootForm::select('time_zone_id', "Time Zone",
                     $timezones_for_select, 169, array('required' => 'required')) !!}
