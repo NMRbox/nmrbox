@@ -15,7 +15,7 @@ hostname=$(hostname -A|xargs)
 account=www-data
 loc=trunk
 os=ubuntu-14.04
-while getopts "n:d:a:s:h:" opt; do
+while getopts "n:d:a:s:o:h" opt; do
     case $opt in
 	h)
 	showhelp
@@ -80,5 +80,6 @@ MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
 EO_ENV
 ) > $installdir/.env
+mkdir $installdir/bootstrap/cache
 
 sudo chown -R $account:$account $installdir 
