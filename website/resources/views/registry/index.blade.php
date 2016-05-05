@@ -28,7 +28,7 @@
                                 <div class="registry-package-wrapper">
                                     <h3>
                                         {{--route("software.edit", array("software"=>$software->slug));--}}
-                                        <a href="{{ route('software-page',  ['software' => $software->id] ) }}">
+                                        <a href="{{ route('software-page',  ['software' => $software->slug] ) }}">
                                             {{$software->name}}
                                         </a>
                                     </h3>

@@ -12,8 +12,13 @@ use Mail;
 use File;
 use Hash;
 use App\User;
+use App\Person;
+use App\Institution;
+use App\Timezone;
+use Illuminate\Http\Request;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
+use App\Http\Controllers\PersonController;
 
 class UsersController extends ChandraController
 {
@@ -300,9 +305,29 @@ class UsersController extends ChandraController
     {
         // Get all the available groups
         $roles = Sentinel::getRoleRepository()->all();
+        $roles = $roles->sortBy("id"); // want these sorted for frontend
+        $roles_for_select = [ ];
 
+        foreach( $roles as $r ) {
+            $roles_for_select[$r->id] = $r->name; // pair VM ID with human friendly VM name
+        }
+
+        $timezones = Timezone::all();
+        $timezones = $timezones->sortBy("zone"); // want these sorted for frontend
+        $timezones_for_select = [ ];
+
+        // The goal here is to pair each vm's id with its friendly name, so the name can be displayed in a select
+        //  to choose the actual vm id.
+        foreach( $timezones as $tz ) {
+            $timezones_for_select[$tz->id] = $tz->zone; // pair VM ID with human friendly VM name
+        }
+
+        $person_positions = Person::positions;
+        $person_institution_types = Institution::institution_types;
+        
         // Show the page
-        return View::make('admin.users.create', compact('roles'));
+        return View::make('admin.users.create', compact('roles_for_select', 'timezones_for_select', 'person_positions',
+            'person_institution_types'));
     }
 
     /**
@@ -310,7 +335,7 @@ class UsersController extends ChandraController
      *
      * @return Redirect
      */
-    public function postCreate()
+    public function postCreate(Request $request)
     {
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $this->validationRules);
@@ -322,60 +347,83 @@ class UsersController extends ChandraController
         }
 
         //upload image
-        if ($file = Input::file('pic'))
-        {
-            $fileName        = $file->getClientOriginalName();
-            $extension       = $file->getClientOriginalExtension() ?: 'png';
-            $folderName      = '/uploads/users/';
-            $destinationPath = public_path() . $folderName;
-            $safeName        = str_random(10).'.'.$extension;
-            $file->move($destinationPath, $safeName);
-        }
+//        if ($file = Input::file('pic'))
+//        {
+//            $fileName        = $file->getClientOriginalName();
+//            $extension       = $file->getClientOriginalExtension() ?: 'png';
+//            $folderName      = '/uploads/users/';
+//            $destinationPath = public_path() . $folderName;
+//            $safeName        = str_random(10).'.'.$extension;
+//            $file->move($destinationPath, $safeName);
+//        }
 
         //check whether use should be activated by default or not
 //        $activate = Input::get('activate')?true:false;
-        $activate = true; // no need to activate users for NMRbox
+        
+        // TODO: this is the same code as in PersonController.php, refactor out
+        $activate = true; //make it false if you don't want to activate user automatically
 
-        // Register the user
-        $user = Sentinel::register(array(
-//            'first_name'    => Input::get('first_name'),
-//            'last_name'     => Input::get('last_name'),
-//            'institution'   => Input::get('institution'),
-            'email'         => Input::get('email'),
-            'password'      => Input::get('password')
-//            'pic'           => isset($safeName)?$safeName:'',
-//            'gender'        => Input::get('gender'),
-//            'phone'         => Input::get('phone'),
-//            'country'       => Input::get('country'),
-//            'address'       => Input::get('address'),
-//            'zip'           => Input::get('zip'),
-//            'facebook'      => Input::get('facebook'),
-//            'twitter'       => Input::get('twitter'),
-//            'google_plus'   => Input::get('google_plus'),
-//            'skype'         => Input::get('skype'),
-//            'flickr'        => Input::get('flickr'),
-//            'youtube'       => Input::get('youtube')
-        ),$activate);
+        try {
+            $person = new Person(array(
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'pi' => $request->pi,
+//                'nmrbox_acct' => $request->nmrbox_acct,
+                'institution_id' => 9, // set to unassigned, but update immediately after saving the model
+                'department' => $request->department,
+                'job_title' => $request->job_title,
+                'address1' => $request->address1,
+                'address2' => $request->address2,
+                'address3' => $request->address3,
+                'city' => $request->city,
+                'state_province' => $request->state_province,
+                'zip_code' => $request->zip_code,
+                'country' => $request->country,
+                'time_zone_id' => $request->time_zone_id
+            ));
+            $person->save();
 
 
-        //add user to 'User' group
-        $role = Sentinel::findRoleById(Input::get('group'));
-        $role->users()->attach($user);
+            $inputInstitution = $request->institution;
+            $inputInstitutionType = $request->institution_type;
+            $existing_institution = Institution::where('name', $inputInstitution)->get();
 
-        //check for activation and send activation mail if not activated by default
-        if(!$activate) {
+            if( $existing_institution->isEmpty() ) {
+                // then make a new institution like normal
+                $institution = new Institution(array(
+                    'name' => $request->institution,
+                    'institution_type' => Institution::institution_types[$request->institution_type]
+                ));
 
-            // Data to be used on the email view
-            $data = array(
-                'user'          => $user,
-                'activationUrl' => URL::route('activate', $user->id, Activation::create($user)->code),
-            );
+                $institution->save();
+                $person->institution()->associate($institution);
+            }
+            else {
+                // use the existing institution
+                $existing_institution = $existing_institution->first();
+                $person->institution()->associate($existing_institution);
+                $existing_institution->institution_type = Institution::institution_types[$request->institution_type];
+                $existing_institution->save();
+            }
 
-            // Send the activation code through email
-            Mail::send('emails.register-activate', $data, function ($m) use ($user) {
-                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                $m->subject('Welcome ' . $user->first_name);
-            });
+            $person->save();
+
+
+            // Register the user
+            $user = Sentinel::register(array(
+                'person_id' => $person->id,
+                'email' => $request->email,
+                'password' => $request->password
+            ), $activate);
+
+            //add user to 'User' group
+            $role = Sentinel::findRoleByName('User');
+            $role->users()->attach($user);
+
+        }
+        catch (UserExistsException $e) {
+            $this->messageBag->add('email', Lang::get('auth/message.account_already_exists'));
         }
 
         // Redirect to the home page with success menu
@@ -419,7 +467,17 @@ class UsersController extends ChandraController
      * @param  int      $id
      * @return Redirect
      */
-    public function postEdit($id = null)
+    public function postEdit($id = null) {
+
+    }
+
+    /**
+     * User update form processing page.
+     *
+     * @param  int      $id
+     * @return Redirect
+     */
+    public function OBSOLETEpostEdit($id = null)
     {
         try {
             // Get the user information

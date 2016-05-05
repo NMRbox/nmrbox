@@ -226,6 +226,9 @@ body {
     list-style-type: disc;
     list-style-position: inside; }
 
+.table-comma:last-child {
+  display: none; }
+
 @media (min-width: 768px) {
   .navbar-toggle {
     display: none; } }

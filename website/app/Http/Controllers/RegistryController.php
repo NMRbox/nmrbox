@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 Use App\Software;
+Use App\VM;
 Use View;
 
 class RegistryController extends Controller
@@ -27,7 +28,10 @@ class RegistryController extends Controller
      */
     public function getSoftware(Software $software) {
         $all_files = $software->files()->get();
-        return View::make("registry.software", compact('software', 'all_files'));
+
+        $vm_versions = VM::all();
+
+        return View::make("registry.software", compact('software', 'all_files', 'vm_versions'));
     }
 
     /**

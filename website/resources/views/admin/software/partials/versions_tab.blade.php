@@ -16,7 +16,7 @@
 @endforelse
 </ul>
 
-{!! BootForm::open(array('url'=>route('software.versions', array('software'=>$software->id)), 'class' => 'version-form')) !!}
+{!! BootForm::open(array('url'=>route('software.versions', array('software'=>$software->slug)), 'class' => 'version-form')) !!}
 <div class="form-group">
     <div>
         <button type="button" class="btn btn-success add-version"><span class="glyphicon glyphicon-plus"></span> Add a version</button>
@@ -72,7 +72,7 @@
 
 
 <div id="software-pair-template" class="software-pair-container">
-    {!! BootForm::open(array('url'=>route('software.vm-software', array('software'=>$software->id)), 'class' => 'version-pair-form')) !!}
+    {!! BootForm::open(array('url'=>route('software.vm-software', array('software'=>$software->slug)), 'class' => 'version-pair-form')) !!}
 
     {!! BootForm::select('vm_version', "VM version",
         $vm_versions_for_select, null, array()) !!}
@@ -99,7 +99,7 @@
                 <span class="pair-text">VM Version: <span style="font-weight: bold;">{!! $vm->name() !!}</span>
                 includes Software Version <span style="font-weight: bold;">{!! $sv->version !!}</span></span>
                 <div class="btn btn-danger btn-small delete-pair pull-right"
-                     data-url="{!! route('software.vm-software.delete', array('software'=>$software->id, "vm"=>$vm->id,
+                     data-url="{!! route('software.vm-software.delete', array('software'=>$software->slug, "vm"=>$vm->id,
                      "software_version"=>$sv->id)) !!}">
                     Delete Pair
                 </div>

@@ -18,12 +18,22 @@
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1">
                 <div class="content">
-                    <h1 class="page-header">{{$software->name}}</h1>
+                    <div class="research-header">
+                        <h1>{{$software->name}}</h1>
+
+                        @if ($user = Sentinel::getUser())
+                            @if(Sentinel::inRole('admin'))
+                            <span>
+                                <a href="{{ route('software.edit',  ['software' => $software->slug] ) }}">
+                                    Edit this package
+                                </a>
+                            </span>
+                            @endif
+                        @endif
+                        
+                    </div>
+
                     <div class="row">
-
-
-
-
                         <div class="package-detail">
                             {{--<h3>--}}
                                 {{--{{ $software->name }}--}}
@@ -33,14 +43,6 @@
                                 <h3>
                                     {{ $software->long_title }}
                                 </h3>
-                            @endif
-
-                            @if ($user = Sentinel::getUser())
-                                @if(Sentinel::inRole('admin'))
-                                    <a href="{{ route('software.edit',  ['software' => $software->id] ) }}">
-                                        Edit this package
-                                    </a>
-                                @endif
                             @endif
 
                             @foreach ($all_files as $file)
@@ -79,14 +81,24 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {{--{{# each version in versions}}--}}
-                                        {{--{{# with version.nmrVersion }}--}}
-                                        {{--<tr>--}}
-                                            {{--<td>{{ version.nmrVersion }}</td>--}}
-                                            {{--<td>{{ version.softwareVersion }}</td>--}}
-                                        {{--</tr>--}}
-                                        {{--{{/ with }}--}}
-                                        {{--{{/ each }}--}}
+                                        @forelse($vm_versions as $vm)
+                                            <tr>
+                                                <td>{!! $vm->name() !!}</td>
+                                                <td>
+
+                                                    @forelse($vm->softwareVersions()->where("software_id", "=", $software->id)->get() as $sv)
+                                                        {!! $sv->version !!}<span class="table-comma">,</span>  {{-- trailing commas hidden in edit_software.css --}}
+                                                    @empty
+                                                    @endforelse
+
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td>No VMs yet! <a href="{!! route('vm.create') !!}">Create one here</a></td>
+                                                <td>
+                                            </tr>
+                                        @endforelse
                                         </tbody>
                                     </table>
                                 </div>

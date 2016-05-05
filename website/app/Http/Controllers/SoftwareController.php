@@ -60,7 +60,7 @@ class SoftwareController extends Controller
     {
         $software = new Software($request->except('image','tags','featured'));
         $software->save();
-        return redirect()->route("software.edit", array("software"=>$software->id));
+        return redirect()->route("software.edit", array("software"=>$software->name));
     }
 
     /**

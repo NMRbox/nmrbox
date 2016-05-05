@@ -61,8 +61,8 @@
                             <tr>
                                 <td>{!! $software->name !!}</td>
                                 <td>
-                                    <a href="{{ URL::to('admin/software/' . $software->id . '/edit' ) }}"><i class="fa fa-fw fa-pencil text-warning" title="update software"></i></a>
-                                    <a href="{{ URL::to('admin/software/' . $software->id . '/delete' ) }}" data-toggle="modal" data-target="#delete_confirm"><i class="fa fa-fw fa-times text-danger" title="delete software"></i></a>
+                                    <a href="{{ URL::to('admin/software/' . $software->slug . '/edit' ) }}"><i class="fa fa-fw fa-pencil text-warning" title="update software"></i></a>
+                                    <a href="{{ URL::to('admin/software/' . $software->slug . '/delete' ) }}" data-toggle="modal" data-target="#delete_confirm"><i class="fa fa-fw fa-times text-danger" title="delete software"></i></a>
                                 </td>
                             </tr>
                             @empty

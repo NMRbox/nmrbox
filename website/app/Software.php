@@ -33,7 +33,8 @@ class Software extends NmrModel implements SluggableInterface
         'custom_license',
         'uchc_legal_approve',
         'devel_redistrib_doc',
-        'devel_active'
+        'devel_active',
+        'slug'
     ];
 
     protected $sluggable = [
@@ -51,6 +52,15 @@ class Software extends NmrModel implements SluggableInterface
 
     public function people() {
         return $this->belongsToMany('App\Person');
+    }
+
+    public function _needsSlugging() {
+        return $this->needsSlugging();
+    }
+
+    public function _generateSlug() {
+        $source = $this->getSlugSource();
+        return $this->generateSlug( $this->$source );
     }
 
 }

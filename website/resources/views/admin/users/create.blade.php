@@ -53,118 +53,160 @@
                     <div class="panel-body">
                         <!--main content-->
                         <div class="position-center">
-                            @if($errors->has())
-                                @foreach ($errors->all() as $error)
-                                    <div class="text-danger">{{ $error }}</div>
-                                @endforeach
-                            @endif
-                            <div>
-                                <h3 class="text-primary">Personal Information</h3>
-                            </div>
-                            <form role="form" id="tryitForm" class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ route('users.create') }}">
-                                {!! Form::token() !!}
-                                <div class="form-group">
-                                    <label class="col-lg-2 control-label">Avatar</label>
-                                    <div class="col-lg-6">
-                                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                                                <img src="http://placehold.it/200x150" alt="..."></div>
-                                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-                                            <div>
-                                                            <span class="btn btn-primary btn-file">
-                                                                <span class="fileinput-new">Select image</span>
-                                                                <span class="fileinput-exists">Change</span>
-                                                                <input type="file" name="pic" id="pic" />
-                                                            </span>
-                                                <a href="#" class="btn btn-primary fileinput-exists" data-dismiss="fileinput">Remove</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cd-block">
-                                    <div class="cd-content">
-                                        <div class="form-group">
-                                            <label class="col-lg-2 control-label" for="first_name">First Name</label>
-                                            <div class="col-lg-6">
-                                                <div class="input-group">
-                                                                <span class="input-group-addon">
-                                                                    <i class="fa fa-fw fa-user-md text-primary"></i>
-                                                                </span>
-                                                    <input type="text" placeholder="first name" name="first_name" id="first_name" class="form-control" value="{!! Input::old('first_name') !!}" required="" />
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label class="col-lg-2 control-label" for="last_name">Last Name</label>
-                                            <div class="col-lg-6">
-                                                <div class="input-group">
-                                                                <span class="input-group-addon">
-                                                                    <i class="fa fa-fw fa-user-md text-primary"></i>
-                                                                </span>
-                                                    <input type="text" placeholder="last name" name="last_name" id="last_name" class="form-control" value="{!! Input::old('last_name') !!}" required="" />
-                                                </div>
-                                            </div>
-                                        </div>
+                            {!! BootForm::open(array('url'=>route('users.create') )) !!}
 
-                                        <div class="form-group">
-                                            <label class="col-lg-2 control-label" for="institution">Institution</label>
-                                            <div class="col-lg-6">
-                                                <div class="input-group">
-                                                                <span class="input-group-addon">
-                                                                    <i class="fa fa-fw fa-user-md text-primary"></i>
-                                                                </span>
-                                                    <input type="text" placeholder="Institution name" name="institution" id="institution" class="form-control" value="{!! Input::old('institution') !!}" required="" />
-                                                </div>
-                                            </div>
-                                        </div>
+                            {!! BootForm::text('first_name', "First Name", null, array('class' => 'input-lg', 'maxlength'=> 32, 'required' => 'required'))!!}
+                            {!! BootForm::text('last_name', "Last Name", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
+                            {!! BootForm::email('email', "Email", null, array('class' => 'input-lg', 'maxlength'=> 255, 'required' => 'required')) !!}
 
-                                        <div class="form-group">
-                                            <label class="col-lg-2 control-label" for="password">Password</label>
-                                            <div class="col-lg-6">
-                                                <div class="input-group">
-                                                                <span class="input-group-addon">
-                                                                    <i class="fa fa-fw fa-key text-primary"></i>
-                                                                </span>
-                                                    <input type="password" name="password" placeholder="" id="password" class="form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
+                            {!! BootForm::select('group', "Access Role",
+                    $roles_for_select, null, array('maxlength'=> 32, 'required' => 'required')) !!}
 
-                                        <div class="form-group">
-                                            <label class="col-lg-2 control-label" for="password_confirm">Confirm Password</label>
-                                            <div class="col-lg-6">
-                                                <div class="input-group">
-                                                                <span class="input-group-addon">
-                                                                    <i class="fa fa-fw fa-key text-primary"></i>
-                                                                </span>
-                                                    <input type="password" name="password_confirm" placeholder=" " id="password_confirm" class="form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
+                            {!! BootForm::password('password', 'Password', array('class' => 'input-lg', 'maxlength'=> 255, 'required' => 'required')) !!}
+                            {!! BootForm::password('password_confirm', 'Confirm Password', array('class' => 'input-lg', 'maxlength'=> 255, 'required' => 'required')) !!}
 
-                                        <div class="form-group">
-                                            <label class="col-lg-2 control-label" for="email">Email</label>
-                                            <div class="col-lg-6">
-                                                <div class="input-group">
-                                                                <span class="input-group-addon">
-                                                                    <i class="fa fa-fw fa-envelope text-primary"></i>
-                                                                </span>
-                                                    <input type="text" placeholder="" id="email" name="email" class="form-control" value="{!! Input::old('email') !!}"></div>
-                                            </div>
-                                        </div>
+                            {!! BootForm::select('job_title', "Job Title",
+                                    $person_positions, null, array('maxlength'=> 32, 'required' => 'required')) !!}
 
-                                        <div class="form-group">
-                                            <label for="group" class="col-md-2 control-label">Group</label>
-                                            <div class="col-md-6">
-                                                <select class="form-control " title="Select group..." name="group" id="group" required="">
-                                                    <option value="">Select</option>
-                                                    @foreach($roles as $role)
-                                                        <option value="{{ $role->id }}" @if($role->id == Input::old('group')) selected="selected" @endif >{{ $role->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
+                            {!! BootForm::text('institution', "Institution", null, array('class' => 'input-lg', 'maxlength'=> 256, 'required' => 'required'))!!}
+                            {!! BootForm::select('institution_type', "Institution Type",
+                                    $person_institution_types, null, array( 'maxlength'=> 256, 'required' => 'required')) !!}
+
+                            {!! BootForm::text('department', "Department", null, array('class' => 'input-lg', 'maxlength'=> 256, 'required' => 'required'))!!}
+                            {!! BootForm::text('pi', "PI", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
+
+                            {!! BootForm::text('address1', "Address Line 1", null, array('class' => 'input-lg', 'maxlength'=> 128, 'required' => 'required'))!!}
+                            {!! BootForm::text('address2', "Address Line 2", null, array('class' => 'input-lg', 'maxlength'=> 128))!!}
+                            {!! BootForm::text('address3', "Address Line 3", null, array('class' => 'input-lg', 'maxlength'=> 128))!!}
+                            {!! BootForm::text('city', "City", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
+                            {!! BootForm::text('state_province', "State or Province", null, array('class' => 'input-lg', 'maxlength'=> 32, 'required' => 'required'))!!}
+                            {!! BootForm::text('zip_code', "Zip Code", null, array('class' => 'input-lg', 'maxlength'=> 32, 'required' => 'required'))!!}
+                            {!! BootForm::text('country', "Country", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
+                            {!! BootForm::select('time_zone_id', "Time Zone",
+                                    $timezones_for_select, 169, array('required' => 'required')) !!}
+
+                            {!! BootForm::submit('Save', array('class'=>'btn btn-primary btn-lg ')) !!}
+
+                            {!! BootForm::close() !!}
+
+
+
+
+
+
+                            {{--@if($errors->has())--}}
+                                {{--@foreach ($errors->all() as $error)--}}
+                                    {{--<div class="text-danger">{{ $error }}</div>--}}
+                                {{--@endforeach--}}
+                            {{--@endif--}}
+                            {{--<div>--}}
+                                {{--<h3 class="text-primary">Personal Information</h3>--}}
+                            {{--</div>--}}
+                            {{--<form role="form" id="tryitForm" class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ route('users.create') }}">--}}
+                                {{--{!! Form::token() !!}--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label class="col-lg-2 control-label">Avatar</label>--}}
+                                    {{--<div class="col-lg-6">--}}
+                                        {{--<div class="fileinput fileinput-new" data-provides="fileinput">--}}
+                                            {{--<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">--}}
+                                                {{--<img src="http://placehold.it/200x150" alt="..."></div>--}}
+                                            {{--<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>--}}
+                                            {{--<div>--}}
+                                                            {{--<span class="btn btn-primary btn-file">--}}
+                                                                {{--<span class="fileinput-new">Select image</span>--}}
+                                                                {{--<span class="fileinput-exists">Change</span>--}}
+                                                                {{--<input type="file" name="pic" id="pic" />--}}
+                                                            {{--</span>--}}
+                                                {{--<a href="#" class="btn btn-primary fileinput-exists" data-dismiss="fileinput">Remove</a>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="cd-block">--}}
+                                    {{--<div class="cd-content">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<label class="col-lg-2 control-label" for="first_name">First Name</label>--}}
+                                            {{--<div class="col-lg-6">--}}
+                                                {{--<div class="input-group">--}}
+                                                                {{--<span class="input-group-addon">--}}
+                                                                    {{--<i class="fa fa-fw fa-user-md text-primary"></i>--}}
+                                                                {{--</span>--}}
+                                                    {{--<input type="text" placeholder="first name" name="first_name" id="first_name" class="form-control" value="{!! Input::old('first_name') !!}" required="" />--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+
+                                        {{--<div class="form-group">--}}
+                                            {{--<label class="col-lg-2 control-label" for="last_name">Last Name</label>--}}
+                                            {{--<div class="col-lg-6">--}}
+                                                {{--<div class="input-group">--}}
+                                                                {{--<span class="input-group-addon">--}}
+                                                                    {{--<i class="fa fa-fw fa-user-md text-primary"></i>--}}
+                                                                {{--</span>--}}
+                                                    {{--<input type="text" placeholder="last name" name="last_name" id="last_name" class="form-control" value="{!! Input::old('last_name') !!}" required="" />--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+
+                                        {{--<div class="form-group">--}}
+                                            {{--<label class="col-lg-2 control-label" for="institution">Institution</label>--}}
+                                            {{--<div class="col-lg-6">--}}
+                                                {{--<div class="input-group">--}}
+                                                                {{--<span class="input-group-addon">--}}
+                                                                    {{--<i class="fa fa-fw fa-user-md text-primary"></i>--}}
+                                                                {{--</span>--}}
+                                                    {{--<input type="text" placeholder="Institution name" name="institution" id="institution" class="form-control" value="{!! Input::old('institution') !!}" required="" />--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+
+                                        {{--<div class="form-group">--}}
+                                            {{--<label class="col-lg-2 control-label" for="password">Password</label>--}}
+                                            {{--<div class="col-lg-6">--}}
+                                                {{--<div class="input-group">--}}
+                                                                {{--<span class="input-group-addon">--}}
+                                                                    {{--<i class="fa fa-fw fa-key text-primary"></i>--}}
+                                                                {{--</span>--}}
+                                                    {{--<input type="password" name="password" placeholder="" id="password" class="form-control" />--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+
+                                        {{--<div class="form-group">--}}
+                                            {{--<label class="col-lg-2 control-label" for="password_confirm">Confirm Password</label>--}}
+                                            {{--<div class="col-lg-6">--}}
+                                                {{--<div class="input-group">--}}
+                                                                {{--<span class="input-group-addon">--}}
+                                                                    {{--<i class="fa fa-fw fa-key text-primary"></i>--}}
+                                                                {{--</span>--}}
+                                                    {{--<input type="password" name="password_confirm" placeholder=" " id="password_confirm" class="form-control" />--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+
+                                        {{--<div class="form-group">--}}
+                                            {{--<label class="col-lg-2 control-label" for="email">Email</label>--}}
+                                            {{--<div class="col-lg-6">--}}
+                                                {{--<div class="input-group">--}}
+                                                                {{--<span class="input-group-addon">--}}
+                                                                    {{--<i class="fa fa-fw fa-envelope text-primary"></i>--}}
+                                                                {{--</span>--}}
+                                                    {{--<input type="text" placeholder="" id="email" name="email" class="form-control" value="{!! Input::old('email') !!}"></div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="group" class="col-md-2 control-label">Group</label>--}}
+                                            {{--<div class="col-md-6">--}}
+                                                {{--<select class="form-control " title="Select group..." name="group" id="group" required="">--}}
+                                                    {{--<option value="">Select</option>--}}
+                                                    {{--@foreach($roles as $role)--}}
+                                                        {{--<option value="{{ $role->id }}" @if($role->id == Input::old('group')) selected="selected" @endif >{{ $role->name}}</option>--}}
+                                                    {{--@endforeach--}}
+                                                {{--</select>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
 
                                         {{--<div class="form-group">--}}
                                             {{--<label for="activate" class="col-md-2 control-label"> Activate User</label>--}}
@@ -173,15 +215,15 @@
                                             {{--</div>--}}
                                         {{--</div>--}}
 
-                                        <div class="form-group">
-                                            <div class="col-lg-offset-2 col-lg-10">
-                                                <input type="submit" class="btn btn-primary" name="save" value="Save" />
-                                                <a href="{{ URL::previous() }}" class="btn btn-default" role="button">Cancel</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                                        {{--<div class="form-group">--}}
+                                            {{--<div class="col-lg-offset-2 col-lg-10">--}}
+                                                {{--<input type="submit" class="btn btn-primary" name="save" value="Save" />--}}
+                                                {{--<a href="{{ URL::previous() }}" class="btn btn-default" role="button">Cancel</a>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</form>--}}
                         </div>
                         <!--main content end--> </div>
                 </div>

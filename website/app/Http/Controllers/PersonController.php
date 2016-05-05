@@ -43,9 +43,80 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        $person = new Person($request->all());
-        $person->save();
-        return redirect('admin/people');
+//        $person = new Person($request->all());
+//        $person->save();
+//        return redirect('admin/people');
+
+        $activate = true; //make it false if you don't want to activate user automatically
+
+        try {
+            $person = new Person(array(
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'pi' => $request->pi,
+//                'nmrbox_acct' => $request->nmrbox_acct,
+                'institution_id' => 9, // set to unassigned, but update immediately after saving the model
+                'department' => $request->department,
+                'job_title' => $request->job_title,
+                'address1' => $request->address1,
+                'address2' => $request->address2,
+                'address3' => $request->address3,
+                'city' => $request->city,
+                'state_province' => $request->state_province,
+                'zip_code' => $request->zip_code,
+                'country' => $request->country,
+                'time_zone_id' => $request->time_zone_id
+            ));
+            $person->save();
+
+
+            $inputInstitution = $request->institution;
+            $inputInstitutionType = $request->institution_type;
+            $existing_institution = Institution::where('name', $inputInstitution)->get();
+
+            if( $existing_institution->isEmpty() ) {
+                // then make a new institution like normal
+                $institution = new Institution(array(
+                    'name' => $request->institution,
+                    'institution_type' => Institution::institution_types[$request->institution_type]
+                ));
+
+                $institution->save();
+                $person->institution()->associate($institution);
+            }
+            else {
+                // use the existing institution
+                $existing_institution = $existing_institution->first();
+                $person->institution()->associate($existing_institution);
+                $existing_institution->institution_type = Institution::institution_types[$request->institution_type];
+                $existing_institution->save();
+            }
+
+            $person->save();
+
+
+            // Register the user
+            $user = Sentinel::register(array(
+                'person_id' => $person->id,
+                'email' => $request->email,
+                'password' => "NMR-2016!" // TODO: good god make people change this
+            ), $activate);
+
+            //add user to 'User' group
+            $role = Sentinel::findRoleByName('User');
+            $role->users()->attach($user);
+            
+            return $person;
+        }
+        catch (UserExistsException $e) {
+            $this->messageBag->add('email', Lang::get('auth/message.account_already_exists'));
+        }
+
+        // Ooops.. something went wrong
+        return Redirect::back()->withInput()->withErrors($this->messageBag);
+
+
     }
 
     /**
@@ -84,7 +155,7 @@ class PersonController extends Controller
         $person_institution_type_number = collect($person_institution_types)->search($person_institution_name);
 
 
-        return view('admin.people.edit', compact('person', 'timezones_for_select', 'person_positions', 
+        return view('admin.people.edit', compact('person', 'timezones_for_select', 'person_positions',
             'person_institution_types', 'person_institution_type_number'));
     }
 

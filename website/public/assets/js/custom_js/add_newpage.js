@@ -1,5 +1,17 @@
 $(document).ready(function() {
-    $('.textarea').summernote();
+    $('.textarea').summernote({
+    	height: 500, 
+    	toolbar: [
+		    ['style', ['style']],
+		    ['font', ['bold', 'italic', 'underline', 'clear']],
+		    ['color', ['color']],
+		    ['para', ['ul', 'ol', 'paragraph']],
+		    // ['height', ['height']],
+		    ['table', ['table']],
+		    ['insert', ['link', 'picture', 'hr']],
+		    ['view', ['fullscreen', 'codeview']]
+		  ]
+    });
     $('.select2').select2({
         //placeholder: placeholder
     });
