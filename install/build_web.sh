@@ -2,11 +2,12 @@
 
 showhelp ( ){
 	echo "Install website from svn"
-	echo "Usage: $0 -n [fully qualified hostname] -d [install directory] -a [account] -s [svn location] -o [operating system]"
+	echo "Usage: $0 -n [fully qualified hostname] -d [install directory] -a [account] -s [svn location] -o [operating system] -e [environment]"
 	echo "hostname defaults to current host"
 	echo "account defaults to www-data"
 	echo "svn location defaults to trunk"
 	echo "operating system defaults to ubuntu-14.04"
+	echo "environment defaults to prod"
 	exit 1
 }
 
@@ -15,7 +16,8 @@ hostname=$(hostname -A|xargs)
 account=www-data
 loc=trunk
 os=ubuntu-14.04
-while getopts "n:d:a:s:o:h" opt; do
+env=prod
+while getopts "n:d:a:s:o:e:h" opt; do
     case $opt in
 	h)
 	showhelp
@@ -34,6 +36,9 @@ while getopts "n:d:a:s:o:h" opt; do
 	;;
 	o)
 	os=$OPTARG
+	;;
+	e)
+	env=$OPTARG
 	;;
     esac
 done
@@ -58,7 +63,7 @@ svn co -q https://nmrbox-devel.cam.uchc.edu/repos/nmrbox/trunk/web/vendor-$os $i
 
 (
 cat <<EO_ENV
-APP_ENV=prod
+APP_ENV=$env
 APP_DEBUG=true
 APP_KEY=PjRcCklAPB9gcicXagEmpaQdDwnd8Bw9
 APP_URL=$hostname
@@ -83,3 +88,6 @@ EO_ENV
 mkdir $installdir/bootstrap/cache
 
 sudo chown -R $account:$account $installdir 
+envpath=$(readlink -f $installdir/.env)
+
+echo "Review/edit $envpath to change database, etc."
