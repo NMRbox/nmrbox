@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    // TODO: add a function that watches window.location.pathname and change the tab if the user hits the back button
+
     // this monster function changes the URL based on the tab open, providing tab persistence across refreshes
     // would like to refactor this to make it more general and less enormous
     $('.nav-tabs li a').on("click", function (event) {
@@ -13,6 +15,7 @@ $(document).ready(function() {
         var re_legal = /software\/[A-Za-z0-9]+\/edit\/legal/;
         var re_files = /software\/[A-Za-z0-9]+\/edit\/files/;
         var re_images = /software\/[A-Za-z0-9]+\/edit\/images/;
+        var re_citations = /software\/[A-Za-z0-9]+\/edit\/citations/;
 
 
         if (tab_target.indexOf("software") > -1) {
@@ -35,6 +38,18 @@ $(document).ready(function() {
                 // cut down url to remove everything after /edit
                 var new_url = url.slice(0, url.length - (url.length - url.indexOf("/edit") - 5));
                 new_url = new_url + "/versions";
+                history.pushState({"state": "versions"}, "", new_url);
+            }
+        }
+        else if (tab_target.indexOf("citations") > -1) {
+            // then we are going to the files tab
+            if (url.search(re_citations) > -1) {
+                // we're already there, so don't do anything
+            }
+            else {
+                // cut down url to remove everything after /edit
+                var new_url = url.slice(0, url.length - (url.length - url.indexOf("/edit") - 5));
+                new_url = new_url + "/citations";
                 history.pushState({"state": "versions"}, "", new_url);
             }
         }

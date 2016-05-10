@@ -20,6 +20,7 @@ Use App\File;
 Use App\VM;
 Use App\SoftwareVersion;
 use App\Person;
+use App\Citation;
 use App\Http\Requests\SoftwareRequest;
 use App\Http\Requests\SoftwarePeopleRequest;
 use App\Http\Requests\SoftwareVersionRequest;
@@ -192,10 +193,14 @@ class SoftwareController extends Controller
         foreach( $software_versions as $s ) {
             $software_versions_for_select[$s->id] = $s->version; // pair software id with
         }
+        
+        // add in citation resources, send to view make
+        $all_citations = Citation::all();
+        $attached_citations = $software->citations;
 
         return view('admin.software.edit',compact('software', 'files', 'vm_versions',
             'software_versions', "vm_versions_for_select", "software_versions_for_select", "people_for_select",
-            'people'));
+            'people', 'all_citations', 'attached_citations'));
     }
 
     public function storeSoftwareVersion(SoftwareVersionRequest $request, Software $software)
@@ -397,13 +402,36 @@ class SoftwareController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Attach a citation to this software.
      *
-     * @param  int  $id
+     * @param  Software  $software
+     * @param  Citation  $citation
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function attachCitation($software, $citation) {
+        try {
+            $software->citations()->attach($citation);
+            return back();
+        }
+        catch(\Illuminate\Database\QueryException $e) {
+            dd($e);
+        }
+    }
+
+    /**
+     * Detach a citation from this software.
+     *
+     * @param  Software  $software
+     * @param  Citation  $citation
+     * @return \Illuminate\Http\Response
+     */
+    public function detachCitation($software, $citation) {
+        try {
+            $software->citations()->detach($citation);
+            return back();
+        }
+        catch(\Illuminate\Database\QueryException $e) {
+            dd($e);
+        }
     }
 }

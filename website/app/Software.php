@@ -54,6 +54,10 @@ class Software extends NmrModel implements SluggableInterface
         return $this->belongsToMany('App\Person');
     }
 
+    public function citations() {
+        return $this->belongsToMany('App\Citation');
+    }
+    
     public function _needsSlugging() {
         return $this->needsSlugging();
     }

@@ -69,6 +69,12 @@
 
                             <br>
 
+                            <h3>Synopsis</h3>
+                            <p>{{ $software->synopsis }}</p>
+
+                            <h3>Description</h3>
+                            <p>{!! $software->description !!} </p>
+
                             <h3>Versions</h3>
 
                             <div class="row">
@@ -104,12 +110,6 @@
                                 </div>
                             </div>
 
-                            <h3>Synopsis</h3>
-                            <p>{{ $software->synopsis }}</p>
-
-                            <h3>Description</h3>
-                            <p>{!! $software->description !!} </p>
-
                             {{--<h3>Developer Lab</h3>--}}
                             {{--<p>{{ $software->developer_lab }}</p>--}}
 
@@ -131,18 +131,24 @@
                             {{--<h3>License</h3>--}}
                             {{--<p><a href={{ license_file }}>{{ license_description }}</a></p>--}}
 
-                            {{--<h3>Citations</h3>--}}
-                            {{--{{# each citation in citations }}--}}
-                            {{--<p>--}}
-                                {{--<cite>{{ citation.title }}</cite><br>--}}
-                                {{--{{ citation.authors }}<br>--}}
-                                {{--{{ citation.journal }}. {{ citation.year }}; {{ citation.volume }}({{ citation.issue }}): {{ citation.pages }}<br>--}}
-                                {{--PMID: {{ citation.pubmedid }}--}}
-                            {{--</p>--}}
+                            @forelse($attached_citations as $citation)
+                            <h3>Citations</h3>
+                            <div class="citation">
+                                <cite>{{ $citation->title }}</cite><br>
+                                <div class="authors">
+                                    @forelse($citation->authors as $author)
+                                        {{ $author->last_name }} {{ $author->first_name }}<span class="table-comma">,</span>
+                                    @empty
+                                    @endforelse
+                                </div>
+                                {{ $citation->journal }}. {{ $citation->year }}; {{ $citation->volume }}({{ $citation->issue }}): {{ $citation->pages }}
+                            </div>
                             {{--{{/ each }}--}}
                             {{--<p>--}}
                                 {{--<small>Package entry by {{ getCreator.profile.name }}</small>--}}
                             {{--</p>--}}
+                            @empty
+                            @endforelse
 
                         </div>
 

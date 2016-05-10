@@ -115,6 +115,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 //    Route::model('software', 'App\Software'); // already included above
     Route::model('software_version', 'App\SoftwareVersion');
     Route::model('vm', 'App\VM');
+    Route::model('citation', 'App\Citation');
 //    Route::model('file', 'App\File'); // already included above
     Route::group(array('prefix' => 'software'), function () {
         Route::get('/', array('as' => 'adminSoftware', 'uses' => 'SoftwareController@index'));
@@ -124,6 +125,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{software}/edit/people', array('as' => 'software.edit-developer', 'uses' => 'SoftwareController@edit'));
         Route::get('{software}/edit/legal', array('as' => 'software.edit-legal', 'uses' => 'SoftwareController@edit'));
         Route::get('{software}/edit/versions', array('as' => 'software.edit-versions', 'uses' => 'SoftwareController@edit'));
+        Route::get('{software}/edit/citations', array('as' => 'software.edit-citations', 'uses' => 'SoftwareController@edit'));
         Route::get('{software}/edit/files', array('as' => 'software.edit-files', 'uses' => 'SoftwareController@edit'));
         Route::put('{software}/edit', array('as' => 'software.update', 'uses' => 'SoftwareController@update'));
         Route::get('{software}/edit/people/existing/{person}/remove', array('as' => 'software.detach-person', 'uses' => 'SoftwareController@detachPerson'));
@@ -138,6 +140,12 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{software}/edit/versions/vm-software/delete/{vm}/{software_version}', array('as' => 'software.vm-software.delete', 'uses' => 'SoftwareController@destroySoftwareVersionPair'));
         Route::get('{software}/edit/versions/{software_version}/delete', array('as' => 'software.versionsdelete', 'uses' => 'SoftwareController@destroySoftwareVersion'));
         Route::get('{software}/edit/versions/{software_version}/{new_version}', array('as' => 'software.versionsedit', 'uses' => 'SoftwareController@editSoftwareVersion'));
+        
+        
+        Route::get('{software}/edit/citations/{citation}/attach', array('as' => 'software.attach-citation', 'uses' => 'SoftwareController@attachCitation'));
+        Route::get('{software}/edit/citations/{citation}/delete', array('as' => 'software.detach-citation', 'uses' => 'SoftwareController@detachCitation'));
+        
+        
         Route::get('{software}/edit/images', array('as' => 'software.images', 'uses' => 'SoftwareController@edit'));
         Route::post('{software}/edit/images', array('as' => 'software.images', 'uses' => 'SoftwareController@storeFiles'));
         Route::get('{software}/file/{file}/delete', array('as' => 'software.deletefile', 'uses' => 'SoftwareController@deleteFile'));

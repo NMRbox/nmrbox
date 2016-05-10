@@ -28,10 +28,15 @@ class RegistryController extends Controller
      */
     public function getSoftware(Software $software) {
         $all_files = $software->files()->get();
+        $attached_citations = $software->citations;
+
+        foreach($attached_citations as $citation) {
+            $citation->authors = $citation->authors()->get();
+        }
 
         $vm_versions = VM::all();
 
-        return View::make("registry.software", compact('software', 'all_files', 'vm_versions'));
+        return View::make("registry.software", compact('software', 'all_files', 'vm_versions', 'attached_citations'));
     }
 
     /**

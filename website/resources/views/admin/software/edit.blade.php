@@ -46,17 +46,21 @@
                     <ul class="nav nav-tabs">
                         <li {{ (Request::is('admin/software/*/edit') ? 'class=active' : '') }}><a href="#software-tab" data-toggle="tab">Software</a></li>
                         <li {{ (Request::is('admin/software/*/edit/versions') ? 'class=active' : '') }}><a href="#versions-tab" data-toggle="tab">Versions</a></li>
+                        <li {{ (Request::is('admin/software/*/edit/citations') ? 'class=active' : '') }}><a href="#citations-tab" data-toggle="tab">Citations</a></li>
                         <li {{ (Request::is('admin/software/*/edit/legal') ? 'class=active' : '') }}><a href="#legal-tab" data-toggle="tab">Legal</a></li>
                         <li {{ (Request::is('admin/software/*/edit/people') ? 'class=active' : '') }}><a href="#people-tab" data-toggle="tab">People</a></li>
                         <li {{ (Request::is('admin/software/*/edit/files') ? 'class=active' : '') }}><a href="#files-tab" data-toggle="tab">Files</a></li>
                         <li {{ (Request::is('admin/software/*/edit/images') ? 'class=active' : '') }}><a href="#images-tab" data-toggle="tab">Images</a></li>
                     </ul>
-                    <div class="tab-content col-sm-8">
+                    <div class="tab-content col-sm-12">
                         <div class="tab-pane fade {{ (Request::is('admin/software/*/edit') ? 'active in' : '') }}" id="software-tab">
                             @include('admin.software.partials.software_tab')
                         </div>
                         <div class="tab-pane fade {{ (Request::is('admin/software/*/edit/versions') ? 'active in' : '') }}" id="versions-tab">
                             @include('admin.software.partials.versions_tab')
+                        </div>
+                        <div class="tab-pane fade {{ (Request::is('admin/software/*/edit/citations') ? 'active in' : '') }}" id="citations-tab">
+                            @include('admin.software.partials.citations_tab')
                         </div>
                         <div class="tab-pane fade {{ (Request::is('admin/software/*/edit/legal') ? 'active in' : '') }}" id="legal-tab">
                             @include('admin.software.partials.legal_tab')
