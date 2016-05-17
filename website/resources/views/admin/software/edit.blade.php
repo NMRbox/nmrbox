@@ -85,6 +85,8 @@
 
 {{-- page level scripts --}}
 @section('footer_scripts')
+    <script src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/vendors/datatables/js/dataTables.bootstrap.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/vendors/summernote/summernote.min.js') }}" type="text/javascript" ></script>
     <script src="{{ asset('assets/vendors/select2/select2.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/vendors/iCheck/icheck.js') }}" type="text/javascript"></script>

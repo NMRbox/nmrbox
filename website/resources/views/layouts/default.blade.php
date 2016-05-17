@@ -44,7 +44,7 @@
                     {{--</li>--}}
 
                     <li class="dropdown {{ (Request::is('research') || Request::is('trd1') || Request::is('trd2') ||
-                        Request::is('trd3') || Request::is('dbps') || Request::is('c&s') || Request::is('initiating_a_collaboration')
+                        Request::is('trd3') || Request::is('dbps') || Request::is('c-s') || Request::is('initiating-a-collaboration')
                         ? 'active' : '') }}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Research</a>
                         <ul class="dropdown-menu" role="menu">
@@ -54,9 +54,9 @@
                             <li><a href="{{ URL::to('trd3') }}">TR&amp;D 3</a></li>
                             <li><a href="{{ URL::to('dbps') }}">DBPs</a>
                             </li>
-                            <li><a href="{{ URL::to('c&s') }}">C&S</a>
+                            <li><a href="{{ URL::to('c-s') }}">C&S</a>
                             </li>
-                            <li><a href="{{ URL::to('initiating_a_collaboration') }}">Initiating a collaboration</a></li>
+                            <li><a href="{{ URL::to('initiating-a-collaboration') }}">Initiating a collaboration</a></li>
                         </ul>
                     </li>
 
@@ -82,15 +82,15 @@
                             </li>
                             <li><a href="{{ URL::to('people-eab') }}">EAB</a></li>
                             <li><a href="{{ URL::to('people-administration') }}">Administration</a></li>
-                            <li><a href="{{ URL::to('people-technical_staff') }}">Technical Staff</a></li>
+                            <li><a href="{{ URL::to('people-technical-staff') }}">Technical Staff</a></li>
                         </ul>
                     </li>
 
-                    <li class="dropdown {{ (Request::is('contact_us') || Request::is('acknowledge_us') ? 'active' : '') }}">
+                    <li class="dropdown {{ (Request::is('contact-us') || Request::is('acknowledge-us') ? 'active' : '') }}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> About Us</a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ URL::to('contact_us') }}">Contact Us</a></li>
-                            <li><a href="{{ URL::to('acknowledge_us') }}">How to acknowledge us</a></li>
+                            <li><a href="{{ URL::to('contact-us') }}">Contact Us</a></li>
+                            <li><a href="{{ URL::to('acknowledge-us') }}">How to acknowledge us</a></li>
                         </ul>
                     </li>
 

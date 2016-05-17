@@ -25,8 +25,19 @@ class Page extends model implements SluggableInterface {
 
     protected $guarded  = array('id');
 
+    protected $fillable = [
+        'title',
+        'subheader',
+        'content',
+        'slug'
+    ];
+
     public function author()
     {
         return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function _generateSlug($source) {
+        return $this->generateSlug( $source );
     }
 }

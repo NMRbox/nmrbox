@@ -47,8 +47,14 @@ Edit Blog
                             {!! Form::label('title', 'Title', array('class' => 'h3')) !!}
                             {!! Form::text('title', null, array('class' => 'form-control input-lg', 'required' => 'required', 'placeholder'=>'Page title here...'))!!}
                             <p></p>
-                            <p>The page title is used to generate a unique url, which will be visible after you save this page. If the url has a number at the end you didn't add. (eg. mypage2) it is likely because there is already another page with the same name. Delete the other page to stop the forcible creation of a unique url.</p>
+                            {!! Form::label('slug', 'URL', array('class' => 'h3')) !!}
+                            {!! Form::text('slug', null, array('class' => 'form-control input-lg', 'required' => 'required', 'placeholder'=>'Desired URL'))!!}
+                            <p>We'll try to make a web-safe version of the URL you ask for here. If that url is taken, you may see your url with a number at the end.</p>
+                            {!! Form::label('subheader', 'Subheader', array('class' => 'h3')) !!}
+                            {!! Form::text('subheader', null, array('class' => 'form-control input-lg', 'placeholder'=>'Page title here...'))!!}
+                            <p></p>
                         </div>
+                        {!! Form::label('content', 'Content', array('class' => 'h3')) !!}
                         <div class='box-body pad'>
                             {!! Form::textarea('content', null, array('class' => 'textarea form-control', 'rows'=>'5', 'placeholder'=>'Place some text here', 'style'=>'style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"')) !!}
                         </div>

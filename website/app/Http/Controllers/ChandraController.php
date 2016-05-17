@@ -55,18 +55,16 @@ class ChandraController extends Controller {
 
     public function showFrontEndView($name=null)
     {
-
-        if(View::exists($name))
-        {
-            return View($name);
+        if( Page::where('slug', '=', $name)->exists() ) {
+            // $name is the page's slug
+            $page = Page::where('slug', $name)->get()->first();
+            return View::make('basic_page')->with('page', $page);
         }
         else
         {
-            if( Page::exists($name) ) {
-                // $name is the page's slug
-                $page = Page::where('slug', $name)->get()->first();
-//                dd($page);
-                return View::make('basic_page')->with('page', $page);
+            if(View::exists($name))
+            {
+                return View($name);
             }
             else {
                 return View('404');

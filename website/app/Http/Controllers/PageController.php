@@ -132,16 +132,12 @@ class PageController extends ChandraController {
 	 */
 	public function postCreate(PageRequest $request)
 	{
-        $page = new Page($request->except('image','tags','featured'));
-//        $picture = "";
-//        if ($request->hasFile('image')) {
-//            $file = $request->file('image');
-//            $extension = $file->getClientOriginalExtension()?: 'png';
-//            $folderName      = '/uploads/page/';
-//            $picture = str_random(10).'.'.$extension;
-//            dd($request->image);
-//        }
+        $page = new Page($request->except('image','tags','featured','slug'));
         $page->user_id = Sentinel::getUser()->id;
+        $page->save();
+
+        // unfortunately need to save twice to get around the auto-slugging
+        $page->slug = $page->_generateSlug($request->slug);
         $page->save();
 
         return redirect('admin/pages');
@@ -190,6 +186,8 @@ class PageController extends ChandraController {
 //        }
         $page->user_id = Sentinel::getUser()->id;
         $page->update($request->except('image','_method','tags'));
+
+        // TODO: sluggify requested url
 
         return redirect('admin/pages');
 	}

@@ -142,8 +142,8 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{software}/edit/versions/{software_version}/{new_version}', array('as' => 'software.versionsedit', 'uses' => 'SoftwareController@editSoftwareVersion'));
         
         
-        Route::get('{software}/edit/citations/{citation}/attach', array('as' => 'software.attach-citation', 'uses' => 'SoftwareController@attachCitation'));
-        Route::get('{software}/edit/citations/{citation}/delete', array('as' => 'software.detach-citation', 'uses' => 'SoftwareController@detachCitation'));
+//        Route::get('{software}/edit/citations/{citation}/attach', array('as' => 'software.attach-citation', 'uses' => 'SoftwareController@attachCitation'));
+//        Route::get('{software}/edit/citations/{citation}/delete', array('as' => 'software.detach-citation', 'uses' => 'SoftwareController@detachCitation'));
         
         
         Route::get('{software}/edit/images', array('as' => 'software.images', 'uses' => 'SoftwareController@edit'));

@@ -20,9 +20,13 @@
 
                 <div class="research-header">
                     <h1>{{ $page->title  }}</h1>
+                    @if( $page->subheader != null )
+                        <span>{{ $page->subheader }}</span>
+                    @endif
 
                     @if ($user = Sentinel::getUser())
                         @if(Sentinel::inRole('admin'))
+                            <br>
                             <span>
                                 <a href="{{ route('update/page', $page->slug) }}">Edit this page</a>
                             </span>
