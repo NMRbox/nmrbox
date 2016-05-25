@@ -75,6 +75,11 @@
                             <h3>Description</h3>
                             <p>{!! $software->description !!} </p>
 
+                            <h3>URL</h3>
+                            <p>
+                                <a href="{!! $software->url !!}">{!! $software->url !!}</a>
+                            </p>
+
                             <h3>Versions</h3>
 
                             <div class="row">
