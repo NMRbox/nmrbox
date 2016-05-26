@@ -4,26 +4,26 @@
 @forelse($software_versions as $sv)
     <li>
         <span class="version-display-edit-box" data-url="{!! route("software.versionsedit", array('software'=>$software,'software_version'=>$sv->id)) !!}">{!! $sv->version !!}</span>
-        <div class="btn-group inline pull-right" data-toggle="buttons-checkbox">
-            <div class="btn btn-warning btn-small edit-version">Edit</div>
-            <div class="btn btn-primary btn-small save-edit-version" style="display: none;">Save</div>
-            <div class="btn btn-danger btn-small cancel-edit-version" style="display: none;">Cancel</div>
-            <div class="btn btn-danger btn-small delete-version">Delete</div>
-        </div>
+        {{--<div class="btn-group inline pull-right" data-toggle="buttons-checkbox">--}}
+            {{--<div class="btn btn-warning btn-small edit-version">Edit</div>--}}
+            {{--<div class="btn btn-primary btn-small save-edit-version" style="display: none;">Save</div>--}}
+            {{--<div class="btn btn-danger btn-small cancel-edit-version" style="display: none;">Cancel</div>--}}
+            {{--<div class="btn btn-danger btn-small delete-version">Delete</div>--}}
+        {{--</div>--}}
     </li>
 @empty
     <li>No versions of this software registered yet! Add one below</li>
 @endforelse
 </ul>
 
-{!! BootForm::open(array('url'=>route('software.versions', array('software'=>$software->slug)), 'class' => 'version-form')) !!}
-<div class="form-group">
-    <div>
-        <button type="button" class="btn btn-success add-version"><span class="glyphicon glyphicon-plus"></span> Add a version</button>
-    </div>
-</div>
-{!! BootForm::submit('Save New Software Version', array("class"=>"btn btn-primary btn-md save-new-software-version", "style"=>"display: none;")) !!}
-{!! BootForm::close() !!}
+{{--{!! BootForm::open(array('url'=>route('software.versions', array('software'=>$software->slug)), 'class' => 'version-form')) !!}--}}
+{{--<div class="form-group">--}}
+    {{--<div>--}}
+        {{--<button type="button" class="btn btn-success add-version"><span class="glyphicon glyphicon-plus"></span> Add a version</button>--}}
+    {{--</div>--}}
+{{--</div>--}}
+{{--{!! BootForm::submit('Save New Software Version', array("class"=>"btn btn-primary btn-md save-new-software-version", "style"=>"display: none;")) !!}--}}
+{{--{!! BootForm::close() !!}--}}
 
 <br>
 
@@ -63,7 +63,7 @@
         </tr>
     @empty
         <tr>
-            <td>No VMs yet! <a href="{!! route('vm.create') !!}">Create one here</a></td>
+            {{--<td>No VMs yet! <a href="{!! route('vm.create') !!}">Create one here</a></td>--}}
             <td>
         </tr>
     @endforelse
@@ -71,25 +71,25 @@
 </table>
 
 
-<div id="software-pair-template" class="software-pair-container">
-    {!! BootForm::open(array('url'=>route('software.vm-software', array('software'=>$software->slug)), 'class' => 'version-pair-form')) !!}
+{{--<div id="software-pair-template" class="software-pair-container">--}}
+    {{--{!! BootForm::open(array('url'=>route('software.vm-software', array('software'=>$software->slug)), 'class' => 'version-pair-form')) !!}--}}
 
-    {!! BootForm::select('vm_version', "VM version",
-        $vm_versions_for_select, null, array()) !!}
+    {{--{!! BootForm::select('vm_version', "VM version",--}}
+        {{--$vm_versions_for_select, null, array()) !!}--}}
 
-    {!! BootForm::select('software_version', "includes software version",
-        $software_versions_for_select, null, array()) !!}
+    {{--{!! BootForm::select('software_version', "includes software version",--}}
+        {{--$software_versions_for_select, null, array()) !!}--}}
 
-    {!! BootForm::submit('Save Version Pair', array("class"=>"btn btn-primary btn-md")) !!}
-    <button type="button" class="btn btn-danger versions-pair-cancel">Cancel</button>
-    {!! BootForm::close() !!}
-</div>
+    {{--{!! BootForm::submit('Save Version Pair', array("class"=>"btn btn-primary btn-md")) !!}--}}
+    {{--<button type="button" class="btn btn-danger versions-pair-cancel">Cancel</button>--}}
+    {{--{!! BootForm::close() !!}--}}
+{{--</div>--}}
 
 
-@unless( $software_versions->isEmpty() )
-    <p>Use the list below to add or delete version pairs from the table.</p>
-    <br>
-@endunless
+{{--@unless( $software_versions->isEmpty() )--}}
+    {{--<p>Use the list below to add or delete version pairs from the table.</p>--}}
+    {{--<br>--}}
+{{--@endunless--}}
 
 
 <ul class="versions-ul wide">
@@ -98,11 +98,11 @@
             <li>
                 <span class="pair-text">VM Version: <span style="font-weight: bold;">{!! $vm->name() !!}</span>
                 includes Software Version <span style="font-weight: bold;">{!! $sv->version !!}</span></span>
-                <div class="btn btn-danger btn-small delete-pair pull-right"
-                     data-url="{!! route('software.vm-software.delete', array('software'=>$software->slug, "vm"=>$vm->id,
-                     "software_version"=>$sv->id)) !!}">
-                    Delete Pair
-                </div>
+                {{--<div class="btn btn-danger btn-small delete-pair pull-right"--}}
+                     {{--data-url="{!! route('software.vm-software.delete', array('software'=>$software->slug, "vm"=>$vm->id,--}}
+                     {{--"software_version"=>$sv->id)) !!}">--}}
+                    {{--Delete Pair--}}
+                {{--</div>--}}
             </li>
         @endforeach
 @empty
@@ -111,10 +111,10 @@
 </ul>
 
 
-<div class="form-group">
-    <div>
-        <button type="button" class="btn btn-success add-version-pair">
-            <span class="glyphicon glyphicon-plus"></span>
-            Add a VM-Software version pair</button>
-    </div>
-</div>
+{{--<div class="form-group">--}}
+    {{--<div>--}}
+        {{--<button type="button" class="btn btn-success add-version-pair">--}}
+            {{--<span class="glyphicon glyphicon-plus"></span>--}}
+            {{--Add a VM-Software version pair</button>--}}
+    {{--</div>--}}
+{{--</div>--}}
