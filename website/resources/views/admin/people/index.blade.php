@@ -65,7 +65,7 @@ People Index
 
 
                                             <a href="#">
-                                                <i class="fa fa-fw fa-times text-danger delete-person" data-url="{!! route("person.delete", $person->id) !!}" data-personname="{!! $person->name !!}"></i>
+                                                <i class="fa fa-fw fa-times text-danger delete-person" data-url="{!! route("person.delete", array('person' => $person->id)) !!}" data-person_name="{!! $person->first_name . " " . $person->last_name !!}"></i>
                                             </a>
                                     </td>
                                 </tr>

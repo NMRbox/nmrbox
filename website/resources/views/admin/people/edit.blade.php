@@ -62,7 +62,7 @@ Edit VM
                             $timezones_for_select, 169, array('required' => 'required')) !!}
                         {!! BootForm::submit('Save') !!}
                     </div>
-                    {!! Form::close() !!}
+                    {!! BootForm::close() !!}
                 </div>
             </div>
         </div>

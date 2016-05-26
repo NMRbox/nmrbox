@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\MessageBag;
 use View;
 use Input;
+use Sentinel;
 use App\Person;
 use App\Institution;
 use App\Timezone;
@@ -14,6 +16,22 @@ use App\Http\Controllers\Controller;
 
 class PersonController extends Controller
 {
+    /**
+     * Message bag.
+     *
+     * @var MessageBag
+     */
+    protected $messageBag = null;
+
+    /**
+     * Initializer.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->messageBag = new MessageBag;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +50,23 @@ class PersonController extends Controller
      */
     public function create()
     {
-        return view('admin.people.create');
+
+        $timezones = Timezone::all();
+        $timezones = $timezones->sortBy("zone"); // want these sorted for frontend
+        $timezones_for_select = [];
+
+        // The goal here is to pair each vm's id with its friendly name, so the name can be displayed in a select
+        //  to choose the actual vm id.
+        foreach( $timezones as $tz ) {
+            $timezones_for_select[$tz->id] = $tz->zone; // pair VM ID with human friendly VM name
+        }
+
+        $person_positions = Person::positions;
+        $person_institution_types = Institution::institution_types;
+
+
+        return view('admin.people.create', compact('person', 'timezones_for_select', 'person_positions',
+            'person_institution_types', 'person_institution_type_number'));
     }
 
     /**
@@ -106,8 +140,10 @@ class PersonController extends Controller
             //add user to 'User' group
             $role = Sentinel::findRoleByName('User');
             $role->users()->attach($user);
-            
-            return $person;
+
+//            $this->messageBag->add('person', "Created " . $person->first_name . " " . $person->last_name . "successfully!");
+
+            return redirect("admin/people");
         }
         catch (UserExistsException $e) {
             $this->messageBag->add('email', Lang::get('auth/message.account_already_exists'));
@@ -207,6 +243,10 @@ class PersonController extends Controller
      */
     public function destroy(Person $person)
     {
+        if(!$person->user()->get()->isEmpty()) {
+            $person->user()->forceDelete(); // forceDelete because soft deletes are on for the User class
+        }
+
         $person->delete();
         return redirect("admin/people");
     }
