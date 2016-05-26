@@ -35,7 +35,7 @@
 
                                 <br><br>
 
-                                <p class="text-center"><a class="button button-flat" href="{{ route('register') }}" role="button">Register</a></p>
+                                <p class="text-center"><a class="button button-flat" href="{{ route('register') }}" role="button">Sign up for an account</a></p>
                                 {{--<a class="button button-flat" href="#" role="button">Register</a>--}}
 
                             </div>
