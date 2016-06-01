@@ -15,13 +15,14 @@ class SoftwareVersion extends NmrModel
 
     protected $fillable = [
         'id',
-        'major',
-        'minor',
-        'variant'
+        'version'
     ];
 
-    public function VMVersions()
-    {
+    public function VMVersions() {
         return $this->belongsToMany('App\VM', 'software_version_vm', 'software_version_id', 'vm_id');
+    }
+
+    public function software() {
+        return $this->belongsToMany('App/Software', 'software_versions', 'software_id');
     }
 }

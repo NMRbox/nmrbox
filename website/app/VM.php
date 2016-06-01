@@ -24,8 +24,7 @@ class VM extends NmrModel
         return $this->major . "." . $this->minor . "." . $this->variant;
     }
 
-    public function softwareVersions()
-    {
+    public function softwareVersions() {
         return $this->belongsToMany('App\SoftwareVersion', 'software_version_vm', 'vm_id', 'software_version_id');
     }
 }

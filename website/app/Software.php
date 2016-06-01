@@ -50,6 +50,19 @@ class Software extends NmrModel implements SluggableInterface
         return $this->hasMany('App\SoftwareVersion');
     }
 
+    public function vmVersionPairs() {
+        $versions = $this->versions()->get();
+        $pairs = [ ];
+        foreach($versions as $v) {
+            $vm = $v->VMVersions();
+            $pairs[ "$v->version" ].array_push($vm);
+        }
+
+        return $pairs;
+
+//        return $this->belongsToMany('App\VM', 'software_version_vm', 'software_version_id', 'vm_id');
+    }
+
     public function people() {
         return $this->belongsToMany('App\Person');
     }
