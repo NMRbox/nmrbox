@@ -68,7 +68,7 @@ APP_DEBUG=true
 APP_KEY=PjRcCklAPB9gcicXagEmpaQdDwnd8Bw9
 APP_URL=$hostname
 
-DB_HOST=nmrbox-buildserver.cam.uchc.edu
+DB_HOST=nmrbox-data.cam.uchc.edu
 DB_DATABASE=registry
 DB_USERNAME=laravel
 DB_PASSWORD=nmr-laravel!
