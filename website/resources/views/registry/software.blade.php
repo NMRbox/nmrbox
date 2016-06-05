@@ -92,13 +92,15 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @forelse($vm_versions as $vm)
+
+
+                                        @forelse($vm_version_pairs as $vm => $svArray)
                                             <tr>
-                                                <td>{!! $vm->name() !!}</td>
+                                                <td>{!! $vm !!}</td>
                                                 <td>
 
-                                                    @forelse($vm->softwareVersions()->where("software_id", "=", $software->id)->get() as $sv)
-                                                        {!! $sv->version !!}<span class="table-comma">,</span>  {{-- trailing commas hidden in edit_software.css --}}
+                                                    @forelse($svArray as $sv)
+                                                        {!! $sv !!}<span class="table-comma">,</span>   {{-- trailing commas hidden in edit_software.css--}}
                                                     @empty
                                                     @endforelse
 
@@ -106,7 +108,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td>No VMs yet! <a href="{!! route('vm.create') !!}">Create one here</a></td>
+                                                <td>No VMs yet!</td>
                                                 <td>
                                             </tr>
                                         @endforelse

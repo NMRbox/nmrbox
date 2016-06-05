@@ -32,13 +32,9 @@ class RegistryController extends Controller
         foreach($attached_citations as $citation) {
             $citation->authors = $citation->authors()->get();
         }
-
-        $vm_versions = VM::all();
-//        $software_versions = $software->vmVersions()->get();
-        $vm_version_pairs = $software->vmVersionPairs();
         
-        dd($vm_versions, $vm_version_pairs);
+        $vm_version_pairs = $software->vmVersionPairs();
 
-        return View::make("registry.software", compact('software', 'all_files', 'vm_versions', 'attached_citations'));
+        return View::make("registry.software", compact('software', 'all_files', 'vm_version_pairs', 'attached_citations'));
     }
 }
