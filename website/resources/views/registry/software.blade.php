@@ -8,6 +8,7 @@
 
     {{-- page level styles --}}
     @section('header_styles')
+        <link href="{{ asset('assets/css/registry.css') }}" rel="stylesheet" type="text/css" />
     @stop
 
 
@@ -116,6 +117,17 @@
                                     </table>
                                 </div>
                             </div>
+
+                            <h3>Keywords</h3>
+                            <ul>
+
+                                @forelse ($all_keywords as $kw)
+                                    <li>{!! $kw->label !!}</li>
+                                @empty
+                                    <p>No keywords recorded for this software package yet.</p>
+                                @endforelse
+
+                            </ul>
 
                             {{--<h3>Developer Lab</h3>--}}
                             {{--<p>{{ $software->developer_lab }}</p>--}}

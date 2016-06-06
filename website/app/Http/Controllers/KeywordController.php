@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use App\Keyword;
-
+use View;
 use App\Http\Requests;
 use App\Http\Requests\KeywordRequest;
 use App\Http\Controllers\Controller;

@@ -361,6 +361,28 @@ class SoftwareController extends Controller
     }
 
     /**
+     * Add a new keyword and attach him or her to the software.
+     *
+     * @param  Request  $request
+     * @param  Software $software
+     * @return \Illuminate\Http\Response
+     */
+    public function addNewKeyword(Request $request, Software $software)
+    {
+        $new_keyword = new Keyword( $request->all() );
+        $new_keyword->save();
+
+        try {
+            $software->keywords()->attach($new_keyword->id);
+        }
+        catch(\Illuminate\Database\QueryException $e) {
+            return back()->withErrors($e);
+        }
+
+        return back();
+    }
+
+    /**
      * Add a keyword to the specified resource in storage.
      *
      * @param  Request  $request
@@ -370,7 +392,7 @@ class SoftwareController extends Controller
     public function addExistingKeyword(Request $request, Software $software)
     {
 
-        // TODO: validation doesn't actually work, but the DB won't add a dupe. Fix validation. -dj 5/5/16
+        // TODO: validation doesn't actually work, but the DB won't add a dupe. Fix validation. Or maybe allow user to select only values not already attached to software? Both? -dj 5/5/16
 
         $existing_keyword_id = $request->existing_keyword;
 //

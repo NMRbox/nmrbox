@@ -40,7 +40,7 @@
                 <div class="panel-body">
                     {!! BootForm::horizontal() !!}
                         <div class="col-sm-12 col-md-8">
-                            {!! BootForm::text('label', "Label (menu item name)", null, array('class' => 'input-lg', 'required' => 'required'))!!}
+                            {!! BootForm::text('label', "Label (menu item name)", null, array('class' => 'input-lg', 'required' => 'required', 'autofocus' => 'autofocus'))!!}
                             {!! BootForm::submit('Save') !!}
                         </div>
                     {!! Form::close() !!}

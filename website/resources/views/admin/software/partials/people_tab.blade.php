@@ -6,7 +6,7 @@
     @endforeach
 @endif
 
-<ul class="people-ul">
+<ul class="admin-item-ul">
     @forelse($people as $person)
         <li>
             <span class="person-display-edit-box" data-url="{!! route("software.people-edit", array('software'=>$software,'person'=>$person->id)) !!}">{!! $person->first_name . " " . $person->last_name !!}</span>

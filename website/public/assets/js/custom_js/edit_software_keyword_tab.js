@@ -14,9 +14,9 @@ $(document).ready(function() {
 
 
     function add_new_keyword_form(event, target, text) {
-        // target.show();
-        // $('#keywords-tab .keyword-add-buttons').hide();
-        // $('#keywords-tab #add-nag').hide();
+        target.show();
+        $('#keywords-tab .keyword-add-buttons').hide();
+        $('#keywords-tab #add-nag').hide();
     }
 
     function add_new_existing_keyword_form(event, target, text) {

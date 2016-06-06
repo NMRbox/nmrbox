@@ -35,6 +35,9 @@ class RegistryController extends Controller
         
         $vm_version_pairs = $software->vmVersionPairs();
 
-        return View::make("registry.software", compact('software', 'all_files', 'vm_version_pairs', 'attached_citations'));
+        $all_keywords = $software->keywords()->get();
+
+        return View::make("registry.software", compact('software', 'all_files', 'vm_version_pairs', 'attached_citations',
+            'all_keywords'));
     }
 }

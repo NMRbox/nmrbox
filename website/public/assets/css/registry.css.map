@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEE,kBAAG;EACD,eAAe,EAAE,IAAI;EACrB,SAAS,EAAE,MAAM",
+"sources": ["../../../resources/assets/sass/registry.scss"],
+"names": [],
+"file": "registry.css"
+}

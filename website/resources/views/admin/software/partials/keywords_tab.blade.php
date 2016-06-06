@@ -6,7 +6,7 @@
     @endforeach
 @endif
 
-<ul class="keywords-ul">
+<ul class="admin-item-ul">
     @forelse($keywords as $keyword)
         <li>
             <span class="keyword-display-edit-box" data-url="{!! route("software.keywords-edit", array('software'=>$software,'keyword'=>$keyword->id)) !!}">{!! $keyword->label !!}</span>
@@ -26,28 +26,25 @@
 <br>
 
 
-{{--<div class="form-group keyword-add-buttons">--}}
-    {{--<div>--}}
-        {{--<button type="button" class="btn btn-success add-keyword-new"><span class="glyphicon glyphicon-plus"></span> Add a new keyword</button>--}}
-        {{--<span>or</span>--}}
-        {{--<button type="button" class="btn btn-success add-keyword-existing"><span class="glyphicon glyphicon-plus"></span> Add an existing keyword</button>--}}
-    {{--</div>--}}
-{{--</div>--}}
-
-
 <div class="form-group keyword-add-buttons">
     <div>
+        <button type="button" class="btn btn-success add-keyword-new"><span class="glyphicon glyphicon-plus"></span> Add a new keyword</button>
+        <span>or</span>
         <button type="button" class="btn btn-success add-keyword-existing"><span class="glyphicon glyphicon-plus"></span> Add an existing keyword</button>
     </div>
 </div>
 
 
+{{--<div class="form-group keyword-add-buttons">--}}
+    {{--<div>--}}
+        {{--<button type="button" class="btn btn-success add-keyword-existing"><span class="glyphicon glyphicon-plus"></span> Add an existing keyword</button>--}}
+    {{--</div>--}}
+{{--</div>--}}
+
+
 {!! BootForm::open(array('url'=>route('software.add-new-keyword', array('software'=>$software->slug)), 'style'=>'display:none;', 'class' => 'add-keyword-new-form add-keyword-container')) !!}
 <div class="col-sm-12 col-md-8">
-    {!! BootForm::text('name', "Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
-    {!! BootForm::email('email', "Email", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
-    {!! BootForm::text('institution', "Institution", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
-    {!! BootForm::text('nmrbox_acct', "NMRbox Account Number", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
+    {!! BootForm::text('label', "Label", null, array('class' => 'input-lg', 'required' => 'required'))!!}
     {!! BootForm::submit('Save', array('class'=>'btn btn-primary btn-lg ')) !!}
     <div class="form-group">
         <div>
