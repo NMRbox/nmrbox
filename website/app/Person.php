@@ -17,6 +17,7 @@ class Person extends NmrModel
         'first_name',
         'last_name',
         'email',
+        'email_institution',
         'pi',
         'nmrbox_acct',
         'institution',

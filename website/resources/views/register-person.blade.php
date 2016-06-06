@@ -46,6 +46,10 @@
                     <input type="email" class="form-control" id="Email" name="email" placeholder="Email" value="{!! Input::old('Email') !!}" required>
                 </div>
                 <div class="form-group">
+                    <label for="institutional_email"> Preferred contact email (if different than institutional email)</label>
+                    <input type="email" class="form-control" id="institutional_email" name="institutional_email" placeholder="Email" value="{!! Input::old('institutional_email') !!}">
+                </div>
+                <div class="form-group">
                     <label for="Institution"> Institution</label>
                     <input type="text" class="form-control" id="Institution" name="institution" placeholder="Institution" value="{!! Input::old('Institution') !!}" required>
                 </div>

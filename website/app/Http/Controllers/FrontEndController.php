@@ -269,6 +269,7 @@ class FrontEndController extends ChandraController
             'first_name' => 'required|min:1',
             'last_name' =>  'required|min:1',
             'email' => 'required|email|max:255|unique:users',
+            'email_institution' => 'email|max:255|unique:persons',
             'job_title' =>  'required',
             'institution' =>  'required',
             'institution_type' =>  'required',
@@ -296,13 +297,17 @@ class FrontEndController extends ChandraController
 
         try {
 
-
+            $institutional_email = Input::get('email_institution');
+            if( strlen($institutional_email) <= 0 ) {
+                $institutional_email = Input::get('email');
+            }
 
             // register the person
             $person = new Person(array(
                 'first_name' => Input::get('first_name'),
                 'last_name' => Input::get('last_name'),
                 'email' => Input::get('email'),
+                'email_institution' => $institutional_email,
                 'pi' => Input::get('pi'),
 //                'nmrbox_acct' => Input::get('nmrbox_acct'),
                 'institution_id' => 9, // set to unassigned, but update immediately after saving the model
