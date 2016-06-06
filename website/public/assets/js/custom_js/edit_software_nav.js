@@ -16,6 +16,7 @@ $(document).ready(function() {
         var re_files = /software\/[A-Za-z0-9]+\/edit\/files/;
         var re_images = /software\/[A-Za-z0-9]+\/edit\/images/;
         var re_citations = /software\/[A-Za-z0-9]+\/edit\/citations/;
+        var re_keywords = /software\/[A-Za-z0-9]+\/edit\/keywords/;
 
 
         if (tab_target.indexOf("software") > -1) {
@@ -99,6 +100,18 @@ $(document).ready(function() {
                 var new_url = url.slice(0, url.length - (url.length - url.indexOf("/edit") - 5));
                 new_url = new_url + "/images";
                 history.pushState({"state": "images"}, "", new_url);
+            }
+        }
+        else if (tab_target.indexOf("keywords") > -1) {
+            // then we are going to the keywords tab
+            if (url.search(re_keywords) > -1) {
+                // we're already there, so don't do anything
+            }
+            else {
+                // cut down url to remove everything after /edit
+                var new_url = url.slice(0, url.length - (url.length - url.indexOf("/edit") - 5));
+                new_url = new_url + "/keywords";
+                history.pushState({"state": "keywords"}, "", new_url);
             }
         }
     });

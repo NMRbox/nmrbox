@@ -49,6 +49,7 @@
                         <li {{ (Request::is('admin/software/*/edit/citations') ? 'class=active' : '') }}><a href="#citations-tab" data-toggle="tab">Citations</a></li>
                         <li {{ (Request::is('admin/software/*/edit/legal') ? 'class=active' : '') }}><a href="#legal-tab" data-toggle="tab">Legal</a></li>
                         <li {{ (Request::is('admin/software/*/edit/people') ? 'class=active' : '') }}><a href="#people-tab" data-toggle="tab">People</a></li>
+                        <li {{ (Request::is('admin/software/*/edit/keywords') ? 'class=active' : '') }}><a href="#keywords-tab" data-toggle="tab">Keywords</a></li>
                         <li {{ (Request::is('admin/software/*/edit/files') ? 'class=active' : '') }}><a href="#files-tab" data-toggle="tab">Files</a></li>
                         <li {{ (Request::is('admin/software/*/edit/images') ? 'class=active' : '') }}><a href="#images-tab" data-toggle="tab">Images</a></li>
                     </ul>
@@ -70,6 +71,9 @@
                         </div>
                         <div class="tab-pane fade {{ (Request::is('admin/software/*/edit/files') ? 'active in' : '') }} " id="files-tab">
                             @include('admin.software.partials.files_tab')
+                        </div>
+                        <div class="tab-pane fade {{ (Request::is('admin/software/*/edit/keywords') ? 'active in' : '') }} " id="keywords-tab">
+                            @include('admin.software.partials.keywords_tab')
                         </div>
                         <div class="tab-pane fade {{ (Request::is('admin/software/*/edit/images') ? 'active in' : '') }}" id="images-tab">
                             @include('admin.software.partials.images_tab')

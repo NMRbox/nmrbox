@@ -118,37 +118,52 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
     Route::model('citation', 'App\Citation');
 //    Route::model('file', 'App\File'); // already included above
     Route::group(array('prefix' => 'software'), function () {
+        // Basic CRUD
         Route::get('/', array('as' => 'adminSoftware', 'uses' => 'SoftwareController@index'));
         Route::get('create', array('as' => 'software.create', 'uses' => 'SoftwareController@create'));
         Route::post('create', array('as' => 'software.store', 'uses' => 'SoftwareController@store'));
         Route::get('{software}/edit', array('as' => 'software.edit', 'uses' => 'SoftwareController@edit'));
+        Route::put('{software}/edit', array('as' => 'software.update', 'uses' => 'SoftwareController@update'));
+        Route::get('{software}/delete', array('as' => 'delete/software', 'uses' => 'SoftwareController@destroy'));
+
+        // Tabs within software page
         Route::get('{software}/edit/people', array('as' => 'software.edit-developer', 'uses' => 'SoftwareController@edit'));
         Route::get('{software}/edit/legal', array('as' => 'software.edit-legal', 'uses' => 'SoftwareController@edit'));
         Route::get('{software}/edit/versions', array('as' => 'software.edit-versions', 'uses' => 'SoftwareController@edit'));
         Route::get('{software}/edit/citations', array('as' => 'software.edit-citations', 'uses' => 'SoftwareController@edit'));
+        Route::get('{software}/edit/keywords', array('as' => 'software.edit-keywords', 'uses' => 'SoftwareController@edit'));
         Route::get('{software}/edit/files', array('as' => 'software.edit-files', 'uses' => 'SoftwareController@edit'));
-        Route::put('{software}/edit', array('as' => 'software.update', 'uses' => 'SoftwareController@update'));
+
+        // Legal
+        Route::put('{software}/edit/legal', array('as' => 'software.updatelegal', 'uses' => 'SoftwareController@updateLegal'));
+
+        // People
         Route::get('{software}/edit/people/existing/{person}/remove', array('as' => 'software.detach-person', 'uses' => 'SoftwareController@detachPerson'));
         Route::post('{software}/edit/people/new/add', array('as' => 'software.add-new-person', 'uses' => 'SoftwareController@addNewPerson'));
         Route::post('{software}/edit/people/existing/add', array('as' => 'software.add-existing-person', 'uses' => 'SoftwareController@addExistingPerson'));
         Route::post('{software}/edit/people/edit', array('as' => 'software.people-edit', 'uses' => 'SoftwareController@updatePeople'));
-        Route::put('{software}/edit/legal', array('as' => 'software.updatelegal', 'uses' => 'SoftwareController@updateLegal'));
-        Route::get('{software}/delete', array('as' => 'delete/software', 'uses' => 'SoftwareController@destroy'));
-        Route::post('{software}/edit/files', array('as' => 'software.files', 'uses' => 'SoftwareController@storeFiles'));
+
+        // Versions
         Route::post('{software}/edit/versions', array('as' => 'software.versions', 'uses' => 'SoftwareController@storeSoftwareVersion'));
         Route::post('{software}/edit/versions/vm-software', array('as' => 'software.vm-software', 'uses' => 'SoftwareController@storeSoftwareVersionPair'));
         Route::get('{software}/edit/versions/vm-software/delete/{vm}/{software_version}', array('as' => 'software.vm-software.delete', 'uses' => 'SoftwareController@destroySoftwareVersionPair'));
         Route::get('{software}/edit/versions/{software_version}/delete', array('as' => 'software.versionsdelete', 'uses' => 'SoftwareController@destroySoftwareVersion'));
         Route::get('{software}/edit/versions/{software_version}/{new_version}', array('as' => 'software.versionsedit', 'uses' => 'SoftwareController@editSoftwareVersion'));
         
-        
+        // Citations (RIP)
 //        Route::get('{software}/edit/citations/{citation}/attach', array('as' => 'software.attach-citation', 'uses' => 'SoftwareController@attachCitation'));
 //        Route::get('{software}/edit/citations/{citation}/delete', array('as' => 'software.detach-citation', 'uses' => 'SoftwareController@detachCitation'));
         
+        // Keywords
         
+        
+        // Images
         Route::get('{software}/edit/images', array('as' => 'software.images', 'uses' => 'SoftwareController@edit'));
         Route::post('{software}/edit/images', array('as' => 'software.images', 'uses' => 'SoftwareController@storeFiles'));
+
+        // Files
         Route::get('{software}/file/{file}/delete', array('as' => 'software.deletefile', 'uses' => 'SoftwareController@deleteFile'));
+        Route::post('{software}/edit/files', array('as' => 'software.files', 'uses' => 'SoftwareController@storeFiles'));
         Route::get('{software}/file/{file}/download', array('as' => 'software.downloadfile', 'uses' => 'SoftwareController@downloadFile'));
         Route::get('{software}/file/{file}', array('as' => 'software.getfile', 'uses' => 'SoftwareController@getFile'));
     });
