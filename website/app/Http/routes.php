@@ -190,6 +190,17 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{person}/delete', array('as' => 'person.delete', 'uses' => 'PersonController@destroy'));
     });
 
+    # Keyword Management
+    Route::model('keyword', 'App\Keyword');
+    Route::group(array('prefix' => 'keyword'), function () {
+        Route::get('/', array('as' => 'admin/keyword', 'uses' => 'KeywordController@index'));
+        Route::get('create', array('as' => 'keyword.create', 'uses' => 'KeywordController@create'));
+        Route::post('create', array('as' => 'keyword.store', 'uses' => 'KeywordController@store'));
+        Route::get('{keyword}/edit', array('as' => 'keyword.edit', 'uses' => 'KeywordController@edit'));
+        Route::put('{keyword}/edit', array('as' => 'keyword.update', 'uses' => 'KeywordController@update'));
+        Route::get('{keyword}/delete', array('as' => 'keyword.delete', 'uses' => 'KeywordController@destroy'));
+    });
+
     # Lab Role Management
     Route::model('lab_role', 'App\LabRole');
     Route::group(array('prefix' => 'lab_roles'), function () {
@@ -200,7 +211,6 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::put('{lab_role}/edit', array('as' => 'lab_role.update', 'uses' => 'LabRoleController@update'));
         Route::get('{lab_role}/delete', array('as' => 'lab_role.delete', 'uses' => 'LabRoleController@destroy'));
     });
-
 
     Route::model('page', 'App\Page');
     /*routes for page*/

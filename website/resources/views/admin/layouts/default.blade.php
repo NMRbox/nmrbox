@@ -111,6 +111,25 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="menu-dropdown {{ (Request::is('admin/keyword') || Request::is('admin/keyword/create') || Request::is('admin/keyword/*') ? 'active' : '') }}">
+                        <a href="#">
+                            <i class="menu-icon  fa fa-fw fa-laptop"></i>
+                            <span>Keyword</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li {{ (Request::is('admin/keyword') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('admin/keyword') }}">
+                                    Keyword Index
+                                </a>
+                            </li>
+                            <li {{ (Request::is('admin/keyword/create') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('admin/keyword/create') }}">
+                                    Add New Keyword
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="menu-dropdown {{ (Request::is('admin/vm') || Request::is('admin/vm/create') || Request::is('admin/vm/*') ? 'active' : '') }}">
                         <a href="#">
                             <i class="menu-icon  fa fa-fw fa-cubes"></i>

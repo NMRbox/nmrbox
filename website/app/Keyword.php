@@ -11,7 +11,7 @@ class Keyword extends NmrModel
      *
      * @var string
      */
-    protected $table = 'persons';
+    protected $table = 'menus';
 
     protected $fillable = [
         'label'
