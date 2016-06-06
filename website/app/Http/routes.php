@@ -155,7 +155,10 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 //        Route::get('{software}/edit/citations/{citation}/delete', array('as' => 'software.detach-citation', 'uses' => 'SoftwareController@detachCitation'));
         
         // Keywords
-        
+        Route::get('{software}/edit/keywords/existing/{keyword}/remove', array('as' => 'software.detach-keyword', 'uses' => 'SoftwareController@detachKeyword'));
+        Route::post('{software}/edit/keywords/new/add', array('as' => 'software.add-new-keyword', 'uses' => 'SoftwareController@addNewKeyword'));
+        Route::post('{software}/edit/keywords/existing/add', array('as' => 'software.add-existing-keyword', 'uses' => 'SoftwareController@addExistingKeyword'));
+        Route::post('{software}/edit/keywords/edit', array('as' => 'software.keywords-edit', 'uses' => 'SoftwareController@updatePeople'));
         
         // Images
         Route::get('{software}/edit/images', array('as' => 'software.images', 'uses' => 'SoftwareController@edit'));

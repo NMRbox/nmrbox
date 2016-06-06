@@ -16,6 +16,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 Use App\Software;
 Use App\User;
+Use App\Keyword;
 Use App\File;
 Use App\VM;
 Use App\SoftwareVersion;
@@ -198,9 +199,21 @@ class SoftwareController extends Controller
         $all_citations = Citation::all();
         $attached_citations = $software->citations;
 
+        // return keywords already attached to the software
+        $keywords = $software->keywords()->get();
+
+        // sort all keywords for html select element
+        $all_keywords = Keyword::all();
+        $all_keywords = $all_keywords->sortBy("label");
+        $keywords_for_select = [];
+        foreach( $all_keywords as $keyword ) {
+            $keywords_for_select[$keyword->id] = $keyword->label; // pair keyword ID with keyword label
+        }
+
+
         return view('admin.software.edit',compact('software', 'files', 'vm_versions',
             'software_versions', "vm_versions_for_select", "software_versions_for_select", "people_for_select",
-            'people', 'all_citations', 'attached_citations'));
+            'people', 'all_citations', 'attached_citations', 'keywords', 'keywords_for_select'));
     }
 
     public function storeSoftwareVersion(SoftwareVersionRequest $request, Software $software)
@@ -348,6 +361,43 @@ class SoftwareController extends Controller
     }
 
     /**
+     * Add a keyword to the specified resource in storage.
+     *
+     * @param  Request  $request
+     * @param  Software $software
+     * @return \Illuminate\Http\Response
+     */
+    public function addExistingKeyword(Request $request, Software $software)
+    {
+
+        // TODO: validation doesn't actually work, but the DB won't add a dupe. Fix validation. -dj 5/5/16
+
+        $existing_keyword_id = $request->existing_keyword;
+//
+//        $rules = array(
+//            'existing_keyword' => 'unique:keyword_software,keyword_id,NULL,keyword_id, software_id,' . $software->id
+//        );
+//
+//        $validator = Validator::make([$existing_keyword_id], $rules);
+//
+//        if ($validator->fails()) {
+//            // Ooops.. something went wrong
+////            return var_dump($validator);
+//            return back()->withErrors($validator);
+//        }
+
+        try {
+            $software->keywords()->attach($existing_keyword_id);
+        }
+        catch(\Illuminate\Database\QueryException $e) {
+//            return var_dump($e);
+            return back()->withErrors($e);
+        }
+
+        return back();
+    }
+
+    /**
      * Detach a person from the specified resource in storage.
      *
      * @param  SoftwareDeveloperRequest  $request
@@ -358,6 +408,25 @@ class SoftwareController extends Controller
     {
         try {
             $software->people()->detach($person->id);
+        }
+        catch(\Illuminate\Database\QueryException $e) {
+            dd($e);
+        }
+
+        return back();
+    }
+
+    /**
+     * Detach a keyword from the specified resource in storage.
+     *
+     * @param  SoftwareDeveloperRequest  $request
+     * @param  Software $software
+     * @return \Illuminate\Http\Response
+     */
+    public function detachKeyword(Software $software, Keyword $keyword)
+    {
+        try {
+            $software->keywords()->detach($keyword->id);
         }
         catch(\Illuminate\Database\QueryException $e) {
             dd($e);

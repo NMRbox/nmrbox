@@ -98,4 +98,5 @@
     <script src="{{ asset('assets/js/custom_js/edit_software_nav.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/custom_js/edit_software.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/custom_js/edit_software_people_tab.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/custom_js/edit_software_keyword_tab.js') }}" type="text/javascript"></script>
 @stop
