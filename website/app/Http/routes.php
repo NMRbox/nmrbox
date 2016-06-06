@@ -231,9 +231,11 @@ Route::get('logout', array('as' => 'logout','uses' => 'FrontEndController@getLog
 Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@postContact'));
 
 #frontend views
-Route::get('/', array('as' => 'home', function () {
-    return View::make('index');
-}));
+//Route::get('/', array('as' => 'home', function () {
+//    return View::make('index');
+//}));
+
+Route::get('/', array('as' => 'home', 'uses' => 'ChandraController@showFrontEndView'));
 
 Route::get('blog', array('as' => 'blog', 'uses' => 'BlogController@getIndexFrontend'));
 Route::get('blog/{slug}/tag', 'BlogController@getBlogTagFrontend');

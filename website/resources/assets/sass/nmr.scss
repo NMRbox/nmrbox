@@ -72,7 +72,12 @@ body {
 }
 
 .homepage img {
-  max-height: 225px;
+
+  max-height: 175px;
+
+  @media (min-width: 768px) {
+    max-height: 225px;
+  }
 }
 
 .homepage .jumbotron {

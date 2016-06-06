@@ -55,6 +55,13 @@ class ChandraController extends Controller {
 
     public function showFrontEndView($name=null)
     {
+        // this is a special case for the home page. If more special cases arise, refactor into a more structured solution
+        if($name == '') {
+            $name = 'homepage';
+            $page = Page::where('slug', $name)->get()->first();
+            return View::make('blank')->with('page', $page);
+        }
+
         if( Page::where('slug', '=', $name)->exists() ) {
             // $name is the page's slug
             $page = Page::where('slug', $name)->get()->first();

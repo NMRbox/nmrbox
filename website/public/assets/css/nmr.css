@@ -57,7 +57,10 @@ body {
   margin: 20px auto 0 auto; }
 
 .homepage img {
-  max-height: 225px; }
+  max-height: 175px; }
+  @media (min-width: 768px) {
+    .homepage img {
+      max-height: 225px; } }
 
 .homepage .jumbotron {
   background-color: inherit;
