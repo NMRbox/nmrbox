@@ -2,12 +2,13 @@
 
 showhelp ( ){
 	echo "Install website from svn"
-	echo "Usage: $0 -n [fully qualified hostname] -d [install directory] -a [account] -s [svn location] -o [operating system] -e [environment]"
+	echo "Usage: $0 -n [fully qualified hostname] -d [install directory] -a [account] -s [svn location] -o [operating system] -e [environment] -b [database]"
 	echo "hostname defaults to current host"
 	echo "account defaults to www-data"
 	echo "svn location defaults to trunk"
 	echo "operating system defaults to ubuntu-14.04"
 	echo "environment defaults to prod"
+	echo "database defaults to registry"
 	exit 1
 }
 
@@ -17,7 +18,8 @@ account=www-data
 loc=trunk
 os=ubuntu-14.04
 env=prod
-while getopts "n:d:a:s:o:e:h" opt; do
+db=registry
+while getopts "n:d:a:s:o:e:hb:" opt; do
     case $opt in
 	h)
 	showhelp
@@ -40,6 +42,9 @@ while getopts "n:d:a:s:o:e:h" opt; do
 	e)
 	env=$OPTARG
 	;;
+	b)
+	db=$OPTARG
+	;;
     esac
 done
 
@@ -59,7 +64,7 @@ if [ ! -w $parent ]; then
 fi
 
 svn co -q https://nmrbox-devel.cam.uchc.edu/repos/nmrbox/$loc/web/website $installdir 
-svn co -q https://nmrbox-devel.cam.uchc.edu/repos/nmrbox/trunk/web/vendor-$os $installdir/vendor
+svn co -q https://nmrbox-devel.cam.uchc.edu/repos/nmrbox/$loc/web/vendor-$os $installdir/vendor
 
 (
 cat <<EO_ENV
@@ -69,7 +74,7 @@ APP_KEY=PjRcCklAPB9gcicXagEmpaQdDwnd8Bw9
 APP_URL=$hostname
 
 DB_HOST=nmrbox-data.cam.uchc.edu
-DB_DATABASE=registry
+DB_DATABASE=$db
 DB_USERNAME=laravel
 DB_PASSWORD=nmr-laravel!
 
@@ -86,6 +91,11 @@ MAIL_ENCRYPTION=null
 EO_ENV
 ) > $installdir/.env
 mkdir $installdir/bootstrap/cache
+chmod 777 $installdir/bootstrap/cache
+storage=$installdir/storage
+chmod 777 $storage
+find $storage -type d -exec chmod 777 {} \;
+
 
 sudo chown -R $account:$account $installdir 
 envpath=$(readlink -f $installdir/.env)
