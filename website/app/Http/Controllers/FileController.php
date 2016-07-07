@@ -8,6 +8,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 Use App\User;
 Use App\File;
+Use App\Software;
+use Input;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Sentinel;
 
 class FileController extends Controller
 {
@@ -65,6 +69,35 @@ class FileController extends Controller
         return $newfile;
     }
 
+    /**
+     * Create a File from Symfony's UploadedFile
+     *
+     * @param  UploadedFile $f, string $name
+     * @return String url
+     */
+    public function uploadAndGetURL() {
+        if (Input::hasFile('image')) {
+            $f = Input::file('image');
+            $newfile = new File();
+            $newfile->name = $f->getClientOriginalName();
+            $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
+            $newfile->label = $newfile->name;
+            $newfile->mime_type = $f->getMimeType();
+            $newfile->size = $f->getSize();
+            $newfile->user_id = Sentinel::getUser()->id;
+            $newfile->role_id = Sentinel::findRoleBySlug('admin')->id; // change to some value from input
+//        $newfile->software_id = 0;
+            $newfile->save();
+            return route('file.get', [$newfile->slug]);
+//        return route('file.downloadfile', $newfile);
+        }
+        else {
+            return 'error';
+        }
+
+    }
+    
+    
     /**
      * Show the form for creating a new resource.
      *

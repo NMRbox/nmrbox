@@ -536,3 +536,13 @@ Customized Bootstrap Buttons
     background-color: #FFCE54;
 }
 
+
+/* Summernote style overrides */
+
+.note-editor .panel-heading span {
+    font-size: inherit;
+}
+
+.note-editor .panel-heading.note-toolbar {
+    background-color: #f5f5f5;
+}

@@ -15,6 +15,11 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
+
     <script src="{{ asset('assets/js/jquery-2.2.0.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}" type="text/javascript"></script>
 

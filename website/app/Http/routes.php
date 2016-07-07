@@ -50,6 +50,7 @@ Route::group(array('prefix' => 'registry'), function() {
 Route::model('file', 'App\File');
 Route::group(array('prefix' => 'files'), function() {
     Route::post('store', array('as' => 'file.store', 'uses' => 'FileController@storeFiles'));
+    Route::post('save', array('as' => 'file.save', 'uses' => 'FileController@uploadAndGetURL'));
     Route::get('{file}/delete', array('as' => 'file.deletefile', 'uses' => 'FileController@deleteFile'));
     Route::get('{file}/download', array('as' => 'file.downloadfile', 'uses' => 'FileController@downloadFile'));
     Route::get('{file}', array('as' => 'file.get', 'uses' => 'FileController@getFile'));
