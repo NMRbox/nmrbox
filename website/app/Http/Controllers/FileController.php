@@ -8,13 +8,23 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 Use App\User;
 Use App\File;
-Use App\Software;
 use Input;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Sentinel;
+use View;
 
 class FileController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index() {
+        $all_files = File::All()->sortBy('name');
+        return View::make("admin.files.index", compact('all_files'));
+    }
+    
     /**
      * Show the requested file
      *

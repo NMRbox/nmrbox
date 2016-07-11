@@ -116,6 +116,25 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="menu-dropdown {{ (Request::is('admin/files') || Request::is('admin/files/create') || Request::is('admin/files/*') ? 'active' : '') }}">
+                        <a href="#">
+                            <i class="menu-icon  fa fa-fw fa-file"></i>
+                            <span>Files</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li {{ (Request::is('admin/files') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('admin/files') }}">
+                                    File Index
+                                </a>
+                            </li>
+                            {{--<li {{ (Request::is('admin/files/create') ? 'class=active' : '') }}>--}}
+                                {{--<a href="{{ URL::to('admin/files/create') }}">--}}
+                                    {{--Add New Software--}}
+                                {{--</a>--}}
+                            {{--</li>--}}
+                        </ul>
+                    </li>
                     <li class="menu-dropdown {{ (Request::is('admin/keyword') || Request::is('admin/keyword/create') || Request::is('admin/keyword/*') ? 'active' : '') }}">
                         <a href="#">
                             <i class="menu-icon  fa fa-fw fa-laptop"></i>

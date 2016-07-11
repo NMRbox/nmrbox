@@ -228,6 +228,13 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{page_id}/confirm-delete', array('as' => 'confirm-delete/page', 'uses' => 'PageController@getModalDelete'));
         Route::get('{page}/restore', array('as' => 'restore/page', 'uses' => 'PageController@getRestore'));
     });
+    
+    # File Management
+    Route::group(array('prefix' => 'files','before' => 'Sentinel'), function () {
+        Route::get('/', array('as' => 'admin/files', 'uses' => 'FileController@index'));
+        Route::get('{file}/delete', array('as' => 'file.delete', 'uses' => 'FileController@destroy'));
+    });
+        
 
     //Remaining pages will be called from below controller method
     //in real world scenario, you may be required to define all routes manually
