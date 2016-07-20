@@ -263,8 +263,25 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 text-center">
+                    <a href="http://www.btrportal.org/">NIH Biomedical Technology Resource Portal</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <a href="{{ URL::to('contact-us') }}">Contact Us</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <a href="{{ URL::to('register') }}">Register for an account</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 text-center">
                     <span>NMRbox 2015</span>
                 </div>
+            </div>
+
             <!-- Icon Section Start -->
             {{--<div class="pad_top10">--}}
             {{--<ul class="list-inline" id="icon_section">--}}
@@ -289,7 +306,7 @@
                     {{--</a>--}}
                 {{--</li>--}}
             {{--</ul>--}}
-            </div>
+            {{--</div>--}}
         <!-- //Icon Section End -->
             </div>
         </div>
