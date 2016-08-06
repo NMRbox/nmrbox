@@ -26,14 +26,15 @@ class Software extends NmrModel implements SluggableInterface
         'public_release',
         'display',
         'description',
-        'license_comment',
         'free_to_redistribute',
         'devel_contacted',
+        'license_comment',
         'devel_include',
-        'custom_license',
-        'uchc_legal_approve',
+        'nfp_release',
+        'academic_release',
+        'government_release',
+        'commercial_release',
         'devel_redistrib_doc',
-        'devel_active',
         'slug'
     ];
 
@@ -41,6 +42,18 @@ class Software extends NmrModel implements SluggableInterface
         'build_from' => 'name',
         'save_to'    => 'slug',
     ];
+
+    public function boolToString($value) {
+        if(is_null($value)) {
+            return "null";
+        }
+        else if($value == false) {
+            return "false";
+        }
+        else {
+            return "true";
+        }
+    }
 
     public function files() {
         return $this->hasMany('App\File');
