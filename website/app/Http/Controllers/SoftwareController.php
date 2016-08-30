@@ -17,6 +17,7 @@ use App\Http\Controllers\Controller;
 Use App\Software;
 Use App\User;
 Use App\Keyword;
+Use App\Category;
 Use App\File;
 Use App\VM;
 Use App\SoftwareVersion;
@@ -200,20 +201,32 @@ class SoftwareController extends Controller
         $attached_citations = $software->citations;
 
         // return keywords already attached to the software
+        // NOTE: this is duplicating code from CategoryController, consider refactoring
         $keywords = $software->keywords()->get();
 
         // sort all keywords for html select element
-        $all_keywords = Keyword::all();
-        $all_keywords = $all_keywords->sortBy("label");
-        $keywords_for_select = [];
+        $all_keywords = Keyword::All();
+        $software_keywords = $software->keywords()->get();
+        $keyword_map = collect([ ]);
+
+        $keyed = $software_keywords->keyBy("label");
+
         foreach( $all_keywords as $keyword ) {
-            $keywords_for_select[$keyword->id] = $keyword->label; // pair keyword ID with keyword label
+            if($keyed->has($keyword->label)) {
+                $keyword_map->push($keyword->label);
+                $keyword->present = true;
+            }
+            else {
+//                $keyword_map->push($keyword->label, false);
+            }
         }
+
+        $all_categories = Category::all();
 
 
         return view('admin.software.edit',compact('software', 'files', 'vm_versions',
             'software_versions', "vm_versions_for_select", "software_versions_for_select", "people_for_select",
-            'people', 'all_citations', 'attached_citations', 'keywords', 'keywords_for_select'));
+            'people', 'all_citations', 'attached_citations', 'all_keywords', 'all_categories', 'keywords'));
     }
 
     public function storeSoftwareVersion(SoftwareVersionRequest $request, Software $software)
@@ -360,7 +373,7 @@ class SoftwareController extends Controller
         return back();
     }
 
-    /**
+    /** DEPRECATED
      * Add a new keyword and attach him or her to the software.
      *
      * @param  Request  $request
@@ -382,7 +395,7 @@ class SoftwareController extends Controller
         return back();
     }
 
-    /**
+    /** DEPRECATED
      * Add a keyword to the specified resource in storage.
      *
      * @param  Request  $request
@@ -418,6 +431,35 @@ class SoftwareController extends Controller
 
         return back();
     }
+
+    /**
+     * Add or remove keywords.
+     *
+     * @param  Request  $request
+     * @param  Software $software
+     * @return \Illuminate\Http\Response
+     */
+    public function saveKeywords(Request $request, Software $software)
+    {
+        $keyword_checkboxes = $request->except(["name", "_token", "_method"]);
+        foreach($keyword_checkboxes as $keyword => $checked_status) {
+            $keywd = Keyword::where("label", "=", $keyword)->get()->first();
+            if($checked_status == "on") {
+                try {
+                    $software->keywords()->attach($keywd->id);
+                }
+                catch(\Illuminate\Database\QueryException $e) {
+                    // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
+                }
+            }
+            else {
+                $software->keywords()->detach($keywd->id);
+            }
+        }
+
+        return back();
+    }
+
 
     /**
      * Detach a person from the specified resource in storage.

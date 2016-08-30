@@ -29,6 +29,7 @@
     <link href="{{ asset('assets/css/custom_css/chandra.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('assets/css/custom_css/metisMenu.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('assets/css/custom_css/panel.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/css/edit_software.css') }}" rel="stylesheet" type="text/css" />
     <!-- end of global css -->
     <!--page level css-->
     @yield('header_styles')
@@ -135,10 +136,29 @@
                             {{--</li>--}}
                         </ul>
                     </li>
+                    <li class="menu-dropdown {{ (Request::is('admin/categories') || Request::is('admin/categories/create') || Request::is('admin/categories/*') ? 'active' : '') }}">
+                        <a href="#">
+                            <i class="menu-icon  fa fa-fw fa-laptop"></i>
+                            <span>Category</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li {{ (Request::is('admin/categories') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('admin/categories') }}">
+                                    Category Index
+                                </a>
+                            </li>
+                            <li {{ (Request::is('admin/categories/create') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('admin/categories/create') }}">
+                                    Add New Category
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="menu-dropdown {{ (Request::is('admin/keyword') || Request::is('admin/keyword/create') || Request::is('admin/keyword/*') ? 'active' : '') }}">
                         <a href="#">
                             <i class="menu-icon  fa fa-fw fa-laptop"></i>
-                            <span>Keyword</span>
+                            <span>Keywords</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="sub-menu">

@@ -112,6 +112,9 @@ body {
   background-color: #5757af;
   text-decoration: none; }
 
+.list-box {
+  max-height: 400px; }
+
 .logo-text {
   font-family: "Calibri", "Source Sans Pro", sans-serif;
   color: #5757af; }

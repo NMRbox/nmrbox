@@ -150,17 +150,16 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{software}/edit/versions/vm-software/delete/{vm}/{software_version}', array('as' => 'software.vm-software.delete', 'uses' => 'SoftwareController@destroySoftwareVersionPair'));
         Route::get('{software}/edit/versions/{software_version}/delete', array('as' => 'software.versionsdelete', 'uses' => 'SoftwareController@destroySoftwareVersion'));
         Route::get('{software}/edit/versions/{software_version}/{new_version}', array('as' => 'software.versionsedit', 'uses' => 'SoftwareController@editSoftwareVersion'));
-        
-        // Citations (RIP)
-//        Route::get('{software}/edit/citations/{citation}/attach', array('as' => 'software.attach-citation', 'uses' => 'SoftwareController@attachCitation'));
-//        Route::get('{software}/edit/citations/{citation}/delete', array('as' => 'software.detach-citation', 'uses' => 'SoftwareController@detachCitation'));
-        
+
         // Keywords
-        Route::get('{software}/edit/keywords/existing/{keyword}/remove', array('as' => 'software.detach-keyword', 'uses' => 'SoftwareController@detachKeyword'));
-        Route::post('{software}/edit/keywords/new/add', array('as' => 'software.add-new-keyword', 'uses' => 'SoftwareController@addNewKeyword'));
-        Route::post('{software}/edit/keywords/existing/add', array('as' => 'software.add-existing-keyword', 'uses' => 'SoftwareController@addExistingKeyword'));
-        Route::post('{software}/edit/keywords/edit', array('as' => 'software.keywords-edit', 'uses' => 'SoftwareController@updatePeople'));
-        
+//        Route::get('{software}/edit/keywords/existing/{keyword}/remove', array('as' => 'software.detach-keyword', 'uses' => 'SoftwareController@detachKeyword'));
+//        Route::post('{software}/edit/keywords/new/add', array('as' => 'software.add-new-keyword', 'uses' => 'SoftwareController@addNewKeyword'));
+//        Route::post('{software}/edit/keywords/existing/add', array('as' => 'software.add-existing-keyword', 'uses' => 'SoftwareController@addExistingKeyword'));
+//        Route::post('{software}/edit/keywords/edit', array('as' => 'software.keywords-edit', 'uses' => 'SoftwareController@updatePeople'));
+
+        Route::post('{software}/edit/keywords/save', array('as' => 'software.save-keywords', 'uses' => 'SoftwareController@saveKeywords'));
+        Route::put('{software}/edit/keywords/save', array('as' => 'software.save-keywords', 'uses' => 'SoftwareController@saveKeywords'));
+
         // Images
         Route::get('{software}/edit/images', array('as' => 'software.images', 'uses' => 'SoftwareController@edit'));
         Route::post('{software}/edit/images', array('as' => 'software.images', 'uses' => 'SoftwareController@storeFiles'));
@@ -203,6 +202,17 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{keyword}/edit', array('as' => 'keyword.edit', 'uses' => 'KeywordController@edit'));
         Route::put('{keyword}/edit', array('as' => 'keyword.update', 'uses' => 'KeywordController@update'));
         Route::get('{keyword}/delete', array('as' => 'keyword.delete', 'uses' => 'KeywordController@destroy'));
+    });
+
+    # Category Management
+    Route::model('category', 'App\Category');
+    Route::group(array('prefix' => 'categories'), function () {
+        Route::get('/', array('as' => 'admin/keyword', 'uses' => 'CategoryController@index'));
+        Route::get('create', array('as' => 'category.create', 'uses' => 'CategoryController@create'));
+        Route::post('create', array('as' => 'category.store', 'uses' => 'CategoryController@store'));
+        Route::get('{category}/edit', array('as' => 'category.edit', 'uses' => 'CategoryController@edit'));
+        Route::put('{category}/edit', array('as' => 'category.update', 'uses' => 'CategoryController@update'));
+        Route::get('{category}/delete', array('as' => 'category.delete', 'uses' => 'CategoryController@destroy'));
     });
 
     # Lab Role Management

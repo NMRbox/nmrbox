@@ -1,5 +1,33 @@
+.admin-item-ul {
+  li {
+    min-height: 34px;
+    margin: 5px;
+    padding: 0 5px;
+
+    span {
+      line-height: 34px;
+    }
+  }
+}
+
 td .table-comma:last-child {
   display: none;
+}
+
+.categories-container {
+  max-height: 450px;
+
+  .selected {
+    background-color: gainsboro;
+  }
+
+  ul {
+    padding: 0;
+
+    li {
+      padding: .5em 1em;
+    }
+  }
 }
 
 .delete-file {
@@ -15,15 +43,21 @@ td .table-comma:last-child {
   padding: 10px;
 }
 
-.admin-item-ul {
-  li {
-    min-height: 34px;
-    margin: 5px;
-    padding: 0 5px;
+.keywords-container {
+  ul {
+    max-height: 350px;
+    overflow: scroll;
 
-    span {
-      line-height: 34px;
+    li {
+      padding: 0;
     }
+  }
+}
+
+.list-box {
+  //max-height: 450px;
+  ul {
+    padding: 0;
   }
 }
 

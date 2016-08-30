@@ -1,5 +1,21 @@
+.admin-item-ul li {
+  min-height: 34px;
+  margin: 5px;
+  padding: 0 5px; }
+  .admin-item-ul li span {
+    line-height: 34px; }
+
 td .table-comma:last-child {
   display: none; }
+
+.categories-container {
+  max-height: 450px; }
+  .categories-container .selected {
+    background-color: gainsboro; }
+  .categories-container ul {
+    padding: 0; }
+    .categories-container ul li {
+      padding: .5em 1em; }
 
 .delete-file {
   margin: 5px 0; }
@@ -11,12 +27,14 @@ td .table-comma:last-child {
   border: solid 1px #ccc;
   padding: 10px; }
 
-.admin-item-ul li {
-  min-height: 34px;
-  margin: 5px;
-  padding: 0 5px; }
-  .admin-item-ul li span {
-    line-height: 34px; }
+.keywords-container ul {
+  max-height: 350px;
+  overflow: scroll; }
+  .keywords-container ul li {
+    padding: 0; }
+
+.list-box ul {
+  padding: 0; }
 
 .nav-tabs {
   margin-bottom: 15px; }

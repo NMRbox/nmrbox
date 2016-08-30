@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use App\Keyword;
+use App\Category;
 use View;
 use App\Http\Requests;
 use App\Http\Requests\KeywordRequest;
@@ -36,7 +37,8 @@ class KeywordController extends Controller
     public function index()
     {
         $all_keywords = Keyword::All();
-        return View::make('admin.keywords.index', compact('all_keywords'));
+        $all_categories = Category::All();
+        return View::make('admin.keywords.index', compact('all_keywords', 'all_categories'));
     }
 
     /**
