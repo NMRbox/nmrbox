@@ -29,8 +29,11 @@ use App\Http\Requests\SoftwareVersionRequest;
 use App\Http\Requests\SoftwareVersionPairRequest;
 use App\Http\Requests\SoftwareLegalRequest;
 
+
 class SoftwareController extends Controller
 {
+    use FileHandler;
+
     /**
      * Display a listing of the resource.
      *
@@ -75,84 +78,6 @@ class SoftwareController extends Controller
     public function show($id)
     {
         //
-    }
-
-    /**
-     * Show the requested file
-     *
-     * @param  Software $software
-     * @param  File $file
-     * @return \Illuminate\Http\Response
-     */
-    public function getFile(Software $software, File $file)
-    {
-        $headers = array('Content-type' => $file->mime_type, 'Content-length' => $file->size);
-
-        $data = $file->bdata;
-        $unescape = $file->binary_unsql($data);
-        $un64 = base64_decode($unescape);
-
-        return response($un64, 200, $headers);
-    }
-
-    /**
-     * Force browser to download a specified file
-     *
-     * @param  Software $software, File $file
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function downloadFile(Software $software, File $file) {
-
-        $headers = array('Content-type' => $file->mime_type, // 'application/octet-stream' if need to force for older browsers
-            'Content-length' => $file->size,
-            'Content-Disposition'=>'attachment;filename="' . $file->name . '"',
-            );
-        $data = $file->bdata;
-        $unescape = $file->binary_unsql($data);
-        $un64 = base64_decode($unescape);
-        return response($un64, 200, $headers);
-    }
-
-    /**
-     * Delete a specified file
-     *
-     * @param  Software $software, File $file
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function deleteFile(Software $software, File $file)
-    {
-        $file->delete();
-        return back()->withInput();
-    }
-
-    public function storeFiles(Request $request, Software $software) {
-        $all_files = Input::file();
-
-        foreach( $all_files as $name => $f ) {
-            $newfile = $this->makeFileFromUploadedFile($f, $name);
-            $software->files()->save($newfile);
-        }
-
-        // redirect back to editing the same page when done
-        return back()->withInput();
-    }
-
-    /**
-     * Create a File from Symfony's UploadedFile
-     *
-     * @param  UploadedFile $f, string $name
-     * @return \App\File
-     */
-    public function makeFileFromUploadedFile(UploadedFile $f, string $name) {
-        $newfile = new File();
-        $newfile->name = $f->getClientOriginalName();
-        $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
-        $newfile->label = $name;
-        $newfile->mime_type = $f->getMimeType();
-        $newfile->size = $f->getSize();
-        $newfile->user_id = Sentinel::getUser()->id;
-        $newfile->role_id = Sentinel::findRoleBySlug('admin')->id; // change to some value from input
-        return $newfile;
     }
 
     /**

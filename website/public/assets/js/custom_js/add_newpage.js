@@ -69,6 +69,8 @@ $(document).ready(function() {
 
                 }
                 else {
+                    // TODO: add a download attribute to this so you don't get slugified filenames on download
+                    // https://davidwalsh.name/download-attribute
                     $('.textarea').summernote('createLink', {
                         text: url,
                         url: url,

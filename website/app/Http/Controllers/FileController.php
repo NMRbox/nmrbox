@@ -15,6 +15,9 @@ use View;
 
 class FileController extends Controller
 {
+    // downloadFile, uploadAndGetURL, makeFileFromUploadedFile methods
+    use FileHandler;
+
     /**
      * Display a listing of the resource.
      *
@@ -42,72 +45,6 @@ class FileController extends Controller
         return response($un64, 200, $headers);
     }
 
-    /**
-     * Force browser to download a specified file
-     *
-     * @param  Software $software, File $file
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function downloadFile(Software $software, File $file) {
-
-        $headers = array('Content-type' => $file->mime_type, // 'application/octet-stream' if need to force for older browsers
-            'Content-length' => $file->size,
-            'Content-Disposition'=>'attachment;filename="' . $file->name . '"',
-        );
-        $data = $file->bdata;
-        $unescape = $file->binary_unsql($data);
-        $un64 = base64_decode($unescape);
-        return response($un64, 200, $headers);
-    }
-
-
-    /**
-     * Create a File from Symfony's UploadedFile
-     *
-     * @param  UploadedFile $f, string $name
-     * @return \App\File
-     */
-    public function makeFileFromUploadedFile(UploadedFile $f, string $name) {
-        $newfile = new File();
-        $newfile->name = $f->getClientOriginalName();
-        $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
-        $newfile->label = $name;
-        $newfile->mime_type = $f->getMimeType();
-        $newfile->size = $f->getSize();
-        $newfile->user_id = Sentinel::getUser()->id;
-        $newfile->role_id = Sentinel::findRoleBySlug('admin')->id; // change to some value from input
-        return $newfile;
-    }
-
-    /**
-     * Create a File from Symfony's UploadedFile
-     *
-     * @param  UploadedFile $f, string $name
-     * @return String url
-     */
-    public function uploadAndGetURL() {
-        if (Input::hasFile('image')) {
-            $f = Input::file('image');
-            $newfile = new File();
-            $newfile->name = $f->getClientOriginalName();
-            $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
-            $newfile->label = $newfile->name;
-            $newfile->mime_type = $f->getMimeType();
-            $newfile->size = $f->getSize();
-            $newfile->user_id = Sentinel::getUser()->id;
-            $newfile->role_id = Sentinel::findRoleBySlug('admin')->id; // change to some value from input
-//        $newfile->software_id = 0;
-            $newfile->save();
-            return route('file.get', [$newfile->slug]);
-//        return route('file.downloadfile', $newfile);
-        }
-        else {
-            return 'error';
-        }
-
-    }
-    
-    
     /**
      * Show the form for creating a new resource.
      *

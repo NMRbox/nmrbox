@@ -10,10 +10,14 @@
             <h4>{!! $file->label !!}</h4>
             <div class="file-box">
                 <p>
-                    {!! $file->name !!}
+                    {!! $file->slug !!}
                 </p>
-                <a class="btn btn-primary download-file" href="{{ route('software.downloadfile', array('software'=>$software->slug, 'file'=>$file->slug) ) }}">Download</a>
-                <a href="#" class="btn btn-danger delete-file" data-filename="{!! $file->name !!}" data-label="{!! $file->label !!}" data-url="{{ route('software.deletefile', array('software'=>$software, 'file'=>$file->slug) ) }}">Delete</a>
+                {{--To be consistent, for the time being we'll use the slug as the download name--}}
+                <a class="btn btn-primary download-file" href="{{ route('file.downloadfile', array('file'=>$file->slug) ) }}"
+                   download="{{ $file->slug }}"
+                >Download</a>
+                <a href="#" class="btn btn-danger delete-file" data-filename="{!! $file->slug !!}" data-label="{!! $file->label !!}"
+                   data-url="{{ route('software.deletefile', array('software'=>$software, 'file'=>$file->slug) ) }}">Delete</a>
             </div>
         </div>
     @endunless
