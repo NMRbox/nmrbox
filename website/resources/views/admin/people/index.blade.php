@@ -91,4 +91,4 @@ People Index
             $('#vm-table').DataTable();
         });
     </script>
-@stop
+@stop 
