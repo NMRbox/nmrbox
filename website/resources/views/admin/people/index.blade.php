@@ -59,7 +59,11 @@ People Index
                                     <td>{!! $person->first_name !!}</td>
                                     <td>{!! $person->last_name !!}</td>
                                     <td>{!! $person->email !!}</td>
-                                    <td>{!! $person->institution()->get()->first()->name !!}</td>
+                                    @if($person->institution()->get()->first())
+                                        <td>{!! $person->institution()->get()->first()->name !!}</td>
+                                    @else
+                                        <td></td>
+                                    @endif
                                     <td>
                                         <a href="{!! URL::to('admin/people/' . $person->id . '/edit' ) !!}"><i class="fa fa-fw fa-pencil text-warning" title="update person"></i></a>
 
