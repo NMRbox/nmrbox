@@ -68,9 +68,9 @@ People Index
                                 <th>Last Name</th>
                                 <th>Email</th>
                                 <th>Institution</th>
-                                <th class="col-md-1">Institution<br>Type</th>
                                 <th class="col-md-1">Principal<br>Instructor</th>
                                 <th>Department</th>
+                                <th>Category</th>
                                 <th>Address</th>
                                 <th>City</th>
                                 <th>State</th>
@@ -85,9 +85,9 @@ People Index
                                 <th class="col-md-1">Last Name</th>
                                 <th class="col-md-1">Email</th>
                                 <th class="col-md-1">Institution</th>
-                                <th class="col-md-1">Instn Type</th>
                                 <th class="col-md-1">PI</th>
                                 <th class="col-md-1">Department</th>
+                                <th class="col-md-1">Category</th>
                                 <th class="col-md-1">Address</th>
                                 <th class="col-md-1">City</th>
                                 <th class="col-md-1">State</th>
@@ -105,9 +105,9 @@ People Index
                                     <td class="col-md-1">{!! $person->last_name !!}</td>
                                     <td class="col-md-1">{!! $person->email !!}</td>
                                     <td class="col-md-1">{!! $person->institution()->get()->first()->name !!}</td>
-                                    <td class="col-md-1">{!! $person->institution()->get()->first()->institution_type !!}</td>
                                     <td class="col-md-1">{!! $person->pi !!}</td>
                                     <td class="col-md-1">{!! $person->department !!}</td>
+                                    <td class="col-md-1">{!! $person->category !!}</td>
                                     <td class="col-md-1">{!! $person->address1 !!}</td>
                                     <td class="col-md-1">{!! $person->city !!}</td>
                                     <td class="col-md-1">{!! $person->state_province !!}</td>
@@ -210,10 +210,11 @@ People Index
             /* Selecting/Deselecting particular single rows */
             $('#vm-table tbody').on('click', 'tr', function() {
                 var id = this.id;
-                if($.inArray(id, selected) === -1) {
+                var index = $.inArray(id, selected);
+                if(index === -1) {
                     selected.push(id);
                 } else {
-                    selected.splice(id, 1);
+                    selected.splice(index, 1);
                 }
                 $(this).toggleClass('selected');
             });
@@ -239,10 +240,6 @@ People Index
             $('a#btn_send_email').on('click', function(e) {
                 e.preventDefault();
                 if(selected.length > 0) {
-                    /**@ToDo: SEND AJAX TO EMAIL SCRIPT **/
-                    console.log(JSON.stringify(selected));
-                    console.log(selected.toString());
-
                     $.ajax({
                         type: "POST",
                         url: 'people/send_email',
@@ -283,9 +280,9 @@ People Index
                     $("#modal-header-title").text( response.user['first_name'] + ' ' + response.user['last_name'] );
                     //Show content within modal body
                     $("#user_details_modal .modal-body").html(
-                            'First Name' + response.user['first_name'] + '<br>' +
-                            'last Name' + response.user['last_name'] + '<br>' +
-                            'Email' + response.user['email'] + '<br>'
+                            'First Name:&nbsp;' + response.user['first_name'] + '<br>' +
+                            'last Name:&nbsp;' + response.user['last_name'] + '<br>' +
+                            'Email:&nbsp;' + response.user['email'] + '<br>'
 
                     )
                 },
