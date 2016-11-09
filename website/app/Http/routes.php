@@ -186,11 +186,14 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
     Route::model('person', 'App\Person');
     Route::group(array('prefix' => 'people'), function () {
         Route::get('/', array('as' => 'admin/people', 'uses' => 'PersonController@index'));
+        //Route::post('/', array('as' => 'person.sendEmail', 'uses' => 'PersonController@sendEmail'));
         Route::get('create', array('as' => 'person.create', 'uses' => 'PersonController@create'));
         Route::post('create', array('as' => 'person.store', 'uses' => 'PersonController@store'));
         Route::get('{person}/edit', array('as' => 'person.edit', 'uses' => 'PersonController@edit'));
         Route::put('{person}/edit', array('as' => 'person.update', 'uses' => 'PersonController@update'));
         Route::get('{person}/delete', array('as' => 'person.delete', 'uses' => 'PersonController@destroy'));
+        Route::post('send_email', array('as' => 'person.sendEmail', 'uses' => 'PersonController@sendEmail'));
+        Route::post('show', array('as' => 'person.show', 'uses' => 'PersonController@show'));
     });
 
     # Keyword Management
@@ -283,11 +286,15 @@ Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@post
 
 Route::get('/', array('as' => 'home', 'uses' => 'ChandraController@showFrontEndView'));
 
+
 Route::get('blog', array('as' => 'blog', 'uses' => 'BlogController@getIndexFrontend'));
 Route::get('blog/{slug}/tag', 'BlogController@getBlogTagFrontend');
 Route::get('blog/{slug?}', 'BlogController@getBlogFrontend');
 Route::post('blog/{blog}/comment', 'BlogController@storeCommentFrontend');
 
 Route::get('{name?}', 'ChandraController@showFrontEndView');
+
+
+Route::get('/ldap', array('as' => 'ldap', 'uses' => 'AuthController@validate_ldap_password'));
 # End of frontend views
 

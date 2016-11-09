@@ -15,10 +15,13 @@
     <div class="container">
         <div class="row">
             <div class="panel-header">
-                <h2 class="text-center">
+                <img class="center-block" src="{{ asset('assets/img/logo/nmrbox-logo-sm.png') }}">
+                <h2 class="text-center text-primary logo-text">NMRbox</h2>
+
+                <h4 class="text-center">
                     Login or
                     <a href="{{ route('admin-register') }}">Sign up</a>
-                </h2>
+                </h4>
             </div>
             <div class="panel-body social">
                 <div class="clearfix">

@@ -574,7 +574,7 @@ class FrontEndController extends ChandraController
 
         // Send the activation code through email
         Mail::send('emails.contact', compact('data'), function ($m) use ($data) {
-            $m->from('test@test.com', 'TestSiteName');
+            $m->from(env('MAIL_USERNAME'), 'TestSiteName');
             $m->to($data['contact-email'], $data['contact-name']);
             $m->subject('Welcome ' . $data['contact-name']);
 

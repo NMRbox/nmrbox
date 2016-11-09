@@ -65,7 +65,7 @@
                                         @if ($role->id != 1)
                                             @if($role->users()->count())
                                                 <a href="#" data-toggle="modal" data-target="#users_exists" data-name="{!! $role->name !!}" class="users_exists">
-                                                    <i class="fa fa-fw fa-info text-warning"></i>
+                                                    <i class="fa fa-fw fa-info text-warning"></i>bla bla
                                                 </a>
                                             @else
                                                 <a href="{{ route('confirm-delete/group', $role->id) }}" data-toggle="modal" data-target="#delete_confirm">

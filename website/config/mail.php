@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'habeeb@lorventindia.com', 'name' => 'Habeeb'],
+    'from' => ['address' => 'nmrbox.org@gmail.com', 'name' => 'NMR Box'],
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
 
     /*
     |--------------------------------------------------------------------------

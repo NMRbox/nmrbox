@@ -7,12 +7,15 @@ use Illuminate\Support\MessageBag;
 use View;
 use Input;
 use Sentinel;
+use Mail;
+use Lang;
 use App\Person;
 use App\Institution;
 use App\Timezone;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 
 class PersonController extends Controller
 {
@@ -161,9 +164,21 @@ class PersonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Person $person)
+    public function show(Request $request)
     {
-        //
+        if(!$request->ajax()){
+            return App::abort(500, 'error in show');
+        }
+
+        $id = $request->input('id');
+        //print_r($id);
+
+        //retrieving person details
+        $user = Person::where('id', $id)->first();
+
+        //json_encode($user);
+        return response( json_encode( array( 'user' => $user)), 200 )
+            ->header( 'Content-Type', 'application/json' );
     }
 
     /**
@@ -249,5 +264,46 @@ class PersonController extends Controller
 
         $person->delete();
         return redirect("admin/people");
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function sendEmail(Request $request)
+    {
+        if(!$request->ajax()) {
+            return App::abort(403);
+        }
+
+        $ids = json_decode($request->input('ids'), true);
+
+
+        $users = Person::whereIn('id', $ids)->get();
+//        print_r($users);
+
+        /* Email processing */
+        // Data to be used on the email view
+        $mail_count = 0;
+        foreach ($users as $user){
+            $recipient = $user['first_name'] . ' ' . $user['last_name'] . '<' . $user['email'] . '>';
+
+            //Send mail
+            $send_mail = Mail::send('emails.group-email', compact('user'), function ($m) use ($user) {
+                            $m->from(env('MAIL_USERNAME'), 'NMRbox');
+                            $m->to('schowdhury@uchc.edu', $user['first_name'] . ' ' . $user['last_name']);
+                            $m->subject('Welcome ' . $user['first_name']);
+
+                        });
+
+            if($send_mail) {
+                $mail_count++;
+            }
+        }
+
+        return response( json_encode( array( 'message' => 'Successfully sent ' . $mail_count . ' emails. ' ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
     }
 }

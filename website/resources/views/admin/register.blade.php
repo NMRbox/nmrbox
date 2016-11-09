@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register | Chandra Admin Template</title>
+    <title>Sign In</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- global level css -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -20,6 +20,8 @@
     <div class="container">
         <div class="row " id="form-login">
             <div class="panel-header">
+                <img class="center-block" src="{{ asset('assets/img/logo/nmrbox-logo-sm.png') }}">
+                <h2 class="text-center text-primary logo-text">NMRbox</h2>
                 <h2 class="text-center text-primary">
                     Register  or
                     <a href="{{ route('admin-login') }}">Sign in</a>
