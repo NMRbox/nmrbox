@@ -132,15 +132,27 @@ class PageController extends ChandraController {
 	 */
 	public function postCreate(PageRequest $request)
 	{
-        $page = new Page($request->except('image','tags','featured','slug'));
-        $page->user_id = Sentinel::getUser()->id;
-        $page->save();
 
-        // unfortunately need to save twice to get around the auto-slugging
-        $page->slug = $page->_generateSlug($request->slug);
-        $page->save();
+        try {
 
-        return redirect('admin/pages');
+            $page = new Page($request->except('image','tags','featured','slug'));
+            $page->user_id = Sentinel::getUser()->id;
+            $page->save();
+
+            // unfortunately need to save twice to get around the auto-slugging
+            $slug = $page->_generateSlug($request->slug);
+            $slug = $page->_makeSlugUnique($slug);
+            $page->slug = $slug;
+            $page->save();
+
+            return redirect('admin/pages');
+
+        } catch (\UnexpectedValueException $e) {
+            return back()->withInput()->with('error', 'Invalid slug. Please try another.');
+        }
+
+
+
 	}
 
 	/**

@@ -40,4 +40,8 @@ class Page extends model implements SluggableInterface {
     public function _generateSlug($source) {
         return $this->generateSlug( $source );
     }
+
+    public function _makeSlugUnique($source) {
+        return $this->makeSlugUnique( $source );
+    }
 }
