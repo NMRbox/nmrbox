@@ -60,8 +60,8 @@
                             {!! BootForm::text('last_name', "Last Name", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
                             {!! BootForm::email('email', "Email", null, array('class' => 'input-lg', 'maxlength'=> 255, 'required' => 'required')) !!}
 
-                            {!! BootForm::select('group', "Access Role",
-                    $roles_for_select, null, array('maxlength'=> 32, 'required' => 'required')) !!}
+                            {!! BootForm::select('groups[]', "Access Role",
+                                $roles_for_select, null, array('maxlength'=> 32, 'required' => 'required')) !!}
 
                             {!! BootForm::password('password', 'Password', array('class' => 'input-lg', 'maxlength'=> 255, 'required' => 'required')) !!}
                             {!! BootForm::password('password_confirm', 'Confirm Password', array('class' => 'input-lg', 'maxlength'=> 255, 'required' => 'required')) !!}

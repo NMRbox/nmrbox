@@ -417,9 +417,15 @@ class UsersController extends ChandraController
                 'password' => $request->password
             ), $activate);
 
-            //add user to 'User' group
-            $role = Sentinel::findRoleByName('User');
-            $role->users()->attach($user);
+            // Add user to selected group
+            // Get the selected groups
+            $rolesToAdd = Input::get('groups', array());
+
+            // Assign roles to user
+            foreach ($rolesToAdd as $roleId) {
+                $role = Sentinel::findRoleById($roleId);
+                $role->users()->attach($user);
+            }
 
         }
         catch (UserExistsException $e) {
@@ -469,6 +475,60 @@ class UsersController extends ChandraController
      */
     public function postEdit($id = null) {
 
+        try {
+            // Get the user information
+            $user = Sentinel::findById($id);
+        } catch (UserNotFoundException $e) {
+            // Prepare the error message
+            $error = Lang::get('users/message.user_not_found', compact('id'));
+
+            // Redirect to the user management page
+            return Redirect::route('users')->with('error', $error);
+        }
+
+        // Get the current user groups
+        $userRoles = $user->roles()->lists('id')->all();
+
+        // Get the selected groups
+        $selectedRoles = Input::get('groups', array());
+
+        // Groups comparison between the groups the user currently
+        // have and the groups the user wish to have.
+        $rolesToAdd    = array_diff($selectedRoles, $userRoles);
+        $rolesToRemove = array_diff($userRoles, $selectedRoles);
+
+        // Assign roles to user
+        foreach ($rolesToAdd as $roleId) {
+            $role = Sentinel::findRoleById($roleId);
+
+            $role->users()->attach($user);
+        }
+
+        // Remove roles to user
+        foreach ($rolesToRemove as $roleId) {
+            $role = Sentinel::findRoleById($roleId);
+            $role->users()->detach($user);
+        }
+
+
+        // Was the user's person record updated?
+
+        $user->save();
+        // Was the user updated?
+        if ($user->save()) {
+            // Prepare the success message
+            $success = Lang::get('users/message.success.update');
+
+            // Redirect to the user page
+            return Redirect::route('users')->with('success', $success);
+        }
+
+        // Prepare the error message
+        $error = Lang::get('users/message.error.update');
+
+
+        // Redirect to the user page
+        return Redirect::route('users')->withInput()->with('error', $error);
     }
 
     /**
