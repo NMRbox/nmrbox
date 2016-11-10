@@ -62,6 +62,11 @@ class ChandraController extends Controller {
             return View::make('blank')->with('page', $page);
         }
 
+        // prevent users from viewing homepage dynamic page outside of site root
+        if($name == 'homepage') {
+            return Redirect::to('/');
+        }
+
         if( Page::where('slug', '=', $name)->exists() ) {
             // $name is the page's slug
             $page = Page::where('slug', $name)->get()->first();
