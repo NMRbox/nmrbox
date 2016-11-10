@@ -268,8 +268,8 @@ class FrontEndController extends ChandraController
         $rules = array(
             'first_name' => 'required|min:1',
             'last_name' =>  'required|min:1',
-            'email' => 'required|email|max:255|unique:users',
-            'email_institution' => 'email|max:255|unique:persons',
+            'email' => 'email|max:255|unique:persons',
+            'email_institution' => 'required|email|max:255|unique:persons|unique:users,email', // need to validate the email isn't taken on the users table either
             'job_title' =>  'required',
             'institution' =>  'required',
             'institution_type' =>  'required',
@@ -297,17 +297,17 @@ class FrontEndController extends ChandraController
 
         try {
 
-            $institutional_email = Input::get('email_institution');
-            if( strlen($institutional_email) <= 0 ) {
-                $institutional_email = Input::get('email');
+            $email = Input::get('email');
+            if( strlen($email) <= 0 ) {
+                $email = Input::get('email_institution');
             }
 
             // register the person
             $person = new Person(array(
                 'first_name' => Input::get('first_name'),
                 'last_name' => Input::get('last_name'),
-                'email' => Input::get('email'),
-                'email_institution' => $institutional_email,
+                'email' => $email,
+                'email_institution' => Input::get('email_institution'),
                 'pi' => Input::get('pi'),
 //                'nmrbox_acct' => Input::get('nmrbox_acct'),
                 'institution_id' => 9, // set to unassigned, but update immediately after saving the model
