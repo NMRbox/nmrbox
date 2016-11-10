@@ -171,8 +171,8 @@
                     {{--based on anyone login or not display menu items--}}
                     @if(Sentinel::guest())
                         {{--<li><a href="{{ URL::to('login') }}">Login</a>--}}
-                        <li><a href="{{ URL::to('admin/login') }}">Login</a>
-                        </li>
+                        {{--<li><a href="{{ URL::to('admin/login') }}">Login</a>--}}
+                        {{--</li>--}}
                         {{--<li><a href="{{ URL::to('register') }}">Register</a>--}}
                         {{--</li>--}}
                     @else
