@@ -132,13 +132,15 @@ People Index
 @stop
 {{-- Body Bottom confirm modal --}}
 @section('footer_scripts')
-    {{-- single user details modal --}}
+    {{-- delete user modal --}}
     <div class="modal fade" id="delete_confirm" tabindex="-1" role="dialog" aria-labelledby="user_delete_confirm_title" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
         </div>
     </div>
-    </div>
+
+    {{-- single user details modal --}}
     <div class="modal fade" id="user_details_modal" tabindex="-2" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -155,7 +157,9 @@ People Index
             </div>
         </div>
     </div>
-    {{-- single user modal --}}
+    {{-- eof single user modal --}}
+
+    {{-- send mail --}}
 
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
@@ -216,6 +220,7 @@ People Index
                 } else {
                     selected.splice(index, 1);
                 }
+
                 $(this).toggleClass('selected');
             });
 

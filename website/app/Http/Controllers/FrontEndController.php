@@ -106,13 +106,50 @@ class FrontEndController extends ChandraController
         // the person attached to the user
         $person = $user->person()->get()->first();
 
-        return View::make('user_account', compact('user', 'person'));
+        /*
+         * @todo - remove old template
+         * */
+
+        return View::make('user_dashboard', compact('user', 'person'));
+        //return View::make('user_account', compact('user', 'person'));
+    }
+
+    /**
+     * display form for user general profile update
+     *
+     * @todo - remove old template
+     *
+     */
+    public function editProfile()
+    {
+        $user = Sentinel::getUser();
+        // the person attached to the user
+        $person = $user->person()->get()->first();
+
+
+        $timezones = Timezone::all();
+        $timezones = $timezones->sortBy("zone"); // want these sorted for frontend
+        $timezones_for_select = [];
+
+        // The goal here is to pair each vm's id with its friendly name, so the name can be displayed in a select
+        //  to choose the actual vm id.
+        foreach( $timezones as $tz ) {
+            $timezones_for_select[$tz->id] = $tz->zone; // pair VM ID with human friendly VM name
+        }
+
+        $person_positions = Person::positions;
+        $person_institution_types = Institution::institution_types;
+
+
+        return view('edit_profile', compact('person', 'timezones_for_select', 'person_positions',
+            'person_institution_types', 'person_institution_type_number'));
+
     }
 
     /**
      * update user details and display
      */
-    public function updateAccount()
+    public function updateProfile()
     {
         //$user = Sentinel::findById($id);
         $user = Sentinel::getUser();

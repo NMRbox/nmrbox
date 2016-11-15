@@ -272,8 +272,12 @@ Route::get('forgot-password/{userId}/{passwordResetCode}', array('as' => 'forgot
 Route::post('forgot-password/{userId}/{passwordResetCode}', 'FrontEndController@postForgotPasswordConfirm');
 # My account display and update details
 Route::group(array('middleware' => 'SentinelUser'), function () {
+    Route::get('update_profile', array('as' => 'update_profile', 'uses' => 'FrontEndController@editProfile'));
+    Route::post('update_profile', 'FrontEndController@updateProfile');
+});
+Route::group(array('middleware' => 'SentinelUser'), function () {
     Route::get('my-account', array('as' => 'my-account', 'uses' => 'FrontEndController@myAccount'));
-    Route::post('my-account', 'FrontEndController@updateAccount');
+    //Route::post('my-account', 'FrontEndController@updateAccount');
 });
 Route::get('logout', array('as' => 'logout','uses' => 'FrontEndController@getLogout'));
 # contact form
