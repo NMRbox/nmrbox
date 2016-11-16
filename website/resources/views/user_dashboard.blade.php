@@ -82,7 +82,7 @@
                                     @if($user->pic)
                                         <img src="{!! url('/').'/uploads/users/'.$user->pic !!}" alt="img" class="img-circle"/>
                                     @else
-                                        <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive">
+                                        <img alt="User Pic" src="http://www.doppelme.com/DM1430605JCH/crop.gif" class="img-circle img-responsive">
                                     @endif
                                 </div>
 

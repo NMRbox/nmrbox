@@ -41,6 +41,8 @@ People Index
                         <a href="javascript:" id="btn_select_all" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-check"></span> Select All</a>
                         <a href="javascript:" id="btn_deselect_all" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-refresh"></span> Deselect</a>
                         <a href="javascript:" id="btn_send_email" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-envelope"></span> Send Email</a>
+                        <a href="#" data-toggle="modal" data-target="#email_modal" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-envelope"></span> Send Group Email</a>
+                        {{--<a href="#" data-toggle="modal" data-target="#user_details_modal" data-id="{!! $person->id !!}" id="show_user"><i class="fa fa-fw fa-info text-warning" title="View details"></i></a>--}}
                         <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
                     </div>
                 </div>
@@ -59,7 +61,7 @@ People Index
 
                 </div>
                 <br />
-                <div class="panel-body">
+                <div class="panel-body table_fluid">
                     <table id="vm-table" class="table table-bordered">
                         <thead>
                             <tr>
@@ -140,19 +142,126 @@ People Index
         </div>
     </div>
 
-    {{-- single user details modal --}}
-    <div class="modal fade" id="user_details_modal" tabindex="-2" role="dialog" aria-hidden="true">
+    {{-- email modal --}}
+    <div class="modal fade" id="delete_confirm" tabindex="-1" role="dialog" aria-labelledby="user_delete_confirm_title" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4>
-                        <span id="modal-header-title">Loading</span>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <span id="modal-header-title">Modify Group Email</span>
                     </h4>
 
                 </div>
                 <div class="modal-body">
                     Loading user data...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- single user details modal --}}
+    <div class="modal fade" id="email_modal" tabindex="-2" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                    </h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <!-- Notifications -->
+                        @include('notifications')
+
+
+
+                        <form class="form-horizontal">
+                            <fieldset>
+
+                                <!-- Form Name -->
+                                <legend>Email Customization</legend>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="Subject">Subject</label>
+                                    <div class="col-md-8">
+                                        <input id="Subject" name="Subject" type="text" placeholder="Email Subject"
+                                               class="form-control input-md" required="">
+
+                                    </div>
+                                </div>
+
+                                <!-- Button Drop Down -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="email_template">Email Template</label>
+
+                                    <div class="col-md-8">
+                                        <select id="email_template" name="tmplt">
+                                            <option value="">Select Template</option>
+                                            <option value="1">Value1</option>
+                                            <option value="2">Value2</option>
+                                            <option value="3">Value3</option>
+                                        </select>
+                                    </div>
+                                    {{--<div class="col-md-4">
+                                        <div class="input-group">
+                                            <input id="email_template" name="email_template" class="form-control"
+                                                   placeholder="Email Template" type="text" required="">
+                                            <div class="input-group-btn">
+                                                --}}{{--<button type="button" class="btn btn-default dropdown-toggle"
+                                                        data-toggle="dropdown">
+                                                    Select
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu pull-right" id="email_template">
+                                                    <li><a href="#" value="1">Option one</a></li>
+                                                    <li><a href="#" value="2">Option two</a></li>
+                                                    <li><a href="#" value="3">Option three</a></li>
+                                                </ul>--}}{{--
+
+                                            </div>
+                                        </div>
+                                    </div>--}}
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="message">Select email fields</label>
+                                    <div class="col-md-8" id="template_area">
+                                        <a href="#" class="btn btn-xs btn-default" data-field-name="first_name">First Name</a>
+                                        <a href="#" class="btn btn-xs btn-default" data-field-name="last_name">Last Name</a>
+                                        <a href="#" class="btn btn-xs btn-default" data-field-name="email">Email</a>
+                                    </div>
+                                </div>
+
+                                <!-- Textarea -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="message">Message</label>
+                                    <div class="col-md-8" id="template_area">
+                                        <textarea class="form-control" id="message" name="message">Email Message</textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Button (Double) -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="send_email">Send Email</label>
+                                    <div class="col-md-8">
+                                        <button id="send_email" name="send_email" class="btn btn-success">Send Email
+                                        </button>
+                                        <button id="reset" name="reset" class="btn btn-inverse">Reset</button>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </form>
+                    </div>
+
+
+
+
+
+
                 </div>
             </div>
         </div>
@@ -171,6 +280,11 @@ People Index
 
         table tfoot input{
             width: 100%;
+        }
+
+        .table_fluid{
+            overflow-x: scroll;
+
         }
     </style>
     <script>
@@ -239,6 +353,34 @@ People Index
                 e.preventDefault();
                 selected = [];
                 $('#vm-table tbody tr').removeClass('selected');
+            });
+
+            /* populating Email template */
+            $(document).on("change", '#email_template', function(e) {
+                e.preventDefault();
+                var template_id = $(this).val();
+                console.log(template_id);
+
+                $.ajax({
+                    type: "POST",
+                    url: 'people/email_template',
+                    data: 'id=' + template_id + '&_token=' + $('input#user_csrf_token').val(),
+                    success: function(data) {
+                        $('textarea#message').val(data.message);
+
+                        /*
+                        var $el = $("#name");
+                        $el.empty(); // remove old options
+                        $el.append($("<option></option>")
+                                .attr("value", '').text('Please Select'));
+                        $.each(json, function(value, key) {
+                            $el.append($("<option></option>")
+                                    .attr("value", value).text(key));
+                        });
+                        */
+                    }
+                });
+
             });
 
             /* Email all the selected person*/

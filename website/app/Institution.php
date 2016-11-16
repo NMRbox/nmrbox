@@ -25,6 +25,11 @@ class Institution extends NmrModel
         'Other'
     ];
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function persons()
     {
         return $this->hasMany('App\Person');

@@ -306,4 +306,37 @@ class PersonController extends Controller
         return response( json_encode( array( 'message' => 'Successfully sent ' . $mail_count . ' emails. ' ) ), 200 )
             ->header( 'Content-Type', 'application/json' );
     }
+
+    /**
+     * Display the specified email template.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function email_template(Request $request)
+    {
+        if(!$request->ajax()){
+            return App::abort(500, 'error in show');
+        }
+
+        $id = $request->input('id');
+
+        //retrieving person details
+        if($id == 1){
+            //json_encode($user);
+            return response( json_encode( array( 'message' => 'This is email template 1.' ) ), 200 )
+                ->header( 'Content-Type', 'application/json' );
+        } elseif ($id == 2) {
+            //json_encode($user);
+            return response( json_encode( array( 'message' => 'This is email template 2.' ) ), 200 )
+                ->header( 'Content-Type', 'application/json' );
+
+        } elseif ($id == 3) {
+            //json_encode($user);
+            return response( json_encode( array( 'message' => 'This is email template 3.' ) ), 200 )
+                ->header( 'Content-Type', 'application/json' );
+        }
+
+    }
+
 }
