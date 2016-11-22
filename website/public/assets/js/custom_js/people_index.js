@@ -16,4 +16,6 @@ $(document).ready(function() {
         mbutton.text("Delete");
         m.modal();
     });
+
 });
+

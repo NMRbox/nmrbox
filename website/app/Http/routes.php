@@ -186,7 +186,6 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
     Route::model('person', 'App\Person');
     Route::group(array('prefix' => 'people'), function () {
         Route::get('/', array('as' => 'admin/people', 'uses' => 'PersonController@index'));
-        //Route::post('/', array('as' => 'person.sendEmail', 'uses' => 'PersonController@sendEmail'));
         Route::get('create', array('as' => 'person.create', 'uses' => 'PersonController@create'));
         Route::post('create', array('as' => 'person.store', 'uses' => 'PersonController@store'));
         Route::get('{person}/edit', array('as' => 'person.edit', 'uses' => 'PersonController@edit'));
@@ -249,7 +248,20 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('/', array('as' => 'admin/files', 'uses' => 'FileController@index'));
         Route::get('{file}/delete', array('as' => 'file.delete', 'uses' => 'FileController@destroy'));
     });
-        
+
+    # Email Management
+    Route::model('email', 'App\Email');
+    Route::group(array('prefix' => 'email'), function () {
+        Route::get('/', array('as' => 'admin/email', 'uses' => 'EmailController@index'));
+        Route::get('create', array('as' => 'email.create', 'uses' => 'EmailController@create'));
+        Route::post('create', array('as' => 'email.store', 'uses' => 'EmailController@store'));
+        Route::get('{email}/edit', array('as' => 'email.edit', 'uses' => 'EmailController@edit'));
+        Route::put('{email}/edit', array('as' => 'email.update', 'uses' => 'EmailController@update'));
+        Route::get('{email}/delete', array('as' => 'email.delete', 'uses' => 'EmailController@destroy'));
+    });
+
+
+
 
     //Remaining pages will be called from below controller method
     //in real world scenario, you may be required to define all routes manually

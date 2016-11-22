@@ -260,6 +260,27 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="menu-dropdown {{ (Request::is('admin/email') || Request::is('admin/email/create') || Request::is('admin/email/*') ? 'active' : '') }}">
+                        <a href="#">
+                            <i class="menu-icon  fa fa-fw fa-envelope-o"></i>
+                            <span>Email Templates</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li {{ (Request::is('admin/email') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('admin/email') }}">
+                                    <i class="fa fa-fw fa-envelope"></i>
+                                    Email Templates Index
+                                </a>
+                            </li>
+                            <li {{ (Request::is('admin/email/create') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('admin/email/create') }}">
+                                    <i class="fa fa-fw fa-envelope"></i>
+                                    Add New Temaplate
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="menu-dropdown {{ (Request::is('admin/lab_roles') || Request::is('admin/lab_roles/create') || Request::is('admin/lab_roles/*') ? 'active' : '') }}">
                         <a href="#">
                             <i class="menu-icon  fa fa-fw fa-user"></i>

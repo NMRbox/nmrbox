@@ -10,6 +10,7 @@ use Sentinel;
 use Mail;
 use Lang;
 use App\Person;
+use App\Email;
 use App\Institution;
 use App\Timezone;
 
@@ -43,7 +44,9 @@ class PersonController extends Controller
     public function index()
     {
         $all_people = Person::All();
-        return View::make('admin.people.index', compact('all_people'));
+        $email_templates = Email::All();
+
+        return View::make('admin.people.index', compact('all_people', 'email_templates'));
     }
 
     /**
@@ -187,8 +190,10 @@ class PersonController extends Controller
      * @param  Person  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Person $person)
+    public function edit(Request $request, $id)
     {
+        $person = Person::where('id', $id)->first();
+
         $timezones = Timezone::all();
         $timezones = $timezones->sortBy("zone"); // want these sorted for frontend
         $timezones_for_select = [];
@@ -209,6 +214,7 @@ class PersonController extends Controller
         return view('admin.people.edit', compact('person', 'timezones_for_select', 'person_positions',
             'person_institution_types', 'person_institution_type_number'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -278,24 +284,45 @@ class PersonController extends Controller
             return App::abort(403);
         }
 
+        $save_template = $request->input('save_template');
+        $msg_body = $request->input('message');
+
+        if($save_template == 'yes')
+        {
+            // Saving Email template
+            $email_template_name = $request->input('email_template_name');
+            $email_template_body = $msg_body;
+
+            $email = new Email(array(
+                'name' => $email_template_name,
+                'content' => $email_template_body,
+            ));
+            $email->save();
+        }
+
         $ids = json_decode($request->input('ids'), true);
 
-
+        // Retrieving the users list from person table
         $users = Person::whereIn('id', $ids)->get();
-//        print_r($users);
 
         /* Email processing */
         // Data to be used on the email view
         $mail_count = 0;
+
         foreach ($users as $user){
-            $recipient = $user['first_name'] . ' ' . $user['last_name'] . '<' . $user['email'] . '>';
+            $email_subj = $request->input('subject');
+
+            // message body str_replace array
+            $search = array('%%first_name%%', '%%last_name%%', '%%email%%', '%%category%%');
+            $replace = array('%%first_name%%' => $user->first_name, '%%last_name%%' => $user->last_name, '%%email%%' => $user->email, '%%category%%' => $user->category);
+            $message = str_replace($search, $replace, $msg_body);
 
             //Send mail
-            $send_mail = Mail::send('emails.group-email', compact('user'), function ($m) use ($user) {
-                            $m->from(env('MAIL_USERNAME'), 'NMRbox');
-                            $m->to('schowdhury@uchc.edu', $user['first_name'] . ' ' . $user['last_name']);
-                            $m->subject('Welcome ' . $user['first_name']);
-
+            $send_mail = Mail::send([], [], function ($m) use ($user, $email_subj, $message) {
+                            $m->from(env('MAIL_USERNAME'), 'NMRbox')
+                                ->to('schowdhury@uchc.edu', $user['first_name'] . ' ' . $user['last_name'])
+                                ->subject($email_subj)
+                                ->setBody($message);
                         });
 
             if($send_mail) {
@@ -319,23 +346,15 @@ class PersonController extends Controller
             return App::abort(500, 'error in show');
         }
 
-        $id = $request->input('id');
+        $name = $request->input('name');
+        $template = Email::where('name', $name)->first();
 
         //retrieving person details
-        if($id == 1){
-            //json_encode($user);
-            return response( json_encode( array( 'message' => 'This is email template 1.' ) ), 200 )
-                ->header( 'Content-Type', 'application/json' );
-        } elseif ($id == 2) {
-            //json_encode($user);
-            return response( json_encode( array( 'message' => 'This is email template 2.' ) ), 200 )
-                ->header( 'Content-Type', 'application/json' );
 
-        } elseif ($id == 3) {
-            //json_encode($user);
-            return response( json_encode( array( 'message' => 'This is email template 3.' ) ), 200 )
-                ->header( 'Content-Type', 'application/json' );
-        }
+        //json_encode($user);
+        return response( json_encode( array( 'message' => $template->content ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
+
 
     }
 

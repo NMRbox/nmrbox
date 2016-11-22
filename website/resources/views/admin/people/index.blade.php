@@ -40,9 +40,7 @@ People Index
                         <a href="{{ URL::to('admin/people/create') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> Add Person</a>
                         <a href="javascript:" id="btn_select_all" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-check"></span> Select All</a>
                         <a href="javascript:" id="btn_deselect_all" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-refresh"></span> Deselect</a>
-                        <a href="javascript:" id="btn_send_email" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-envelope"></span> Send Email</a>
-                        <a href="#" data-toggle="modal" data-target="#email_modal" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-envelope"></span> Send Group Email</a>
-                        {{--<a href="#" data-toggle="modal" data-target="#user_details_modal" data-id="{!! $person->id !!}" id="show_user"><i class="fa fa-fw fa-info text-warning" title="View details"></i></a>--}}
+                        <a href="#" data-toggle="modal" data-target="#email_modal" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-envelope"></span> Send Email</a>
                         <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
                     </div>
                 </div>
@@ -176,62 +174,44 @@ People Index
                         <!-- Notifications -->
                         @include('notifications')
 
-
-
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" id="email_template_form">
                             <fieldset>
 
-                                <!-- Form Name -->
+                                {{-- Form Title --}}
                                 <legend>Email Customization</legend>
 
-                                <!-- Text input-->
+                                {{-- Email Subject --}}
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" for="Subject">Subject</label>
+                                    <label class="col-md-4 control-label" for="subject">Subject</label>
                                     <div class="col-md-8">
-                                        <input id="Subject" name="Subject" type="text" placeholder="Email Subject"
+                                        <input name="subject" type="text" placeholder="Email Subject"
                                                class="form-control input-md" required="">
-
                                     </div>
                                 </div>
 
-                                <!-- Button Drop Down -->
+                                {{-- Email Template Drop Down --}}
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="email_template">Email Template</label>
 
                                     <div class="col-md-8">
                                         <select id="email_template" name="tmplt">
-                                            <option value="">Select Template</option>
-                                            <option value="1">Value1</option>
-                                            <option value="2">Value2</option>
-                                            <option value="3">Value3</option>
+                                            <option value="0">Select Template</option>
+                                            @foreach ($email_templates as $email_template)
+                                                <option>{!! $email_template->name !!}</option>
+                                            @endforeach
                                         </select>
                                     </div>
-                                    {{--<div class="col-md-4">
-                                        <div class="input-group">
-                                            <input id="email_template" name="email_template" class="form-control"
-                                                   placeholder="Email Template" type="text" required="">
-                                            <div class="input-group-btn">
-                                                --}}{{--<button type="button" class="btn btn-default dropdown-toggle"
-                                                        data-toggle="dropdown">
-                                                    Select
-                                                    <span class="caret"></span>
-                                                </button>
-                                                <ul class="dropdown-menu pull-right" id="email_template">
-                                                    <li><a href="#" value="1">Option one</a></li>
-                                                    <li><a href="#" value="2">Option two</a></li>
-                                                    <li><a href="#" value="3">Option three</a></li>
-                                                </ul>--}}{{--
-
-                                            </div>
-                                        </div>
-                                    </div>--}}
                                 </div>
+
+                                {{-- Available database fields --}}
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" for="message">Select email fields</label>
+                                    <label class="col-md-4 control-label" for="template_area">Select email fields</label>
                                     <div class="col-md-8" id="template_area">
                                         <a href="#" class="btn btn-xs btn-default" data-field-name="first_name">First Name</a>
                                         <a href="#" class="btn btn-xs btn-default" data-field-name="last_name">Last Name</a>
                                         <a href="#" class="btn btn-xs btn-default" data-field-name="email">Email</a>
+                                        <a href="#" class="btn btn-xs btn-default" data-field-name="institution">Institution</a>
+                                        <a href="#" class="btn btn-xs btn-default" data-field-name="category">Category</a>
                                     </div>
                                 </div>
 
@@ -242,10 +222,27 @@ People Index
                                         <textarea class="form-control" id="message" name="message">Email Message</textarea>
                                     </div>
                                 </div>
+                                {{-- new template saving option--}}
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="save_template">Save as new template?</label>
+                                    <div class="col-md-8" id="save_template_option">
+                                        <input type="radio" name="save_template" value="yes"> Yes
+                                        <input type="radio" name="save_template" value="no" checked="checked"> No
+                                    </div>
+                                </div>
+
+                                {{-- Saving a new template with a name --}}
+                                <div class="form-group" style="display: none;" id="template_name_box">
+                                    <label class="col-md-4 control-label" for="email_template_name">Template Name</label>
+                                    <div class="col-md-8">
+                                        <input name="email_template_name" type="text" placeholder="Email Template Name"
+                                               class="form-control input-md" required="">
+                                    </div>
+                                </div>
 
                                 <!-- Button (Double) -->
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" for="send_email">Send Email</label>
+                                    <div class="col-md-4">&nbsp;</div>
                                     <div class="col-md-8">
                                         <button id="send_email" name="send_email" class="btn btn-success">Send Email
                                         </button>
@@ -257,11 +254,6 @@ People Index
                         </form>
                     </div>
 
-
-
-
-
-
                 </div>
             </div>
         </div>
@@ -269,7 +261,6 @@ People Index
     {{-- eof single user modal --}}
 
     {{-- send mail --}}
-
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
     <script src="{{ asset('assets/js/custom_js/people_index.js') }}" type="text/javascript"></script>
@@ -364,34 +355,28 @@ People Index
                 $.ajax({
                     type: "POST",
                     url: 'people/email_template',
-                    data: 'id=' + template_id + '&_token=' + $('input#user_csrf_token').val(),
+                    data: 'name=' + template_id + '&_token=' + $('input#user_csrf_token').val(),
                     success: function(data) {
                         $('textarea#message').val(data.message);
-
-                        /*
-                        var $el = $("#name");
-                        $el.empty(); // remove old options
-                        $el.append($("<option></option>")
-                                .attr("value", '').text('Please Select'));
-                        $.each(json, function(value, key) {
-                            $el.append($("<option></option>")
-                                    .attr("value", value).text(key));
-                        });
-                        */
                     }
                 });
 
             });
 
             /* Email all the selected person*/
-            $('a#btn_send_email').on('click', function(e) {
+            $('button#send_email').on('click', function(e) {
                 e.preventDefault();
                 if(selected.length > 0) {
+                var form_data = $("#email_template_form").serialize();
+                console.log(form_data);
+
                     $.ajax({
                         type: "POST",
                         url: 'people/send_email',
-                        data: 'ids=' + JSON.stringify(selected) +'&selected=' + selected.toString() + '&_token=' + $('input#user_csrf_token').val(),
+                        data: 'ids=' + JSON.stringify(selected) + '&' + form_data + '&_token=' + $('input#user_csrf_token').val(),
                         success: function (data) {
+                            $('input, textarea', $('#email_template_form')).val('');
+                            $('#email_modal').modal('hide');
                             $('#success_msg').html(data.message);
                             show_alert('success');
                         },
@@ -400,6 +385,23 @@ People Index
                             show_alert('error');
                         }
                     })
+                } else {
+                    /* If no row selected */
+                    $('#error_msg').html('Something went wrong. Please try again.');
+                    show_alert('error');
+                }
+
+            });
+
+            /* Display email template name input field */
+            $("input[name$='save_template']").click(function(e) {
+                //e.preventDefault();
+                console.log($(this).val());
+                var val = $(this).val();
+                if(val == 'yes') {
+                    $('#template_name_box').toggle();
+                } else {
+                    $('#template_name_box').hide();
                 }
             });
 
@@ -430,15 +432,49 @@ People Index
                             'First Name:&nbsp;' + response.user['first_name'] + '<br>' +
                             'last Name:&nbsp;' + response.user['last_name'] + '<br>' +
                             'Email:&nbsp;' + response.user['email'] + '<br>'
-
                     )
                 },
                 error: function (data) {
-                    $('#error_msg').html('Something went wrong. Please try again.');
+                    $('#error_msg').html('No rows selected. Please try again.');
                     show_alert('error');
                 }
             })
 
         });
     </script>
+    <script type="application/javascript">
+        jQuery.fn.extend({
+            insertAtCaret: function(myValue){
+                return this.each(function(i) {
+                    if (document.selection) {
+                        //For browsers like Internet Explorer
+                        this.focus();
+                        var sel = document.selection.createRange();
+                        sel.text = myValue;
+                        this.focus();
+                    }
+                    else if (this.selectionStart || this.selectionStart == '0') {
+                        //For browsers like Firefox and Webkit based
+                        var startPos = this.selectionStart;
+                        var endPos = this.selectionEnd;
+                        var scrollTop = this.scrollTop;
+                        this.value = this.value.substring(0, startPos)+myValue+this.value.substring(endPos,this.value.length);
+                        this.focus();
+                        this.selectionStart = startPos + myValue.length;
+                        this.selectionEnd = startPos + myValue.length;
+                        this.scrollTop = scrollTop;
+                    } else {
+                        this.value += myValue;
+                        this.focus();
+                    }
+                });
+            }
+        });
+
+        $('#template_area a').click(function(){
+            var val = $(this).attr('data-field-name');
+            $('textarea').insertAtCaret( "%%" + val + "%%");
+        })
+    </script>
+
 @stop 
