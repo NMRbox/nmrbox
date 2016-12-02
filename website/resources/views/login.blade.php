@@ -28,11 +28,11 @@
 
             <form action="{{ route('login') }}" class="omb_loginForm"  autocomplete="off" method="POST">
                 {!! Form::token() !!}
-                <div class="form-group {{ $errors->first('email', 'has-error') }}">
-                    <label for="Email">Email</label>
-                    <input type="email" class="form-control" name="email" placeholder="Email" value="{!! Input::old('email') !!}">
+                <div class="form-group {{ $errors->first('username', 'has-error') }}">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Username" value="{!! Input::old('username') !!}">
                 </div>
-                <span class="help-block">{{ $errors->first('email', ':message') }}</span>
+                <span class="help-block">{{ $errors->first('username', ':message') }}</span>
                 <div class="form-group {{ $errors->first('password', 'has-error') }}">
                     <label for="Password">Password</label>
                     <input type="password" class="form-control" name="password" placeholder="Password">

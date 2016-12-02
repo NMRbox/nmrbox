@@ -64,6 +64,31 @@
             <div class="welcome">
                 <h3>My Account</h3>
             </div>
+            <div class="row">
+                <br>
+            </div>
+            <div class="row">
+                <div class="alert alert-success hidden" id="success-alert">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    <strong>Success! </strong>
+                    <span id="success_msg"></span>
+                </div>
+
+                <div class="alert alert-danger hidden" id="error-alert">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    <strong>Error! </strong>
+                    <span id="error_msg"></span>
+                </div>
+            </div>
+
+            {{-- Accouncement --}}
+
+            <div class="row">
+                <div class="alert alert-info">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <p class="text-center">Welcome to your NMRbox user dashboard!  This interface is under active development and additional tools / panels that provide user-specific information will be posted here.</p>
+                </div>
+            </div>
 
             <div class="row">
                 {{--<div class="col-md-12">--}}
@@ -109,12 +134,6 @@
                                                 <td>Address</td>
                                                 <td>{!! $person->address1.'&nbsp;<br>'.$person->city.'&nbsp;,'.$person->state_province.'&nbsp;'. $person->zip_code!!}</td>
                                             </tr>
-                                            {{--<tr>
-                                                <td>Phone Number</td>
-                                                <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)
-                                                </td>
-                                            </tr>--}}
-
                                         </tbody>
                                     </table>
 
@@ -124,23 +143,16 @@
                             </div>
                         </div>
                         <div class="panel-footer">
-                            <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                            <span class="pull-right">
-                            <a href="{{ URL::to('update_profile') }}" data-original-title="Edit user profile" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            {{--<a data-original-title="Remove this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>--}}
-                        </span>
+                            <div class="text-right">
+                                <a href="{{ URL::to('update_profile') }}" data-original-title="Edit user profile" data-toggle="tooltip" type="button"
+                                   class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                            </div>
                         </div>
-
                     </div>
                 </div>
 
                 {{-- bio-science box --}}
                 <div class="col-sm-12 col-md-6 toppad">
-
-
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title">Bio-science Account</h3>
@@ -154,26 +166,34 @@
                                 <div class=" col-md-12 col-lg-12 ">
                                     <table class="table table-user-information">
                                         <tbody>
-                                        <tr>
-                                            <td>Bio Science ID:</td>
-                                            <td>{!! $person->nmrbox_acct !!}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Email: </td>
-                                            <td><a href="mailto:info@support.com">{!! $person->email !!}</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Password: </td>
-                                            <td>Password123!</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Role</td>
-                                            <td>General/Admin</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Status</td>
-                                            <td>Active/Inactive<br>&nbsp;</td>
-                                        </tr>
+                                            <tr>
+                                                <td>Bio Science ID:</td>
+                                                <td>{!! $person->nmrbox_acct !!}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Email: </td>
+                                                <td><a href="mailto:info@support.com">{!! $person->email !!}</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Password: </td>
+                                                <td>
+                                                    <input type="hidden" name="password" id="ldap_pass" >
+                                                    <span id="pass_asterisk">******</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Role</td>
+                                                <td>User <br> Developer</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Status</td>
+                                                <td>Active<br>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
 
@@ -181,14 +201,13 @@
                             </div>
                         </div>
                         <div class="panel-footer">
-                            <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                            <span class="pull-right">
-                            {{--<a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>--}}
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                        </span>
+                            <div class="text-right">
+                                <a href="{{ URL::to('update_profile') }}" data-original-title="Reset Bio-science password" data-toggle="tooltip" type="button"
+                                   class="btn btn-sm btn-warning" id="edit_ldap_pass"><i class="glyphicon glyphicon-edit"></i></a>
+                                <input type="hidden" name="change-password" value="Save" id="save_ldap_pass" class="btn btn-primary">
+                                {{-- csrf token --}}
+                                <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
+                            </div>
                         </div>
 
                     </div>
@@ -196,22 +215,15 @@
 
             </div>
 
-            <div class="row">
-
-                {{-- bio-science box --}}
+            {{--<div class="row">
+                --}}{{-- software listing box --}}{{--
                 <div class="col-sm-12 col-md-12 toppad">
-
-
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title">Software Listings</h3>
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                {{--<div class="col-md-3 col-lg-3 " align="center">--}}
-                                    {{--<div>Software listing</div>--}}
-                                {{--</div>--}}
-
                                 <div class=" col-md-12 col-lg-12 ">
                                     <table class="table table-user-information">
                                         <thead>
@@ -260,170 +272,12 @@
                         </div>
                         <div class="panel-footer">
                             &nbsp;<br>&nbsp;
-                            {{--<a data-original-title="Broadcast Message" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                            <span class="pull-right">
-                            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>--}}
-                        </span>
+
                         </div>
 
                     </div>
                 </div>
-
-
-                {{--
-                <div class="position-left">
-                    <!-- Notifications -->
-                    @include('notifications')
-
-                    --}}{{--<div>
-                        <h3 class="text-primary">Personal Information</h3>
-                    </div>--}}{{--
-                    <form role="form" id="tryitForm" class="form-horizontal" enctype="multipart/form-data"
-                          action="{{ route('my-account') }}" method="post">
-                        --}}{{--{!!  Form::model($user, array('route' => 'my-account', $user->id))  !!}--}}{{--
-                        --}}{{--<input type="hidden" name="_token" value="">--}}{{--
-                        {!! Form::token() !!}
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Avatar:</label>
-                            <div class="col-lg-6">
-                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                    <div class="fileinput-new thumbnail" style="max-width: 100px; max-height: 75px;">
-                                        @if($user->pic)
-                                            <img src="{!! url('/').'/uploads/users/'.$user->pic !!}" alt="img"/>
-                                        @else
-                                            <img src="http://placehold.it/100x75" alt="..."/>
-                                        @endif
-                                    </div>
-                                    <div class="fileinput-preview fileinput-exists thumbnail"
-                                         style="max-width: 200px; max-height: 150px;"></div>
-                                    <div>
-                                                            <span class="btn btn-primary btn-file">
-                                                                <span class="fileinput-new">Select image</span>
-                                                                <span class="fileinput-exists">Change</span>
-                                                                <input type="file" name="pic" id="pic"/>
-                                                            </span>
-                                        <a href="#" class="btn btn-primary fileinput-exists" data-dismiss="fileinput">Remove</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cd-block">
-                            <div class="cd-content">
-                                <div class="form-group {{ $errors->first('first_name', 'has-error') }}">
-                                    <label class="col-lg-2 control-label">
-                                        First Name:
-                                        <span class='require'>*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-fw fa-user-md text-primary"></i>
-                                            </span>
-                                            <input type="text" placeholder=" " name="first_name" id="first_name"
-                                                   class="form-control"
-                                                   value="{!! Input::old('first_name',$person->first_name) !!}"></div>
-                                        <span class="help-block">{{ $errors->first('first_name', ':message') }}</span>
-                                    </div>
-
-                                </div>
-
-                                <div class="form-group {{ $errors->first('last_name', 'has-error') }}">
-                                    <label class="col-lg-2 control-label">
-                                        Last Name:
-                                        <span class='require'>*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-fw fa-user-md text-primary"></i>
-                                            </span>
-                                            <input type="text" placeholder=" " name="last_name" id="last_name"
-                                                   class="form-control"
-                                                   value="{!! Input::old('last_name',$person->last_name) !!}"></div>
-                                        <span class="help-block">{{ $errors->first('last_name', ':message') }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group {{ $errors->first('email', 'has-error') }}">
-                            <label class="col-lg-2 control-label">
-                                Email:
-                                <span class='require'>*</span>
-                            </label>
-                            <div class="col-lg-6">
-                                <div class="input-group">
-                                                                <span class="input-group-addon">
-                                                                    <i class="fa fa-fw fa-envelope text-primary"></i>
-                                                                </span>
-                                    <input type="text" placeholder=" " id="email" name="email" class="form-control"
-                                           value="{!! Input::old('email',$user->email) !!}"></div>
-                                <span class="help-block">{{ $errors->first('email', ':message') }}</span>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-2"></div>
-                            <div class="col-lg-6">
-                                <h5 class="text-danger"><strong>If you don't want to change password, leave both fields
-                                        empty</strong></h5>
-                            </div>
-                        </div>
-                        <div class="cd-block">
-                            <div class="cd-content">
-                                <div class="form-group {{ $errors->first('password', 'has-error') }}">
-                                    <label class="col-lg-2 control-label">
-                                        Password:
-                                        <span class='require'>*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-fw fa-key text-primary"></i>
-                                            </span>
-                                            <input type="password" name="password" placeholder=" " id="pwd"
-                                                   class="form-control"></div>
-                                        <span class="help-block">{{ $errors->first('password', ':message') }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cd-block">
-                            <div class="cd-content">
-                                <div class="form-group {{ $errors->first('password_confirm', 'has-error') }}">
-                                    <label class="col-lg-2 control-label">
-                                        Confirm Password:
-                                        <span class='require'>*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-fw fa-key text-primary"></i>
-                                            </span>
-                                            <input type="password" name="password_confirm" placeholder=" " id="cpwd"
-                                                   class="form-control"></div>
-                                        <span class="help-block">{{ $errors->first('password_confirm', ':message') }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cd-block">
-                            <div class="cd-content">
-                                <div class="form-group">
-                                    <div class="col-lg-offset-2 col-lg-10">
-                                        <button class="btn btn-primary btn-lg" type="submit">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>--}}{{--{!!  Form::close()  !!}--}}{{--
-                </div>--}}
-
-                {{--</div>--}}
-            </div>
+            </div>--}}
         </div>
     </div>
 @stop
@@ -463,7 +317,59 @@
                 e.preventDefault();
                 alert("This is a demo.\n :-)");
             });
+
+            /* Enabling the fields for entering password */
+            $('#edit_ldap_pass').on('click', function (e) {
+                e.preventDefault();
+
+                $('input#ldap_pass').attr('type', 'password');
+                $('#pass_asterisk').hide();
+                $('input#save_ldap_pass').attr('type', 'submit');
+            });
+
+            /* saving the data into LDAP */
+            $("#save_ldap_pass").on("click", function (e) {
+                e.preventDefault();
+                var pass = $('#ldap_pass').val();
+                $('#ldap_pass').after('<span id="ldap_pass_loading">Saving Password...</span>');
+
+                $('input#ldap_pass').attr('type', 'hidden');
+                $('input#save_ldap_pass').attr('type', 'hidden');
+
+
+                $.ajax({
+                    type: "POST",
+                    url: 'change-password',
+                    data: 'pass=' + pass +'&_token=' + $('input#user_csrf_token').val(),
+                    dataType: 'JSON',
+                    success: function(response) {
+                        $('#ldap_pass_loading').remove();
+                        $('#pass_asterisk').show();
+                        console.log(response);
+                        show_alert('success');
+                    },
+                    error: function (data) {
+                        $('#ldap_pass_loading').remove();
+                        $('#pass_asterisk').show();
+                        $('#error_msg').html('No rows selected. Please try again.');
+                        show_alert('error');
+                    }
+                })
+
+            });
+
+            function show_alert(alert_type) {
+
+                $("#"+alert_type+"-alert").alert();
+                $("#"+alert_type+"-alert").fadeTo(2000, 500).slideUp(500, function(){
+                    $("#"+alert_type+"-alert").slideUp(500);
+                });
+            }
         });
+
+
+
+
     </script>
 
     <script type="text/javascript"

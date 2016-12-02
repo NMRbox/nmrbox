@@ -190,9 +190,10 @@ class PersonController extends Controller
      * @param  Person  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    //public function edit(Request $request, $id)
+    public function edit(Person $person)
     {
-        $person = Person::where('id', $id)->first();
+        //$person = Person::where('id', $id)->first();
 
         $timezones = Timezone::all();
         $timezones = $timezones->sortBy("zone"); // want these sorted for frontend

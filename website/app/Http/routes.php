@@ -281,14 +281,20 @@ Route::get('register-person', array('as' => 'register-person','uses' => 'FrontEn
 Route::post('register-person','FrontEndController@postRegisterPerson');
 Route::get('forgot-password',array('as' => 'forgot-password','uses' => 'FrontEndController@getForgotPassword'));
 Route::post('forgot-password','FrontEndController@postForgotPassword');
+//Route::get('change-password',array('as' => 'change-password','uses' => 'FrontEndController@getChangePassword'));
+Route::post('change-password', 'FrontEndController@postChangePassword');
+
 # Forgot Password Confirmation
 Route::get('forgot-password/{userId}/{passwordResetCode}', array('as' => 'forgot-password-confirm', 'uses' => 'FrontEndController@getForgotPasswordConfirm'));
 Route::post('forgot-password/{userId}/{passwordResetCode}', 'FrontEndController@postForgotPasswordConfirm');
 # My account display and update details
-Route::group(array('middleware' => 'SentinelUser'), function () {
-    Route::get('update_profile', array('as' => 'update_profile', 'uses' => 'FrontEndController@editProfile'));
-    Route::post('update_profile', 'FrontEndController@updateProfile');
-});
+
+Route::get('update_profile', array('as' => 'update_profile', 'uses' => 'FrontEndController@editProfile'));
+//Route::post('update_profile/{id}', 'FrontEndController@updatePersonProfile');
+//Route::get('{person}/update_profile', array('as' => 'person.edit', 'uses' => 'PersonController@edit'));
+Route::put('{person}/update_profile', array('as' => 'person.update', 'uses' => 'FrontEndController@updatePersonProfile'));
+
+
 Route::group(array('middleware' => 'SentinelUser'), function () {
     Route::get('my-account', array('as' => 'my-account', 'uses' => 'FrontEndController@myAccount'));
     //Route::post('my-account', 'FrontEndController@updateAccount');

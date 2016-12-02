@@ -105,9 +105,15 @@ class EmailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $name)
+    /*public function edit(Request $request, $name)
     {
         $email = Email::where('name', $name)->first();
+
+        return view('admin.emails.edit', compact('email'));
+    }*/
+
+    public function edit(Email $email)
+    {
 
         return view('admin.emails.edit', compact('email'));
     }
@@ -119,9 +125,19 @@ class EmailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $name)
+    /*public function update(Request $request, $name)
     {
         $email = Email::where('name', $name)->first();
+        $email->name = $request->input('name');
+        $email->content = $request->input('content');
+
+        $email->save();
+
+        return redirect('admin/email');
+    }*/
+    public function update(Request $request, Email $email)
+    {
+        //$email = Email::where('name', $name)->first();
         $email->name = $request->input('name');
         $email->content = $request->input('content');
 
@@ -136,9 +152,14 @@ class EmailController extends Controller
      * @param  string name
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Email $email, $name)
+    /*public function destroy(Email $email, $name)
     {
         $email->where('name', $name)->first()->delete();
+        return redirect("admin/email");
+    }*/
+    public function destroy(Email $email)
+    {
+        $email->delete();
         return redirect("admin/email");
     }
 
