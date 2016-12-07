@@ -50,4 +50,9 @@ class Person extends NmrModel
     public function institution() {
         return $this->belongsTo('App\Institution');
     }
+
+    public function classification() {
+        return $this->belongsToMany('App\Classification', 'classification_person',
+      'person_id', 'name');
+    }
 }

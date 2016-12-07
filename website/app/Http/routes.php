@@ -193,8 +193,8 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{person}/delete', array('as' => 'person.delete', 'uses' => 'PersonController@destroy'));
         Route::post('send_email', array('as' => 'person.sendEmail', 'uses' => 'PersonController@sendEmail'));
         Route::post('show', array('as' => 'person.show', 'uses' => 'PersonController@show'));
-        // test line for email template
         Route::post('email_template', array('as' => 'person.email_template', 'uses' => 'PersonController@email_template'));
+        Route::post('assign_classification', array('as' => 'person.assign_classification', 'uses' => 'PersonController@assignPersonClassification'));
     });
 
     # Keyword Management

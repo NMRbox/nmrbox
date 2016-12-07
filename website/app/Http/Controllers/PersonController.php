@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classification;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use View;
@@ -45,8 +46,9 @@ class PersonController extends Controller
     {
         $all_people = Person::All();
         $email_templates = Email::All();
+        $classifications = Classification::All();
 
-        return View::make('admin.people.index', compact('all_people', 'email_templates'));
+        return View::make('admin.people.index', compact('all_people', 'email_templates', 'classifications'));
     }
 
     /**
@@ -333,6 +335,49 @@ class PersonController extends Controller
 
         return response( json_encode( array( 'message' => 'Successfully sent ' . $mail_count . ' emails. ' ) ), 200 )
             ->header( 'Content-Type', 'application/json' );
+    }
+
+    public function assignPersonClassification(Request $request){
+
+        if(!$request->ajax()) {
+            return App::abort(403);
+        }
+
+        $save_classification = $request->input('save_classification');
+
+        if($save_classification == 'yes') {
+            // Saving New Classification
+            $classification_name = $request->input('classification_name', true);
+            $classification_definition = $request->input('classification_definition', true);
+
+            $classification = new Classification(array(
+                'name' => $classification_name,
+                'definition' => $classification_definition,
+            ));
+            $classification->save();
+
+            // merging the newly added value in input array
+            Input::merge(array('classifications' => array_merge($request->input('classifications'), array($classification_name))));
+        }
+        // Selected user ids
+        $ids = json_decode($request->input('ids'), true);
+
+        // the classification input list
+        $classifications = $request->input('classifications', true);
+
+        // Retrieving the users list from person table
+        $users = Person::whereIn('id', $ids)->get();
+
+        /* Email processing */
+        foreach ($users as $user){
+            $person = Person::find($user['id']);
+            $person->classification()->detach($classifications);
+            $person->classification()->attach($classifications);
+        }
+
+        return response( json_encode( array( 'message' => 'Successfully added people in groups. ' ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
+
     }
 
     /**

@@ -100,14 +100,13 @@ namespace App\library {
             echo '<pre>';
             print_r($result);
             echo '</pre>';
-            die();
+
 
             if(strstr($result, 'success') !== false) {
                 return true;
             }
 
             return false;
-
         }
     }
 }

@@ -41,6 +41,7 @@ People Index
                         <a href="javascript:" id="btn_select_all" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-check"></span> Select All</a>
                         <a href="javascript:" id="btn_deselect_all" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-refresh"></span> Deselect</a>
                         <a href="#" data-toggle="modal" data-target="#email_modal" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-envelope"></span> Send Email</a>
+                        <a href="#" data-toggle="modal" data-target="#user_classification_modal" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-user"></span> Assign Classification</a>
                         <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
                     </div>
                 </div>
@@ -208,6 +209,7 @@ People Index
                                     <div class="col-md-8" id="template_area">
                                         <a href="#" class="btn btn-xs btn-default" data-field-name="first_name">First Name</a>
                                         <a href="#" class="btn btn-xs btn-default" data-field-name="last_name">Last Name</a>
+                                        <a href="#" class="btn btn-xs btn-default" data-field-name="nmrbox_acct">NMRBox Account</a>
                                         <a href="#" class="btn btn-xs btn-default" data-field-name="email">Email</a>
                                         <a href="#" class="btn btn-xs btn-default" data-field-name="institution">Institution</a>
                                         <a href="#" class="btn btn-xs btn-default" data-field-name="category">Category</a>
@@ -258,6 +260,83 @@ People Index
         </div>
     </div>
     {{-- eof single user modal --}}
+
+    {{-- assign user classification --}}
+    <div class="modal fade" id="user_classification_modal" tabindex="-2" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <!-- Notifications -->
+                        @include('notifications')
+
+                        <form class="form-horizontal" id="assign_classification_form">
+                            <fieldset>
+
+                                {{-- Form Title --}}
+                                <legend>Assign Classification</legend>
+
+                                {{-- Email Subject --}}
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="subject">Available List</label>
+                                    <div class="col-md-8">
+                                        @foreach ($classifications as $classification)
+                                            <input type="checkbox" name="classifications[]" value="{!! $classification->name !!}">&nbsp;{!! $classification->name !!}&nbsp;&nbsp;
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                {{-- new template saving option--}}
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="save_template">Assign new tag?</label>
+                                    <div class="col-md-8" id="save_option">
+                                        <input type="radio" name="save_classification" value="yes"> Yes
+                                        <input type="radio" name="save_classification" value="no" checked="checked"> No
+                                    </div>
+                                </div>
+
+                                {{-- Saving a new template with a name and definitation--}}
+                                <div style="display: none;" id="name_box">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="classification_name">Name</label>
+                                        <div class="col-md-8">
+                                            <input name="classification_name" type="text" placeholder="Classification Title"
+                                                   class="form-control input-md" required="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="classification_definition">Definition</label>
+                                        <div class="col-md-8">
+                                            <input name="classification_definition" type="text" placeholder="Classification Definition"
+                                                   class="form-control input-md" required="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Button (Double) -->
+                                <div class="form-group">
+                                    <div class="col-md-4">&nbsp;</div>
+                                    <div class="col-md-8">
+                                        <button id="assign_classification" name="assign_classification" class="btn btn-success">Assign Classification Tags</button>
+                                        <button id="reset" name="reset" class="btn btn-inverse">Reset</button>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- eof user assign classification modal --}}
 
     {{-- send mail --}}
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.js') }}"></script>
@@ -394,14 +473,54 @@ People Index
 
             /* Display email template name input field */
             $("input[name$='save_template']").click(function(e) {
-                //e.preventDefault();
-                console.log($(this).val());
                 var val = $(this).val();
+
                 if(val == 'yes') {
                     $('#template_name_box').toggle();
                 } else {
                     $('#template_name_box').hide();
                 }
+            });
+
+            /* Display title input box for classification tags */
+            $("input[name$='save_classification']").click(function(e) {
+                var val = $(this).val();
+
+                if(val == 'yes') {
+                    $('#name_box').toggle();
+                } else {
+                    $('#name_box').hide();
+                }
+            });
+
+            /* Assign tags to all the selected person*/
+            $('button#assign_classification').on('click', function(e) {
+                e.preventDefault();
+                if(selected.length > 0) {
+                    var form_data = $("#assign_classification_form").serialize();
+                    console.log(form_data);
+
+                    $.ajax({
+                        type: "POST",
+                        url: 'people/assign_classification',
+                        data: 'ids=' + JSON.stringify(selected) + '&' + form_data + '&_token=' + $('input#user_csrf_token').val(),
+                        success: function (data) {
+                            $('input, textarea', $('#assign_classification_form')).val('');
+                            $('#user_classification_modal').modal('hide');
+                            $('#success_msg').html(data.message);
+                            show_alert('success');
+                        },
+                        error: function (data) {
+                            $('#error_msg').html('Something went wrong. Please try again.');
+                            show_alert('error');
+                        }
+                    })
+                } else {
+                    /* If no row selected */
+                    $('#error_msg').html('Something went wrong. Please try again.');
+                    show_alert('error');
+                }
+
             });
 
         });
