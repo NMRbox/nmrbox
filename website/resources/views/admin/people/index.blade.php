@@ -72,6 +72,7 @@ People Index
                                 <th class="col-md-1">Principal<br>Instructor</th>
                                 <th>Department</th>
                                 <th>Category</th>
+                                <th>Classifications</th>
                                 <th>Address</th>
                                 <th>City</th>
                                 <th>State</th>
@@ -79,24 +80,24 @@ People Index
                                 <th>NMRbox Account #</th>
                             </tr>
                         </thead>
-                        <tfoot>
+                        <thead>
                             <tr>
-                                <th class="no-search hidden"></th>
-                                <th class="col-md-1">First Name</th>
-                                <th class="col-md-1">Last Name</th>
-                                <th class="col-md-1">Email</th>
-                                <th class="col-md-1">Institution</th>
-                                <th class="col-md-1">PI</th>
-                                <th class="col-md-1">Department</th>
-                                <th class="col-md-1">Category</th>
-                                <th class="col-md-1">Address</th>
-                                <th class="col-md-1">City</th>
-                                <th class="col-md-1">State</th>
-                                <th class="col-md-1">Zip</th>
-                                <th class="col-md-1 no-search"></th>
+                                <th class="no-search hidden ref_search"></th>
+                                <th class="col-md-1 ref_search">First Name</th>
+                                <th class="col-md-1 ref_search">Last Name</th>
+                                <th class="col-md-1 ref_search">Email</th>
+                                <th class="col-md-1 ref_search">Institution</th>
+                                <th class="col-md-1 ref_search">PI</th>
+                                <th class="col-md-1 ref_search">Department</th>
+                                <th class="col-md-1 ref_search">Category</th>
+                                <th class="col-md-1 ref_search">Classifications</th>
+                                <th class="col-md-1 ref_search">Address</th>
+                                <th class="col-md-1 ref_search">City</th>
+                                <th class="col-md-1 ref_search">State</th>
+                                <th class="col-md-1 ref_search">Zip</th>
+                                <th class="col-md-1 no-search ref_search"></th>
                             </tr>
-
-                        </tfoot>
+                        </thead>
                         <tbody>
                         @if(!empty($all_people))
                             @foreach ($all_people as $person)
@@ -105,10 +106,15 @@ People Index
                                     <td class="col-md-1">{!! $person->first_name !!}</td>
                                     <td class="col-md-1">{!! $person->last_name !!}</td>
                                     <td class="col-md-1">{!! $person->email !!}</td>
-                                    <td class="col-md-1">{!! $person->institution()->get()->first()->name !!}</td>
+                                    <td class="col-md-1">{!! $person->institution()->get()->first() !!}</td>
                                     <td class="col-md-1">{!! $person->pi !!}</td>
                                     <td class="col-md-1">{!! $person->department !!}</td>
                                     <td class="col-md-1">{!! $person->category !!}</td>
+                                    <td class="col-md-1">
+                                        @foreach($person->classification as $group)
+                                            <div>{!! $group->name !!}</div>
+                                        @endforeach
+                                    </td>
                                     <td class="col-md-1">{!! $person->address1 !!}</td>
                                     <td class="col-md-1">{!! $person->city !!}</td>
                                     <td class="col-md-1">{!! $person->state_province !!}</td>
@@ -347,8 +353,10 @@ People Index
             background: #9FAFD1;
         }
 
-        table tfoot input{
-            width: 100%;
+        table thead input{
+            margin:0;
+            padding:0;
+            width: 150px;
         }
 
         .table_fluid{
@@ -365,7 +373,7 @@ People Index
             var selected = [];
 
             // Setup - add a text input to each footer cell
-            $('#vm-table tfoot th').each( function (index) {
+            $('#vm-table thead th.ref_search').each( function (index) {
                 if(!$(this).hasClass('no-search')) {
                     var title = $(this).text();
                     if (title.length > 0) {

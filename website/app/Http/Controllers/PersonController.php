@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Classification;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use View;
@@ -14,6 +13,7 @@ use App\Person;
 use App\Email;
 use App\Institution;
 use App\Timezone;
+use App\Classification;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
