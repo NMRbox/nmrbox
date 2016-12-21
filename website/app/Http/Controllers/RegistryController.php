@@ -25,7 +25,10 @@ class RegistryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getSoftware(Software $software) {
+    public function getSoftware(Software $software, $param) {
+
+        $software = Software::where('slug', $param)->first();
+
         $all_files = $software->files()->get();
         $attached_citations = $software->citations;
 

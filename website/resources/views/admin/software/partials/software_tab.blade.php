@@ -12,6 +12,9 @@
 {!! BootForm::text('long_title', 'Long Title', null,
     array('class' => 'input-lg', 'required' => 'required', 'placeholder'=>'Long title for software'))!!}
 
+{!! BootForm::text('url', 'URL', null,
+    array('class' => 'input-lg', 'required' => 'required', 'placeholder'=>'URL'))!!}
+
 {!! BootForm::text('synopsis', null, null,
     array('class' => 'input-lg', 'required' => 'required', 'placeholder'=>'Synopsis'))!!}
 
@@ -20,4 +23,5 @@
 
 {!! BootForm::submit('Save Software Info', array("class"=>"btn btn-primary btn-lg")) !!}
 {!! BootForm::close() !!}
+
 

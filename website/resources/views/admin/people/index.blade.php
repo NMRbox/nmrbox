@@ -8,6 +8,42 @@ People Index
 
 @section('header_styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/datatables/css/dataTables.bootstrap.css') }}" />
+    <style type="text/css">
+        table tr.selected td {
+            background: #9FAFD1;
+        }
+
+        table thead tr th input {
+            margin:0;
+            padding:0;
+            width: 150px;
+        }
+
+        body{
+            width: 100%;
+            position: relative;
+            bottom: 0;
+            overflow-x: scroll;
+        }
+
+        /* overflow scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+        }
+        .panel{
+            border: 0px solid #eff0ef;
+        }
+    </style>
 @stop
 
 {{-- Content --}}
@@ -30,7 +66,7 @@ People Index
 <section class="content">
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-primary ">
+            <div class="panel panel-primary">
                 <div class="panel-heading clearfix">
                     <h4 class="panel-title pull-left">
                         <i class="fa fa-fw fa-list"></i>
@@ -167,7 +203,7 @@ People Index
 
     {{-- single user details modal --}}
     <div class="modal fade" id="email_modal" tabindex="-2" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4>
@@ -226,7 +262,7 @@ People Index
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="message">Message</label>
                                     <div class="col-md-8" id="template_area">
-                                        <textarea class="form-control" id="message" name="message">Email Message</textarea>
+                                        <textarea class="form-control" id="message" name="message" rows="20">Email Message</textarea>
                                     </div>
                                 </div>
                                 {{-- new template saving option--}}
@@ -290,18 +326,26 @@ People Index
 
                                 {{-- Email Subject --}}
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" for="subject">Available List</label>
-                                    <div class="col-md-8">
+                                    <label class="col-md-3 control-label" for="subject">Available List</label>
+                                    <div class="col-md-9">
                                         @foreach ($classifications as $classification)
-                                            <input type="checkbox" name="classifications[]" value="{!! $classification->name !!}">&nbsp;{!! $classification->name !!}&nbsp;&nbsp;
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <input type="checkbox" name="classifications[]" value="{!! $classification->name !!}" >&nbsp;{!! $classification->name !!}&nbsp;&nbsp;
+                                                </div>
+                                                <div class="col-md-7">
+                                                    {!! $classification->definition !!}
+                                                </div>
+                                            </div>
+                                            <hr>
                                         @endforeach
                                     </div>
                                 </div>
 
                                 {{-- new template saving option--}}
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" for="save_template">Assign new tag?</label>
-                                    <div class="col-md-8" id="save_option">
+                                    <label class="col-md-3 control-label" for="save_template">Assign new tag?</label>
+                                    <div class="col-md-9" id="save_option">
                                         <input type="radio" name="save_classification" value="yes"> Yes
                                         <input type="radio" name="save_classification" value="no" checked="checked"> No
                                     </div>
@@ -348,22 +392,7 @@ People Index
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
     <script src="{{ asset('assets/js/custom_js/people_index.js') }}" type="text/javascript"></script>
-    <style type="text/css">
-        table tr.selected td {
-            background: #9FAFD1;
-        }
 
-        table thead input{
-            margin:0;
-            padding:0;
-            width: 150px;
-        }
-
-        .table_fluid{
-            overflow-x: scroll;
-
-        }
-    </style>
     <script>
         $(document).ready(function() {
             $("#success-alert").hide().removeClass('hidden');
@@ -517,6 +546,7 @@ People Index
                             $('#user_classification_modal').modal('hide');
                             $('#success_msg').html(data.message);
                             show_alert('success');
+                            location.href = '/admin/people';
                         },
                         error: function (data) {
                             $('#error_msg').html('Something went wrong. Please try again.');

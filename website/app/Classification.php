@@ -24,7 +24,7 @@ class Classification extends Model
 
     public function person() {
         return $this->belongsToMany('App\Person', 'classification_person',
-      'person_id', 'name');
+            'name', 'person_id');
     }
 
 }

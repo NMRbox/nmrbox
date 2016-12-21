@@ -10,7 +10,7 @@ Edit VM
 @section('content')
 <section class="content-header">
     <h1>
-        Edit VM
+        Edit Classification
     </h1>
     <ol class="breadcrumb">
         <li>
@@ -19,8 +19,8 @@ Edit VM
                 Dashboard
             </a>
         </li>
-        <li> Email Templates</li>
-        <li class="active"> Edit Email Template</li>
+        <li> Classification</li>
+        <li class="active"> Edit Classification</li>
     </ol>
 </section>
 
@@ -31,26 +31,16 @@ Edit VM
             <div class="panel panel-primary ">
                 <div class="panel-heading">
                     <h4 class="panel-title"><i class="fa fa-fw fa-plus"></i>
-                        Edit Person
+                        Edit Classification
                     </h4>
                 </div>
                 <div class="panel-body">
-                    {!! BootForm::horizontal(array('model'=>$email, 'store'=>'email.store', 'update'=>'email.update')) !!}
+
+                    {!! BootForm::horizontal(array('model'=>$classification, 'store'=>'classification.store', 'update'=>'classification.update')) !!}
                     <div class="col-sm-12 col-md-10">
                         {!! BootForm::text('name', "Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="template_area">Select email fields</label>
-                            <div class="col-md-7" id="template_area">
-                                <a href="#" class="btn btn-xs btn-default" data-field-name="first_name">First Name</a>
-                                <a href="#" class="btn btn-xs btn-default" data-field-name="last_name">Last Name</a>
-                                <a href="#" class="btn btn-xs btn-default" data-field-name="nmrbox_acct">NMRBox Account</a>
-                                <a href="#" class="btn btn-xs btn-default" data-field-name="email">Email</a>
-                                <a href="#" class="btn btn-xs btn-default" data-field-name="institution">Institution</a>
-                                <a href="#" class="btn btn-xs btn-default" data-field-name="category">Category</a>
-                            </div>
-                        </div>
-                        {!! BootForm::textarea('content', "Template body", null, array('class' => 'input-lg', 'id' => 'template_area', 'required' => 'required'))!!}
-
+                        {!! BootForm::text('definition', "Definition", null, array('class' => 'input-lg', 'id' => 'template_area', 'required' => 'required'))!!}
+                        {!! BootForm::select('web_role', 'Web Role', array(1 => 'True', 0 => 'False'), $web_role , array('class' => 'input-lg'))!!}
                         {!! BootForm::submit('Save') !!}
                     </div>
                     {!! BootForm::close() !!}

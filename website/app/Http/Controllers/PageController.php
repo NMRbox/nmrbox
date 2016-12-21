@@ -173,9 +173,31 @@ class PageController extends ChandraController {
 	 * @param  Page $page
 	 * @return view
 	 */
-	public function getEdit(Page $page)
+	/*public function getEdit(Page $page)
 	{
         return view('admin.pages.edit', compact('page','pagecategory'));
+	}*/
+
+	public function getEdit(Page $page, $id = null)
+	{
+	    try {
+            // Get the page information
+            if(is_numeric($id))
+                $page = Page::where('id', $id)->first();
+            else
+                $page = Page::where('slug', $id)->first();
+
+
+        } catch (UserNotFoundException $e) {
+            // Prepare the error message
+            $error = Lang::get('page/message.user_not_found', compact('id'));
+
+            // Redirect to the user management page
+            return Redirect::route('pages')->with('error', $error);
+        }
+
+        // Show the page
+        return view('admin.pages.edit', compact('page','pagecategory', 'page_content'));
 	}
 
 	/**

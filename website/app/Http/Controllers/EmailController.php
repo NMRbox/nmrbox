@@ -112,8 +112,9 @@ class EmailController extends Controller
         return view('admin.emails.edit', compact('email'));
     }*/
 
-    public function edit(Email $email)
+    public function edit(Email $email, $name)
     {
+        $email = Email::where('name', $name)->first();
 
         return view('admin.emails.edit', compact('email'));
     }
@@ -135,9 +136,9 @@ class EmailController extends Controller
 
         return redirect('admin/email');
     }*/
-    public function update(Request $request, Email $email)
+    public function update(Request $request, Email $email, $name)
     {
-        //$email = Email::where('name', $name)->first();
+        $email = Email::where('name', $name)->first();
         $email->name = $request->input('name');
         $email->content = $request->input('content');
 
@@ -152,15 +153,19 @@ class EmailController extends Controller
      * @param  string name
      * @return \Illuminate\Http\Response
      */
-    /*public function destroy(Email $email, $name)
+    public function destroy($param)
     {
-        $email->where('name', $name)->first()->delete();
-        return redirect("admin/email");
-    }*/
-    public function destroy(Email $email)
-    {
-        $email->delete();
-        return redirect("admin/email");
+        $email = Email::where('name', $param)->delete();
+
+        if($email == true){
+            // Adding message for notification
+            $this->messageBag->add('email', Lang::get('emails/message.success.delete'));
+            // redirect with success message
+            return redirect()->back()->withErrors($this->messageBag);
+        }
+
+        return false;
+
     }
 
 }

@@ -193,9 +193,9 @@ class PersonController extends Controller
      * @return \Illuminate\Http\Response
      */
     //public function edit(Request $request, $id)
-    public function edit(Person $person)
+    public function edit(Person $person, $id)
     {
-        //$person = Person::where('id', $id)->first();
+        $person = Person::where('id', $id)->first();
 
         $timezones = Timezone::all();
         $timezones = $timezones->sortBy("zone"); // want these sorted for frontend
@@ -315,15 +315,18 @@ class PersonController extends Controller
         foreach ($users as $user){
             $email_subj = $request->input('subject');
 
+            // user institution details
+            $person_institution_name = $user->institution()->get()->first()->name;
+
             // message body str_replace array
-            $search = array('%%first_name%%', '%%last_name%%', '%%email%%', '%%category%%');
-            $replace = array('%%first_name%%' => $user->first_name, '%%last_name%%' => $user->last_name, '%%email%%' => $user->email, '%%category%%' => $user->category);
+            $search = array('%%first_name%%', '%%last_name%%', '%%nmrbox_acct%%', '%%email%%', '%%institution%%', '%%category%%');
+            $replace = array('%%first_name%%' => $user->first_name, '%%last_name%%' => $user->last_name,'%%nmrbox_acct%%' => $user->nmrbox_acct, '%%email%%' => $user->email, '%%institution%%' => $person_institution_name, '%%category%%' => $user->category);
             $message = str_replace($search, $replace, $msg_body);
 
             //Send mail
             $send_mail = Mail::send([], [], function ($m) use ($user, $email_subj, $message) {
                             $m->from(env('MAIL_USERNAME'), 'NMRbox')
-                                ->to('schowdhury@uchc.edu', $user['first_name'] . ' ' . $user['last_name'])
+                                ->to($user['email'], $user['first_name'] . ' ' . $user['last_name'])
                                 ->subject($email_subj)
                                 ->setBody($message);
                         });
@@ -357,7 +360,12 @@ class PersonController extends Controller
             $classification->save();
 
             // merging the newly added value in input array
-            Input::merge(array('classifications' => array_merge($request->input('classifications'), array($classification_name))));
+            if($request->input('classifications') == true){
+                Input::merge(array('classifications' => array_merge($request->input('classifications'), array($classification_name))));
+            } else {
+                Input::merge(array('classifications' => array($classification_name)));
+            }
+
         }
         // Selected user ids
         $ids = json_decode($request->input('ids'), true);

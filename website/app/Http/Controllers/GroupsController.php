@@ -82,9 +82,6 @@ class GroupsController extends ChandraController
      */
     public function getEdit($id = null)
     {
-
-
-        
         try {
             // Get the group information
             $role = Sentinel::findRoleById($id);

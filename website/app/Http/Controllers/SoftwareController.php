@@ -86,8 +86,12 @@ class SoftwareController extends Controller
      * @param  Software $software
      * @return \Illuminate\Http\Response
      */
-    public function edit(Software $software)
+    public function edit(Software $software, $param)
     {
+        //Get the software info from DB
+        $software = Software::where('slug', $param)->first();
+
+        // get the files details
         $files = $software->files()->get();
 
         // return lab_roles
@@ -147,7 +151,6 @@ class SoftwareController extends Controller
         }
 
         $all_categories = Category::all();
-
 
         return view('admin.software.edit',compact('software', 'files', 'vm_versions',
             'software_versions', "vm_versions_for_select", "software_versions_for_select", "people_for_select",

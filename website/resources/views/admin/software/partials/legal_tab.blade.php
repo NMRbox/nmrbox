@@ -1,4 +1,4 @@
-{!! BootForm::open(array('model'=>$software, 'update'=>'software.updatelegal', 'files' => true)) !!}
+{!! BootForm::open(array('model'=>$software, 'store'=>'software.store', 'update'=>'software.updatelegal', 'files' => true)) !!}
 
 {!! BootForm::select('free_to_redistribute', "Is the software free to be redistributed?",
     array("null"=>"Unknown", "false"=>"No", "true"=>"Yes"), $software->boolToString($software->free_to_redistribute), array()) !!}

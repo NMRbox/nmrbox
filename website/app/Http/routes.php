@@ -261,6 +261,17 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
     });
 
 
+    # Classifications Management
+    Route::model('classification', 'App\Classification');
+    Route::group(array('prefix' => 'classification'), function () {
+        Route::get('/', array('as' => 'admin/classification', 'uses' => 'ClassificationController@index'));
+        Route::get('create', array('as' => 'classification.create', 'uses' => 'ClassificationController@create'));
+        Route::post('create', array('as' => 'classification.store', 'uses' => 'ClassificationController@store'));
+        Route::get('{classification}/edit', array('as' => 'classification.edit', 'uses' => 'ClassificationController@edit'));
+        Route::put('{classification}/edit', array('as' => 'classification.update', 'uses' => 'ClassificationController@update'));
+        Route::get('{classification}/delete', array('as' => 'classification.delete', 'uses' => 'ClassificationController@destroy'));
+    });
+
 
 
     //Remaining pages will be called from below controller method
