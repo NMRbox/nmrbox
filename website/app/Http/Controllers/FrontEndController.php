@@ -18,11 +18,14 @@ use URL;
 use Mail;
 use File;
 use Hash;
-use Reminder;
+use Crypt;
+//use Reminder;
 
 use App\User;
 use App\Person;
 use App\Timezone;
+use App\Classification;
+use App\Reminder;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use App\Library\Ldap;
 
@@ -111,6 +114,7 @@ class FrontEndController extends ChandraController
         $user = Sentinel::getUser();
         // the person attached to the user
         $person = $user->person()->get()->first();
+        $classifications = Classification::All();
 
         /*
          * @todo - remove old template
@@ -119,7 +123,6 @@ class FrontEndController extends ChandraController
         return View::make('user_dashboard', compact('user', 'person'));
         //return View::make('user_account', compact('user', 'person'));
     }
-
 
 
     /**
@@ -203,14 +206,7 @@ class FrontEndController extends ChandraController
     {
         //$user = Sentinel::findById($id);
         $user = Sentinel::getUser();
-        echo '<pre>';
-        print_r($user);
-        echo '</pre>';
-
         $person = $user->person()->get()->first();
-        echo '<pre>';
-        print_r($person);
-        echo '</pre>';
 
 
         //validatoinRules are declared at beginning
@@ -277,9 +273,6 @@ class FrontEndController extends ChandraController
             //save new file path into db
             $user->pic = $safeName;
         }*/
-        echo '<pre>';
-        print_r($person);
-        echo '</pre>';
 
 
         // Was the user's person record updated?
@@ -324,6 +317,22 @@ class FrontEndController extends ChandraController
         //sleep(5);
         if(!$request->ajax()) {
             return App::abort(403);
+        }
+
+        // Declare the rules for the form validation
+        $rules = array(
+            'password' => 'required|between:6,14',
+            'password_confirm' => 'required|same:password'
+        );
+
+        // Create a new validator instance from our dynamic rules
+        $validator = Validator::make(Input::all(), $rules);
+
+        // If validation fails, we'll exit the operation now.
+        if ($validator->fails()) {
+            // Ooops.. something went wrong
+            //return Redirect::route('forgot-password-confirm', $passwordResetCode)->withInput()->withErrors($validator);
+            return Redirect::to(URL::previous())->withInput()->withErrors($validator);
         }
 
         $user_session = Sentinel::check();
@@ -379,33 +388,36 @@ class FrontEndController extends ChandraController
         if ($validator->fails()) {
             // Ooops.. something went wrong
             return Redirect::to(URL::previous())->withInput()->withErrors($validator);
-
-
         }
 
 
         try {
             // Get the user password recovery code
-            //$user = Sentinel::getUserProvider()->findByLogin(Input::get('email'));
-            $user = Sentinel::findByCredentials(['email' => Input::get('email')]);
+            $user = Person::where('email', Input::get('email'))->first();
 
             if (!$user) {
-                return Redirect::route('forgot-password')->with('error', Lang::get('auth/message.account_not_found'));
+                return Redirect::route('forgot-password')->with('error', Lang::get('auth/message.forgot-password.error'));
             }
 
-            $reminder = Reminder::exists($user) ?: Reminder::create($user);
+            $reminder_code = Crypt::encrypt($user->id);
+
+            $reminder = new Reminder(array(
+                'user_id' => $user->id,
+                'code'    => $reminder_code,
+            ));
+
+            $reminder->save();
 
             // Data to be used on the email view
             $data = array(
                 'user' => $user,
-                //'forgotPasswordUrl' => URL::route('forgot-password-confirm', $user->getResetPasswordCode()),
-                'forgotPasswordUrl' => URL::route('forgot-password-confirm', [$user->id, $reminder->code]),
+                'forgotPasswordUrl' => URL::route('forgot-password-confirm', [$user->id, $reminder_code]),
             );
 
             // Send the activation code through email
             Mail::send('emails.forgot-password', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                $m->subject('Account Password Recovery');
+                $m->subject('NMRbox Account Password Recovery');
             });
         } catch (UserNotFoundException $e) {
             // Even though the email was not found, we will pretend
@@ -415,6 +427,90 @@ class FrontEndController extends ChandraController
 
         //  Redirect to the forgot password
         return Redirect::to(URL::previous())->with('success', Lang::get('auth/message.forgot-password.success'));
+    }
+
+    /**
+     * Forgot Password Confirmation page.
+     *
+     * @param  string $passwordResetCode
+     * @return View
+     */
+    public function getForgotPasswordConfirm($userId, $passwordResetCode)
+    {
+        //if (!$user = Sentinel::findById($userId)) {
+        if (!$user = Person::where('id', $userId)->first()) {
+            // Redirect to the forgot password page
+            return Redirect::route('forgot-password')->with('error', Lang::get('auth/message.account_not_found'));
+        }
+
+        // Show the page
+        return View::make('forgotpwd-confirm', compact(['userId', 'passwordResetCode']));
+    }
+
+    /**
+     * Forgot Password Confirmation form processing page.
+     *
+     * @param  string $passwordResetCode
+     * @return Redirect
+     */
+    public function postForgotPasswordConfirm($userId, $passwordResetCode, Request $request)
+    {
+        // Declare the rules for the form validation
+        $rules = array(
+            'nmrbox_acct' => 'required',
+            'password' => 'required|between:6,14',
+            'password_confirm' => 'required|same:password'
+        );
+
+        // Create a new validator instance from our dynamic rules
+        $validator = Validator::make(Input::all(), $rules);
+
+        // If validation fails, we'll exit the operation now.
+        if ($validator->fails()) {
+            // Ooops.. something went wrong
+            //return Redirect::route('forgot-password-confirm', $passwordResetCode)->withInput()->withErrors($validator);
+            return Redirect::to(URL::previous())->withInput()->withErrors($validator);
+        }
+
+        //$user = Sentinel::findById($userId);
+        $user = Person::where('id', $userId)->first();
+
+        if($user->nmrbox_acct != $request->get('nmrbox_acct') ||
+            !$reminder = Reminder::where('user_id', $user->id)
+                ->where('code', $passwordResetCode)
+                ->where('completed', 'false')
+                ->first())
+        {
+            // Ooops.. something went wrong
+            return back()->with('error', Lang::get('auth/message.forgot-password-confirm.error'));
+        } else {
+
+            //making credential array for LDAP verification
+            $credential['username'] = $user->nmrbox_acct;
+            $credential['password'] = $request->get('password');
+
+            // Adding custom LDAP library class and authenticating
+            $ldap = new Ldap;
+            $ldap_login = $ldap->ldap_set_password($credential);
+
+            // LDAP login response
+            if($ldap_login !== false){
+                // update reminder table
+                $reminder_update = Reminder::where('id', $reminder->id)
+                                            ->update(
+                                                array(
+                                                    'completed' => true,
+                                                    'completed_at'    => date('Y-m-d H:i:s'),
+                                                )
+                                            );
+
+                // Password successfully reseted
+                return Redirect::route('login')->with('success', Lang::get('auth/message.forgot-password-confirm.success'));
+            } else {
+                // Ooops.. something went wrong
+                return back()->with('error', Lang::get('auth/message.forgot-password-confirm.error'));
+            }
+        }
     }
 
     /**
@@ -632,58 +728,7 @@ class FrontEndController extends ChandraController
         return View::make('registration-person-successful')->with('success', Lang::get('auth/message.signup.success'));
     }
 
-    /**
-     * Forgot Password Confirmation page.
-     *
-     * @param  string $passwordResetCode
-     * @return View
-     */
-    public function getForgotPasswordConfirm($userId, $passwordResetCode = null)
-    {
-        if (!$user = Sentinel::findById($userId)) {
-            // Redirect to the forgot password page
-            return Redirect::route('forgot-password')->with('error', Lang::get('auth/message.account_not_found'));
-        }
 
-        // Show the page
-        return View::make('forgotpwd-confirm', compact(['userId', 'passwordResetCode']));
-    }
-
-    /**
-     * Forgot Password Confirmation form processing page.
-     *
-     * @param  string $passwordResetCode
-     * @return Redirect
-     */
-    public function postForgotPasswordConfirm($userId, $passwordResetCode = null)
-    {
-        // Declare the rules for the form validation
-        $rules = array(
-            'password' => 'required|between:3,32',
-            'password_confirm' => 'required|same:password'
-        );
-
-        // Create a new validator instance from our dynamic rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            // Ooops.. something went wrong
-            //return Redirect::route('forgot-password-confirm', $passwordResetCode)->withInput()->withErrors($validator);
-            return Redirect::to(URL::previous())->withInput()->withErrors($validator);
-        }
-
-
-        $user = Sentinel::findById($userId);
-
-        if (!$reminder = Reminder::complete($user, $passwordResetCode, Input::get('password'))) {
-            // Ooops.. something went wrong
-            return Redirect::route('login')->with('error', Lang::get('auth/message.forgot-password-confirm.error'));
-        }
-
-        // Password successfully reseted
-        return Redirect::route('login')->with('success', Lang::get('auth/message.forgot-password-confirm.success'));
-    }
 
     /**
      * Contact form processing.

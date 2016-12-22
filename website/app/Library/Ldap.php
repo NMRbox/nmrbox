@@ -95,12 +95,7 @@ namespace App\library {
             $data = $xml->asXML( );
             fwrite($client, $data);
             $response = stream_get_contents($client);
-
             $result = str_replace($username, '', $response);
-            echo '<pre>';
-            print_r($result);
-            echo '</pre>';
-
 
             if(strstr($result, 'success') !== false) {
                 return true;

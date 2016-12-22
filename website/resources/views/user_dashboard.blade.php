@@ -69,13 +69,13 @@
             </div>
             <div class="row">
                 <div class="alert alert-success hidden" id="success-alert">
-                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>Success! </strong>
                     <span id="success_msg"></span>
                 </div>
 
                 <div class="alert alert-danger hidden" id="error-alert">
-                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>Error! </strong>
                     <span id="error_msg"></span>
                 </div>
@@ -92,11 +92,7 @@
 
             <div class="row">
                 {{--<div class="col-md-12">--}}
-
-
                 <div class="col-sm-12 col-md-6 toppad">
-
-
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title">Profile - {!! $person->first_name."&nbsp;".$person->last_name !!}</h3>
@@ -136,7 +132,6 @@
                                             </tr>
                                         </tbody>
                                     </table>
-
                                     {{--<a href="#" class="btn btn-primary">My Sales Performance</a>
                                     <a href="#" class="btn btn-primary">Team Sales Performance</a>--}}
                                 </div>
@@ -145,7 +140,7 @@
                         <div class="panel-footer">
                             <div class="text-right">
                                 <a href="{{ URL::to('update_profile') }}" data-original-title="Edit user profile" data-toggle="tooltip" type="button"
-                                   class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                                   class="btn btn-sm btn-warning"><i class="fa fa-pencil fa-2x"></i></a>
                             </div>
                         </div>
                     </div>
@@ -155,7 +150,7 @@
                 <div class="col-sm-12 col-md-6 toppad">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Bio-science Account</h3>
+                            <h3 class="panel-title">User Account</h3>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -167,7 +162,7 @@
                                     <table class="table table-user-information">
                                         <tbody>
                                             <tr>
-                                                <td>Bio Science ID:</td>
+                                                <td>User ID:</td>
                                                 <td>{!! $person->nmrbox_acct !!}</td>
                                             </tr>
                                             <tr>
@@ -181,19 +176,25 @@
                                                     <span id="pass_asterisk">******</span>
                                                 </td>
                                             </tr>
+                                            <tr id="conf_pass_box" style="display: none;">
+                                                <td>Confirm Password: </td>
+                                                <td>
+                                                    <input type="password" name="conf_password" id="conf_pass">
+                                                </td>
+                                            </tr>
                                             <tr>
-                                                <td>Role</td>
-                                                <td>User <br> Developer</td>
+                                                <td>Classification Group</td>
+                                                <td>
+                                                    @foreach($person->classification as $group)
+                                                        <div>{!! $group->name !!}</div>
+                                                    @endforeach
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Status</td>
                                                 <td>Active<br>&nbsp;</td>
                                             </tr>
-                                            <tr>
-                                                <td colspan="2">
 
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
 
@@ -202,8 +203,9 @@
                         </div>
                         <div class="panel-footer">
                             <div class="text-right">
-                                <a href="{{ URL::to('update_profile') }}" data-original-title="Reset Bio-science password" data-toggle="tooltip" type="button"
-                                   class="btn btn-sm btn-warning" id="edit_ldap_pass"><i class="glyphicon glyphicon-edit"></i></a>
+                                <a href="{{ URL::to('update_profile') }}" data-original-title="Reset account password" data-toggle="tooltip" type="button"
+                                   class="btn btn-sm btn-warning" id="edit_ldap_pass"><i class="fa fa-key fa-2x"></i></a>
+
                                 <input type="hidden" name="change-password" value="Save" id="save_ldap_pass" class="btn btn-primary">
                                 {{-- csrf token --}}
                                 <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
@@ -286,6 +288,15 @@
 @section('footer_scripts')
 
     <script type="text/javascript">
+        function show_alert(alert_type) {
+            console.log(alert_type);
+            $("#"+alert_type+"-alert").removeClass('hidden');
+            $("#"+alert_type+"-alert").alert();
+            $("#"+alert_type+"-alert").fadeTo(2000, 500).slideUp(500, function(){
+                $("#"+alert_type+"-alert").slideUp(500);
+            });
+        }
+
         $(document).ready(function () {
             var panels = $('.user-infos');
             var panelsButton = $('.dropdown-user');
@@ -315,7 +326,6 @@
 
             $('button').click(function (e) {
                 e.preventDefault();
-                alert("This is a demo.\n :-)");
             });
 
             /* Enabling the fields for entering password */
@@ -324,6 +334,9 @@
 
                 $('input#ldap_pass').attr('type', 'password');
                 $('#pass_asterisk').hide();
+                $('#conf_pass_box').show();
+                $('#edit_ldap_pass').hide();
+                $('input#reset_ldap_pass').attr('type', 'reset');
                 $('input#save_ldap_pass').attr('type', 'submit');
             });
 
@@ -331,40 +344,46 @@
             $("#save_ldap_pass").on("click", function (e) {
                 e.preventDefault();
                 var pass = $('#ldap_pass').val();
-                $('#ldap_pass').after('<span id="ldap_pass_loading">Saving Password...</span>');
+                var conf_pass = $('#conf_pass').val();
 
-                $('input#ldap_pass').attr('type', 'hidden');
-                $('input#save_ldap_pass').attr('type', 'hidden');
+                if(pass.length < 6){
+                    $('#error_msg').html('Password length must be 6 or greater. Please try again.');
+                    show_alert('error');
+                } else if(pass != conf_pass){
+                    $('#error_msg').html('Password and Confirm password did not match. Please try again.');
+                    show_alert('error');
+                } else {
+
+                    $('#ldap_pass').after('<span id="ldap_pass_loading">Saving Password...</span>');
+
+                    $('input#ldap_pass').attr('type', 'hidden');
+                    $('input#save_ldap_pass').attr('type', 'hidden');
 
 
-                $.ajax({
-                    type: "POST",
-                    url: 'change-password',
-                    data: 'pass=' + pass +'&_token=' + $('input#user_csrf_token').val(),
-                    dataType: 'JSON',
-                    success: function(response) {
-                        $('#ldap_pass_loading').remove();
-                        $('#pass_asterisk').show();
-                        console.log(response);
-                        show_alert('success');
-                    },
-                    error: function (data) {
-                        $('#ldap_pass_loading').remove();
-                        $('#pass_asterisk').show();
-                        $('#error_msg').html('No rows selected. Please try again.');
-                        show_alert('error');
-                    }
-                })
-
+                    $.ajax({
+                        type: "POST",
+                        url: 'change-password',
+                        data: 'pass=' + pass +'&_token=' + $('input#user_csrf_token').val(),
+                        dataType: 'JSON',
+                        success: function(response) {
+                            $('#ldap_pass_loading').remove();
+                            $('#pass_asterisk').show();
+                            $('#conf_pass_box').hide();
+                            console.log(response);
+                            show_alert('success');
+                        },
+                        error: function (data) {
+                            $('#ldap_pass_loading').remove();
+                            $('#pass_asterisk').show();
+                            $('#conf_pass_box').hide();
+                            $('#error_msg').html('No rows selected. Please try again.');
+                            show_alert('error');
+                        }
+                    })
+                }
             });
 
-            function show_alert(alert_type) {
 
-                $("#"+alert_type+"-alert").alert();
-                $("#"+alert_type+"-alert").fadeTo(2000, 500).slideUp(500, function(){
-                    $("#"+alert_type+"-alert").slideUp(500);
-                });
-            }
         });
 
 

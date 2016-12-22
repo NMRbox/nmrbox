@@ -22,15 +22,15 @@ return array(
         'success' => 'Account sucessfully created.',
     ),
 
-        'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
-        ),
+    'forgot-password' => array(
+        'error'   => 'There was a problem while trying to get a reset password link, please enter email address associated with your account and try again.',
+        'success' => 'Password recovery email successfully sent.',
+    ),
 
-        'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
-        ),
+    'forgot-password-confirm' => array(
+        'error'   => 'There was a problem while trying to reset your password, please try again.',
+        'success' => 'Your password has been successfully reset.',
+    ),
 
     'activate' => array(
         'error'   => 'There was a problem while trying to activate your account, please try again.',

@@ -195,6 +195,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::post('show', array('as' => 'person.show', 'uses' => 'PersonController@show'));
         Route::post('email_template', array('as' => 'person.email_template', 'uses' => 'PersonController@email_template'));
         Route::post('assign_classification', array('as' => 'person.assign_classification', 'uses' => 'PersonController@assignPersonClassification'));
+
     });
 
     # Keyword Management
@@ -296,8 +297,8 @@ Route::post('forgot-password','FrontEndController@postForgotPassword');
 Route::post('change-password', 'FrontEndController@postChangePassword');
 
 # Forgot Password Confirmation
-Route::get('forgot-password/{userId}/{passwordResetCode}', array('as' => 'forgot-password-confirm', 'uses' => 'FrontEndController@getForgotPasswordConfirm'));
-Route::post('forgot-password/{userId}/{passwordResetCode}', 'FrontEndController@postForgotPasswordConfirm');
+Route::get('forgot-password-confirm/{userId}/{passwordResetCode}', array('as' => 'forgot-password-confirm', 'uses' => 'FrontEndController@getForgotPasswordConfirm'));
+Route::post('forgot-password-confirm/{userId}/{passwordResetCode}', 'FrontEndController@postForgotPasswordConfirm');
 # My account display and update details
 
 Route::get('update_profile', array('as' => 'update_profile', 'uses' => 'FrontEndController@editProfile'));

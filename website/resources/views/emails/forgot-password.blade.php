@@ -5,7 +5,7 @@
 
 <p>Please click on the following link to updated your password:</p>
 
-<p><a href="{!! $forgotPasswordUrl !!}">{!! $forgotPasswordUrl !!}</a></p>
+<p><a href="{!! $forgotPasswordUrl !!}">Reset password</a></p>
 
 <p>Best regards,</p>
 

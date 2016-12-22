@@ -77,23 +77,22 @@ People Index
                         <a href="javascript:" id="btn_select_all" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-check"></span> Select All</a>
                         <a href="javascript:" id="btn_deselect_all" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-refresh"></span> Deselect</a>
                         <a href="#" data-toggle="modal" data-target="#email_modal" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-envelope"></span> Send Email</a>
-                        <a href="#" data-toggle="modal" data-target="#user_classification_modal" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-user"></span> Assign Classification</a>
+                        <a href="#" data-toggle="modal" data-target="#user_classification_modal" class="btn btn-sm btn-primary" id="user_classification"><span class="glyphicon glyphicon-user"></span> Assign Classification</a>
                         <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="alert alert-success hidden" id="success-alert">
-                        <button type="button" class="close" data-dismiss="alert">x</button>
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong>Success! </strong>
                             <span id="success_msg"></span>
                     </div>
                     
                     <div class="alert alert-danger hidden" id="error-alert">
-                        <button type="button" class="close" data-dismiss="alert">x</button>
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong>Error! </strong>
                             <span id="error_msg"></span>
                     </div>
-
                 </div>
                 <br />
                 <div class="panel-body table_fluid">
@@ -529,6 +528,9 @@ People Index
                     $('#name_box').hide();
                 }
             });
+
+
+
 
             /* Assign tags to all the selected person*/
             $('button#assign_classification').on('click', function(e) {
