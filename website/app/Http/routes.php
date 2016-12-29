@@ -195,7 +195,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::post('show', array('as' => 'person.show', 'uses' => 'PersonController@show'));
         Route::post('email_template', array('as' => 'person.email_template', 'uses' => 'PersonController@email_template'));
         Route::post('assign_classification', array('as' => 'person.assign_classification', 'uses' => 'PersonController@assignPersonClassification'));
-
+        Route::post('get_users_classification', array('as' => 'person.get_users_classification', 'uses' => 'PersonController@getPersonClassification'));
     });
 
     # Keyword Management

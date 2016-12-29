@@ -379,7 +379,7 @@ class PersonController extends Controller
         /* Email processing */
         foreach ($users as $user){
             $person = Person::find($user['id']);
-            $person->classification()->detach($classifications);
+            $person->classification()->detach();
             $person->classification()->attach($classifications);
         }
 
@@ -388,7 +388,43 @@ class PersonController extends Controller
 
     }
 
+    /**
+     * Display the specified email template.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getPersonClassification(Request $request){
 
+        if(!$request->ajax()) {
+            return App::abort(403);
+        }
+
+        // Selected user ids
+        $ids = json_decode($request->input('ids'), true);
+        // Retrieving the users list from person table
+        $users = Person::whereIn('id', $ids)->get();
+        // all the classifications value
+        $classifications = Classification::all();
+
+            $list = array();
+            //$group_data = $group->person()->where('name', $group->name)->get();
+            foreach($users as $user){
+
+                $group = $user->classification()->get();
+
+                foreach ($group as $item) {
+
+                    if(!isset($list[$item['name']]) || !in_array($user->id, $list[$item['name']])){
+                        $list[$item['name']][] = $user->id;
+                    }
+                }
+            }
+
+        return response( json_encode( array( 'message' => $list ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
+
+    }
 
     /**
      * Display the specified email template.
@@ -410,7 +446,6 @@ class PersonController extends Controller
         //json_encode($user);
         return response( json_encode( array( 'message' => $template->content ) ), 200 )
             ->header( 'Content-Type', 'application/json' );
-
 
     }
 

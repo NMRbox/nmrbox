@@ -43,6 +43,16 @@ People Index
         .panel{
             border: 0px solid #eff0ef;
         }
+
+        .fancy-checkbox-holder { display: block; }
+        .fancy-checkbox-holder label { display: block; line-height: 1.2em; }
+        .fancy-checkbox-holder label i.fa:before { content: "\f096";
+            /* Unchecked */ }
+        .fancy-checkbox-holder label.partial-checked i.fa:before { content: "\f147";
+            /* Minus */ }
+        .fancy-checkbox-holder label.checked i.fa:before { content: "\f046";
+                                      /* Checked */ }
+
     </style>
 @stop
 
@@ -304,7 +314,7 @@ People Index
 
     {{-- assign user classification --}}
     <div class="modal fade" id="user_classification_modal" tabindex="-2" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4>
@@ -326,11 +336,15 @@ People Index
                                 {{-- Email Subject --}}
                                 <div class="form-group">
                                     <label class="col-md-3 control-label" for="subject">Available List</label>
-                                    <div class="col-md-9">
+                                    <div class="col-md-9 fancy-checkbox-holder">
                                         @foreach ($classifications as $classification)
+
                                             <div class="row">
                                                 <div class="col-md-5">
-                                                    <input type="checkbox" name="classifications[]" value="{!! $classification->name !!}" >&nbsp;{!! $classification->name !!}&nbsp;&nbsp;
+                                                    <label id="group_check_{{ strtolower(str_replace(' ', '_', $classification->name)) }}">
+                                                        <input type="checkbox"  name="classifications[]" value="{!! $classification->name !!}" /> {!! $classification->name !!}&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </label>
+                                                    {{--<input type="checkbox" name="classifications[]" value="{!! $classification->name !!}" id="group_name" class="unchecked">&nbsp;{!! $classification->name !!}&nbsp;&nbsp;--}}
                                                 </div>
                                                 <div class="col-md-7">
                                                     {!! $classification->definition !!}
@@ -396,6 +410,20 @@ People Index
         $(document).ready(function() {
             $("#success-alert").hide().removeClass('hidden');
             $("#error-alert").hide().removeClass('hidden');
+
+            // classification checkbox elements
+            $('label', $('.fancy-checkbox-holder')).children('input[type="checkbox"]').hide();
+            $('label', $('.fancy-checkbox-holder')).prepend('<i class="fa fa-fw"></i>');
+            $('label', $('.fancy-checkbox-holder')).on('click', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                $(this).removeClass('partial-checked').removeClass('unchecked').toggleClass('checked');
+                if($(this).hasClass('checked')) {
+                    $(this).children('input[type="checkbox"]').attr('checked', 'checked');
+                } else {
+                    $(this).children('input[type="checkbox"]').removeAttr('checked');
+                }
+            });
 
             //$('#vm-table').DataTable();
             var selected = [];
@@ -529,26 +557,34 @@ People Index
                 }
             });
 
-
-
-
-            /* Assign tags to all the selected person*/
-            $('button#assign_classification').on('click', function(e) {
+            // load user assigned classification information
+            $('#user_classification').on('click', function(e){
                 e.preventDefault();
-                if(selected.length > 0) {
-                    var form_data = $("#assign_classification_form").serialize();
-                    console.log(form_data);
 
+                if(selected.length > 0) {
                     $.ajax({
                         type: "POST",
-                        url: 'people/assign_classification',
-                        data: 'ids=' + JSON.stringify(selected) + '&' + form_data + '&_token=' + $('input#user_csrf_token').val(),
+                        url: 'people/get_users_classification',
+                        data: 'ids=' + JSON.stringify(selected) + '&_token=' + $('input#user_csrf_token').val(),
                         success: function (data) {
-                            $('input, textarea', $('#assign_classification_form')).val('');
-                            $('#user_classification_modal').modal('hide');
-                            $('#success_msg').html(data.message);
-                            show_alert('success');
-                            location.href = '/admin/people';
+                            var list = data.message;
+
+                            var users_count = selected.length;
+                            $.each(data.message, function (index, value) {
+                                var class_id = index.toLowerCase().replace(' ', '_');
+
+                                var array_count = value.length;
+                                if(users_count == array_count){
+                                    $("#group_check_"+class_id).addClass('checked');
+                                    $("#group_check_"+class_id).children('input[type="checkbox"]').attr('checked', 'checked');
+                                } else if(array_count > 0 && array_count < users_count){
+                                    $("#group_check_"+class_id).addClass('partial-checked');
+                                } else {
+                                    $("#group_check_"+class_id).addClass('unchecked');
+                                }
+
+                            });
+
                         },
                         error: function (data) {
                             $('#error_msg').html('Something went wrong. Please try again.');
@@ -560,8 +596,39 @@ People Index
                     $('#error_msg').html('Something went wrong. Please try again.');
                     show_alert('error');
                 }
-
             });
+
+
+            /* Assign tags to all the selected person*/
+            /*$('button#assign_classification').on('click', function(e) {
+             e.preventDefault();
+             if(selected.length > 0) {
+             var form_data = $("#assign_classification_form").serialize();
+
+             $.ajax({
+             type: "POST",
+             url: 'people/assign_classification',
+             data: 'ids=' + JSON.stringify(selected) + '&' + form_data + '&_token=' + $('input#user_csrf_token').val(),
+             success: function (data) {
+
+             $('input, textarea', $('#assign_classification_form')).val('');
+             $('#user_classification_modal').modal('hide');
+             $('#success_msg').html(data.message);
+             show_alert('success');
+             location.href = '/admin/people';
+             },
+             error: function (data) {
+             $('#error_msg').html('Something went wrong. Please try again.');
+             show_alert('error');
+             }
+             })
+             } else {
+             /!* If no row selected *!/
+             $('#error_msg').html('Something went wrong. Please try again.');
+             show_alert('error');
+             }
+
+             });*/
 
         });
 
