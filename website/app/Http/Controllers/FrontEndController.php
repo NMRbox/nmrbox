@@ -319,22 +319,6 @@ class FrontEndController extends ChandraController
             return App::abort(403);
         }
 
-        // Declare the rules for the form validation
-        $rules = array(
-            'password' => 'required|between:6,14',
-            'password_confirm' => 'required|same:password'
-        );
-
-        // Create a new validator instance from our dynamic rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            // Ooops.. something went wrong
-            //return Redirect::route('forgot-password-confirm', $passwordResetCode)->withInput()->withErrors($validator);
-            return Redirect::to(URL::previous())->withInput()->withErrors($validator);
-        }
-
         $user_session = Sentinel::check();
         $user = User::where('id', $user_session->id)->first();
         $person = Person::where('id', $user['person_id'])->first();
@@ -348,10 +332,10 @@ class FrontEndController extends ChandraController
 
         // LDAP login response
         if($ldap_login !== false){
-            return response( json_encode( array( 'message' => 'Password reset successfully. ' ) ), 200 )
+            return response( json_encode( array( 'message' => 'Password reset successfully. ', 'type' => 'success' ) ), 200 )
                 ->header( 'Content-Type', 'application/json' );
         } else {
-            return response( json_encode( array( 'message' => 'Sorry, password reset unsuccessful. Try again. ' ) ), 200 )
+            return response( json_encode( array( 'message' => 'Sorry, password reset unsuccessful. Try again. ', 'type' => 'error' ) ), 200 )
                 ->header( 'Content-Type', 'application/json' );
         }
 
@@ -458,7 +442,7 @@ class FrontEndController extends ChandraController
         // Declare the rules for the form validation
         $rules = array(
             'nmrbox_acct' => 'required',
-            'password' => 'required|between:6,14',
+            'password' => 'required',
             'password_confirm' => 'required|same:password'
         );
 

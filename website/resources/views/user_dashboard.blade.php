@@ -292,7 +292,7 @@
             console.log(alert_type);
             $("#"+alert_type+"-alert").removeClass('hidden');
             $("#"+alert_type+"-alert").alert();
-            $("#"+alert_type+"-alert").fadeTo(2000, 500).slideUp(500, function(){
+            $("#"+alert_type+"-alert").fadeTo(5000, 500).slideUp(500, function(){
                 $("#"+alert_type+"-alert").slideUp(500);
             });
         }
@@ -346,10 +346,7 @@
                 var pass = $('#ldap_pass').val();
                 var conf_pass = $('#conf_pass').val();
 
-                if(pass.length < 6){
-                    $('#error_msg').html('Password length must be 6 or greater. Please try again.');
-                    show_alert('error');
-                } else if(pass != conf_pass){
+                if(pass != conf_pass){
                     $('#error_msg').html('Password and Confirm password did not match. Please try again.');
                     show_alert('error');
                 } else {
@@ -365,18 +362,27 @@
                         url: 'change-password',
                         data: 'pass=' + pass +'&_token=' + $('input#user_csrf_token').val(),
                         dataType: 'JSON',
-                        success: function(response) {
+                        success: function(data) {
                             $('#ldap_pass_loading').remove();
                             $('#pass_asterisk').show();
                             $('#conf_pass_box').hide();
-                            console.log(response);
-                            show_alert('success');
+                            $('#edit_ldap_pass').show();
+                            if(data.type == 'success'){
+                                $('#success_msg').html(data.message);
+                                show_alert('success');
+                            } else {
+                                $('#error_msg').html(data.message);
+                                $('#error_msg').html('Password '+ pass+ ' does not meet Active Directory Complexity Rules');
+                                show_alert('error');
+                            }
                         },
                         error: function (data) {
                             $('#ldap_pass_loading').remove();
                             $('#pass_asterisk').show();
                             $('#conf_pass_box').hide();
-                            $('#error_msg').html('No rows selected. Please try again.');
+                            $('#edit_ldap_pass').show();
+                            $('#error_msg').html(data.message);
+                            $('#error_msg').html('Password '+ pass+ ' does not meet Active Directory Complexity Rules');
                             show_alert('error');
                         }
                     })
