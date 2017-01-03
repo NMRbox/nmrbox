@@ -425,11 +425,6 @@ class PersonController extends Controller
         // the classification input list
         $classifications = $request->input('classifications', true);
 
-        echo "<pre>";
-        print_r($classifications);
-        echo "</pre>";
-
-
         // Retrieving the users list from person table
         $users = Person::whereIn('id', $ids)->get();
 

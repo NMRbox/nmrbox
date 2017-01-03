@@ -114,7 +114,7 @@ People Index
                                 <th>Last Name</th>
                                 <th>Email</th>
                                 <th>Institution</th>
-                                <th class="col-md-1">Principal<br>Instructor</th>
+                                <th class="col-md-1">Principal<br>Investigator</th>
                                 <th>Department</th>
                                 <th>Category</th>
                                 <th>Classifications</th>
