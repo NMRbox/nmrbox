@@ -9,6 +9,7 @@ use Input;
 use Sentinel;
 use Mail;
 use Lang;
+use Session;
 use App\Person;
 use App\Email;
 use App\Institution;
@@ -340,6 +341,57 @@ class PersonController extends Controller
             ->header( 'Content-Type', 'application/json' );
     }
 
+    /**
+     * Display the specified email template.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getPersonClassification(Request $request){
+
+        if(!$request->ajax()) {
+            return App::abort(403);
+        }
+
+        // Selected user ids
+        $ids = json_decode($request->input('ids'), true);
+        // Retrieving the users list from person table
+        $users = Person::whereIn('id', $ids)->get();
+        // all the classifications value
+        $classifications = Classification::all();
+
+        $list = array();
+        //$group_data = $group->person()->where('name', $group->name)->get();
+        foreach($users as $user){
+
+            $group = $user->classification()->get();
+
+            foreach ($group as $item) {
+
+                if(!isset($list[$item['name']]) || !in_array($user->id, $list[$item['name']])){
+                    $list[$item['name']][] = $user->id;
+                }
+            }
+        }
+
+        if (Session::has('classification')) {
+            Session::forget('classification');
+        }
+
+        Session::put('classification', $list);
+
+        $group_session = Session::get('classification');
+
+        return response( json_encode( array( 'message' => $list ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
+
+    }
+
+    /**
+     * Assign the selected users into particular classification gourps
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function assignPersonClassification(Request $request){
 
         if(!$request->ajax()) {
@@ -373,56 +425,25 @@ class PersonController extends Controller
         // the classification input list
         $classifications = $request->input('classifications', true);
 
+        echo "<pre>";
+        print_r($classifications);
+        echo "</pre>";
+
+
         // Retrieving the users list from person table
         $users = Person::whereIn('id', $ids)->get();
 
-        /* Email processing */
+        /* Saving into DB */
         foreach ($users as $user){
             $person = Person::find($user['id']);
-            $person->classification()->detach();
-            $person->classification()->attach($classifications);
+            /*$person->classification()->detach();
+            $person->classification()->attach($classifications);*/
+            $person->classification()->sync($classifications);
+
         }
 
-        return response( json_encode( array( 'message' => 'Successfully added people in groups. ' ) ), 200 )
-            ->header( 'Content-Type', 'application/json' );
-
-    }
-
-    /**
-     * Display the specified email template.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getPersonClassification(Request $request){
-
-        if(!$request->ajax()) {
-            return App::abort(403);
-        }
-
-        // Selected user ids
-        $ids = json_decode($request->input('ids'), true);
-        // Retrieving the users list from person table
-        $users = Person::whereIn('id', $ids)->get();
-        // all the classifications value
-        $classifications = Classification::all();
-
-            $list = array();
-            //$group_data = $group->person()->where('name', $group->name)->get();
-            foreach($users as $user){
-
-                $group = $user->classification()->get();
-
-                foreach ($group as $item) {
-
-                    if(!isset($list[$item['name']]) || !in_array($user->id, $list[$item['name']])){
-                        $list[$item['name']][] = $user->id;
-                    }
-                }
-            }
-
-        return response( json_encode( array( 'message' => $list ) ), 200 )
-            ->header( 'Content-Type', 'application/json' );
+        /*return response( json_encode( array( 'message' => 'Successfully added people in groups. ' ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );*/
 
     }
 

@@ -36,7 +36,7 @@
 
                     <form action="{{ route('forgot-password-confirm',compact(['userId','passwordResetCode'])) }}" class="omb_loginForm"  autocomplete="off" method="POST">
                         {!! Form::token() !!}
-                        <input type="text" class="form-control" name="nmrbox_acct" placeholder="NMRbox Account">
+                        <input type="text" class="form-control" name="nmrbox_acct" placeholder="NMRbox Username">
                         <span class="help-block">{{ $errors->first('nmrbox_acct', ':message') }}</span>
                         <input type="password" class="form-control" name="password" placeholder="New Password">
                         <span class="help-block">{{ $errors->first('password', ':message') }}</span>

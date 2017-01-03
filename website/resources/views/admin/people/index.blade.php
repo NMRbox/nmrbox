@@ -312,7 +312,7 @@ People Index
     </div>
     {{-- eof single user modal --}}
 
-    {{-- assign user classification --}}
+    {{-- assign user classification modal --}}
     <div class="modal fade" id="user_classification_modal" tabindex="-2" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -600,35 +600,39 @@ People Index
 
 
             /* Assign tags to all the selected person*/
-            /*$('button#assign_classification').on('click', function(e) {
-             e.preventDefault();
-             if(selected.length > 0) {
-             var form_data = $("#assign_classification_form").serialize();
+            $('button#assign_classification').on('click', function(e) {
+                 e.preventDefault();
+                 if(selected.length > 0) {
+                     var form_data = $("#assign_classification_form").serialize();
 
-             $.ajax({
-             type: "POST",
-             url: 'people/assign_classification',
-             data: 'ids=' + JSON.stringify(selected) + '&' + form_data + '&_token=' + $('input#user_csrf_token').val(),
-             success: function (data) {
+                     // assign partial fields
+                     /*var partial_select = $('#partial-checked :input').value;
+                     console.log(partial_select);
+                     die();*/
 
-             $('input, textarea', $('#assign_classification_form')).val('');
-             $('#user_classification_modal').modal('hide');
-             $('#success_msg').html(data.message);
-             show_alert('success');
-             location.href = '/admin/people';
-             },
-             error: function (data) {
-             $('#error_msg').html('Something went wrong. Please try again.');
-             show_alert('error');
-             }
-             })
-             } else {
-             /!* If no row selected *!/
-             $('#error_msg').html('Something went wrong. Please try again.');
-             show_alert('error');
-             }
+                     $.ajax({
+                         type: "POST",
+                         url: 'people/assign_classification',
+                         data: 'ids=' + JSON.stringify(selected) + '&' + form_data + '&_token=' + $('input#user_csrf_token').val(),
+                         success: function (data) {
+                             $('input, textarea', $('#assign_classification_form')).val('');
+                             $('#user_classification_modal').modal('hide');
+                             $('#success_msg').html(data.message);
+                             show_alert('success');
+                             location.href = '/admin/people';
+                         },
+                         error: function (data) {
+                             $('#error_msg').html('Something went wrong. Please try again.');
+                             show_alert('error');
+                             }
+                     })
+                 } else {
+                 /* If no row selected */
+                 $('#error_msg').html('Something went wrong. Please try again.');
+                 show_alert('error');
+                }
 
-             });*/
+             });
 
         });
 

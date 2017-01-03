@@ -94,7 +94,7 @@ class FrontEndController extends ChandraController
             }
         } catch (UserNotFoundException $e) {
             $this->messageBag->add('email', Lang::get('auth/message.account_not_found'));
-        } catch (NotActivatedException $e) {
+        } catch (UserNotActivatedException $e) {
             $this->messageBag->add('email', Lang::get('auth/message.account_not_activated'));
         } catch (UserSuspendedException $e) {
             $this->messageBag->add('email', Lang::get('auth/message.account_suspended'));
