@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh 
 
 showhelp ( ){
 	echo "Install website from svn"
@@ -19,6 +19,7 @@ loc=trunk
 os=ubuntu-14.04
 env=prod
 db=registry
+svn_auth='--username buildserver --password boxofrocks'
 while getopts "n:d:a:s:o:e:hb:" opt; do
     case $opt in
 	h)
@@ -63,18 +64,18 @@ if [ ! -w $parent ]; then
 	exit 3
 fi
 
-svn co -q https://nmrbox-devel.cam.uchc.edu/repos/nmrbox/$loc/web/website $installdir 
-svn co -q https://nmrbox-devel.cam.uchc.edu/repos/nmrbox/$loc/web/vendor-$os $installdir/vendor
+svn $svn_auth co -q https://nmrbox-devel.cam.uchc.edu/repos/nmrbox/$loc/web/website $installdir 
+svn $svn_auth co -q https://nmrbox-devel.cam.uchc.edu/repos/nmrbox/$loc/web/vendor-$os $installdir/vendor
 
 (
 cat <<EO_ENV
 APP_ENV=$env
 APP_DEBUG=true
 APP_KEY=PjRcCklAPB9gcicXagEmpaQdDwnd8Bw9
-APP_URL=$hostname
+APP_URL=nmrbox-webdev.cam.uchc.edu
 
 DB_HOST=nmrbox-data.cam.uchc.edu
-DB_DATABASE=$db
+DB_DATABASE=staging
 DB_USERNAME=laravel
 DB_PASSWORD=nmr-laravel!
 
@@ -83,11 +84,14 @@ SESSION_DRIVER=file
 QUEUE_DRIVER=sync
 
 MAIL_DRIVER=smtp
-MAIL_HOST=mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_ENCRYPTION=null
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=nmrbox.org@gmail.com
+MAIL_PASSWORD=Nmrbox2016
+MAIL_ENCRYPTION=tls
+
+LDAP_HOST=nmrbox-buildserver2.nmrbox.org
+LDAP_PORT=5050
 EO_ENV
 ) > $installdir/.env
 mkdir $installdir/bootstrap/cache
