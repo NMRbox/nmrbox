@@ -25,7 +25,7 @@ class RegistryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getSoftware(Software $software, $param) {
+    public function getSoftware($param) {
 
         $software = Software::where('slug', $param)->first();
 
