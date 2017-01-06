@@ -75,7 +75,7 @@ APP_KEY=PjRcCklAPB9gcicXagEmpaQdDwnd8Bw9
 APP_URL=nmrbox-webdev.cam.uchc.edu
 
 DB_HOST=nmrbox-data.cam.uchc.edu
-DB_DATABASE=staging
+DB_DATABASE=registry
 DB_USERNAME=laravel
 DB_PASSWORD=nmr-laravel!
 
