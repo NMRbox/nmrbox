@@ -113,6 +113,7 @@ People Index
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email</th>
+                                <th>Account Name</th>
                                 <th>Institution</th>
                                 <th class="col-md-1">Principal<br>Investigator</th>
                                 <th>Department</th>
@@ -131,6 +132,7 @@ People Index
                                 <th class="col-md-1 ref_search">First Name</th>
                                 <th class="col-md-1 ref_search">Last Name</th>
                                 <th class="col-md-1 ref_search">Email</th>
+                                <th class="col-md-1 ref_search">Account Name</th>
                                 <th class="col-md-1 ref_search">Institution</th>
                                 <th class="col-md-1 ref_search">PI</th>
                                 <th class="col-md-1 ref_search">Department</th>
@@ -151,6 +153,7 @@ People Index
                                     <td class="col-md-1">{!! $person->first_name !!}</td>
                                     <td class="col-md-1">{!! $person->last_name !!}</td>
                                     <td class="col-md-1">{!! $person->email !!}</td>
+                                    <td class="col-md-1">{!! $person->nmrbox_acct !!}</td>
                                     <td class="col-md-1">{!! $person->institution()->get()->first() !!}</td>
                                     <td class="col-md-1">{!! $person->pi !!}</td>
                                     <td class="col-md-1">{!! $person->department !!}</td>
