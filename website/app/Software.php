@@ -43,6 +43,11 @@ class Software extends NmrModel implements SluggableInterface
         'save_to'    => 'slug',
     ];
 
+    public function __toString()
+    {
+        return $this->slug;
+    }
+
     public function boolToString($value) {
         if(is_null($value)) {
             return "null";

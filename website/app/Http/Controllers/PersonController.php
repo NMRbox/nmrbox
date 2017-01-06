@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ClassificationPerson;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use View;
@@ -15,6 +16,7 @@ use App\Email;
 use App\Institution;
 use App\Timezone;
 use App\Classification;
+
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -357,13 +359,11 @@ class PersonController extends Controller
         $ids = json_decode($request->input('ids'), true);
         // Retrieving the users list from person table
         $users = Person::whereIn('id', $ids)->get();
-        // all the classifications value
-        $classifications = Classification::all();
 
         $list = array();
+
         //$group_data = $group->person()->where('name', $group->name)->get();
         foreach($users as $user){
-
             $group = $user->classification()->get();
 
             foreach ($group as $item) {
@@ -422,23 +422,50 @@ class PersonController extends Controller
         // Selected user ids
         $ids = json_decode($request->input('ids'), true);
 
-        // the classification input list
-        $classifications = $request->input('classifications', true);
-
         // Retrieving the users list from person table
         $users = Person::whereIn('id', $ids)->get();
 
-        /* Saving into DB */
-        foreach ($users as $user){
-            $person = Person::find($user['id']);
-            /*$person->classification()->detach();
-            $person->classification()->attach($classifications);*/
-            $person->classification()->sync($classifications);
+        // partial checked values
+        $partial_checked = json_decode($request->input('partial_checked'), true);
 
+        // the classification input list
+        $classifications = $request->input('classifications', true);
+
+        if(empty($classifications)){
+            $classifications = array();
         }
 
-        /*return response( json_encode( array( 'message' => 'Successfully added people in groups. ' ) ), 200 )
-            ->header( 'Content-Type', 'application/json' );*/
+        if(count($ids) > 1){
+
+            /* Saving the data into DB */
+            if(!empty($classifications)){
+                foreach ($classifications as $key => $value){
+                    $classification = Classification::find($value);
+                    $classification->person()->sync($users);
+                }
+            }
+
+            // all the classifications value
+            $all_classification = Classification::all();
+
+            // Refining the partial checked and checked users
+            foreach($all_classification as $key => $classification){
+                if(!in_array($classification->name, $classifications) && !in_array($classification->name, $partial_checked)) {
+                    //$classification->person()->detach($users->pluck('id'));
+                    ClassificationPerson::where('name', $classification->name)->whereIn('person_id', $users->pluck('id'))->delete();
+                }
+            }
+
+        } else {
+            /* Saving into DB */
+            foreach ($users as $user){
+                $person = Person::find($user['id']);
+                $person->classification()->sync($classifications);
+            }
+        }
+
+        return response( json_encode( array( 'message' => 'Successfully added people in groups. ' ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
 
     }
 

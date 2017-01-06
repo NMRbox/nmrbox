@@ -23,8 +23,8 @@ class Classification extends Model
 
 
     public function person() {
-        return $this->belongsToMany('App\Person', 'classification_person',
-            'name', 'person_id');
+        return $this->belongsToMany('App\Person', 'classification_person', 'name', 'person_id')
+            ->withPivot('name', 'person_id');
     }
 
 }

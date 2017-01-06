@@ -450,7 +450,6 @@ People Index
                     ]
             });
             var all_rows = table.rows().data();
-            //console.log(table.rows().data());
 
             /* Advance search option based on particular db fields*/
             $('input.advanced-search').on('keyup change', function(){
@@ -492,7 +491,6 @@ People Index
             $(document).on("change", '#email_template', function(e) {
                 e.preventDefault();
                 var template_id = $(this).val();
-                console.log(template_id);
 
                 $.ajax({
                     type: "POST",
@@ -510,7 +508,6 @@ People Index
                 e.preventDefault();
                 if(selected.length > 0) {
                 var form_data = $("#email_template_form").serialize();
-                console.log(form_data);
 
                     $.ajax({
                         type: "POST",
@@ -606,26 +603,41 @@ People Index
                      var form_data = $("#assign_classification_form").serialize();
 
                      // assign partial fields
-                     /*var partial_select = $('#partial-checked :input').value;
-                     console.log(partial_select);
-                     die();*/
+                     var partial_checked = [];
+                     $('label.partial-checked input[type="checkbox"]').each(function(){
+                         partial_checked.push($(this).attr('value'));
+                     });
 
-                     $.ajax({
-                         type: "POST",
-                         url: 'people/assign_classification',
-                         data: 'ids=' + JSON.stringify(selected) + '&' + form_data + '&_token=' + $('input#user_csrf_token').val(),
-                         success: function (data) {
-                             $('input, textarea', $('#assign_classification_form')).val('');
-                             $('#user_classification_modal').modal('hide');
-                             $('#success_msg').html(data.message);
-                             show_alert('success');
-                             location.href = '/admin/people';
-                         },
-                         error: function (data) {
-                             $('#error_msg').html('Something went wrong. Please try again.');
-                             show_alert('error');
-                             }
+                     var required_check = ['user', 'developer', 'admin'];
+                     var has_required_group = 0;
+                     $('label.checked input[type="checkbox"]').each(function(){
+                         if($.inArray($(this).attr('value'), required_check)) { has_required_group++; }
                      })
+
+                     if(has_required_group > 0 ){
+
+                         $.ajax({
+                             type: "POST",
+                             url: 'people/assign_classification',
+                             data: 'ids=' + JSON.stringify(selected) + '&partial_checked=' + JSON.stringify(partial_checked) + '&' + form_data + '&_token=' + $('input#user_csrf_token').val(),
+                             success: function (data) {
+                                 $('input, textarea', $('#assign_classification_form')).val('');
+                                 $('#user_classification_modal').modal('toggle');
+                                 $('#success_msg').html(data.message);
+                                 show_alert('success');
+                                 location.href = '/admin/people';
+                             },
+                             error: function (data) {
+                                 $('#user_classification_modal').modal('toggle');
+                                 $('#error_msg').html('Something went wrong. Please try again.');
+                                 show_alert('error');
+                             }
+                         })
+                     } else {
+                         $('#user_classification_modal').modal('toggle');
+                         $('#error_msg').html('Selection of either user, developer or admin is mandatory.');
+                         show_alert('error');
+                     }
                  } else {
                  /* If no row selected */
                  $('#error_msg').html('Something went wrong. Please try again.');
@@ -654,8 +666,8 @@ People Index
                 data: 'id=' + id +'&_token=' + $('input#user_csrf_token').val(),
                 dataType: 'JSON',
                 success: function(response) {
-                    console.log(response);
                     $("#modal-header-title").text( response.user['first_name'] + ' ' + response.user['last_name'] );
+
                     //Show content within modal body
                     $("#user_details_modal .modal-body").html(
                             'First Name:&nbsp;' + response.user['first_name'] + '<br>' +
