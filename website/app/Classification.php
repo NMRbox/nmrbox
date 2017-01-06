@@ -19,6 +19,7 @@ class Classification extends Model
     protected $fillable = [
         'name',
         'definition',
+        'web_role'
     ];
 
 

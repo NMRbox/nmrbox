@@ -86,7 +86,7 @@ class SoftwareController extends Controller
      * @param  Software $software
      * @return \Illuminate\Http\Response
      */
-    public function edit(Software $software, $param)
+    public function edit($param)
     {
         //Get the software info from DB
         $software = Software::where('slug', $param)->first();

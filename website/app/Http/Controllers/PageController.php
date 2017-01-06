@@ -178,7 +178,7 @@ class PageController extends ChandraController {
         return view('admin.pages.edit', compact('page','pagecategory'));
 	}*/
 
-	public function getEdit(Page $page, $id = null)
+	public function getEdit($id = null)
 	{
 	    try {
             // Get the page information

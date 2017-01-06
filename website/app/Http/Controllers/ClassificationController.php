@@ -105,7 +105,7 @@ class ClassificationController extends Controller
     {
         $classification = Classification::where('name', $param)->first();
         $web_role = 0;
-        if($classification->web_role)
+        if($classification->web_role != false)
         {
             $web_role = 1;
         }

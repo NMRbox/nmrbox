@@ -196,7 +196,7 @@ class PersonController extends Controller
      * @return \Illuminate\Http\Response
      */
     //public function edit(Request $request, $id)
-    public function edit(Person $person, $id)
+    public function edit($id)
     {
         $person = Person::where('id', $id)->first();
 
