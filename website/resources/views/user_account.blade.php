@@ -77,7 +77,7 @@ User Account
                                                     <td class="col-md-4 text-left">{{ $person->institution_id }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="col-md-2 text-right">Principle Instructor: </td>
+                                                    <td class="col-md-2 text-right">Principal Investigator: </td>
                                                     <td class="col-md-4 text-left">{{ $person->first_name }}</td>
                                                 </tr>
 

@@ -123,7 +123,7 @@
                                                 <td>{!! $person->department !!}</td>
                                             </tr>
                                             <tr>
-                                                <td>Principle Instructor:</td>
+                                                <td>Principal Investigator:</td>
                                                 <td>{!! $person->pi !!}</td>
                                             </tr>
                                             <tr>
