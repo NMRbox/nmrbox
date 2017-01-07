@@ -273,4 +273,4 @@ User Account
 <script type="text/javascript" src="{{ asset('assets/js/frontend/user_account.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/vendors/datepicker/js/bootstrap-datepicker.js') }}"></script>
 
-@stop
+@stop 
