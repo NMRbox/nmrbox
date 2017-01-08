@@ -34,4 +34,5 @@ cd $installdir || { echo "cd to $installdir failed"; exit 3; }
 svn update || { echo "svn updated failed"; exit 4; }
 chown -R www-data:www-data .
 php artisan cache:clear
-php artisan route:clear
+php artisan route:cache
+service nginx restart
