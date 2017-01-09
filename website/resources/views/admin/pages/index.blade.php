@@ -66,7 +66,7 @@ Pages List
                                 <td>{{ $page->author()->get()->first()->email }}</td>
                                 <td>{{ $page->updated_at->diffForHumans() }}</td>
                                 <td>
-                                    <a href="{{ URL::to('admin/pages/' . $page->id . '/edit' ) }}"><i class="fa fa-fw fa-pencil text-warning" title="update blog"></i></a>
+                                    <a href="{{ URL::to('admin/pages/' . $page->slug . '/edit' ) }}"><i class="fa fa-fw fa-pencil text-warning" title="update blog"></i></a>
                                     <a href="{{ route('confirm-delete/page', $page->id) }}" data-toggle="modal" data-target="#delete_confirm"><i class="fa fa-fw fa-times text-danger" title="delete page"></i></a>
                                 </td>
                             </tr>

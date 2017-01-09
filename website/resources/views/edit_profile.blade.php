@@ -78,8 +78,7 @@
                 </div>
                 <!-- edit form column -->
                 {{--{!! BootForm::horizontal(array('model'=>$person, 'update'=>'update_profile')) !!}--}}
-                {!! BootForm::horizontal(array('model'=>$person, 'store'=>'person.store', 'update'=>'person.update')) !!}
-
+                {!! BootForm::horizontal(array('model'=>$person, 'store'=>'person.store', 'update'=>'person.update_profile')) !!}
 
                 <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
                     @include('notifications')

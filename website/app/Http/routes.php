@@ -299,12 +299,10 @@ Route::post('change-password', 'FrontEndController@postChangePassword');
 # Forgot Password Confirmation
 Route::get('forgot-password-confirm/{userId}/{passwordResetCode}', array('as' => 'forgot-password-confirm', 'uses' => 'FrontEndController@getForgotPasswordConfirm'));
 Route::post('forgot-password-confirm/{userId}/{passwordResetCode}', 'FrontEndController@postForgotPasswordConfirm');
-# My account display and update details
 
+# My account display and update details
 Route::get('update_profile', array('as' => 'update_profile', 'uses' => 'FrontEndController@editProfile'));
-//Route::post('update_profile/{id}', 'FrontEndController@updatePersonProfile');
-//Route::get('{person}/update_profile', array('as' => 'person.edit', 'uses' => 'PersonController@edit'));
-Route::put('{person}/update_profile', array('as' => 'person.update', 'uses' => 'FrontEndController@updatePersonProfile'));
+Route::put('{person}/update_profile', array('as' => 'person.update_profile', 'uses' => 'FrontEndController@updatePersonProfile'));
 
 
 Route::group(array('middleware' => 'SentinelUser'), function () {

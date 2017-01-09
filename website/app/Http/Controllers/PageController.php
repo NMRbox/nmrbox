@@ -182,12 +182,7 @@ class PageController extends ChandraController {
 	{
 	    try {
             // Get the page information
-            if(is_numeric($id))
-                $page = Page::where('id', $id)->first();
-            else
-                $page = Page::where('slug', $id)->first();
-
-
+            $page = Page::where('slug', $id)->first();
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = Lang::get('page/message.user_not_found', compact('id'));
@@ -218,10 +213,13 @@ class PageController extends ChandraController {
 //            $picture = str_random(10).'.'.$extension;
 //            $page->image = $picture;
 //        }
+
+        // creating the object from input slug
+        $slug = $request->input('slug');
+        $page = Page::where('slug', $slug)->first();
+
         $page->user_id = Sentinel::getUser()->id;
         $page->update($request->except('image','_method','tags'));
-
-        // TODO: sluggify requested url
 
         return redirect('admin/pages');
 	}

@@ -229,8 +229,9 @@ class PersonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Person $person)
+    public function update(Request $request, $id)
     {
+        $person = Person::where('id', $id)->first();
         $person->update($request->except(['institution', 'institution_type']));
 
 

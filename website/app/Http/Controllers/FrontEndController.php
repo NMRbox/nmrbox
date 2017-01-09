@@ -204,10 +204,8 @@ class FrontEndController extends ChandraController
      */
     public function updateProfile()
     {
-        //$user = Sentinel::findById($id);
         $user = Sentinel::getUser();
         $person = $user->person()->get()->first();
-
 
         //validatoinRules are declared at beginning
         /*if (Input::get('email')) {
