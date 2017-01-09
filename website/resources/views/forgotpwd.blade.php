@@ -40,12 +40,11 @@
                             <span class="input-group-addon">
                                     <i class="fa fa-user"></i>
                                 </span>
-                            <input type="email" class="form-control email" name="email" placeholder="Email"
+                            <input type="email" class="form-control email" name="email" placeholder="Institutional Email"
                                    value="{!! Input::old('email') !!}">
 
                         </div>
-                        <span class="help-block">{{ $errors->first('email', ':message') }}</span>
-
+                        <span class="help-block errors">{{ $errors->first('email', 'Please enter your institutional email address.') }}</span>
                         <input type="submit" class="btn btn-block btn-primary" value="Reset Your Password" style="margin-top:10px;">
                     </form>
 

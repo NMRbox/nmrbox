@@ -375,7 +375,7 @@ class FrontEndController extends ChandraController
 
         try {
             // Get the user password recovery code
-            $user = Person::where('email', Input::get('email'))->first();
+            $user = Person::where('email_institution', Input::get('email'))->first();
 
             if (!$user) {
                 return Redirect::route('forgot-password')->with('error', Lang::get('auth/message.forgot-password.error'));
@@ -398,7 +398,7 @@ class FrontEndController extends ChandraController
 
             // Send the activation code through email
             Mail::send('emails.forgot-password', $data, function ($m) use ($user) {
-                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                $m->to($user->email_institution, $user->first_name . ' ' . $user->last_name);
                 $m->subject('NMRbox Account Password Recovery');
             });
         } catch (UserNotFoundException $e) {

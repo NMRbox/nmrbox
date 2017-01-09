@@ -23,7 +23,7 @@ return array(
     ),
 
     'forgot-password' => array(
-        'error'   => 'There was a problem while trying to get a reset password link, please enter email address associated with your account and try again.',
+        'error'   => 'There was a problem while trying to get a reset password link, please enter institutional email address associated with your account and try again.',
         'success' => 'Password recovery email successfully sent.',
     ),
 
