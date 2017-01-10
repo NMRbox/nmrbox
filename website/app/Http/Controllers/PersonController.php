@@ -293,6 +293,7 @@ class PersonController extends Controller
 
         $save_template = $request->input('save_template');
         $msg_body = $request->input('message');
+        $email_recipient = $request->input('recipient');
 
         if($save_template == 'yes')
         {
@@ -318,19 +319,20 @@ class PersonController extends Controller
 
         foreach ($users as $user){
             $email_subj = $request->input('subject');
+            $email_recipient_address = ($email_recipient == 'email_institution')? $user['email_institution'] : $user['email'];
 
             // user institution details
             $person_institution_name = $user->institution()->get()->first()->name;
 
             // message body str_replace array
-            $search = array('%%first_name%%', '%%last_name%%', '%%nmrbox_acct%%', '%%email%%', '%%institution%%', '%%category%%');
-            $replace = array('%%first_name%%' => $user->first_name, '%%last_name%%' => $user->last_name,'%%nmrbox_acct%%' => $user->nmrbox_acct, '%%email%%' => $user->email, '%%institution%%' => $person_institution_name, '%%category%%' => $user->category);
+            $search = array('%%first_name%%', '%%last_name%%', '%%nmrbox_acct%%', '%%preferred_email%%', '%%institutional_email%%', '%%institution%%', '%%category%%');
+            $replace = array('%%first_name%%' => $user->first_name, '%%last_name%%' => $user->last_name,'%%nmrbox_acct%%' => $user->nmrbox_acct, '%%preferred_email%%' => $user->email, '%%institutional_email%%' => $user->email_institution, '%%institution%%' => $person_institution_name, '%%category%%' => $user->category);
             $message = str_replace($search, $replace, $msg_body);
 
             //Send mail
-            $send_mail = Mail::send([], [], function ($m) use ($user, $email_subj, $message) {
+            $send_mail = Mail::send([], [], function ($m) use ($user, $email_subj, $message, $email_recipient_address) {
                             $m->from(env('MAIL_USERNAME'), 'NMRbox')
-                                ->to($user['email'], $user['first_name'] . ' ' . $user['last_name'])
+                                ->to($email_recipient_address, $user['first_name'] . ' ' . $user['last_name'])
                                 ->subject($email_subj)
                                 ->setBody($message);
                         });

@@ -234,12 +234,14 @@ People Index
                                 {{-- Form Title --}}
                                 <legend>Email Customization</legend>
 
-                                {{-- Email Subject --}}
+                                {{-- Email Template Drop Down --}}
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" for="subject">Subject</label>
+                                    <label class="col-md-4 control-label" for="email_template">Recipient Address</label>
                                     <div class="col-md-8">
-                                        <input name="subject" type="text" placeholder="Email Subject"
-                                               class="form-control input-md" required="">
+                                        <select id="email_template" name="recipient">
+                                            <option value="email">Preferred Email</option>
+                                            <option value="email_institution">Institutional Email</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -257,6 +259,15 @@ People Index
                                     </div>
                                 </div>
 
+                                {{-- Email Subject --}}
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="subject">Subject</label>
+                                    <div class="col-md-8">
+                                        <input name="subject" type="text" placeholder="Email Subject"
+                                               class="form-control input-md" required="">
+                                    </div>
+                                </div>
+
                                 {{-- Available database fields --}}
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="template_area">Select email fields</label>
@@ -264,7 +275,8 @@ People Index
                                         <a href="#" class="btn btn-xs btn-default" data-field-name="first_name">First Name</a>
                                         <a href="#" class="btn btn-xs btn-default" data-field-name="last_name">Last Name</a>
                                         <a href="#" class="btn btn-xs btn-default" data-field-name="nmrbox_acct">NMRBox Account</a>
-                                        <a href="#" class="btn btn-xs btn-default" data-field-name="email">Email</a>
+                                        <a href="#" class="btn btn-xs btn-default" data-field-name="preferred_email">Preferred Email</a>
+                                        <a href="#" class="btn btn-xs btn-default" data-field-name="institutional_email">Institutional Email</a>
                                         <a href="#" class="btn btn-xs btn-default" data-field-name="institution">Institution</a>
                                         <a href="#" class="btn btn-xs btn-default" data-field-name="category">Category</a>
                                     </div>
@@ -397,7 +409,6 @@ People Index
                             </fieldset>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -523,12 +534,14 @@ People Index
                             show_alert('success');
                         },
                         error: function (data) {
+                            $('#email_modal').modal('hide');
                             $('#error_msg').html('Something went wrong. Please try again.');
                             show_alert('error');
                         }
                     })
                 } else {
                     /* If no row selected */
+                    $('#email_modal').modal('hide');
                     $('#error_msg').html('Something went wrong. Please try again.');
                     show_alert('error');
                 }

@@ -46,7 +46,8 @@
                                 <div class="col-md-5" id="template_area">
                                     <a href="#" class="btn btn-xs btn-default" data-field-name="first_name">First Name</a>
                                     <a href="#" class="btn btn-xs btn-default" data-field-name="last_name">Last Name</a>
-                                    <a href="#" class="btn btn-xs btn-default" data-field-name="email">Email</a>
+                                    <a href="#" class="btn btn-xs btn-default" data-field-name="preferred_email">Preferred Email</a>
+                                    <a href="#" class="btn btn-xs btn-default" data-field-name="institutional_email">Institutional Email</a>
                                     <a href="#" class="btn btn-xs btn-default" data-field-name="institution">Institution</a>
                                     <a href="#" class="btn btn-xs btn-default" data-field-name="category">Category</a>
                                 </div>
