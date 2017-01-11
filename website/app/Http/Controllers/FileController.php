@@ -36,12 +36,7 @@ class FileController extends ChandraController
      */
     public function getFile($file_name)
     {
-        echo $file_name;
         $file = File::where('slug', 'like', $file_name)->find();
-        echo "<pre>";
-        print_r($file);
-        echo "</pre>";
-        exit;
         $headers = array('Content-type' => $file->mime_type, 'Content-length' => $file->size);
 
         $data = $file->bdata;
