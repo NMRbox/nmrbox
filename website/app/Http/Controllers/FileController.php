@@ -127,9 +127,9 @@ class FileController extends ChandraController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(File $file)
+    public function destroy($file_id)
     {
-
+        $file = File::where('id', $file_id)->first();
         $file->delete();
         return back()->withInput();
     }
