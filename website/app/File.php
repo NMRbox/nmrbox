@@ -61,6 +61,7 @@ class File extends NmrModel implements SluggableInterface
 
     public static function binary_unsql($bin)
     {
+
         if (is_resource($bin))
         {
             $bin = stream_get_contents($bin);
