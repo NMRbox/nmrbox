@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Sentinel;
 use View;
 
-class FileController extends Controller
+class FileController extends ChandraController
 {
     // downloadFile, uploadAndGetURL, makeFileFromUploadedFile methods
     use FileHandler;
