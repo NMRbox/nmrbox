@@ -37,13 +37,15 @@ class FileController extends Controller
     public function getFile($file_name)
     {
         echo $file_name;
+        exit;
+
         $file = File::where('slug', $file_name)->find();
-        print_r($file);
         $headers = array('Content-type' => $file->mime_type, 'Content-length' => $file->size);
 
         $data = $file->bdata;
         $unescape = $file->binary_unsql($data);
         $un64 = base64_decode($unescape);
+
 
         return response($un64, 200, $headers);
     }
