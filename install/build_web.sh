@@ -19,7 +19,7 @@ loc=trunk
 os=ubuntu-14.04
 env=prod
 db=registry
-svn_auth='--username buildserver --password boxofrocks'
+svn_auth='--username buildserver --password boxofrocks --no-auth-cache'
 while getopts "n:d:a:s:o:e:hb:" opt; do
     case $opt in
 	h)
@@ -64,8 +64,11 @@ if [ ! -w $parent ]; then
 	exit 3
 fi
 
-svn $svn_auth co -q https://nmrbox-devel.cam.uchc.edu/repos/nmrbox/$loc/web/website $installdir 
-svn $svn_auth co -q https://nmrbox-devel.cam.uchc.edu/repos/nmrbox/$loc/web/vendor-$os $installdir/vendor
+#show checkout command
+SVN_ROOT=https://nmrbox-devel.cam.uchc.edu/repos/nmrbox/$loc/web 
+echo "Extracting code from $SVN_ROOT"
+svn $svn_auth export -q ${SVN_ROOT}/website $installdir 
+svn $svn_auth export -q ${SVN_ROOT}/vendor-$os $installdir/vendor
 
 (
 cat <<EO_ENV
@@ -102,6 +105,10 @@ find $storage -type d -exec chmod 777 {} \;
 
 
 sudo chown -R $account:$account $installdir 
+
+cd $installdir || { echo "cd to $installdir failed"; exit 3; }
+php artisan cache:clear
+php artisan route:cache
 envpath=$(readlink -f $installdir/.env)
 
 echo "Review/edit $envpath to change database, etc."
