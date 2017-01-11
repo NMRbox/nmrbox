@@ -34,8 +34,11 @@ class FileController extends Controller
      * @param  File $file
      * @return \Illuminate\Http\Response
      */
-    public function getFile(File $file)
+    public function getFile($file_name)
     {
+        echo $file_name;
+        $file = File::where('slug', $file_name)->find();
+        print_r($file);
         $headers = array('Content-type' => $file->mime_type, 'Content-length' => $file->size);
 
         $data = $file->bdata;
