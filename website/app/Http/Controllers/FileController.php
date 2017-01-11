@@ -37,7 +37,7 @@ class FileController extends Controller
     public function getFile($file_name)
     {
         echo $file_name;
-        $file = File::where('slug', $file_name)->find();
+        $file = File::where('slug', $file_name)->toSql();
         echo "<pre>";
         print_r($file);
         echo "</pre>";
