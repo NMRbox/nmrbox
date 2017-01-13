@@ -263,7 +263,7 @@ People Index
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="subject">Subject</label>
                                     <div class="col-md-8">
-                                        <input name="subject" type="text" placeholder="Email Subject"
+                                        <input name="subject" type="text" placeholder="Email Subject" id="email_subject"
                                                class="form-control input-md" required="">
                                     </div>
                                 </div>
@@ -511,6 +511,7 @@ People Index
                     url: 'people/email_template',
                     data: 'name=' + template_id + '&_token=' + $('input#user_csrf_token').val(),
                     success: function(data) {
+                        $('input#email_subject').val(data.subject);
                         $('textarea#message').val(data.message);
                     }
                 });
@@ -532,6 +533,7 @@ People Index
                             $('#email_modal').modal('hide');
                             $('#success_msg').html(data.message);
                             show_alert('success');
+                            location.href = '/admin/people';
                         },
                         error: function (data) {
                             $('#email_modal').modal('hide');

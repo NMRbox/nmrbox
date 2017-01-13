@@ -292,8 +292,10 @@ class PersonController extends Controller
         }
 
         $save_template = $request->input('save_template');
+        $email_subj = $request->input('subject');
         $msg_body = $request->input('message');
         $email_recipient = $request->input('recipient');
+
 
         if($save_template == 'yes')
         {
@@ -304,6 +306,7 @@ class PersonController extends Controller
             $email = new Email(array(
                 'name' => $email_template_name,
                 'content' => $email_template_body,
+                'subject' => $email_subj,
             ));
             $email->save();
         }
@@ -487,10 +490,12 @@ class PersonController extends Controller
         $name = $request->input('name');
         $template = Email::where('name', $name)->first();
 
-        //retrieving person details
+        $message = $template->content;
+        $subject = $template->subject;
+
 
         //json_encode($user);
-        return response( json_encode( array( 'message' => $template->content ) ), 200 )
+        return response( json_encode( array( 'message' => $message, 'subject' => $subject ) ), 200 )
             ->header( 'Content-Type', 'application/json' );
 
     }

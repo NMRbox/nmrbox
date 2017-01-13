@@ -71,8 +71,8 @@ class EmailController extends Controller
         try {
             $email = new Email(array(
                 'name' => $request->name,
-                'content' => $request->content,
-
+                'subject' => $request->subject,
+                'content' => $request->content
             ));
 
             $email->save();
@@ -130,6 +130,7 @@ class EmailController extends Controller
     {
         $email = Email::where('name', $name)->first();
         $email->name = $request->input('name');
+        $email->subject = $request->input('subject');
         $email->content = $request->input('content');
 
         $email->save();

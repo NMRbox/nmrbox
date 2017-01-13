@@ -154,10 +154,6 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                {{--<div class="col-md-3 col-lg-3 " align="center">
-                                    <div>Software listing</div>
-                                </div>--}}
-
                                 <div class=" col-md-12 col-lg-12 ">
                                     <table class="table table-user-information">
                                         <tbody>

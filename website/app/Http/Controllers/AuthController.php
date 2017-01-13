@@ -327,39 +327,5 @@ class AuthController extends ChandraController
     }
 
 
-    /**
-     * LDAP test.
-     *
-     * @return connection string
-     */
-    /*
-    public function validate_ldap_password($name,$password)
-    {
-        #this stuff should go in config file
-        $host = env('CAM_HOST');
-        $port = env('CAM_PORT');
-
-        $addr = gethostbyname($host);
-        $client = stream_socket_client("tcp://$addr:$port",$errno,$errorMessage);
-
-        if ($client === false) {
-            throw new UnexpectedValueException("Failed to connect: $errorMessage");
-        }
-
-        $xml = new SimpleXMLElement('<ldap/>');
-        $xml->addChild(env('CAM_USERNAME'),$name);
-        $xml->addChild(env('CAM_PASSWORD'),$password);
-
-        $data = $xml->asXML( );
-        fwrite($client, $data);
-        $result = stream_get_contents($client);
-        if ($result=='pass') {
-            return 1;
-        }
-
-        var_dump($result);
-    }*/
-
-
 
 }

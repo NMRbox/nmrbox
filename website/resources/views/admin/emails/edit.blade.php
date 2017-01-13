@@ -38,6 +38,7 @@ Edit VM
                     {!! BootForm::horizontal(array('model'=>$email, 'store'=>'email.store', 'update'=>'email.update')) !!}
                     <div class="col-sm-12 col-md-10">
                         {!! BootForm::text('name', "Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
+                        {!! BootForm::text('subject', "Email subject", null, array('class' => 'input-lg', 'required' => 'required'))!!}
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="template_area">Select email fields</label>
                             <div class="col-md-7" id="template_area">

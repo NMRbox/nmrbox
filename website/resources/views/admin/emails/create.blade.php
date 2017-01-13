@@ -39,11 +39,12 @@
                 </div>
                 <div class="panel-body">
                     {!! BootForm::horizontal() !!}
-                        <div class="col-sm-12 col-md-8">
+                        <div class="col-sm-12 col-md-10">
                             {!! BootForm::text('name', "Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
+                            {!! BootForm::text('subject', "Email subject", null, array('class' => 'input-lg', 'required' => 'required'))!!}
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="template_area">Select email fields</label>
-                                <div class="col-md-5" id="template_area">
+                                <div class="col-md-7" id="template_area">
                                     <a href="#" class="btn btn-xs btn-default" data-field-name="first_name">First Name</a>
                                     <a href="#" class="btn btn-xs btn-default" data-field-name="last_name">Last Name</a>
                                     <a href="#" class="btn btn-xs btn-default" data-field-name="preferred_email">Preferred Email</a>

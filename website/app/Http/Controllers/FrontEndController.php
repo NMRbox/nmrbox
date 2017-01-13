@@ -457,14 +457,18 @@ class FrontEndController extends ChandraController
         //$user = Sentinel::findById($userId);
         $user = Person::where('id', $userId)->first();
 
-        if($user->nmrbox_acct != $request->get('nmrbox_acct') ||
+        // checking whether user has an entry in the DB & pass reset request in Reminder table
+        if($user->nmrbox_acct != trim($request->get('nmrbox_acct'))){
+            // Ooops.. something went wrong
+            return back()->with('error', Lang::get('auth/message.forgot-password-confirm.account_error'));
+        } elseif (
             !$reminder = Reminder::where('user_id', $user->id)
                 ->where('code', $passwordResetCode)
                 ->where('completed', 'false')
                 ->first())
         {
             // Ooops.. something went wrong
-            return back()->with('error', Lang::get('auth/message.forgot-password-confirm.error'));
+            return back()->with('error', Lang::get('auth/message.forgot-password-confirm.request_expired'));
         } else {
 
             //making credential array for LDAP verification
@@ -473,10 +477,10 @@ class FrontEndController extends ChandraController
 
             // Adding custom LDAP library class and authenticating
             $ldap = new Ldap;
-            $ldap_login = $ldap->ldap_set_password($credential);
+            $ldap_status = $ldap->ldap_set_password($credential);
 
             // LDAP login response
-            if($ldap_login !== false){
+            if($ldap_status !== false){
                 // update reminder table
                 $reminder_update = Reminder::where('id', $reminder->id)
                                             ->update(
@@ -490,7 +494,7 @@ class FrontEndController extends ChandraController
                 return Redirect::route('login')->with('success', Lang::get('auth/message.forgot-password-confirm.success'));
             } else {
                 // Ooops.. something went wrong
-                return back()->with('error', Lang::get('auth/message.forgot-password-confirm.error'));
+                return back()->with('error', Lang::get('auth/message.forgot-password-confirm.complexity_error'));
             }
         }
     }
