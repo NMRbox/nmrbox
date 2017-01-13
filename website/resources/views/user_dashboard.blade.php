@@ -343,7 +343,7 @@
                 var conf_pass = $('#conf_pass').val();
 
                 if(pass != conf_pass){
-                    $('#error_msg').html('Password and Confirm password did not match. Please try again.');
+                    $('#error_msg').html('Password and Confirm password do not match. Please try again.');
                     show_alert('error');
                 } else {
 
@@ -368,7 +368,7 @@
                                 show_alert('success');
                             } else {
                                 $('#error_msg').html(data.message);
-                                $('#error_msg').html('Password '+ pass+ ' does not meet Active Directory Complexity Rules');
+                                $('#error_msg').html("Password "+ pass+ "does not meet complexity rules, please try again. Password hint: Minimum 8 characters with mix of upper case, lower case, numbers and punctuation marks except '&' and '$''.");
                                 show_alert('error');
                             }
                         },
@@ -378,7 +378,7 @@
                             $('#conf_pass_box').hide();
                             $('#edit_ldap_pass').show();
                             $('#error_msg').html(data.message);
-                            $('#error_msg').html('Password '+ pass+ ' does not meet Active Directory Complexity Rules');
+                            $('#error_msg').html("Password "+ pass+ "does not meet complexity rules, please try again. Password hint: Minimum 8 characters with mix of upper case, lower case, numbers and punctuation marks except '&' and '$''.");
                             show_alert('error');
                         }
                     })
