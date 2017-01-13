@@ -494,7 +494,7 @@ class FrontEndController extends ChandraController
                 return Redirect::route('login')->with('success', Lang::get('auth/message.forgot-password-confirm.success'));
             } else {
                 // Ooops.. something went wrong
-                return back()->with('error', Lang::get('auth/message.forgot-password-confirm.complexity_error'));
+                return back()->with('error', nl2br(Lang::get('auth/message.forgot-password-confirm.complexity_error')) );
             }
         }
     }
