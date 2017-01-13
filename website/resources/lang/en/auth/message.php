@@ -29,10 +29,10 @@ return array(
 
     'forgot-password-confirm' => array(
         'account_error'   => 'NMRbox usename do not match, please try again.',
-        'complexity_error'   => 'Password does not meet complexity rules, please try again. <br>
-                                 Password requirement:<br>
-                                    - Minimum 8 characters with mix of upper case, lower case and numbers.<br>
-                                    - Use punctuation marks except "&" and "$".',
+        'complexity_error'   => "Password does not meet complexity rules, please try again.\r\n 
+                                 Password requirement:\r\n
+                                    - Minimum 8 characters with mix of upper case, lower case and numbers.\r\n
+                                    - Use punctuation marks except '&' and '$''.",
         'request_expired'   => 'Looks like your password reset request has expired, please try again.',
         'success' => 'Your password has been successfully reset.',
     ),
