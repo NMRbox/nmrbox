@@ -419,10 +419,16 @@ class FrontEndController extends ChandraController
      */
     public function getForgotPasswordConfirm($userId, $passwordResetCode)
     {
-        //if (!$user = Sentinel::findById($userId)) {
+        // Checking the user entry in person table
         if (!$user = Person::where('id', $userId)->first()) {
             // Redirect to the forgot password page
             return Redirect::route('forgot-password')->with('error', Lang::get('auth/message.account_not_found'));
+        }
+
+        // Redirect if password reset request has expired
+        if (!$reminder = Reminder::where('user_id', $userId)->where('code', $passwordResetCode)->where('completed', 'false')->first()){
+        // Ooops.. something went wrong
+            return Redirect::route('forgot-password')->with('error', Lang::get('auth/message.forgot-password-confirm.request_expired'));
         }
 
         // Show the page
