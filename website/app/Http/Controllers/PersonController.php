@@ -336,6 +336,7 @@ class PersonController extends Controller
             $send_mail = Mail::send([], [], function ($m) use ($user, $email_subj, $message, $email_recipient_address) {
                             $m->from(env('MAIL_USERNAME'), 'NMRbox')
                                 ->to($email_recipient_address, $user['first_name'] . ' ' . $user['last_name'])
+                                ->replyTo('support@nmrbox.org', 'NMRBox.org')
                                 ->subject($email_subj)
                                 ->setBody($message);
                         });
