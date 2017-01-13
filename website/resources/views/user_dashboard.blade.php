@@ -368,7 +368,7 @@
                                 show_alert('success');
                             } else {
                                 $('#error_msg').html(data.message);
-                                $('#error_msg').html("Password "+ pass+ "does not meet complexity rules, please try again. Password hint: Minimum 8 characters with mix of upper case, lower case, numbers and punctuation marks except '&' and '$''.");
+                                $('#error_msg').html("Password "+ pass+ " does not meet complexity rules, please try again. Password must be a minimum of 8 characters and include a character from 3 of the following 4 groups: upper case, lower case, numbers, and punctuation marks ('&' and '$' no allowed).");
                                 show_alert('error');
                             }
                         },
@@ -378,7 +378,7 @@
                             $('#conf_pass_box').hide();
                             $('#edit_ldap_pass').show();
                             $('#error_msg').html(data.message);
-                            $('#error_msg').html("Password "+ pass+ "does not meet complexity rules, please try again. Password hint: Minimum 8 characters with mix of upper case, lower case, numbers and punctuation marks except '&' and '$''.");
+                            $('#error_msg').html("Password "+ pass+ " does not meet complexity rules, please try again. Password must be a minimum of 8 characters and include a character from 3 of the following 4 groups: upper case, lower case, numbers, and punctuation marks ('&' and '$' no allowed).");
                             show_alert('error');
                         }
                     })
