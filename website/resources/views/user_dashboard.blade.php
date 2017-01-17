@@ -103,7 +103,7 @@
                                     @if($user->pic)
                                         <img src="{!! url('/').'/uploads/users/'.$user->pic !!}" alt="img" class="img-circle"/>
                                     @else
-                                        <img alt="User Pic" src="http://www.doppelme.com/DM1430605JCH/crop.gif" class="img-circle img-responsive">
+                                        <img alt="User Pic" src="{!! url('/').'/uploads/users/profile.gif' !!}" class="img-circle img-responsive">
                                     @endif
                                 </div>
 

@@ -66,21 +66,11 @@
             </div>
 
             <div class="row">
-
-
-                <!-- left column -->
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="text-center">
-                        <img src="http://www.doppelme.com/DM1430605JCH/avatar.gif" class="avatar img-circle img-thumbnail" alt="avatar">
-                        <h6>Upload a different photo...</h6>
-                        <input type="file" class="text-center center-block well well-sm">
-                    </div>
-                </div>
                 <!-- edit form column -->
                 {{--{!! BootForm::horizontal(array('model'=>$person, 'update'=>'update_profile')) !!}--}}
                 {!! BootForm::horizontal(array('model'=>$person, 'store'=>'person.store', 'update'=>'person.update_profile')) !!}
 
-                <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+                <div class="col-md-10 col-sm-10 col-xs-12 personal-info">
                     @include('notifications')
                     <br>
                     {!! Form::token() !!}
@@ -109,7 +99,7 @@
                         $timezones_for_select, 169, array('required' => 'required')) !!}
                     {{-- csrf token --}}
 
-                    {!! BootForm::submit('Save') !!}
+                    {!! BootForm::submit('Save Changes') !!}
 
 
 
