@@ -39,7 +39,8 @@
                         <div class="col-sm-12 col-md-8">
                             {!! BootForm::text('first_name', "First Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
                             {!! BootForm::text('last_name', "Last Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
-                            {!! BootForm::email('email', "Email", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
+                            {!! BootForm::email('email', "Preferred Email", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
+                            {!! BootForm::email('email_institution', "Institutional Email", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
                             {!! BootForm::select('job_title', "Job Title",
                                 $person_positions, null, array('maxlength'=> 32, 'required' => 'required')) !!}
 
