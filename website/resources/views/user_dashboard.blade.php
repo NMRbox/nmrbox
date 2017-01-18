@@ -168,14 +168,21 @@
                                             <tr>
                                                 <td>Password: </td>
                                                 <td>
-                                                    <input type="hidden" name="password" id="ldap_pass" >
+                                                    <input type="hidden" name="password" id="ldap_pass" class="password">
+                                                    <span id="show_pass_box" style="display: none; cursor:pointer;">
+                                                        <i class="fa fa-eye fa-1x" id="showHide"></i>
+                                                    </span>
                                                     <span id="pass_asterisk">******</span>
+
                                                 </td>
                                             </tr>
                                             <tr id="conf_pass_box" style="display: none;">
                                                 <td>Confirm Password: </td>
                                                 <td>
                                                     <input type="password" name="conf_password" id="conf_pass">
+                                                    <span id="show_pass_box" style="cursor:pointer;">
+                                                        <i class="fa fa-eye fa-1x" id="showHideConf"></i>
+                                                    </span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -324,6 +331,8 @@
                 e.preventDefault();
             });
 
+
+
             /* Enabling the fields for entering password */
             $('#edit_ldap_pass').on('click', function (e) {
                 e.preventDefault();
@@ -331,9 +340,35 @@
                 $('input#ldap_pass').attr('type', 'password');
                 $('#pass_asterisk').hide();
                 $('#conf_pass_box').show();
+                $('#show_pass_box').show();
                 $('#edit_ldap_pass').hide();
                 $('input#reset_ldap_pass').attr('type', 'reset');
                 $('input#save_ldap_pass').attr('type', 'submit');
+
+            });
+
+            /* show/hide password*/
+            $('#showHide').on('click', function(e){
+                    if($("#ldap_pass").attr("type") == 'password') {
+                        $('input#ldap_pass').attr('type', 'text');
+                        $("#showHide").addClass('fa fa-eye-slash fa-1x');
+                    } else {
+                        $('input#ldap_pass').attr('type', 'password');
+                        $("#showHide").removeClass('fa fa-eye-slash fa-1x');
+                        $("#showHide").addClass('fa fa-eye fa-1x');
+                    }
+            });
+
+            /* show/hide conf pass */
+            $('#showHideConf').on('click', function(e){
+                    if($("#conf_pass").attr("type") == 'password') {
+                        $('input#conf_pass').attr('type', 'text');
+                        $("#showHideConf").addClass('fa fa-eye-slash fa-1x');
+                    } else {
+                        $('input#conf_pass').attr('type', 'password');
+                        $("#showHideConf").removeClass('fa fa-eye-slash fa-1x');
+                        $("#showHideConf").addClass('fa fa-eye fa-1x');
+                    }
             });
 
             /* saving the data into LDAP */
@@ -384,7 +419,6 @@
                     })
                 }
             });
-
 
         });
 
