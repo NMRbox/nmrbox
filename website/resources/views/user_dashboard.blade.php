@@ -396,6 +396,7 @@
                         success: function(data) {
                             $('#ldap_pass_loading').remove();
                             $('#pass_asterisk').show();
+                            $('#show_pass_box').hide();
                             $('#conf_pass_box').hide();
                             $('#edit_ldap_pass').show();
                             if(data.type == 'success'){
@@ -410,6 +411,7 @@
                         error: function (data) {
                             $('#ldap_pass_loading').remove();
                             $('#pass_asterisk').show();
+                            $('#show_pass_box').hide();
                             $('#conf_pass_box').hide();
                             $('#edit_ldap_pass').show();
                             $('#error_msg').html(data.message);
