@@ -207,7 +207,7 @@
                         <div class="panel-footer">
                             <div class="text-right">
                                 {{-- Password reset button --}}
-                                <a href="#" data-toggle="modal" data-target="#pass_confirm_modal" class="btn btn-sm btn-warning" id="edit_ldap_pass" data-original-title="Reset account password" data-toggle="tooltip"><i class="fa fa-key fa-2x"></i></a>
+                                <a href="#" role="button" rel="tooltip" data-original-title="Reset account password" data-toggle="modal" data-target="#pass_confirm_modal" class="btn btn-sm btn-warning" id="edit_ldap_pass"><i class="fa fa-key fa-2x"></i></a>
                                 {{-- form saving button, toggle when password reset authentication pass --}}
                                 <input type="hidden" name="change-password" value="Save" id="save_ldap_pass" class="btn btn-primary">
                                 {{-- csrf token --}}
@@ -369,6 +369,7 @@
 
 
             $('[data-toggle="tooltip"]').tooltip();
+            $('[rel="tooltip"]').tooltip();
 
             $('button').click(function (e) {
                 e.preventDefault();
