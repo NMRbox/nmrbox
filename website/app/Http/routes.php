@@ -282,19 +282,24 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 });
 
 #FrontEndController
-
-Route::get('registration-success', array('as' => 'registration-success','uses' => 'FrontEndController@getLogout'));
-
+# Login
 Route::get('login', array('as' => 'login','uses' => 'FrontEndController@getLogin'));
 Route::post('login','FrontEndController@postLogin');
+
+# Register
 Route::get('register', array('as' => 'register','uses' => 'FrontEndController@getRegister'));
 Route::post('register','FrontEndController@postRegister');
 Route::get('register-person', array('as' => 'register-person','uses' => 'FrontEndController@getRegisterPerson'));
 Route::post('register-person','FrontEndController@postRegisterPerson');
+Route::get('registration-success', array('as' => 'registration-success','uses' => 'FrontEndController@getLogout'));
+
+# Change password
+Route::post('change-password', 'FrontEndController@postChangePassword');
+Route::post('verify-password', 'FrontEndController@verifyLdapAuthentication');
+
+# Forget password
 Route::get('forgot-password',array('as' => 'forgot-password','uses' => 'FrontEndController@getForgotPassword'));
 Route::post('forgot-password','FrontEndController@postForgotPassword');
-//Route::get('change-password',array('as' => 'change-password','uses' => 'FrontEndController@getChangePassword'));
-Route::post('change-password', 'FrontEndController@postChangePassword');
 
 # Forgot Password Confirmation
 Route::get('forgot-password-confirm/{userId}/{passwordResetCode}', array('as' => 'forgot-password-confirm', 'uses' => 'FrontEndController@getForgotPasswordConfirm'));

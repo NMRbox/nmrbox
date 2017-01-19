@@ -305,6 +305,42 @@ class FrontEndController extends ChandraController
     }
 
     /**
+     * Verifying the LDAP authentication before reseting password
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function verifyLdapAuthentication(Request $request)
+    {
+        if(!$request->ajax()) {
+            return App::abort(403);
+        }
+
+        $user_session = Sentinel::check();
+        $user = User::where('id', $user_session->id)->first();
+        $person = Person::where('id', $user['person_id'])->first();
+
+        // LDAP credential
+        $credential['username'] = $person['nmrbox_acct'];
+        $credential['password'] = $request->input('pass');
+
+        // Verifying LDAP password
+        $ldap = new Ldap;
+        $ldap_login = $ldap->ldap_authenticate($credential);
+
+        // LDAP login response
+        if($ldap_login !== false){
+            return response( json_encode( array( 'message' => 'Authentication successful. Proceed to reset password. ', 'type' => 'success' ) ), 200 )
+                ->header( 'Content-Type', 'application/json' );
+        } else {
+            return response( json_encode( array( 'message' => 'Sorry, authentication unsuccessful. Try again. ', 'type' => 'error' ) ), 200 )
+                ->header( 'Content-Type', 'application/json' );
+        }
+
+
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -312,7 +348,6 @@ class FrontEndController extends ChandraController
      */
     public function postChangePassword(Request $request)
     {
-        //sleep(5);
         if(!$request->ajax()) {
             return App::abort(403);
         }

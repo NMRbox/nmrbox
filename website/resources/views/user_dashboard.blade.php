@@ -208,7 +208,7 @@
                             <div class="text-right">
                                 <a href="{{ URL::to('update_profile') }}" data-original-title="Reset account password" data-toggle="tooltip" type="button"
                                    class="btn btn-sm btn-warning" id="edit_ldap_pass"><i class="fa fa-key fa-2x"></i></a>
-
+                                <a href="#" data-toggle="modal" data-target="#pass_confirm_modal" class="btn btn-sm btn-warning" id="edit_ldap_pass"><i class="fa fa-key fa-2x"></i></a>
                                 <input type="hidden" name="change-password" value="Save" id="save_ldap_pass" class="btn btn-primary">
                                 {{-- csrf token --}}
                                 <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
@@ -289,6 +289,50 @@
 
 {{-- page level scripts --}}
 @section('footer_scripts')
+    {{-- email modal --}}
+    <div class="modal fade" id="pass_confirm_modal" tabindex="-1" role="dialog" aria-labelledby="user_pass_confirm_title" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <span id="modal-header-title">Password Reset</span>
+                    </h4>
+
+                </div>
+                <form id="pass_verify_form">
+                    <div class="modal-body row">
+                        <table class="table table-user-information col-md-12">
+                            <tr>
+                                <td>
+                                    {{-- Password input box --}}
+                                    <div class="form-group">
+                                        <label for="ldap_pass"> Please enter your current password - </label>
+                                        <div class="col-md-8">
+                                            <input type="password" name="password" id="auth_pass" class="password">
+                                            <span id="show_pass_box" style="display: none; cursor:pointer;">
+                                                    <i class="fa fa-eye fa-1x" id="showHide"></i>
+                                                </span>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <!-- Button (Double) -->
+                                    <div class="form-group">
+                                        <div class="col-md-8">
+                                            <button id="verify_pass" name="send_email" class="btn btn-success">Verify
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <script type="text/javascript">
         function show_alert(alert_type) {
@@ -422,6 +466,51 @@
                 }
             });
 
+
+            /* Verify LDAP authentication */
+            $("#verify_pass").on("click", function (e) {
+                e.preventDefault();
+                var pass = $('#auth_pass').val();
+                //var userid = $('#conf_pass').val();
+                console.log(pass);
+
+                if(pass.length > 0){
+                    $.ajax({
+                        type: "POST",
+                        url: 'verify-password',
+                        data: 'pass=' + pass +'&_token=' + $('input#user_csrf_token').val(),
+                        dataType: 'JSON',
+                        success: function(data) {
+                            /* Activating password reset form */
+                            $('#pass_confirm_modal').modal('hide');
+                            $('input#ldap_pass').attr('type', 'password');
+                            $('#pass_asterisk').hide();
+                            $('#conf_pass_box').show();
+                            $('#show_pass_box').show();
+                            $('#edit_ldap_pass').hide();
+                            $('input#reset_ldap_pass').attr('type', 'reset');
+                            $('input#save_ldap_pass').attr('type', 'submit');
+
+                            /* Showing success message */
+                            $('#success_msg').html(data.message);
+                            show_alert('success');
+
+                        },
+                        error: function (data) {
+                            /* Showing success message */
+                            $('#pass_confirm_modal').modal('hide');
+                            $('#error_msg').html(data.message);
+                            show_alert('error');
+                        }
+                    })
+                } else {
+                    /* Error for not entering any password*/
+                    $('#pass_confirm_modal').modal('hide');
+                    $('#error_msg').html("Please enter a valid password and try again. ");
+                    show_alert('error');
+
+                }
+            });
         });
 
 
