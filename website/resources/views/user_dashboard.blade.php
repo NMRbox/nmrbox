@@ -391,6 +391,9 @@
             /* saving the data into LDAP */
             $("#save_ldap_pass").on("click", function (e) {
                 e.preventDefault();
+                /* Saving password delay moments*/
+                $('#ldap_pass').after('<span id="ldap_pass_loading">Saving Password...</span>');
+
                 var pass = $('#ldap_pass').val();
                 var conf_pass = $('#conf_pass').val();
 
@@ -399,9 +402,6 @@
                     $('#error_msg').html('Password and Confirm password do not match. Please try again.');
                     show_alert('error');
                 } else {
-                    /* Saving password delay moments*/
-                    $('#ldap_pass').after('<span id="ldap_pass_loading">Saving Password...</span>');
-
                     /* Changing form input type */
                     $('input#ldap_pass').attr('type', 'hidden');
                     $('input#save_ldap_pass').attr('type', 'hidden');
@@ -413,14 +413,14 @@
                         data: 'pass=' + pass +'&_token=' + $('input#user_csrf_token').val(),
                         dataType: 'JSON',
                         success: function(data) {
-                            if(data.type == 'success'){
-                                /* Activating the fields*/
-                                $('#ldap_pass_loading').remove();
-                                $('#pass_asterisk').show();
-                                $('#show_pass_box').hide();
-                                $('#conf_pass_box').hide();
-                                $('#edit_ldap_pass').show();
+                            /* Activating the fields*/
+                            $('#ldap_pass_loading').remove();
+                            $('#pass_asterisk').show();
+                            $('#show_pass_box').hide();
+                            $('#conf_pass_box').hide();
+                            $('#edit_ldap_pass').show();
 
+                            if(data.type == 'success'){
                                 /* Success message */
                                 $('#success_msg').html(data.message);
                                 /* removing error alert message */
@@ -434,6 +434,17 @@
                             }
                         },
                         error: function (data) {
+                            /* Activating the fields*/
+                            $('#ldap_pass_loading').remove();
+                            $('input#ldap_pass').attr('type', 'password');
+                            $('#edit_ldap_pass').hide();
+                            $('#pass_asterisk').hide();
+                            $('#conf_pass_box').show();
+                            $('#show_pass_box').show();
+                            $('#edit_ldap_pass').hide();
+                            $('input#reset_ldap_pass').attr('type', 'reset');
+                            $('input#save_ldap_pass').attr('type', 'submit');
+
                             /* Success message */
                             $('#error_msg').html(data.message);
                             $('#error_msg').html("Password "+ pass+ " does not meet complexity rules, please try again. Password must be a minimum of 8 characters and include a character from 3 of the following 4 groups: upper case, lower case, numbers, and punctuation marks ('&' and '$' no allowed).");
@@ -450,6 +461,16 @@
                 var pass = $('#auth_pass').val();
                 //var userid = $('#conf_pass').val();
                 console.log(pass);
+
+                /* Activating password reset form */
+                $('#pass_confirm_modal').modal('hide');
+                $('input#ldap_pass').attr('type', 'password');
+                $('#pass_asterisk').hide();
+                $('#conf_pass_box').show();
+                $('#show_pass_box').show();
+                $('#edit_ldap_pass').hide();
+                $('input#reset_ldap_pass').attr('type', 'reset');
+                $('input#save_ldap_pass').attr('type', 'submit');
 
                 if(pass.length > 0){
                     $.ajax({
@@ -491,7 +512,6 @@
                     $('#pass_confirm_modal').modal('hide');
                     $('#error_msg').html("Please enter a valid password and try again. ");
                     show_alert('error');
-
                 }
             });
         });
