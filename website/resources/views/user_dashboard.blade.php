@@ -434,13 +434,6 @@
                             }
                         },
                         error: function (data) {
-                            /* Activating the fields*/
-                            $('#ldap_pass_loading').remove();
-                            $('#pass_asterisk').show();
-                            $('#show_pass_box').hide();
-                            $('#conf_pass_box').hide();
-                            $('#edit_ldap_pass').show();
-
                             /* Success message */
                             $('#error_msg').html(data.message);
                             $('#error_msg').html("Password "+ pass+ " does not meet complexity rules, please try again. Password must be a minimum of 8 characters and include a character from 3 of the following 4 groups: upper case, lower case, numbers, and punctuation marks ('&' and '$' no allowed).");
