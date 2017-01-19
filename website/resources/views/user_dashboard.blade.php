@@ -413,14 +413,14 @@
                         data: 'pass=' + pass +'&_token=' + $('input#user_csrf_token').val(),
                         dataType: 'JSON',
                         success: function(data) {
-                            /* Activating the fields*/
-                            $('#ldap_pass_loading').remove();
-                            $('#pass_asterisk').show();
-                            $('#show_pass_box').hide();
-                            $('#conf_pass_box').hide();
-                            $('#edit_ldap_pass').show();
-
                             if(data.type == 'success'){
+                                /* Activating the fields*/
+                                $('#ldap_pass_loading').remove();
+                                $('#pass_asterisk').show();
+                                $('#show_pass_box').hide();
+                                $('#conf_pass_box').hide();
+                                $('#edit_ldap_pass').show();
+
                                 /* Success message */
                                 $('#success_msg').html(data.message);
                                 /* removing error alert message */
