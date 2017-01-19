@@ -170,7 +170,7 @@
                                                 <td>
                                                     <input type="hidden" name="password" id="ldap_pass" class="password">
                                                     <span id="show_pass_box" style="display: none; cursor:pointer;">
-                                                        <i class="fa fa-eye fa-1x" id="showHide"></i>
+                                                        <i data-target="ldap_pass" class="fa fa-eye fa-1x showHide"></i>
                                                     </span>
                                                     <span id="pass_asterisk">******</span>
 
@@ -181,7 +181,7 @@
                                                 <td>
                                                     <input type="password" name="conf_password" id="conf_pass">
                                                     <span id="show_pass_box" style="cursor:pointer;">
-                                                        <i class="fa fa-eye fa-1x" id="showHideConf"></i>
+                                                        <i data-target="conf_password" class="fa fa-eye fa-1x showHide"></i>
                                                     </span>
                                                 </td>
                                             </tr>
@@ -310,9 +310,9 @@
                                         <label for="ldap_pass"> Please enter your current password - </label>
                                         <div class="col-md-8">
                                             <input type="password" name="password" id="auth_pass" class="password">
-                                            <span id="show_pass_box" style="display: none; cursor:pointer;">
-                                                    <i class="fa fa-eye fa-1x" id="showHide"></i>
-                                                </span>
+                                            <span id="show_pass_box" style="cursor:pointer;">
+                                                <i data-target="auth_pass" class="fa fa-eye fa-1x showHide"></i>
+                                            </span>
                                         </div>
                                     </div>
                                     <br>
@@ -323,7 +323,6 @@
                                             </button>
                                         </div>
                                     </div>
-
                                 </td>
                             </tr>
                         </table>
@@ -335,12 +334,14 @@
 
 
     <script type="text/javascript">
-        function show_alert(alert_type) {
+        function show_alert(alert_type, fade) {
             $("#"+alert_type+"-alert").removeClass('hidden');
             $("#"+alert_type+"-alert").alert();
-            $("#"+alert_type+"-alert").fadeTo(5000, 500).slideUp(500, function(){
-                $("#"+alert_type+"-alert").slideUp(500);
-            });
+            if(fade != 'no'){
+                $("#"+alert_type+"-alert").fadeTo(5000, 500).slideUp(500, function(){
+                    $("#"+alert_type+"-alert").slideUp(500);
+                });
+            }
         }
 
         $(document).ready(function () {
@@ -376,27 +377,15 @@
             });
 
             /* show/hide password*/
-            $('#showHide').on('click', function(e){
-                    if($("#ldap_pass").attr("type") == 'password') {
-                        $('input#ldap_pass').attr('type', 'text');
-                        $("#showHide").addClass('fa fa-eye-slash fa-1x');
-                    } else {
-                        $('input#ldap_pass').attr('type', 'password');
-                        $("#showHide").removeClass('fa fa-eye-slash fa-1x');
-                        $("#showHide").addClass('fa fa-eye fa-1x');
-                    }
-            });
-
-            /* show/hide conf pass */
-            $('#showHideConf').on('click', function(e){
-                    if($("#conf_pass").attr("type") == 'password') {
-                        $('input#conf_pass').attr('type', 'text');
-                        $("#showHideConf").addClass('fa fa-eye-slash fa-1x');
-                    } else {
-                        $('input#conf_pass').attr('type', 'password');
-                        $("#showHideConf").removeClass('fa fa-eye-slash fa-1x');
-                        $("#showHideConf").addClass('fa fa-eye fa-1x');
-                    }
+            $('.showHide').on('click', function(e){
+                var target_id = $(this).attr('data-target');
+                if($("#"+target_id).attr("type") == 'password') {
+                    $('input#'+target_id).attr('type', 'text');
+                    $(this).removeClass('fa-eye').addClass('fa-eye-slash');
+                } else {
+                    $('input#'+target_id).attr('type', 'password');
+                    $(this).removeClass('fa-eye-slash').addClass('fa-eye');
+                }
             });
 
             /* saving the data into LDAP */
@@ -439,7 +428,7 @@
                                 /* Error message */
                                 $('#error_msg').html(data.message);
                                 $('#error_msg').html("Password "+ pass+ " does not meet complexity rules, please try again. Password must be a minimum of 8 characters and include a character from 3 of the following 4 groups: upper case, lower case, numbers, and punctuation marks ('&' and '$' no allowed).");
-                                show_alert('error');
+                                show_alert('error', 'no');
                             }
                         },
                         error: function (data) {
@@ -453,7 +442,7 @@
                             /* Success message */
                             $('#error_msg').html(data.message);
                             $('#error_msg').html("Password "+ pass+ " does not meet complexity rules, please try again. Password must be a minimum of 8 characters and include a character from 3 of the following 4 groups: upper case, lower case, numbers, and punctuation marks ('&' and '$' no allowed).");
-                            show_alert('error');
+                            show_alert('error', 'no');
                         }
                     })
                 }
