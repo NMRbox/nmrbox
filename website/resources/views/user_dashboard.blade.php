@@ -206,9 +206,9 @@
                         </div>
                         <div class="panel-footer">
                             <div class="text-right">
-                                <a href="{{ URL::to('update_profile') }}" data-original-title="Reset account password" data-toggle="tooltip" type="button"
-                                   class="btn btn-sm btn-warning" id="edit_ldap_pass"><i class="fa fa-key fa-2x"></i></a>
+                                {{-- Password reset button --}}
                                 <a href="#" data-toggle="modal" data-target="#pass_confirm_modal" class="btn btn-sm btn-warning" id="edit_ldap_pass"><i class="fa fa-key fa-2x"></i></a>
+                                {{-- form saving button, toggle when password reset authentication pass --}}
                                 <input type="hidden" name="change-password" value="Save" id="save_ldap_pass" class="btn btn-primary">
                                 {{-- csrf token --}}
                                 <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
@@ -336,7 +336,6 @@
 
     <script type="text/javascript">
         function show_alert(alert_type) {
-            console.log(alert_type);
             $("#"+alert_type+"-alert").removeClass('hidden');
             $("#"+alert_type+"-alert").alert();
             $("#"+alert_type+"-alert").fadeTo(5000, 500).slideUp(500, function(){
@@ -375,22 +374,6 @@
                 e.preventDefault();
             });
 
-
-
-            /* Enabling the fields for entering password */
-            $('#edit_ldap_pass').on('click', function (e) {
-                e.preventDefault();
-
-                $('input#ldap_pass').attr('type', 'password');
-                $('#pass_asterisk').hide();
-                $('#conf_pass_box').show();
-                $('#show_pass_box').show();
-                $('#edit_ldap_pass').hide();
-                $('input#reset_ldap_pass').attr('type', 'reset');
-                $('input#save_ldap_pass').attr('type', 'submit');
-
-            });
-
             /* show/hide password*/
             $('#showHide').on('click', function(e){
                     if($("#ldap_pass").attr("type") == 'password') {
@@ -422,12 +405,14 @@
                 var conf_pass = $('#conf_pass').val();
 
                 if(pass != conf_pass){
+                    /* Checking password and confirm password */
                     $('#error_msg').html('Password and Confirm password do not match. Please try again.');
                     show_alert('error');
                 } else {
-
+                    /* Saving password delay moments*/
                     $('#ldap_pass').after('<span id="ldap_pass_loading">Saving Password...</span>');
 
+                    /* Changing form input type */
                     $('input#ldap_pass').attr('type', 'hidden');
                     $('input#save_ldap_pass').attr('type', 'hidden');
 
@@ -438,26 +423,33 @@
                         data: 'pass=' + pass +'&_token=' + $('input#user_csrf_token').val(),
                         dataType: 'JSON',
                         success: function(data) {
+                            /* Activating the fields*/
                             $('#ldap_pass_loading').remove();
                             $('#pass_asterisk').show();
                             $('#show_pass_box').hide();
                             $('#conf_pass_box').hide();
                             $('#edit_ldap_pass').show();
+
                             if(data.type == 'success'){
+                                /* Success message */
                                 $('#success_msg').html(data.message);
                                 show_alert('success');
                             } else {
+                                /* Error message */
                                 $('#error_msg').html(data.message);
                                 $('#error_msg').html("Password "+ pass+ " does not meet complexity rules, please try again. Password must be a minimum of 8 characters and include a character from 3 of the following 4 groups: upper case, lower case, numbers, and punctuation marks ('&' and '$' no allowed).");
                                 show_alert('error');
                             }
                         },
                         error: function (data) {
+                            /* Activating the fields*/
                             $('#ldap_pass_loading').remove();
                             $('#pass_asterisk').show();
                             $('#show_pass_box').hide();
                             $('#conf_pass_box').hide();
                             $('#edit_ldap_pass').show();
+
+                            /* Success message */
                             $('#error_msg').html(data.message);
                             $('#error_msg').html("Password "+ pass+ " does not meet complexity rules, please try again. Password must be a minimum of 8 characters and include a character from 3 of the following 4 groups: upper case, lower case, numbers, and punctuation marks ('&' and '$' no allowed).");
                             show_alert('error');
