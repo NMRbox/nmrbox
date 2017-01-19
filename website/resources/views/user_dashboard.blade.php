@@ -413,20 +413,32 @@
                         data: 'pass=' + pass +'&_token=' + $('input#user_csrf_token').val(),
                         dataType: 'JSON',
                         success: function(data) {
-                            /* Activating the fields*/
-                            $('#ldap_pass_loading').remove();
-                            $('#pass_asterisk').show();
-                            $('#show_pass_box').hide();
-                            $('#conf_pass_box').hide();
-                            $('#edit_ldap_pass').show();
+
 
                             if(data.type == 'success'){
+                                /* Activating the fields*/
+                                $('#ldap_pass_loading').remove();
+                                $('#pass_asterisk').show();
+                                $('#show_pass_box').hide();
+                                $('#conf_pass_box').hide();
+                                $('#edit_ldap_pass').show();
                                 /* Success message */
                                 $('#success_msg').html(data.message);
                                 /* removing error alert message */
                                 $("#error-alert").slideUp();
                                 show_alert('success');
                             } else {
+                                /* Activating the fields*/
+                                $('#ldap_pass_loading').remove();
+                                $('input#ldap_pass').attr('type', 'password');
+                                $('#edit_ldap_pass').hide();
+                                $('#pass_asterisk').hide();
+                                $('#conf_pass_box').show();
+                                $('#show_pass_box').show();
+                                $('#edit_ldap_pass').hide();
+                                $('input#reset_ldap_pass').attr('type', 'reset');
+                                $('input#save_ldap_pass').attr('type', 'submit');
+
                                 /* Error message */
                                 $('#error_msg').html(data.message);
                                 $('#error_msg').html("Password "+ pass+ " does not meet complexity rules, please try again. Password must be a minimum of 8 characters and include a character from 3 of the following 4 groups: upper case, lower case, numbers, and punctuation marks ('&' and '$' no allowed).");
@@ -501,6 +513,7 @@
                     $('#error_msg').html("Please enter a valid password and try again. ");
                     show_alert('error');
                 }
+
             });
         });
 
