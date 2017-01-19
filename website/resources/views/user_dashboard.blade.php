@@ -459,18 +459,6 @@
             $("#verify_pass").on("click", function (e) {
                 e.preventDefault();
                 var pass = $('#auth_pass').val();
-                //var userid = $('#conf_pass').val();
-                console.log(pass);
-
-                /* Activating password reset form */
-                $('#pass_confirm_modal').modal('hide');
-                $('input#ldap_pass').attr('type', 'password');
-                $('#pass_asterisk').hide();
-                $('#conf_pass_box').show();
-                $('#show_pass_box').show();
-                $('#edit_ldap_pass').hide();
-                $('input#reset_ldap_pass').attr('type', 'reset');
-                $('input#save_ldap_pass').attr('type', 'submit');
 
                 if(pass.length > 0){
                     $.ajax({
