@@ -181,7 +181,7 @@
                                                 <td>
                                                     <input type="password" name="conf_password" id="conf_pass">
                                                     <span id="show_pass_box" style="cursor:pointer;">
-                                                        <i data-target="conf_password" class="fa fa-eye fa-1x showHide"></i>
+                                                        <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
                                                     </span>
                                                 </td>
                                             </tr>
