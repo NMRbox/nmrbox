@@ -423,6 +423,8 @@
                             if(data.type == 'success'){
                                 /* Success message */
                                 $('#success_msg').html(data.message);
+                                /* removing error alert message */
+                                $("#error-alert").slideUp();
                                 show_alert('success');
                             } else {
                                 /* Error message */
