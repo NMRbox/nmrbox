@@ -481,23 +481,29 @@
                         data: 'pass=' + pass +'&_token=' + $('input#user_csrf_token').val(),
                         dataType: 'JSON',
                         success: function(data) {
-                            /* Activating password reset form */
-                            $('#pass_confirm_modal').modal('hide');
-                            $('input#ldap_pass').attr('type', 'password');
-                            $('#pass_asterisk').hide();
-                            $('#conf_pass_box').show();
-                            $('#show_pass_box').show();
-                            $('#edit_ldap_pass').hide();
-                            $('input#reset_ldap_pass').attr('type', 'reset');
-                            $('input#save_ldap_pass').attr('type', 'submit');
+                            if(data.type == 'success'){
+                                /* Activating password reset form */
+                                $('#pass_confirm_modal').modal('hide');
+                                $('input#ldap_pass').attr('type', 'password');
+                                $('#pass_asterisk').hide();
+                                $('#conf_pass_box').show();
+                                $('#show_pass_box').show();
+                                $('#edit_ldap_pass').hide();
+                                $('input#reset_ldap_pass').attr('type', 'reset');
+                                $('input#save_ldap_pass').attr('type', 'submit');
 
-                            /* Showing success message */
-                            $('#success_msg').html(data.message);
-                            show_alert('success');
-
+                                /* Success message */
+                                $('#success_msg').html(data.message);
+                                show_alert('success');
+                            } else {
+                                /* Error message */
+                                $('#pass_confirm_modal').modal('hide');
+                                $('#error_msg').html(data.message);
+                                show_alert('error');
+                            }
                         },
                         error: function (data) {
-                            /* Showing success message */
+                            /* Error message */
                             $('#pass_confirm_modal').modal('hide');
                             $('#error_msg').html(data.message);
                             show_alert('error');
