@@ -111,8 +111,8 @@
                                     <table class="table table-user-information">
                                         <tbody>
                                             <tr>
-                                                <td>Email</td>
-                                                <td><a href="mailto:info@support.com">{!! $person->email !!}</a></td>
+                                                <td>Preferred Email:</td>
+                                                <td><a href="mailto:{!! $person->email_institution !!}">{!! $person->email !!}</a></td>
                                             </tr>
                                             <tr>
                                                 <td>Institution:</td>
@@ -162,8 +162,8 @@
                                                 <td>{!! $person->nmrbox_acct !!}</td>
                                             </tr>
                                             <tr>
-                                                <td>Email: </td>
-                                                <td><a href="mailto:info@support.com">{!! $person->email !!}</a></td>
+                                                <td>Institutional Email: </td>
+                                                <td><a href="mailto:{!! $person->email_institution !!}">{!! $person->email_institution !!}</a></td>
                                             </tr>
                                             <tr>
                                                 <td>Password: </td>
