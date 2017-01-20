@@ -15,6 +15,18 @@
     <link href="{{asset('assets/vendors/iCheck/skins/all.css')}}" rel="stylesheet">
     <link href="{{ asset('assets/css/frontend/login.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/nmr.css') }}" rel="stylesheet">
+    <style type="text/css">
+
+        .table {
+            border-bottom:0px !important;
+        }
+        .table th, .table td {
+            border: 1px !important;
+        }
+        .fixed-table-container {
+            border:0px !important;
+        }
+    </style>
     <!-- end of page level styles-->
 
 </head>
@@ -27,23 +39,82 @@
             <h2 class="text-center text-primary logo-text">NMRbox</h2>
             <h4 class="text-center">Reset Password?</h4>
         </div>
-        <div class="panel-body social">
+        <div class="panel-body ">
             <div class="clearfix">
-
                 <div class="col-xs-12 col-sm-6 col-sm-offset-3">
                     <!-- Notifications -->
                     @include('notifications')
 
                     <form action="{{ route('forgot-password-confirm',compact(['userId','passwordResetCode'])) }}" class="omb_loginForm"  autocomplete="off" method="POST">
                         {!! Form::token() !!}
-                        <input type="text" class="form-control" name="nmrbox_acct" placeholder="NMRbox Username">
-                        <span class="help-block">{{ $errors->first('nmrbox_acct', ':message') }}</span>
-                        <input type="password" class="form-control" name="password" placeholder="New Password">
-                        <span class="help-block">{{ $errors->first('password', ':message') }}</span>
-                        <input type="password" class="form-control" name="password_confirm" placeholder="Confirm New Password">
-                        <span class="help-block">{{ $errors->first('password_confirm', ':message') }}</span>
+                        {{--<div class="input-group-lg">
+                            <input type="text" class="form-control" name="nmrbox_acct" placeholder="NMRbox Username">
+                            <span class="help-block">{{ $errors->first('nmrbox_acct', ':message') }}</span>
 
-                        <input type="submit" class="btn btn-block btn-primary" value="Submit to Reset Password" style="margin-top:10px;">
+                        </div>
+                        <div class="input-group-lg">
+                            <input type="password" class="form-control" name="password" placeholder="New Password" >
+                            <span class="help-block">{{ $errors->first('password', ':message') }}</span>
+                        </div>
+                        <div class="input-group-lg">
+                            <input type="password" class="form-control" name="password_confirm" placeholder="Confirm New Password">
+                            <span class="help-block">{{ $errors->first('password_confirm', ':message') }}</span>
+                        </div>
+
+
+                        <input type="submit" class="btn btn-block btn-primary" value="Submit to Reset Password" style="margin-top:10px;">--}}
+
+
+
+                        <div class="row">
+                            <div class=" col-md-12 col-lg-12 ">
+                                <table class="table">
+                                    <tbody>
+
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" name="nmrbox_acct" placeholder="NMRbox Username">
+                                                <span class="help-block">{{ $errors->first('nmrbox_acct', ':message') }}</span>
+                                            </td>
+                                            <td>
+                                                &nbsp;
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="password" class="form-control" name="password" placeholder="New Password" id="ldap_pass">
+                                                <span class="help-block">{{ $errors->first('password', ':message') }}</span>
+                                            </td>
+                                            <td>
+                                                <span id="show_pass_box" style="cursor:pointer;">
+                                                    <i data-target="ldap_pass" class="fa fa-eye fa-1x showHide"></i>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="password" class="form-control" name="password_confirm" placeholder="Confirm New Password" id="conf_pass">
+                                                <span class="help-block">{{ $errors->first('password_confirm', ':message') }}</span>
+                                            </td>
+                                            <td>
+                                                <i data-target="conf_pass" class="fa fa-eye fa-1x showHide" style="cursor:pointer;"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="submit" class="btn btn-block btn-primary" value="Submit to Reset Password" style="margin-top:10px;">
+                                            </td>
+                                            <td>
+                                                &nbsp;
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
                     </form>
 
                     <div class="panel-header">
@@ -64,6 +135,21 @@
 <script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/vendors/iCheck/icheck.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/frontend/register.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        /* show/hide password*/
+        $('.showHide').on('click', function(e){
+            var target_id = $(this).attr('data-target');
+            if($("#"+target_id).attr("type") == 'password') {
+                $('input#'+target_id).attr('type', 'text');
+                $(this).removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                $('input#'+target_id).attr('type', 'password');
+                $(this).removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
+    });
+</script>
 <!-- end of global js -->
 </body>
 </html>
