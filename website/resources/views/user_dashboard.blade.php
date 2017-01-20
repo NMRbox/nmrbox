@@ -399,6 +399,7 @@
 
                 if(pass != conf_pass){
                     /* Checking password and confirm password */
+                    $('#ldap_pass_loading').remove();
                     $('#error_msg').html('Password and Confirm password do not match. Please try again.');
                     show_alert('error');
                 } else {
