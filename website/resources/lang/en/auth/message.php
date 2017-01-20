@@ -28,9 +28,9 @@ return array(
     ),
 
     'forgot-password-confirm' => array(
-        'account_error'       => 'NMRbox usename do not match, please try again.',
-        'complexity_error'    => "Password does not meet complexity rules, please try again. Password must be a minimum of 8 characters and include a character from 3 of the following 4 groups: upper case, lower case, numbers, and punctuation marks ('&' and '$' no allowed).",
-        'request_expired'     => 'Your password reset link has already been used. Please request a new reset again.',
+        'account_error'       => 'The username you entered does not match the username that requested the password reset.',
+        'complexity_error'    => "Password does not meet complexity rules, please try again. Password must be a minimum of 8 characters and include a character from 3 of the following 4 groups: upper case, lower case, numbers, and punctuation marks ('&' and '$' not allowed).",
+        'request_expired'     => 'Your password reset link has already been used. Please request a new reset by entering your institutional email below.',
         'success'             => 'Your password has been successfully reset.',
     ),
 
