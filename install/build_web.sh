@@ -65,19 +65,20 @@ if [ ! -w $parent ]; then
 fi
 
 #show checkout command
-SVN_ROOT=https://nmrbox-devel.cam.uchc.edu/repos/nmrbox/$loc/web 
+SVN_ROOT=https://devel.nmrbox.org/svn/nmrbox/$loc/web 
 echo "Extracting code from $SVN_ROOT"
 svn $svn_auth export -q ${SVN_ROOT}/website $installdir 
 svn $svn_auth export -q ${SVN_ROOT}/vendor-$os $installdir/vendor
 
 (
 cat <<EO_ENV
+# deployed from $SVN_ROOT
 APP_ENV=$env
 APP_DEBUG=true
 APP_KEY=PjRcCklAPB9gcicXagEmpaQdDwnd8Bw9
 APP_URL=nmrbox-webdev.cam.uchc.edu
 
-DB_HOST=nmrbox-data.cam.uchc.edu
+DB_HOST=data.nmrbox.org
 DB_DATABASE=registry
 DB_USERNAME=laravel
 DB_PASSWORD=nmr-laravel!
@@ -108,6 +109,7 @@ sudo chown -R $account:$account $installdir
 
 cd $installdir || { echo "cd to $installdir failed"; exit 3; }
 php artisan cache:clear
+php artisan config:clear
 php artisan route:cache
 envpath=$(readlink -f $installdir/.env)
 
