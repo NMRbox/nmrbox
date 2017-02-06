@@ -1,47 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Be right back.</title>
-
-        <link href="//fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Be right back.</div>
-            </div>
-        </div>
-    </body>
-</html>
+<head>
+<title>NMRbox</title>
+<style>
+p {text-align:center;
+	border: 5px solid red ;
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;}
+IMG.displayed {
+    display: block;
+	margin-left: auto;
+	margin-right: auto; }
+</style>
+</head>
+<body>
+<img class="displayed" src="assets/failsafe/nmrbox_placeholder.png" alt="NMRbox is a cloud-based virtual machine loaded with NMR software.">
+<br><br>
+<p>
+Our website is temporarily offline for maintenance.  Please check back in a bit.
+<br><br>
+Existing users: your NMRbox VM should still be accessible through VNC.
+<br>
+New users: please return to our site shortly to register for an account.
+<br><br>
+You can reach us with urgent questions at: <a href="mailto:support@nmrbox.org">support@nmrbox.org</a>
+</p>
+</body>
