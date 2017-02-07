@@ -126,4 +126,18 @@ class KeywordController extends Controller
         $keyword->delete();
         return redirect("admin/keyword");
     }
+
+    public function getAllKeywords()
+    {
+        $keywords = Keyword::All();
+
+        $all_keywords = array();
+        foreach ($keywords as $key => $val){
+
+            $all_keywords[] = array('id' => $val->id, 'label' => $val->label);
+        }
+
+        return response( json_encode( array( 'message' => $all_keywords ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
+    }
 }

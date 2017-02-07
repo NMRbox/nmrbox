@@ -38,12 +38,27 @@ Route::group(array('prefix' => 'admin'), function() {
     Route::get('logout', array('as' => 'logout','uses' => 'AuthController@getLogout'));
 });
 
+/* Software Registry*/
 Route::model('software', 'App\Software');
 Route::group(array('prefix' => 'registry'), function() {
     //All basic routes defined here
     Route::get('/', array('as' => 'registry','uses' => 'RegistryController@index'));
     Route::get('{software}', array('as' => 'software-page','uses' => 'RegistryController@getSoftware'));
     Route::get('logout', array('as' => 'logout','uses' => 'AuthController@getLogout'));
+    Route::post('software-search',array('as' => 'software-search','uses' => 'RegistryController@postRegistrySearch'));
+    Route::match(['get', 'post'], 'tags/all-tags', array('as' => 'all-tags','uses' => 'KeywordController@getAllKeywords'));
+});
+
+/* Keywords management */
+Route::model('keyword', 'App\Kewword');
+Route::group(array('prefix' => 'tags'), function() {
+    //All basic routes defined here
+    Route::get('/', array('as' => 'tags','uses' => 'KeywordController@index'));
+    Route::get('all-tags', array('as' => 'all-tags','uses' => 'KeywordController@getAllKeywords'));
+    Route::post('all-tags', array('as' => 'all-tags','uses' => 'KeywordController@getAllKeywords'));
+
+
+
 });
 
 // All files public for now, unless requirements change
@@ -308,13 +323,14 @@ Route::post('forgot-password-confirm/{userId}/{passwordResetCode}', 'FrontEndCon
 # My account display and update details
 Route::get('update_profile', array('as' => 'update_profile', 'uses' => 'FrontEndController@editProfile'));
 Route::put('{person}/update_profile', array('as' => 'person.update_profile', 'uses' => 'FrontEndController@updatePersonProfile'));
-
-
 Route::group(array('middleware' => 'SentinelUser'), function () {
     Route::get('my-account', array('as' => 'my-account', 'uses' => 'FrontEndController@myAccount'));
     //Route::post('my-account', 'FrontEndController@updateAccount');
 });
+
+# Logout
 Route::get('logout', array('as' => 'logout','uses' => 'FrontEndController@getLogout'));
+
 # contact form
 Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@postContact'));
 
@@ -323,6 +339,7 @@ Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@post
 //    return View::make('index');
 //}));
 
+# homepage
 Route::get('/', array('as' => 'home', 'uses' => 'ChandraController@showFrontEndView'));
 
 
@@ -333,7 +350,7 @@ Route::post('blog/{blog}/comment', 'BlogController@storeCommentFrontend');
 
 Route::get('{name?}', 'ChandraController@showFrontEndView');
 
-
+# LDAP authentication
 Route::get('/ldap', array('as' => 'ldap', 'uses' => 'AuthController@validate_ldap_password'));
 # End of frontend views
 

@@ -23,6 +23,6 @@ class SoftwareVersion extends NmrModel
     }
 
     public function software() {
-        return $this->belongsToMany('App/Software', 'software_versions', 'software_id');
+        return $this->belongsToMany('App\Software', 'software_versions', 'software_id');
     }
 }

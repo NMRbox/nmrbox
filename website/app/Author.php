@@ -19,6 +19,6 @@ class Author extends NmrModel
     ];
 
     public function citations() {
-        return $this->belongsToMany('App\Citation', 'author_id', 'citation_id');
+        return $this->belongsToMany('App\Citation', 'author_citation', 'author_id', 'citation_id');
     }
 }

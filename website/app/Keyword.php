@@ -18,7 +18,7 @@ class Keyword extends NmrModel
     ];
 
     public function software() {
-        return $this->belongsToMany('App\Sotfware', 'menu_software', 'menu_id', 'software_id');
+        return $this->belongsToMany('App\Software', 'menu_software', 'menu_id', 'software_id');
     }
 
     public function categories() {
