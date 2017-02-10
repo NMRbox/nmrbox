@@ -76,7 +76,7 @@ class RegistryController extends Controller
 
                 $software =$software->where(function($qry) use ($fields_value){
                     foreach($fields_value as $key => $val){
-                        $qry->where($key, '=', $val);
+                        $qry->where($key, 'ILIKE', '%'.$val.'%');
                     }
                 });
             }
@@ -143,8 +143,8 @@ class RegistryController extends Controller
                     $author = new Author();
                     $author =$author->where(function($qry) use ($author_name){
                         foreach($author_name as $key => $val){
-                            $qry->where('first_name', '=', $val);
-                            $qry->orWhere('last_name', '=', $val);
+                            $qry->where('first_name', 'ILIKE', '%'.$val.'%');
+                            $qry->orWhere('last_name', 'ILIKE', '%'.$val.'%');
                         }
                     });
                     $author = $author->get();
