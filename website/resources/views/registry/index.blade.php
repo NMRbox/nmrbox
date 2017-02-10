@@ -25,6 +25,9 @@
                         <div class="col-md-2 col-sm-push-0">
                             <a href="#" class="btn btn-sm btn-default" id="software_registry_search"> Software Registry Search</a>
                         </div>
+                        <div class="col-md-2" id="clear_filters_box">
+
+                        </div>
                     </div>
 
                     {{-- Advance search form --}}
@@ -54,9 +57,6 @@
                             <div class="form-group row" id="search_button">
                                 <div class="col-md-2" id="apply_filters">
                                     <button name="search" value="search" class="btn btn-primary">Apply Filters</button>
-                                </div>
-                                <div class="col-md-2" id="clear_filters_box">
-
                                 </div>
                             </div>
                         </form>

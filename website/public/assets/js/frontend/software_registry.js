@@ -30,7 +30,7 @@ $(document).ready(function() {
         e.preventDefault();
         if ($('#search_form').is(':hidden')) {
             $('#search_form').slideDown();
-            $('#clear_filters_box').html('<button name="search" value="search" class="btn btn-primary">Clear Filters</button>');
+            $('#clear_filters_box').html('<button name="search" value="search" class="btn btn-default">Clear Filters</button>');
         } else {
             $('#search_form').slideUp();
         }
