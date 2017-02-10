@@ -33,6 +33,7 @@ $(document).ready(function() {
             $('#clear_filters_box').html('<a href="#" class="btn btn-sm btn-default" id="clear_filters"> Clear Filters</a>');
         } else {
             $('#search_form').slideUp();
+            $('#clear_filters_box').hide();
         }
 
     });
@@ -102,10 +103,8 @@ $(document).ready(function() {
     });
 
     /* clear filters to refresh the page */
-    $('#clear_filters').on('click', function (e) {
+    $('body').on('click', 'a.clear_filters', function (e) {
         e.preventDefault();
         location.href = '/registry';
-    })
-
-
+    });
 });
