@@ -81,6 +81,7 @@ People Index
                     <h4 class="panel-title pull-left">
                         <i class="fa fa-fw fa-list"></i>
                         People List
+
                     </h4>
                     <div class="pull-right">
                         <a href="{{ URL::to('admin/people/create') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> Add Person</a>
@@ -106,6 +107,7 @@ People Index
                 </div>
                 <br />
                 <div class="panel-body table_fluid">
+                    <div class="col-md-offset-11"><a href="#" class="btn btn-sm btn-primary" id="search_empty_val"><span class="glyphicon glyphicon-envelope"></span>  Empty field </a></div><br>
                     <table id="vm-table" class="table table-bordered">
                         <thead>
                             <tr>
@@ -465,7 +467,16 @@ People Index
             });
             var all_rows = table.rows().data();
 
-            /* Advance search option based on particular db fields*/
+            /* search empty field in table */
+            $('#search_empty_val').on('click', function(e){
+                e.preventDefault();
+                table.column().search("^$", 1, 0).draw();
+                //table.column(col_index).search( '^'+this.value+'$', true, false ).draw();
+
+                //table.search("FieldName is NULL").draw();
+            });
+
+            /* Advance search option based on particular db fields */
             $('input.advanced-search').on('keyup change', function(){
                 var col_index = $(this).attr('id').substr('advanced_search_'.length);
                 table.column(col_index).search($(this).val()).draw();

@@ -52,8 +52,11 @@
                             </div>
 
                             <div class="form-group row" id="search_button">
-                                <div class="col-md-12">
-                                    <button name="search" value="search" class="btn btn-primary">Refine Search</button>
+                                <div class="col-md-2" id="apply_filters">
+                                    <button name="search" value="search" class="btn btn-primary">Apply Filters</button>
+                                </div>
+                                <div class="col-md-2" id="clear_filters_box">
+
                                 </div>
                             </div>
                         </form>

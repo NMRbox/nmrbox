@@ -30,6 +30,7 @@ $(document).ready(function() {
         e.preventDefault();
         if ($('#search_form').is(':hidden')) {
             $('#search_form').slideDown();
+            $('#clear_filters_box').html('<button name="search" value="search" class="btn btn-primary">Clear Filters</button>');
         } else {
             $('#search_form').slideUp();
         }
@@ -99,6 +100,12 @@ $(document).ready(function() {
         $('#search_button').before(row_html);
 
     });
+
+    /* clear filters to refresh the page */
+    $('#clear_filters').on('click', function (e) {
+        e.preventDefault();
+        location.href = '/registry';
+    })
 
 
 });
