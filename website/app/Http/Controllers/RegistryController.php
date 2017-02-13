@@ -143,8 +143,17 @@ class RegistryController extends Controller
                     $author = new Author();
                     $author =$author->where(function($qry) use ($author_name){
                         foreach($author_name as $key => $val){
-                            $qry->where('first_name', 'ILIKE', '%'.$val.'%');
-                            $qry->orWhere('last_name', 'ILIKE', '%'.$val.'%');
+                            if(strrpos($val, " ") != null){
+                                $split_name = explode(" ", $val);
+                                $first_name = $split_name[0];
+                                $last_name = $split_name[1];
+
+                                $qry->where('first_name', 'ILIKE', '%'.$first_name.'%');
+                                $qry->orWhere('last_name', 'ILIKE', '%'.($last_name != null)?$last_name:$first_name.'%');
+                            } else {
+                                $qry->where('first_name', 'ILIKE', '%'.$val.'%');
+                                $qry->orWhere('last_name', 'ILIKE', '%'.$val.'%');
+                            }
                         }
                     });
                     $author = $author->get();

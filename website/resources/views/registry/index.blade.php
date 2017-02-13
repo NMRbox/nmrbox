@@ -22,10 +22,10 @@
 
                     {{-- Advance search button --}}
                     <div class="row">
-                        <div class="col-md-2 col-sm-push-0">
-                            <a href="#" class="btn btn-sm btn-default" id="software_registry_search"> Software Registry Search</a>
+                        <div class="col-md-2 col-sm-2">
+                            <a href="#" class="btn btn-sm btn-default" id="software_registry_search"> Registry Search</a>
                         </div>
-                        <div class="col-md-2" id="clear_filters_box">
+                        <div class="col-md-1 col-sm-2 col-md-pull-1" id="clear_filters_box">
 
                         </div>
                     </div>

@@ -1,20 +1,6 @@
 /**
  * Created by mosrur on 1/30/17.
  */
-
-/* Get all the keywords */
-function getAllKeywords() {
-    $.ajax({
-        type: "POST",
-        url: 'people/email_template',
-        data: 'name=' + template_id + '&_token=' + $('input#user_csrf_token').val(),
-        success: function(data) {
-            $('input#email_subject').val(data.subject);
-            $('textarea#message').val(data.message);
-        }
-    });
-}
-
 $(document).ready(function() {
     $.ajaxSetup({
         headers: {
@@ -71,9 +57,9 @@ $(document).ready(function() {
                 "<option value='2'>NMRbox Ver 2</option>" +
                 "</select>";
         } else if(value == 'author_name') {
-            form_input_field = "<input type='text' name='author_name[]' class='form-control'>";
+            form_input_field = "<input type='text' name='author_name[]' placeholder='John Doe' class='form-control'>";
         }else {
-            form_input_field = "<input type='text' name='fields_value["+value+"]' class='form-control'>";
+            form_input_field = "<input type='text' name='fields_value["+value+"]' placeholder='nmrbox' class='form-control'>";
         }
         var form_button = "<a href='#' class='btn btn-sm btn-warning remove_button'><span class='glyphicon glyphicon-minus'></span></a>";
 
@@ -85,8 +71,7 @@ $(document).ready(function() {
     });
     var add_button = '<a href="#" class="btn btn-sm btn-info add_now_button"><span class="glyphicon glyphicon-plus"></span></a>';
 
-    /* Email all the selected person*/
-
+    /* Remove a row from the selection */
     $('body').on('click', 'a.remove_button', function(e){
         e.preventDefault();
         $(this).parent().parent().parent().remove();
@@ -103,7 +88,7 @@ $(document).ready(function() {
     });
 
     /* clear filters to refresh the page */
-    $('body').on('click', 'a.clear_filters', function (e) {
+    $('body').on('click', 'a#clear_filters', function (e) {
         e.preventDefault();
         location.href = '/registry';
     });
