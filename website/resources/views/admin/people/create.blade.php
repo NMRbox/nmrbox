@@ -6,6 +6,12 @@
     Add Person :: @parent
 @stop
 
+{{-- page level styles --}}
+@section('header_styles')
+    <link href="{{ asset('assets/vendors/iCheck/skins/minimal/red.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/vendors/iCheck/skins/flat/red.css') }}" rel="stylesheet" type="text/css"/>
+@stop
+
 {{-- Content --}}
 
 @section('content')
@@ -45,11 +51,11 @@
                             {!! BootForm::text('last_name', "Last Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
                             {!! BootForm::email('email', "Email", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
                             {!! BootForm::select('job_title', "Job Title",
-                                $person_positions, null, array('maxlength'=> 32, 'required' => 'required')) !!}
+                                [null=>'Please Select'] + $person_positions, null, array('class' => 'input-lg select_pi', 'maxlength'=> 32, 'required' => 'required')) !!}
 
                             {!! BootForm::text('institution', "Institution", null, array('class' => 'input-lg', 'maxlength'=> 256, 'required' => 'required'))!!}
                             {!! BootForm::select('institution_type', "Institution Type",
-                                $person_institution_types, 0, array( 'maxlength'=> 256, 'required' => 'required')) !!}
+                                [null=>'Please Select'] + $person_institution_types, null, array('class' => 'input-lg',  'maxlength'=> 256, 'required' => 'required')) !!}
 
                             {!! BootForm::text('department', "Department", null, array('class' => 'input-lg', 'maxlength'=> 256, 'required' => 'required'))!!}
                             {!! BootForm::text('pi', "PI", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
@@ -72,4 +78,11 @@
     </div>
     <!-- row-->
 </section>
+@stop
+
+{{-- page level scripts --}}
+@section('footer_scripts')
+    {{-- Add external script --}}
+    <script type="text/javascript" src="{{ asset('assets/vendors/iCheck/icheck.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/frontend/register.js') }}"></script>
 @stop
