@@ -23,7 +23,7 @@
                     {{-- Advance search button --}}
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="btn btn-sm btn-default" id="software_registry_search"> Registry Search</a>
+                            <a href="#" class="btn btn-sm btn-default" id="software_registry_search"><span class="glyphicon glyphicon-search"></span> &nbsp; Filter Software Registry</a>
                             <a href="#" class="btn btn-sm btn-default clear_filter_box" id="clear_filters"> Clear Filters</a>
                         </div>
                     </div>

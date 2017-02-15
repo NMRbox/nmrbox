@@ -188,7 +188,6 @@ class RegistryController extends Controller
         }
         $all_software = $software->where('display', '!=', 'FALSE');
         $all_software = $software->get();
-        
 
         $soft_array=array();
         foreach ($all_software as $software){
