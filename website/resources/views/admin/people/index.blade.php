@@ -107,7 +107,6 @@ People Index
                 </div>
                 <br />
                 <div class="panel-body table_fluid">
-                    <div class="col-md-offset-11"><a href="#" class="btn btn-sm btn-primary" id="search_empty_val"><span class="glyphicon glyphicon-envelope"></span>  Empty field </a></div><br>
                     <table id="vm-table" class="table table-bordered">
                         <thead>
                             <tr>
