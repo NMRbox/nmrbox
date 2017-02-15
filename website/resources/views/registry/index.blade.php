@@ -22,17 +22,15 @@
 
                     {{-- Advance search button --}}
                     <div class="row">
-                        <div class="col-md-2 col-sm-2">
+                        <div class="col-md-12">
                             <a href="#" class="btn btn-sm btn-default" id="software_registry_search"> Registry Search</a>
-                        </div>
-                        <div class="col-md-1 col-sm-2 col-md-pull-1" id="clear_filters_box">
-
+                            <a href="#" class="btn btn-sm btn-default clear_filter_box" id="clear_filters"> Clear Filters</a>
                         </div>
                     </div>
 
                     {{-- Advance search form --}}
                     <div class="row row-registry" id="search_form">
-                        <form action="{!! route('software-search') !!}" class="form form-horizontal col-md-12" method="post" />
+                        <form action="{!! route('software-search') !!}" class="form form-horizontal col-md-12" method="post" id="soft_reg_search"/>
                         {!! csrf_field() !!}
                             <div class="form_row">
                                 <div class="form-group row">
@@ -55,41 +53,39 @@
                             </div>
 
                             <div class="form-group row" id="search_button">
-                                <div class="col-md-2" id="apply_filters">
+                                {{--<div class="col-md-2" id="apply_filters">
                                     <button name="search" value="search" class="btn btn-primary">Apply Filters</button>
-                                </div>
+                                </div>--}}
                             </div>
                         </form>
                     </div>
 
                     {{-- Software Registry --}}
-                    <div class="row row-registry">
-
-                        <div class="col-md-12">
-                            @forelse ($all_software as $software)
-                                @if($software->display == true)
-                                <div class="col-sm-3 registry-package">
-                                    <div class="registry-package-wrapper">
-                                        <h3>
-                                            {{--route("software.edit", array("software"=>$software->slug));--}}
-                                            <a href="{{ route('software-page',  ['software' => $software->slug] ) }}">
-                                                {{$software->name}}
-                                            </a>
-                                        </h3>
-                                        <p class="description">
-                                            {{ $software->synopsis }}
-                                        </p>
-                                        {{--<span class="usage">Usage: </span>--}}
-                                        <a href="#">
+                    <div class="row row-registry" id="filter_result">
+                        @forelse ($all_software as $software)
+                            @if($software->display == true)
+                            <div class="col-sm-3 registry-package">
+                                <div class="registry-package-wrapper">
+                                    <h3>
+                                        {{--route("software.edit", array("software"=>$software->slug));--}}
+                                        <a href="{{ route('software-page',  ['software' => $software->slug] ) }}">
+                                            {{$software->name}}
                                         </a>
-                                    </div>
+                                    </h3>
+                                    <p class="description">
+                                        {{ $software->synopsis }}
+                                    </p>
+                                    {{--<span class="usage">Usage: </span>--}}
+                                    <a href="#">
+                                    </a>
                                 </div>
-                                @endif
-                            @empty
+                            </div>
+                            @endif
+                        @empty
+                            <div class="col-md-12">
                                 <h2>No software found</h2>
-                            @endforelse
-                        </div>
-
+                            </div>
+                        @endforelse
                     </div>
                 </div>
             </div>

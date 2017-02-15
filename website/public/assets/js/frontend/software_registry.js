@@ -10,16 +10,17 @@ $(document).ready(function() {
 
     /* hide the advance search form */
     $('#search_form').hide();
+    $('a.clear_filter_box').hide();
 
     /* Select all the refined field*/
     $('a#software_registry_search').on('click', function (e) {
         e.preventDefault();
         if ($('#search_form').is(':hidden')) {
             $('#search_form').slideDown();
-            $('#clear_filters_box').html('<a href="#" class="btn btn-sm btn-default" id="clear_filters"> Clear Filters</a>');
+            $('a.clear_filter_box').show();
         } else {
             $('#search_form').slideUp();
-            $('#clear_filters_box').hide();
+            $('a.clear_filter_box').hide();
         }
 
     });
@@ -37,8 +38,8 @@ $(document).ready(function() {
                 type: "GET",
                 url: 'tags/all-tags',
                 success: function (data) {
-                    form_input_field += "<select name='menus[]' class='form-control tags_dropdown'>";
-
+                    form_input_field += "<select name='menus[]' class='form-control tags_dropdown search_fields'>";
+                    form_input_field += "<option value=''>-- Please select -- </option>";
                     $.each(data.message, function(key, value) {
                         form_input_field += "<option value='"+value.id+"'>"+value.label+"</option>";
                     })
@@ -52,14 +53,15 @@ $(document).ready(function() {
             });
 
         } else if(value == 'vm_version') {
-            form_input_field = "<select name='vm_version[]' class='form-control'>" +
+            form_input_field = "<select name='vm_version[]' class='form-control search_fields'>" +
+                "<option value=''> -- Please select -- </option>" +
                 "<option value='1'>NMRbox Ver 1</option>" +
                 "<option value='2'>NMRbox Ver 2</option>" +
                 "</select>";
         } else if(value == 'author_name') {
-            form_input_field = "<input type='text' name='author_name[]' placeholder='John Doe' class='form-control'>";
+            form_input_field = "<input type='text' name='author_name[]' placeholder='John Doe' class='form-control search_fields'>";
         }else {
-            form_input_field = "<input type='text' name='fields_value["+value+"]' placeholder='nmrbox' class='form-control'>";
+            form_input_field = "<input type='text' name='fields_value["+value+"]' placeholder='nmrbox' class='form-control search_fields'>";
         }
         var form_button = "<a href='#' class='btn btn-sm btn-warning remove_button'><span class='glyphicon glyphicon-minus'></span></a>";
 
@@ -92,4 +94,53 @@ $(document).ready(function() {
         e.preventDefault();
         location.href = '/registry';
     });
+
+    /* populating the search result */
+    $('body').on('keyup change', '.search_fields', function (e) {
+        e.preventDefault();
+        var form_data = $('#soft_reg_search').serialize();
+
+        $.ajax({
+            type: "POST",
+            url: 'registry/software-search',
+            data: form_data,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data.message);
+                var soft_array = data.message;
+
+                $('#filter_result').html("");
+
+                $.each(soft_array, function( key, value ) {
+                    $('#filter_result').append('' +
+                        '<div class="col-sm-3 registry-package">' +
+                            '<div class="registry-package-wrapper">' +
+                                '<h3>' +
+                                    '<a href="registry/'+value.slug+'">' +
+                                        value.name +
+                                    '</a>' +
+                                '</h3>' +
+                                '<p class="description">' +
+                                    value.synopsis +
+                                '</p>' +
+                            '</div>' +
+                        '</div>'
+                    );
+                });
+            },
+            error: function (data) {
+                $('#filter_result').append('' +
+                    '<div class="col-sm-3 registry-package">' +
+                    '<div class="registry-package-wrapper">' +
+                    '<h3>' +
+                    'No software found.' +
+                    '</h3>' +
+                    '</div>' +
+                    '</div>'
+                );
+            }
+        });
+
+
+    })
 });

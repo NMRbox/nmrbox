@@ -59,7 +59,6 @@ class RegistryController extends Controller
         /* Menu listings */
         $fields = $request->input('field');
 
-
         /* Request input var */
         $fields_value = $request->input('fields_value');
         $category = $request->input('menus');
@@ -188,9 +187,19 @@ class RegistryController extends Controller
             }
         }
         $all_software = $software->get();
+
+        $soft_array=array();
+        foreach ($all_software as $software){
+            $soft_array[] = array('id' => $software->id, 'name' => $software->name, 'synopsis' => $software->synopsis, 'slug' => $software->slug);
+        }
         //dd($all_software);
 
-        return View::make("registry.index", compact('all_software'));
+
+        return response( json_encode( array( 'message' => $soft_array ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
+
+
+        //return View::make("registry.index", compact('all_software', 'request_data'));
     }
 }
 
