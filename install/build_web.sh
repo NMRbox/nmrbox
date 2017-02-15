@@ -94,7 +94,7 @@ MAIL_USERNAME=nmrbox.org@gmail.com
 MAIL_PASSWORD=Nmrbox2016
 MAIL_ENCRYPTION=tls
 
-LDAP_HOST=nmrbox-buildserver2.nmrbox.org
+LDAP_HOST=buildserver.nmrbox.org
 LDAP_PORT=5050
 EO_ENV
 ) > $installdir/.env
