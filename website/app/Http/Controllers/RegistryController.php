@@ -195,12 +195,8 @@ class RegistryController extends Controller
         }
         //dd($all_software);
 
-
         return response( json_encode( array( 'message' => $soft_array ) ), 200 )
             ->header( 'Content-Type', 'application/json' );
-
-
-        //return View::make("registry.index", compact('all_software', 'request_data'));
     }
 }
 
