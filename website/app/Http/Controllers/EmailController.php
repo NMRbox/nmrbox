@@ -135,7 +135,7 @@ class EmailController extends Controller
             $email_log[$data->sent][] = array(
                 'person_name' => $person_data[0]['first_name']. " " . $person_data[0]['last_name'],
                 'person_email' => $person_email,
-                'person_nmrbox_acct' => $person_data[0]['first_name'],
+                'person_nmrbox_acct' => $person_data[0]['nmrbox_acct'],
                 'person_email_sent' => $email_sent,
             );
         }

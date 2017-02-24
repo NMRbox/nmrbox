@@ -359,7 +359,6 @@ class PersonController extends Controller
         $mail_sent = date('Y-m-d H:i:s');
 
 
-
         foreach ($users as $user){
             $email_subj = $request->input('subject');
             $email_recipient_address = ($email_recipient == 'email_institution')? $user['email_institution'] : $user['email'];
