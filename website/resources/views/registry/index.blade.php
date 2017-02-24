@@ -16,6 +16,19 @@
     <!-- Container Section Start -->
     <div class="container-fluid">
         <div class="row">
+            <div class="alert alert-success hidden" id="success-alert">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Success! </strong>
+                <span id="success_msg"></span>
+            </div>
+
+            <div class="alert alert-danger hidden" id="error-alert">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Error! </strong>
+                <span id="error_msg"></span>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-10 col-lg-offset-1">
                 <div class="content">
                     <h1 class="page-header">Software Registry</h1>
@@ -30,7 +43,7 @@
 
                     {{-- Advance search form --}}
                     <div class="row row-registry" id="search_form">
-                        <form action="{!! route('software-search') !!}" class="form form-horizontal col-md-12" method="post" id="soft_reg_search"/>
+                        <form class="form form-horizontal col-md-12" method="post" id="soft_reg_search"/>
                         {!! csrf_field() !!}
                             <div class="form_row">
                                 <div class="form-group row">

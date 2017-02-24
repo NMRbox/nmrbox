@@ -11,8 +11,10 @@ use Sentinel;
 use Mail;
 use Lang;
 use Session;
+use DateTime;
 use App\Person;
 use App\Email;
+use App\EmailPerson;
 use App\Institution;
 use App\Timezone;
 use App\Classification;
@@ -280,6 +282,33 @@ class PersonController extends Controller
     }
 
     /**
+     * Display the specified email template.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function email_template(Request $request)
+    {
+        if(!$request->ajax()){
+            return App::abort(500, 'error in show');
+        }
+
+        /* Retrieving data from email_template table */
+        $id = $request->input('id');
+        $template = Email::where('id', $id)->first();
+
+        /* Email template data */
+        $message = $template->content;
+        $subject = $template->subject;
+
+
+        //json_encode($user);
+        return response( json_encode( array( 'message' => $message, 'subject' => $subject ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
+
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -295,7 +324,8 @@ class PersonController extends Controller
         $email_subj = $request->input('subject');
         $msg_body = $request->input('message');
         $email_recipient = $request->input('recipient');
-
+        $email_tmplt_id = $request->input('tmplt');
+        $email_template_new_id = '';
 
         if($save_template == 'yes')
         {
@@ -308,7 +338,11 @@ class PersonController extends Controller
                 'content' => $email_template_body,
                 'subject' => $email_subj,
             ));
-            $email->save();
+
+            if($email->save()){
+                $email_template_new_id = $email->id;
+            }
+
         }
 
         $ids = json_decode($request->input('ids'), true);
@@ -319,6 +353,12 @@ class PersonController extends Controller
         /* Email processing */
         // Data to be used on the email view
         $mail_count = 0;
+
+        /* email log data */
+        $email_template_id = ($email_template_new_id == null)? $email_tmplt_id : $email_template_new_id ;
+        $mail_sent = date('Y-m-d H:i:s');
+
+
 
         foreach ($users as $user){
             $email_subj = $request->input('subject');
@@ -341,8 +381,19 @@ class PersonController extends Controller
                                 ->setBody($message);
                         });
 
+            /* if mail sending successful */
             if($send_mail) {
+                /* incrementing the mail count */
                 $mail_count++;
+
+                /* Saving data to email person table */
+                $email_log = new EmailPerson(array(
+                    'person_id' => $user->id,
+                    'email_id' => $email_template_id,
+                    'email' => $email_recipient_address,
+                    'sent' => $mail_sent,
+                ));
+                $email_log->save();
             }
         }
 
@@ -476,29 +527,6 @@ class PersonController extends Controller
 
     }
 
-    /**
-     * Display the specified email template.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function email_template(Request $request)
-    {
-        if(!$request->ajax()){
-            return App::abort(500, 'error in show');
-        }
 
-        $name = $request->input('name');
-        $template = Email::where('name', $name)->first();
-
-        $message = $template->content;
-        $subject = $template->subject;
-
-
-        //json_encode($user);
-        return response( json_encode( array( 'message' => $message, 'subject' => $subject ) ), 200 )
-            ->header( 'Content-Type', 'application/json' );
-
-    }
 
 }

@@ -96,7 +96,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: 'people/email_template',
-            data: 'name=' + template_id + '&_token=' + $('input#user_csrf_token').val(),
+            data: 'id=' + template_id + '&_token=' + $('input#user_csrf_token').val(),
             success: function(data) {
                 $('input#email_subject').val(data.subject);
                 $('textarea#message').val(data.message);

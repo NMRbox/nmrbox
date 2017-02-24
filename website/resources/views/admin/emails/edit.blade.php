@@ -62,6 +62,72 @@ Edit VM
     </div>
     <!-- row-->
 </section>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading clearfix">
+                    <h3>Email Log: </h3>
+                </div>
+                <div class="panel-body table_fluid">
+                    <table id="vm-table" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th width="20%">Delivery Date</th>
+                            <th>Receiver</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if(!empty($email_log))
+                            @foreach ($email_log as $key => $log)
+                                <tr>
+                                    <td>{!! $key !!}</td>
+                                    <td>Sent to - <a href="#" id="show_recipient">{!! count($log) !!} Recipients </a>
+                                        <div class="hidden">
+                                            <hr>
+                                            <table class="table table-horizental">
+                                                <thead>
+                                                <tr>
+                                                    <th>Name </th>
+                                                    <th>Email </th>
+                                                    <th>NMRbox Account</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                            @foreach ($log as $key => $user_data)
+                                                    <tr>
+                                                        <td>{!! $user_data['person_name'] !!}</td>
+                                                        <td>{!! $user_data['person_email'] !!}</td>
+                                                        <td>{!! $user_data['person_nmrbox_acct'] !!}</td>
+                                                    </tr>
+                                            @endforeach
+
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="2">
+                                    <h4> No email log found. </h4>
+                                </td>
+                            </tr>
+
+                        @endif
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
 
 @stop
 
@@ -71,6 +137,7 @@ Edit VM
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
     <script type="application/javascript">
+
         jQuery.fn.extend({
             insertAtCaret: function(myValue){
                 return this.each(function(i) {
@@ -102,6 +169,11 @@ Edit VM
         $('#template_area a').click(function(){
             var val = $(this).attr('data-field-name');
             $('textarea').insertAtCaret( "%%" + val + "%%");
-        })
+        });
+
+        $('a#show_recipient').on('click', function (e) {
+            e.preventDefault();
+            $(this).next('div').toggleClass('hidden');
+        });
     </script>
 @stop

@@ -1,6 +1,20 @@
 /**
  * Created by mosrur on 1/30/17.
  */
+
+/* Alert box */
+function show_alert(alert_type) {
+
+    $("#"+alert_type+"-alert").alert();
+    $("#"+alert_type+"-alert").fadeTo(2000, 500).slideUp(500, function(){
+        $("#"+alert_type+"-alert").slideUp(500);
+    });
+}
+
+/* page alert message box */
+$("#success-alert").hide().removeClass('hidden');
+$("#error-alert").hide().removeClass('hidden');
+
 $(document).ready(function() {
     $.ajaxSetup({
         headers: {
@@ -25,6 +39,12 @@ $(document).ready(function() {
 
     });
 
+    /* preventing form submit */
+    $('body').on('submit', function (e) {
+        e.preventDefault();
+        return false;
+    })
+
     var row_html = '<div class="form_row">' + $('.form_row').html() + '</div>';
     $('body').on('change', 'select.select_field', function (e) {
         e.preventDefault();
@@ -48,7 +68,8 @@ $(document).ready(function() {
 
                 },
                 error: function (data) {
-
+                    $('#error_msg').html('Something went wrong. Please try again.');
+                    show_alert('error');
                 }
             });
 
@@ -67,8 +88,13 @@ $(document).ready(function() {
 
         $($(this).parent()[0]).siblings('.form_input_field').html(form_input_field);
         $('a.add_now_button').show();
+
         if($('.form_row').length > 1) {
-            $($(this).parent()[0]).siblings('.form_button').prepend(form_button);
+            if($($(this).parent()[0]).siblings('.form_button').children('.remove_button').length == 0)
+            {
+                $($(this).parent()[0]).siblings('.form_button').prepend(form_button);
+            }
+            //$($(this).parent()[0]).siblings('.form_button').prepend(form_button);
         }
     });
     var add_button = '<a href="#" class="btn btn-sm btn-info add_now_button"><span class="glyphicon glyphicon-plus"></span></a>';

@@ -260,7 +260,7 @@ People Index
                                         <select id="email_template" name="tmplt">
                                             <option value="0">Select Template</option>
                                             @foreach ($email_templates as $email_template)
-                                                <option>{!! $email_template->name !!}</option>
+                                                <option value="{!! $email_template->id !!}">{!! $email_template->name !!}</option>
                                             @endforeach
                                         </select>
                                     </div>

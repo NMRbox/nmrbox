@@ -55,6 +55,9 @@ class RegistryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function postRegistrySearch(Request $request) {
+        if(!$request->ajax()) {
+            return App::abort(403);
+        }
 
         /* Menu listings */
         $fields = $request->input('field');

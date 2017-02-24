@@ -15,6 +15,7 @@ use Mail;
 use Lang;
 use App\Person;
 use App\Email;
+use App\EmailPerson;
 use App\Institution;
 use App\Timezone;
 
@@ -112,11 +113,38 @@ class EmailController extends Controller
         return view('admin.emails.edit', compact('email'));
     }*/
 
-    public function edit($name)
+    public function edit($id)
     {
-        $email = Email::where('name', $name)->first();
+        // email object
+        $email = Email::where('id', $id)->first();
 
-        return view('admin.emails.edit', compact('email'));
+        // email_person object
+        $email_person = EmailPerson::where('email_id', $id)->orderBy('id')->get();
+        //dd($email_person);
+        /*echo "<pre>";
+        print_r($email_person);
+        echo "</pre>";
+        die();*/
+
+        $email_log = array();
+        foreach ($email_person as $data){
+            $person_data = Person::where('id', $data->person_id)->get();
+            $person_email = $data->email;
+            $email_sent = $data->sent;
+
+            $email_log[$data->sent][] = array(
+                'person_name' => $person_data[0]['first_name']. " " . $person_data[0]['last_name'],
+                'person_email' => $person_email,
+                'person_nmrbox_acct' => $person_data[0]['first_name'],
+                'person_email_sent' => $email_sent,
+            );
+        }
+        /*echo "<pre>";
+        print_r($email_log);
+        echo "</pre>";*/
+
+        return view('admin.emails.edit', compact('email', 'email_log'));
+        //return view('admin.emails.edit', compact('email'));
     }
 
     /**
