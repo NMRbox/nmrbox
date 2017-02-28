@@ -99,15 +99,7 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-3 col-lg-3 " align="center">
-                                    @if($user->pic)
-                                        <img src="{!! url('/').'/uploads/users/'.$user->pic !!}" alt="img" class="img-circle"/>
-                                    @else
-                                        <img alt="User Pic" src="{!! url('/').'/uploads/users/profile.gif' !!}" class="img-circle img-responsive">
-                                    @endif
-                                </div>
-
-                                <div class=" col-md-9 col-lg-9 ">
+                                <div class=" col-md-12 col-lg-12 ">
                                     <table class="table table-user-information">
                                         <tbody>
                                             <tr>

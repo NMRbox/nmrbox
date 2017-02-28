@@ -84,17 +84,19 @@ $(document).ready(function() {
         }else {
             form_input_field = "<input type='text' name='fields_value["+value+"]' placeholder='nmrbox' class='form-control search_fields'>";
         }
+        // remove button
         var form_button = "<a href='#' class='btn btn-sm btn-warning remove_button'><span class='glyphicon glyphicon-minus'></span></a>";
 
+        // Adding the second column input boxes
         $($(this).parent()[0]).siblings('.form_input_field').html(form_input_field);
         $('a.add_now_button').show();
 
+        // Adding the remove button for each row
         if($('.form_row').length > 1) {
             if($($(this).parent()[0]).siblings('.form_button').children('.remove_button').length == 0)
             {
                 $($(this).parent()[0]).siblings('.form_button').prepend(form_button);
             }
-            //$($(this).parent()[0]).siblings('.form_button').prepend(form_button);
         }
     });
     var add_button = '<a href="#" class="btn btn-sm btn-info add_now_button"><span class="glyphicon glyphicon-plus"></span></a>';
