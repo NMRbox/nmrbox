@@ -24,7 +24,7 @@ return array(
     'error' => array(
         'create'    => 'There was an issue creating the email template. Please try again.',
         'update'    => 'There was an issue updating the email template. Please try again.',
-        'delete'    => 'There was an issue deleting the email template. Please try again.',
+        'delete'    => 'Can not be deleted!! This template has reference entries in Email log table.',
     ),
 
 );

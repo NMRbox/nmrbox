@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -106,13 +107,6 @@ class EmailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    /*public function edit(Request $request, $name)
-    {
-        $email = Email::where('name', $name)->first();
-
-        return view('admin.emails.edit', compact('email'));
-    }*/
-
     public function edit($id)
     {
         // email object
@@ -120,11 +114,6 @@ class EmailController extends Controller
 
         // email_person object
         $email_person = EmailPerson::where('email_id', $id)->orderBy('id')->get();
-        //dd($email_person);
-        /*echo "<pre>";
-        print_r($email_person);
-        echo "</pre>";
-        die();*/
 
         $email_log = array();
         foreach ($email_person as $data){
@@ -139,12 +128,8 @@ class EmailController extends Controller
                 'person_email_sent' => $email_sent,
             );
         }
-        /*echo "<pre>";
-        print_r($email_log);
-        echo "</pre>";*/
 
         return view('admin.emails.edit', compact('email', 'email_log'));
-        //return view('admin.emails.edit', compact('email'));
     }
 
     /**
@@ -154,16 +139,25 @@ class EmailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $name)
+    public function update(Request $request, $id)
     {
-        $email = Email::where('name', $name)->first();
-        $email->name = $request->input('name');
-        $email->subject = $request->input('subject');
-        $email->content = $request->input('content');
+        try{
+            /* Input request content */
+            $email = Email::where('id', $id)->first();
+            $email->name = $request->input('name');
+            $email->subject = $request->input('subject');
+            $email->content = $request->input('content');
 
-        $email->save();
+            $email->save();
+        } catch ( QueryException $e){
 
-        return redirect('admin/email');
+            // something went wrong - probably has entries in email_person table
+            return redirect()->back()->withError(Lang::get('emails/message.error.update'));
+        }
+
+        // redirect with success message
+        //return redirect('admin/email');
+        return redirect()->back()->withSuccess(Lang::get('emails/message.success.update'));
     }
 
     /**
@@ -174,17 +168,17 @@ class EmailController extends Controller
      */
     public function destroy($param)
     {
-        $email = Email::where('name', $param)->delete();
+        try{
+            $email = Email::where('id', $param)->delete();
 
-        if($email == true){
-            // Adding message for notification
-            $this->messageBag->add('email', Lang::get('emails/message.success.delete'));
-            // redirect with success message
-            return redirect()->back()->withErrors($this->messageBag);
+        } catch ( QueryException $e){
+
+            // something went wrong - probably has entries in email_person table
+            return redirect()->back()->withError(Lang::get('emails/message.error.delete'));
         }
 
-        return false;
-
+        // redirect with success message
+        return redirect()->back()->withSuccess(Lang::get('emails/message.success.delete'));
     }
 
 }

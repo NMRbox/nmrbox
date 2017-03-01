@@ -47,7 +47,7 @@ People Index
                         <strong>Success! </strong>
                             <span id="success_msg"></span>
                     </div>
-                    
+
                     <div class="alert alert-danger hidden" id="error-alert">
                         <button type="button" class="close" data-dismiss="alert">x</button>
                         <strong>Error! </strong>
@@ -75,7 +75,7 @@ People Index
                                     {{--<td class="col-md-1">{!! $email_template->content !!}</td>--}}
                                     <td class="col-md-1">
                                         <a href="{!! URL::to('admin/email/' . $email_template->id . '/edit' ) !!}"><i class="fa fa-fw fa-pencil text-warning" title="Update email template"></i></a>
-                                        <a href="#" ><i class="fa fa-fw fa-times text-danger delete_email_template" data-url="{!! route("email.delete", array('email' => $email_template->name)) !!}" data-template_name="{!! $email_template->name !!}" title="Delete"></i></a>
+                                        <a href="#" ><i class="fa fa-fw fa-times text-danger delete_email_template" data-url="{!! route("email.delete", array('email' => $email_template->id)) !!}" data-template_name="{!! $email_template->id !!}" title="Delete"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
