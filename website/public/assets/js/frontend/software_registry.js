@@ -32,6 +32,7 @@ $(document).ready(function() {
         if ($('#search_form').is(':hidden')) {
             $('#search_form').slideDown();
             $('a.clear_filter_box').show();
+            $('.select_field').removeAttr('selected').find('option:first').attr('selected', 'selected');
         } else {
             $('#search_form').slideUp();
             $('a.clear_filter_box').hide();
