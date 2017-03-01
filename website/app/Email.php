@@ -10,8 +10,7 @@ class Email extends Model
     protected $table = 'email_templates';
 
     // overriding primary keys and turning off auto increment
-    protected $primaryKey = 'name';
-    public $incrementing = false;
+    protected $primaryKey = 'id';
 
     // disableing default timestamp for not inserting created_at & updated_at
     public $timestamps = false;

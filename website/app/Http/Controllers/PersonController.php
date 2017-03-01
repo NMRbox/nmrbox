@@ -327,6 +327,7 @@ class PersonController extends Controller
         $email_tmplt_id = $request->input('tmplt');
         $email_template_new_id = '';
 
+        /* saving newly created templates */
         if($save_template == 'yes')
         {
             // Saving Email template
@@ -342,9 +343,9 @@ class PersonController extends Controller
             if($email->save()){
                 $email_template_new_id = $email->id;
             }
-
         }
 
+        /* Selected user ids */
         $ids = json_decode($request->input('ids'), true);
 
         // Retrieving the users list from person table
@@ -355,10 +356,10 @@ class PersonController extends Controller
         $mail_count = 0;
 
         /* email log data */
-        $email_template_id = ($email_template_new_id == null)? $email_tmplt_id : $email_template_new_id ;
+        $email_template_id = ($email_template_new_id != null) ? $email_template_new_id : $email_tmplt_id ;
         $mail_sent = date('Y-m-d H:i:s');
 
-
+        /* Iterating through each one of the user and sending email */
         foreach ($users as $user){
             $email_subj = $request->input('subject');
             $email_recipient_address = ($email_recipient == 'email_institution')? $user['email_institution'] : $user['email'];
