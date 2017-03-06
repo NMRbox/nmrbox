@@ -14,11 +14,12 @@
         <hr>
 
         {!! BootForm::open(array('model'=>$software, 'store'=>'software.save-keywords', 'update'=>'software.save-keywords')) !!}
+        {!! csrf_field() !!}
         <ul>
         @foreach ($all_keywords as $keyword)
-            <li x-data-keyword="{{ $keyword->label }}">
-                {!! BootForm::hidden($keyword->label, "off", [ ]) !!}
-                {!! BootForm::checkbox($keyword->label, $keyword->label, null, $keyword->present) !!}
+            <li x-data-keyword="{{ $keyword->id }}">
+                {!! BootForm::hidden($keyword->id, "off", [ ]) !!}
+                {!! BootForm::checkbox($keyword->id, $keyword->label, null, $keyword->present) !!}
             </li>
         @endforeach
         </ul>

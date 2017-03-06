@@ -11,12 +11,14 @@ use Redirect;
 use URL;
 use Sentinel;
 use Validator;
+use Lang;
 use Debugbar;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 Use App\Software;
 Use App\User;
 Use App\Keyword;
+Use App\KeywordSoftware;
 Use App\Category;
 Use App\File;
 Use App\VM;
@@ -367,11 +369,15 @@ class SoftwareController extends Controller
      * @param  Software $software
      * @return \Illuminate\Http\Response
      */
-    public function saveKeywords(Request $request, Software $software)
+    public function saveKeywords(Request $request, $param)
     {
+        $software = Software::where('id', $param->id)->get()->first();
         $keyword_checkboxes = $request->except(["name", "_token", "_method"]);
+
         foreach($keyword_checkboxes as $keyword => $checked_status) {
-            $keywd = Keyword::where("label", "=", $keyword)->get()->first();
+
+            $keywd = Keyword::where("id", "=", $keyword)->get()->first();
+
             if($checked_status == "on") {
                 try {
                     $software->keywords()->attach($keywd->id);
@@ -379,13 +385,13 @@ class SoftwareController extends Controller
                 catch(\Illuminate\Database\QueryException $e) {
                     // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
                 }
-            }
-            else {
+            } else {
                 $software->keywords()->detach($keywd->id);
             }
         }
 
-        return back();
+        // redirect with success message
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update_keyword'));
     }
 
 
