@@ -369,21 +369,13 @@ class SoftwareController extends Controller
      * @param  Software $software
      * @return \Illuminate\Http\Response
      */
-    public function saveKeywords(Request $request, $param)
+    public function saveKeywords(Request $request, Software $software)
     {
-        echo "<pre>";
-        print_r($param);
-        echo "</pre>";
-        $software = Software::where('id', $param->id)->toSql();
-        dd($software);
-        exit;
-
-
         $keyword_checkboxes = $request->except(["name", "_token", "_method"]);
 
         foreach($keyword_checkboxes as $keyword => $checked_status) {
 
-            $keywd = Keyword::where("id", "=", $keyword)->first();
+            $keywd = Keyword::where("id", "=", $keyword)->get()->first();
 
             if($checked_status == "on") {
                 try {
