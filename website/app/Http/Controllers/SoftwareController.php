@@ -371,6 +371,10 @@ class SoftwareController extends Controller
      */
     public function saveKeywords(Request $request, Software $software)
     {
+        echo "<pre>";
+        print_r($software);
+        echo "</pre>";
+        die();
         $keyword_checkboxes = $request->except(["name", "_token", "_method"]);
 
         foreach($keyword_checkboxes as $keyword => $checked_status) {
