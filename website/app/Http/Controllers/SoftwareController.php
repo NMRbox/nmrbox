@@ -372,6 +372,7 @@ class SoftwareController extends Controller
     public function saveKeywords(Request $request, $param)
     {
         $software = Software::where('id', $param->id)->get()->first();
+        
         $keyword_checkboxes = $request->except(["name", "_token", "_method"]);
 
         foreach($keyword_checkboxes as $keyword => $checked_status) {
