@@ -17,8 +17,8 @@
         {!! csrf_field() !!}
         <ul>
         @foreach ($all_keywords as $keyword)
-            <li x-data-keyword="{{ $keyword->label }}">
-                {!! BootForm::hidden($keyword->label, "off", [ ]) !!}
+            <li x-data-keyword="{{ $keyword->id }}">
+                {!! BootForm::hidden($keyword->id, "off", [ ]) !!}
                 {!! BootForm::checkbox($keyword->id, $keyword->label, null, $keyword->present) !!}
             </li>
         @endforeach
