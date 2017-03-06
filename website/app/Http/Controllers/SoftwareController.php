@@ -369,8 +369,16 @@ class SoftwareController extends Controller
      * @param  Software $software
      * @return \Illuminate\Http\Response
      */
-    public function saveKeywords(Request $request, Software $software)
+    public function saveKeywords(Request $request, $param)
     {
+        echo "<pre>";
+        print_r($request->input());
+        echo "</pre>";
+        echo "<pre>";
+        print_r($param);
+        echo "</pre>";
+
+        $software = Software::where('id', '=', $param)->get()->first();
         echo "<pre>";
         print_r($software);
         echo "</pre>";
