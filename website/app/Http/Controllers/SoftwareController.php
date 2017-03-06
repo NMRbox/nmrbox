@@ -374,8 +374,8 @@ class SoftwareController extends Controller
         echo "<pre>";
         print_r($param);
         echo "</pre>";
-        dd($param->id);
-        $software = Software::where('id', $param->id)->first();
+        $software = Software::where('id', $param->id)->toSql();
+        dd($software);
         exit;
 
 
