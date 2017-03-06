@@ -376,6 +376,7 @@ class SoftwareController extends Controller
         print_r($software);
         echo "</pre>";
         dd($software);
+        die();
 
         $keyword_checkboxes = $request->except(["name", "_token", "_method"]);
 
