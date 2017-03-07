@@ -63,11 +63,9 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         try {
-            
             $category = new Category(array(
                 'name' => $request->name
             ));
-            
             $category->save();
 
             return redirect("admin/categories");
@@ -98,8 +96,9 @@ class CategoryController extends Controller
      * @param  Category  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($category_id)
     {
+        $category = Category::where('id', $category_id)->get()->first();
         $all_keywords = Keyword::All();
         $category_keywords = $category->keywords()->get();
         $keyword_map = collect([ ]);
@@ -126,15 +125,17 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $category_id)
     {
+        $category = Category::where('id', $category_id)->get()->first();
         // Update title
         $category->update($request->all());
         $category->save();
 
         $category_checkboxes = $request->except(["name", "_token", "_method"]);
-        foreach($category_checkboxes as $keyword => $checked_status) {
-            $keywd = Keyword::where("label", "=", $keyword)->get()->first();
+
+        foreach($category_checkboxes as $keyword_id => $checked_status) {
+            $keywd = Keyword::where("id", "=", $keyword_id)->get()->first();
             if($checked_status == "on") {
                 try {
                     $category->keywords()->attach($keywd->id);
@@ -157,8 +158,9 @@ class CategoryController extends Controller
      * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($category_id)
     {
+        $category = Category::where('id', $category_id)->get()->first();
         $category->delete();
         return redirect("admin/categories");
     }

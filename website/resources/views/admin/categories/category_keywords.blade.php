@@ -8,8 +8,8 @@
         <div class="col-sm-12 col-md-8">
             {!! BootForm::horizontal(array('model'=>$category, 'store'=>'category.store', 'update'=>'category.update')) !!}
                 @foreach ($all_keywords as $keyword)
-                    {!! BootForm::hidden($keyword->label, "off", [ ]) !!}
-                    {!! BootForm::checkbox($keyword->label, $keyword->label, null, $keyword->present) !!}
+                    {!! BootForm::hidden($keyword->id, "off", [ ]) !!}
+                    {!! BootForm::checkbox($keyword->id, $keyword->label, null, $keyword->present) !!}
                 @endforeach
                 {!! BootForm::submit('Save') !!}
             {!! BootForm::close() !!}

@@ -90,31 +90,6 @@
                                     Page List
                                 </a>
                             </li>
-                            <li {!! (Request::is('admin/pages/create') ? 'class="active"' : '') !!}>
-                                <a href="{{ URL::to('admin/pages/create') }}">
-                                    <i class="fa fa-fw fa-pencil-square-o"></i>
-                                    Add New Page
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-dropdown {{ (Request::is('admin/software') || Request::is('admin/software/create') || Request::is('admin/software/*') ? 'active' : '') }}">
-                        <a href="#">
-                            <i class="menu-icon  fa fa-fw fa-laptop"></i>
-                            <span>Software</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li {{ (Request::is('admin/software') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/software') }}">
-                                    Software Index
-                                </a>
-                            </li>
-                            <li {{ (Request::is('admin/software/create') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/software/create') }}">
-                                    Add New Software
-                                </a>
-                            </li>
                         </ul>
                     </li>
                     <li class="menu-dropdown {{ (Request::is('admin/files') || Request::is('admin/files/create') || Request::is('admin/files/*') ? 'active' : '') }}">
@@ -129,145 +104,30 @@
                                     File Index
                                 </a>
                             </li>
-                            {{--<li {{ (Request::is('admin/files/create') ? 'class=active' : '') }}>--}}
-                                {{--<a href="{{ URL::to('admin/files/create') }}">--}}
-                                    {{--Add New Software--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
                         </ul>
                     </li>
-                    <li class="menu-dropdown {{ (Request::is('admin/categories') || Request::is('admin/categories/create') || Request::is('admin/categories/*') ? 'active' : '') }}">
+                    <li class="menu-dropdown {{ (Request::is('admin/software') || Request::is('admin/categories') || Request::is('admin/keyword') || Request::is('admin/software/*') ? 'active' : '') }}">
                         <a href="#">
                             <i class="menu-icon  fa fa-fw fa-laptop"></i>
-                            <span>Category</span>
+                            <span>Software</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="sub-menu">
-                            <li {{ (Request::is('admin/categories') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/categories') }}">
-                                    Category Index
+                            <li {{ (Request::is('admin/software') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('admin/software') }}">
+                                    Software Index
                                 </a>
                             </li>
-                            <li {{ (Request::is('admin/categories/create') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/categories/create') }}">
-                                    Add New Category
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-dropdown {{ (Request::is('admin/keyword') || Request::is('admin/keyword/create') || Request::is('admin/keyword/*') ? 'active' : '') }}">
-                        <a href="#">
-                            <i class="menu-icon  fa fa-fw fa-laptop"></i>
-                            <span>Keywords</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
                             <li {{ (Request::is('admin/keyword') ? 'class=active' : '') }}>
                                 <a href="{{ URL::to('admin/keyword') }}">
                                     Keyword Index
                                 </a>
                             </li>
-                            <li {{ (Request::is('admin/keyword/create') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/keyword/create') }}">
-                                    Add New Keyword
+                            <li {{ (Request::is('admin/categories') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('admin/categories') }}">
+                                    Category Index
                                 </a>
                             </li>
-                        </ul>
-                    </li>
-                    <li class="menu-dropdown {{ (Request::is('admin/vm') || Request::is('admin/vm/create') || Request::is('admin/vm/*') ? 'active' : '') }}">
-                        <a href="#">
-                            <i class="menu-icon  fa fa-fw fa-cubes"></i>
-                            <span>VM Versions</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li {{ (Request::is('admin/vm') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/vm') }}">
-                                    VM Index
-                                </a>
-                            </li>
-                            <li {{ (Request::is('admin/vm/create') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/vm/create') }}">
-                                    Add New VM
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-dropdown {{ (Request::is('admin/users') || Request::is('admin/users/create') || Request::is('admin/users/*') || Request::is('admin/deleted_users') ? 'active' : '') }}">
-                        <a href="#">
-                            <i class="menu-icon  fa fa-fw fa-user"></i>
-                            <span>Users</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li {{ (Request::is('admin/users') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/users') }}">
-                                    Users
-                                </a>
-                            </li>
-                            <li {{ (Request::is('admin/users/create') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/users/create') }}">
-                                    Add New User
-                                </a>
-                            </li>
-                            <li {{ ((Request::is('admin/users/*')) && !(Request::is('admin/users/create')) ? 'class=active' : '') }}>
-                                <a href="{{ URL::route('users.show',Sentinel::getUser()->id) }}">
-                                    User Profile
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    {{--<li class="menu-dropdown {{ (Request::is('admin/groups') || Request::is('admin/groups/create') || Request::is('admin/groups/*') ? 'active' : '') }}">
-                        <a href="#">
-                            <i class="menu-icon  fa fa-fw fa-users"></i>
-                            <span>Groups</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li {{ (Request::is('admin/groups') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/groups') }}">
-                                    <i class="fa fa-fw fa-users"></i>
-                                    Groups
-                                </a>
-                            </li>
-                            <li {{ (Request::is('admin/groups/create') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/groups/create') }}">
-                                    <i class="fa fa-fw fa-user"></i>
-                                    Add New Group
-                                </a>
-                            </li>
-                        </ul>
-                    </li>--}}
-                    <li class="menu-dropdown {{ (Request::is('admin/people') || Request::is('admin/classification') || Request::is('admin/groups') ? 'active' : '') }}">
-                        <a href="#">
-                            <i class="menu-icon  fa fa-fw fa-users"></i>
-                            <span>People</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li {{ (Request::is('admin/people') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/people') }}">
-                                    People Index
-                                </a>
-                            </li>
-                            <li {{ (Request::is('admin/groups') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/groups') }}">
-                                    Categories
-                                </a>
-                            </li>
-                            <li {{ (Request::is('admin/classification') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/classification') }}">
-                                    Classifications
-                                </a>
-                            </li>
-
-                            {{--<li {{ (Request::is('admin/people/create') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/people/create') }}">
-                                    <i class="fa fa-fw fa-user"></i>
-                                    Add New Person
-                                </a>
-                            </li>--}}
                         </ul>
                     </li>
                     <li class="menu-dropdown {{ (Request::is('admin/email') || Request::is('admin/email/create') || Request::is('admin/email/*') ? 'active' : '') }}">
@@ -284,14 +144,60 @@
                             </li>
                         </ul>
                     </li>
-                    {{--<li class="menu-dropdown {{ (Request::is('admin/classification') || Request::is('admin/classification/create') || Request::is('admin/classification/*') ? 'active' : '') }}">
+                    <li class="menu-dropdown {{ (Request::is('admin/people') || Request::is('admin/classification') || Request::is('admin/groups') ? 'active' : '') }}">
                         <a href="#">
-                            <i class="menu-icon  fa fa-fw fa-envelope-o"></i>
-                            <span>Person Classification</span>
+                            <i class="menu-icon  fa fa-fw fa-users"></i>
+                            <span>People</span>
                             <span class="fa arrow"></span>
                         </a>
+                        <ul class="sub-menu">
+                            <li {{ (Request::is('admin/people') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('admin/people') }}">
+                                    People Index
+                                </a>
+                            </li>
+                            <li {{ (Request::is('admin/classification') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('admin/classification') }}">
+                                    Classifications
+                                </a>
+                            </li>
+                            <li {{ (Request::is('admin/groups') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('admin/groups') }}">
+                                    Categories
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
-                    </li>--}}
+
+                    <li class="menu-dropdown {{ (Request::is('admin/users') || Request::is('admin/users/create') || Request::is('admin/users/*') || Request::is('admin/deleted_users') ? 'active' : '') }}">
+                        <a href="#">
+                            <i class="menu-icon  fa fa-fw fa-user"></i>
+                            <span>Users</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li {{ (Request::is('admin/users') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('admin/users') }}">
+                                    Users
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-dropdown {{ (Request::is('admin/vm') || Request::is('admin/vm/create') || Request::is('admin/vm/*') ? 'active' : '') }}">
+                        <a href="#">
+                            <i class="menu-icon  fa fa-fw fa-cubes"></i>
+                            <span>VM Versions</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li {{ (Request::is('admin/vm') ? 'class=active' : '') }}>
+                                <a href="{{ URL::to('admin/vm') }}">
+                                    VM Index
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="menu-dropdown {{ (Request::is('admin/lab_roles') || Request::is('admin/lab_roles/create') || Request::is('admin/lab_roles/*') ? 'active' : '') }}">
                         <a href="#">
                             <i class="menu-icon  fa fa-fw fa-user"></i>
@@ -303,12 +209,6 @@
                                 <a href="{{ URL::to('admin/lab_roles') }}">
                                     <i class="fa fa-fw fa-users"></i>
                                     Lab Role Index
-                                </a>
-                            </li>
-                            <li {{ (Request::is('admin/lab_role/create') ? 'class=active' : '') }}>
-                                <a href="{{ URL::to('admin/lab_roles/create') }}">
-                                    <i class="fa fa-fw fa-user"></i>
-                                    Add New Lab Role
                                 </a>
                             </li>
                         </ul>

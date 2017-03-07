@@ -95,8 +95,10 @@ class KeywordController extends Controller
      * @param  Keyword  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Keyword $keyword)
+    public function edit($keyword_id)
     {
+        $keyword = Keyword::where('id', $keyword_id)->get()->first();
+
         return view('admin.keywords.edit', compact('keyword'));
     }
 
@@ -107,8 +109,10 @@ class KeywordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Keyword $keyword)
+    public function update(Request $request, $keyword_id)
     {
+        $keyword = Keyword::where('id', $keyword_id)->get()->first();
+
         $keyword->update($request->all());
         $keyword->save();
 
@@ -121,8 +125,9 @@ class KeywordController extends Controller
      * @param  Keyword $keyword
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Keyword $keyword)
+    public function destroy($keyword_id)
     {
+        $keyword = Keyword::where('id', $keyword_id)->get()->first();
         $keyword->delete();
         return redirect("admin/keyword");
     }
