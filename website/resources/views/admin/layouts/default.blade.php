@@ -106,7 +106,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="menu-dropdown {{ (Request::is('admin/software') || Request::is('admin/categories') || Request::is('admin/keyword') || Request::is('admin/software/*') ? 'active' : '') }}">
+                    <li class="menu-dropdown {{ (Request::is('admin/software') || Request::is('admin/categories') || Request::is('admin/keyword') || Request::is('admin/categories/*') || Request::is('admin/keyword/*') || Request::is('admin/software/*') ? 'active' : '') }}">
                         <a href="#">
                             <i class="menu-icon  fa fa-fw fa-laptop"></i>
                             <span>Software</span>

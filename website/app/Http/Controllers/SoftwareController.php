@@ -88,10 +88,10 @@ class SoftwareController extends Controller
      * @param  Software $software
      * @return \Illuminate\Http\Response
      */
-    public function edit($param)
+    public function edit($software_id)
     {
         //Get the software info from DB
-        $software = Software::where('slug', $param)->first();
+        $software = Software::where('slug', $software_id)->first();
 
         // get the files details
         $files = $software->files()->get();
@@ -147,12 +147,25 @@ class SoftwareController extends Controller
                 $keyword_map->push($keyword->label);
                 $keyword->present = true;
             }
-            else {
-//                $keyword_map->push($keyword->label, false);
-            }
+            /*else {
+                $keyword_map->push($keyword->label, false);
+            }*/
         }
+        //dd($software_keywords);
+        //$all_categories = Category::all();
+        $keyword_categories = array();
+        foreach ($software_keywords as $key => $keyword){
+            $keyword_categories[$keyword->id] = $keyword->categories()->get();
 
-        $all_categories = Category::all();
+        }
+        //dd($keyword_categories);
+        $all_categories = array();
+        foreach ($keyword_categories as $key => $value){
+            foreach ($value as $data){
+                $all_categories[$data->name] = $data->name;
+            }
+
+        }
 
         return view('admin.software.edit',compact('software', 'files', 'vm_versions',
             'software_versions', "vm_versions_for_select", "software_versions_for_select", "people_for_select",
@@ -237,8 +250,9 @@ class SoftwareController extends Controller
      * @param  Software $software
      * @return \Illuminate\Http\Response
      */
-    public function update(SoftwareRequest $request, Software $software)
+    public function update(SoftwareRequest $request, $software_id)
     {
+        $software = Software::where('id', $software_id)->get()->first();
         $software->update($request->all());
         return back();
     }

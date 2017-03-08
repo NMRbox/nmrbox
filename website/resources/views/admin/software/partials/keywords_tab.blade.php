@@ -4,8 +4,9 @@
         <hr>
         <ul>
             @foreach ($all_categories as $category)
-                <li x-data-keywords="@foreach ($category->keywords()->get() as $keyword){{ $keyword->label . ',' }}@endforeach" {{-- TODO: change when vue is in place--}}
-                >{{ $category->name }}</li>
+                {{--<li x-data-keywords="@foreach ($category->keywords()->get() as $keyword){{ $keyword->label . ',' }}@endforeach" --}}{{-- TODO: change when vue is in place--}}{{--
+                >{{ $category->name }}</li>--}}
+                <li>{!! $category !!}</li>
             @endforeach
         </ul>
     </div>

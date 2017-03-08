@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Software;
 use App\Http\Requests\Request;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
@@ -30,7 +31,9 @@ class SoftwareRequest extends Request {
      */
     public function rules()
     {
-        $software = $this->route('software');
+        $software_id = $this->route('software');
+        $software = Software::where('id', $software_id)->get()->first();
+
 
         if( $software == null ) {
             // then we are creating a new resource
