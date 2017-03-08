@@ -9,6 +9,7 @@ use App\Keyword;
 use View;
 use Redirect;
 use Input;
+use Lang;
 use App\Http\Requests;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Controllers\Controller;
@@ -68,7 +69,8 @@ class CategoryController extends Controller
             ));
             $category->save();
 
-            return redirect("admin/categories");
+            return redirect("admin/categories")->withSuccess(Lang::get('softwares/message.success.create_category'));
+
         }
         catch (CategoryExistsException $e) {
             $this->messageBag->add('name', 'Category already exists');
@@ -149,7 +151,7 @@ class CategoryController extends Controller
             }
         }
 
-        return Redirect::back();
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update_category'));
     }
 
     /**

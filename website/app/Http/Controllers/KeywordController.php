@@ -7,6 +7,7 @@ use Illuminate\Support\MessageBag;
 use App\Keyword;
 use App\Category;
 use View;
+use Lang;
 use App\Http\Requests;
 use App\Http\Requests\KeywordRequest;
 use App\Http\Controllers\Controller;
@@ -67,7 +68,7 @@ class KeywordController extends Controller
             
             $keyword->save();
 
-            return redirect("admin/keyword");
+            return redirect("admin/keyword")->withSuccess(Lang::get('softwares/message.success.create_keyword'));
         }
         catch (KeywordExistsException $e) {
             $this->messageBag->add('label', 'Keyword already exists');
@@ -116,7 +117,7 @@ class KeywordController extends Controller
         $keyword->update($request->all());
         $keyword->save();
 
-        return redirect('admin/keyword');
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update_keyword'));
     }
 
     /**

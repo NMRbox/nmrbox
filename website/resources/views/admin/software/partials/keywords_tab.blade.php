@@ -4,9 +4,11 @@
         <hr>
         <ul>
             @foreach ($all_categories as $category)
-                {{--<li x-data-keywords="@foreach ($category->keywords()->get() as $keyword){{ $keyword->label . ',' }}@endforeach" --}}{{-- TODO: change when vue is in place--}}{{--
-                >{{ $category->name }}</li>--}}
-                <li>{!! $category !!}</li>
+                @if(count($category) == 0)
+                    No category available
+                @else
+                    <li>{!! $category !!}</li>
+                @endif
             @endforeach
         </ul>
     </div>

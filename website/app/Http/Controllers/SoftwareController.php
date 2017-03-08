@@ -140,25 +140,23 @@ class SoftwareController extends Controller
         $software_keywords = $software->keywords()->get();
         $keyword_map = collect([ ]);
 
+        // lebeling the keywords
         $keyed = $software_keywords->keyBy("label");
-
         foreach( $all_keywords as $keyword ) {
             if($keyed->has($keyword->label)) {
                 $keyword_map->push($keyword->label);
                 $keyword->present = true;
             }
-            /*else {
-                $keyword_map->push($keyword->label, false);
-            }*/
         }
-        //dd($software_keywords);
-        //$all_categories = Category::all();
+
+        /* Defining all the related pivot relation with category*/
         $keyword_categories = array();
         foreach ($software_keywords as $key => $keyword){
             $keyword_categories[$keyword->id] = $keyword->categories()->get();
 
         }
-        //dd($keyword_categories);
+
+         /* Assigning all categories to related keywords*/
         $all_categories = array();
         foreach ($keyword_categories as $key => $value){
             foreach ($value as $data){
@@ -254,7 +252,7 @@ class SoftwareController extends Controller
     {
         $software = Software::where('id', $software_id)->get()->first();
         $software->update($request->all());
-        return back();
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update'));
     }
 
     /**
