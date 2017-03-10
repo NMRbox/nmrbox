@@ -13,6 +13,7 @@ namespace App\library {
     use Auth;
     use Cartalyst\Sentinel\Laravel\Facades\Activation;
     use Sentinel;
+    use Session;
     use App\User;
     use App\Person;
 
