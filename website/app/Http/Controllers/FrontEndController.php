@@ -87,14 +87,14 @@ class FrontEndController extends Controller
             $ldap = new Ldap;
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
 
-            /* Test
+            /* Test 
             $ldap_login = true;
             $user = User::where('person_id', 226)->first();
             $person = Person::where('id', $user->person_id)->get()->first();
             if($person){
                 Session::put('person', $person);
             }
-            Sentinel::login($user);
+            Sentinel::loginAndRemember($user);
             /* Eof Test */
 
             // LDAP login response

@@ -65,7 +65,7 @@ namespace App\library {
                 }
 
                 // Adding user var into sentinel session logged user
-                Sentinel::login($user);
+                Sentinel::loginAndRemember($user);
                 // Adding person table information into session
                 Session::put('person', $person);
 

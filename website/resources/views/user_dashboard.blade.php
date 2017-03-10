@@ -86,15 +86,14 @@
             <div class="row">
                 <div class="alert alert-info">
                     <a href="#" class="close" data-dismiss="alert">&times;</a>
-                    <p class="text-center">Welcome to your NMRbox user dashboard!  This interface is under active development and additional tools / panels that provide user-specific information will be posted here.</p>
+                    <p>Welcome to your NMRbox user dashboard!  This interface is under active development and additional tools / panels that provide user-specific information will be posted here.</p>
                 </div>
             </div>
 
             @if(Session::has('user_is_admin') == true)
             <div class="row">
                 <div class="alert alert-info">
-                    <a href="#" class="close" data-dismiss="alert">&times;</a>
-                    <p class="text-center">You have access to the administrative section. <a href="{!! url("/admin") !!}" class="btn btn-md btn-warning"><i class="fa fa-cog fa-lg"> Admin Panel</i></a></p>
+                    <p>Access the administrative section using the button - <a href="{!! url("/admin") !!}" class="btn btn-md btn-warning"><i class="fa fa-cog fa-lg"> Admin Panel</i></a></p>
                 </div>
             </div>
             @endif
