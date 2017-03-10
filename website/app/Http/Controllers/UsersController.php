@@ -20,7 +20,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use App\Http\Controllers\PersonController;
 
-class UsersController extends ChandraController
+class UsersController extends Controller
 {
 
     protected $countries = array(

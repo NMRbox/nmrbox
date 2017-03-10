@@ -8,7 +8,7 @@ use Redirect;
 use Lang;
 use URL;
 
-class GroupsController extends ChandraController
+class GroupsController extends Controller
 {
     /**
      * Show a list of all the groups.

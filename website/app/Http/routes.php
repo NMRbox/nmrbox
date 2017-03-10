@@ -29,14 +29,15 @@ Route::model('blogcategory', 'App\BlogCategory');
 Route::model('blog', 'App\Blog');
 Route::pattern('slug', '[a-z0-9- _]+');
 
-Route::group(array('prefix' => 'admin'), function() {
+/*Route::group(array('prefix' => 'admin'), function() {
     //All basic routes defined here
     Route::get('login', array('as' => 'admin-login','uses' => 'AuthController@getLogin'));
     Route::post('login','AuthController@postLogin');
     Route::get('register', array('as' => 'admin-register','uses' => 'AuthController@getRegister'));
     Route::post('register','AuthController@postRegister');
     Route::get('logout', array('as' => 'logout','uses' => 'AuthController@getLogout'));
-});
+});*/
+
 
 /* Software Registry*/
 Route::model('software', 'App\Software');
@@ -44,7 +45,6 @@ Route::group(array('prefix' => 'registry'), function() {
     //All basic routes defined here
     Route::get('/', array('as' => 'registry','uses' => 'RegistryController@index'));
     Route::get('{software}', array('as' => 'software-page','uses' => 'RegistryController@getSoftware'));
-    Route::get('logout', array('as' => 'logout','uses' => 'AuthController@getLogout'));
     Route::post('software-search',array('as' => 'software-search','uses' => 'RegistryController@postRegistrySearch'));
     Route::match(['get', 'post'], 'tags/all-tags', array('as' => 'all-tags','uses' => 'KeywordController@getAllKeywords'));
 });
@@ -56,9 +56,6 @@ Route::group(array('prefix' => 'tags'), function() {
     Route::get('/', array('as' => 'tags','uses' => 'KeywordController@index'));
     Route::get('all-tags', array('as' => 'all-tags','uses' => 'KeywordController@getAllKeywords'));
     Route::post('all-tags', array('as' => 'all-tags','uses' => 'KeywordController@getAllKeywords'));
-
-
-
 });
 
 // All files public for now, unless requirements change
@@ -73,7 +70,6 @@ Route::group(array('prefix' => 'files'), function() {
 
 // protected routes
 Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), function () {
-
     Route::get('/', array('as' => 'dashboard','uses' => 'ChandraController@showHome'));
 
     # User Management
@@ -128,11 +124,9 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
     });
 
     # Software Management
-//    Route::model('software', 'App\Software'); // already included above
     Route::model('software_version', 'App\SoftwareVersion');
     Route::model('vm', 'App\VM');
     Route::model('citation', 'App\Citation');
-//    Route::model('file', 'App\File'); // already included above
     Route::group(array('prefix' => 'software'), function () {
         // Basic CRUD
         Route::get('/', array('as' => 'adminSoftware', 'uses' => 'SoftwareController@index'));
@@ -165,12 +159,6 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{software}/edit/versions/vm-software/delete/{vm}/{software_version}', array('as' => 'software.vm-software.delete', 'uses' => 'SoftwareController@destroySoftwareVersionPair'));
         Route::get('{software}/edit/versions/{software_version}/delete', array('as' => 'software.versionsdelete', 'uses' => 'SoftwareController@destroySoftwareVersion'));
         Route::get('{software}/edit/versions/{software_version}/{new_version}', array('as' => 'software.versionsedit', 'uses' => 'SoftwareController@editSoftwareVersion'));
-
-        // Keywords
-//        Route::get('{software}/edit/keywords/existing/{keyword}/remove', array('as' => 'software.detach-keyword', 'uses' => 'SoftwareController@detachKeyword'));
-//        Route::post('{software}/edit/keywords/new/add', array('as' => 'software.add-new-keyword', 'uses' => 'SoftwareController@addNewKeyword'));
-//        Route::post('{software}/edit/keywords/existing/add', array('as' => 'software.add-existing-keyword', 'uses' => 'SoftwareController@addExistingKeyword'));
-//        Route::post('{software}/edit/keywords/edit', array('as' => 'software.keywords-edit', 'uses' => 'SoftwareController@updatePeople'));
 
         Route::post('{software}/edit/keywords/save', array('as' => 'software.save-keywords', 'uses' => 'SoftwareController@saveKeywords'));
         Route::put('{software}/edit/keywords/save', array('as' => 'software.save-keywords', 'uses' => 'SoftwareController@saveKeywords'));
@@ -276,7 +264,6 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{email}/delete', array('as' => 'email.delete', 'uses' => 'EmailController@destroy'));
     });
 
-
     # Classifications Management
     Route::model('classification', 'App\Classification');
     Route::group(array('prefix' => 'classification'), function () {
@@ -287,8 +274,6 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::put('{classification}/edit', array('as' => 'classification.update', 'uses' => 'ClassificationController@update'));
         Route::get('{classification}/delete', array('as' => 'classification.delete', 'uses' => 'ClassificationController@destroy'));
     });
-
-
 
     //Remaining pages will be called from below controller method
     //in real world scenario, you may be required to define all routes manually
@@ -334,23 +319,14 @@ Route::get('logout', array('as' => 'logout','uses' => 'FrontEndController@getLog
 # contact form
 Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@postContact'));
 
-#frontend views
-//Route::get('/', array('as' => 'home', function () {
-//    return View::make('index');
-//}));
-
 # homepage
 Route::get('/', array('as' => 'home', 'uses' => 'ChandraController@showFrontEndView'));
-
 
 Route::get('blog', array('as' => 'blog', 'uses' => 'BlogController@getIndexFrontend'));
 Route::get('blog/{slug}/tag', 'BlogController@getBlogTagFrontend');
 Route::get('blog/{slug?}', 'BlogController@getBlogFrontend');
 Route::post('blog/{blog}/comment', 'BlogController@storeCommentFrontend');
-
 Route::get('{name?}', 'ChandraController@showFrontEndView');
 
-# LDAP authentication
-Route::get('/ldap', array('as' => 'ldap', 'uses' => 'AuthController@validate_ldap_password'));
 # End of frontend views
 

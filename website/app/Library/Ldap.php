@@ -63,7 +63,11 @@ namespace App\library {
                     return false;
                 }
 
+                // Adding user var into sentinel session logged user
                 Sentinel::login($user);
+                // Adding person table information into session
+                Session::put('person', $person);
+
 
                 //Auth::loginUsingId($user->id);
 

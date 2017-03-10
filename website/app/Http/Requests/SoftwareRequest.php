@@ -34,7 +34,6 @@ class SoftwareRequest extends Request {
         $software_id = $this->route('software');
         $software = Software::where('id', $software_id)->get()->first();
 
-
         if( $software == null ) {
             // then we are creating a new resource
             return [

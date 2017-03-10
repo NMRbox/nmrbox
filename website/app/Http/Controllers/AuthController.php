@@ -10,7 +10,7 @@ use Redirect;
 use Lang;
 use URL;
 
-class AuthController extends ChandraController
+class AuthController extends Controller
 {
     /**
      * Account sign in.
@@ -25,7 +25,7 @@ class AuthController extends ChandraController
         }
 
         // Show the page
-        return View::make('admin.login');
+        return View::make('login');
     }
 
     /**
@@ -76,7 +76,7 @@ class AuthController extends ChandraController
     public function getRegister()
     {
         // Show the page
-        return View::make('admin.register');
+        return View::make('register');
     }
 
     /**

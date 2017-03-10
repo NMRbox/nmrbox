@@ -25,13 +25,14 @@ use App\User;
 use App\Person;
 use App\Timezone;
 use App\Classification;
+use App\ClassificationPerson;
 use App\Reminder;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use App\Library\Ldap;
 
 
 
-class FrontEndController extends ChandraController
+class FrontEndController extends Controller
 {
 
     protected $validationRules = array(
@@ -86,8 +87,29 @@ class FrontEndController extends ChandraController
             $ldap = new Ldap;
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
 
+            /* Test
+            $ldap_login = true;
+            $user = User::where('person_id', 226)->first();
+            $person = Person::where('id', $user->person_id)->get()->first();
+            if($person){
+                Session::put('person', $person);
+            }
+            Sentinel::login($user);
+            /* Eof Test */
+
             // LDAP login response
             if($ldap_login !== false){
+                if ($user = Sentinel::check())
+                {
+                    // Assigning user classification
+                    $user_classification = ClassificationPerson::where('person_id', $user->person_id)->get();
+                    foreach ($user_classification as $key => $value) {
+                        if ($value->name == 'admin'){
+                            $is_admin = true;
+                            Session::put('user_is_admin', $is_admin);
+                        }
+                    }
+                }
                 return Redirect::route("my-account")->with('success', Lang::get('auth/message.login.success'));
             } else {
                 return Redirect::to('login')->with('error', 'Username or password is incorrect.');
@@ -104,6 +126,25 @@ class FrontEndController extends ChandraController
 
         // Ooops.. something went wrong
         return Redirect::back()->withInput()->withErrors($this->messageBag);
+    }
+
+    /**
+     * Logout page.
+     *
+     * @return Redirect
+     */
+    public function getLogout()
+    {
+        // Log the user out
+        Sentinel::logout();
+
+        //clear the admin session value
+        if(Session::has('user_is_admin')){
+            Session::flush();
+        }
+
+        // Redirect to the users page
+        return Redirect::to('login')->with('success', 'You have successfully logged out!');
     }
 
     /**
@@ -794,19 +835,7 @@ class FrontEndController extends ChandraController
         return Redirect::back()->withInput()->withErrors($this->messageBag);
     }
 
-    /**
-     * Logout page.
-     *
-     * @return Redirect
-     */
-    public function getLogout()
-    {
-        // Log the user out
-        Sentinel::logout();
 
-        // Redirect to the users page
-        return Redirect::to('login')->with('success', 'You have successfully logged out!');
-    }
 
 
 }

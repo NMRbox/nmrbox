@@ -12,16 +12,11 @@ use Input;
 Use DebugBar\DebugBar;
 
 
-class PageController extends ChandraController {
+class PageController extends Controller {
 
 
     private $tags ;
 
-    public function __construct()
-    {
-        parent::__construct();
-//        $this->tags = Page::tagArray();
-    }
     /**
      * @return \Illuminate\View\View
      */

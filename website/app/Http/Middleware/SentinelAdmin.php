@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Sentinel;
 use Redirect;
+use Session;
 
 class SentinelAdmin
 {
@@ -18,8 +19,8 @@ class SentinelAdmin
     public function handle($request, Closure $next)
     {
         if(!Sentinel::check())
-            return Redirect::to('admin/login')->with('error', 'You must be logged in!');
-        elseif(!Sentinel::inRole('admin'))
+            return Redirect::to('login')->with('error', 'You must be logged in!');
+        elseif(!Session::has('user_is_admin'))
             return Redirect::to('my-account');
 
         return $next($request);

@@ -39,7 +39,7 @@
 <!-- header logo: style can be found in header-->
 <header class="header">
     <nav class="navbar navbar-static-top" role="navigation">
-        <a href="{{ route('dashboard')}}" class="logo">
+        <a href="{{ route('home')}}" class="logo">
             <!-- Add the class icon to your logo image or logo icon to add the margining -->
             <img src="{{ asset('assets/images/logo2.png') }}" alt="logo"/>
         </a>
@@ -51,12 +51,17 @@
         </div>
 
         <div class="navbar-right">
-            <ul class="nav navbar-nav">
-
-                {{-- User Account --}}
-                @include('admin.layouts._user_menu')
-
-            </ul>
+            <span style="color: white; font-weight: bold;">Welcome, {!! Session::get('person')->first_name !!} {!! Session::get('person')->last_name !!}</span>
+            &nbsp; | &nbsp;
+            <a href="{{ URL::to('my-account') }}" class="btn btn-outline-primaryy" style="color: white;">
+                <i class="fa fa-fw fa-2x fa-cog"></i>
+                <b>My Account</b>
+            </a>
+            &nbsp; | &nbsp;
+            <a href="{{ URL::to('logout') }}" class="btn btn-outline-primaryy" style="color: white;">
+                <i class="fa fa-fw fa-2x fa-sign-out"></i>
+                <b>Logout</b>
+            </a>
         </div>
     </nav>
 </header>
@@ -68,7 +73,7 @@
             <div id="menu" role="navigation">
 
                 {{-- user bio --}}
-                @include('admin.layouts._left_bio')
+                {{--@include('admin.layouts._left_bio')--}}
 
                 <ul class="navigation">
                     <li {{ (Request::is('admin') ? 'class="active"' : '') }}>

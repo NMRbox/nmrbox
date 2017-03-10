@@ -118,63 +118,9 @@
 
                     <li {{ (Request::is('registry') ? 'class=active' : '') }}><a href="{{ URL::to('registry') }}"> Registry</a></li>
 
-
-
-
-                    @if ($user = Sentinel::getUser())
-                        @if(Sentinel::inRole('admin'))
-                            <li>
-                                <a href="{{ URL::to('admin') }}">Admin</a>
-                            </li>
-                        @endif
-
-                        @if(Sentinel::inRole('dillon'))
-                        <li class="dropdown {{ (Request::is('aboutus') || Request::is('timeline') || Request::is('blank') ? 'active' : '') }}"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> Pages</a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ URL::to('aboutus') }}">About Us</a></li>
-                                <li><a href="{{ URL::to('timeline') }}">Timeline</a></li>
-                                <li><a href="{{ URL::to('404') }}">404 Page</a>
-                                </li>
-                                <li><a href="{{ URL::to('500') }}">500 Page</a>
-                                </li>
-                                <li><a href="{{ URL::to('blank') }}">Blank</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown {{ (Request::is('typography') || Request::is('advancedfeatures') || Request::is('grid') ? 'active' : '') }}"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> Features</a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ URL::to('typography') }}">Typography</a>
-                                </li>
-                                <li><a href="{{ URL::to('advancedfeatures') }}">Advanced Features</a>
-                                </li>
-                                <li><a href="{{ URL::to('grid') }}">Grid System</a>
-                                </li>
-                                <li class="hidden-xs hidden-lg hidden-md"><a href="{{ URL::to('price') }}">Price</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown {{ (Request::is('portfolio') || Request::is('portfolioitem') ? 'active' : '') }}"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> Portfolio</a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ URL::to('portfolio') }}">Portfolio</a>
-                                </li>
-                                <li><a href="{{ URL::to('portfolioitem') }}">Portfolio Item</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="hidden-sm {{ (Request::is('price') ? 'active' : '') }}">
-                            <a href="{{ URL::to('price') }}">Price</a>
-                        </li>
-                        <li {{ (Request::is('blog') || Request::is('blog/*') ? 'class=active' : '') }}><a href="{{ URL::to('blog') }}">Blog</a>
-                        <li {{ (Request::is('contact') ? 'class=active' : '') }}><a href="{{ URL::to('contact') }}">Contact</a>
-                        </li>
-                        @endif
-                    @endif
                     {{--based on anyone login or not display menu items--}}
                     @if(Sentinel::guest())
                         <li><a href="{{ URL::to('login') }}">Login</a>
-                        {{--<li><a href="{{ URL::to('admin/login') }}">Login</a>--}}
-                        {{--</li>--}}
-                        {{--<li><a href="{{ URL::to('register') }}">Register</a>--}}
-                        {{--</li>--}}
                     @else
                         <li {{ (Request::is('my-account') ? 'class=active' : '') }}><a href="{{ URL::to('my-account') }}">My Account</a>
                         </li>
@@ -194,66 +140,7 @@
     <footer>
         <div class="container ftr-txt">
             <div class="row">
-                {{--<!-- About Us Section Start -->--}}
-                {{--<div class="col-sm-3 col-xs-12">--}}
-                    {{--<h3>About us</h3>--}}
-                    {{--<p>--}}
-                        {{--There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum.--}}
-                    {{--</p>--}}
-                {{--</div>--}}
-                {{--<!-- //About Us Section End -->--}}
-                {{--<!-- Recent post Section Start -->--}}
-                {{--<div class="col-sm-3 col-xs-12 recen-post">--}}
-                    {{--<h3>Recent Posts</h3>--}}
-                    {{--<ul class="list-unstyled recen-post">--}}
-                        {{--<li>--}}
-                            {{--<img src="{{ asset('assets/images/c2.jpg') }}" class="ftr-image-small" /> <span class="fotr-post">Lorem Ipsum is simply dummy text of the printing industry.--}}
-                            {{--</span>--}}
-                        {{--</li>--}}
-                        {{--<li>--}}
-                            {{--<img src="{{ asset('assets/images/c3.jpg') }}" class="ftr-image-small" /> <span class="fotr-post">Lorem Ipsum is simply dummy text of the printing industry.--}}
-                            {{--</span>--}}
-                        {{--</li>--}}
-                        {{--<li>--}}
-                            {{--<img src="{{ asset('assets/images/c4.jpg') }}" class="ftr-image-small" /> <span class="fotr-post">Lorem Ipsum is simply dummy text of the printing industry.--}}
-                            {{--</span>--}}
-                        {{--</li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-                {{--<!-- //Recent Post Section End -->--}}
-                {{--<!-- GetIn Touch Section Start -->--}}
-                {{--<div class="col-sm-3 col-xs-12">--}}
-                    {{--<h3>get in touch</h3>--}}
-                    {{--<p>--}}
-                        {{--<i class="fa  fa-map-marker"></i>&nbsp;Gieringer Robert E MD 2751 Debarr Rd #320 Anchorage, AK(Alaska) 99508--}}
-                    {{--</p>--}}
-                    {{--<p>--}}
-                        {{--<i class="fa fa-mobile-phone"></i> Phone:&nbsp;(907) 563-3232 --}}
-                    {{--</p>--}}
-                    {{--<p>--}}
-                        {{--<i class="fa fa-envelope-o"></i> E-mail:&nbsp; <a href="mailto:"><span class="text-white">info@domain.com</span></a>--}}
-                    {{--</p>--}}
-                    {{--<p>--}}
-                        {{--<i class="fa fa-skype"></i> Skype:&nbsp;<span class="text-white">domain</span>--}}
-                    {{--</p>--}}
-                {{--</div>--}}
-                {{--<!-- //GetIn Touch Section End -->--}}
-                {{--<!-- Subscribe Section Start -->--}}
-                {{--<div class="col-sm-3 col-xs-12">--}}
-                    {{--<h3>Subscribe</h3>--}}
-                    {{--<p>--}}
-                        {{--The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced.--}}
-                    {{--</p>--}}
-                    {{--<form class="ftr-form">--}}
-                        {{--<div class="input-group">--}}
-                            {{--<input type="email" class="form-control" placeholder="E-mail" />--}}
-                            {{--<a href="#">--}}
-                                {{--<input type="button" class="btn btn-primary" value="Submit" />--}}
-                            {{--</a>--}}
-                        {{--</div>--}}
-                    {{--</form>--}}
-                {{--</div>--}}
-                {{--<!-- //Subscribe Section End -->--}}
+
             </div>
         </div>
     </footer>
@@ -282,32 +169,6 @@
                 </div>
             </div>
 
-            <!-- Icon Section Start -->
-            {{--<div class="pad_top10">--}}
-            {{--<ul class="list-inline" id="icon_section">--}}
-                {{--<li>--}}
-                    {{--<a href="#"> <i class="fa fa-facebook"></i>--}}
-                    {{--</a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a href="#"> <i class="fa fa-google-plus"></i>--}}
-                    {{--</a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a href="#"> <i class="fa fa-twitter"></i>--}}
-                    {{--</a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a href="#"> <i class="fa fa-linkedin"></i>--}}
-                    {{--</a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a href="#"> <i class="fa fa-rss"></i>--}}
-                    {{--</a>--}}
-                {{--</li>--}}
-            {{--</ul>--}}
-            {{--</div>--}}
-        <!-- //Icon Section End -->
             </div>
         </div>
     </div>

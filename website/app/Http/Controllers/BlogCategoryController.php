@@ -6,7 +6,7 @@ use App\Http\Requests;
 use App\Http\Requests\BlogCategoryRequest;
 use App\BlogCategory;
 
-class BlogCategoryController extends ChandraController {
+class BlogCategoryController extends Controller {
 
     /**
      * Display a listing of the resource.

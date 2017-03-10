@@ -90,6 +90,15 @@
                 </div>
             </div>
 
+            @if(Session::has('user_is_admin') == true)
+            <div class="row">
+                <div class="alert alert-info">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <p class="text-center">You have access to the administrative section. <a href="{!! url("/admin") !!}" class="btn btn-md btn-warning"><i class="fa fa-cog fa-lg"> Admin Panel</i></a></p>
+                </div>
+            </div>
+            @endif
+
             <div class="row">
                 {{--<div class="col-md-12">--}}
                 <div class="col-sm-12 col-md-6 toppad">

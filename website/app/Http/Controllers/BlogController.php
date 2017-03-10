@@ -14,14 +14,13 @@ use Response;
 Use DebugBar\DebugBar;
 
 
-class BlogController extends ChandraController {
+class BlogController extends Controller {
 
 
     private $tags ;
 
     public function __construct()
     {
-        parent::__construct();
         $this->tags = Blog::tagArray();
     }
     /**
