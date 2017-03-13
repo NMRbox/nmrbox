@@ -46,7 +46,6 @@ Route::group(array('prefix' => 'registry'), function() {
     Route::get('/', array('as' => 'registry','uses' => 'RegistryController@index'));
     Route::get('{software}', array('as' => 'software-page','uses' => 'RegistryController@getSoftware'));
     Route::post('software-search',array('as' => 'software-search','uses' => 'RegistryController@postRegistrySearch'));
-    Route::match(['get', 'post'], 'tags/all-tags', array('as' => 'all-tags','uses' => 'KeywordController@getAllKeywords'));
 });
 
 /* Keywords management */
@@ -57,6 +56,16 @@ Route::group(array('prefix' => 'tags'), function() {
     Route::get('all-tags', array('as' => 'all-tags','uses' => 'KeywordController@getAllKeywords'));
     Route::post('all-tags', array('as' => 'all-tags','uses' => 'KeywordController@getAllKeywords'));
 });
+
+/* Categoryies management */
+Route::model('category', 'App\Category');
+Route::group(array('prefix' => 'cats'), function() {
+    //All basic routes defined here
+    Route::get('/', array('as' => 'cats','uses' => 'CategoryController@index'));
+    Route::get('all-cats', array('as' => 'all-cats','uses' => 'CategoryController@getAllCategories'));
+    Route::post('all-cats', array('as' => 'all-cats','uses' => 'CategoryController@getAllCategories'));
+});
+
 
 // All files public for now, unless requirements change
 Route::model('file', 'App\File');
@@ -221,6 +230,8 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{category}/edit', array('as' => 'category.edit', 'uses' => 'CategoryController@edit'));
         Route::put('{category}/edit', array('as' => 'category.update', 'uses' => 'CategoryController@update'));
         Route::get('{category}/delete', array('as' => 'category.delete', 'uses' => 'CategoryController@destroy'));
+        Route::get('all-cats', array('as' => 'all-cats','uses' => 'CategoryController@getAllCategories'));
+        Route::post('all-cats', array('as' => 'all-cats','uses' => 'CategoryController@getAllCategories'));
     });
 
     # Lab Role Management

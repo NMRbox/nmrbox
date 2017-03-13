@@ -133,6 +133,11 @@ class KeywordController extends Controller
         return redirect("admin/keyword");
     }
 
+    /**
+     * Populate all the keywords
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getAllKeywords()
     {
         $keywords = Keyword::All();

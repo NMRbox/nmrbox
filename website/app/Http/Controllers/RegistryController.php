@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 Use App\Software;
+use App\Category;
 Use App\Keyword;
 Use App\VM;
 Use App\SoftwareVersion;
@@ -87,10 +88,17 @@ class RegistryController extends Controller
             if($field == 'software_category') {
                 // menu_category relation
                 if($category != null){
+                    $cat = new Category();
+                    $cat = $cat->keywords();
+                    foreach ($category as $key => $val){
+                        $cat = $cat->orWherePivot('keyword_category_id', '=', $val);
+                    }
+                    $cat = $cat->get();
+
                     $menus = new Keyword();
                     $menus = $menus->software();
-                    foreach ($category as $key => $val){
-                        $menus = $menus->orWherePivot('menu_id', '=', $val);
+                    foreach ($cat as $key => $val){
+                        $menus = $menus->orWherePivot('menu_id', '=', $val->id);
                     }
                     $menus = $menus->get();
                 }

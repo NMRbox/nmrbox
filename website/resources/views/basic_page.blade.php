@@ -25,7 +25,7 @@
                     @endif
 
                     @if ($user = Sentinel::getUser())
-                        @if(Sentinel::inRole('admin'))
+                        @if(Session::has('user_is_admin'))
                             <br>
                             <span>
                                 <a href="{{ route('update/page', $page->slug) }}">Edit this page</a>

@@ -57,7 +57,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "GET",
-                url: 'tags/all-tags',
+                url: 'cats/all-cats',
                 success: function (data) {
                     form_input_field += "<select name='menus[]' class='form-control tags_dropdown search_fields'>";
                     form_input_field += "<option value=''>-- Please select -- </option>";

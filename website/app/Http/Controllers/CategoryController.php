@@ -166,4 +166,23 @@ class CategoryController extends Controller
         $category->delete();
         return redirect("admin/categories");
     }
+
+    /**
+     * Populate all the categories
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllCategories()
+    {
+        $categories = Category::All();
+
+        $all_categories = array();
+        foreach ($categories as $key => $val){
+
+            $all_categories[] = array('id' => $val->id, 'label' => $val->name);
+        }
+
+        return response( json_encode( array( 'message' => $all_categories ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
+    }
 }
