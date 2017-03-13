@@ -27,7 +27,7 @@
             <h2 class="text-center text-primary logo-text">NMRbox</h2>
             <h2 class="text-center text-primary">
                 Register  or
-                <a href="{{ route('admin-login') }}">Sign in</a>
+                <a href="{{ route('login') }}">Sign in</a>
             </h2>
         </div>
         <div class="panel-body social col-sm-offset-3">

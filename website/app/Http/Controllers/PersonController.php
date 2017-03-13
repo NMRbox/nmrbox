@@ -368,8 +368,8 @@ class PersonController extends Controller
             $person_institution_name = $user->institution()->get()->first()->name;
 
             // message body str_replace array
-            $search = array('%%first_name%%', '%%last_name%%', '%%nmrbox_acct%%', '%%preferred_email%%', '%%institutional_email%%', '%%institution%%', '%%category%%');
-            $replace = array('%%first_name%%' => $user->first_name, '%%last_name%%' => $user->last_name,'%%nmrbox_acct%%' => $user->nmrbox_acct, '%%preferred_email%%' => $user->email, '%%institutional_email%%' => $user->email_institution, '%%institution%%' => $person_institution_name, '%%category%%' => $user->category);
+            $search = array('%%first_name%%', '%%last_name%%', '%%nmrbox_acct%%', '%%preferred_email%%', '%%institutional_email%%', '%%institution%%');
+            $replace = array('%%first_name%%' => $user->first_name, '%%last_name%%' => $user->last_name,'%%nmrbox_acct%%' => $user->nmrbox_acct, '%%preferred_email%%' => $user->email, '%%institutional_email%%' => $user->email_institution, '%%institution%%' => $person_institution_name);
             $message = str_replace($search, $replace, $msg_body);
 
             //Send mail

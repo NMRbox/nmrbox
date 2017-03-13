@@ -50,7 +50,6 @@
                                     <a href="#" class="btn btn-xs btn-default" data-field-name="preferred_email">Preferred Email</a>
                                     <a href="#" class="btn btn-xs btn-default" data-field-name="institutional_email">Institutional Email</a>
                                     <a href="#" class="btn btn-xs btn-default" data-field-name="institution">Institution</a>
-                                    <a href="#" class="btn btn-xs btn-default" data-field-name="category">Category</a>
                                 </div>
                             </div>
 
