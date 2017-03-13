@@ -70,7 +70,7 @@ class RegistryController extends Controller
         $author_name = $request->input('author_name');
 
         /* Instantiating new software object */
-        $software = new Software;
+        $software = new Software();
 
         /* Pulling out the data based on fields */
         foreach($fields as $key => $field) {
@@ -95,21 +95,25 @@ class RegistryController extends Controller
                     }
                     $cat = $cat->get();
 
-                    $menus = new Keyword();
-                    $menus = $menus->software();
-                    foreach ($cat as $key => $val){
-                        $menus = $menus->orWherePivot('menu_id', '=', $val->id);
+                    if(count($cat) > 0){
+                        $menus = new Keyword();
+                        $menus = $menus->software();
+                        foreach ($cat as $key => $val){
+                            $menus = $menus->orWherePivot('menu_id', '=', $val->id);
+                        }
+                        $menus = $menus->get();
+                        // fetching menu_ids
+                        foreach ($menus as $data){
+                            $menu_id[] = $data->id;
+                        }
+                    } else {
+                        $menu_id[]=array();
                     }
-                    $menus = $menus->get();
-                }
 
-                // fetching menu_ids
-                foreach ($menus as $data){
-                    $menu_id[] = $data->id;
                 }
-
                 // fetching software details
                 $software = $software->whereIn('id', $menu_id);
+
             }
 
             /* VM Version search */
@@ -204,7 +208,7 @@ class RegistryController extends Controller
         foreach ($all_software as $software){
             $soft_array[] = array('id' => $software->id, 'name' => $software->name, 'synopsis' => $software->synopsis, 'slug' => $software->slug);
         }
-        //dd($all_software);
+
 
         return response( json_encode( array( 'message' => $soft_array ) ), 200 )
             ->header( 'Content-Type', 'application/json' );

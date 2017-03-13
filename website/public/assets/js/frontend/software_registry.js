@@ -135,7 +135,7 @@ $(document).ready(function() {
             data: form_data,
             dataType: 'json',
             success: function (data) {
-                console.log(data.message);
+
                 var soft_array = data.message;
 
                 $('#filter_result').html("");
@@ -158,6 +158,7 @@ $(document).ready(function() {
                 });
             },
             error: function (data) {
+                $('#filter_result').html("");
                 $('#filter_result').append('' +
                     '<div class="col-sm-3 registry-package">' +
                     '<div class="registry-package-wrapper">' +
