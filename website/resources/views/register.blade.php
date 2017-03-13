@@ -68,8 +68,7 @@
                     {!! BootForm::select('time_zone_id', "Time Zone",
                             $timezones_for_select, 169, array('required' => 'required')) !!}
 
-                    {!! BootForm::submit('Save', array('class'=>'btn btn-primary btn-lg btn-block ')) !!}
-                    {{--{!! BootForm::submit('Reset', array('class'=>'btn btn-primary btn-lg btn-block')) !!}--}}
+                    {!! BootForm::submit('Register', array('class'=>'btn btn-primary btn-lg btn-block ')) !!}
 
                 {!! BootForm::close() !!}
             </div>
