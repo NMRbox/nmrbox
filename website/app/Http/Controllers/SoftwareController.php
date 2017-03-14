@@ -511,7 +511,7 @@ class SoftwareController extends Controller
         }
 
         $software->update($all);
-        return back();
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update'));
     }
 
     /**
