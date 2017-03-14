@@ -495,21 +495,6 @@ class SoftwareController extends Controller
         //Get the software info from DB
         $software = Software::where('id', '=', $software_id)->get()->first();
 
-        $all = $request->all();
-
-        // change string "null" to literal null
-        foreach($all as $key=>$value) {
-            if($value == "null") {
-                $all[$key] = null;
-            }
-            if($value == "false") {
-                $all[$key] = false;
-            }
-            if($value == "true") {
-                $all[$key] = true;
-            }
-        }
-
         $software->update($request->all());
         return back();
     }
