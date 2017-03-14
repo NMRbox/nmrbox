@@ -12,6 +12,7 @@
 {!! BootForm::select('devel_include', "Does the developer intend to include the software in NMRbox?",
     array("null"=>"Unknown", "false"=>"No", "true"=>"Yes"), $software->boolToString($software->devel_include), array()) !!}
 
+{{--
 {!! BootForm::select('nfp_release', "Permission for not-for-profit release?",
     array("null"=>"Unknown", "false"=>"No", "true"=>"Yes"), $software->boolToString($software->nfp_release), array()) !!}
 
@@ -23,6 +24,7 @@
 
 {!! BootForm::select('commercial_release', "Permission for commercial release?",
     array("null"=>"Unknown", "false"=>"No", "true"=>"Yes"), $software->boolToString($software->commercial_release), array()) !!}
+--}}
 
 {!! BootForm::select('devel_redistrib_doc', "Has developer given permission to redistribute documentation?",
     array("null"=>"Unknown", "false"=>"No", "true"=>"Yes"), $software->boolToString($software->devel_redistrib_doc), array()) !!}
