@@ -14,7 +14,7 @@ class SoftwareVersionRequest extends Request {
      */
     public function authorize()
     {
-        if(Sentinel::inRole('admin')) {
+        if(Session::has('user_is_admin')){
             return true;
         }
         else {
