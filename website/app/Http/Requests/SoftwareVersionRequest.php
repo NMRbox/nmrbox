@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Session;
 use App\Http\Requests\Request;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
