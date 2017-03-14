@@ -170,11 +170,8 @@ class SoftwareController extends Controller
             'people', 'all_citations', 'attached_citations', 'all_keywords', 'all_categories', 'keywords'));
     }
 
-    public function storeSoftwareVersion(SoftwareVersionRequest $request, $software_id)
+    public function storeSoftwareVersion(SoftwareVersionRequest $request, Software $software)
     {
-        //Get the software info from DB
-        $software = Software::where('slug', $software_id)->first();
-
         $submitted_versions = $request->version;
 
         foreach( $submitted_versions as $version ) {
@@ -267,9 +264,8 @@ class SoftwareController extends Controller
      */
     public function addNewPerson(SoftwarePeopleRequest $request, $software_id)
     {
-        //Get the software info from DB
-        $software = Software::where('slug', $software_id)->first();
-
+        $software = Software::where('id', '=', $software_id)->get()->first();
+        
         $new_person = new Person( $request->all() );
         $new_person->save();
 
@@ -293,8 +289,7 @@ class SoftwareController extends Controller
      */
     public function addExistingPerson(Request $request, $software_id)
     {
-        //Get the software info from DB
-        $software = Software::where('slug', $software_id)->first();
+        $software = Software::where('id', '=', $software_id)->get()->first();
 
         // TODO: validation doesn't actually work, but the DB won't add a dupe. Fix validation. -dj 4/9/16
 
@@ -332,8 +327,7 @@ class SoftwareController extends Controller
      */
     public function addNewKeyword(Request $request, $software_id)
     {
-        //Get the software info from DB
-        $software = Software::where('slug', $software_id)->first();
+        $software = Software::where('id', '=', $software_id)->get()->first();
 
         $new_keyword = new Keyword( $request->all() );
         $new_keyword->save();
@@ -357,8 +351,7 @@ class SoftwareController extends Controller
      */
     public function addExistingKeyword(Request $request, $software_id)
     {
-        //Get the software info from DB
-        $software = Software::where('slug', $software_id)->first();
+        $software = Software::where('id', '=', $software_id)->get()->first();
 
         // TODO: validation doesn't actually work, but the DB won't add a dupe. Fix validation. Or maybe allow user to select only values not already attached to software? Both? -dj 5/5/16
 
@@ -431,7 +424,7 @@ class SoftwareController extends Controller
     public function detachPerson($software_id, Person $person)
     {
         //Get the software info from DB
-        $software = Software::where('slug', $software_id)->first();
+        $software = Software::where('id', '=', $software_id)->get()->first();
 
         try {
             $software->people()->detach($person->id);
@@ -453,7 +446,7 @@ class SoftwareController extends Controller
     public function detachKeyword($software_id, Keyword $keyword)
     {
         //Get the software info from DB
-        $software = Software::where('slug', $software_id)->first();
+        $software = Software::where('id', '=', $software_id)->get()->first();
 
         try {
             $software->keywords()->detach($keyword->id);
@@ -475,8 +468,9 @@ class SoftwareController extends Controller
     public function updatePeople(SoftwarePeopleRequest $request, $software_id)
     {
         //Get the software info from DB
-        $software = Software::where('slug', $software_id)->first();
+        $software = Software::where('id', '=', $software_id)->get()->first();
 
+        dd($request->all());
         $existing_person_id = $request->existing_person;
 
         try {
@@ -499,7 +493,7 @@ class SoftwareController extends Controller
     public function updateLegal(SoftwareLegalRequest $request, $software_id)
     {
         //Get the software info from DB
-        $software = Software::where('slug', $software_id)->first();
+        $software = Software::where('id', '=', $software_id)->get()->first();
 
         $all = $request->all();
 
