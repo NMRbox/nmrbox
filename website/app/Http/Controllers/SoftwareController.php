@@ -265,7 +265,7 @@ class SoftwareController extends Controller
     public function addNewPerson(SoftwarePeopleRequest $request, $software_id)
     {
         $software = Software::where('id', '=', $software_id)->get()->first();
-        
+
         $new_person = new Person( $request->all() );
         $new_person->save();
 
@@ -510,7 +510,7 @@ class SoftwareController extends Controller
             }
         }
 
-        $software->update($all);
+        $software->update($request->all());
         return back();
     }
 
