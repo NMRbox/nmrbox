@@ -393,7 +393,6 @@ class SoftwareController extends Controller
         //Get the software info from DB
         $software = Software::where('slug', '=', $slug)->get()->first();
 
-        dd($request->all());
         $existing_person_id = $request->existing_person;
 
         try {
