@@ -65,7 +65,8 @@ trait FileHandler {
 
     }
 
-    public function storeFiles(Request $request, Software $software) {
+    public function storeFiles(Request $request, $software_slug) {
+        $software = Software::where('slug', $software_slug)->get()->first();
         $all_files = Input::file();
 
         foreach( $all_files as $label => $f ) {
@@ -84,8 +85,9 @@ trait FileHandler {
      * @param  Software $software, File $file
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteFile(Software $software, File $file)
+    public function deleteFile($software_slug, $file_slug)
     {
+        $file = File::where('slug', $file_slug)->get()->first();
         $file->delete();
         return back()->withInput();
     }
@@ -96,7 +98,8 @@ trait FileHandler {
      * @param  Software $software, File $file
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function downloadFile(File $file) {
+    public function downloadFile($file_slug) {
+        $file = File::where('slug', $file_slug)->get()->first();
         // To be consistent, for the time being we'll use the slug as the download name
         $headers = array('Content-type' => $file->mime_type, // 'application/octet-stream' if need to force for older browsers
             'Content-length' => $file->size,

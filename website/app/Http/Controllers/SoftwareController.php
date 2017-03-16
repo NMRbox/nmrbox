@@ -165,9 +165,33 @@ class SoftwareController extends Controller
 
         }
 
+        /*
+         * TODO: Add files for files tab.
+         * */
+        $software_files = $software->files()->where('software_id', $software->id)->get();
+        //dd($software_files);
+
+        /*
+         * TODO: Add images for images tab
+         * */
+
         return view('admin.software.edit',compact('software', 'files', 'vm_versions',
             'software_versions', "vm_versions_for_select", "software_versions_for_select", "people_for_select",
             'people', 'all_citations', 'attached_citations', 'all_keywords', 'all_categories', 'keywords'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  SoftwareRequest $request
+     * @param  Software $software
+     * @return \Illuminate\Http\Response
+     */
+    public function update(SoftwareRequest $request, $software_id)
+    {
+        $software = Software::where('id', $software_id)->get()->first();
+        $software->update($request->all());
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update'));
     }
 
     public function storeSoftwareVersion(SoftwareVersionRequest $request, Software $software)
@@ -242,16 +266,55 @@ class SoftwareController extends Controller
     }
 
     /**
+     * Attach a citation to this software.
+     *
+     * @param  Software  $software
+     * @param  Citation  $citation
+     * @return \Illuminate\Http\Response
+     */
+    public function attachCitation($software, $citation) {
+        try {
+            $software->citations()->attach($citation);
+            return back();
+        }
+        catch(\Illuminate\Database\QueryException $e) {
+            dd($e);
+        }
+    }
+
+    /**
+     * Detach a citation from this software.
+     *
+     * @param  Software  $software
+     * @param  Citation  $citation
+     * @return \Illuminate\Http\Response
+     */
+    public function detachCitation($software, $citation) {
+        try {
+            $software->citations()->detach($citation);
+            return back();
+        }
+        catch(\Illuminate\Database\QueryException $e) {
+            dd($e);
+        }
+    }
+
+
+    /**
      * Update the specified resource in storage.
      *
-     * @param  SoftwareRequest $request
+     * @param  SoftwareLegalRequest  $request
      * @param  Software $software
      * @return \Illuminate\Http\Response
      */
-    public function update(SoftwareRequest $request, $software_id)
+    public function updateLegal(SoftwareLegalRequest $request, $software_id)
     {
-        $software = Software::where('id', $software_id)->get()->first();
-        $software->update($request->all());
+        //Get the software info from DB
+        $software = Software::where('id', '=', $software_id)->get()->first();
+
+        $all = $request->all();
+
+        $software->update($all);
         return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update'));
     }
 
@@ -289,7 +352,7 @@ class SoftwareController extends Controller
      */
     public function addExistingPerson(Request $request, $software_id)
     {
-        $software = Software::where('id', '=', $software_id)->get()->first();
+        $software = Software::where('slug', '=', $software_id)->get()->first();
 
         // TODO: validation doesn't actually work, but the DB won't add a dupe. Fix validation. -dj 4/9/16
 
@@ -317,6 +380,53 @@ class SoftwareController extends Controller
 
         return back();
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  SoftwareDeveloperRequest  $request
+     * @param  Software $software
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePeople(SoftwarePeopleRequest $request, $slug)
+    {
+        //Get the software info from DB
+        $software = Software::where('slug', '=', $slug)->get()->first();
+
+        dd($request->all());
+        $existing_person_id = $request->existing_person;
+
+        try {
+            $software->people()->attach($existing_person_id);
+        }
+        catch(\Illuminate\Database\QueryException $e) {
+        }
+
+        return back();
+    }
+
+
+    /**
+     * Detach a person from the specified resource in storage.
+     *
+     * @param  SoftwareDeveloperRequest  $request
+     * @param  Software $software
+     * @return \Illuminate\Http\Response
+     */
+    public function detachPerson($software_id, $person_id)
+    {
+        //Get the software info from DB
+        $software = Software::where('id', '=', $software_id)->get()->first();
+
+        try {
+            $software->people()->detach($person_id);
+        }
+        catch(\Illuminate\Database\QueryException $e) {
+        }
+
+        return back();
+    }
+
 
     /** DEPRECATED
      * Add a new keyword and attach him or her to the software.
@@ -413,29 +523,6 @@ class SoftwareController extends Controller
         return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update_keyword'));
     }
 
-
-    /**
-     * Detach a person from the specified resource in storage.
-     *
-     * @param  SoftwareDeveloperRequest  $request
-     * @param  Software $software
-     * @return \Illuminate\Http\Response
-     */
-    public function detachPerson($software_id, Person $person)
-    {
-        //Get the software info from DB
-        $software = Software::where('id', '=', $software_id)->get()->first();
-
-        try {
-            $software->people()->detach($person->id);
-        }
-        catch(\Illuminate\Database\QueryException $e) {
-            dd($e);
-        }
-
-        return back();
-    }
-
     /**
      * Detach a keyword from the specified resource in storage.
      *
@@ -452,99 +539,10 @@ class SoftwareController extends Controller
             $software->keywords()->detach($keyword->id);
         }
         catch(\Illuminate\Database\QueryException $e) {
-            dd($e);
         }
 
         return back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  SoftwareDeveloperRequest  $request
-     * @param  Software $software
-     * @return \Illuminate\Http\Response
-     */
-    public function updatePeople(SoftwarePeopleRequest $request, $software_id)
-    {
-        //Get the software info from DB
-        $software = Software::where('id', '=', $software_id)->get()->first();
 
-        dd($request->all());
-        $existing_person_id = $request->existing_person;
-
-        try {
-            $software->people()->attach($existing_person_id);
-        }
-        catch(\Illuminate\Database\QueryException $e) {
-            dd($e);
-        }
-
-        return back();
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  SoftwareLegalRequest  $request
-     * @param  Software $software
-     * @return \Illuminate\Http\Response
-     */
-    public function updateLegal(SoftwareLegalRequest $request, $software_id)
-    {
-        //Get the software info from DB
-        $software = Software::where('id', '=', $software_id)->get()->first();
-
-        $all = $request->all();
-
-        // change string "null" to literal null
-        foreach($all as $key=>$value) {
-            if($value == "null") {
-                $all[$key] = null;
-            }
-            if($value == "false") {
-                $all[$key] = false;
-            }
-            if($value == "true") {
-                $all[$key] = true;
-            }
-        }
-
-        $software->update($all);
-        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update'));
-    }
-
-    /**
-     * Attach a citation to this software.
-     *
-     * @param  Software  $software
-     * @param  Citation  $citation
-     * @return \Illuminate\Http\Response
-     */
-    public function attachCitation($software, $citation) {
-        try {
-            $software->citations()->attach($citation);
-            return back();
-        }
-        catch(\Illuminate\Database\QueryException $e) {
-            dd($e);
-        }
-    }
-
-    /**
-     * Detach a citation from this software.
-     *
-     * @param  Software  $software
-     * @param  Citation  $citation
-     * @return \Illuminate\Http\Response
-     */
-    public function detachCitation($software, $citation) {
-        try {
-            $software->citations()->detach($citation);
-            return back();
-        }
-        catch(\Illuminate\Database\QueryException $e) {
-            dd($e);
-        }
-    }
 }

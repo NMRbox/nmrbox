@@ -87,7 +87,7 @@ $(document).ready(function() {
             // pass parameter to html
         }
         else {
-            text = "File label " + NMR.edit_software_index++;
+            text = "File label" + NMR.edit_software_index++;
         }
 
         if( target.find("input[name='" + text + "']").length > 0 ) {
