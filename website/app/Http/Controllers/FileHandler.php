@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\File;
 use Input;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Sentinel;
+use Lang;
 use Illuminate\Http\Request;
 Use App\Software;
 
@@ -76,7 +77,8 @@ trait FileHandler {
         }
 
         // redirect back to editing the same page when done
-        return back()->withInput();
+        //return back()->withInput();
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update_files'));
     }
 
     /**
@@ -89,7 +91,7 @@ trait FileHandler {
     {
         $file = File::where('slug', $file_slug)->get()->first();
         $file->delete();
-        return back()->withInput();
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.delete_files'));
     }
 
     /**

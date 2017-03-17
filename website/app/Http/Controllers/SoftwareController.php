@@ -340,7 +340,7 @@ class SoftwareController extends Controller
             return back()->withErrors($e);
         }
 
-//        return back();
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update_people'));
     }
 
     /**
@@ -378,7 +378,7 @@ class SoftwareController extends Controller
             return back()->withErrors($e);
         }
 
-        return back();
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update_people'));
     }
 
     /**
@@ -401,7 +401,7 @@ class SoftwareController extends Controller
         catch(\Illuminate\Database\QueryException $e) {
         }
 
-        return back();
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update_people'));
     }
 
 
@@ -423,7 +423,7 @@ class SoftwareController extends Controller
         catch(\Illuminate\Database\QueryException $e) {
         }
 
-        return back();
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.delete_people'));
     }
 
 
@@ -448,7 +448,7 @@ class SoftwareController extends Controller
             return back()->withErrors($e);
         }
 
-        return back();
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update_keywords'));
     }
 
     /** DEPRECATED
@@ -486,7 +486,7 @@ class SoftwareController extends Controller
             return back()->withErrors($e);
         }
 
-        return back();
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update_keywords'));
     }
 
     /**
