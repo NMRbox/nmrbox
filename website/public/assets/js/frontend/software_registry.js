@@ -54,7 +54,7 @@ $(document).ready(function() {
         var field = this;
 
         if(value == 'software_category'){
-
+            // populating software category index
             $.ajax({
                 type: "GET",
                 url: 'cats/all-cats',
@@ -75,11 +75,26 @@ $(document).ready(function() {
             });
 
         } else if(value == 'vm_version') {
-            form_input_field = "<select name='vm_version[]' class='form-control search_fields'>" +
-                "<option value=''> -- Please select -- </option>" +
-                "<option value='1'>NMRbox Ver 1</option>" +
-                "<option value='2'>NMRbox Ver 2</option>" +
-                "</select>";
+            // populating vm index
+            $.ajax({
+                type: "GET",
+                url: 'vms/all-vms',
+                success: function (data) {
+                    form_input_field += "<select name='vm_version[]' class='form-control search_fields'>";
+                    form_input_field += "<option value=''>-- Please select -- </option>";
+                    $.each(data.message, function(key, value) {
+                        form_input_field += "<option value='"+value.id+"'>NMRbox Ver "+value.label+"</option>";
+                    })
+                    form_input_field += "</select>";
+                    $($(field).parent()[0]).siblings('.form_input_field').html(form_input_field);
+
+                },
+                error: function (data) {
+                    $('#error_msg').html('Something went wrong. Please try again.');
+                    show_alert('error');
+                }
+            });
+
         } else if(value == 'author_name') {
             form_input_field = "<input type='text' name='author_name[]' placeholder='John Doe' class='form-control search_fields'>";
         }else {
