@@ -18,7 +18,10 @@
 {!! BootForm::select('uchc_legal_approve', "Does the agreement signed by the UCHC legal adviser?",
     array("false"=>"No", "true"=>"Yes"), $software->boolToString($software->uchc_legal_approve), array()) !!}
 
-{!! BootForm::select('non_profit_release', "Permission for non for profit release?",
+{!! BootForm::select('execute_license', "Execute the software license?",
+    array("false"=>"No", "true"=>"Yes"), $software->boolToString($software->execute_license), array()) !!}
+
+{!! BootForm::select('non_profit_release', "Permission for non profit release?",
     array("false"=>"No", "true"=>"Yes"), $software->boolToString($software->non_profit_release), array()) !!}
 
 {!! BootForm::select('academic_release', "Permission for academic release?",
@@ -29,6 +32,7 @@
 
 {!! BootForm::select('commercial_release', "Permission for commercial release?",
     array("false"=>"No", "true"=>"Yes"), $software->boolToString($software->commercial_release), array()) !!}
+
 
 {!! BootForm::select('devel_redistribute_doc', "Has developer given permission to redistribute documentation?",
     array("false"=>"No", "true"=>"Yes"), $software->boolToString($software->devel_redistribute_doc), array()) !!}

@@ -57,7 +57,7 @@ Route::group(array('prefix' => 'tags'), function() {
     Route::post('all-tags', array('as' => 'all-tags','uses' => 'KeywordController@getAllKeywords'));
 });
 
-/* Categoryies management */
+/* Categories management */
 Route::model('category', 'App\Category');
 Route::group(array('prefix' => 'cats'), function() {
     //All basic routes defined here
@@ -66,6 +66,14 @@ Route::group(array('prefix' => 'cats'), function() {
     Route::post('all-cats', array('as' => 'all-cats','uses' => 'CategoryController@getAllCategories'));
 });
 
+/* VM management */
+Route::model('VM', 'App\VM');
+Route::group(array('prefix' => 'vms'), function() {
+    //All basic routes defined here
+    Route::get('/', array('as' => 'vms','uses' => 'VMController@index'));
+    Route::get('all-vms', array('as' => 'all-vms','uses' => 'VMController@getAllVMs'));
+    Route::post('all-vms', array('as' => 'all-vms','uses' => 'VMController@getAllVMs'));
+});
 
 // All files public for now, unless requirements change
 Route::model('file', 'App\File');

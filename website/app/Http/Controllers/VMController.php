@@ -84,4 +84,23 @@ class VMController extends Controller
         $vm->delete();
         return redirect('admin/vm');
     }
+
+    /**
+     * Populate all the categories
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllVMs()
+    {
+        $vms = VM::All();
+
+        $all_vms = array();
+        foreach ($vms as $key => $val){
+
+            $all_vms[] = array('id' => $val->id, 'label' => $val->name);
+        }
+
+        return response( json_encode( array( 'message' => $all_vms ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
+    }
 }

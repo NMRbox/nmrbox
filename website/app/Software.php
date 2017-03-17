@@ -32,6 +32,7 @@ class Software extends NmrModel implements SluggableInterface
         'devel_include',
         'custom_license',
         'uchc_legal_approve',
+        'execute_license',
         'non_profit_release',
         'academic_release',
         'government_release',
