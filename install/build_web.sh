@@ -76,10 +76,10 @@ cat <<EO_ENV
 APP_ENV=$env
 APP_DEBUG=true
 APP_KEY=PjRcCklAPB9gcicXagEmpaQdDwnd8Bw9
-APP_URL=nmrbox-webdev.cam.uchc.edu
+APP_URL=nmrbox.org
 
 DB_HOST=data.nmrbox.org
-DB_DATABASE=registry
+DB_DATABASE=$db
 DB_USERNAME=laravel
 DB_PASSWORD=nmr-laravel!
 
@@ -109,7 +109,7 @@ sudo chown -R $account:$account $installdir
 
 cd $installdir || { echo "cd to $installdir failed"; exit 3; }
 php artisan cache:clear
-php artisan config:clear
+php artisan config:cache
 php artisan route:cache
 envpath=$(readlink -f $installdir/.env)
 
