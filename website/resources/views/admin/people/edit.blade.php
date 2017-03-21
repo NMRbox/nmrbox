@@ -60,7 +60,7 @@
                             {!! BootForm::text('country', "Country", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
                             {!! BootForm::select('time_zone_id', "Time Zone",
                                 $timezones_for_select, 169, array('required' => 'required')) !!}
-                            {!! BootForm::submit('Save') !!}
+                            {!! BootForm::submit('Update profile') !!}
                         </div>
                         {!! BootForm::close() !!}
                     </div>
