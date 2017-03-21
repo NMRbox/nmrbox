@@ -10,7 +10,7 @@
         "laravelcollective/html": "5.1.*",
         "cartalyst/sentinel": "2.0.*",
         "cviebrock/eloquent-sluggable": "^3.1",
-        "cviebrock/eloquent-taggable": "dev-master",
+        "cviebrock/eloquent-taggable": "2.0",
         "barryvdh/laravel-debugbar": "^2.0",
         "barryvdh/laravel-ide-helper": "^2.1",
         "watson/bootstrap-form": "^1.0",
@@ -57,4 +57,3 @@
         "preferred-install": "dist"
     }
 }
-

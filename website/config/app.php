@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/New_York',
 
     /*
     |--------------------------------------------------------------------------
@@ -152,7 +152,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         App\Providers\ChandraCrudGeneratorServiceProvider::class,
-        Watson\BootstrapForm\BootstrapFormServiceProvider::class,
+        Watson\BootstrapForm\BootstrapFormServiceProvider::class
+
     ],
 
     /*
