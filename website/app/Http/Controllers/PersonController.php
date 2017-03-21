@@ -165,7 +165,6 @@ class PersonController extends Controller
         // Ooops.. something went wrong
         return Redirect::back()->withInput()->withErrors($this->messageBag);
 
-
     }
 
     /**
@@ -260,9 +259,13 @@ class PersonController extends Controller
             $existing_institution->save();
         }
 
-        $person->save();
+        if($person->save()){
+            return redirect()->back()->withSuccess(Lang::get('users/message.success.update_profile'));
 
-        return redirect('admin/people');
+        }
+
+        return Redirect::back()->withInput()->withErrors($this->messageBag);
+
     }
 
     /**

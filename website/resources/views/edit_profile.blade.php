@@ -65,7 +65,7 @@
                 <h3>Update Profile</h3>
             </div>
 
-            <div class="col-md-12 text-center notifications-box">
+            <div class="col-md-12">
                 <br>
                 @include('notifications')
             </div>
@@ -103,7 +103,7 @@
                         $timezones_for_select, 169, array('required' => 'required')) !!}
                     {{-- csrf token --}}
 
-                    {!! BootForm::submit('Save Changes') !!}
+                    {!! BootForm::submit('Update profile') !!}
                 </div>
                 {!! BootForm::close() !!}
 
