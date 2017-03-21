@@ -65,13 +65,17 @@
                 <h3>Update Profile</h3>
             </div>
 
+            <div class="col-md-12 text-center notifications-box">
+                <br>
+                @include('notifications')
+            </div>
+
             <div class="row">
                 <!-- edit form column -->
                 {{--{!! BootForm::horizontal(array('model'=>$person, 'update'=>'update_profile')) !!}--}}
                 {!! BootForm::horizontal(array('model'=>$person, 'store'=>'person.store', 'update'=>'person.update_profile')) !!}
 
                 <div class="col-md-10 col-sm-10 col-xs-12 personal-info">
-                    @include('notifications')
                     <br>
                     {!! Form::token() !!}
                     {!! BootForm::text('first_name', "First Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
@@ -100,11 +104,6 @@
                     {{-- csrf token --}}
 
                     {!! BootForm::submit('Save Changes') !!}
-
-
-
-
-
                 </div>
                 {!! BootForm::close() !!}
 

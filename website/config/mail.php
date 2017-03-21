@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'info@nmrbox.org', 'name' => 'NMR Box'],
+    'from' => ['address' => 'admin@nmrbox.org', 'name' => 'NMR Box'],
 
     /*
     |--------------------------------------------------------------------------

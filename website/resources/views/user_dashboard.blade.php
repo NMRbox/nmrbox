@@ -334,15 +334,6 @@
 
 
     <script type="text/javascript">
-        function show_alert(alert_type, fade) {
-            $("#"+alert_type+"-alert").removeClass('hidden');
-            $("#"+alert_type+"-alert").alert();
-            if(fade != 'no'){
-                $("#"+alert_type+"-alert").fadeTo(5000, 500).slideUp(500, function(){
-                    $("#"+alert_type+"-alert").slideUp(500);
-                });
-            }
-        }
 
         $(document).ready(function () {
             var panels = $('.user-infos');

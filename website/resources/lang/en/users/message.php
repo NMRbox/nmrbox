@@ -15,14 +15,15 @@ return array(
     'suspended'             => 'suspended',
 
     'success' => array(
-        'create'    => 'User was successfully created.',
-        'update'    => 'User was successfully updated.',
-        'delete'    => 'User was successfully deleted.',
-        'ban'       => 'User was successfully banned.',
-        'unban'     => 'User was successfully unbanned.',
-        'suspend'   => 'User was successfully suspended.',
-        'unsuspend' => 'User was successfully unsuspended.',
-        'restored'  => 'User was successfully restored.'
+        'create'            => 'User was successfully created.',
+        'update'            => 'User was successfully updated.',
+        'update_profile'    => 'Profile successfully updated.',
+        'delete'            => 'User was successfully deleted.',
+        'ban'               => 'User was successfully banned.',
+        'unban'             => 'User was successfully unbanned.',
+        'suspend'           => 'User was successfully suspended.',
+        'unsuspend'         => 'User was successfully unsuspended.',
+        'restored'          => 'User was successfully restored.'
     ),
 
     'error' => array(
