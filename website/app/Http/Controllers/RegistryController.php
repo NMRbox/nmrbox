@@ -78,7 +78,7 @@ class RegistryController extends Controller
             if($field == 'name') {
 
                 foreach ($fields_value as $key => $value){
-                    $software =$software->orWhere(function($qry) use ($value){
+                    $software =$software->where(function($qry) use ($value){
                         foreach($value as $key => $val){
                             $qry->where($key, 'ILIKE', '%'.$val.'%');
                             $qry->where('display', '=', 'TRUE');
