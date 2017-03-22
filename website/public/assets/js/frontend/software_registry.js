@@ -98,8 +98,9 @@ $(document).ready(function() {
         } else if(value == 'author_name') {
             form_input_field = "<input type='text' name='author_name[]' placeholder='John Doe' class='form-control search_fields'>";
         }else {
-            form_input_field = "<input type='text' name='fields_value["+value+"]' placeholder='nmrbox' class='form-control search_fields'>";
+            form_input_field = "<input type='text' name='fields_value[]["+value+"]' placeholder='nmrbox' class='form-control search_fields'>";
         }
+        console.log(form_input_field);
         // remove button
         var form_button = "<a href='#' class='btn btn-sm btn-warning remove_button'><span class='glyphicon glyphicon-minus'></span></a>";
 

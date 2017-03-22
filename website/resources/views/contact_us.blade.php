@@ -13,7 +13,7 @@
 
     {{-- Page content --}}
     @section('content')
-            <!-- Container Section Start -->
+    <!-- Container Section Start -->
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">

@@ -77,11 +77,15 @@ class RegistryController extends Controller
             /* Software name - field search*/
             if($field == 'name') {
 
-                $software =$software->where(function($qry) use ($fields_value){
-                    foreach($fields_value as $key => $val){
-                        $qry->where($key, 'ILIKE', '%'.$val.'%');
-                    }
-                });
+                foreach ($fields_value as $key => $value){
+                    $software =$software->orWhere(function($qry) use ($value){
+                        foreach($value as $key => $val){
+                            $qry->where($key, 'ILIKE', '%'.$val.'%');
+                            $qry->where('display', '=', 'TRUE');
+                        }
+                    });
+                }
+
             }
 
             /* Category search */
@@ -201,7 +205,7 @@ class RegistryController extends Controller
                 $software = $software->whereIn('id', $soft_ver_id);
             }
         }
-        $all_software = $software->where('display', '!=', 'FALSE');
+        $all_software = $software->where('display', '=', 'TRUE');
         $all_software = $software->get();
 
         $soft_array=array();

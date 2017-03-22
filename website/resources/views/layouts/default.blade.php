@@ -120,11 +120,11 @@
 
                     {{--based on anyone login or not display menu items--}}
                     @if(Sentinel::guest())
-                        <li><a href="{{ URL::to('login') }}">Login</a>
+                        <li><a href="{{ URL::to('login') }}">Sign in</a>
                     @else
                         <li {{ (Request::is('my-account') ? 'class=active' : '') }}><a href="{{ URL::to('my-account') }}">My Account</a>
                         </li>
-                        <li><a href="{{ URL::to('logout') }}">Logout</a>
+                        <li><a href="{{ URL::to('logout') }}">Sign out</a>
                         </li>
                     @endif
                 </ul>
@@ -137,6 +137,7 @@
     @yield('content')
 
     <!-- Footer Section Start -->
+    <br><br><br>
     <footer>
         <div class="container ftr-txt">
             <div class="row">
