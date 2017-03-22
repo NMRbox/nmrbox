@@ -323,7 +323,7 @@ class AuthController extends Controller
         Sentinel::logout();
 
         // Redirect to the users page
-        return Redirect::to('admin/login')->with('success', 'You have successfully logged out!');
+        return Redirect::to('homepage')->with('success', 'You have successfully logged out!');
     }
 
 

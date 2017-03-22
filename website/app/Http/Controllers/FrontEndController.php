@@ -87,7 +87,7 @@ class FrontEndController extends Controller
             $ldap = new Ldap;
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
 
-            /* Test
+            /* Test 
             $ldap_login = true;
             $user = User::where('person_id', 226)->first();
             $person = Person::where('id', $user->person_id)->get()->first();
@@ -144,7 +144,7 @@ class FrontEndController extends Controller
         }
 
         // Redirect to the users page
-        return Redirect::to('login')->with('success', 'You have successfully logged out!');
+        return Redirect::to('homepage')->with('success', 'You have successfully logged out!');
     }
 
     /**
