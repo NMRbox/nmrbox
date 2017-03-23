@@ -33,15 +33,13 @@
                     <fieldset>
                         <h2>Please Sign In</h2>
                         <div class="form-group">
-                            {{--<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address">--}}
                             <input type="text" class="form-control" name="username" placeholder="Username" value="{!! Input::old('username') !!}">
                         </div>
                         <div class="form-group">
-                            {{--<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password">--}}
                             <input type="password" class="form-control" name="password" placeholder="Password">
                         </div>
                         <span class="button-checkbox">
-                            <input type="checkbox" name="remember_me" id="remember_me" checked="checked"> Remember Me
+                            <input type="checkbox" name="remember_me" id="remember_me"> Remember Me
                             <a href="{!! route('forgot-password') !!}" class="btn btn-link pull-right">Forgot Password?</a>
 				        </span>
                         <br><br>

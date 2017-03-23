@@ -60,7 +60,7 @@
             &nbsp; | &nbsp;
             <a href="{{ URL::to('logout') }}" class="btn btn-outline-primaryy" style="color: white;">
                 <i class="fa fa-fw fa-2x fa-sign-out"></i>
-                <b>Logout</b>
+                <b>Sign out</b>
             </a>
         </div>
     </nav>
