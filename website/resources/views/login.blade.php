@@ -10,6 +10,11 @@
 @section('header_styles')
     <link href="{{asset('assets/vendors/iCheck/skins/all.css')}}" rel="stylesheet">
     <link href="{{ asset('assets/css/nmr.css') }}" rel="stylesheet">
+    <style type="text/css">
+        .hidden {
+            display: none !important;
+        }
+    </style>
 @stop
 
 
@@ -36,8 +41,7 @@
                             <input type="password" class="form-control" name="password" placeholder="Password">
                         </div>
                         <span class="button-checkbox">
-                            <button type="button" class="btn" data-color="info">Remember Me</button>
-                            <input type="checkbox" name="remember_me" id="remember_me" checked="checked" class="hidden">
+                            <input type="checkbox" name="remember_me" id="remember_me" checked="checked"> Remember Me
                             <a href="{!! route('forgot-password') !!}" class="btn btn-link pull-right">Forgot Password?</a>
 				        </span>
                         <br><br>
