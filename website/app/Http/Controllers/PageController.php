@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Sentinel;
 use Response;
 use Input;
+use Lang;
 Use DebugBar\DebugBar;
 
 
@@ -140,7 +141,7 @@ class PageController extends Controller {
             $page->slug = $slug;
             $page->save();
 
-            return redirect('admin/pages');
+            return redirect('admin/pages')->withSuccess(Lang::get('page/message.success.create'));
 
         } catch (\UnexpectedValueException $e) {
             return back()->withInput()->with('error', 'Invalid slug. Please try another.');
@@ -197,26 +198,15 @@ class PageController extends Controller {
      * @param Page $page
 	 * @return Response
 	 */
-	public function postEdit(PageRequest $request, Page $page)
+	public function postEdit(PageRequest $request, $page_id)
 	{
-//        $picture = "";
-//        if ($request->hasFile('image')) {
-//            $file = $request->file('image');
-//            $filename = $file->getClientOriginalName();
-//            $extension = $file->getClientOriginalExtension()?: 'png';
-//            $folderName      = '/uploads/page/';
-//            $picture = str_random(10).'.'.$extension;
-//            $page->image = $picture;
-//        }
-
-        // creating the object from input slug
-        $slug = $request->input('slug');
-        $page = Page::where('slug', $slug)->first();
+	    // creating the object
+        $page = Page::where('id', $page_id)->first();
 
         $page->user_id = Sentinel::getUser()->id;
         $page->update($request->except('image','_method','tags'));
 
-        return redirect('admin/pages');
+        return Redirect('admin/pages')->withSuccess(Lang::get('page/message.success.update'));
 	}
 
     /**
@@ -225,7 +215,7 @@ class PageController extends Controller {
      * @param $website
      * @return Response
      */
-    public function getModalDelete(String $page_id)
+    public function getModalDelete($page_id)
     {
         $model = 'page';
         $confirm_route = $error = null;
@@ -267,7 +257,7 @@ class PageController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function getDelete(String $page_id)
+	public function getDelete($page_id)
 	{
 
         // do query to get page, which may be soft deleted.
@@ -294,7 +284,7 @@ class PageController extends Controller {
             $page->delete();
         }
 
-        return redirect('admin/pages');
+        return redirect()->back()->withSuccess(Lang::get('page/message.success.delete'));
 	}
 
 }

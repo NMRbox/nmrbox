@@ -81,13 +81,6 @@ People Index
                     <h4 class="panel-title pull-left">
                         <i class="fa fa-fw fa-list"></i>
                         People List
-                        {{-- Advance Query --}}
-                        {{--<div class="row">
-                            <div class="col-md-12">
-                                <a href="#" class="btn btn-sm btn-default" id="query_builder_box"><span class="glyphicon glyphicon-search"></span> Query builder </a>
-                                <a href="#" class="btn btn-sm btn-default clear_filter_box" id="clear_filters"> Clear Filters</a>
-                            </div>
-                        </div>--}}
                     </h4>
                     <div class="pull-right">
                         <a href="{{ URL::to('admin/people/create') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> Add Person</a>
@@ -177,7 +170,6 @@ People Index
                                     <td class="col-md-1">
                                         <a href="{!! URL::to('admin/people/' . $person->id . '/edit' ) !!}"><i class="fa fa-fw fa-pencil text-warning" title="Update person"></i></a>
                                         <a href="#" ><i class="fa fa-fw fa-times text-danger delete-person" data-url="{!! route("person.delete", array('person' => $person->id)) !!}" data-person_name="{!! $person->first_name . " " . $person->last_name !!}" title="Delete person"></i></a>
-                                        <a href="#" data-toggle="modal" data-target="#user_details_modal" data-id="{!! $person->id !!}" id="show_user"><i class="fa fa-fw fa-info text-warning" title="View details"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

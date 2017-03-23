@@ -174,7 +174,7 @@ class CategoryController extends Controller
      */
     public function getAllCategories()
     {
-        $categories = Category::All();
+        $categories = Category::All()->sortBy('name');
 
         $all_categories = array();
         foreach ($categories as $key => $val){

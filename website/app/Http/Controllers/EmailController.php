@@ -113,7 +113,7 @@ class EmailController extends Controller
         $email = Email::where('id', $id)->first();
 
         // email_person object
-        $email_person = EmailPerson::where('email_id', $id)->orderBy('id')->get();
+        $email_person = EmailPerson::where('email_id', $id)->orderBy('sent', 'desc')->get();
 
         $email_log = array();
         foreach ($email_person as $data){

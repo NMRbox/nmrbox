@@ -34,20 +34,8 @@
     <section class="content paddingleft_right15">
         <div class="row">
             <div class="col-lg-12">
-                {{--<div class="btn-group" role="group" aria-label="...">--}}
-                    {{--<a class="btn btn-default btn-sm" href="{{ route('adminSoftware') }}" role="button">Show Active all_software</a>--}}
-                    {{--<a class="btn btn-success btn-sm" href="{{ route('adminSoftware') }}?withTrashed=true" role="button">Include Deleted all_software</a>--}}
-                    {{--<a class="btn btn-danger btn-sm" href="{{ route('adminSoftware') }}?onlyTrashed=true">Show Only Deleted all_software</a>--}}
-                {{--</div>--}}
-                <br />&nbsp;
+
                 <div class="panel panel-primary ">
-                <div class="panel-heading clearfix">
-                    <h3 class="panel-title pull-left">
-                    </h3>
-                    <div class="pull-right">
-                        <a href="{{ URL::to('admin/software/create') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> @lang('button.create')</a>
-                    </div>
-                </div>
                 <div class="panel-body">
                     <table class="table" id="table">
                         <thead>

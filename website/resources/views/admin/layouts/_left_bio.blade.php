@@ -52,11 +52,6 @@
                         Keyword Index
                     </a>
                 </li>
-                <li {{ (Request::is('admin/categories') ? 'class=active' : '') }}>
-                    <a href="{{ URL::to('admin/categories') }}">
-                        Category Index
-                    </a>
-                </li>
             </ul>
         </li>
         <li class="menu-dropdown {{ (Request::is('admin/email') || Request::is('admin/email/create') || Request::is('admin/email/*') ? 'active' : '') }}">

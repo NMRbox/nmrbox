@@ -31,18 +31,13 @@ Pages List
 <!-- Main content -->
 <section class="content paddingleft_right15">
     <div class="row">
-        {{--<div class="btn-group" role="group" aria-label="...">--}}
-            {{--<a class="btn btn-default btn-sm" href="{{ route('pages') }}" role="button">Show Active Pages</a>--}}
-            {{--<a class="btn btn-success btn-sm" href="{{ route('pages') }}?withTrashed=true" role="button">Include Deleted Pages</a>--}}
-            {{--<a class="btn btn-danger btn-sm" href="{{ route('pages') }}?onlyTrashed=true">Show Only Deleted Pages</a>--}}
-        {{--</div>--}}
         <div class="panel panel-primary ">
             <div class="panel-heading clearfix">
                 <h4 class="panel-title pull-left"><i class="fa fa-fw fa-book"></i>
                     Page List
                 </h4>
                 <div class="pull-right">
-                    <a href="{{ URL::to('admin/pages/create') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> @lang('button.create')</a>
+                    <a href="{{ URL::to('admin/pages/create') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> Add new page</a>
                 </div>
             </div>
             <br />
