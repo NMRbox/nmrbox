@@ -206,6 +206,7 @@ class RegistryController extends Controller
             }
         }
         $all_software = $software->where('display', '=', 'TRUE');
+        $all_software = $software->orderBy('id', 'ASC');
         $all_software = $software->get();
 
         $soft_array=array();

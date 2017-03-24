@@ -75,7 +75,9 @@ People Index
                                     {{--<td class="col-md-1">{!! $email_template->content !!}</td>--}}
                                     <td class="col-md-1">
                                         <a href="{!! URL::to('admin/email/' . $email_template->id . '/edit' ) !!}"><i class="fa fa-fw fa-pencil text-warning" title="Update email template"></i></a>
-                                        <a href="#" ><i class="fa fa-fw fa-times text-danger delete_email_template" data-url="{!! route("email.delete", array('email' => $email_template->id)) !!}" data-template_name="{!! $email_template->id !!}" title="Delete"></i></a>
+                                        {{-- As template deletion has reference entry with email_person table,
+                                             the delete link should not be available though it has conditional check and popup messages. --}}
+                                        {{--<a href="#" ><i class="fa fa-fw fa-times text-danger delete_email_template" data-url="{!! route("email.delete", array('email' => $email_template->id)) !!}" data-template_name="{!! $email_template->id !!}" title="Delete"></i></a>--}}
                                     </td>
                                 </tr>
                             @endforeach

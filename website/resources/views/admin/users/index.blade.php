@@ -82,7 +82,6 @@
                                         @if((Sentinel::getUser()->id != $user->id) && ($user->id != 1))
                                             <a href="{{ route('confirm-delete/user', $user->id) }}" data-toggle="modal" data-target="#delete_confirm"><i class="fa fa-fw fa-times text-danger"></i></a>
                                         @endif
-                                        <a href="{{ route('users.show', $user->id) }}"><i class="fa fa-fw fa-star text-primary"></i></a>
                                     @else
                                         <a href="{{ route('restore/user', $user->id) }}"><i class="fa fa-fw fa-undo text-danger"></i></a>
                                     @endif

@@ -122,7 +122,8 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-dropdown {{ (Request::is('admin/lab_roles') || Request::is('admin/lab_roles/create') || Request::is('admin/lab_roles/*') ? 'active' : '') }}">
+        {{-- TODO: if the lab roles related table remove permanently from the DB, then all the lab roles related pages should be deleted. --}}
+        {{--<li class="menu-dropdown {{ (Request::is('admin/lab_roles') || Request::is('admin/lab_roles/create') || Request::is('admin/lab_roles/*') ? 'active' : '') }}">
             <a href="#">
                 <i class="menu-icon  fa fa-fw fa-user"></i>
                 <span>Lab Roles</span>
@@ -136,7 +137,7 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li>--}}
         @if(Sentinel::inRole('dillon'))
             <li class="menu-dropdown  {!! ((Request::is('admin/blogcategory') || Request::is('admin/blogcategory/create') || Request::is('admin/blog') ||  Request::is('admin/blog/create')) || Request::is('admin/blog/*') || Request::is('admin/blogcategory/*') ? 'active' : '') !!}">
                 <a href="#">
