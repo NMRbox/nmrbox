@@ -82,7 +82,7 @@
                                     <h3>
                                         {{--route("software.edit", array("software"=>$software->slug));--}}
                                         <a href="{{ route('software-page',  ['software' => $software->slug] ) }}">
-                                            {{$software->name}}
+                                            {{$software->short_title}}
                                         </a>
                                     </h3>
                                     <p class="description">

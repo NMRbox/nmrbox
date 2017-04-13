@@ -18,15 +18,15 @@ trait FileHandler {
      * @param  UploadedFile $f, string $name
      * @return \App\File
      */
-    public function makeFileFromUploadedFile(UploadedFile $f, string $label) {
+    public function makeFileFromUploadedFile(UploadedFile $f, $label) {
         $newfile = new File();
 
         // parse out file name less .extension
         $name = $f->getClientOriginalName();
-        $newfile->name = $name;
 
+        $newfile->name = $name;
         $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
-        $newfile->label = $label;
+        $newfile->label = $name;
         $newfile->mime_type = $f->getMimeType();
         $newfile->size = $f->getSize();
         $newfile->user_id = Sentinel::getUser()->id;

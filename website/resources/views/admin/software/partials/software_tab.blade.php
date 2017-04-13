@@ -13,7 +13,7 @@
     array('class' => 'input-lg', 'required' => 'required', 'placeholder'=>'Long title for software'))!!}
 
 {!! BootForm::text('url', 'URL', null,
-    array('class' => 'input-lg', 'required' => 'required', 'placeholder'=>'URL'))!!}
+    array('class' => 'input-lg', 'placeholder'=>'URL'))!!}
 
 {!! BootForm::text('synopsis', null, null,
     array('class' => 'input-lg', 'required' => 'required', 'placeholder'=>'Synopsis'))!!}

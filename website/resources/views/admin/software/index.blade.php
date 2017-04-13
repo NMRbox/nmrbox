@@ -41,6 +41,7 @@
                         <thead>
                         <tr class="filters">
                             <th>Name</th>
+                            <th>Short Title</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -48,6 +49,7 @@
                         @forelse ($all_software as $software)
                             <tr>
                                 <td>{!! $software->name !!}</td>
+                                <td>{!! $software->short_title !!}</td>
                                 <td>
                                     <a href="{{ URL::to('admin/software/' . $software->slug . '/edit' ) }}"><i class="fa fa-fw fa-pencil text-warning" title="update software"></i></a>
                                     <a href="{{ URL::to('admin/software/' . $software->slug . '/delete' ) }}" data-toggle="modal" data-target="#delete_confirm"><i class="fa fa-fw fa-times text-danger" title="delete software"></i></a>

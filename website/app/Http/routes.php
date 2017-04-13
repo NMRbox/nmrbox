@@ -266,9 +266,16 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
     });
     
     # File Management
-    Route::group(array('prefix' => 'files','before' => 'Sentinel'), function () {
+    Route::model('file', 'App\File');
+    Route::group(array('prefix' => 'files'), function () {
         Route::get('/', array('as' => 'admin/files', 'uses' => 'FileController@index'));
+        Route::get('{file}', array('as' => 'file.getfile', 'uses' => 'FileController@getFile'));
+        Route::get('create', array('as' => 'file.create', 'uses' => 'FileController@create'));
+        Route::post('create', array('as' => 'file.store', 'uses' => 'FileController@store'));
+        Route::get('{file}/edit', array('as' => 'file.edit', 'uses' => 'FileController@edit'));
+        Route::put('{file}/edit', array('as' => 'file.update', 'uses' => 'FileController@update'));
         Route::get('{file}/delete', array('as' => 'file.delete', 'uses' => 'FileController@destroy'));
+        Route::post('test', array('as' => 'file.test', 'uses' => 'FileController@test'));
     });
 
     # Email Management

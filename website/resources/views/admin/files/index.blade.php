@@ -46,26 +46,34 @@
                     </h3>
                     <div class="pull-right">
                         {{--<a href="{{ URL::to('admin/files/create') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> @lang('button.create')</a>--}}
+
+                        {{--<button type="button" class="btn btn-success add-file"><span class="glyphicon glyphicon-plus"></span> Add another file</button>--}}
+                        <a href="{{ URL::to('admin/files/create') }}" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-plus"></span> Add Another Files</a>
+
                     </div>
                 </div>
                 <div class="panel-body">
                     <table class="table" id="table">
                         <thead>
                         <tr class="filters">
-                            <th>Name</th>
+                            <th>Label</th>
+                            <th>Type</th>
                             <th>Slug</th>
+                            <th>Size</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         @forelse ($all_files as $file)
                             <tr>
-                                <td>{!! $file->name !!}</td>
+                                <td><a href="{!! URL::to('admin/files/' . $file->slug ) !!}" target="_blank">{!! $file->label !!}</a></td>
+                                <td>{!! $file->mime_type !!}</td>
                                 <td>{!! $file->slug !!}</td>
+                                <td>{!! round(($file->size/1024)/1024, 2) !!} MB</td>
                                 <td>
                                     {{--<a href="{{ URL::to('admin/files/' . $file->slug . '/delete' ) }}" data-toggle="modal" data-target="#delete_confirm"><i class="fa fa-fw fa-times text-danger" title="delete files"></i></a>--}}
-
                                     <a href="#">
+                                        <a href="{{ URL::to('admin/files/' . $file->slug . '/edit' ) }}"><i class="fa fa-fw fa-pencil text-warning" title="update blog"></i></a>
                                         <i class="fa fa-fw fa-times text-danger delete-item" data-url="{!! route("file.delete", array('file' => $file->id)) !!}" data-file_name="{!! $file->slug !!}"></i>
                                     </a>
                                 </td>
