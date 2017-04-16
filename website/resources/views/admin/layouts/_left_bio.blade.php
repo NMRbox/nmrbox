@@ -21,7 +21,7 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-dropdown {{ (Request::is('admin/files') || Request::is('admin/files/create') || Request::is('admin/files/*') ? 'active' : '') }}">
+        <li class="menu-dropdown {{ (Request::is('admin/files') || Request::is('admin/files/create') || Request::is('admin/files/*') || Request::is('admin/file_metadata') || Request::is('admin/file_metadata/*') ? 'active' : '') }}">
             <a href="#">
                 <i class="menu-icon  fa fa-fw fa-file"></i>
                 <span>Files</span>
@@ -31,6 +31,11 @@
                 <li {{ (Request::is('admin/files') ? 'class=active' : '') }}>
                     <a href="{{ URL::to('admin/files') }}">
                         File Index
+                    </a>
+                </li>
+                <li {{ (Request::is('admin/file_metadata') ? 'class=active' : '') }}>
+                    <a href="{{ URL::to('admin/file_metadata') }}">
+                        File Metadata Index
                     </a>
                 </li>
             </ul>

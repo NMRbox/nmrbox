@@ -278,6 +278,17 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::post('test', array('as' => 'file.test', 'uses' => 'FileController@test'));
     });
 
+    # File Metadata Management
+    Route::model('file_metadata', 'App\FileMetadata');
+    Route::group(array('prefix' => 'file_metadata'), function () {
+        Route::get('/', array('as' => 'admin/file_metadata', 'uses' => 'FileMetadataController@index'));
+        Route::get('create', array('as' => 'file_metadata.create', 'uses' => 'FileMetadataController@create'));
+        Route::post('create', array('as' => 'file_metadata.store', 'uses' => 'FileMetadataController@store'));
+        Route::get('{file_metadata}/edit', array('as' => 'file_metadata.edit', 'uses' => 'FileMetadataController@edit'));
+        Route::put('{file_metadata}/edit', array('as' => 'file_metadata.update', 'uses' => 'FileMetadataController@update'));
+        Route::get('{file_metadata}/delete', array('as' => 'file_metadata.delete', 'uses' => 'FileMetadataController@destroy'));
+    });
+
     # Email Management
     Route::model('email', 'App\Email');
     Route::group(array('prefix' => 'email'), function () {
