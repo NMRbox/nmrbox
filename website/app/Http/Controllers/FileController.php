@@ -31,7 +31,14 @@ class FileController extends Controller
     public function index() {
         //ini_set('memory_limit','256M');
         $all_files = File::All()->sortBy('name');
-        return View::make("admin.files.index", compact('all_files'));
+
+        // all keywords
+        $all_keywords = Category::All();
+
+        // all metadata
+        $all_metadata = FileMetadata::All();
+
+        return View::make("admin.files.index", compact('all_files', 'all_keywords', 'all_metadata'));
     }
     
     /**

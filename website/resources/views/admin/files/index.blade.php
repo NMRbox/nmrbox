@@ -58,19 +58,29 @@
                         <tr class="filters">
                             <th>Label</th>
                             <th>Type</th>
-                            <th>Slug</th>
                             <th>Size</th>
+                            <th>Metadata</th>
+                            <th>Keywords</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         @forelse ($all_files as $file)
                             <tr>
-                                <td><a href="{!! URL::to('admin/files/' . $file->slug ) !!}" target="_blank">{!! $file->label !!}</a></td>
-                                <td>{!! $file->mime_type !!}</td>
-                                <td>{!! $file->slug !!}</td>
-                                <td>{!! round(($file->size/1024)/1024, 2) !!} MB</td>
-                                <td>
+                                <td class="col-md-3"><a href="{!! URL::to('admin/files/' . $file->slug ) !!}" target="_blank">{!! $file->label !!}</a></td>
+                                <td class="col-md-3">{!! $file->mime_type !!}</td>
+                                <td class="col-md-1">{!! round(($file->size/1024)/1024, 2) !!} MB</td>
+                                <td class="col-md-2">
+                                    @foreach($file->metadatas as $metadata)
+                                        {!! $metadata->metadata !!} <br>
+                                    @endforeach
+                                </td>
+                                <td class="col-md-2">
+                                    @foreach($file->keyword_categories as $keyword)
+                                        {!! $keyword->name !!} <br>
+                                    @endforeach
+                                </td>
+                                <td class="col-md-1">
                                     {{--<a href="{{ URL::to('admin/files/' . $file->slug . '/delete' ) }}" data-toggle="modal" data-target="#delete_confirm"><i class="fa fa-fw fa-times text-danger" title="delete files"></i></a>--}}
                                     <a href="#">
                                         <a href="{{ URL::to('admin/files/' . $file->id . '/edit' ) }}"><i class="fa fa-fw fa-pencil text-warning" title="update blog"></i></a>
