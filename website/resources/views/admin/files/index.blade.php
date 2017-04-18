@@ -73,20 +73,14 @@
                                 <td>
                                     {{--<a href="{{ URL::to('admin/files/' . $file->slug . '/delete' ) }}" data-toggle="modal" data-target="#delete_confirm"><i class="fa fa-fw fa-times text-danger" title="delete files"></i></a>--}}
                                     <a href="#">
-                                        <a href="{{ URL::to('admin/files/' . $file->slug . '/edit' ) }}"><i class="fa fa-fw fa-pencil text-warning" title="update blog"></i></a>
+                                        <a href="{{ URL::to('admin/files/' . $file->id . '/edit' ) }}"><i class="fa fa-fw fa-pencil text-warning" title="update blog"></i></a>
                                         <i class="fa fa-fw fa-times text-danger delete-item" data-url="{!! route("file.delete", array('file' => $file->id)) !!}" data-file_name="{!! $file->slug !!}"></i>
                                     </a>
                                 </td>
                             </tr>
                             @empty
                             <tr>
-                                <td>No Files Yet!</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td colspan="5">No Files Yet!</td>
                             </tr>
                         @endforelse
 

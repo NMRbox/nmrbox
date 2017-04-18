@@ -21,12 +21,14 @@ trait FileHandler {
     public function makeFileFromUploadedFile(UploadedFile $f, $label) {
         $newfile = new File();
 
-        // parse out file name less .extension
+        // parse out file name with and without extension
         $name = $f->getClientOriginalName();
+        $filename = pathinfo($name, PATHINFO_FILENAME);
 
         $newfile->name = $name;
+        $newfile->label = $filename;
+        $newfile->slug = $filename;
         $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
-        $newfile->label = $name;
         $newfile->mime_type = $f->getMimeType();
         $newfile->size = $f->getSize();
         $newfile->user_id = Sentinel::getUser()->id;
@@ -36,6 +38,32 @@ trait FileHandler {
         return $newfile;
     }
 
+    /**
+     * Replace a File from Symfony's UploadedFile
+     *
+     * @param  UploadedFile $f, string $name
+     * @return \App\File
+     */
+    public function replaceFileFromUploadedFile(UploadedFile $f, $id) {
+        $newfile = File::where('id', $id)->get()->first();
+
+        // parse out file name with and without extension
+        $name = $f->getClientOriginalName();
+        $filename = pathinfo($name, PATHINFO_FILENAME);
+
+        $newfile->name = $name;
+        $newfile->label = $filename;
+        $newfile->slug = $filename;
+        $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
+        $newfile->mime_type = $f->getMimeType();
+        $newfile->size = $f->getSize();
+        $newfile->user_id = Sentinel::getUser()->id;
+        $newfile->role_id = Sentinel::findRoleBySlug('admin')->id; // change to some value from input
+
+        $newfile->update();
+
+        return $newfile;
+    }
 
     /**
      * Create a File from Symfony's UploadedFile
@@ -48,8 +76,6 @@ trait FileHandler {
             $f = Input::file('image');
             $newfile = new File();
             $newfile->name = $f->getClientOriginalName();
-
-            // save file metadata
             $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
             $newfile->label = $newfile->name;
             $newfile->mime_type = $f->getMimeType();

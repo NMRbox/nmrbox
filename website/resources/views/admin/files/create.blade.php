@@ -91,7 +91,7 @@
             overwriteInitial: false,
             validateInitialCount: true,
             maxFileSize: 100000,
-            maxFilesNum: 10,
+            maxFileCount: 10,
             minFileCount: 1,
             allowedFileTypes: ['image', 'html', 'text', 'video', 'audio', 'flash', 'object'],
             slugCallback: function (filename) {

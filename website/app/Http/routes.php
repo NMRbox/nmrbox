@@ -273,7 +273,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('create', array('as' => 'file.create', 'uses' => 'FileController@create'));
         Route::post('create', array('as' => 'file.store', 'uses' => 'FileController@store'));
         Route::get('{file}/edit', array('as' => 'file.edit', 'uses' => 'FileController@edit'));
-        Route::put('{file}/edit', array('as' => 'file.update', 'uses' => 'FileController@update'));
+        Route::post('{file}/edit', array('as' => 'file.update', 'uses' => 'FileController@update'));
         Route::get('{file}/delete', array('as' => 'file.delete', 'uses' => 'FileController@destroy'));
         Route::post('test', array('as' => 'file.test', 'uses' => 'FileController@test'));
     });

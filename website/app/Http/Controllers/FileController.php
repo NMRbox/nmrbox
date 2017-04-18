@@ -9,7 +9,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 Use App\User;
 Use App\File;
+Use App\FileMetadata;
 use App\Keyword;
+use App\Category;
 use Input;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Sentinel;
@@ -86,22 +88,8 @@ class FileController extends Controller
                 ->header( 'Content-Type', 'application/json' );
         }
 
-        return response( json_encode( array( 'message' => 'Files upload unsuccessful.' ) ), 200 )
-            ->header( 'Content-Type', 'application/json' );
-
-        /*echo "<pre>";
-        print_r($all_files['file_data']);
-        echo "</pre>";*/
-
-        /*try{
-            // redirect back to the index page when done
-            //return redirect()->withSuccess(Lang::get('files/message.success.create'));
-        } catch (QueryException $e){
-            // something went wrong
-            return redirect()->withErrors(Lang::get('files/message.error.create'));
-        }*/
-
-        /*return redirect()->withErrors(Lang::get('files/message.error.create'));*/
+        // returning back to the page
+        return redirect()->back()->withSuccess(Lang::get('files/message.success.create'));
 
     }
 
@@ -141,16 +129,47 @@ class FileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($param)
+    public function edit($id)
     {
-        // All keywords
-        $all_keywords = Keyword::All();
-
         // retrieving file data
-        $file = File::where('slug', 'like', $param)->first();
+        $file = File::where('id', '=', $id)->first();
+
+        // Keywords Mapping
+        $all_keywords = Category::All();
+        $file_keywords = $file->keyword_categories()->get();
+        $keyword_map = collect([ ]);
+
+        $keyed = $file_keywords->keyBy("name");
+
+        foreach( $all_keywords as $keyword ) {
+            if($keyed->has($keyword->name)) {
+                $keyword_map->push($keyword->name);
+                $keyword->present = true;
+            }
+            else {
+//              $keyword_map->push($keyword->label, false);
+            }
+        }
+
+        /* All File metadata */
+        $all_metadata = FileMetadata::All();
+        $file_metadata = $file->metadatas()->get();
+        $metadata_map = collect([ ]);
+
+        $metad = $file_metadata->keyBy("metadata");
+
+        foreach( $all_metadata as $metadata ) {
+            if($metad->has($metadata->metadata)) {
+                $metadata_map->push($metadata->metadata);
+                $metadata->present = true;
+            }
+            else {
+//              $keyword_map->push($keyword->label, false);
+            }
+        }
 
         // view
-        return view('admin.files.edit',compact('file','all_keywords'));
+        return view('admin.files.edit',compact('file','all_keywords', 'file_keywords', 'keyword_map', 'all_metadata', 'file_metadata', 'metadata_map' ));
     }
 
     /**
@@ -162,9 +181,68 @@ class FileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo "<pre>";
-        print_r($request->input());
-        echo "</pre>";
+        // Retrieving the information for requested file
+        $file = File::where('id', $id)->get()->first();
+
+        // all the files that are included to upload
+        $all_files = Input::file();
+
+
+        // uploading all the files using file handler
+        if($all_files){
+            foreach( $all_files as $name => $f ) {
+                $updatefile = $this->replaceFileFromUploadedFile($f, $id);
+            }
+            /* file upload return true */
+            if($updatefile == true){
+                return response( json_encode( array( 'message' => 'Successfully uploaded. ' ) ), 200 )
+                    ->header( 'Content-Type', 'application/json' );
+            }
+        }
+
+        /* keyword categories */
+        $file_keyword_metadata = $request->except(["name", "_token", "_method"]);
+
+        foreach($file_keyword_metadata['keyword'] as $keyword_id => $checked_status) {
+            $keywd = Category::where("id", "=", $keyword_id)->get()->first();
+            if($checked_status == "on") {
+
+                try {
+                    $file->keyword_categories()->attach($keywd->id);
+                }
+                catch(\Illuminate\Database\QueryException $e) {
+                    // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
+                    //dd($e);
+                }
+            }
+            else {
+                $file->keyword_categories()->detach($keywd->id);
+            }
+        }
+
+        /* */
+        foreach($file_keyword_metadata['metadata'] as $metadata_id => $checked_status) {
+            $metad = FileMetadata::where("id", "=", $metadata_id)->get()->first();
+            if($checked_status == "on") {
+
+                try {
+                    $file->metadatas()->attach($metad->id);
+                }
+                catch(\Illuminate\Database\QueryException $e) {
+                    // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
+                    //dd($e);
+                }
+            }
+            else {
+                $file->metadatas()->detach($metad->id);
+            }
+        }
+
+
+        // returning back to the page
+        return redirect()->back()->withSuccess(Lang::get('files/message.success.update'));
+
+
     }
 
     /**

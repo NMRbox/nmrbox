@@ -199,4 +199,18 @@ class File extends NmrModel implements SluggableInterface
 
 
     }
+
+    /**
+     * pivot relation with keyword_category table
+     */
+    public function keyword_categories() {
+        return $this->belongsToMany('App\Category', 'file_keyword_category', 'file_id', 'keyword_category_id');
+    }
+
+    /**
+     * pivot relation with file_metadata table
+     */
+    public function metadatas() {
+        return $this->belongsToMany('App\FileMetadata', 'file_file_metadata', 'file_id', 'metadata_id');
+    }
 }

@@ -36,38 +36,65 @@ Edit File
     <div class="row">
         <div class="the-box no-border">
             <div class="panel panel-primary">
-                <div class="panel-heading"><strong>Add/Upload Files</strong></div>
+                <div class="panel-heading"><strong>File info of - {!! $file->label !!}</strong></div>
                 <div class="panel-body">
 
                     <!-- Standar Form -->
-                    <form enctype='multipart/form-data' action="{!! URL::to('admin/files/create') !!}" method="post">
+                    <form enctype='multipart/form-data' action="" method="post">
                         {!! csrf_field() !!}
+                        <div class="form-group">
+                            <div class="row">
 
-                        {{--<div class="form-group">
-                            <label for="file_name">Name</label>
-                            <input type="text" name="label" id="file_name" placeholder="Enter file name" class="form-control">
+                                <h3></h3>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Label</th>
+                                            <th>Name</th>
+                                            <th>Slug</th>
+                                            <th>Type</th>
+                                            <th>Size</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{!! $file->label !!}</td>
+                                            <td>{!! $file->name !!}</td>
+                                            <td>{!! $file->slug !!}</td>
+                                            <td>{!! $file->mime_type !!}</td>
+                                            <td>{!! round(($file->size/1024)/1024, 2) !!} MB (aprox.)</td>
+                                            <td><a href="{!! URL::to('admin/files/' . $file->slug ) !!}" target="_blank" class="btn btn-success">Preview</a></td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="files">Select files from your computer</label>
-                            <input type="file" name="files[]" id="js-upload-files" id="files" class="form-control" multiple >
+                            <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="1">
                         </div>
                         <div class="form-group">
-                            --}}{{--<input type="submit" class="btn btn-sm btn-primary" id="js-upload-submit" name="submit" value="Upload files">--}}{{--
-                            <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Upload files</button>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Select Keywords: </h4><hr>
+                                    @foreach ($all_keywords as $keyword)
+                                        {!! BootForm::hidden('keyword['.$keyword->id.']', "off", [ ]) !!}
+                                        {!! BootForm::checkbox('keyword['.$keyword->id.']', $keyword->name, null, $keyword->present) !!}
+                                    @endforeach
+                                </div>
+                                <div class="col-md-6">
+                                    <h4>Select Metadata: </h4><hr>
+                                    @foreach ($all_metadata as $metadata)
+                                        {!! BootForm::hidden('metadata['.$metadata->id.']', "off", [ ]) !!}
+                                        {!! BootForm::checkbox('metadata['.$metadata->id.']', $metadata->metadata, null, $metadata->present) !!}
+                                    @endforeach
+                                </div>
+                            </div>
+
                         </div>
-                        <hr>--}}
-                        <div class="form-group">
-                            <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="2">
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-12"><h4>Select Keywords: </h4><hr></div>
-                            @foreach ($all_keywords as $keyword)
-                                {!! BootForm::hidden($keyword->id, "off", [ ]) !!}
-                                {!! BootForm::checkbox($keyword->id, $keyword->label, null, $keyword->present) !!}
-                            @endforeach
-                        </div>
-                        <div class="form-group">
-                            {!! BootForm::submit('Update') !!}
+                        <div class="form-group text-capitalize text-center">
+                            {!! BootForm::submit('Update', array('class' => 'btn btn-block btn-primary')) !!}
                         </div>
 
 
@@ -94,13 +121,12 @@ Edit File
     <script type="application/javascript">
 
         $("#file-1").fileinput({
-            uploadUrl: 'create', // you must set a valid URL here else you will get an error
+            uploadUrl: 'edit', // you must set a valid URL here else you will get an error
             uploadExtraData: {_token:"{{csrf_token()}}"},
-            allowedFileExtensions: ['jpg', 'png', 'gif'],
             overwriteInitial: false,
             validateInitialCount: true,
             maxFileSize: 100000,
-            maxFilesNum: 10,
+            maxFileCount: 1,
             minFileCount: 1,
             allowedFileTypes: ['image', 'html', 'text', 'video', 'audio', 'flash', 'object'],
             slugCallback: function (filename) {

@@ -18,4 +18,8 @@ class FileMetadata extends Model
     protected $fillable = [
         'metadata',
     ];
+
+    public function files() {
+        return $this->belongsToMany('App\File', 'file_file_metadata', 'metadata_id', 'file_id');
+    }
 }
