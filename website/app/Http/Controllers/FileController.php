@@ -30,7 +30,7 @@ class FileController extends Controller
      */
     public function index() {
         //ini_set('memory_limit','256M');
-        $all_files = File::All()->sortBy('name');
+        $all_files = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->get()->sortBy('name');
 
         // all keywords
         $all_keywords = Category::All();
@@ -85,9 +85,9 @@ class FileController extends Controller
     public function store(Request $request)
     {
         $all_files = Input::file();
-
+        $filename = $request->input('label');
         foreach( $all_files as $name => $f ) {
-            $newfile = $this->makeFileFromUploadedFile($f, $name);
+            $newfile = $this->makeFileFromUploadedFile($f, $filename);
         }
 
         if($newfile == true){
@@ -139,7 +139,7 @@ class FileController extends Controller
     public function edit($id)
     {
         // retrieving file data
-        $file = File::where('id', '=', $id)->first();
+        $file = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->where('id', '=', $id)->get()->first();
 
         // Keywords Mapping
         $all_keywords = Category::All();
@@ -194,21 +194,17 @@ class FileController extends Controller
         // all the files that are included to upload
         $all_files = Input::file();
 
+        /* parsing the inputs from form submission */
+        parse_str(urldecode($request->input('data')), $file_keyword_metadata);
+
+        $file_label = $file_keyword_metadata['label'];
 
         // uploading all the files using file handler
         if($all_files){
             foreach( $all_files as $name => $f ) {
-                $updatefile = $this->replaceFileFromUploadedFile($f, $id);
-            }
-            /* file upload return true */
-            if($updatefile == true){
-                return response( json_encode( array( 'message' => 'Successfully uploaded. ' ) ), 200 )
-                    ->header( 'Content-Type', 'application/json' );
+                $updatefile = $this->replaceFileFromUploadedFile($f, $id, $file_label);
             }
         }
-
-        /* keyword categories */
-        $file_keyword_metadata = $request->except(["name", "_token", "_method"]);
 
         foreach($file_keyword_metadata['keyword'] as $keyword_id => $checked_status) {
             $keywd = Category::where("id", "=", $keyword_id)->get()->first();
@@ -247,8 +243,9 @@ class FileController extends Controller
 
 
         // returning back to the page
-        return redirect()->back()->withSuccess(Lang::get('files/message.success.update'));
-
+        //return redirect()->back()->withSuccess(Lang::get('files/message.success.update'));
+        return response( json_encode( array( 'message' => 'Successfully uploaded. ' ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
 
     }
 

@@ -1,28 +1,30 @@
 $(document).ready(function() {
-
+    /*csrf token */
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
-    var HelloButton = function(context) {
+    /* customized FileButton */
+    var FileButton = function(context) {
         var ui = $.summernote.ui;
 
         // create button
         var button = ui.button({
-            contents: '<i class="fa fa-child"/> Hello',
-            tooltip: 'hello',
+            contents: '<i data-toggle="modal" data-target="#resource_modal" class="fa fa-file-o"/> ',
+            tooltip: 'Insert File',
             click: function () {
                 // invoke insertText method with 'hello' on editor module.
                 // context.invoke('editor.insertText', 'hello');
-                context.invoke(uploadImage, 'hello');
+                //context.invoke(uploadImage, 'hello');
             }
         });
 
         return button.render();   // return button as jquery object
     };
 
+    /* defining the editor buttons & tabs*/
     $('.textarea').summernote({
     	height: 500, 
     	toolbar: [
@@ -30,15 +32,14 @@ $(document).ready(function() {
 		    ['font', ['bold', 'italic', 'underline', 'clear']],
 		    ['color', ['color']],
 		    ['para', ['ul', 'ol', 'paragraph']],
-		    // ['height', ['height']],
-		    ['table', ['table']],
-		    ['insert', ['link', 'picture', 'hr']],
+		    ['table', ['table', 'hr']],
+		    ['insert', ['link', 'picture', 'files']],
 		    ['view', ['fullscreen', 'codeview']],
-			['mybutton', ['hello']]
+			['mybutton', []]
 		  ],
-        // buttons: {
-        //     hello: HelloButton
-        // },
+        buttons: {
+             files: FileButton
+        },
         callbacks: {
             onImageUpload: function(image) {
                 uploadImage(image[0]);
@@ -49,7 +50,26 @@ $(document).ready(function() {
         //placeholder: placeholder
     });
 
+    /* File insertion process */
+    $('button#insert_files').on('click', function(e){
+       e.preventDefault();
+       $('input.modal_files:checked').each(function () {
 
+           /* file slug & name */
+           var file_name = $(this).data('name');
+           var file_slug = $(this).val();
+
+           /* appending the value to textarea */
+           $('.note-editable.panel-body').append("<p style='font-size: 19px; line-height: 29px;' target='_blank'><a href='"+file_slug+"'>" + file_name +"</a></p>");
+           $('textarea.textarea').val($('.note-editable.panel-body').html());
+
+       })
+
+        /* closing modal */
+        $('#resource_modal').modal('toggle');
+    });
+
+    /* File upload process */
     function uploadImage(image) {
         var data = new FormData();
         data.append("image", image);

@@ -263,6 +263,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{page_id}/delete', array('as' => 'delete/page', 'uses' => 'PageController@getDelete'));
         Route::get('{page_id}/confirm-delete', array('as' => 'confirm-delete/page', 'uses' => 'PageController@getModalDelete'));
         Route::get('{page}/restore', array('as' => 'restore/page', 'uses' => 'PageController@getRestore'));
+        Route::post('insert_files', 'PageController@insertFiles');
     });
     
     # File Management

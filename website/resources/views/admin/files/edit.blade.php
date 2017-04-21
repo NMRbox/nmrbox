@@ -40,7 +40,7 @@ Edit File
                 <div class="panel-body">
 
                     <!-- Standar Form -->
-                    <form enctype='multipart/form-data' action="" method="post">
+                    <form enctype='multipart/form-data' action="" method="post" id="file_edit_form">
                         {!! csrf_field() !!}
                         <div class="form-group">
                             <div class="row">
@@ -71,6 +71,11 @@ Edit File
                                 </table>
                             </div>
                         </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="file_name">File label</label>
+                            <input type="text" name="label" id="file_name" placeholder="Enter file label" class="form-control">
+                        </div>
                         <div class="form-group">
                             <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="1">
                         </div>
@@ -94,7 +99,9 @@ Edit File
 
                         </div>
                         <div class="form-group text-capitalize text-center">
-                            {!! BootForm::submit('Update', array('class' => 'btn btn-block btn-primary')) !!}
+                            {{--<a href="edit" tabindex="500" title="Upload selected files" class="btn btn-default fileinput-upload fileinput-upload-button"><i class="glyphicon glyphicon-upload"></i>  <span class="hidden-xs">Upload</span></a>--}}
+                            {{--<a href="edit" class="btn btn-default fileinput-upload fileinput-upload-button" id="update_file_edit"><i class="glyphicon glyphicon-upload"><span>Upload</span></i></a>--}}
+                            {!! BootForm::submit('Update', array('class' => 'btn btn-block btn-primary ', 'id' => 'update_file_edit')) !!}
                         </div>
 
 
@@ -120,12 +127,15 @@ Edit File
     <script src="{{ asset('assets/js/custom_js/fileinput.js') }}" type="text/javascript"></script>
     <script type="application/javascript">
 
-        $("#file-1").fileinput({
+        var file_upload = $("#file-1").fileinput({
             uploadUrl: 'edit', // you must set a valid URL here else you will get an error
-            uploadExtraData: {_token:"{{csrf_token()}}"},
+            uploadExtraData: function(previewId, index) {
+                var extra_data = {_token:"{{csrf_token()}}", data:$("#file_edit_form").serialize()};
+                return extra_data;
+            },
             overwriteInitial: false,
             validateInitialCount: true,
-            maxFileSize: 100000,
+            maxFileSize: 1000000,
             maxFileCount: 1,
             minFileCount: 1,
             allowedFileTypes: ['image', 'html', 'text', 'video', 'audio', 'flash', 'object'],
@@ -133,6 +143,13 @@ Edit File
                 return filename.replace('(', '_').replace(']', '_');
             }
         });
+
+        // Updating all the input and passing to controller
+        $('#update_file_edit').on('click', function(e){
+            e.preventDefault();
+            file_upload.fileinput('upload');
+        });
+
 
         $(".btn-warning").on('click', function () {
             var $el = $("#file-4");
@@ -145,14 +162,7 @@ Edit File
         $(".btn-info").on('click', function () {
             $("#file-4").fileinput('refresh', {previewClass: 'bg-info'});
         });
-        $(document).ready(function () {
-            $("#test-upload").fileinput({
-                'showPreview': false,
-                'allowedFileExtensions': ['jpg', 'png', 'gif'],
-                'elErrorContainer': '#errorBlock'
-            });
 
-        });
     </script>
 
 @stop

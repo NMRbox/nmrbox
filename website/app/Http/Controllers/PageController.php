@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\File;
 use App\Http\Requests;
 use App\Http\Requests\PageRequest;
 use App\Page;
@@ -118,7 +119,10 @@ class PageController extends Controller {
 	 */
 	public function getCreate()
 	{
-        return view('admin.pages.create',compact(''));
+        // All files information
+        $all_files = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->get()->sortBy('name');
+
+        return view('admin.pages.create',compact('all_files'));
 	}
 
 	/**
@@ -179,6 +183,10 @@ class PageController extends Controller {
 	    try {
             // Get the page information
             $page = Page::where('slug', $id)->first();
+
+            // All files information
+            $all_files = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->get()->sortBy('name');
+
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = Lang::get('page/message.user_not_found', compact('id'));
@@ -188,7 +196,7 @@ class PageController extends Controller {
         }
 
         // Show the page
-        return view('admin.pages.edit', compact('page','pagecategory', 'page_content'));
+        return view('admin.pages.edit', compact('page','pagecategory', 'page_content', 'all_files'));
 	}
 
 	/**
@@ -286,5 +294,17 @@ class PageController extends Controller {
 
         return redirect()->back()->withSuccess(Lang::get('page/message.success.delete'));
 	}
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function insertFiles(Request $request)
+    {
+
+
+    }
 
 }

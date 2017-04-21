@@ -43,20 +43,10 @@
                         <!-- Standar Form -->
                         <form enctype='multipart/form-data' action="{!! URL::to('admin/files/create') !!}" method="post">
                             {!! csrf_field() !!}
-
-                            {{--<div class="form-group">
-                                <label for="file_name">Name</label>
-                                <input type="text" name="label" id="file_name" placeholder="Enter file name" class="form-control">
-                            </div>
                             <div class="form-group">
-                                <label for="files">Select files from your computer</label>
-                                <input type="file" name="files[]" id="js-upload-files" id="files" class="form-control" multiple >
+                                <label for="file_name">File label</label>
+                                <input type="text" name="label" id="file_name" placeholder="Enter file label" class="form-control">
                             </div>
-                            <div class="form-group">
-                                --}}{{--<input type="submit" class="btn btn-sm btn-primary" id="js-upload-submit" name="submit" value="Upload files">--}}{{--
-                                <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Upload files</button>
-                            </div>
-                            <hr>--}}
                             <div class="form-group">
                                 <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="2">
                             </div>
@@ -86,11 +76,14 @@
 
         $("#file-1").fileinput({
             uploadUrl: 'create', // you must set a valid URL here else you will get an error
-            uploadExtraData: {_token:"{{csrf_token()}}"},
+            uploadExtraData: function(previewId, index) {
+                var extra_data = {_token:"{{csrf_token()}}", label:$("input[type='text']").val()};
+                return extra_data;
+            },
             allowedFileExtensions: ['jpg', 'png', 'gif'],
             overwriteInitial: false,
             validateInitialCount: true,
-            maxFileSize: 100000,
+            maxFileSize: 1000000,
             maxFileCount: 10,
             minFileCount: 1,
             allowedFileTypes: ['image', 'html', 'text', 'video', 'audio', 'flash', 'object'],
@@ -110,14 +103,7 @@
         $(".btn-info").on('click', function () {
             $("#file-4").fileinput('refresh', {previewClass: 'bg-info'});
         });
-        $(document).ready(function () {
-            $("#test-upload").fileinput({
-                'showPreview': false,
-                'allowedFileExtensions': ['jpg', 'png', 'gif'],
-                'elErrorContainer': '#errorBlock'
-            });
 
-        });
     </script>
 
 @stop

@@ -54,26 +54,14 @@ Edit Blog
                             {!! Form::text('subheader', null, array('class' => 'form-control input-lg', 'placeholder'=>'Page title here...'))!!}
                             <p></p>
                         </div>
-                        {!! Form::label('content', 'Content', array('class' => 'h3')) !!}
+                        {!! Form::label('content', 'Content', array('class' => 'h3')) !!} <br>
                         <div class='box-body pad'>
-                            {!! Form::textarea('content', null, array('class' => 'textarea form-control', 'rows'=>'5', 'placeholder'=>'Place some text here', 'style'=>'style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"')) !!}
+                            {!! Form::textarea('content', null, array('class' => 'textarea form-control', 'id' => 'page_content', 'rows'=>'5', 'placeholder'=>'Place some text here', 'style'=>'style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"')) !!}
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 crud-options-box">
-                        {{--<div class="form-group">--}}
-                            {{--<label>Featured image</label>--}}
-                            {{--<div class="fileupload fileupload-new" data-provides="fileupload">--}}
-                                    {{--<span class="btn btn-primary btn-file">--}}
-                                        {{--<span class="fileupload-new">Select file</span>--}}
-                                        {{--<span class="fileupload-exists">Change</span>--}}
-                                        {{--{!! Form::file('image', null, array('class' => 'form-control')) !!}--}}
-                                    {{--</span>--}}
-                                {{--<span class="fileupload-preview"></span>--}}
-                                {{--<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
                         <div class="form-group">
                             <button type="submit" class="btn btn-lg btn-success">Publish</button>
                             <a href="{!! URL::to('admin/pages') !!}" class="btn btn-lg btn-danger">Discard</a>
@@ -88,9 +76,59 @@ Edit Blog
 @stop
 {{-- page level scripts --}}
 @section('footer_scripts')
+    {{-- resource/file modal --}}
+    <div class="modal fade" id="resource_modal" tabindex="-1" role="dialog" aria-labelledby="user_delete_confirm_title" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <span id="modal-header-title">Select files to insert - </span>
+                    </h4>
+
+                </div>
+                <div class="modal-body">
+                    <form action="insert_files" method="post" id="file_form">
+                    <table class="table" id="table table-striped">
+                        <thead>
+                        <tr class="filters">
+                            <th>Label</th>
+                            <th>Type</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse ($all_files as $file)
+                            <tr>
+                                <td class="col-md-9">
+                                    <input type="checkbox" name="files" value="{!! URL::to('files/' . $file->slug) !!}" data-name="{!! $file->label !!}" class="modal_files form-group">&nbsp;&nbsp;
+                                    {!! $file->label !!}
+                                </td>
+                                <td class="col-md-3">{!! $file->mime_type !!}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5">No Files Yet!</td>
+                            </tr>
+                        @endforelse
+                            <tr>
+                                <td class="text-center" colspan="2">
+                                    <button type="button" class="btn btn-primary btn-lg col-md-3" value="Insert" id="insert_files">Insert Files</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="{{ asset('assets/vendors/summernote/summernote.min.js') }}" type="text/javascript" ></script>
     <script src="{{ asset('assets/vendors/select2/select2.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/vendors/iCheck/icheck.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/vendors/tags/dist/bootstrap-tagsinput.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/custom_js/add_newpage.js') }}" type="text/javascript"></script>
+    <script type="application/javascript">
+
+    </script>
 @stop

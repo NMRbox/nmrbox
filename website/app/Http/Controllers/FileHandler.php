@@ -23,11 +23,14 @@ trait FileHandler {
 
         // parse out file name with and without extension
         $name = $f->getClientOriginalName();
-        $filename = pathinfo($name, PATHINFO_FILENAME);
+
+        /* determining the filename as label and slug */
+        $slug = pathinfo($name, PATHINFO_FILENAME);
+        $filename = $filename = ($label == NULL) ? $slug : $label ;
 
         $newfile->name = $name;
         $newfile->label = $filename;
-        $newfile->slug = $filename;
+        $newfile->slug = $slug;
         $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
         $newfile->mime_type = $f->getMimeType();
         $newfile->size = $f->getSize();
@@ -44,22 +47,24 @@ trait FileHandler {
      * @param  UploadedFile $f, string $name
      * @return \App\File
      */
-    public function replaceFileFromUploadedFile(UploadedFile $f, $id) {
+    public function replaceFileFromUploadedFile(UploadedFile $f, $id, $label) {
         $newfile = File::where('id', $id)->get()->first();
 
         // parse out file name with and without extension
         $name = $f->getClientOriginalName();
-        $filename = pathinfo($name, PATHINFO_FILENAME);
+
+        /* determining the filename as label and slug */
+        $slug = pathinfo($name, PATHINFO_FILENAME);
+        $filename = $filename = ($label == NULL) ? $slug : $label ;
 
         $newfile->name = $name;
         $newfile->label = $filename;
-        $newfile->slug = $filename;
+        $newfile->slug = $slug;
         $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
         $newfile->mime_type = $f->getMimeType();
         $newfile->size = $f->getSize();
         $newfile->user_id = Sentinel::getUser()->id;
         $newfile->role_id = Sentinel::findRoleBySlug('admin')->id; // change to some value from input
-
         $newfile->update();
 
         return $newfile;
