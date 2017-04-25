@@ -58,6 +58,7 @@ Edit FAQ
                             </div>
                             <div class="col-md-6">
                                 <h4>Select Metadata: </h4><hr>
+                                <div><b>Work in progress.....</b></div>
                                 {{--@foreach ($all_metadata as $metadata)
                                     {!! BootForm::hidden('metadata['.$metadata->id.']', "off", [ ]) !!}
                                     {!! BootForm::checkbox('metadata['.$metadata->id.']', $metadata->metadata, null, $metadata->present) !!}
