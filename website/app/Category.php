@@ -24,4 +24,8 @@ class Category extends NmrModel
     public function files() {
         return $this->belongsToMany('App\File', 'file_keyword_category', 'keyword_category_id', 'file_id');
     }
+
+    public function faqs() {
+        return $this->belongsToMany('App\FAQ', 'faq_keyword_category', 'keyword_category_id', 'faq_id');
+    }
 }

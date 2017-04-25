@@ -206,6 +206,7 @@ class FileController extends Controller
             }
         }
 
+        /* keyword mapping */
         foreach($file_keyword_metadata['keyword'] as $keyword_id => $checked_status) {
             $keywd = Category::where("id", "=", $keyword_id)->get()->first();
             if($checked_status == "on") {
@@ -223,7 +224,7 @@ class FileController extends Controller
             }
         }
 
-        /* */
+        /* metadata mapping */
         foreach($file_keyword_metadata['metadata'] as $metadata_id => $checked_status) {
             $metad = FileMetadata::where("id", "=", $metadata_id)->get()->first();
             if($checked_status == "on") {

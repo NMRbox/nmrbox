@@ -73,6 +73,20 @@
                 </li>
             </ul>
         </li>
+        <li class="menu-dropdown {{ (Request::is('admin/faq') || Request::is('admin/faq/create') || Request::is('admin/faq/*') ? 'active' : '') }}">
+            <a href="#">
+                <i class="menu-icon  fa fa-question-circle"></i>
+                <span>FAQs</span>
+                <span class="fa arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li {{ (Request::is('admin/faq') ? 'class=active' : '') }}>
+                    <a href="{{ URL::to('admin/faq') }}">
+                        FAQs Index
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li class="menu-dropdown {{ (Request::is('admin/people') || Request::is('admin/classification') || Request::is('admin/groups') ? 'active' : '') }}">
             <a href="#">
                 <i class="menu-icon  fa fa-fw fa-users"></i>

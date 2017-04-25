@@ -301,6 +301,17 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{email}/delete', array('as' => 'email.delete', 'uses' => 'EmailController@destroy'));
     });
 
+    # FAQ Management
+    Route::model('faq', 'App\FAQ');
+    Route::group(array('prefix' => 'faq'), function () {
+        Route::get('/', array('as' => 'admin/faq', 'uses' => 'FAQController@index'));
+        Route::get('create', array('as' => 'faq.create', 'uses' => 'FAQController@create'));
+        Route::post('create', array('as' => 'faq.store', 'uses' => 'FAQController@store'));
+        Route::get('{faq}/edit', array('as' => 'faq.edit', 'uses' => 'FAQController@edit'));
+        Route::post('{faq}/edit', array('as' => 'faq.update', 'uses' => 'FAQController@update'));
+        Route::get('{faq}/delete', array('as' => 'faq.delete', 'uses' => 'FAQController@destroy'));
+    });
+
     # Classifications Management
     Route::model('classification', 'App\Classification');
     Route::group(array('prefix' => 'classification'), function () {
