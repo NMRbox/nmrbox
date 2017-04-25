@@ -6,6 +6,12 @@
     Add FAQ :: @parent
 @stop
 
+{{-- page level styles --}}
+@section('header_styles')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/datatables/css/dataTables.bootstrap.css') }}" />
+    <link href="{{ asset('assets/vendors/summernote/summernote.css') }}" rel="stylesheet" media="screen" type="text/css" />
+@stop
+
 {{-- Content --}}
 
 @section('content')
@@ -34,15 +40,15 @@
             <div class="panel panel-primary ">
                 <div class="panel-heading">
                     <h4 class="panel-title"><i class="fa fa-fw fa-plus"></i>
-                        Create A New FAQ
+                        <strong>Create A New FAQ</strong>
                     </h4>
                 </div>
                 <div class="panel-body">
-                    {!! BootForm::horizontal() !!}
-                        <div class="col-sm-12 col-md-10">
-                            {!! BootForm::text('question', "Question", null, array('class' => 'input-lg', 'required' => 'required'))!!}
-                            {!! BootForm::textarea('answer', "Answer", null, array('class' => 'input-lg', 'required' => 'required'))!!}
-                            {!! BootForm::submit('Save') !!}
+                    {!! BootForm::open() !!}
+                        <div class="col-sm-12 col-md-12">
+                            {!! BootForm::text('question', "Question", null, array('placeholder' => 'Enter Question', 'class' => 'input-lg', 'required' => 'required'))!!}
+                            {!! BootForm::textarea('answer', "Answer", null, array('class' => 'input-lg textarea form-control note-placeholder', 'required' => 'required', 'rows' => '5', 'style'=>'style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"'))!!}
+                            {!! BootForm::submit('Save', array('class' => 'btn btn-block btn-primary ')) !!}
                         </div>
                     {!! Form::close() !!}
                 </div>
@@ -57,38 +63,24 @@
 @section('footer_scripts')
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
-    <script type="application/javascript">
-        jQuery.fn.extend({
-            insertAtCaret: function(myValue){
-                return this.each(function(i) {
-                    if (document.selection) {
-                        //For browsers like Internet Explorer
-                        this.focus();
-                        var sel = document.selection.createRange();
-                        sel.text = myValue;
-                        this.focus();
-                    }
-                    else if (this.selectionStart || this.selectionStart == '0') {
-                        //For browsers like Firefox and Webkit based
-                        var startPos = this.selectionStart;
-                        var endPos = this.selectionEnd;
-                        var scrollTop = this.scrollTop;
-                        this.value = this.value.substring(0, startPos)+myValue+this.value.substring(endPos,this.value.length);
-                        this.focus();
-                        this.selectionStart = startPos + myValue.length;
-                        this.selectionEnd = startPos + myValue.length;
-                        this.scrollTop = scrollTop;
-                    } else {
-                        this.value += myValue;
-                        this.focus();
-                    }
-                });
-            }
+    {{-- WYSING Editor--}}
+    <script src="{{ asset('assets/vendors/summernote/summernote.min.js') }}" type="text/javascript" ></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            /* defining the editor buttons & tabs*/
+            $('.textarea').summernote({
+                height: 500,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table', 'hr']],
+                    ['insert', ['link', 'picture']],
+                    ['view', ['fullscreen', 'codeview']]
+                ],
+                placeholder: 'Enter Answer text. ',
+            });
         });
-
-        $('#template_area a').click(function(){
-            var val = $(this).attr('data-field-name');
-            $('textarea').insertAtCaret( "%%" + val + "%%");
-        })
     </script>
 @stop

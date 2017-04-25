@@ -10,7 +10,7 @@ Edit FAQ
 {{-- page level styles --}}
 @section('header_styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/datatables/css/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/custom_css/fileinput.css') }}" />
+    <link href="{{ asset('assets/vendors/summernote/summernote.css') }}" rel="stylesheet" media="screen" type="text/css" />
 @stop
 
 
@@ -43,9 +43,8 @@ Edit FAQ
                 <div class="panel-body">
                     {!! BootForm::open() !!}
                     <div class="col-sm-12 col-md-12 form-group">
-                        {!! BootForm::text('question', "Question", $faq->question, array('class' => 'input-lg', 'required' => 'required'))!!}
-                        {!! BootForm::textarea('answer', "Answer", $faq->answer, array('class' => 'input-lg', 'required' => 'required'))!!}
-
+                        {!! BootForm::text('question', "Question", $faq->question, array('placeholder' => 'Enter Question', 'class' => 'input-lg', 'required' => 'required'))!!}
+                        {!! BootForm::textarea('answer', "Answer", $faq->answer, array('class' => 'input-lg textarea form-control', 'required' => 'required', 'rows' => '5', 'placeholder'=>'Place some text here', 'style'=>'style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"'))!!}
                     </div>
                     <div class="form-group">
                         <div class="row">
@@ -92,4 +91,24 @@ Edit FAQ
 @section('footer_scripts')
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
+    {{-- WYSING Editor--}}
+    <script src="{{ asset('assets/vendors/summernote/summernote.min.js') }}" type="text/javascript" ></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            /* defining the editor buttons & tabs*/
+            $('.textarea').summernote({
+                height: 500,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table', 'hr']],
+                    ['insert', ['link', 'picture']],
+                    ['view', ['fullscreen', 'codeview']]
+                ],
+                placeholder: "Enter answer text."
+            });
+        });
+    </script>
 @stop
