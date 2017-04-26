@@ -62,15 +62,13 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <p class="lead">Useful Links</p>
-                <div class="list-group">
-                    <a href="{{ URL::to('documentation') }}"class="list-group-item">Documentation</a>
-                    <a href="{{ URL::to('licensing') }}"class="list-group-item">Licensing</a>
-                    <a href="{{ URL::to('nihresources') }}"class="list-group-item">NIH Biomedical Technology Resources</a>
-
-                    {{--<a href="#" class="list-group-item active">Printable</a>
-                    <a href="#" class="list-group-item">Cupcake Wrappers</a>
-                    <a href="#" class="list-group-item">Authentic Dragon Bones</a>--}}
+                <div class="panel panel-default">
+                    <div class="panel-heading">Useful Links</div>
+                    <div class="panel-body list-group">
+                        <a href="{{ URL::to('documentation') }}"class="list-group-item">Documentation</a>
+                        <a href="{{ URL::to('licensing') }}"class="list-group-item">Licensing</a>
+                        <a href="{{ URL::to('nihresources') }}"class="list-group-item">NIH Biomedical Technology Resources</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,8 +86,8 @@
 */
             $('a.btn-yes, a.btn-no').on('click', function (e) {
                 e.preventDefault();
-                $('#success_msg').html('Thanks for your feedback.');
-                show_alert('success');
+                $('#info_msg').html('Thank you for your feedback.');
+                show_alert('info');
 
                 /*var m = $('#thanks_modal');
                 m.modal();*/

@@ -149,6 +149,12 @@
                     <strong>Error! </strong>
                     <span id="error_msg"></span>
                 </div>
+
+                <div class="alert alert-info hidden" id="info-alert">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong> </strong>
+                    <span id="info_msg"></span>
+                </div>
             </div>
         </div>
         <br />
