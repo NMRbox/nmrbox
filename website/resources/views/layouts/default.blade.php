@@ -80,6 +80,7 @@
                             <li><a href="{{ URL::to('documentation') }}">Documentation</a></li>
                             <li><a href="{{ URL::to('licensing') }}">Licensing</a></li>
                             <li><a href="{{ URL::to('nihresources') }}">NIH Biomedical Technology Resources</a></li>
+                            <li><a href="{{ URL::to('faq') }}">FAQ</a></li>
                         </ul>
                     </li>
 
@@ -132,6 +133,26 @@
         </nav>
     </header>
     <!-- //Header Section Start -->
+
+    {{-- alert box section --}}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6 col-md-push-3">
+                <div class="alert alert-success hidden" id="success-alert">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Success! </strong>
+                    <span id="success_msg"></span>
+                </div>
+
+                <div class="alert alert-danger hidden" id="error-alert">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Error! </strong>
+                    <span id="error_msg"></span>
+                </div>
+            </div>
+        </div>
+        <br />
+    </section>
 
     <!-- Content -->
     @yield('content')

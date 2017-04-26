@@ -94,8 +94,8 @@ FAQ Index
         </div>
     </div>    <!-- row-->
 </section>
-
 @stop
+
 {{-- Body Bottom confirm modal --}}
 @section('footer_scripts')
     {{-- delete user modal --}}
@@ -176,6 +176,4 @@ FAQ Index
             });
         });
     </script>
-
-
 @stop 

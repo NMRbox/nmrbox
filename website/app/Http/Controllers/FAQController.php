@@ -123,7 +123,39 @@ class FAQController extends Controller
      */
     public function show($id)
     {
-        //
+        /* all faqs*/
+        $faqs = FAQ::All();
+        /*echo "<pre>";
+        print_r($faqs);
+        echo "</pre>";*/
+        /*echo "<pre>";
+        $my_bytea = stream_get_contents($all_faqs[0]['answer']);
+        $my_string = pg_unescape_bytea($my_bytea);
+        $html_data = htmlspecialchars($my_string);
+        print_r($html_data);
+        echo "</pre>";*/
+
+        foreach($faqs as $key => $value){
+            $all_faqs[] = $this->convert_to_string($value->id);
+        }
+        /*echo "<pre>";
+        print_r($all_faqs);
+        echo "</pre>";
+        die();*/
+
+        // all keywords
+        $all_keywords = Category::All();
+
+        // all metadata
+        $all_metadata = FileMetadata::All();
+
+        echo "<pre>";
+        print_r($all_faqs);
+        echo "</pre>";
+
+
+        // make index view
+        return view::make('faq', compact('all_faqs', 'all_keywords'));
     }
 
     /**
@@ -246,6 +278,12 @@ class FAQController extends Controller
         return redirect()->back()->withSuccess(Lang::get('faqs/message.success.delete'));
     }
 
+    /**
+     * Converting the bytea resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function convert_to_string($id){
 
         /* Getting the original faq */
@@ -266,5 +304,30 @@ class FAQController extends Controller
         /* Returing the converted result */
         return $new_faq;
 
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showAllFAQs()
+    {
+        /* all faqs*/
+        $faqs = FAQ::All();
+
+        foreach($faqs as $key => $value){
+            $all_faqs[] = $this->convert_to_string($value->id);
+        }
+
+        /*// all keywords
+        $all_keywords = Category::All();
+
+        // all metadata
+        $all_metadata = FileMetadata::All();*/
+
+        // make index view
+        return view::make('faq', compact('all_faqs'));
     }
 }

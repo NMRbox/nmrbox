@@ -334,6 +334,9 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 Route::get('login', array('as' => 'login','uses' => 'FrontEndController@getLogin'));
 Route::post('login','FrontEndController@postLogin');
 
+# Logout
+Route::get('logout', array('as' => 'logout','uses' => 'FrontEndController@getLogout'));
+
 # Register
 Route::get('register', array('as' => 'register','uses' => 'FrontEndController@getRegister'));
 Route::post('register','FrontEndController@postRegister');
@@ -361,11 +364,11 @@ Route::get('my-account', array('as' => 'my-account', 'uses' => 'FrontEndControll
 //Route::post('my-account', 'FrontEndController@updateAccount');
 });
 
-# Logout
-Route::get('logout', array('as' => 'logout','uses' => 'FrontEndController@getLogout'));
-
 # contact form
 Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@postContact'));
+
+# faq
+Route::get('faq',array('as' => 'faq','uses' => 'FAQController@showAllFAQs'));
 
 # homepage
 Route::get('/', array('as' => 'home', 'uses' => 'ChandraController@showFrontEndView'));
