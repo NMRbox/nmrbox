@@ -9,12 +9,13 @@
     {{-- page level styles --}}
     @section('header_styles')
         <style type="text/css">
-            div.container{
-
+            .table-borderless td,
+            .table-borderless th {
+                border: 0 !important;
             }
         </style>
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/datatables/css/dataTables.bootstrap.css') }}" />
     @stop
-
 
     {{-- Page content --}}
     @section('content')
@@ -28,9 +29,24 @@
         <div class="row">
             <div id="faq" class="col-md-9">
                 <div class="panel-group" id="accordion">
-                    @if(!empty($all_faqs))
-                        @foreach ($all_faqs as $faq)
-                            <div class="panel panel-default">
+                    {{-- Search input field --}}
+                    <div class="form-group panel-heading">
+                        <input type="text" class="form-control input-lg" id="faqSearchField" placeholder="Have a question? Enter a search term here.">
+                    </div>
+
+                    {{-- FAQ listings --}}
+                    <table class="table table-borderless display" id="vm-table">
+                        <thead>
+                        <tr><th></th></tr>
+                        </thead>
+                        <tbody>
+                        @if(!empty($all_faqs))
+                            @foreach ($all_faqs as $faq)
+
+                            <tr>
+                                <td>
+
+                                <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
@@ -54,10 +70,13 @@
                                         {{--<div class="btn-group btn-group-xs pull-right"><a class="btn btn-primary" href="#">Report this question</a></div>--}}
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    @endif
-                    {{-- original faqs --}}
+                                </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
 
                 </div>
             </div>
@@ -78,25 +97,42 @@
 
 {{-- page level scripts --}}
 @section('footer_scripts')
+    <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/js/custom_js/datatables.js') }}" type="text/javascript"></script>
     <script>
         $(document).ready(function () {
-
-            /*$('div#modal').dialog({ autoOpen: false })
-            $('#thelink').click(function(){ $('div#thedialog').dialog('open'); });
-*/
+            // top level msg box
             $('a.btn-yes, a.btn-no').on('click', function (e) {
                 e.preventDefault();
                 $('#info_msg').html('Thank you for your feedback.');
                 show_alert('info');
+            });
 
-                /*var m = $('#thanks_modal');
-                m.modal();*/
+            // initiating accordion carousel for collapse/hide
+            $('.carousel').carousel({
+                interval: 3000
+            });
+
+
+            /* Initializing Datatable for search option*/
+            var faq_table = $('#vm-table').DataTable({
+                paging: false,
+                ordering: false,
+                responsive: true,
+                "bFilter": true,
+                "sDom": 't'
+
+            });
+
+            $('#faqSearchField').on('keyup change', function(){
+                faq_table.search($(this).val()).draw();
             })
+
+
         })
 
 
-        $('.carousel').carousel({
-            interval: 3000
-        })
+
     </script>
 @stop

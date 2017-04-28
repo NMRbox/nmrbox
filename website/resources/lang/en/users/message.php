@@ -11,8 +11,8 @@ return array(
     'user_login_required'      => 'The login field is required',
     'user_password_required'   => 'The password is required.',
     'insufficient_permissions' => 'Insufficient Permissions.',
-    'banned'              => 'banned',
-    'suspended'             => 'suspended',
+    'banned'                   => 'banned',
+    'suspended'                => 'suspended',
 
     'success' => array(
         'create'            => 'User was successfully created.',

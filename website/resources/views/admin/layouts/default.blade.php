@@ -73,7 +73,7 @@
             <div id="menu" role="navigation">
 
                 {{-- user bio --}}
-                @include('admin.layouts._left_bio')
+                @include('admin.layouts.menu')
                 <!-- / .navigation -->
             </div>
             <!-- menu -->
