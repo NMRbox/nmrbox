@@ -62,7 +62,7 @@ FAQ Index
                             <tr>
                                 <th>Question</th>
                                 <th>Answer</th>
-                                <th>Keywords</th>
+                                <th>Softwares</th>
                                 <th>Action #</th>
                             </tr>
                         </thead>
@@ -74,7 +74,7 @@ FAQ Index
                                     <td class="col-md-5">{!! $faq->answer !!}</td>
                                     <td class="col-md-2">
                                         @foreach($faq->softwares as $software)
-                                            {!! $software->short_title !!} <br>
+                                            {!! $software->name !!} <br>
                                         @endforeach
                                     </td>
                                     <td class="col-md-1">

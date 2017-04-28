@@ -193,7 +193,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 text-center">
-                    <span>NMRbox 2015</span>
+                    <span>NMRbox {!! date('Y') !!}</span>
                 </div>
             </div>
 

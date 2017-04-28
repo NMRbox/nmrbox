@@ -67,14 +67,14 @@ class FAQController extends Controller
         die();*/
 
         // all keywords
-        $all_keywords = Category::All();
+        $all_softwares = Software::All();
 
         // all metadata
         $all_metadata = FileMetadata::All();
 
 
         // make index view
-        return view::make('admin.faqs.index', compact('all_faqs', 'all_keywords'));
+        return view::make('admin.faqs.index', compact('all_faqs', 'all_softwares'));
     }
 
     /**
