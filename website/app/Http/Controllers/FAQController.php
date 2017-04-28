@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Software;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -125,37 +126,19 @@ class FAQController extends Controller
     {
         /* all faqs*/
         $faqs = FAQ::All();
-        /*echo "<pre>";
-        print_r($faqs);
-        echo "</pre>";*/
-        /*echo "<pre>";
-        $my_bytea = stream_get_contents($all_faqs[0]['answer']);
-        $my_string = pg_unescape_bytea($my_bytea);
-        $html_data = htmlspecialchars($my_string);
-        print_r($html_data);
-        echo "</pre>";*/
 
         foreach($faqs as $key => $value){
             $all_faqs[] = $this->convert_to_string($value->id);
         }
-        /*echo "<pre>";
-        print_r($all_faqs);
-        echo "</pre>";
-        die();*/
 
         // all keywords
-        $all_keywords = Category::All();
+        $all_softwares = Software::All();
 
         // all metadata
         $all_metadata = FileMetadata::All();
 
-        echo "<pre>";
-        print_r($all_faqs);
-        echo "</pre>";
-
-
         // make index view
-        return view::make('faq', compact('all_faqs', 'all_keywords'));
+        return view::make('faq', compact('all_faqs', 'all_softwares'));
     }
 
     /**
@@ -170,15 +153,15 @@ class FAQController extends Controller
         $faq = $this->convert_to_string($id);
 
         // Keywords Mapping
-        $all_keywords = Category::All();
-        $faq_keywords = $faq->keyword_categories()->get();
-        $keyword_map = collect([ ]);
-        $keyed = $faq_keywords->keyBy("name");
+        $all_softwares = Software::All();
+        $faq_softwares = $faq->softwares()->get();
+        $software_map = collect([ ]);
+        $keyed = $faq_softwares->keyBy("name");
 
-        foreach( $all_keywords as $keyword ) {
-            if($keyed->has($keyword->name)) {
-                $keyword_map->push($keyword->name);
-                $keyword->present = true;
+        foreach( $all_softwares as $software ) {
+            if($keyed->has($software->name)) {
+                $software_map->push($software->name);
+                $software->present = true;
             }
             else {
 //              $keyword_map->push($keyword->label, false);
@@ -202,7 +185,7 @@ class FAQController extends Controller
         }*/
 
         //return view::make('admin.faqs.edit', compact('faq', 'all_keywords', 'keyword_map', 'file_keywords', 'keyword_map', 'all_metadata', 'faq_metadata', 'metadata_map'));
-        return view::make('admin.faqs.edit', compact('faq', 'all_keywords', 'keyword_map', 'faq_keywords'));
+        return view::make('admin.faqs.edit', compact('faq', 'all_softwares', 'software_map', 'faq_softwares'));
     }
 
     /**
@@ -224,16 +207,17 @@ class FAQController extends Controller
             $faq->answer = $request->input('answer');
             $faq->save();
 
-            $request_keyword_data = $request->input('keyword');
+            $request_software_data = $request->input('software');
             /*echo "<pre>";
-            print_r($request_keyword_data);
-            echo "</pre>";*/
-            /* keyword mapping */
-            foreach($request_keyword_data as $keyword_id => $checked_status) {
-                $keywd = Category::where("id", "=", $keyword_id)->get()->first();
+            print_r($request_software_data);
+            echo "</pre>";
+            die();*/
+            /* software mapping */
+            foreach($request_software_data as $software_id => $checked_status) {
+                $software = Software::where("id", "=", $software_id)->get()->first();
                 if($checked_status == "on") {
                     try {
-                        $faq->keyword_categories()->attach($keywd->id);
+                        $faq->softwares()->attach($software->id);
                     }
                     catch(\Illuminate\Database\QueryException $e) {
                         // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
@@ -241,7 +225,7 @@ class FAQController extends Controller
                     }
                 }
                 else {
-                    $faq->keyword_categories()->detach($keywd->id);
+                    $faq->softwares()->detach($software->id);
                 }
             }
         } catch ( QueryException $e){

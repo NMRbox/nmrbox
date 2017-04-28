@@ -23,8 +23,8 @@ class FAQ extends Model
     /**
      * pivot relation with keyword_category table
      */
-    public function keyword_categories() {
-        return $this->belongsToMany('App\Category', 'faq_keyword_category', 'faq_id', 'keyword_category_id');
+    public function softwares() {
+        return $this->belongsToMany('App\Software', 'faq_software', 'faq_id', 'software_id');
     }
 
     /**

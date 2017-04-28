@@ -100,6 +100,7 @@ class Software extends NmrModel implements SluggableInterface
         return $pairs;
     }
 
+
     public function people() {
         return $this->belongsToMany('App\Person');
     }
@@ -108,17 +109,26 @@ class Software extends NmrModel implements SluggableInterface
         return $this->belongsToMany('App\Citation');
     }
 
+
     public function keywords() {
         return $this->belongsToMany('App\Keyword', 'menu_software', 'software_id', 'menu_id');
     }
     
+    /* passing slugging */
     public function _needsSlugging() {
         return $this->needsSlugging();
     }
 
+    /* Generating slugs */
     public function _generateSlug() {
         $source = $this->getSlugSource();
         return $this->generateSlug( $this->$source );
     }
+
+    /* FAQs pivot relation */
+    public function faqs() {
+        return $this->belongsToMany('App\FAQ', 'faq_software', 'software_id', 'faq_id');
+    }
+
 
 }

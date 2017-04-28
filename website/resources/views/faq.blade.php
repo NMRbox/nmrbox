@@ -42,7 +42,6 @@
                         <tbody>
                         @if(!empty($all_faqs))
                             @foreach ($all_faqs as $faq)
-
                             <tr>
                                 <td>
 
@@ -80,7 +79,7 @@
 
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" style="padding-top: 10px;">
                 <div class="panel panel-default">
                     <div class="panel-heading">Useful Links</div>
                     <div class="panel-body list-group">

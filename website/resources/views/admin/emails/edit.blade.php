@@ -93,16 +93,13 @@ Edit VM
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                            @foreach ($log as $key => $user_data)
+                                                @foreach ($log as $key => $user_data)
                                                     <tr>
                                                         <td>{!! $user_data['person_name'] !!}</td>
                                                         <td>{!! $user_data['person_email'] !!}</td>
                                                         <td>{!! $user_data['person_nmrbox_acct'] !!}</td>
                                                     </tr>
-                                            @endforeach
-
-
-
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

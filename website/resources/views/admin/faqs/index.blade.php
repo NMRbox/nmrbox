@@ -73,8 +73,8 @@ FAQ Index
                                     <td class="col-md-3">{!! $faq->question !!}</td>
                                     <td class="col-md-5">{!! $faq->answer !!}</td>
                                     <td class="col-md-2">
-                                        @foreach($faq->keyword_categories as $keyword)
-                                            {!! $keyword->name !!} <br>
+                                        @foreach($faq->softwares as $software)
+                                            {!! $software->short_title !!} <br>
                                         @endforeach
                                     </td>
                                     <td class="col-md-1">

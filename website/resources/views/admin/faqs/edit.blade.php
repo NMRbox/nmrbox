@@ -11,6 +11,33 @@ Edit FAQ
 @section('header_styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/datatables/css/dataTables.bootstrap.css') }}" />
     <link href="{{ asset('assets/vendors/summernote/summernote.css') }}" rel="stylesheet" media="screen" type="text/css" />
+    <style t type="text/css">
+        .software-scroll{
+            border: none;
+            height: 500px;
+            overflow-x: scroll;
+        }
+
+        /* Scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background: #ccc;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #999;
+        }
+    </style>
 @stop
 
 
@@ -48,14 +75,14 @@ Edit FAQ
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-6 text-left">
+                            <div class="col-md-6 text-left software-scroll">
                                 <h4>Select Keywords: </h4><hr>
-                                @foreach ($all_keywords as $keyword)
-                                    {!! BootForm::hidden('keyword['.$keyword->id.']', "off", [ ]) !!}
-                                    {!! BootForm::checkbox('keyword['.$keyword->id.']', $keyword->name, null, $keyword->present) !!}
+                                @foreach ($all_softwares as $software)
+                                    {!! BootForm::hidden('software['.$software->id.']', "off", [ ]) !!}
+                                    {!! BootForm::checkbox('software['.$software->id.']', $software->name, null, $software->present) !!}
                                 @endforeach
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 software-scroll">
                                 <h4>Select Metadata: </h4><hr>
                                 <div><b>Work in progress.....</b></div>
                                 {{--@foreach ($all_metadata as $metadata)

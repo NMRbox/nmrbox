@@ -108,6 +108,7 @@ class SoftwareController extends Controller
             $people_for_select[$person->id] = $person->last_name . ", " . $person->first_name; // pair VM ID with human friendly VM name
         }
 
+        // VM versions
         $vm_versions = VM::all();
         $vm_versions = $vm_versions->sortBy("name"); // want these sorted for frontend
         $vm_versions_for_select = [];
@@ -118,6 +119,7 @@ class SoftwareController extends Controller
             $vm_versions_for_select[$vm->id] = $vm->name(); // pair VM ID with human friendly VM name
         }
 
+        //Software versions
         $software_versions = $software->versions()->get();
         $software_versions = $software_versions->sortBy("version"); // want these sorted for frontend
         $software_versions_for_select = [];
@@ -175,9 +177,15 @@ class SoftwareController extends Controller
          * TODO: Add images for images tab
          * */
 
+        /*
+         * FAQ
+         * */
+        $software_faqs = $software->faqs()->where('software_id', $software->id)->get();
+        //dd($software_faqs);
+
         return view('admin.software.edit',compact('software', 'files', 'vm_versions',
             'software_versions', "vm_versions_for_select", "software_versions_for_select", "people_for_select",
-            'people', 'all_citations', 'attached_citations', 'all_keywords', 'all_categories', 'keywords'));
+            'people', 'all_citations', 'attached_citations', 'all_keywords', 'all_categories', 'keywords', 'software_faqs'));
     }
 
     /**
@@ -541,6 +549,31 @@ class SoftwareController extends Controller
         }
 
         return back();
+    }
+
+    /**
+     * Add a new person and attach him or her to the software.
+     *
+     * @param  SoftwareDeveloperRequest  $request
+     * @param  Software $software
+     * @return \Illuminate\Http\Response
+     */
+    public function attachFAQ(SoftwarePeopleRequest $request, $software_id)
+    {
+        $software = Software::where('id', '=', $software_id)->get()->first();
+
+        $new_person = new Person( $request->all() );
+        $new_person->save();
+
+        try {
+            $software->people()->attach($new_person->id);
+        }
+        catch(\Illuminate\Database\QueryException $e) {
+//            dd($e);
+            return back()->withErrors($e);
+        }
+
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update_people'));
     }
 
 
