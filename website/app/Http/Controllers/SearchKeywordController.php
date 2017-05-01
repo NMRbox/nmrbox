@@ -13,10 +13,10 @@ use View;
 use Input;
 use Sentinel;
 use Lang;
-use App\FileMetadata;
+use App\SearchKeyword;
 use App\File;
 
-class FileMetadataController extends Controller
+class SearchKeywordController extends Controller
 {
     /**
      * Message bag.
@@ -40,9 +40,9 @@ class FileMetadataController extends Controller
      */
     public function index()
     {
-        $all_metadata = FileMetadata::All();
+        $search_keywords = SearchKeyword::All();
 
-        return View::make('admin.file_metadata.index', compact('all_metadata'));
+        return View::make('admin.search_keyword.index', compact('search_keywords'));
 
     }
 
@@ -53,7 +53,7 @@ class FileMetadataController extends Controller
      */
     public function create()
     {
-        return view('admin.file_metadata.create', compact('file_metadata'));
+        return view('admin.search_keyword.create', compact('search_keyword'));
     }
 
     /**
@@ -65,20 +65,23 @@ class FileMetadataController extends Controller
     public function store(Request $request)
     {
         try {
-            $file_metadata = new FileMetadata(array(
+            $search_keyword = new SearchKeyword(array(
                 'metadata' => $request->metadata
             ));
 
-            $file_metadata->save();
-            //$this->messageBag->add('email', Lang::get('file_metadata/message.success.create'));
+            $search_keyword->save();
+            //$this->messageBag->add('email', Lang::get('search_keyword/message.success.create'));
+            return redirect('admin/search_keyword');
         }
         catch (UserExistsException $e) {
-            $this->messageBag->add('email', Lang::get('file_metadata/message.error.create'));
-
+            // something went wrong - probably has entries in search_keyword table
+            return redirect()->back()->withError(Lang::get('search_keyword/message.error.create'));
+        }catch (QueryException $e) {
+            // something went wrong - probably has entries in search_keyword table
+            return redirect()->back()->withError(Lang::get('search_keyword/message.file_metadata_exists'));
         }
-        // Ooops.. something went wrong
-        //return redirect('admin/email')->withSuccess($this->messageBag);
-        return redirect('admin/file_metadata');
+
+        return redirect()->back()->withError(Lang::get('search_keyword/message.error.create'));
     }
 
     /**
@@ -101,8 +104,8 @@ class FileMetadataController extends Controller
     public function edit($id)
     {
         // file metadata object
-        $file_metadata = FileMetadata::where('id', $id)->first();
-        return view('admin.file_metadata.edit', compact('file_metadata'));
+        $search_keyword = SearchKeyword::where('id', $id)->first();
+        return view('admin.search_keyword.edit', compact('search_keyword'));
 
     }
 
@@ -117,19 +120,19 @@ class FileMetadataController extends Controller
     {
         try{
             /* Input request content */
-            $file_metadata = FileMetadata::where('id', $id)->first();
-            $file_metadata->metadata = $request->input('metadata');
+            $search_keyword = SearchKeyword::where('id', $id)->first();
+            $search_keyword->metadata = $request->input('metadata');
 
-            $file_metadata->save();
+            $search_keyword->save();
         } catch ( QueryException $e){
 
             // something went wrong - probably has entries in email_person table
-            return redirect()->back()->withError(Lang::get('file_metadata/message.error.update'));
+            return redirect()->back()->withError(Lang::get('search_keyword/message.file_metadata_exists'));
         }
 
         // redirect with success message
         //return redirect('admin/email');
-        return redirect()->back()->withSuccess(Lang::get('file_metadata/message.success.update'));
+        return redirect()->back()->withSuccess(Lang::get('search_keyword/message.success.update'));
 
     }
 
@@ -142,16 +145,16 @@ class FileMetadataController extends Controller
     public function destroy($id)
     {
         try{
-            $file_metadata = FileMetadata::where('id', $id)->delete();
+            $search_keyword = SearchKeyword::where('id', $id)->delete();
 
         } catch ( QueryException $e){
 
             // something went wrong - probably has entries in email_person table
-            return redirect()->back()->withError(Lang::get('file_metadata/message.error.delete'));
+            return redirect()->back()->withError(Lang::get('search_keyword/message.error.delete'));
         }
 
         // redirect with success message
-        return redirect()->back()->withSuccess(Lang::get('file_metadata/message.success.delete'));
+        return redirect()->back()->withSuccess(Lang::get('search_keyword/message.success.delete'));
     }
 
 

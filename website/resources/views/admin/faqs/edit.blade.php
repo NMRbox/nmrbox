@@ -84,11 +84,10 @@ Edit FAQ
                             </div>
                             <div class="col-md-6 software-scroll">
                                 <h4>Select Metadata: </h4><hr>
-                                <div><b>Work in progress.....</b></div>
-                                {{--@foreach ($all_metadata as $metadata)
-                                    {!! BootForm::hidden('metadata['.$metadata->id.']', "off", [ ]) !!}
-                                    {!! BootForm::checkbox('metadata['.$metadata->id.']', $metadata->metadata, null, $metadata->present) !!}
-                                @endforeach--}}
+                                @foreach ($all_search_keywords as $keyword)
+                                    {!! BootForm::hidden('metadata['.$keyword->id.']', "off", [ ]) !!}
+                                    {!! BootForm::checkbox('metadata['.$keyword->id.']', $keyword->metadata, null, $keyword->present) !!}
+                                @endforeach
                             </div>
                         </div>
                     </div>

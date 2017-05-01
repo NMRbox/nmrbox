@@ -59,25 +59,19 @@
                             <th>Label</th>
                             <th>Type</th>
                             <th>Size</th>
-                            <th>Metadata</th>
-                            <th>Keywords</th>
+                            <th>Search Keywords</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         @forelse ($all_files as $file)
                             <tr>
-                                <td class="col-md-3"><a href="{!! URL::to('admin/files/' . $file->slug ) !!}" target="_blank">{!! $file->label !!}</a></td>
-                                <td class="col-md-3">{!! $file->mime_type !!}</td>
+                                <td class="col-md-4"><a href="{!! URL::to('admin/files/' . $file->slug ) !!}" target="_blank">{!! $file->label !!}</a></td>
+                                <td class="col-md-4">{!! $file->mime_type !!}</td>
                                 <td class="col-md-1">{!! round(($file->size/1024)/1024, 2) !!} MB</td>
                                 <td class="col-md-2">
-                                    @foreach($file->metadatas as $metadata)
-                                        {!! $metadata->metadata !!} <br>
-                                    @endforeach
-                                </td>
-                                <td class="col-md-2">
-                                    @foreach($file->keyword_categories as $keyword)
-                                        {!! $keyword->name !!} <br>
+                                    @foreach($file->search_keywords as $keyword)
+                                        {!! $keyword->metadata !!} <br>
                                     @endforeach
                                 </td>
                                 <td class="col-md-1">

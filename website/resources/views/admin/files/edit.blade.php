@@ -10,6 +10,33 @@ Edit File
 @section('header_styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/datatables/css/dataTables.bootstrap.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/custom_css/fileinput.css') }}" />
+    <style t type="text/css">
+        .software-scroll{
+            border: none;
+            height: 500px;
+            overflow-x: scroll;
+        }
+
+        /* Scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background: #ccc;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #999;
+        }
+    </style>
 @stop
 
 
@@ -81,26 +108,17 @@ Edit File
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <h4>Select Keywords: </h4><hr>
-                                    @foreach ($all_keywords as $keyword)
-                                        {!! BootForm::hidden('keyword['.$keyword->id.']', "off", [ ]) !!}
-                                        {!! BootForm::checkbox('keyword['.$keyword->id.']', $keyword->name, null, $keyword->present) !!}
-                                    @endforeach
-                                </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 software-scroll">
                                     <h4>Select Metadata: </h4><hr>
-                                    @foreach ($all_metadata as $metadata)
-                                        {!! BootForm::hidden('metadata['.$metadata->id.']', "off", [ ]) !!}
-                                        {!! BootForm::checkbox('metadata['.$metadata->id.']', $metadata->metadata, null, $metadata->present) !!}
+                                    @foreach ($all_search_keywords as $keyword)
+                                        {!! BootForm::hidden('metadata['.$keyword->id.']', "off", [ ]) !!}
+                                        {!! BootForm::checkbox('metadata['.$keyword->id.']', $keyword->metadata, null, $keyword->present) !!}
                                     @endforeach
                                 </div>
                             </div>
 
                         </div>
                         <div class="form-group text-capitalize text-center">
-                            {{--<a href="edit" tabindex="500" title="Upload selected files" class="btn btn-default fileinput-upload fileinput-upload-button"><i class="glyphicon glyphicon-upload"></i>  <span class="hidden-xs">Upload</span></a>--}}
-                            {{--<a href="edit" class="btn btn-default fileinput-upload fileinput-upload-button" id="update_file_edit"><i class="glyphicon glyphicon-upload"><span>Upload</span></i></a>--}}
                             {!! BootForm::submit('Update', array('class' => 'btn btn-block btn-primary ', 'id' => 'update_file_edit')) !!}
                         </div>
 

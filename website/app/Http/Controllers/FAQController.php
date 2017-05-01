@@ -17,7 +17,7 @@ use Sentinel;
 use Mail;
 use Lang;
 use App\FAQ;
-Use App\FileMetadata;
+Use App\SearchKeyword;
 use App\Keyword;
 use App\Category;
 
@@ -48,29 +48,17 @@ class FAQController extends Controller
     {
         /* all faqs*/
         $faqs = FAQ::All();
-        /*echo "<pre>";
-        print_r($faqs);
-        echo "</pre>";*/
-        /*echo "<pre>";
-        $my_bytea = stream_get_contents($all_faqs[0]['answer']);
-        $my_string = pg_unescape_bytea($my_bytea);
-        $html_data = htmlspecialchars($my_string);
-        print_r($html_data);
-        echo "</pre>";*/
+
 
         foreach($faqs as $key => $value){
             $all_faqs[] = $this->convert_to_string($value->id);
         }
-        /*echo "<pre>";
-        print_r($all_faqs);
-        echo "</pre>";
-        die();*/
 
         // all keywords
         $all_softwares = Software::All();
 
         // all metadata
-        $all_metadata = FileMetadata::All();
+        $all_search_keywords = SearchKeyword::All();
 
 
         // make index view
@@ -96,7 +84,6 @@ class FAQController extends Controller
      */
     public function store(Request $request)
     {
-        echo "store";
         /* try & catch process for new faq */
         try {
             $faq = new FAQ(array(
@@ -107,7 +94,7 @@ class FAQController extends Controller
             $faq->save();
             //$this->messageBag->add('email', Lang::get('emails/message.success.create'));
         }
-        catch (UserExistsException $e) {
+        catch (QueryException $e) {
             $this->messageBag->add('faq', Lang::get('faqs/message.error.create'));
 
         }
@@ -124,21 +111,7 @@ class FAQController extends Controller
      */
     public function show($id)
     {
-        /* all faqs*/
-        $faqs = FAQ::All();
 
-        foreach($faqs as $key => $value){
-            $all_faqs[] = $this->convert_to_string($value->id);
-        }
-
-        // all keywords
-        $all_softwares = Software::All();
-
-        // all metadata
-        $all_metadata = FileMetadata::All();
-
-        // make index view
-        return view::make('faq', compact('all_faqs', 'all_softwares'));
     }
 
     /**
@@ -152,7 +125,7 @@ class FAQController extends Controller
         // Pulling out the object
         $faq = $this->convert_to_string($id);
 
-        // Keywords Mapping
+        // Software / FAQ Mapping
         $all_softwares = Software::All();
         $faq_softwares = $faq->softwares()->get();
         $software_map = collect([ ]);
@@ -168,24 +141,22 @@ class FAQController extends Controller
             }
         }
 
-        /* All File metadata */
-        /*$all_metadata = FileMetadata::All();
-        $faq_metadata = $faq->metadatas()->get();
-        $metadata_map = collect([ ]);
-        $metad = $faq_metadata->keyBy("metadata");
+        /* All File Search Keywords */
+        $all_search_keywords = SearchKeyword::All();
+        $faq_search_keywords = $faq->search_keywords()->get();
+        $search_keywords_map = collect([ ]);
 
-        foreach( $all_metadata as $metadata ) {
-            if($metad->has($metadata->metadata)) {
-                $metadata_map->push($metadata->metadata);
-                $metadata->present = true;
+        $keyed = $faq_search_keywords->keyBy("metadata");
+
+        foreach( $all_search_keywords as $keyword ) {
+            if($keyed->has($keyword->metadata)) {
+                $search_keywords_map->push($keyword->metadata);
+                $keyword->present = true;
             }
-            else {
-//              $keyword_map->push($keyword->label, false);
-            }
-        }*/
+        }
 
         //return view::make('admin.faqs.edit', compact('faq', 'all_keywords', 'keyword_map', 'file_keywords', 'keyword_map', 'all_metadata', 'faq_metadata', 'metadata_map'));
-        return view::make('admin.faqs.edit', compact('faq', 'all_softwares', 'software_map', 'faq_softwares'));
+        return view::make('admin.faqs.edit', compact('faq', 'all_softwares', 'software_map', 'faq_softwares', 'all_search_keywords', 'search_keywords_map', 'faq_search_keywords'));
     }
 
     /**
@@ -208,10 +179,6 @@ class FAQController extends Controller
             $faq->save();
 
             $request_software_data = $request->input('software');
-            /*echo "<pre>";
-            print_r($request_software_data);
-            echo "</pre>";
-            die();*/
             /* software mapping */
             foreach($request_software_data as $software_id => $checked_status) {
                 $software = Software::where("id", "=", $software_id)->get()->first();
@@ -226,6 +193,25 @@ class FAQController extends Controller
                 }
                 else {
                     $faq->softwares()->detach($software->id);
+                }
+            }
+
+            /* search keyword mapping */
+            $faq_search_keyword = $request->input('metadata');
+            foreach($faq_search_keyword as $keyword_id => $checked_status) {
+                $metad = SearchKeyword::where("id", "=", $keyword_id)->get()->first();
+                if($checked_status == "on") {
+
+                    try {
+                        $faq->search_keywords()->attach($metad->id);
+                    }
+                    catch(\Illuminate\Database\QueryException $e) {
+                        // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
+                        //dd($e);
+                    }
+                }
+                else {
+                    $faq->search_keywords()->detach($metad->id);
                 }
             }
         } catch ( QueryException $e){
@@ -309,7 +295,7 @@ class FAQController extends Controller
         $all_keywords = Category::All();
 
         // all metadata
-        $all_metadata = FileMetadata::All();*/
+        $all_metadata = SearchKeyword::All();*/
 
         // make index view
         return view::make('faq', compact('all_faqs'));

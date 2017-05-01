@@ -208,9 +208,9 @@ class File extends NmrModel implements SluggableInterface
     }
 
     /**
-     * pivot relation with file_metadata table
+     * pivot relation with search_keywords table
      */
-    public function metadatas() {
-        return $this->belongsToMany('App\FileMetadata', 'file_file_metadata', 'file_id', 'metadata_id');
+    public function search_keywords() {
+        return $this->belongsToMany('App\SearchKeyword', 'file_search_keyword', 'file_id', 'metadata_id');
     }
 }

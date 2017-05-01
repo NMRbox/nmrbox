@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-FAQ Index
+File Metadata Index
 @parent
 @stop
 
@@ -13,7 +13,7 @@ FAQ Index
 {{-- Content --}}
 @section('content')
 <section class="content-header">
-    <h1>FAQ</h1>
+    <h1>People</h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('dashboard') }}">
@@ -21,7 +21,7 @@ FAQ Index
                 Dashboard
             </a>
         </li>
-        <li> FAQs</li>
+        <li> Search Keyword</li>
         <li class="active">Index</li>
     </ol>
 </section>
@@ -34,10 +34,10 @@ FAQ Index
                 <div class="panel-heading clearfix">
                     <h4 class="panel-title pull-left">
                         <i class="fa fa-fw fa-list"></i>
-                        FAQ List
+                        Keyword List
                     </h4>
                     <div class="pull-right">
-                        <a href="{{ URL::to('admin/faq/create') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> Create new FAQ</a>
+                        <a href="{{ URL::to('admin/search_keyword/create') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> Create new search keyword</a>
                         <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
                     </div>
                 </div>
@@ -60,34 +60,24 @@ FAQ Index
                     <table id="vm-table" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Question</th>
-                                <th>Answer</th>
-                                <th>Softwares</th>
-                                <th>Search Keywords</th>
+                                <th class="hidden"></th>
+                                <th>Name</th>
+                                {{--<th>Content body</th>--}}
                                 <th>Action #</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @if(!empty($all_faqs))
-                            @foreach ($all_faqs as $faq)
-                                <tr id="{!! $faq->id !!}">
-                                    <td class="col-md-3">{!! $faq->question !!}</td>
-                                    <td class="col-md-4">{!! $faq->answer !!}</td>
-                                    <td class="col-md-2">
-                                        @foreach($faq->softwares as $software)
-                                            {!! $software->name !!} <br>
-                                        @endforeach
-                                    </td>
-                                    <td class="col-md-2">
-                                        @foreach($faq->search_keywords as $keyword)
-                                            {!! $keyword->metadata !!} <br>
-                                        @endforeach
-                                    </td>
+                        @if(!empty($search_keywords))
+                            @foreach ($search_keywords as $keyword)
+                                <tr id="{!! $keyword->metadata !!}">
+                                    <td class="hidden">{!! $keyword->metadata !!}</td>
+                                    <td class="col-md-1">{!! $keyword->metadata !!}</td>
+                                    {{--<td class="col-md-1">{!! $email_template->content !!}</td>--}}
                                     <td class="col-md-1">
-                                        <a href="{!! URL::to('admin/faq/' . $faq->id . '/edit' ) !!}"><i class="fa fa-fw fa-pencil text-warning" title="Update FAQ"></i></a>
+                                        <a href="{!! URL::to('admin/search_keyword/' . $keyword->id . '/edit' ) !!}"><i class="fa fa-fw fa-pencil text-warning" title="Update search keyword"></i></a>
                                         {{-- As template deletion has reference entry with email_person table,
                                              the delete link should not be available though it has conditional check and popup messages. --}}
-                                        <a href="#" ><i class="fa fa-fw fa-times text-danger delete_faq" data-url="{!! route("faq.delete", array('email' => $faq->id)) !!}" data-template_name="{!! $faq->id !!}" title="Delete"></i></a>
+                                        <a href="#" ><i class="fa fa-fw fa-times text-danger delete_file_metadata" data-url="{!! route("search_keyword.delete", array('search_keyword' => $keyword->id)) !!}" data-template_name="{!! $keyword->id !!}" title="Delete"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -100,8 +90,8 @@ FAQ Index
         </div>
     </div>    <!-- row-->
 </section>
-@stop
 
+@stop
 {{-- Body Bottom confirm modal --}}
 @section('footer_scripts')
     {{-- delete user modal --}}
@@ -112,26 +102,6 @@ FAQ Index
         </div>
     </div>
 
-    {{-- email modal --}}
-    <div class="modal fade" id="delete_faq" tabindex="-1" role="dialog" aria-labelledby="user_delete_confirm_title" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <span id="modal-header-title">Modify FAQ</span>
-                    </h4>
-
-                </div>
-                <div class="modal-body">
-                    Loading user data...
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    {{-- send mail --}}
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
     <style type="text/css">
@@ -153,17 +123,17 @@ FAQ Index
             // DataTable
             var table = $('#vm-table').DataTable( {
                 "order": [[ 1, "asc" ]],
-            /*    "columnDefs": [
+                "columnDefs": [
                         {
                             "targets": [ 0 ],
                             "visible": false,
                             "searchable": false
                         }
-                    ]*/
+                    ]
             });
 
             // deleting confirmation
-            $('.delete_faq').on("click", function(event) {
+            $('.delete_file_metadata').on("click", function(event) {
                 event.preventDefault();
                 var button = $(event.target);
                 var template_name = button.attr("data-name");
@@ -171,7 +141,7 @@ FAQ Index
 
                 var m = $('#admin-modal');
                 m.find('.modal-title').text('Delete Confirmation');
-                m.find('.modal-body').html('Are you sure you want to delete this FAQ? <br><span  class="modal-highlight">' + name + '</span><span class="modal-highlight"></span>');
+                m.find('.modal-body').html('Are you sure you want to delete this search keyword? <br><span  class="modal-highlight">' + name + '</span><span class="modal-highlight"></span>');
 
                 var mbutton = m.find('.modal-action');
                 mbutton.attr("onclick", "window.location.href='" + url + "'");
@@ -180,6 +150,8 @@ FAQ Index
                 mbutton.text("Delete");
                 m.modal();
             });
+
         });
     </script>
+
 @stop 

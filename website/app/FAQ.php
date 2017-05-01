@@ -28,9 +28,9 @@ class FAQ extends Model
     }
 
     /**
-     * pivot relation with file_metadata table
+     * pivot relation with search_keywords table
      */
-    /*public function metadatas() {
-        return $this->belongsToMany('App\FileMetadata', 'file_file_metadata', 'file_id', 'metadata_id');
-    }*/
+    public function search_keywords() {
+        return $this->belongsToMany('App\SearchKeyword', 'faq_search_keyword', 'faq_id', 'search_keyword_id');
+    }
 }

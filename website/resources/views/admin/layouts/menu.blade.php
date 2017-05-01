@@ -82,16 +82,16 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-dropdown {{ (Request::is('admin/file_metadata') || Request::is('admin/file_metadata/*') ? 'active' : '') }}">
+        <li class="menu-dropdown {{ (Request::is('admin/search_keyword') || Request::is('admin/search_keyword/*') ? 'active' : '') }}">
             <a href="#">
                 <i class="menu-icon  fa fa-fw fa-file"></i>
-                <span>Metadata</span>
+                <span>Search Keywords</span>
                 <span class="fa arrow"></span>
             </a>
             <ul class="sub-menu">
-                <li {{ (Request::is('admin/file_metadata') ? 'class=active' : '') }}>
-                    <a href="{{ URL::to('admin/file_metadata') }}">
-                        Metadata Index
+                <li {{ (Request::is('admin/search_keyword') ? 'class=active' : '') }}>
+                    <a href="{{ URL::to('admin/search_keyword') }}">
+                        Keywords Index
                     </a>
                 </li>
             </ul>

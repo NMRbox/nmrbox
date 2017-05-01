@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 Use App\User;
 Use App\File;
-Use App\FileMetadata;
+Use App\SearchKeyword;
 use App\Keyword;
 use App\Category;
 use Input;
@@ -32,13 +32,10 @@ class FileController extends Controller
         //ini_set('memory_limit','256M');
         $all_files = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->get()->sortBy('name');
 
-        // all keywords
-        $all_keywords = Category::All();
-
         // all metadata
-        $all_metadata = FileMetadata::All();
+        $all_search_keywords = SearchKeyword::All();
 
-        return View::make("admin.files.index", compact('all_files', 'all_keywords', 'all_metadata'));
+        return View::make("admin.files.index", compact('all_files', 'all_keywords', 'all_search_keywords'));
     }
     
     /**
@@ -141,16 +138,16 @@ class FileController extends Controller
         // retrieving file data
         $file = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->where('id', '=', $id)->get()->first();
 
-        // Keywords Mapping
-        $all_keywords = Category::All();
-        $file_keywords = $file->keyword_categories()->get();
-        $keyword_map = collect([ ]);
+        /* All File Search Keywords */
+        $all_search_keywords = SearchKeyword::All();
+        $file_search_keywords = $file->search_keywords()->get();
+        $search_keywords_map = collect([ ]);
 
-        $keyed = $file_keywords->keyBy("name");
+        $keyed = $file_search_keywords->keyBy("metadata");
 
-        foreach( $all_keywords as $keyword ) {
-            if($keyed->has($keyword->name)) {
-                $keyword_map->push($keyword->name);
+        foreach( $all_search_keywords as $keyword ) {
+            if($keyed->has($keyword->metadata)) {
+                $search_keywords_map->push($keyword->metadata);
                 $keyword->present = true;
             }
             else {
@@ -158,25 +155,8 @@ class FileController extends Controller
             }
         }
 
-        /* All File metadata */
-        $all_metadata = FileMetadata::All();
-        $file_metadata = $file->metadatas()->get();
-        $metadata_map = collect([ ]);
-
-        $metad = $file_metadata->keyBy("metadata");
-
-        foreach( $all_metadata as $metadata ) {
-            if($metad->has($metadata->metadata)) {
-                $metadata_map->push($metadata->metadata);
-                $metadata->present = true;
-            }
-            else {
-//              $keyword_map->push($keyword->label, false);
-            }
-        }
-
-        // view
-        return view('admin.files.edit',compact('file','all_keywords', 'file_keywords', 'keyword_map', 'all_metadata', 'file_metadata', 'metadata_map' ));
+        // file view
+        return view('admin.files.edit',compact('file','all_search_keywords', 'file_search_keywords', 'search_keywords_map'));
     }
 
     /**
@@ -206,13 +186,13 @@ class FileController extends Controller
             }
         }
 
-        /* keyword mapping */
-        foreach($file_keyword_metadata['keyword'] as $keyword_id => $checked_status) {
-            $keywd = Category::where("id", "=", $keyword_id)->get()->first();
+        /* search keyword mapping */
+        foreach($file_keyword_metadata['metadata'] as $keyword_id => $checked_status) {
+            $metad = SearchKeyword::where("id", "=", $keyword_id)->get()->first();
             if($checked_status == "on") {
 
                 try {
-                    $file->keyword_categories()->attach($keywd->id);
+                    $file->search_keywords()->attach($metad->id);
                 }
                 catch(\Illuminate\Database\QueryException $e) {
                     // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
@@ -220,25 +200,7 @@ class FileController extends Controller
                 }
             }
             else {
-                $file->keyword_categories()->detach($keywd->id);
-            }
-        }
-
-        /* metadata mapping */
-        foreach($file_keyword_metadata['metadata'] as $metadata_id => $checked_status) {
-            $metad = FileMetadata::where("id", "=", $metadata_id)->get()->first();
-            if($checked_status == "on") {
-
-                try {
-                    $file->metadatas()->attach($metad->id);
-                }
-                catch(\Illuminate\Database\QueryException $e) {
-                    // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
-                    //dd($e);
-                }
-            }
-            else {
-                $file->metadatas()->detach($metad->id);
+                $file->search_keywords()->detach($metad->id);
             }
         }
 

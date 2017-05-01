@@ -48,7 +48,7 @@
                         <div class="col-sm-12 col-md-12">
                             {!! BootForm::text('question', "Question", null, array('placeholder' => 'Enter Question', 'class' => 'input-lg', 'required' => 'required'))!!}
                             {!! BootForm::textarea('answer', "Answer", null, array('class' => 'input-lg textarea form-control note-placeholder', 'required' => 'required', 'rows' => '5', 'style'=>'style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"'))!!}
-                            {!! BootForm::submit('Save', array('class' => 'btn btn-block btn-primary ')) !!}
+                            {!! BootForm::submit('Save', array('class' => 'input-lg btn btn-block btn-primary ')) !!}
                         </div>
                     {!! Form::close() !!}
                 </div>

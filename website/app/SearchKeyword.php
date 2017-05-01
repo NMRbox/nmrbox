@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FileMetadata extends Model
+class SearchKeyword extends Model
 {
     // defining table name
-    protected $table = 'file_metadata';
+    protected $table = 'search_keywords';
 
     // overriding primary keys and turning off auto increment
     protected $primaryKey = 'id';
@@ -20,6 +20,6 @@ class FileMetadata extends Model
     ];
 
     public function files() {
-        return $this->belongsToMany('App\File', 'file_file_metadata', 'metadata_id', 'file_id');
+        return $this->belongsToMany('App\File', 'file_search_keyword', 'metadata_id', 'file_id');
     }
 }

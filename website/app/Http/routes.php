@@ -290,6 +290,17 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{file_metadata}/delete', array('as' => 'file_metadata.delete', 'uses' => 'FileMetadataController@destroy'));
     });
 
+    # Search Keyword Management
+    Route::model('search_keyword', 'App\SearchKeyword');
+    Route::group(array('prefix' => 'search_keyword'), function () {
+        Route::get('/', array('as' => 'admin/search_keyword', 'uses' => 'SearchKeywordController@index'));
+        Route::get('create', array('as' => 'search_keyword.create', 'uses' => 'SearchKeywordController@create'));
+        Route::post('create', array('as' => 'search_keyword.store', 'uses' => 'SearchKeywordController@store'));
+        Route::get('{search_keyword}/edit', array('as' => 'search_keyword.edit', 'uses' => 'SearchKeywordController@edit'));
+        Route::put('{search_keyword}/edit', array('as' => 'search_keyword.update', 'uses' => 'SearchKeywordController@update'));
+        Route::get('{search_keyword}/delete', array('as' => 'search_keyword.delete', 'uses' => 'SearchKeywordController@destroy'));
+    });
+
     # Email Management
     Route::model('email', 'App\Email');
     Route::group(array('prefix' => 'email'), function () {
