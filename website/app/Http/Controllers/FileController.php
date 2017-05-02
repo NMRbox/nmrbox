@@ -223,7 +223,9 @@ class FileController extends Controller
         try{
             $file = File::where('id', $file_id)->first();
             $file->delete();
-            return back()->withInput();
+
+            // redirect with success message
+            return redirect()->back()->withSuccess(Lang::get('files/message.success.delete'));
 
         } catch (QueryException $e){
             return redirect()->back()->withError(Lang::get('files/message.error.delete'));

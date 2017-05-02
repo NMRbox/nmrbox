@@ -238,14 +238,14 @@ class FAQController extends Controller
             
             $faq->delete();
 
+            // redirect with success message
+            return redirect()->back()->withSuccess(Lang::get('faqs/message.success.delete'));
         } catch ( QueryException $e){
 
             // something went wrong - probably has entries in email_person table
             return redirect()->back()->withError(Lang::get('faqs/message.error.delete'));
         }
 
-        // redirect with success message
-        return redirect()->back()->withSuccess(Lang::get('faqs/message.success.delete'));
     }
 
     /**
