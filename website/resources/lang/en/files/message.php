@@ -15,7 +15,7 @@ return array(
     'error' => array(
         'create'    => 'There was an issue uploading the files. Please try again.',
         'update'    => 'There was an issue updating the file entry. Please try again.',
-        'delete'    => 'Can not be deleted!! ',
+        'delete'    => 'Can not be deleted!! Remove the pivot table entries in File edit page and try again.',
     ),
 
 );

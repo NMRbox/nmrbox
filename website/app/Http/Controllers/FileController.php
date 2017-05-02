@@ -220,8 +220,13 @@ class FileController extends Controller
      */
     public function destroy($file_id)
     {
-        $file = File::where('id', $file_id)->first();
-        $file->delete();
-        return back()->withInput();
+        try{
+            $file = File::where('id', $file_id)->first();
+            $file->delete();
+            return back()->withInput();
+
+        } catch (QueryException $e){
+            return redirect()->back()->withError(Lang::get('files/message.error.delete'));
+        }
     }
 }

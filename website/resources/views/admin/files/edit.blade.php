@@ -109,7 +109,7 @@ Edit File
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6 software-scroll">
-                                    <h4>Select Metadata: </h4><hr>
+                                    <h4>Select Search Keywords: </h4><hr>
                                     @foreach ($all_search_keywords as $keyword)
                                         {!! BootForm::hidden('metadata['.$keyword->id.']', "off", [ ]) !!}
                                         {!! BootForm::checkbox('metadata['.$keyword->id.']', $keyword->metadata, null, $keyword->present) !!}
