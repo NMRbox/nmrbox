@@ -361,7 +361,6 @@ Route::get('update_profile', array('as' => 'update_profile', 'uses' => 'FrontEnd
 Route::put('{person}/update_profile', array('as' => 'person.update_profile', 'uses' => 'FrontEndController@updatePersonProfile'));
 Route::group(array('middleware' => 'SentinelUser'), function () {
 Route::get('my-account', array('as' => 'my-account', 'uses' => 'FrontEndController@myAccount'));
-//Route::post('my-account', 'FrontEndController@updateAccount');
 });
 
 # contact form

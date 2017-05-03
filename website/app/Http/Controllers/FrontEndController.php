@@ -87,7 +87,7 @@ class FrontEndController extends Controller
             $ldap = new Ldap;
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
 
-            /* Test
+            /* Test (Localhost login code to skip LDAP authentication)
             $ldap_login = true;
             $user = User::where('person_id', 226)->first();
             $person = Person::where('id', $user->person_id)->get()->first();
@@ -623,7 +623,7 @@ class FrontEndController extends Controller
      *
      * @return Redirect
      */
-    public function postRegister()
+    public function postRegister(Request $request)
     {
         // Declare the rules for the form validation
         $rules = array(
@@ -657,6 +657,7 @@ class FrontEndController extends Controller
         $activate = true; //make it false if you don't want to activate user automatically
 
         try {
+
 
             $email = Input::get('email');
             if( strlen($email) <= 0 ) {
@@ -707,11 +708,15 @@ class FrontEndController extends Controller
                 $existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
                 $existing_institution->save();
             }
-
+            /* saving person */
             $person->save();
 
 
-            // Register the user
+
+            /*
+             * TODO: Trying to replace user table with person table and these section needs to be removed.
+             */
+             // Register the person in user table
             $user = Sentinel::register(array(
                 'person_id' => $person->id,
                 'email' => Input::get('email'),
@@ -721,6 +726,7 @@ class FrontEndController extends Controller
             //add user to 'User' group
             $role = Sentinel::findRoleByName('User');
             $role->users()->attach($user);
+
 
 
             /*
