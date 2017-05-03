@@ -24,7 +24,7 @@
                     <br>
                     <br>
                     <br>
-                    <span>Thanks for registering! We'll be in touch when we're ready.</span>
+                    <span>Thanks for registering! We will create your account and email you with instructions to access your NMRbox VM.</span>
                     <br>
                     <br><br>
                     <br>
