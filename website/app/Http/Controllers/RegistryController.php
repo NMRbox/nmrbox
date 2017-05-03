@@ -80,7 +80,7 @@ class RegistryController extends Controller
                 foreach ($fields_value as $key => $value){
                     $software =$software->where(function($qry) use ($value){
                         foreach($value as $key => $val){
-                            $qry->where($key, 'ILIKE', '%'.$val.'%');
+                            $qry->where('short_title', 'ILIKE', '%'.$val.'%');
                             $qry->where('display', '=', 'TRUE');
                         }
                     });
