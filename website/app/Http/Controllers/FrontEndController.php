@@ -84,17 +84,17 @@ class FrontEndController extends Controller
 
         try {
             // Adding custom LDAP library class and authenticating
-            /*$ldap = new Ldap;
-            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));*/
+            $ldap = new Ldap;
+            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
 
             /* Test (Localhost login code to skip LDAP authentication) */
-            $ldap_login = true;
+            /*$ldap_login = true;
             $user = User::where('person_id', 226)->first();
             $person = Person::where('id', $user->person_id)->get()->first();
             if($person){
                 Session::put('person', $person);
             }
-            Sentinel::loginAndRemember($user);
+            Sentinel::loginAndRemember($user);*/
             /* Eof Test */
 
             // LDAP login response
