@@ -172,7 +172,7 @@ class FrontEndController extends Controller
     {
         $user = Sentinel::getUser();
         // the person attached to the user
-        $person = $user->person()->get()->first();
+        $person = Person::where('id', $user->person_id)->get()->first();
 
         $timezones = Timezone::all();
         $timezones = $timezones->sortBy("zone"); // want these sorted for frontend
@@ -204,7 +204,7 @@ class FrontEndController extends Controller
     public function updatePersonProfile(Request $request, Person $person)
     {
         $user = Sentinel::getUser();
-        $person = $user->person()->get()->first();
+        $person = Person::where('id', $user->person_id)->get()->first();
 
         $person->update($request->except(['institution', 'institution_type']));
 
@@ -242,7 +242,7 @@ class FrontEndController extends Controller
     public function updateProfile()
     {
         $user = Sentinel::getUser();
-        $person = $user->person()->get()->first();
+        $person = Person::where('id', $user->person_id)->get()->first();
 
         //validatoinRules are declared at beginning
         /*if (Input::get('email')) {

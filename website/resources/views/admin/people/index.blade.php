@@ -83,12 +83,27 @@ People Index
                         People List
                     </h4>
                     <div class="pull-right">
-                        <a href="{{ URL::to('admin/people/create') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> Add Person</a>
-                        <a href="javascript:" id="btn_select_all" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-check"></span> Select All</a>
-                        <a href="javascript:" id="btn_deselect_all" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-refresh"></span> Deselect</a>
-                        <a href="#" data-toggle="modal" data-target="#email_modal" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-envelope"></span> Send Email</a>
-                        <a href="#" data-toggle="modal" data-target="#user_classification_modal" class="btn btn-sm btn-primary" id="user_classification"><span class="glyphicon glyphicon-user"></span> Assign Classification</a>
-                        <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
+                        <div>
+                            <a href="{{ URL::to('admin/people/create') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> Add Person</a>
+                            <a href="javascript:" id="btn_select_all" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-check"></span> Select All</a>
+                            <a href="javascript:" id="btn_deselect_all" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-refresh"></span> Deselect</a>
+                            <a href="#" data-toggle="modal" data-target="#email_modal" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-envelope"></span> Send Email</a>
+                            <a href="#" data-toggle="modal" data-target="#user_classification_modal" class="btn btn-sm btn-primary" id="user_classification"><span class="glyphicon glyphicon-user"></span> Assign Classification</a>
+                            {{--<a href="#" data-target="#adv_search_box" class="btn btn-sm btn-primary" id="adv_search_box_button"><span class="glyphicon glyphicon-search"></span> Search by ID</a>--}}
+                            <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
+                        </div>
+                        {{--<br>
+                        <div id="adv_search_box" class="hidden text-right">
+                            <form class="form" method="post" action="">
+                                <div class="form-group">
+                                    <input type="text" class="input-sm" name="adv_search" placeholder="1, 2, 3, 4, 5" id="search_input">
+                                    <button class="btn btn-sm btn-primary" id="adv_search_button">Search</button>
+                                </div>
+                                <div class="form-group">
+
+                                </div>
+                            </form>
+                        </div>--}}
                     </div>
                 </div>
                 <div class="row">
@@ -128,7 +143,7 @@ People Index
                         </thead>
                         <thead>
                             <tr>
-                                <th class="no-search hidden ref_search"></th>
+                                <th class="no-search ref_search hidden"></th>
                                 <th class="col-md-1 ref_search">First Name</th>
                                 <th class="col-md-1 ref_search">Last Name</th>
                                 <th class="col-md-1 ref_search">Email</th>
