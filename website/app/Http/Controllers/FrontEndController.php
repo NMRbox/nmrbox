@@ -84,10 +84,10 @@ class FrontEndController extends Controller
 
         try {
             // Adding custom LDAP library class and authenticating
-            $ldap = new Ldap;
-            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
+            /*$ldap = new Ldap;
+            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));*/
 
-            /* Test (Localhost login code to skip LDAP authentication)
+            /* Test (Localhost login code to skip LDAP authentication) */
             $ldap_login = true;
             $user = User::where('person_id', 226)->first();
             $person = Person::where('id', $user->person_id)->get()->first();
@@ -154,15 +154,11 @@ class FrontEndController extends Controller
     {
         $user = Sentinel::getUser();
         // the person attached to the user
-        $person = $user->person()->get()->first();
+        //$person = $user->person()->get()->first();
+        $person = Person::where('id', $user->person_id)->get()->first();
         $classifications = Classification::All();
 
-        /*
-         * @todo - remove old template
-         * */
-
-        return View::make('user_dashboard', compact('user', 'person'));
-        //return View::make('user_account', compact('user', 'person'));
+        return View::make('user_dashboard', compact('user', 'person', 'classifications'));
     }
 
 

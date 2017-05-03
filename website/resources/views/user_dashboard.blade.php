@@ -514,8 +514,7 @@
 
     </script>
 
-    <script type="text/javascript"
-            src="{{ asset('assets/vendors/jasny-bootstrap/js/jasny-bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendors/jasny-bootstrap/js/jasny-bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/iCheck/icheck.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/holder/holder.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/select2/select2.js') }}"></script>
