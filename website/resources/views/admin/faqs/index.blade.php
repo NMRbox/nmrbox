@@ -61,7 +61,7 @@ FAQ Index
                         <thead>
                             <tr>
                                 <th>Question</th>
-                                <th>Answer</th>
+                                {{--<th>Answer</th>--}}
                                 <th>Softwares</th>
                                 <th>Search Keywords</th>
                                 <th>Action #</th>
@@ -71,14 +71,14 @@ FAQ Index
                         @if(!empty($all_faqs))
                             @foreach ($all_faqs as $faq)
                                 <tr id="{!! $faq->id !!}">
-                                    <td class="col-md-3">{!! $faq->question !!}</td>
-                                    <td class="col-md-4">{!! $faq->answer !!}</td>
-                                    <td class="col-md-2">
+                                    <td class="col-md-5">{!! $faq->question !!}</td>
+                                    {{--<td class="col-md-4">{!! $faq->answer !!}</td>--}}
+                                    <td class="col-md-3">
                                         @foreach($faq->softwares as $software)
                                             {!! $software->name !!} <br>
                                         @endforeach
                                     </td>
-                                    <td class="col-md-2">
+                                    <td class="col-md-3">
                                         @foreach($faq->search_keywords as $keyword)
                                             {!! $keyword->metadata !!} <br>
                                         @endforeach
