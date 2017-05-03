@@ -21,7 +21,7 @@ class RegistryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $all_software = Software::All()->sortBy('name');
+        $all_software = Software::All()->sortBy('short_title', SORT_NATURAL|SORT_FLAG_CASE);
         return View::make("registry.index", compact('all_software'));
     }
 
@@ -206,12 +206,12 @@ class RegistryController extends Controller
             }
         }
         $all_software = $software->where('display', '=', 'TRUE')
-                                 ->orderBy('name', 'ASC')
+                                 ->orderBy('short_title', 'ASC')
                                  ->get();
 
         $soft_array=array();
         foreach ($all_software as $software){
-            $soft_array[] = array('id' => $software->id, 'name' => $software->name, 'synopsis' => $software->synopsis, 'slug' => $software->slug);
+            $soft_array[] = array('id' => $software->id, 'name' => $software->short_title, 'synopsis' => $software->synopsis, 'slug' => $software->slug);
         }
 
 
