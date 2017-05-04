@@ -89,21 +89,18 @@ People Index
                             <a href="javascript:" id="btn_deselect_all" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-refresh"></span> Deselect</a>
                             <a href="#" data-toggle="modal" data-target="#email_modal" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-envelope"></span> Send Email</a>
                             <a href="#" data-toggle="modal" data-target="#user_classification_modal" class="btn btn-sm btn-primary" id="user_classification"><span class="glyphicon glyphicon-user"></span> Assign Classification</a>
-                            {{--<a href="#" data-target="#adv_search_box" class="btn btn-sm btn-primary" id="adv_search_box_button"><span class="glyphicon glyphicon-search"></span> Search by ID</a>--}}
+                            <a href="#" data-target="#adv_search_box" class="btn btn-sm btn-primary" id="adv_search_box_button"><span class="glyphicon glyphicon-search"></span> Search by ID</a>
                             <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
                         </div>
-                        {{--<br>
+                        <br>
                         <div id="adv_search_box" class="hidden text-right">
-                            <form class="form" method="post" action="">
-                                <div class="form-group">
-                                    <input type="text" class="input-sm" name="adv_search" placeholder="1, 2, 3, 4, 5" id="search_input">
-                                    <button class="btn btn-sm btn-primary" id="adv_search_button">Search</button>
+                            <form class="form-inline" method="post" action="">
+                                <div class="input-group">
+                                    <input type="text" class="input-sm form-control" name="adv_search" placeholder="1, 2, 3, 4, 5" id="search_input">
                                 </div>
-                                <div class="form-group">
-
-                                </div>
+                                <button class="btn btn-sm btn-primary" id="adv_search_button">Search</button>
                             </form>
-                        </div>--}}
+                        </div>
                     </div>
                 </div>
                 <div class="row">

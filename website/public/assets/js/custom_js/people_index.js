@@ -36,8 +36,8 @@ $(document).ready(function() {
         "columnDefs": [
             {
                 "targets": [ 0 ],
-                "visible": false,
-                "searchable": false
+                "visible": true,
+                "searchable": true
             }
         ]
     });
@@ -46,7 +46,7 @@ $(document).ready(function() {
     /* search empty field in table */
     $('#search_empty_val').on('click', function(e){
         e.preventDefault();
-        table.column().search("^$", 1, 0).draw();
+        table.column(4).search("^$", 1, 0).draw();
         //table.column(col_index).search( '^'+this.value+'$', true, false ).draw();
 
         //table.search("FieldName is NULL").draw();
@@ -253,7 +253,22 @@ $(document).ready(function() {
         m.modal();
     });
 
+    /* Show/Hide Advance search box */
+    $("#adv_search_box_button").on('click', function(e){
+        e.preventDefault();
+        $("div#adv_search_box").toggleClass('hidden');
+    });
+
+    /* Advance search */
+    $('button#adv_search_button').on('click', function (e) {
+        e.preventDefault();
+        var request_input = $("#search_input").val().replace(/,(\s*)/g, "|");
+        table.column(0).search("^("+request_input+")$", 1, 0).draw();
+    });
+
 });
+
+
 
 /* Alert box */
 function show_alert(alert_type) {
