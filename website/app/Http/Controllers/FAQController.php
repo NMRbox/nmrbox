@@ -178,40 +178,44 @@ class FAQController extends Controller
             $faq->answer = $request->input('answer');
             $faq->save();
 
-            $request_software_data = $request->input('software');
             /* software mapping */
-            foreach($request_software_data as $software_id => $checked_status) {
-                $software = Software::where("id", "=", $software_id)->get()->first();
-                if($checked_status == "on") {
-                    try {
-                        $faq->softwares()->attach($software->id);
+            $request_software_data = $request->input('software');
+            if($request_software_data){
+                foreach($request_software_data as $software_id => $checked_status) {
+                    $software = Software::where("id", "=", $software_id)->get()->first();
+                    if($checked_status == "on") {
+                        try {
+                            $faq->softwares()->attach($software->id);
+                        }
+                        catch(\Illuminate\Database\QueryException $e) {
+                            // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
+                            //dd($e);
+                        }
                     }
-                    catch(\Illuminate\Database\QueryException $e) {
-                        // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
-                        //dd($e);
+                    else {
+                        $faq->softwares()->detach($software->id);
                     }
-                }
-                else {
-                    $faq->softwares()->detach($software->id);
                 }
             }
 
             /* search keyword mapping */
             $faq_search_keyword = $request->input('metadata');
-            foreach($faq_search_keyword as $keyword_id => $checked_status) {
-                $metad = SearchKeyword::where("id", "=", $keyword_id)->get()->first();
-                if($checked_status == "on") {
+            if($faq_search_keyword){
+                foreach($faq_search_keyword as $keyword_id => $checked_status) {
+                    $metad = SearchKeyword::where("id", "=", $keyword_id)->get()->first();
+                    if($checked_status == "on") {
 
-                    try {
-                        $faq->search_keywords()->attach($metad->id);
+                        try {
+                            $faq->search_keywords()->attach($metad->id);
+                        }
+                        catch(\Illuminate\Database\QueryException $e) {
+                            // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
+                            //dd($e);
+                        }
                     }
-                    catch(\Illuminate\Database\QueryException $e) {
-                        // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
-                        //dd($e);
+                    else {
+                        $faq->search_keywords()->detach($metad->id);
                     }
-                }
-                else {
-                    $faq->search_keywords()->detach($metad->id);
                 }
             }
         } catch ( QueryException $e){
