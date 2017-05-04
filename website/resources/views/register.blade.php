@@ -108,7 +108,7 @@
                             {!! BootForm::text('address3', "Address Line 3", null, array('class' => 'form-control', 'maxlength'=> 128))!!}
                         </div>
 
-                        <div class="form-group col-lg-6">
+                        <div class="form-group col-lg-12">
                             {!! BootForm::text('city', "City", null, array('class' => 'form-control', 'maxlength'=> 64, 'required' => 'required'))!!}
                         </div>
 
@@ -116,7 +116,7 @@
                             {{--{!! BootForm::text('state_province', "State or Province", null, array('class' => 'form-control', 'maxlength'=> 32, 'required' => 'required'))!!}--}}
                             <label for="state_province" class="control-label">State or Province</label>
                             <div class="form-group">
-                                <select name='state_province' class="form-control" id="ct" data-default-value-option="true" data-default-value="Connecticut" data-value="shortcode" required></select>
+                                <select name='state_province' class="form-control" id="ct" data-show-default-option="true" data-default-option="Select State or Province" data-default-value="Connecticut" data-value="shortcode" required></select>
                             </div>
                         </div>
 
@@ -124,19 +124,13 @@
                             {!! BootForm::text('zip_code', "Zip Code", null, array('class' => 'form-control', 'maxlength'=> 32, 'required' => 'required'))!!}
                         </div>
 
-                        <div class="form-group col-lg-6">
+                        <div class="form-group col-lg-12">
                             {{--{!! BootForm::text('country', "Country", null, array('class' => 'form-control', 'maxlength'=> 64, 'required' => 'required'))!!}--}}
                             <label for="country" class="control-label">Country</label>
                             <div class="form-group">
                                 <select name='country' class="crs-country form-control" data-region-id="ct" data-default-value-option="true" data-default-value="United States" required></select>
                             </div>
                         </div>
-
-                        {{-- test --}}
-                        <div class="form-group col-lg-12">
-
-                        </div>
-                        {{-- eof test --}}
 
                         <div class="form-group col-lg-12">
                             {!! BootForm::select('time_zone_id', "Time Zone",
