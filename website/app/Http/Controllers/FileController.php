@@ -187,20 +187,23 @@ class FileController extends Controller
         }
 
         /* search keyword mapping */
-        foreach($file_keyword_metadata['metadata'] as $keyword_id => $checked_status) {
-            $metad = SearchKeyword::where("id", "=", $keyword_id)->get()->first();
-            if($checked_status == "on") {
+        if(isset($file_keyword_metadata['metadata'])){
 
-                try {
-                    $file->search_keywords()->attach($metad->id);
+            foreach($file_keyword_metadata['metadata'] as $keyword_id => $checked_status) {
+                $metad = SearchKeyword::where("id", "=", $keyword_id)->get()->first();
+                if($checked_status == "on") {
+
+                    try {
+                        $file->search_keywords()->attach($metad->id);
+                    }
+                    catch(\Illuminate\Database\QueryException $e) {
+                        // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
+                        //dd($e);
+                    }
                 }
-                catch(\Illuminate\Database\QueryException $e) {
-                    // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
-                    //dd($e);
+                else {
+                    $file->search_keywords()->detach($metad->id);
                 }
-            }
-            else {
-                $file->search_keywords()->detach($metad->id);
             }
         }
 
