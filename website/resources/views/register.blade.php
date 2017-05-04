@@ -113,7 +113,11 @@
                         </div>
 
                         <div class="form-group col-lg-6">
-                            {!! BootForm::text('state_province', "State or Province", null, array('class' => 'form-control', 'maxlength'=> 32, 'required' => 'required'))!!}
+                            {{--{!! BootForm::text('state_province', "State or Province", null, array('class' => 'form-control', 'maxlength'=> 32, 'required' => 'required'))!!}--}}
+                            <label for="state_province" class="control-label">State or Province</label>
+                            <div class="form-group">
+                                <select name='state_province' class="form-control" id="ct" data-default-value-option="true" data-default-value="Connecticut" data-value="shortcode" required></select>
+                            </div>
                         </div>
 
                         <div class="form-group col-lg-6">
@@ -121,8 +125,18 @@
                         </div>
 
                         <div class="form-group col-lg-6">
-                            {!! BootForm::text('country', "Country", null, array('class' => 'form-control', 'maxlength'=> 64, 'required' => 'required'))!!}
+                            {{--{!! BootForm::text('country', "Country", null, array('class' => 'form-control', 'maxlength'=> 64, 'required' => 'required'))!!}--}}
+                            <label for="country" class="control-label">Country</label>
+                            <div class="form-group">
+                                <select name='country' class="crs-country form-control" data-region-id="ct" data-default-value-option="true" data-default-value="United States" required></select>
+                            </div>
                         </div>
+
+                        {{-- test --}}
+                        <div class="form-group col-lg-12">
+
+                        </div>
+                        {{-- eof test --}}
 
                         <div class="form-group col-lg-12">
                             {!! BootForm::select('time_zone_id', "Time Zone",
@@ -163,4 +177,5 @@
 @section('footer_scripts')
     <script type="text/javascript" src="{{ asset('assets/vendors/iCheck/icheck.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/frontend/register.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendors/country-region-list/jquery.crs.min.js') }}"></script>
 @stop
