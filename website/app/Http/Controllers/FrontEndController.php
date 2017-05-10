@@ -654,7 +654,6 @@ class FrontEndController extends Controller
 
         try {
 
-
             $email = Input::get('email');
             if( strlen($email) <= 0 ) {
                 $email = Input::get('email_institution');
@@ -706,8 +705,6 @@ class FrontEndController extends Controller
             }
             /* saving person */
             $person->save();
-
-
 
             /*
              * TODO: Trying to replace user table with person table and these section needs to be removed.
