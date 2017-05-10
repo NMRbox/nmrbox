@@ -705,20 +705,12 @@ class FrontEndController extends Controller
             }
 
             $new_person_id = $person->id;
-            echo "<pre>";
-            print_r($new_person_id);
-            echo "</pre>";
-
+            
             $user_details = array(
                 'person_id' => $new_person_id,
                 'email' => Input::get('email'),
                 'password' => "NMR-2016!" // TODO: good god make people change this
             );
-            
-            echo "<pre>";
-            print_r($user_details);
-            echo "</pre>";
-            die();
 
             /*
              * TODO: Trying to replace user table with person table and these section needs to be removed.
