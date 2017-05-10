@@ -704,10 +704,6 @@ class FrontEndController extends Controller
                 $existing_institution->save();
             }
 
-            echo "<pre>";
-            print_r($person->id);
-            echo "</pre>";
-            die();
             /*
              * TODO: Trying to replace user table with person table and these section needs to be removed.
              */
