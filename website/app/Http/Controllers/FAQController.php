@@ -3,7 +3,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Software;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -13,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\MessageBag;
 use View;
 use Input;
+use Session;
 use Sentinel;
 use Mail;
 use Lang;
@@ -20,6 +20,8 @@ use App\FAQ;
 Use App\SearchKeyword;
 use App\Keyword;
 use App\Category;
+use App\Person;
+use App\Software;
 
 class FAQController extends Controller
 {
@@ -54,15 +56,18 @@ class FAQController extends Controller
             $all_faqs[] = $this->convert_to_string($value->id);
         }
 
-        // all keywords
+        // all softwares
         $all_softwares = Software::All();
 
-        // all metadata
+        // all search keywords
         $all_search_keywords = SearchKeyword::All();
+
+        // all person
+        $all_person = Person::All();
 
 
         // make index view
-        return view::make('admin.faqs.index', compact('all_faqs', 'all_softwares'));
+        return view::make('admin.faqs.index', compact('all_faqs', 'all_softwares', 'all_search_keywords', 'all_person'));
     }
 
     /**
@@ -125,6 +130,22 @@ class FAQController extends Controller
         // Pulling out the object
         $faq = $this->convert_to_string($id);
 
+        // All user details
+        $all_person = Person::All();
+
+        // All ratings
+        /*$faq_ratings = $faq->ratings()->get();
+        /*echo "<pre>";
+        print_r($faq_ratings);
+        echo "</pre>";*/
+
+
+        /*foreach ($faq->ratings as $rating){
+            $data[] = $rating->pivot->person_id;
+
+        }*/
+
+
         // Software / FAQ Mapping
         $all_softwares = Software::All();
         $faq_softwares = $faq->softwares()->get();
@@ -156,7 +177,7 @@ class FAQController extends Controller
         }
 
         //return view::make('admin.faqs.edit', compact('faq', 'all_keywords', 'keyword_map', 'file_keywords', 'keyword_map', 'all_metadata', 'faq_metadata', 'metadata_map'));
-        return view::make('admin.faqs.edit', compact('faq', 'all_softwares', 'software_map', 'faq_softwares', 'all_search_keywords', 'search_keywords_map', 'faq_search_keywords'));
+        return view::make('admin.faqs.edit', compact('faq', 'all_person', 'faq_ratings', 'all_softwares', 'software_map', 'faq_softwares', 'all_search_keywords', 'search_keywords_map', 'faq_search_keywords'));
     }
 
     /**
@@ -304,4 +325,55 @@ class FAQController extends Controller
         // make index view
         return view::make('faq', compact('all_faqs'));
     }
+
+    /**
+     * Count the specific FAQ ratings
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function countFAQRatings(Request $request){
+
+        if(!$request->ajax()) {
+            return App::abort(403);
+        }
+
+        // input fields
+        $vote = $request->input('vote');
+        $comment = $request->input('comment');
+
+
+        // FAQ id
+        $id = $request->input('id');
+        $faq = FAQ::where('id', $id)->get()->first();
+
+        // Retrieving the logged users id from session variable
+        $person = Session::get('person');
+        $faq_rating = $faq->ratings()->wherePivot('person_id', $person->id)->get()->first();
+
+        echo "<pre>";
+        print_r($faq_rating);
+        echo "</pre>";
+        die();
+
+        /* Saving vote to db if not yet cast */
+        if(!$faq_rating){
+            $faq->ratings()->attach(array(
+                    $person->id => array(
+                        'upvote' => $vote,
+                        'comment' => $comment
+                    )
+                )
+            );
+
+            return response( json_encode( array( 'message' => 'Thank you for your time to give us your feedback. ' ) ), 200 )
+                ->header( 'Content-Type', 'application/json' );
+
+        } else {
+            return response( json_encode( array( 'message' => 'You have already cast your vote. ' ) ), 401 )
+                ->header( 'Content-Type', 'application/json' );
+        }
+    }
+
+
 }
