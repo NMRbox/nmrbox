@@ -704,15 +704,27 @@ class FrontEndController extends Controller
                 $existing_institution->save();
             }
 
+            $new_person_id = $person->id;
+            echo "<pre>";
+            print_r($new_person_id);
+            echo "</pre>";
+
+            $user_details = array(
+                'person_id' => $new_person_id,
+                'email' => Input::get('email'),
+                'password' => "NMR-2016!" // TODO: good god make people change this
+            );
+            
+            echo "<pre>";
+            print_r($user_details);
+            echo "</pre>";
+            die();
+
             /*
              * TODO: Trying to replace user table with person table and these section needs to be removed.
              */
              // Register the person in user table
-            $user = Sentinel::register(array(
-                'person_id' => $person->id,
-                'email' => Input::get('email'),
-                'password' => "NMR-2016!" // TODO: good god make people change this
-            ), $activate);
+            $user = Sentinel::register($user_details, $activate);
 
             //add user to 'User' group
             $role = Sentinel::findRoleByName('User');
