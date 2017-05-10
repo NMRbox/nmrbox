@@ -703,9 +703,7 @@ class FrontEndController extends Controller
                 $existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
                 $existing_institution->save();
             }
-            /* saving person */
-            $person->save();
-
+            
             /*
              * TODO: Trying to replace user table with person table and these section needs to be removed.
              */
