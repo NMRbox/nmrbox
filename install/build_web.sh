@@ -2,13 +2,14 @@
 
 showhelp ( ){
 	echo "Install website from svn"
-	echo "Usage: $0 -n [fully qualified hostname] -d [install directory] -a [account] -s [svn location] -o [operating system] -e [environment] -b [database]"
+	echo "Usage: $0 -n [fully qualified hostname] -d [install directory] -a [account] -s [svn location] -o [operating system] -e [environment] -b [database] -w"
 	echo "hostname defaults to current host"
 	echo "account defaults to www-data"
 	echo "svn location defaults to trunk"
 	echo "operating system defaults to ubuntu-14.04"
 	echo "environment defaults to prod"
 	echo "database defaults to registry"
+	echo "-w makes 'writable'  (can do svn commit)"
 	exit 1
 }
 
@@ -20,7 +21,8 @@ os=ubuntu-14.04
 env=prod
 db=registry
 svn_auth='--username buildserver --password boxofrocks --no-auth-cache'
-while getopts "n:d:a:s:o:e:hb:" opt; do
+svn_op=export
+while getopts "n:d:a:s:o:e:hb:w" opt; do
     case $opt in
 	h)
 	showhelp
@@ -46,6 +48,9 @@ while getopts "n:d:a:s:o:e:hb:" opt; do
 	b)
 	db=$OPTARG
 	;;
+	w)
+	svn_op=checkout	
+	;;
     esac
 done
 
@@ -67,8 +72,8 @@ fi
 #show checkout command
 SVN_ROOT=https://devel.nmrbox.org/svn/nmrbox/$loc/web 
 echo "Extracting code from $SVN_ROOT"
-svn $svn_auth export -q ${SVN_ROOT}/website $installdir 
-svn $svn_auth export -q ${SVN_ROOT}/vendor-$os $installdir/vendor
+svn $svn_auth $svn_op -q ${SVN_ROOT}/website $installdir 
+svn $svn_auth $svn_op -q ${SVN_ROOT}/vendor-$os $installdir/vendor
 
 (
 cat <<EO_ENV
