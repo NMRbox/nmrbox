@@ -41,7 +41,8 @@ $(document).ready(function() {
             }
         ]
     });
-    var all_rows = table.rows().data();
+
+
 
     /* search empty field in table */
     $('#search_empty_val').on('click', function(e){
@@ -67,17 +68,23 @@ $(document).ready(function() {
         } else {
             selected.splice(index, 1);
         }
-
         $(this).toggleClass('selected');
     });
+
+    /* targeting all the filtered data from the table */
+    /*//var all_rows = table.rows().data();
+    var all_rows = table.rows( { filter:'applied' } ).data();
+    console.log(all_rows);*/
 
     /* Select all the refined field*/
     $('a#btn_select_all').on('click', function(e) {
         e.preventDefault();
         selected = [];
-        $(all_rows).each(function(key, row) {
+        //$(all_rows).each(function(key, row) {
+        $(table.rows( { filter:'applied' } ).data()).each(function(key, row) {
             selected.push(row[0]);
         });
+        console.log(selected);
         $('#vm-table tbody tr').addClass('selected');
     });
 
@@ -85,6 +92,7 @@ $(document).ready(function() {
     $('a#btn_deselect_all').on('click', function(e) {
         e.preventDefault();
         selected = [];
+        console.log(selected);
         $('#vm-table tbody tr').removeClass('selected');
     });
 

@@ -368,6 +368,8 @@ Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@post
 
 # faq
 Route::get('faq',array('as' => 'faq','uses' => 'FAQController@showAllFAQs'));
+Route::post('faq',array('as' => 'faq','uses' => 'FAQController@showAllFAQs'));
+Route::post('faq-ratings', array('as' => 'faq-ratings', 'uses' => 'FAQController@countFAQRatings'));
 
 # homepage
 Route::get('/', array('as' => 'home', 'uses' => 'ChandraController@showFrontEndView'));

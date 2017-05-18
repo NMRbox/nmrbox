@@ -2,9 +2,13 @@
 
 namespace App;
 
+use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Model;
 
-class Person extends NmrModel
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Person extends EloquentUser
+//class Person extends NmrModel
 {
     /**
      * The database table used by the model.
@@ -43,16 +47,35 @@ class Person extends NmrModel
         'Other'
     ];
 
+    /**
+     * pivot relation with user table
+     */
     public function user() {
         return $this->hasOne('App\User');
     }
 
+    /**
+     * pivot relation with institution table
+     */
     public function institution() {
         return $this->belongsTo('App\Institution');
     }
 
+    /**
+     * pivot relation with classifications_person table
+     */
     public function classification() {
         return $this->belongsToMany('App\Classification', 'classification_person',
       'person_id', 'name');
     }
+
+    /**
+     * pivot relation with faq_ratings table
+     */
+    public function ratings() {
+        return $this->belongsToMany('App\FAQ', 'faq_rating',
+      'person_id', 'faq_id');
+    }
+
+
 }

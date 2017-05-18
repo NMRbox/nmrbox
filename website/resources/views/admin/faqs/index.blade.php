@@ -64,6 +64,7 @@ FAQ Index
                                 <th class="hidden">Answer</th>
                                 <th>Softwares</th>
                                 <th>Search Keywords</th>
+                                <th>Feedback Count</th>
                                 <th>Action #</th>
                             </tr>
                         </thead>
@@ -73,15 +74,20 @@ FAQ Index
                                 <tr id="{!! $faq->id !!}">
                                     <td class="col-md-5">{!! $faq->question !!}</td>
                                     <td class="hidden">{!! $faq->answer !!}</td>
-                                    <td class="col-md-3">
+                                    <td class="col-md-2">
                                         @foreach($faq->softwares as $software)
                                             {!! $software->name !!} <br>
                                         @endforeach
                                     </td>
-                                    <td class="col-md-3">
+                                    <td class="col-md-2">
                                         @foreach($faq->search_keywords as $keyword)
                                             {!! $keyword->metadata !!} <br>
                                         @endforeach
+                                    </td>
+                                    <td class="col-md-2">
+                                        {{--@foreach($faq->ratings as $key => $rating)--}}
+                                            {!! $faq->ratings->count() !!} <br>
+                                        {{--@endforeach--}}
                                     </td>
                                     <td class="col-md-1">
                                         <a href="{!! URL::to('admin/faq/' . $faq->id . '/edit' ) !!}"><i class="fa fa-fw fa-pencil text-warning" title="Update FAQ"></i></a>

@@ -33,4 +33,11 @@ class FAQ extends Model
     public function search_keywords() {
         return $this->belongsToMany('App\SearchKeyword', 'faq_search_keyword', 'faq_id', 'search_keyword_id');
     }
+
+    /**
+     * pivot relation with FAQ_ratings table
+     */
+    public function ratings() {
+        return $this->belongsToMany('App\Person', 'faq_rating', 'faq_id', 'person_id')->withPivot('upvote', 'comment');
+    }
 }

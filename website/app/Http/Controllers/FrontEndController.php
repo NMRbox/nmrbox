@@ -88,21 +88,26 @@ class FrontEndController extends Controller
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
 
             /* Test (Localhost login code to skip LDAP authentication) */
-            /*$ldap_login = true;
-            $user = User::where('person_id', 226)->first();
-            $person = Person::where('id', $user->person_id)->get()->first();
+            /*
+            $ldap_login = true;
+
+            $person = Person::where('id', 226)->get()->first();
             if($person){
                 Session::put('person', $person);
             }
-            Sentinel::loginAndRemember($user);*/
+            //Sentinel::loginAndRemember($user); // removing user test
+            Sentinel::loginAndRemember($person);*/
             /* Eof Test */
 
             // LDAP login response
             if($ldap_login !== false){
-                if ($user = Sentinel::check())
+                //if ($user = Sentinel::check()) // removing user -> person test
+                if ($person = Sentinel::check())
                 {
+
                     // Assigning user classification
-                    $user_classification = ClassificationPerson::where('person_id', $user->person_id)->get();
+                    //$user_classification = ClassificationPerson::where('person_id', $user->person_id)->get(); // removing user -> person test
+                    $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
                     foreach ($user_classification as $key => $value) {
                         if ($value->name == 'admin'){
                             $is_admin = true;
@@ -152,10 +157,12 @@ class FrontEndController extends Controller
      */
     public function myAccount()
     {
+        //$user = Sentinel::getUser(); //removing user->person test
         $user = Sentinel::getUser();
+
         // the person attached to the user
         //$person = $user->person()->get()->first();
-        $person = Person::where('id', $user->person_id)->get()->first();
+        $person = Person::where('id', $user->id)->get()->first();
         $classifications = Classification::All();
 
         return View::make('user_dashboard', compact('user', 'person', 'classifications'));
@@ -171,8 +178,9 @@ class FrontEndController extends Controller
     public function editProfile()
     {
         $user = Sentinel::getUser();
-        // the person attached to the user
-        $person = Person::where('id', $user->person_id)->get()->first();
+
+        // person details
+        $person = Person::where('id', $user->id)->get()->first();
 
         $timezones = Timezone::all();
         $timezones = $timezones->sortBy("zone"); // want these sorted for frontend
@@ -204,7 +212,7 @@ class FrontEndController extends Controller
     public function updatePersonProfile(Request $request, Person $person)
     {
         $user = Sentinel::getUser();
-        $person = Person::where('id', $user->person_id)->get()->first();
+        $person = Person::where('id', $user->id)->get()->first();
 
         $person->update($request->except(['institution', 'institution_type']));
 
@@ -242,7 +250,7 @@ class FrontEndController extends Controller
     public function updateProfile()
     {
         $user = Sentinel::getUser();
-        $person = Person::where('id', $user->person_id)->get()->first();
+        $person = Person::where('id', $user->id)->get()->first();
 
         //validatoinRules are declared at beginning
         /*if (Input::get('email')) {
@@ -704,8 +712,8 @@ class FrontEndController extends Controller
                 $existing_institution->save();
             }
 
-            $new_person_id = $person->id;
-            
+            /*$new_person_id = $person->id;
+
             $user_details = array(
                 'person_id' => $new_person_id,
                 'email' => Input::get('email'),
@@ -716,11 +724,11 @@ class FrontEndController extends Controller
              * TODO: Trying to replace user table with person table and these section needs to be removed.
              */
              // Register the person in user table
-            $user = Sentinel::register($user_details, $activate);
+            /*$user = Sentinel::register($user_details, $activate);
 
             //add user to 'User' group
             $role = Sentinel::findRoleByName('User');
-            $role->users()->attach($user);
+            $role->users()->attach($user);*/
 
 
 

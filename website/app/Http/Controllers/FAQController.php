@@ -130,6 +130,22 @@ class FAQController extends Controller
         // Pulling out the object
         $faq = $this->convert_to_string($id);
 
+        /*
+         * TODO - make an array for faq feedback and itarate the listings in blade view */
+        foreach($faq->ratings()->get() as $key => $value){
+            $all_feedback[] = array(
+                'person_id' => $value->pivot->person_id,
+                'person_name' => $value->first_name . "&nbsp;" . $value->last_name,
+                'upvote' => $value->pivot->upvote,
+                'comment' => $value->pivot->comment,
+            );
+
+        }
+        /*echo "<pre>";
+        print_r($all_feedback);
+        echo "</pre>";
+        die();*/
+
         // All user details
         $all_person = Person::All();
 
@@ -177,7 +193,7 @@ class FAQController extends Controller
         }
 
         //return view::make('admin.faqs.edit', compact('faq', 'all_keywords', 'keyword_map', 'file_keywords', 'keyword_map', 'all_metadata', 'faq_metadata', 'metadata_map'));
-        return view::make('admin.faqs.edit', compact('faq', 'all_person', 'faq_ratings', 'all_softwares', 'software_map', 'faq_softwares', 'all_search_keywords', 'search_keywords_map', 'faq_search_keywords'));
+        return view::make('admin.faqs.edit', compact('faq', 'all_person', 'all_feedback', 'all_softwares', 'software_map', 'faq_softwares', 'all_search_keywords', 'search_keywords_map', 'faq_search_keywords'));
     }
 
     /**
@@ -339,22 +355,17 @@ class FAQController extends Controller
         }
 
         // input fields
+        $id = $request->input('id');
         $vote = $request->input('vote');
         $comment = $request->input('comment');
 
-
         // FAQ id
-        $id = $request->input('id');
         $faq = FAQ::where('id', $id)->get()->first();
 
         // Retrieving the logged users id from session variable
-        $person = Session::get('person');
+        //$person = Session::get('person');
+        $person = Sentinel::getUser();
         $faq_rating = $faq->ratings()->wherePivot('person_id', $person->id)->get()->first();
-
-        echo "<pre>";
-        print_r($faq_rating);
-        echo "</pre>";
-        die();
 
         /* Saving vote to db if not yet cast */
         if(!$faq_rating){

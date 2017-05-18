@@ -60,11 +60,33 @@
                                         <p>
                                             {!! html_entity_decode($faq->answer) !!}
                                         </p>
+
+                                        <div class="hidden" id="box-{!! $faq->id !!}">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    Feedback box
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="text-right">
+                                                        {{--<form class="form" id="faqForm">--}}
+                                                        {!! Form::open(array('class' => 'faqForm')) !!}
+                                                            {!! Form::text('feedback_'.$faq->id, null, array('class' => 'input-lg col-md-12 form-group', 'id' => 'feedback_'.$faq->id, 'placeholder'=>'Your comments')) !!}
+                                                            {!! Form::hidden('faq-id_'.$faq->id, $faq->id, array('id' => 'faq-id_'.$faq->id)) !!}
+                                                            {!! Form::hidden('voteup_'.$faq->id, 0, array('id' => 'voteup_'.$faq->id)) !!}
+                                                            <br><br>
+                                                            <button class="btn btn-primary submit_feedback" value="feedback-submit" id="submit_feedback_{!! $faq->id !!}" data-id="{!! $faq->id !!}">Submit Feedback</button>
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="panel-footer">
                                         <div class="btn-group btn-group-xs"><span class="btn">Was this question useful?</span>
-                                            <a class="btn btn-success btn-yes" href="#"><i class="fa fa-thumbs-up"></i> Yes</a>
-                                            <a class="btn btn-danger btn-no" href="#"><i class="fa fa-thumbs-down"></i> No</a>
+                                            <a class="btn btn-success btn-yes" href="#" data-id="{!! $faq->id !!}" data-value="true"><i class="fa fa-thumbs-up"></i> Yes</a>
+                                            <a class="btn btn-danger btn-no" href="#" data-id="{!! $faq->id !!}" data-value="false"><i class="fa fa-thumbs-down"></i> No</a>
+                                            <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
                                         </div>
                                         {{--<div class="btn-group btn-group-xs pull-right"><a class="btn btn-primary" href="#">Report this question</a></div>--}}
                                     </div>
@@ -101,11 +123,84 @@
     <script src="{{ asset('assets/js/custom_js/datatables.js') }}" type="text/javascript"></script>
     <script>
         $(document).ready(function () {
-            // top level msg box
-            $('a.btn-yes, a.btn-no').on('click', function (e) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+             /* Thumbs up feedback */
+            $('a.btn-yes').on('click', function (e) {
                 e.preventDefault();
-                $('#info_msg').html('Thank you for your feedback.');
-                show_alert('info');
+                // faq id
+                var id = $(this).attr('data-id');
+                var vote = $(this).attr('data-value');
+                console.log(id);
+                /* ajax request for FAQ ratings */
+                $.ajax({
+                    type: "POST",
+                    url: 'faq-ratings',
+                    data: 'id=' + id +'&vote=' + vote +'&_token=' + $('input#user_csrf_token').val(),
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response.message);
+                        $('#success_msg').html(response.message);
+                        show_alert('success');
+                    },
+                    error: function (response) {
+                        console.log(response.message);
+                        $('#error_msg').html("Sorry! Your feedback for this FAQ already received. Thank you.");
+                        show_alert('error');
+                    }
+                })
+
+            });
+
+            // top level msg box
+            $('a.btn-no').on('click', function (e) {
+                e.preventDefault();
+                var id = $(this).attr('data-id');
+                $('#box-'+id).toggleClass('hidden');
+                //$('#faqForm').append('<input type="hidden" name="faq-id" value='+ id +' id="faq-id">');
+            });
+
+            /* Thumbs down feedback */
+            $('button.submit_feedback').on('click', function (e) {
+                e.preventDefault();
+                var faq_id = $(this).attr('data-id');
+
+                // faq id
+                var id = $('#faq-id_'+faq_id).val();
+                var vote = $('#voteup_'+faq_id).val();
+                var comment = $('#feedback_'+faq_id).val();
+
+                console.log(id);
+                console.log(vote);
+                console.log(comment);
+
+
+
+                /* ajax request for FAQ ratings */
+                $.ajax({
+                    type: "POST",
+                    url: 'faq-ratings',
+                    data: 'id=' + id +'&vote=' + vote +'&comment=' + comment +'&_token=' + $('input#user_csrf_token').val(),
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response.message);
+                        $('#box-'+id).toggleClass('hidden');
+                        $('#success_msg').html(response.message);
+                        show_alert('success');
+                    },
+                    error: function (response) {
+                        console.log(response.message);
+                        $('#box-'+id).toggleClass('hidden');
+                        $('#error_msg').html("Sorry! Your feedback for this FAQ already received. Thank you. ");
+                        show_alert('error');
+                    }
+                })
+
+
             });
 
             // initiating accordion carousel for collapse/hide

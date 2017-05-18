@@ -57,6 +57,15 @@ namespace App\library {
                 if(!$person) {
                     return false;
                 }
+
+                // Adding person table information into session
+                Session::put('person', $person);
+
+                // Adding user var into sentinel session logged user
+                Sentinel::loginAndRemember($person);
+
+                // removing users -> persons test
+                /*
                 $user = User::where('person_id', $person->id)->first();
                 //$user = Sentinel::findById(1);
 
@@ -66,11 +75,15 @@ namespace App\library {
 
                 // Adding user var into sentinel session logged user
                 Sentinel::loginAndRemember($user);
+
+
                 // Adding person table information into session
                 Session::put('person', $person);
 
-
+                // replace auth with sentinel
                 //Auth::loginUsingId($user->id);
+                */
+                // eof removing users -> persons test
 
                 return true;
             }

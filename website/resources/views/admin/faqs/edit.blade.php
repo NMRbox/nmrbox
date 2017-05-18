@@ -71,8 +71,9 @@ Edit FAQ
                     {!! BootForm::open() !!}
                     <div class="col-sm-12 col-md-12 form-group">
                         {!! BootForm::text('question', "Question", $faq->question, array('placeholder' => 'Enter Question', 'class' => 'input-lg', 'required' => 'required'))!!}
-                        {!! BootForm::textarea('answer', "Answer", $faq->answer, array('class' => 'input-lg textarea form-control', 'required' => 'required', 'rows' => '5', 'placeholder'=>'Place some text here', 'style'=>'style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"'))!!}
+                        {!! BootForm::textarea('answer', "Answer", $faq->answer, array('class' => 'input-lg textarea form-control', 'required' => 'required', 'rows' => '2', 'placeholder'=>'Place some text here', 'style'=>'style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"'))!!}
                     </div>
+                    {{-- software / metadata section --}}
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6 text-left software-scroll">
@@ -90,6 +91,51 @@ Edit FAQ
                                 @endforeach
                             </div>
                         </div>
+                    </div>
+                    {{-- FAQ section --}}
+
+                    <div class="panle">
+                        <div class="panle-header"
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 software-scroll">
+                            <h3>FAQ Feedback</h3>
+                            <hr>
+                            <table id="vm-table" class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Person ID - Full Name</th>
+                                    <th>Rating</th>
+                                    <th>Comments</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @if(!empty($all_feedback))
+                                    @foreach ($all_feedback as $feedback)
+                                        <tr id="{!! $faq->id !!}">
+                                            <td class="col-md-4">{!! $feedback['person_id'] . '    - ' . $feedback['person_name'] !!}</td>
+                                            <td class="col-md-2">
+                                            @if($feedback['upvote'])
+                                                &nbsp;&nbsp;<i class="fa fa-thumbs-up"></i>
+                                            @else
+                                                &nbsp;&nbsp;<i class="fa fa-thumbs-down"></i>
+                                            @endif
+                                            </td>
+                                            <td class="col-md-4">{!! $feedback['comment'] !!}</td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr><td colspan="3">
+                                            No feedback received yet.
+                                        </td></tr>
+                                @endif
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        &nbsp;
                     </div>
                     <div class="form-group text-capitalize text-left col-md-12">
                         {!! BootForm::submit('Update', array('class' => 'btn btn-block btn-primary ', 'id' => 'update_file_edit')) !!}
