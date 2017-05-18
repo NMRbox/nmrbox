@@ -206,7 +206,8 @@ class FAQController extends Controller
     public function update(Request $request, $id)
     {
         /* Request data */
-        //$request_data = $request->input();
+        $request_data = $request->input();
+
 
         try{
             /* Input request content */
@@ -254,6 +255,11 @@ class FAQController extends Controller
                         $faq->search_keywords()->detach($metad->id);
                     }
                 }
+            }
+
+            /* reset all feedback */
+            if(null !== $request->input('remove_feedback') && $request->input('remove_feedback') == 'yes'){
+                $faq->ratings()->detach();
             }
         } catch ( QueryException $e){
 

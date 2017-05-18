@@ -94,8 +94,8 @@ Edit FAQ
                     </div>
                     {{-- FAQ section --}}
 
-                    <div class="panle">
-                        <div class="panle-header"
+                    <div class="panel">
+                        <div class="panle-header"></div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 software-scroll">
@@ -134,9 +134,17 @@ Edit FAQ
                             </table>
                         </div>
                     </div>
-                    <div class="form-group">
+                    {{--<div class="form-group">
                         &nbsp;
+                    </div>--}}
+                    <div class="form-group col-md-12 panel">
+                        <div class="panel-body">
+                            {!! BootForm::checkbox('remove_feedback', 'Reset all the feedback', 'yes', false) !!}
+                        </div>
                     </div>
+                    {{--<div class="form-group">
+                        &nbsp;
+                    </div>--}}
                     <div class="form-group text-capitalize text-left col-md-12">
                         {!! BootForm::submit('Update', array('class' => 'btn btn-block btn-primary ', 'id' => 'update_file_edit')) !!}
                     </div>
