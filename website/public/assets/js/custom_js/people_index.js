@@ -123,8 +123,8 @@ $(document).ready(function() {
                         $.each(users, function (index, value) {
 
                             user_data += "<tr>"
-                                + "<td>" + value.first_name + "</td>"
-                                + "<td>" + value.last_name + "</td>"
+                                + "<td>" + value.id + "</td>"
+                                + "<td>" + value.first_name + '&nbsp;' +value.last_name + "</td>"
                                 + "<td>" + value.email + "<br>" + value.email_institution + "</td>"
                                 + "</tr>";
                         });
