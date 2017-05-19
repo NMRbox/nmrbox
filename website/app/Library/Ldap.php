@@ -14,7 +14,6 @@ namespace App\library {
     use Cartalyst\Sentinel\Laravel\Facades\Activation;
     use Sentinel;
     use Session;
-    use App\User;
     use App\Person;
 
     class Ldap

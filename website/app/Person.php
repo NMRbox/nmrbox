@@ -50,9 +50,12 @@ class Person extends EloquentUser
     /**
      * pivot relation with user table
      */
-    public function user() {
+    /*
+     * replacing user -> person
+     * public function user() {
         return $this->hasOne('App\User');
     }
+    */
 
     /**
      * pivot relation with institution table

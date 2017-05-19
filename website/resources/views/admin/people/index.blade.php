@@ -87,7 +87,7 @@ People Index
                             <a href="{{ URL::to('admin/people/create') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> Add Person</a>
                             <a href="javascript:" id="btn_select_all" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-check"></span> Select All</a>
                             <a href="javascript:" id="btn_deselect_all" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-refresh"></span> Deselect</a>
-                            <a href="#" data-toggle="modal" data-target="#email_modal" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-envelope"></span> Send Email</a>
+                            <a href="#" data-toggle="modal" data-target="#email_modal" class="btn btn-sm btn-primary" id="email_utility"><span class="glyphicon glyphicon-envelope"></span> Send Email</a>
                             <a href="#" data-toggle="modal" data-target="#user_classification_modal" class="btn btn-sm btn-primary" id="user_classification"><span class="glyphicon glyphicon-user"></span> Assign Classification</a>
                             <a href="#" data-target="#adv_search_box" class="btn btn-sm btn-primary" id="adv_search_box_button"><span class="glyphicon glyphicon-search"></span> Search by ID</a>
                             <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
@@ -206,7 +206,7 @@ People Index
         </div>
     </div>
 
-    {{-- email modal --}}
+    {{-- Delete confirm modal --}}
     <div class="modal fade" id="delete_confirm" tabindex="-1" role="dialog" aria-labelledby="user_delete_confirm_title" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -224,7 +224,7 @@ People Index
         </div>
     </div>
 
-    {{-- single user details modal --}}
+    {{-- Email modal --}}
     <div class="modal fade" id="email_modal" tabindex="-2" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -232,18 +232,26 @@ People Index
                     <h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </h4>
-
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <!-- Notifications -->
                         @include('notifications')
 
+
                         <form class="form-horizontal" id="email_template_form">
                             <fieldset>
 
                                 {{-- Form Title --}}
                                 <legend>Email Customization</legend>
+
+                                {{-- user details --}}
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Total Recipient</label>
+                                    <div class="col-md-8"  id="user_details">
+
+                                    </div>
+                                </div>
 
                                 {{-- Email Template Drop Down --}}
                                 <div class="form-group">

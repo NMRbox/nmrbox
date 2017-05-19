@@ -19,7 +19,6 @@ use App\Institution;
 use App\Timezone;
 use App\Classification;
 
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -282,6 +281,37 @@ class PersonController extends Controller
 
         $person->delete();
         return redirect("admin/people");
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getUserDetails(Request $request)
+    {
+        if(!$request->ajax()){
+            return App::abort(500, 'error in show');
+        }
+
+        /* Selected user ids */
+        $ids = json_decode($request->input('ids'), true);
+
+        // Retrieving the users list from person table
+        $users = Person::whereIn('id', $ids)->get();
+        /*echo "<pre>";
+        print_r($users);
+        echo "</pre>";
+        die();*/
+
+        /*foreach ($users as $user){
+
+        }*/
+
+        //json_encode($user);
+        return response( json_encode( array( 'users' => $users)), 200 )
+            ->header( 'Content-Type', 'application/json' );
     }
 
     /**

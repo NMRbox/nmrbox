@@ -96,6 +96,58 @@ $(document).ready(function() {
         $('#vm-table tbody tr').removeClass('selected');
     });
 
+    /* show/hide mail recipient box */
+    $('body').on('click', '#show_mail_recipients_box', function(e){
+        e.preventDefault();
+        $('#mail_recipients_list').toggleClass('hidden');
+    });
+
+
+    // load user details for sending email
+    $('#email_utility').on('click', function(e){
+        e.preventDefault();
+
+        if(selected.length > 0) {
+            $.ajax({
+                type: "POST",
+                url: 'people/get_user_details',
+                data: 'ids=' + JSON.stringify(selected) + '&_token=' + $('input#user_csrf_token').val(),
+                success: function (data) {
+                    var users_count = selected.length;
+                    var users = data.users;
+
+                    if(users_count == users.length){
+                        var user_data = "<div><a href='javascript:' id='show_mail_recipients_box'> " + users_count + " persons </a></div>";
+                        user_data += "<div class='hidden' id='mail_recipients_list'>";
+                        user_data += "<table class='table'><thead><tr><th>ID</th><th>Full Name</th><th>Email</th></tr></thead><tbody>";
+                        $.each(users, function (index, value) {
+
+                            user_data += "<tr>"
+                                + "<td>" + value.first_name + "</td>"
+                                + "<td>" + value.last_name + "</td>"
+                                + "<td>" + value.email + "<br>" + value.email_institution + "</td>"
+                                + "</tr>";
+                        });
+                        user_data += "</tbody></table></div>";
+                    }
+
+                    /* appending the user_data into email model */
+                    $('#user_details').empty().append(user_data);
+
+                },
+                error: function (data) {
+                    $('#error_msg').html('Something went wrong. Please try again.');
+                    show_alert('error');
+                }
+            })
+        } else {
+            /* If no row selected */
+            $('#email_modal').modal('toggle');
+            $('#error_msg').html('No rows selected. Please try again.');
+            show_alert('error');
+        }
+    });
+
     /* populating Email template */
     $(document).on("change", '#email_template', function(e) {
         e.preventDefault();
@@ -346,4 +398,6 @@ $('#template_area a').click(function(){
     var val = $(this).attr('data-field-name');
     $('textarea').insertAtCaret( "%%" + val + "%%");
 })
+
+
 

@@ -210,6 +210,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{person}/edit', array('as' => 'person.edit', 'uses' => 'PersonController@edit'));
         Route::put('{person}/edit', array('as' => 'person.update', 'uses' => 'PersonController@update'));
         Route::get('{person}/delete', array('as' => 'person.delete', 'uses' => 'PersonController@destroy'));
+        Route::post('get_user_details', array('as' => 'person.getUserDetails', 'uses' => 'PersonController@getUserDetails'));
         Route::post('send_email', array('as' => 'person.sendEmail', 'uses' => 'PersonController@sendEmail'));
         Route::post('show', array('as' => 'person.show', 'uses' => 'PersonController@show'));
         Route::post('email_template', array('as' => 'person.email_template', 'uses' => 'PersonController@email_template'));

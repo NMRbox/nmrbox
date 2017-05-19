@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-Use App\User;
 Use App\File;
 Use App\SearchKeyword;
 use App\Keyword;

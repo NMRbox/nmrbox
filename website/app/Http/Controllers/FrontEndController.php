@@ -19,9 +19,6 @@ use Mail;
 use File;
 use Hash;
 use Crypt;
-//use Reminder;
-
-use App\User;
 use App\Person;
 use App\Timezone;
 use App\Classification;
@@ -362,8 +359,8 @@ class FrontEndController extends Controller
         }
 
         $user_session = Sentinel::check();
-        $user = User::where('id', $user_session->id)->first();
-        $person = Person::where('id', $user['person_id'])->first();
+        //$user = User::where('id', $user_session->id)->first(); // removing user -> person
+        $person = Person::where('id', $user_session->id)->first();
 
         // LDAP credential
         $credential['username'] = $person['nmrbox_acct'];
@@ -398,8 +395,8 @@ class FrontEndController extends Controller
         }
 
         $user_session = Sentinel::check();
-        $user = User::where('id', $user_session->id)->first();
-        $person = Person::where('id', $user['person_id'])->first();
+        //$user = User::where('id', $user_session->id)->first(); // removing user -> person
+        $person = Person::where('id', $user_session->id)->first();
 
         $credential['username'] = $person['nmrbox_acct'];
         $credential['password'] = $request->input('pass');

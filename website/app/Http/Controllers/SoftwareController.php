@@ -16,7 +16,6 @@ use Debugbar;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 Use App\Software;
-Use App\User;
 Use App\Keyword;
 Use App\KeywordSoftware;
 Use App\Category;
