@@ -47,6 +47,8 @@ class Person extends EloquentUser
         'Other'
     ];
 
+    public $timestamps = false;
+
     /**
      * pivot relation with user table
      */
