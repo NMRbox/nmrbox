@@ -532,7 +532,7 @@ class PersonController extends Controller
             if(!empty($classifications)){
                 foreach ($classifications as $key => $value){
                     $classification = Classification::find($value);
-                    $classification->person()->sync($users);
+                    $classification->person()->sync($users, false);
                 }
             }
 

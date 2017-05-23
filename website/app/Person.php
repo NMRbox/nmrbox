@@ -82,5 +82,4 @@ class Person extends EloquentUser
       'person_id', 'faq_id');
     }
 
-
 }

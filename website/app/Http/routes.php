@@ -324,6 +324,17 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{classification}/delete', array('as' => 'classification.delete', 'uses' => 'ClassificationController@destroy'));
     });
 
+    # Workshop Management
+    Route::model('workshop', 'App\Workshops');
+    Route::group(array('prefix' => 'workshop'), function () {
+        Route::get('/', array('as' => 'admin/workshop', 'uses' => 'WorkshopsController@index'));
+        Route::get('create', array('as' => 'workshop.create', 'uses' => 'WorkshopsController@create'));
+        Route::post('create', array('as' => 'workshop.store', 'uses' => 'WorkshopsController@store'));
+        Route::get('{workshop}/edit', array('as' => 'workshop.edit', 'uses' => 'WorkshopsController@edit'));
+        Route::put('{workshop}/edit', array('as' => 'workshop.update', 'uses' => 'WorkshopsController@update'));
+        Route::get('{workshop}/delete', array('as' => 'workshop.delete', 'uses' => 'WorkshopsController@destroy'));
+    });
+
     //Remaining pages will be called from below controller method
     //in real world scenario, you may be required to define all routes manually
     Route::get('{name?}', 'ChandraController@showView');

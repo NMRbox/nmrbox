@@ -85,9 +85,7 @@ class FrontEndController extends Controller
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
 
             /* Test (Localhost login code to skip LDAP authentication) */
-            /*
-            $ldap_login = true;
-
+            /*$ldap_login = true;
             $person = Person::where('id', 226)->get()->first();
             if($person){
                 Session::put('person', $person);

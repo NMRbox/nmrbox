@@ -23,7 +23,7 @@
                         <h1>{{$software->name}}</h1>
 
                         @if ($user = Sentinel::getUser())
-                            @if(Sentinel::inRole('admin'))
+                            @if(Session::has('user_is_admin') == true)
                             <span>
                                 <a href="{{ route('software.edit',  ['software' => $software->slug] ) }}">
                                     Edit this package

@@ -124,6 +124,20 @@
                 </li>
             </ul>
         </li>
+        <li class="menu-dropdown {{ (Request::is('admin/workshop') || Request::is('admin/groups') ? 'active' : '') }}">
+            <a href="#">
+                <i class="menu-icon  fa fa-fw fa-bar-chart"></i>
+                <span>Workshops</span>
+                <span class="fa arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li {{ (Request::is('admin/workshop') ? 'class=active' : '') }}>
+                    <a href="{{ URL::to('admin/workshop') }}">
+                        Workshops Index
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li class="menu-dropdown {{ (Request::is('admin/people') || Request::is('admin/classification') || Request::is('admin/groups') ? 'active' : '') }}">
             <a href="#">
                 <i class="menu-icon  fa fa-fw fa-users"></i>

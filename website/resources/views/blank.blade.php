@@ -26,7 +26,7 @@
             <div class="col-lg-8 col-lg-offset-2">
 
                 @if ($user = Sentinel::getUser())
-                    @if(Sentinel::inRole('admin'))
+                    @if(Session::has('user_is_admin') == true)
                         <a href="{{ route('update/page', $page->slug) }}">
                             <h2 class="text-center">Edit this page</h2>
                         </a>

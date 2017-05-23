@@ -220,6 +220,75 @@
 
             </div>
 
+            {{-- workshops tiles --}}
+            <div class="row">
+                <div class="welcome text-left">
+                    <h3 class="text-left">Upcoming workshops</h3>
+                </div>
+                <div class="row"><br></div>
+                <div class="col-md-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            NMRbox Summer Workshop
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                June 19-23, 2017<br>
+                                Farmington, CT<br>
+                                Syllabus TBD, <br>
+                                register by email to:&nbsp;<a href="mailto:workshop@nmrbox.org">workshop@nmrbox.org</a>
+                            </p>
+                            <button name="register" class="btn btn-warning">Register</button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            NMRbox Summer Workshop 1
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                June 19-23, 2017<br>
+                                Farmington, CT<br>
+                                Syllabus TBD, <br>
+                                register by email to:&nbsp;<a href="mailto:workshop@nmrbox.org">workshop@nmrbox.org</a>
+                            </p>
+                            <button name="register" class="btn btn-primary disabled">Register</button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            NMRbox Summer Workshop 2
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                June 19-23, 2017<br>
+                                Farmington, CT<br>
+                                Syllabus TBD, <br>
+                                register by email to:&nbsp;<a href="mailto:workshop@nmrbox.org">workshop@nmrbox.org</a>
+                            </p>
+                            <button name="register" class="btn btn-warning">Register</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+                        {{--<div class="panel-footer">
+                            <div class="text-right">
+                                <a href="{{ URL::to('update_profile') }}" data-original-title="Edit user profile" data-toggle="tooltip" type="button"
+                                   class="btn btn-sm btn-warning"><i class="fa fa-pencil fa-2x"></i></a>
+                            </div>
+                        </div>--}}
+
             {{--<div class="row">
                 --}}{{-- software listing box --}}{{--
                 <div class="col-sm-12 col-md-12 toppad">
