@@ -380,7 +380,7 @@ Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@post
 
 # Workshop Page
 Route::get('workshops',array('as' => 'workshops','uses' => 'WorkshopsController@showAll'));
-Route::post('workshops',array('as' => 'workshops','uses' => 'WorkshopsController@showAll'));
+Route::post('workshops',array('as' => 'register_person_workshop', 'uses' => 'WorkshopsController@registerPersonWorkshop'));
 Route::post('register_person_workshop', array('as' => 'register_person_workshop', 'uses' => 'WorkshopsController@registerPersonWorkshop'));
 
 # FAQ Page

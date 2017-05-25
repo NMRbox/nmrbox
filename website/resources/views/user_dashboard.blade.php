@@ -503,6 +503,8 @@
                     success: function(response) {
                         $('#success_msg').html(response.message);
                         show_alert('success');
+                        window.scrollTo(0,0);
+                        location.reload();
                     },
                     error: function (response) {
                         $('#error_msg').html(" You already have been registered for this workshop.");

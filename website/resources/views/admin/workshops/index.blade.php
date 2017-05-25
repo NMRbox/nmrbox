@@ -85,7 +85,7 @@ People Index
                                         <a href="{!! URL::to('admin/workshop/' . $workshop->name . '/edit' ) !!}"><i class="fa fa-fw fa-pencil text-warning" title="Update email template"></i></a>
                                         {{-- As template deletion has reference entry with email_person table,
                                              the delete link should not be available though it has conditional check and popup messages. --}}
-                                        {{--<a href="#" ><i class="fa fa-fw fa-times text-danger delete_email_template" data-url="{!! route("email.delete", array('email' => $email_template->id)) !!}" data-template_name="{!! $email_template->id !!}" title="Delete"></i></a>--}}
+                                        {{--<a href="#" ><i class="fa fa-fw fa-times text-danger delete_workshop" data-url="{!! route("workshop.delete", array('workshop' => $workshop->name)) !!}" data-template_name="{!! $workshop->title !!}" title="Delete"></i></a>--}}
                                     </td>
                                 </tr>
                             @empty
@@ -166,7 +166,7 @@ People Index
             });
 
             // deleting confirmation
-            $('.delete_email_template').on("click", function(event) {
+            $('.delete_workshop').on("click", function(event) {
                 event.preventDefault();
                 var button = $(event.target);
                 var template_name = button.attr("data-name");
@@ -174,7 +174,7 @@ People Index
 
                 var m = $('#admin-modal');
                 m.find('.modal-title').text('Delete Confirmation');
-                m.find('.modal-body').html('Are you sure you want to delete this email template? <br><span  class="modal-highlight">' + name + '</span><span class="modal-highlight"></span>');
+                m.find('.modal-body').html('Are you sure you want to delete this workshop? <br><span  class="modal-highlight">' + name + '</span><span class="modal-highlight"></span>');
 
                 var mbutton = m.find('.modal-action');
                 mbutton.attr("onclick", "window.location.href='" + url + "'");

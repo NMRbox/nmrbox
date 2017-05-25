@@ -32,10 +32,22 @@
             <div class="welcome">
                 <h3 class="text-left">Upcoming workshops</h3>
             </div>
+            <div class="row">
+                <div class="alert alert-success hidden" id="success-alert">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Success! </strong>
+                    <span id="success_msg"></span>
+                </div>
+
+                <div class="alert alert-danger hidden" id="error-alert">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Error! </strong>
+                    <span id="error_msg"></span>
+                </div>
+            </div>
             <div class="row"><br>
                 @forelse($upcoming_workshops as $workshop)
                     {!! BootForm::open(array('url' => URL::to('register_person_workshop'), 'method' => 'post', 'class' => 'form-horizontal')) !!}
-                    {{--{!! Form::open() !!}--}}
                     <div class="col-md-4">
                         <div class="panel panel-info">
                             <div class="panel-heading">
@@ -56,16 +68,18 @@
                                 </p>
                                 {{-- checking whether the user is already registered --}}
                                 @if($person != null)
-                                <button
-                                    @foreach($person->classification as $group)
-                                        @if($group->name == $workshop->name)
-                                        disabled
-                                        @endif
-                                    @endforeach
-                                        name="register" class="btn btn-warning btn_register_workshop" data-workshop="{!! $workshop->name !!}" value="{!! $workshop->name !!}">
-                                    Register
-                                </button>
+                                    <button
+                                            @foreach($person->classification as $group)
+                                            @if($group->name == $workshop->name)
+                                            disabled
+                                            @endif
+                                            @endforeach
+                                            name="register" class="btn btn-warning btn_register_workshop" data-workshop="{!! $workshop->name !!}" value="{!! $workshop->name !!}">
+                                        Register
+                                    </button>
                                 @endif
+                                {{-- csrf token --}}
+                                <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
                             </div>
                         </div>
                     </div>
@@ -87,8 +101,6 @@
             </div>
             <div class="row"><br>
                 @forelse($completed_workshops as $workshop)
-                    {!! BootForm::open(array('url' => URL::to('register_person_workshop'), 'method' => 'post', 'class' => 'form-horizontal')) !!}
-                    {{--{!! Form::open() !!}--}}
                     <div class="col-md-4">
                         <div class="panel panel-info">
                             <div class="panel-heading">
@@ -110,7 +122,6 @@
                             </div>
                         </div>
                     </div>
-                    {!! BootForm::close() !!}
                 @empty
                     <div class="panel col-md-12">
                         <div class="panel-body">
@@ -153,18 +164,15 @@
                     success: function(response) {
                         $('#success_msg').html(response.message);
                         show_alert('success');
+                        window.scrollTo(0,0);
+                        location.reload();
                     },
                     error: function (response) {
                         $('#error_msg').html(" You already have been registered for this workshop.");
                         show_alert('error');
                     }
                 })
-
             });
-
         })
-
-
-
     </script>
 @stop
