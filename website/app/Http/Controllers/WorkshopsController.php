@@ -82,44 +82,6 @@ class WorkshopsController extends Controller
     }
 
     /**
-     * Display all the workshops for frontend page
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function showAll()
-    {
-        if(Sentinel::check()){
-
-            //$user = Sentinel::getUser(); //removing user->person test
-            $user = Sentinel::getUser();
-
-            // the person attached to the user
-            $person = Person::where('id', $user->id)->get()->first();
-            $classifications = Classification::All();
-
-            //Get all the upcoming workshops
-            $upcoming_workshops = Workshop::whereDate('start_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
-
-            //Get all the completed workshops
-            $completed_workshops = Workshop::whereDate('start_date', '<', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
-
-            // View
-            return View::make('workshops', compact('upcoming_workshops', 'completed_workshops', 'user', 'person', 'classifications'));
-        } else {
-            //Get all the upcoming workshops
-            $upcoming_workshops = Workshop::whereDate('start_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
-
-            //Get all the completed workshops
-            $completed_workshops = Workshop::whereDate('start_date', '<', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
-
-            $person = null;
-            // View
-            return View::make('workshops', compact('upcoming_workshops', 'completed_workshops', 'person'));
-        }
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -176,6 +138,44 @@ class WorkshopsController extends Controller
         return redirect()->back()->withSuccess(Lang::get('workshops/message.success.update'));
     }
 
+
+    /**
+     * Display all the workshops for frontend page
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showAll()
+    {
+        if(Sentinel::check()){
+
+            //$user = Sentinel::getUser(); //removing user->person test
+            $user = Sentinel::getUser();
+
+            // the person attached to the user
+            $person = Person::where('id', $user->id)->get()->first();
+            $classifications = Classification::All();
+
+            //Get all the upcoming workshops
+            $upcoming_workshops = Workshop::whereDate('start_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
+
+            //Get all the completed workshops
+            $completed_workshops = Workshop::whereDate('start_date', '<', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
+
+            // View
+            return View::make('workshops', compact('upcoming_workshops', 'completed_workshops', 'user', 'person', 'classifications'));
+        } else {
+            //Get all the upcoming workshops
+            $upcoming_workshops = Workshop::whereDate('start_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
+
+            //Get all the completed workshops
+            $completed_workshops = Workshop::whereDate('start_date', '<', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
+
+            $person = null;
+            // View
+            return View::make('workshops', compact('upcoming_workshops', 'completed_workshops', 'person'));
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *

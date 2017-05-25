@@ -66,8 +66,7 @@ People Index
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Location</th>
-                                <th>URL</th>
-                                {{--<th>Content body</th>--}}
+                                {{--<th>Registered Users</th>--}}
                                 <th>Action #</th>
                             </tr>
                         </thead>
@@ -80,7 +79,7 @@ People Index
                                     <td class="col-md-1">{!! $workshop->start_date !!}</td>
                                     <td class="col-md-1">{!! $workshop->end_date !!}</td>
                                     <td class="col-md-1">{!! $workshop->location !!}</td>
-                                    <td class="col-md-1">{!! $workshop->url !!}</td>
+                                    {{--<td class="col-md-1">{!! $workshop->classification->person !!}</td>--}}
                                     <td class="col-md-1">
                                         <a href="{!! URL::to('admin/workshop/' . $workshop->name . '/edit' ) !!}"><i class="fa fa-fw fa-pencil text-warning" title="Update email template"></i></a>
                                         {{-- As template deletion has reference entry with email_person table,
