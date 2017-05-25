@@ -89,20 +89,18 @@ Edit Workshop
                         </tr>
                         </thead>
                         <tbody>
-                        @if(!empty($workshop_classification->person))
-                            @foreach ($workshop_classification->person as $user)
+                            @forelse($workshop_classification->person as $user)
                                 <tr>
                                     <td>{!! $user->id !!}</td>
                                     <td>{!! $user->first_name !!} &nbsp;{!! $user->last_name !!}</td>
                                 </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td colspan="2">
-                                    <h4> No users registered yet. </h4>
-                                </td>
-                            </tr>
-                        @endif
+                            @empty
+                                <tr>
+                                    <td colspan="2">
+                                        <h4> No users registered yet. </h4>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
 
                     </table>

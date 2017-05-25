@@ -72,8 +72,7 @@ People Index
                             </tr>
                         </thead>
                         <tbody>
-                        @if(!empty($all_workshops))
-                            @foreach ($all_workshops as $workshop)
+                            @forelse ($all_workshops as $workshop)
                                 <tr id="{!! $workshop->name !!}">
                                     <td class="hidden">{!! $workshop->name !!}</td>
                                     <td class="col-md-1">{!! $workshop->name !!}</td>
@@ -89,8 +88,13 @@ People Index
                                         {{--<a href="#" ><i class="fa fa-fw fa-times text-danger delete_email_template" data-url="{!! route("email.delete", array('email' => $email_template->id)) !!}" data-template_name="{!! $email_template->id !!}" title="Delete"></i></a>--}}
                                     </td>
                                 </tr>
-                            @endforeach
-                        @endif
+                            @empty
+                                <tr>
+                                    <td colspan="8">
+                                        No workshop entries available.
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
 
                     </table>
