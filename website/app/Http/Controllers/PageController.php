@@ -187,7 +187,7 @@ class PageController extends Controller {
             // All files information
             $all_files = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->get()->sortBy('name');
 
-        } catch (UserNotFoundException $e) {
+        } catch (\Exception $e) {
             // Prepare the error message
             $error = Lang::get('page/message.user_not_found', compact('id'));
 

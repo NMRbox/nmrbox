@@ -38,7 +38,7 @@ class Blog extends model implements SluggableInterface, Taggable {
     }
     public function author()
     {
-        return $this->belongsTo('App\User', 'user_id');
+        return $this->belongsTo('App\Person', 'user_id');
     }
     public function getBlogcategoryAttribute()
     {

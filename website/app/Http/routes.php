@@ -379,8 +379,8 @@ Route::get('my-account', array('as' => 'my-account', 'uses' => 'FrontEndControll
 Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@postContact'));
 
 # Workshop Page
-/*Route::get('workshop',array('as' => 'workshop','uses' => 'WorkshopsController@showAll'));
-Route::post('workshop',array('as' => 'workshop','uses' => 'WorkshopsController@showAll'));*/
+Route::get('workshops',array('as' => 'workshops','uses' => 'WorkshopsController@showAll'));
+Route::post('workshops',array('as' => 'workshops','uses' => 'WorkshopsController@showAll'));
 Route::post('register_person_workshop', array('as' => 'register_person_workshop', 'uses' => 'WorkshopsController@registerPersonWorkshop'));
 
 # FAQ Page
