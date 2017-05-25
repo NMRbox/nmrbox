@@ -99,7 +99,7 @@ class FAQController extends Controller
             $faq->save();
             //$this->messageBag->add('email', Lang::get('emails/message.success.create'));
         }
-        catch (QueryException $e) {
+        catch (\Exception $e) {
             $this->messageBag->add('faq', Lang::get('faqs/message.error.create'));
 
         }
@@ -225,7 +225,7 @@ class FAQController extends Controller
                         try {
                             $faq->softwares()->attach($software->id);
                         }
-                        catch(\Illuminate\Database\QueryException $e) {
+                        catch(\Exception $e) {
                             // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
                             //dd($e);
                         }
@@ -246,7 +246,7 @@ class FAQController extends Controller
                         try {
                             $faq->search_keywords()->attach($metad->id);
                         }
-                        catch(\Illuminate\Database\QueryException $e) {
+                        catch(\Exception $e) {
                             // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
                             //dd($e);
                         }
@@ -261,7 +261,7 @@ class FAQController extends Controller
             if(null !== $request->input('remove_feedback') && $request->input('remove_feedback') == 'yes'){
                 $faq->ratings()->detach();
             }
-        } catch ( QueryException $e){
+        } catch ( \Exception $e){
 
             // something went wrong - probably has entries in email_person table
             return redirect()->back()->withError(Lang::get('faqs/message.error.update'));
@@ -287,7 +287,7 @@ class FAQController extends Controller
 
             // redirect with success message
             return redirect()->back()->withSuccess(Lang::get('faqs/message.success.delete'));
-        } catch ( QueryException $e){
+        } catch ( \Exception $e){
 
             // something went wrong - probably has entries in email_person table
             return redirect()->back()->withError(Lang::get('faqs/message.error.delete'));

@@ -80,7 +80,7 @@ class EmailController extends Controller
             $email->save();
             //$this->messageBag->add('email', Lang::get('emails/message.success.create'));
         }
-        catch (UserExistsException $e) {
+        catch (\Exception $e) {
             $this->messageBag->add('email', Lang::get('emails/message.error.create'));
 
         }
@@ -149,7 +149,7 @@ class EmailController extends Controller
             $email->content = $request->input('content');
 
             $email->save();
-        } catch ( QueryException $e){
+        } catch ( \Exception $e){
 
             // something went wrong - probably has entries in email_person table
             return redirect()->back()->withError(Lang::get('emails/message.error.update'));
@@ -171,7 +171,7 @@ class EmailController extends Controller
         try{
             $email = Email::where('id', $param)->delete();
 
-        } catch ( QueryException $e){
+        } catch ( \Exception $e){
 
             // something went wrong - probably has entries in email_person table
             return redirect()->back()->withError(Lang::get('emails/message.error.delete'));

@@ -157,7 +157,7 @@ class PersonController extends Controller
 
             return redirect("admin/people");
         }
-        catch (UserExistsException $e) {
+        catch (\Exception $e) {
             $this->messageBag->add('email', Lang::get('auth/message.account_already_exists'));
         }
 
@@ -551,7 +551,7 @@ class PersonController extends Controller
             /* Saving into DB */
             foreach ($users as $user){
                 $person = Person::find($user['id']);
-                $person->classification()->sync($classifications);
+                $person->classification()->sync($classifications, false);
             }
         }
 

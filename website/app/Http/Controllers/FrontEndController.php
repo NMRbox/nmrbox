@@ -24,6 +24,7 @@ use App\Timezone;
 use App\Classification;
 use App\ClassificationPerson;
 use App\Reminder;
+use App\Workshop;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use App\Library\Ldap;
 
@@ -114,13 +115,13 @@ class FrontEndController extends Controller
             } else {
                 return Redirect::to('login')->with('error', 'Username or password is incorrect.');
             }
-        } catch (UserNotFoundException $e) {
+        } catch (\Exception $e) {
             $this->messageBag->add('email', Lang::get('auth/message.account_not_found'));
-        } catch (UserNotActivatedException $e) {
+        } catch (\Exception $e) {
             $this->messageBag->add('email', Lang::get('auth/message.account_not_activated'));
-        } catch (UserSuspendedException $e) {
+        } catch (\Exception $e) {
             $this->messageBag->add('email', Lang::get('auth/message.account_suspended'));
-        } catch (UserBannedException $e) {
+        } catch (\Exception $e) {
             $this->messageBag->add('email', Lang::get('auth/message.account_banned'));
         }
 
@@ -156,11 +157,13 @@ class FrontEndController extends Controller
         $user = Sentinel::getUser();
 
         // the person attached to the user
-        //$person = $user->person()->get()->first();
         $person = Person::where('id', $user->id)->get()->first();
         $classifications = Classification::All();
 
-        return View::make('user_dashboard', compact('user', 'person', 'classifications'));
+        //Get all the upcoming workshops
+        $workshops = Workshop::whereDate('start_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
+
+        return View::make('user_dashboard', compact('user', 'person', 'classifications', 'workshops'));
     }
 
 
@@ -247,71 +250,11 @@ class FrontEndController extends Controller
         $user = Sentinel::getUser();
         $person = Person::where('id', $user->id)->get()->first();
 
-        //validatoinRules are declared at beginning
-        /*if (Input::get('email')) {
-            $this->validationRules['email'] = "required|email|unique:users,email,{$user->email},email";
-        } else {
-            unset($this->validationRules['email']);
-        }*/
-
-        /*if (!$password = Input::get('password')) {
-            unset($this->validationRules['password']);
-            unset($this->validationRules['password_confirm']);
-        }*/
-
-        /*// Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $this->validationRules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            // Ooops.. something went wrong
-            return Redirect::back()->withInput()->withErrors($validator);
-        }*/
-
-        // Update the user
-//        $user->first_name = Input::get('first_name');
-//        $user->last_name = Input::get('last_name');
-//        $user->email = Input::get('email');
-//        $user->gender = Input::get('gender');
-//        $user->phone = Input::get('phone');
-//        $user->dob = Input::get('dob');
-//        $user->country = Input::get('country');
-//        $user->address = Input::get('address');
-//        $user->state = Input::get('state');
-//        $user->city = Input::get('city');
-//        $user->zip = Input::get('zip');
-//        $user->facebook = Input::get('facebook');
-//        $user->twitter = Input::get('twitter');
-//        $user->google_plus = Input::get('google_plus');
-//        $user->skype = Input::get('skype');
-//        $user->flickr = Input::get('flickr');
-//        $user->youtube = Input::get('youtube');
-//        $user->subscribed = Input::get('subscribed') ? 1 : 0;
-
         $user->email = Input::get('email');
 
         // the person attached to the user
         $person->first_name = Input::get('first_name');
         $person->last_name = Input::get('last_name');
-
-        // is new image uploaded?
-        /*if ($file = Input::file('pic')) {
-            $fileName = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension() ?: 'png';
-            $folderName = '/uploads/users/';
-            $destinationPath = public_path() . $folderName;
-            $safeName = str_random(10) . '.' . $extension;
-            $file->move($destinationPath, $safeName);
-
-            //delete old pic if exists
-            if (File::exists(public_path() . $folderName . $user->pic)) {
-                File::delete(public_path() . $folderName . $user->pic);
-            }
-
-            //save new file path into db
-            $user->pic = $safeName;
-        }*/
-
 
         // Was the user's person record updated?
         if ($person->save()) {
@@ -476,7 +419,7 @@ class FrontEndController extends Controller
                 $m->to($user->email_institution, $user->first_name . ' ' . $user->last_name);
                 $m->subject('NMRbox Account Password Recovery');
             });
-        } catch (UserNotFoundException $e) {
+        } catch (\Exception $e) {
             // Even though the email was not found, we will pretend
             // we have sent the password reset code through email,
             // this is a security measure against hackers.
@@ -707,61 +650,9 @@ class FrontEndController extends Controller
                 $existing_institution->save();
             }
 
-            /*$new_person_id = $person->id;
-
-            $user_details = array(
-                'person_id' => $new_person_id,
-                'email' => Input::get('email'),
-                'password' => "NMR-2016!" // TODO: good god make people change this
-            );
-
-            /*
-             * TODO: Trying to replace user table with person table and these section needs to be removed.
-             */
-             // Register the person in user table
-            /*$user = Sentinel::register($user_details, $activate);
-
-            //add user to 'User' group
-            $role = Sentinel::findRoleByName('User');
-            $role->users()->attach($user);*/
-
-
-
-            /*
-            //un-comment below if you set $activate=false above
-
-            // Data to be used on the email view
-            $data = array(
-                'user'          => $user,
-                'activationUrl' => URL::route('activate',$user->id, Activation::create($user)->code),
-            );
-
-            // Send the activation code through email
-            Mail::send('emails.register-activate', $data, function ($m) use ($user) {
-                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                $m->subject('Welcome ' . $user->first_name);
-            });
-
-            //Redirect to login page
-            return Redirect::to("admin/login")->with('success', Lang::get('auth/message.signup.success'));
-
-            */
-
-            // login user automatically
-
-
-            // DEFAULT BEHAVIOR
-
-            // Log the user in
-//            Sentinel::login($user, false);
-
-            // Redirect to the home page with success menu
-//            return Redirect::route("my-account")->with('success', Lang::get('auth/message.signup.success'));
-            //return View::make('user_account')->with('success', Lang::get('auth/message.signup.success'));
-
             return View::make('registration-successful')->with('success', Lang::get('auth/message.signup.success'));
 
-        } catch (UserExistsException $e) {
+        } catch (\Exception $e) {
             $this->messageBag->add('email', Lang::get('auth/message.account_already_exists'));
         }
 

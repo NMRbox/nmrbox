@@ -51,7 +51,6 @@
         .toppad {
             margin-top: 20px;
         }
-
     </style>
 
 @stop
@@ -197,10 +196,8 @@
                                                 <td>Status</td>
                                                 <td>Active<br>&nbsp;</td>
                                             </tr>
-
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
                         </div>
@@ -214,10 +211,8 @@
                                 <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
                             </div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
 
             {{-- workshops tiles --}}
@@ -226,134 +221,38 @@
                     <h3 class="text-left">Upcoming workshops</h3>
                 </div>
                 <div class="row"><br></div>
-                <div class="col-md-4">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            NMRbox Summer Workshop
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                                June 19-23, 2017<br>
-                                Farmington, CT<br>
-                                Syllabus TBD, <br>
-                                register by email to:&nbsp;<a href="mailto:workshop@nmrbox.org">workshop@nmrbox.org</a>
-                            </p>
-                            <button name="register" class="btn btn-warning">Register</button>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            NMRbox Summer Workshop 1
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                                June 19-23, 2017<br>
-                                Farmington, CT<br>
-                                Syllabus TBD, <br>
-                                register by email to:&nbsp;<a href="mailto:workshop@nmrbox.org">workshop@nmrbox.org</a>
-                            </p>
-                            <button name="register" class="btn btn-primary disabled">Register</button>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            NMRbox Summer Workshop 2
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                                June 19-23, 2017<br>
-                                Farmington, CT<br>
-                                Syllabus TBD, <br>
-                                register by email to:&nbsp;<a href="mailto:workshop@nmrbox.org">workshop@nmrbox.org</a>
-                            </p>
-                            <button name="register" class="btn btn-warning">Register</button>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-
-
-                        {{--<div class="panel-footer">
-                            <div class="text-right">
-                                <a href="{{ URL::to('update_profile') }}" data-original-title="Edit user profile" data-toggle="tooltip" type="button"
-                                   class="btn btn-sm btn-warning"><i class="fa fa-pencil fa-2x"></i></a>
-                            </div>
-                        </div>--}}
-
-            {{--<div class="row">
-                --}}{{-- software listing box --}}{{--
-                <div class="col-sm-12 col-md-12 toppad">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Software Listings</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class=" col-md-12 col-lg-12 ">
-                                    <table class="table table-user-information">
-                                        <thead>
-                                            <tr>
-                                                <th>Software Name</th>
-                                                <th>Description</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>ABCD</td>
-                                                <td>Lorem ipsum dollor sit amet.</td>
-                                                <td>
-                                                    <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button"
-                                                       class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                                                    <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
-                                                       class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>MNOP</td>
-                                                <td>Lorem ipsum dollor sit amet.</td>
-                                                <td>
-                                                    <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button"
-                                                       class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                                                    <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
-                                                       class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>XYZ</td>
-                                                <td>Lorem ipsum dollor sit amet.</td>
-                                                <td>
-                                                    <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button"
-                                                       class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                                                    <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
-                                                       class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
+                @foreach($workshops as $workshop)
+                    {!! BootForm::open(array('url' => URL::to('register_person_workshop'), 'method' => 'post', 'class' => 'form-horizontal')) !!}
+                        {{--{!! Form::open() !!}--}}
+                        <div class="col-md-4">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    {!! $workshop->title !!}
+                                </div>
+                                <div class="panel-body">
+                                    <p>
+                                        {!! date('F d, Y - ', strtotime($workshop->start_date)) !!}
+                                        {!! date('F d, Y', strtotime($workshop->end_date)) !!}<br>
+                                        {!! $workshop->location !!}<br>
+                                        <a href="{!! $workshop->url !!}" target="_blank">Program flyer</a> <br>
+                                        register by email to:&nbsp;<a href="mailto:workshop@nmrbox.org">workshop@nmrbox.org</a>
+                                    </p>
+                                    {{-- checking whether the user is already registered --}}
+                                    <button
+                                    @foreach($person->classification as $group)
+                                        @if($group->name == $workshop->name)
+                                             disabled
+                                        @endif
+                                    @endforeach
+                                        name="register" class="btn btn-warning btn_register_workshop" data-workshop="{!! $workshop->name !!}" value="{!! $workshop->name !!}">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-footer">
-                            &nbsp;<br>&nbsp;
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>--}}
-        </div>
-    </div>
+                    {!! BootForm::close() !!}
+                @endforeach
+            </div>
 @stop
 
 {{-- page level scripts --}}
@@ -576,6 +475,31 @@
                 }
 
             });
+
+            /* register for workshop */
+            $('button.btn_register_workshop').on('click', function(e){
+                e.preventDefault();
+
+                /* workshop name*/
+                var name = $(this).attr('data-workshop');
+
+                /* ajax request for workshop register */
+                $.ajax({
+                    type: "POST",
+                    url: 'register_person_workshop',
+                    data: 'name=' + name + '&_token=' + $('input#user_csrf_token').val(),
+                    dataType: 'json',
+                    success: function(response) {
+                        $('#success_msg').html(response.message);
+                        show_alert('success');
+                    },
+                    error: function (response) {
+                        $('#error_msg').html(" You already have been registered for this workshop.");
+                        show_alert('error');
+                    }
+                })
+
+            })
         });
 
 

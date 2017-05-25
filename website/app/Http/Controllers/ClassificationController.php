@@ -72,7 +72,7 @@ class ClassificationController extends Controller
             $classification->save();
 
         }
-        catch (UserExistsException $e) {
+        catch (\Exception $e) {
             /* to-do - need to add lang files */
             $this->messageBag->add('email', Lang::get('classifications/message.error.create'));
 
@@ -123,14 +123,23 @@ class ClassificationController extends Controller
      */
     public function update(Request $request, $param)
     {
-        $classification = Classification::where('name', $param)->first();
-        $classification->name = $request->input('name');
-        $classification->definition = $request->input('definition');
-        $classification->web_role = ($request->input('web_role') == 1)?true:false;
 
-        $classification->save();
+        try{
+            /* Input request content */
+            $classification = Classification::where('name', $param)->first();
+            $classification->name = $request->input('name');
+            $classification->definition = $request->input('definition');
+            $classification->web_role = ($request->input('web_role') == 1)?true:false;
 
-        return redirect('admin/classification');
+            $classification->save();
+        } catch (\Exception $e){
+            // something went wrong - probably has entries in email_person table
+            return redirect()->back()->withError(Lang::get('classifications/message.error.update'));
+        }
+
+        // redirect with success message
+        //return redirect('admin/email');
+        return redirect()->back()->withSuccess(Lang::get('classifications/message.success.update'));
     }
 
     /**

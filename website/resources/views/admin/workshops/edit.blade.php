@@ -73,6 +73,45 @@ Edit Workshop
     </div>
     <!-- row-->
 </section>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading clearfix">
+                    <h3>Registered users list: </h3>
+                </div>
+                <div class="panel-body table_fluid">
+                    <table id="vm-table" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th width="20%">ID</th>
+                            <th>Fullname</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if(!empty($workshop_classification->person))
+                            @foreach ($workshop_classification->person as $user)
+                                <tr>
+                                    <td>{!! $user->id !!}</td>
+                                    <td>{!! $user->first_name !!} &nbsp;{!! $user->last_name !!}</td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="2">
+                                    <h4> No users registered yet. </h4>
+                                </td>
+                            </tr>
+                        @endif
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
 @stop
 
 

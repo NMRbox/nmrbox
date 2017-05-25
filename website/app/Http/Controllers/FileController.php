@@ -195,7 +195,7 @@ class FileController extends Controller
                     try {
                         $file->search_keywords()->attach($metad->id);
                     }
-                    catch(\Illuminate\Database\QueryException $e) {
+                    catch(\Exception $e) {
                         // silently ignore trying to ignore a dupe because it doesn't matter and that's what good software engineers do right?
                         //dd($e);
                     }
@@ -229,7 +229,7 @@ class FileController extends Controller
             // redirect with success message
             return redirect()->back()->withSuccess(Lang::get('files/message.success.delete'));
 
-        } catch (QueryException $e){
+        } catch (\Exception $e){
             return redirect()->back()->withError(Lang::get('files/message.error.delete'));
         }
     }

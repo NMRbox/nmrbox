@@ -174,12 +174,6 @@
                 var vote = $('#voteup_'+faq_id).val();
                 var comment = $('#feedback_'+faq_id).val();
 
-                console.log(id);
-                console.log(vote);
-                console.log(comment);
-
-
-
                 /* ajax request for FAQ ratings */
                 $.ajax({
                     type: "POST",

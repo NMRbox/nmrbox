@@ -341,7 +341,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 
 });
 
-#FrontEndController
+#FrontEndController Group
 # Login
 Route::get('login', array('as' => 'login','uses' => 'FrontEndController@getLogin'));
 Route::post('login','FrontEndController@postLogin');
@@ -378,12 +378,17 @@ Route::get('my-account', array('as' => 'my-account', 'uses' => 'FrontEndControll
 # contact form
 Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@postContact'));
 
-# faq
+# Workshop Page
+/*Route::get('workshop',array('as' => 'workshop','uses' => 'WorkshopsController@showAll'));
+Route::post('workshop',array('as' => 'workshop','uses' => 'WorkshopsController@showAll'));*/
+Route::post('register_person_workshop', array('as' => 'register_person_workshop', 'uses' => 'WorkshopsController@registerPersonWorkshop'));
+
+# FAQ Page
 Route::get('faq',array('as' => 'faq','uses' => 'FAQController@showAllFAQs'));
 Route::post('faq',array('as' => 'faq','uses' => 'FAQController@showAllFAQs'));
 Route::post('faq-ratings', array('as' => 'faq-ratings', 'uses' => 'FAQController@countFAQRatings'));
 
-# homepage
+# Homepage
 Route::get('/', array('as' => 'home', 'uses' => 'ChandraController@showFrontEndView'));
 
 Route::get('blog', array('as' => 'blog', 'uses' => 'BlogController@getIndexFrontend'));

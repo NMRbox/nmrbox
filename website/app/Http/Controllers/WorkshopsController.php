@@ -103,10 +103,18 @@ class WorkshopsController extends Controller
         // All classifications
         $classifications = Classification::where('web_role', false)->orderBy('name')->get();
 
+        // Workshop classification details
+        $workshop_classification = Classification::where('name', $param)->get()->first();
+
         //Workshop object
         $workshop = Workshop::where('name', 'LIKE', '%'.$param.'%')->get()->first();
 
-        return view::make('admin.workshops.edit', compact('workshop', 'classifications'));
+
+        // All users
+        //$workshop_users_list = $classifications->person()->get();
+
+
+        return view::make('admin.workshops.edit', compact('workshop', 'classifications', 'workshop_classification'));
     }
 
     /**
@@ -130,7 +138,7 @@ class WorkshopsController extends Controller
 
 
             $workshop->save();
-        } catch ( QueryException $e){
+        } catch (\Exception $e){
 
             // something went wrong - probably has entries in email_person table
             return redirect()->back()->withError(Lang::get('workshops/message.error.update'));
@@ -147,8 +155,56 @@ class WorkshopsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($param)
     {
-        //
+        try{
+            $workshop = Workshop::where('id', $param)->delete();
+
+        } catch ( \Exception $e){
+
+            // something went wrong - probably has entries in email_person table
+            return redirect()->back()->withError(Lang::get('workshops/message.error.delete'));
+        }
+
+        // redirect with success message
+        return redirect()->back()->withSuccess(Lang::get('workshops/message.success.delete'));
+    }
+
+    /**
+     * Display the specified email template.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function registerPersonWorkshop(Request $request){
+
+        if(!$request->ajax()) {
+            return App::abort(403);
+        }
+
+        // Retrieving the users list from person table
+        $logged_user = Sentinel::getUser();
+        $user = Person::where('id', $logged_user->id)->get()->first();
+
+        // the classification input list
+        $classification = $request->input('name', true);
+
+        /* Saving the data into DB */
+        if(!empty($classification)){
+            /*$classification = Classification::find($classification);
+            $classification->person()->sync($user, false);*/
+            $classification = new ClassificationPerson(array(
+                'person_id' => $user->id,
+                'name' => $classification
+            ));
+
+        }
+
+        if($classification->save() !== false){
+            return response( json_encode( array( 'message' => 'Successfully registered. ', 'type' => 'success' ) ), 200 )
+                ->header( 'Content-Type', 'application/json' );
+        } else {
+            return response( json_encode( array( 'message' => 'Sorry, workshop registration unsuccessful. Try again. ', 'type' => 'error' ) ), 200 )
+                ->header( 'Content-Type', 'application/json' );
+        }
     }
 }
