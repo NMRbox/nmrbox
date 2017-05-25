@@ -157,7 +157,7 @@ class PersonController extends Controller
 
             return redirect("admin/people");
         }
-        catch (\Exception $e) {
+        catch (UserExistsException $e) {
             $this->messageBag->add('email', Lang::get('auth/message.account_already_exists'));
         }
 
@@ -215,7 +215,6 @@ class PersonController extends Controller
 
         $person_institution_name = $person->institution()->get()->first()->institution_type;
         $person_institution_type_number = collect($person_institution_types)->search($person_institution_name);
-
 
         return view('admin.people.edit', compact('person', 'timezones_for_select', 'person_positions',
             'person_institution_types', 'person_institution_type_number'));

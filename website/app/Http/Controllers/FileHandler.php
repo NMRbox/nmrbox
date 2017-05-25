@@ -35,7 +35,8 @@ trait FileHandler {
         $newfile->mime_type = $f->getMimeType();
         $newfile->size = $f->getSize();
         $newfile->user_id = Sentinel::getUser()->id;
-        $newfile->role_id = Sentinel::findRoleBySlug('admin')->id; // change to some value from input
+        /*$newfile->role_id = Sentinel::findRoleBySlug('admin')->id; // change to some value from input*/
+        $newfile->role_id = 1;
         $newfile->save();
 
         return $newfile;
@@ -64,7 +65,8 @@ trait FileHandler {
         $newfile->mime_type = $f->getMimeType();
         $newfile->size = $f->getSize();
         $newfile->user_id = Sentinel::getUser()->id;
-        $newfile->role_id = Sentinel::findRoleBySlug('admin')->id; // change to some value from input
+        /*$newfile->role_id = Sentinel::findRoleBySlug('admin')->id; // change to some value from input*/
+        $newfile->role_id = 1;
         $newfile->update();
 
         return $newfile;
@@ -86,7 +88,8 @@ trait FileHandler {
             $newfile->mime_type = $f->getMimeType();
             $newfile->size = $f->getSize();
             $newfile->user_id = Sentinel::getUser()->id;
-            $newfile->role_id = Sentinel::findRoleBySlug('admin')->id; // change to some value from input
+            /*$newfile->role_id = Sentinel::findRoleBySlug('admin')->id; // change to some value from input*/
+            $newfile->role_id = 1;
             $newfile->save();
 
             return route('file.get', [$newfile->slug]);

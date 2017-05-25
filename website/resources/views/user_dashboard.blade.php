@@ -221,37 +221,50 @@
                     <h3 class="text-left">Upcoming workshops</h3>
                 </div>
                 <div class="row"><br></div>
-                @foreach($workshops as $workshop)
-                    {!! BootForm::open(array('url' => URL::to('register_person_workshop'), 'method' => 'post', 'class' => 'form-horizontal')) !!}
-                        {{--{!! Form::open() !!}--}}
-                        <div class="col-md-4">
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    {!! $workshop->title !!}
-                                </div>
-                                <div class="panel-body">
-                                    <p>
-                                        {!! date('F d, Y - ', strtotime($workshop->start_date)) !!}
-                                        {!! date('F d, Y', strtotime($workshop->end_date)) !!}<br>
-                                        {!! $workshop->location !!}<br>
-                                        <a href="{!! $workshop->url !!}" target="_blank">Program flyer</a> <br>
-                                        register by email to:&nbsp;<a href="mailto:workshop@nmrbox.org">workshop@nmrbox.org</a>
-                                    </p>
-                                    {{-- checking whether the user is already registered --}}
-                                    <button
-                                    @foreach($person->classification as $group)
-                                        @if($group->name == $workshop->name)
-                                             disabled
-                                        @endif
-                                    @endforeach
-                                        name="register" class="btn btn-warning btn_register_workshop" data-workshop="{!! $workshop->name !!}" value="{!! $workshop->name !!}">
-                                        Register
-                                    </button>
+                @if(!empty($workshops))
+                    @foreach($workshops as $workshop)
+                        {!! BootForm::open(array('url' => URL::to('register_person_workshop'), 'method' => 'post', 'class' => 'form-horizontal')) !!}
+                            {{--{!! Form::open() !!}--}}
+                            <div class="col-md-4">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        {!! $workshop->title !!}
+                                    </div>
+                                    <div class="panel-body">
+                                        <p>
+                                            @if(date('d', strtotime($workshop->start_date)) == date('d', strtotime($workshop->end_date)))
+                                                {!! date('F d, Y', strtotime($workshop->start_date))  !!}
+                                            @else
+                                                {!! date('F d, Y - ', strtotime($workshop->start_date)) !!}
+                                                {!! date('F d, Y', strtotime($workshop->end_date)) !!}
+                                            @endif
+                                            <br>
+                                            {!! $workshop->location !!}<br>
+                                            <a href="{!! $workshop->url !!}" target="_blank">Program flyer</a> <br>
+                                            register by email to:&nbsp;<a href="mailto:workshop@nmrbox.org">workshop@nmrbox.org</a>
+                                        </p>
+                                        {{-- checking whether the user is already registered --}}
+                                        <button
+                                        @foreach($person->classification as $group)
+                                            @if($group->name == $workshop->name)
+                                                 disabled
+                                            @endif
+                                        @endforeach
+                                            name="register" class="btn btn-warning btn_register_workshop" data-workshop="{!! $workshop->name !!}" value="{!! $workshop->name !!}">
+                                            Register
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
+                        {!! BootForm::close() !!}
+                    @endforeach
+                @else
+                    <div class="panel col-md-12">
+                        <div class="panel-body">
+                            <p>Stay tuned for upcoming workshops update. Thank you.</p>
                         </div>
-                    {!! BootForm::close() !!}
-                @endforeach
+                    </div>
+                @endif
             </div>
 @stop
 

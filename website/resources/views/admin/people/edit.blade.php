@@ -42,11 +42,11 @@
                             {!! BootForm::email('email', "Preferred Email", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
                             {!! BootForm::email('email_institution', "Institutional Email", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
                             {!! BootForm::select('job_title', "Job Title",
-                                $person_positions, null, array('maxlength'=> 32, 'required' => 'required')) !!}
+                                $person_positions, $person_positions, array('maxlength'=> 32, 'required' => 'required', 'selected' => 'selected')) !!}
 
                             {!! BootForm::text('institution', "Institution", $person->institution()->get()->first()->name, array('class' => 'input-lg', 'maxlength'=> 256, 'required' => 'required'))!!}
                             {!! BootForm::select('institution_type', "Institution Type",
-                                $person_institution_types, $person_institution_type_number, array( 'maxlength'=> 256, 'required' => 'required')) !!}
+                                $person_institution_types, 0, array( 'maxlength'=> 256, 'required' => 'required')) !!}
 
                             {!! BootForm::text('department', "Department", null, array('class' => 'input-lg', 'maxlength'=> 256, 'required' => 'required'))!!}
                             {!! BootForm::text('pi', "PI", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
