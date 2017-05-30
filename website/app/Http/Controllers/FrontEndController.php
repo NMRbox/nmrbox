@@ -42,6 +42,175 @@ class FrontEndController extends Controller
         'pic' => 'mimes:jpg,jpeg,bmp,png|max:10000'
     );
 
+
+    /**
+     * Account Register.
+     *
+     * @return View
+     */
+    public function getRegister()
+    {
+        $timezones = Timezone::all();
+        $timezones = $timezones->sortBy("zone"); // want these sorted for frontend
+        $timezones_for_select = [];
+
+        // The goal here is to pair each vm's id with its friendly name, so the name can be displayed in a select
+        //  to choose the actual vm id.
+        foreach( $timezones as $tz ) {
+            $timezones_for_select[$tz->id] = $tz->zone; // pair VM ID with human friendly VM name
+        }
+
+        $person_positions = Person::positions;
+        $person_institution_types = Institution::institution_types;
+
+        // Show the page
+        return View::make('register', compact('timezones_for_select', 'person_positions', 'person_institution_types'));
+    }
+
+    /**
+     * Person Register.
+     *
+     * Intended for use at Bio-Physical Society to capture name, email, institution, and PI of interested people
+     *
+     * @return View
+     */
+    public function getRegisterPerson()
+    {
+        // Show the page
+        return View::make('register-person');
+    }
+
+    /**
+     * Account sign up form processing.
+     *
+     * @return Redirect
+     */
+    public function postRegister(Request $request)
+    {
+        // Declare the rules for the form validation
+        $rules = array(
+            'first_name' => 'required|min:1|unique:persons',
+            'last_name' =>  'required|min:1|unique:persons',
+            'email' => 'email|max:255',
+            'email_institution' => 'required|email|max:255',
+            'job_title' =>  'required',
+            'institution' =>  'required',
+            'institution_type' =>  'required',
+            'department' =>  'required|min:1|max:256',
+            'pi' =>  'required|min:1|max:64',
+            'address1' =>  'required|min:1|max:128',
+            'address2' =>  'max:128',
+            'address3' =>  'max:128',
+            'city' =>  'required|min:1|max:64',
+            'state_province' =>  'required|min:1|max:32',
+            'zip_code' =>  'required|min:1|max:32',
+            'country' =>  'required|min:1|max:64',
+            'time_zone_id' =>  'required|integer'
+        );
+
+        // Create a new validator instance from our validation rules
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            // Ooops.. something went wrong
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+
+        $activate = true; //make it false if you don't want to activate user automatically
+
+        try {
+
+            $email = Input::get('email');
+            if( strlen($email) <= 0 ) {
+                $email = Input::get('email_institution');
+            }
+
+            // register the person
+            $person = new Person(array(
+                'first_name' => Input::get('first_name'),
+                'last_name' => Input::get('last_name'),
+                'email' => $email,
+                'email_institution' => Input::get('email_institution'),
+                'pi' => Input::get('pi'),
+//                'nmrbox_acct' => Input::get('nmrbox_acct'),
+                'institution_id' => 9, // set to unassigned, but update immediately after saving the model
+                'department' => Input::get('department'),
+                'job_title' => Input::get('job_title'),
+                'address1' => Input::get('address1'),
+                'address2' => Input::get('address2'),
+                'address3' => Input::get('address3'),
+                'city' => Input::get('city'),
+                'state_province' => Input::get('state_province'),
+                'zip_code' => Input::get('zip_code'),
+                'country' => Input::get('country'),
+                'time_zone_id' => Input::get('time_zone_id')
+            ));
+            $person->save();
+
+
+            $inputInstitution = Input::get('institution');
+            $inputInstitutionType = Input::get('institution_type');
+            $existing_institution = Institution::where('name', $inputInstitution)->get();
+
+            if( $existing_institution->isEmpty() ) {
+                // then make a new institution like normal
+                $institution = new Institution(array(
+                    'name' => Input::get('institution'),
+                    'institution_type' => Institution::institution_types[Input::get('institution_type')]
+                ));
+
+                $institution->save();
+                $person->institution()->associate($institution);
+            }
+            else {
+                // use the existing institution
+                $existing_institution = $existing_institution->first();
+                $person->institution()->associate($existing_institution);
+                $existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
+                $existing_institution->save();
+            }
+
+            return View::make('registration-successful')->with('success', Lang::get('auth/message.signup.success'));
+
+        } catch (\Exception $e) {
+            $this->messageBag->add('email', Lang::get('auth/message.account_already_exists'));
+        }
+
+        // Ooops.. something went wrong
+        return Redirect::back()->withInput()->withErrors($this->messageBag);
+    }
+
+
+    /**
+     * Account sign up form processing.
+     *
+     * @return Redirect
+     */
+    public function postRegisterPerson()
+    {
+        // Declare the rules for the form validation
+        $rules = array(
+            'first_name' => 'required|min:3',
+            'last_name' =>  'required|min:3',
+            'email' => 'required|email|unique:persons',
+            'institution' =>  'required|min:3',
+            'pi' =>  'required|min:3'
+        );
+
+        // Create a new validator instance from our validation rules
+        $validator = Validator::make(Input::all(), $rules);
+
+        // If validation fails, we'll exit the operation now.
+        if ($validator->fails()) {
+            // Ooops.. something went wrong
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+
+        $person = new Person(Input::all());
+        $person->save();
+        return View::make('registration-person-successful')->with('success', Lang::get('auth/message.signup.success'));
+    }
+
     /**
      * Account sign in.
      *
@@ -521,174 +690,6 @@ class FrontEndController extends Controller
                 return back()->with('error', nl2br(Lang::get('auth/message.forgot-password-confirm.complexity_error')) );
             }
         }
-    }
-
-    /**
-     * Account Register.
-     *
-     * @return View
-     */
-    public function getRegister()
-    {
-        $timezones = Timezone::all();
-        $timezones = $timezones->sortBy("zone"); // want these sorted for frontend
-        $timezones_for_select = [];
-
-        // The goal here is to pair each vm's id with its friendly name, so the name can be displayed in a select
-        //  to choose the actual vm id.
-        foreach( $timezones as $tz ) {
-            $timezones_for_select[$tz->id] = $tz->zone; // pair VM ID with human friendly VM name
-        }
-
-        $person_positions = Person::positions;
-        $person_institution_types = Institution::institution_types;
-
-        // Show the page
-        return View::make('register', compact('timezones_for_select', 'person_positions', 'person_institution_types'));
-    }
-
-    /**
-     * Person Register.
-     *
-     * Intended for use at Bio-Physical Society to capture name, email, institution, and PI of interested people
-     *
-     * @return View
-     */
-    public function getRegisterPerson()
-    {
-        // Show the page
-        return View::make('register-person');
-    }
-
-    /**
-     * Account sign up form processing.
-     *
-     * @return Redirect
-     */
-    public function postRegister(Request $request)
-    {
-        // Declare the rules for the form validation
-        $rules = array(
-            'first_name' => 'required|min:1',
-            'last_name' =>  'required|min:1',
-            'email' => 'email|max:255|unique:persons',
-            'email_institution' => 'required|email|max:255|unique:persons',
-            'job_title' =>  'required',
-            'institution' =>  'required',
-            'institution_type' =>  'required',
-            'department' =>  'required|min:1|max:256',
-            'pi' =>  'required|min:1|max:64',
-            'address1' =>  'required|min:1|max:128',
-            'address2' =>  'max:128',
-            'address3' =>  'max:128',
-            'city' =>  'required|min:1|max:64',
-            'state_province' =>  'required|min:1|max:32',
-            'zip_code' =>  'required|min:1|max:32',
-            'country' =>  'required|min:1|max:64',
-            'time_zone_id' =>  'required|integer'
-        );
-
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        if ($validator->fails()) {
-            // Ooops.. something went wrong
-            return Redirect::back()->withInput()->withErrors($validator);
-        }
-
-        $activate = true; //make it false if you don't want to activate user automatically
-
-        try {
-
-            $email = Input::get('email');
-            if( strlen($email) <= 0 ) {
-                $email = Input::get('email_institution');
-            }
-
-            // register the person
-            $person = new Person(array(
-                'first_name' => Input::get('first_name'),
-                'last_name' => Input::get('last_name'),
-                'email' => $email,
-                'email_institution' => Input::get('email_institution'),
-                'pi' => Input::get('pi'),
-//                'nmrbox_acct' => Input::get('nmrbox_acct'),
-                'institution_id' => 9, // set to unassigned, but update immediately after saving the model
-                'department' => Input::get('department'),
-                'job_title' => Input::get('job_title'),
-                'address1' => Input::get('address1'),
-                'address2' => Input::get('address2'),
-                'address3' => Input::get('address3'),
-                'city' => Input::get('city'),
-                'state_province' => Input::get('state_province'),
-                'zip_code' => Input::get('zip_code'),
-                'country' => Input::get('country'),
-                'time_zone_id' => Input::get('time_zone_id')
-            ));
-            $person->save();
-
-
-            $inputInstitution = Input::get('institution');
-            $inputInstitutionType = Input::get('institution_type');
-            $existing_institution = Institution::where('name', $inputInstitution)->get();
-
-            if( $existing_institution->isEmpty() ) {
-                // then make a new institution like normal
-                $institution = new Institution(array(
-                    'name' => Input::get('institution'),
-                    'institution_type' => Institution::institution_types[Input::get('institution_type')]
-                ));
-
-                $institution->save();
-                $person->institution()->associate($institution);
-            }
-            else {
-                // use the existing institution
-                $existing_institution = $existing_institution->first();
-                $person->institution()->associate($existing_institution);
-                $existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
-                $existing_institution->save();
-            }
-
-            return View::make('registration-successful')->with('success', Lang::get('auth/message.signup.success'));
-
-        } catch (\Exception $e) {
-            $this->messageBag->add('email', Lang::get('auth/message.account_already_exists'));
-        }
-
-        // Ooops.. something went wrong
-        return Redirect::back()->withInput()->withErrors($this->messageBag);
-    }
-
-
-    /**
-     * Account sign up form processing.
-     *
-     * @return Redirect
-     */
-    public function postRegisterPerson()
-    {
-        // Declare the rules for the form validation
-        $rules = array(
-            'first_name' => 'required|min:3',
-            'last_name' =>  'required|min:3',
-            'email' => 'required|email|unique:persons',
-            'institution' =>  'required|min:3',
-            'pi' =>  'required|min:3'
-        );
-
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            // Ooops.. something went wrong
-            return Redirect::back()->withInput()->withErrors($validator);
-        }
-
-        $person = new Person(Input::all());
-        $person->save();
-        return View::make('registration-person-successful')->with('success', Lang::get('auth/message.signup.success'));
     }
 
 
