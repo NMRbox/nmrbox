@@ -36,7 +36,7 @@ class FrontEndController extends Controller
     protected $validationRules = array(
         'first_name' => 'required|min:3',
         'last_name' => 'required|min:3',
-        'email' => 'required|email|unique:users,email',
+        'email' => 'required|email|unique:persons,email',
         'password' => 'required|between:3,32',
         'password_confirm' => 'required|same:password',
         'pic' => 'mimes:jpg,jpeg,bmp,png|max:10000'
@@ -572,7 +572,7 @@ class FrontEndController extends Controller
             'first_name' => 'required|min:1',
             'last_name' =>  'required|min:1',
             'email' => 'email|max:255|unique:persons',
-            'email_institution' => 'required|email|max:255|unique:persons|unique:users,email', // need to validate the email isn't taken on the users table either
+            'email_institution' => 'required|email|max:255|unique:persons',
             'job_title' =>  'required',
             'institution' =>  'required',
             'institution_type' =>  'required',
