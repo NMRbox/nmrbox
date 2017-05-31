@@ -139,40 +139,6 @@
 @section('footer_scripts')
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
-    <script src="{{ asset('assets/js/custom_js/datatables.js') }}" type="text/javascript"></script>
-    <script>
-        $(document).ready(function () {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            /* register for workshop */
-            $('button.btn_register_workshop').on('click', function(e){
-                e.preventDefault();
-
-                /* workshop name*/
-                var name = $(this).attr('data-workshop');
-
-                /* ajax request for workshop register */
-                $.ajax({
-                    type: "POST",
-                    url: 'register_person_workshop',
-                    data: 'name=' + name + '&_token=' + $('input#user_csrf_token').val(),
-                    dataType: 'json',
-                    success: function(response) {
-                        $('#success_msg').html(response.message);
-                        show_alert('success');
-                        window.scrollTo(0,0);
-                        location.reload();
-                    },
-                    error: function (response) {
-                        $('#error_msg').html(" You already have been registered for this workshop.");
-                        show_alert('error');
-                    }
-                })
-            });
-        })
-    </script>
+    <script type="text/javascript" src="{{ asset('assets/js/custom_js/datatables.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/custom_js/workshops.js') }}"></script>
 @stop

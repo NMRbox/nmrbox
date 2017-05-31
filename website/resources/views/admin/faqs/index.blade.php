@@ -140,52 +140,5 @@ FAQ Index
     {{-- send mail --}}
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
-    <style type="text/css">
-        table tr.selected td {
-            background: #9FAFD1;
-        }
-
-        table tfoot input{
-            width: 100%;
-        }
-
-        .table_fluid{
-            overflow-x: scroll;
-
-        }
-    </style>
-    <script>
-        $(document).ready(function() {
-            // DataTable
-            var table = $('#vm-table').DataTable( {
-                "order": [[ 1, "asc" ]],
-            /*    "columnDefs": [
-                        {
-                            "targets": [ 0 ],
-                            "visible": false,
-                            "searchable": false
-                        }
-                    ]*/
-            });
-
-            // deleting confirmation
-            $('.delete_faq').on("click", function(event) {
-                event.preventDefault();
-                var button = $(event.target);
-                var template_name = button.attr("data-name");
-                var url = button.attr("data-url");
-
-                var m = $('#admin-modal');
-                m.find('.modal-title').text('Delete Confirmation');
-                m.find('.modal-body').html('Are you sure you want to delete this FAQ? <br><span  class="modal-highlight">' + name + '</span><span class="modal-highlight"></span>');
-
-                var mbutton = m.find('.modal-action');
-                mbutton.attr("onclick", "window.location.href='" + url + "'");
-                mbutton.removeClass();
-                mbutton.addClass("btn btn-danger");
-                mbutton.text("Delete");
-                m.modal();
-            });
-        });
-    </script>
+    <script type="text/javascript" src="{{ asset('assets/js/custom_js/faq.js') }}"></script>
 @stop 
