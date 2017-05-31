@@ -99,7 +99,6 @@ class PageController extends Controller {
         // Grab all the pages
         $pages = Page::all();
 
-
         // Do we want to include the deleted pages?
         if (Input::get('withTrashed')) {
             $pages = $pages->merge( Page::withTrashed()->get() );

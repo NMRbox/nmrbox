@@ -51,7 +51,7 @@
                     <div class="col-md-4">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                {!! $workshop->title !!}
+                                <h4>{!! $workshop->title !!}</h4>
                             </div>
                             <div class="panel-body">
                                 <p>
@@ -103,8 +103,8 @@
                 @forelse($completed_workshops as $workshop)
                     <div class="col-md-4">
                         <div class="panel panel-info">
-                            <div class="panel-heading">
-                                {!! $workshop->title !!}
+                            <div class="panel-heading heading">
+                                <h4>{!! $workshop->title !!}</h4>
                             </div>
                             <div class="panel-body">
                                 <p>
