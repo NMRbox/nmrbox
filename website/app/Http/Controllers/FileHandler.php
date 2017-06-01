@@ -34,7 +34,7 @@ trait FileHandler {
         $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
         $newfile->mime_type = $f->getMimeType();
         $newfile->size = $f->getSize();
-        $newfile->user_id = Sentinel::getUser()->id;
+        $newfile->person_id = Sentinel::getUser()->id;
         $newfile->save();
 
         return $newfile;
@@ -62,7 +62,7 @@ trait FileHandler {
         $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
         $newfile->mime_type = $f->getMimeType();
         $newfile->size = $f->getSize();
-        $newfile->user_id = Sentinel::getUser()->id;
+        $newfile->person_id = Sentinel::getUser()->id;
         $newfile->update();
 
         return $newfile;
@@ -83,7 +83,7 @@ trait FileHandler {
             $newfile->label = $newfile->name;
             $newfile->mime_type = $f->getMimeType();
             $newfile->size = $f->getSize();
-            $newfile->user_id = Sentinel::getUser()->id;
+            $newfile->person_id = Sentinel::getUser()->id;
             $newfile->save();
 
             return route('file.get', [$newfile->slug]);

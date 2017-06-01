@@ -201,7 +201,7 @@ class File extends NmrModel implements SluggableInterface
     }
 
     /**
-     * pivot relation with keyword_category table
+     * pivot relation with keyword_category tablefil
      */
     public function keyword_categories() {
         return $this->belongsToMany('App\Category', 'file_keyword_category', 'file_id', 'keyword_category_id');
