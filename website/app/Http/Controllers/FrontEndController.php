@@ -221,6 +221,9 @@ class FrontEndController extends Controller
         // Is the user logged in?
         if (Sentinel::check()) {
             return Redirect::route('my-account');
+        } else { //TODO: remove this else part later after v5 release.
+            // Log the user out
+            Sentinel::logout(null, true);
         }
 
         // Show the login page
@@ -280,22 +283,20 @@ class FrontEndController extends Controller
                         }
                     }
                 }
-                return Redirect::route("my-account")->with('success', Lang::get('auth/message.login.success'));
+                return redirect()->back()->withSuccess(Lang::get('auth/message.login.success'));
             } else {
-                return Redirect::to('login')->with('error', 'Username or password is incorrect.');
+                return redirect()->back()->withError(Lang::get('auth/message.login.error'));
             }
         } catch (\Exception $e) {
-            $this->messageBag->add('email', Lang::get('auth/message.account_not_found'));
+            return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
         } catch (\Exception $e) {
-            $this->messageBag->add('email', Lang::get('auth/message.account_not_activated'));
+            return redirect()->back()->withError(Lang::get('auth/message.account_not_activated'));
         } catch (\Exception $e) {
-            $this->messageBag->add('email', Lang::get('auth/message.account_suspended'));
+            return redirect()->back()->withError(Lang::get('auth/message.account_suspended'));
         } catch (\Exception $e) {
-            $this->messageBag->add('email', Lang::get('auth/message.account_banned'));
+            return redirect()->back()->withError(Lang::get('auth/message.account_banned'));
         }
 
-        // Ooops.. something went wrong
-        return Redirect::back()->withInput()->withErrors($this->messageBag);
     }
 
     /**
@@ -306,7 +307,7 @@ class FrontEndController extends Controller
     public function getLogout()
     {
         // Log the user out
-        Sentinel::logout();
+        Sentinel::logout(null, true);
 
         //clear the admin session value
         if(Session::has('user_is_admin')){
