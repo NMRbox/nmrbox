@@ -6,7 +6,7 @@
 
 return array(
 
-    'account_already_exists' => 'An account with this email already exists.',
+    'account_already_exists' => 'An account with this name and email already exists.',
     'account_not_found'      => 'Username or password is incorrect, please try again.',
     'account_not_activated'  => 'This user account is not activated.',
     'account_suspended'      => 'User account suspended because of too many login attempts. Try again later.',

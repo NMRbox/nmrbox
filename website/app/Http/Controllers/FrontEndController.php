@@ -34,9 +34,9 @@ class FrontEndController extends Controller
 {
 
     protected $validationRules = array(
-        'first_name' => 'required|min:3',
-        'last_name' => 'required|min:3',
-        'email' => 'required|email|unique:persons,email',
+        'first_name' => 'required|min:3|unique:persons,first_name',
+        'last_name' => 'required|min:3|unique:persons,last_name',
+        'email' => 'required|email',
         'password' => 'required|between:3,32',
         'password_confirm' => 'required|same:password',
         'pic' => 'mimes:jpg,jpeg,bmp,png|max:10000'
@@ -132,7 +132,7 @@ class FrontEndController extends Controller
                 'email' => $email,
                 'email_institution' => Input::get('email_institution'),
                 'pi' => Input::get('pi'),
-//                'nmrbox_acct' => Input::get('nmrbox_acct'),
+                //'nmrbox_acct' => Input::get('nmrbox_acct'),
                 'institution_id' => 9, // set to unassigned, but update immediately after saving the model
                 'department' => Input::get('department'),
                 'job_title' => Input::get('job_title'),
@@ -145,15 +145,15 @@ class FrontEndController extends Controller
                 'country' => Input::get('country'),
                 'time_zone_id' => Input::get('time_zone_id')
             ));
-            $person->save();
 
-
+            /* institution check from user given inst. name */
             $inputInstitution = Input::get('institution');
             $inputInstitutionType = Input::get('institution_type');
-            $existing_institution = Institution::where('name', $inputInstitution)->get();
+            $existing_institution = Institution::where('name', 'LIKE', '%'.$inputInstitution.'%')->get()->first();
 
-            if( $existing_institution->isEmpty() ) {
-                // then make a new institution like normal
+            /* Existing institution check */
+            if( !$existing_institution ) {
+                // then add a new institution and associate with person entry
                 $institution = new Institution(array(
                     'name' => Input::get('institution'),
                     'institution_type' => Institution::institution_types[Input::get('institution_type')]
@@ -163,17 +163,30 @@ class FrontEndController extends Controller
                 $person->institution()->associate($institution);
             }
             else {
-                // use the existing institution
-                $existing_institution = $existing_institution->first();
+                /* associating old institution data with person entry */
                 $person->institution()->associate($existing_institution);
-                $existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
-                $existing_institution->save();
+                /*$existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
+                $existing_institution->save();*/
             }
 
-            return View::make('registration-successful')->with('success', Lang::get('auth/message.signup.success'));
+            /* Save person entry and return to successful page. */
+            if($person->save()){
+                // Data to be used on the email view
+                $data = array(
+                    'person' => Person::where('id', $person->id)->get()->first(),
+                );
+                // Send the registration acknowledge email
+                Mail::send('emails.register-activate', $data, function ($m) use ($person) {
+                    $m->to($person->email, $person->first_name . ' ' . $person->last_name);
+                    $m->subject('NMRbox registration received');
+                });
+
+                return View::make('registration-successful')->with('success', Lang::get('auth/message.signup.success'));
+            }
 
         } catch (\Exception $e) {
-            $this->messageBag->add('email', Lang::get('auth/message.account_already_exists'));
+            dd($e);
+            return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
         }
 
         // Ooops.. something went wrong
@@ -186,7 +199,7 @@ class FrontEndController extends Controller
      *
      * @return Redirect
      */
-    public function postRegisterPerson()
+    /*public function postRegisterPerson()
     {
         // Declare the rules for the form validation
         $rules = array(
@@ -209,7 +222,7 @@ class FrontEndController extends Controller
         $person = new Person(Input::all());
         $person->save();
         return View::make('registration-person-successful')->with('success', Lang::get('auth/message.signup.success'));
-    }
+    }*/
 
     /**
      * Account sign in.
@@ -259,7 +272,7 @@ class FrontEndController extends Controller
 
             /* Test (Localhost login code to skip LDAP authentication) */
             /*$ldap_login = true;
-            $person = Person::where('id', 226)->get()->first();
+            $person = Person::where('id', 379)->get()->first();
             if($person){
                 Session::put('person', $person);
             }
@@ -328,6 +341,8 @@ class FrontEndController extends Controller
 
         // the person attached to the user
         $person = Person::where('id', $user->id)->get()->first();
+
+        // fetching all classification groups
         $classifications = Classification::All();
 
         //Get all the upcoming workshops
