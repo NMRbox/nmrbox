@@ -279,9 +279,13 @@ class FrontEndController extends Controller
             //Sentinel::loginAndRemember($user); // removing user test
             Sentinel::loginAndRemember($person);*/
             /* Eof Test */
+            echo "<pre>";
+            print_r($ldap_login);
+            echo "</pre>";
 
             // LDAP login response
             if($ldap_login !== false){
+                echo "yes";
                 if ($person = Sentinel::check())
                 {
                     // Assigning user classification
@@ -297,6 +301,7 @@ class FrontEndController extends Controller
                 return Redirect::route("my-account")->with('success', Lang::get('auth/message.login.success'));
 
             } else {
+                echo 'no';
                 return redirect()->back()->withError(Lang::get('auth/message.login.error'));
             }
         } catch (\Exception $e) {
