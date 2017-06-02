@@ -272,20 +272,16 @@ class FrontEndController extends Controller
 
             /* Test (Localhost login code to skip LDAP authentication) */
             /*$ldap_login = true;
-            $person = Person::where('id', 379)->get()->first();
+            $person = Person::where('id', 226)->get()->first();
             if($person){
                 Session::put('person', $person);
             }
             //Sentinel::loginAndRemember($user); // removing user test
             Sentinel::loginAndRemember($person);*/
             /* Eof Test */
-            echo "<pre>";
-            print_r($ldap_login);
-            echo "</pre>";
 
             // LDAP login response
-            if($ldap_login !== false){
-                echo "yes";
+            if($ldap_login === true){
                 if ($person = Sentinel::check())
                 {
                     // Assigning user classification
@@ -301,16 +297,15 @@ class FrontEndController extends Controller
                 return Redirect::route("my-account")->with('success', Lang::get('auth/message.login.success'));
 
             } else {
-                echo 'no';
                 return redirect()->back()->withError(Lang::get('auth/message.login.error'));
             }
-        } catch (\Exception $e) {
+        } catch (UserNotFoundException $e) {
             return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
-        } catch (\Exception $e) {
+        } catch (UserNotActivatedException $e) {
             return redirect()->back()->withError(Lang::get('auth/message.account_not_activated'));
-        } catch (\Exception $e) {
+        } catch (UserSuspendedException $e) {
             return redirect()->back()->withError(Lang::get('auth/message.account_suspended'));
-        } catch (\Exception $e) {
+        } catch (UserBannedException $e) {
             return redirect()->back()->withError(Lang::get('auth/message.account_banned'));
         }
 
