@@ -272,10 +272,12 @@ class FrontEndController extends Controller
 
             /* Test (Localhost login code to skip LDAP authentication) */
             /*$ldap_login = true;
-            $person = Person::where('id', 226)->get()->first();
-            if($person){
-                Session::put('person', $person);
+            $person = Person::where('id', 378)->get()->first();
+            if(!$person) {
+                return false;
             }
+            // Adding person table information into session
+            Session::put('person', $person);
             //Sentinel::loginAndRemember($user); // removing user test
             Sentinel::loginAndRemember($person);*/
             /* Eof Test */
