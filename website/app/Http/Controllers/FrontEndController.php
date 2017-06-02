@@ -282,12 +282,9 @@ class FrontEndController extends Controller
 
             // LDAP login response
             if($ldap_login !== false){
-                //if ($user = Sentinel::check()) // removing user -> person test
                 if ($person = Sentinel::check())
                 {
-
                     // Assigning user classification
-                    //$user_classification = ClassificationPerson::where('person_id', $user->person_id)->get(); // removing user -> person test
                     $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
                     foreach ($user_classification as $key => $value) {
                         if ($value->name == 'admin'){
@@ -296,7 +293,9 @@ class FrontEndController extends Controller
                         }
                     }
                 }
-                return redirect()->back()->withSuccess(Lang::get('auth/message.login.success'));
+                //return redirect()->back()->withSuccess(Lang::get('auth/message.login.success'));
+                return Redirect::route("my-account")->with('success', Lang::get('auth/message.login.success'));
+
             } else {
                 return redirect()->back()->withError(Lang::get('auth/message.login.error'));
             }
