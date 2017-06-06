@@ -103,7 +103,7 @@ class ClassificationController extends Controller
      */
     public function edit($param)
     {
-        $classification = Classification::where('name', $param)->first();
+        $classification = Classification::where('name', 'LIKE', '%'.$param.'%')->get()->first();
         $web_role = 0;
         if($classification->web_role != false)
         {
@@ -126,11 +126,11 @@ class ClassificationController extends Controller
 
         try{
             /* Input request content */
-            $classification = Classification::where('name', $param)->first();
+            $classification = Classification::where('name', 'LIKE', '%'.$param.'%')->get()->first();
             $classification->name = $request->input('name');
             $classification->definition = $request->input('definition');
             $classification->web_role = ($request->input('web_role') == 1)?true:false;
-
+            // Saving classification
             $classification->save();
         } catch (\Exception $e){
             // something went wrong - probably has entries in email_person table
@@ -150,7 +150,7 @@ class ClassificationController extends Controller
      */
     public function destroy($param)
     {
-        $classification = Classification::where('name', $param)->first();
+        $classification = Classification::where('name', 'LIKE', '%'.$param.'%')->get()->first();
         $count_users = $classification->person()->count();
 
         if($count_users === 0){
