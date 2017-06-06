@@ -25,7 +25,8 @@ trait FileHandler {
         $name = $f->getClientOriginalName();
 
         /* determining the filename as label and slug */
-        $slug = pathinfo($name, PATHINFO_FILENAME);
+        //$slug = pathinfo($name, PATHINFO_FILENAME); // Adam wants to keep file extension with slug
+        $slug = $name;
         $filename = $filename = ($label == NULL) ? $slug : $label ;
 
         $newfile->name = $name;
@@ -53,7 +54,8 @@ trait FileHandler {
         $name = $f->getClientOriginalName();
 
         /* determining the filename as label and slug */
-        $slug = pathinfo($name, PATHINFO_FILENAME);
+        //$slug = pathinfo($name, PATHINFO_FILENAME); // Adam wants to keep file extension with slug
+        $slug = $name;
         $filename = $filename = ($label == NULL) ? $slug : $label ;
 
         $newfile->name = $name;
