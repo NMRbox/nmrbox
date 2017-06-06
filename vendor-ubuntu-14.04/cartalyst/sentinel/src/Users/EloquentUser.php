@@ -11,10 +11,10 @@
  * bundled with this package in the LICENSE file.
  *
  * @package    Sentinel
- * @version    2.0.12
+ * @version    2.0.15
  * @author     Cartalyst LLC
  * @license    BSD License (3-clause)
- * @copyright  (c) 2011-2015, Cartalyst LLC
+ * @copyright  (c) 2011-2017, Cartalyst LLC
  * @link       http://cartalyst.com
  */
 
@@ -34,24 +34,42 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
     /**
      * {@inheritDoc}
      */
-    protected $table = 'users';
+    //protected $table = 'users';
+    protected $table = 'persons';
 
     /**
      * {@inheritDoc}
      */
     protected $fillable = [
-        'email',
+        /*'email',
         'password',
         'last_name',
         'first_name',
-        'permissions',
+        'permissions',*/
+        'first_name',
+        'last_name',
+        'email',
+        'email_institution',
+        'pi',
+        'nmrbox_acct',
+        'institution',
+        'department',
+        'position',
+        'address1',
+        'address2',
+        'address3',
+        'city',
+        'state_province',
+        'zip_code',
+        'country',
+        'time_zone_id'
     ];
 
     /**
      * {@inheritDoc}
      */
     protected $hidden = [
-        'password',
+        //'password',
     ];
 
     /**
@@ -201,19 +219,23 @@ class EloquentUser extends Model implements RoleableInterface, PermissibleInterf
      */
     public function inRole($role)
     {
-        $role = array_first($this->roles, function ($index, $instance) use ($role) {
+        if ($role instanceof RoleInterface) {
+            $roleId = $role->getRoleId();
+        }
+
+        foreach ($this->roles as $instance) {
             if ($role instanceof RoleInterface) {
-                return ($instance->getRoleId() === $role->getRoleId());
+                if ($instance->getRoleId() === $roleId) {
+                    return true;
+                }
+            } else {
+                if ($instance->getRoleId() == $role || $instance->getRoleSlug() == $role) {
+                    return true;
+                }
             }
+        }
 
-            if ($instance->getRoleId() == $role || $instance->getRoleSlug() == $role) {
-                return true;
-            }
-
-            return false;
-        });
-
-        return $role !== null;
+        return false;
     }
 
     /**
