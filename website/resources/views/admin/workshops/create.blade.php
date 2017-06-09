@@ -56,7 +56,7 @@
                             {!! BootForm::text('title', "Title", null, array('class' => 'input-lg', 'required' => 'required'))!!}
                             {!! BootForm::date('start_date', "Start Date", null, array('class' => 'input-lg', 'required' => 'required'))!!}
                             {!! BootForm::date('end_date', "End Date", null, array('class' => 'input-lg', 'required' => 'required'))!!}
-                            {!! BootForm::text('url', "URL", null, array('class' => 'input-lg', 'required' => 'required'))!!}
+                            {!! BootForm::text('url', "URL", null, array('class' => 'input-lg'))!!}
                             {!! BootForm::textarea('location', "Location", null, array('class' => 'input-lg', 'required' => 'required'))!!}
                             {!! BootForm::submit('Save') !!}
                         </div>
