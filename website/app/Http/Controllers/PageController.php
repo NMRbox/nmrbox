@@ -119,7 +119,6 @@ class PageController extends Controller {
 	public function getCreate()
 	{
         // All files information
-        //$all_files = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->get()->sortBy('name');
         $all_files = File::select('id', 'label', 'slug', 'mime_type', 'size')->get()->sortBy('label');
 
         return view('admin.pages.create',compact('all_files'));

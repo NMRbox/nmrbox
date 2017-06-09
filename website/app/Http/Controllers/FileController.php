@@ -28,8 +28,6 @@ class FileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //ini_set('memory_limit','256M');
-        //$all_files = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->get()->sortBy('name');
         $all_files = File::select('id', 'label', 'slug', 'mime_type', 'size')->get()->sortBy('label');
 
         // all metadata
@@ -144,7 +142,6 @@ class FileController extends Controller
     public function edit($id)
     {
         // retrieving file data
-        //$file = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->where('id', '=', $id)->get()->first();
         $file = File::select('id', 'label', 'slug', 'mime_type', 'size')->where('id', '=', $id)->get()->first();
 
         /* All File Search Keywords */
@@ -199,6 +196,7 @@ class FileController extends Controller
         } else {
             /* update the file label only */
             $file->label = $file_label;
+            $file->slug = $file_slug;
             $file->save();
         }
 
@@ -225,7 +223,6 @@ class FileController extends Controller
 
 
         // returning back to the page
-        //return redirect()->back()->withSuccess(Lang::get('files/message.success.update'));
         return response( json_encode( array( 'message' => 'Successfully uploaded. ' ) ), 200 )
             ->header( 'Content-Type', 'application/json' );
 
