@@ -119,7 +119,8 @@ class PageController extends Controller {
 	public function getCreate()
 	{
         // All files information
-        $all_files = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->get()->sortBy('name');
+        //$all_files = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->get()->sortBy('name');
+        $all_files = File::select('id', 'label', 'slug', 'mime_type', 'size')->get()->sortBy('label');
 
         return view('admin.pages.create',compact('all_files'));
 	}
@@ -184,11 +185,12 @@ class PageController extends Controller {
             $page = Page::where('slug', $id)->first();
 
             // All files information
-            $all_files = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->get()->sortBy('name');
+            //$all_files = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->get()->sortBy('name');
+            $all_files = File::select('id', 'label', 'slug', 'mime_type', 'size')->get()->sortBy('label');
 
         } catch (\Exception $e) {
-            // Prepare the error message
-            $error = Lang::get('page/message.user_not_found', compact('id'));
+	        // Prepare the error message
+            $error = Lang::get('page/message.page_not_found', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('pages')->with('error', $error);

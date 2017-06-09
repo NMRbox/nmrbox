@@ -88,7 +88,7 @@ class FrontEndController extends Controller
     public function postRegister(Request $request)
     {
         // Declare the rules for the form validation
-        $rules = array(
+        /*$rules = array(
             'first_name' => 'required|min:1|unique:persons',
             'last_name' =>  'required|min:1|unique:persons',
             'email' => 'email|max:255',
@@ -114,12 +114,11 @@ class FrontEndController extends Controller
         if ($validator->fails()) {
             // Ooops.. something went wrong
             return Redirect::back()->withInput()->withErrors($validator);
-        }
+        }*/
 
-        $activate = true; //make it false if you don't want to activate user automatically
+        //$activate = true; //make it false if you don't want to activate user automatically
 
         try {
-
             $email = Input::get('email');
             if( strlen($email) <= 0 ) {
                 $email = Input::get('email_institution');
@@ -184,45 +183,14 @@ class FrontEndController extends Controller
                 return View::make('registration-successful')->with('success', Lang::get('auth/message.signup.success'));
             }
 
-        } catch (\Exception $e) {
-            dd($e);
+        } catch (\Illuminate\Database\QueryException $e) {
+            //dd($e);
             return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
         }
 
         // Ooops.. something went wrong
-        return Redirect::back()->withInput()->withErrors($this->messageBag);
+        return redirect()->back()->withError(Lang::get('auth/message.signup.error'));
     }
-
-
-    /**
-     * Account sign up form processing.
-     *
-     * @return Redirect
-     */
-    /*public function postRegisterPerson()
-    {
-        // Declare the rules for the form validation
-        $rules = array(
-            'first_name' => 'required|min:3',
-            'last_name' =>  'required|min:3',
-            'email' => 'required|email|unique:persons',
-            'institution' =>  'required|min:3',
-            'pi' =>  'required|min:3'
-        );
-
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            // Ooops.. something went wrong
-            return Redirect::back()->withInput()->withErrors($validator);
-        }
-
-        $person = new Person(Input::all());
-        $person->save();
-        return View::make('registration-person-successful')->with('success', Lang::get('auth/message.signup.success'));
-    }*/
 
     /**
      * Account sign in.
@@ -272,13 +240,12 @@ class FrontEndController extends Controller
 
             /* Test (Localhost login code to skip LDAP authentication) */
             /*$ldap_login = true;
-            $person = Person::where('id', 378)->get()->first();
+            $person = Person::where('id', 226)->get()->first();
             if(!$person) {
                 return false;
             }
             // Adding person table information into session
             Session::put('person', $person);
-            //Sentinel::loginAndRemember($user); // removing user test
             Sentinel::loginAndRemember($person);*/
             /* Eof Test */
 

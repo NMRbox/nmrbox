@@ -77,7 +77,7 @@ Edit File
                                     <thead>
                                         <tr>
                                             <th>Label</th>
-                                            <th>Name</th>
+                                            {{--<th>Name</th>--}}
                                             <th>Slug</th>
                                             <th>Type</th>
                                             <th>Size</th>
@@ -87,7 +87,7 @@ Edit File
                                     <tbody>
                                         <tr>
                                             <td>{!! $file->label !!}</td>
-                                            <td>{!! $file->name !!}</td>
+                                            {{--<td>{!! $file->name !!}</td>--}}
                                             <td>{!! $file->slug !!}</td>
                                             <td>{!! $file->mime_type !!}</td>
                                             <td>{!! round(($file->size/1024)/1024, 2) !!} MB (aprox.)</td>
@@ -101,7 +101,11 @@ Edit File
                         <hr>
                         <div class="form-group">
                             <label for="file_name">File label</label>
-                            <input type="text" name="label" id="file_name" placeholder="Enter file label" class="form-control">
+                            <input type="text" name="label" id="file_name" placeholder="Enter file label" class="form-control" value="{!! $file->label !!}">
+                        </div>
+                        <div class="form-group">
+                            <label for="file_slug">File Slug</label>
+                            <input type="text" name="slug" id="file_slug" placeholder="Enter file slug" class="form-control" value="{!! $file->slug !!}">
                         </div>
                         <div class="form-group">
                             <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="1">
@@ -169,7 +173,7 @@ Edit File
         });
 
 
-        $(".btn-warning").on('click', function () {
+        /*$(".btn-warning").on('click', function () {
             var $el = $("#file-4");
             if ($el.attr('disabled')) {
                 $el.fileinput('enable');
@@ -179,7 +183,7 @@ Edit File
         });
         $(".btn-info").on('click', function () {
             $("#file-4").fileinput('refresh', {previewClass: 'bg-info'});
-        });
+        });*/
 
     </script>
 

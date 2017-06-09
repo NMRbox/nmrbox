@@ -29,7 +29,8 @@ class FileController extends Controller
      */
     public function index() {
         //ini_set('memory_limit','256M');
-        $all_files = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->get()->sortBy('name');
+        //$all_files = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->get()->sortBy('name');
+        $all_files = File::select('id', 'label', 'slug', 'mime_type', 'size')->get()->sortBy('label');
 
         // all metadata
         $all_search_keywords = SearchKeyword::All();
@@ -81,9 +82,17 @@ class FileController extends Controller
     public function store(Request $request)
     {
         $all_files = Input::file();
-        $filename = $request->input('label');
+        /*$filename = $request->input('label');
+        $file_slug = $request->input('slug');*/
+
+        /* parsing the inputs from form submission */
+        parse_str(urldecode($request->input('data')), $file_keyword_metadata);
+
+        $file_label = $file_keyword_metadata['label'];
+        $file_slug = $file_keyword_metadata['slug'];
+
         foreach( $all_files as $name => $f ) {
-            $newfile = $this->makeFileFromUploadedFile($f, $filename);
+            $newfile = $this->makeFileFromUploadedFile($f, $file_label, $file_slug);
         }
 
         if($newfile == true){
@@ -135,7 +144,8 @@ class FileController extends Controller
     public function edit($id)
     {
         // retrieving file data
-        $file = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->where('id', '=', $id)->get()->first();
+        //$file = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->where('id', '=', $id)->get()->first();
+        $file = File::select('id', 'label', 'slug', 'mime_type', 'size')->where('id', '=', $id)->get()->first();
 
         /* All File Search Keywords */
         $all_search_keywords = SearchKeyword::All();
@@ -176,13 +186,20 @@ class FileController extends Controller
         /* parsing the inputs from form submission */
         parse_str(urldecode($request->input('data')), $file_keyword_metadata);
 
+        /* parsing label and slug */
         $file_label = $file_keyword_metadata['label'];
+        $file_slug = $file_keyword_metadata['slug'];
+
 
         // uploading all the files using file handler
         if($all_files){
             foreach( $all_files as $name => $f ) {
-                $updatefile = $this->replaceFileFromUploadedFile($f, $id, $file_label);
+                $updatefile = $this->replaceFileFromUploadedFile($f, $id, $file_label, $file_slug);
             }
+        } else {
+            /* update the file label only */
+            $file->label = $file_label;
+            $file->save();
         }
 
         /* search keyword mapping */

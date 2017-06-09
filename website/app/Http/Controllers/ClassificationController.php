@@ -73,13 +73,12 @@ class ClassificationController extends Controller
 
         }
         catch (\Exception $e) {
-            /* to-do - need to add lang files */
-            $this->messageBag->add('email', Lang::get('classifications/message.error.create'));
+            /* @to-do - need to add lang files */
+            return redirect()->back()->withError(Lang::get('classifications/message.error.create'));
 
         }
         // Ooops.. something went wrong
-        //return redirect('admin/email')->withSuccess($this->messageBag);
-        return redirect('admin/classification');
+        return redirect()->back()->withSuccess(Lang::get('classifications/message.success.create'));
     }
 
     /**

@@ -304,11 +304,6 @@ class PersonController extends Controller
         echo "</pre>";
         die();*/
 
-        /*foreach ($users as $user){
-
-        }*/
-
-        //json_encode($user);
         return response( json_encode( array( 'users' => $users)), 200 )
             ->header( 'Content-Type', 'application/json' );
     }

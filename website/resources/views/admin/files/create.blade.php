@@ -41,14 +41,31 @@
                     <div class="panel-body">
 
                         <!-- Standar Form -->
-                        <form enctype='multipart/form-data' action="{!! URL::to('admin/files/create') !!}" method="post">
+                        {{--<form enctype='multipart/form-data' action="" method="post">--}}
+                        <form enctype='multipart/form-data' action="" method="post" id="file_upload_form">
                             {!! csrf_field() !!}
-                            <div class="form-group">
+                            {{--<div class="form-group">
                                 <label for="file_name">File label</label>
                                 <input type="text" name="label" id="file_name" placeholder="Enter file label" class="form-control">
                             </div>
                             <div class="form-group">
+                                <label for="file_slug">File slug</label>
+                                <input type="text" name="name" id="file_slug" placeholder="Enter file slug" class="form-control">
+                            </div>
+                            <div class="form-group">
                                 <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="2">
+                            </div>--}}
+
+                            <div class="form-group">
+                                <label for="file_name">File label</label>
+                                <input type="text" name="label" id="file_name" placeholder="Enter file label" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="file_slug">File Slug</label>
+                                <input type="text" name="slug" id="file_slug" placeholder="Enter file slug" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                                <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="1">
                             </div>
                         </form>
                     </div>
@@ -76,8 +93,12 @@
 
         $("#file-1").fileinput({
             uploadUrl: 'create', // you must set a valid URL here else you will get an error
+            /*uploadExtraData: function(previewId, index) {
+                var extra_data = {_token:"{{csrf_token()}}", label:$("input[name='label']").val(), slug:$("input[name='slug']").val()};
+                return extra_data;
+            },*/
             uploadExtraData: function(previewId, index) {
-                var extra_data = {_token:"{{csrf_token()}}", label:$("input[type='text']").val()};
+                var extra_data = {_token:"{{csrf_token()}}", data:$("#file_upload_form").serialize()};
                 return extra_data;
             },
             allowedFileExtensions: ['jpg', 'png', 'gif'],
@@ -92,7 +113,7 @@
             }
         });
 
-        $(".btn-warning").on('click', function () {
+        /*$(".btn-warning").on('click', function () {
             var $el = $("#file-4");
             if ($el.attr('disabled')) {
                 $el.fileinput('enable');
@@ -102,7 +123,7 @@
         });
         $(".btn-info").on('click', function () {
             $("#file-4").fileinput('refresh', {previewClass: 'bg-info'});
-        });
+        });*/
 
     </script>
 

@@ -239,8 +239,9 @@
                                         @endif
                                         <br>
                                         {!! $workshop->location !!}<br>
-                                        <a href="{!! $workshop->url !!}" target="_blank">Program flyer</a> <br>
-                                        register by email to:&nbsp;<a href="mailto:workshop@nmrbox.org">workshop@nmrbox.org</a>
+                                        @if($workshop->url)
+                                        <a href="{!! $workshop->url !!}" target="_blank">Program flyer</a>
+                                        @endif
                                     </p>
                                     {{-- checking whether the user is already registered --}}
                                     <button

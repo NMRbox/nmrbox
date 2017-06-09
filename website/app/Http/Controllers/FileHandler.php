@@ -18,19 +18,23 @@ trait FileHandler {
      * @param  UploadedFile $f, string $name
      * @return \App\File
      */
-    public function makeFileFromUploadedFile(UploadedFile $f, $label) {
+    public function makeFileFromUploadedFile(UploadedFile $f, $label, $url) {
+        /* new file object */
         $newfile = new File();
 
         // parse out file name with and without extension
-        $name = $f->getClientOriginalName();
+        $source = $f->getClientOriginalName();
 
-        /* determining the filename as label and slug */
-        //$slug = pathinfo($name, PATHINFO_FILENAME); // Adam wants to keep file extension with slug
-        $slug = $name;
-        $filename = $filename = ($label == NULL) ? $slug : $label ;
+        /* determining the filename, file_extension, label and slug */
+        $file_name = pathinfo($source, PATHINFO_FILENAME);
+        $file_ext = pathinfo($source, PATHINFO_EXTENSION);
+        $file_label = ($label == NULL) ? $file_name : $label ;
+        $file_slug = $url.'.'.$file_ext;
+        $slug = ($url == NULL) ? $source : $file_slug ;
 
-        $newfile->name = $name;
-        $newfile->label = $filename;
+        /* Saving file object */
+        //$newfile->name = $name;
+        $newfile->label = $file_label;
         $newfile->slug = $slug;
         $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
         $newfile->mime_type = $f->getMimeType();
@@ -47,19 +51,21 @@ trait FileHandler {
      * @param  UploadedFile $f, string $name
      * @return \App\File
      */
-    public function replaceFileFromUploadedFile(UploadedFile $f, $id, $label) {
+    public function replaceFileFromUploadedFile(UploadedFile $f, $id, $label, $url) {
         $newfile = File::where('id', $id)->get()->first();
 
         // parse out file name with and without extension
-        $name = $f->getClientOriginalName();
+        $source = $f->getClientOriginalName();
 
-        /* determining the filename as label and slug */
-        //$slug = pathinfo($name, PATHINFO_FILENAME); // Adam wants to keep file extension with slug
-        $slug = $name;
-        $filename = $filename = ($label == NULL) ? $slug : $label ;
+        /* determining the filename, file_extension, label and slug */
+        $file_name = pathinfo($source, PATHINFO_FILENAME);
+        $file_ext = pathinfo($source, PATHINFO_EXTENSION);
+        $file_label = ($label == NULL) ? $file_name : $label ;
+        $file_slug = $url.'.'.$file_ext;
+        $slug = ($url == NULL) ? $source : $file_slug ;
 
-        $newfile->name = $name;
-        $newfile->label = $filename;
+        //$newfile->name = $name;
+        $newfile->label = $file_label;
         $newfile->slug = $slug;
         $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
         $newfile->mime_type = $f->getMimeType();
@@ -80,9 +86,10 @@ trait FileHandler {
         if (Input::hasFile('image')) {
             $f = Input::file('image');
             $newfile = new File();
-            $newfile->name = $f->getClientOriginalName();
+            $source = $f->getClientOriginalName();
+            $newfile->slug = $source;
             $newfile->bdata = File::binary_sql(base64_encode(file_get_contents($f->getRealPath())));
-            $newfile->label = $newfile->name;
+            $newfile->label = $source;
             $newfile->mime_type = $f->getMimeType();
             $newfile->size = $f->getSize();
             $newfile->person_id = Sentinel::getUser()->id;

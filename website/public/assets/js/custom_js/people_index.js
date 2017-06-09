@@ -125,7 +125,7 @@ $(document).ready(function() {
                             user_data += "<tr>"
                                 + "<td>" + value.id + "</td>"
                                 + "<td>" + value.first_name + '&nbsp;' +value.last_name + "</td>"
-                                + "<td>" + value.email + "<br>" + value.email_institution + "</td>"
+                                + "<td class='user_email'><div class='preferred_email'> " + value.email + "</div><div class='institutional_email hidden'> " + value.email_institution + "</div></td>"
                                 + "</tr>";
                         });
                         user_data += "</tbody></table></div>";
@@ -146,6 +146,21 @@ $(document).ready(function() {
             $('#error_msg').html('No rows selected. Please try again.');
             show_alert('error');
         }
+    });
+
+    /* Change recipient email address based on the selection */
+    $(document).on("change", "#recipient_address", function(e){
+       e.preventDefault();
+       /* selection value */
+       var email_address = $(this).val();
+
+       if(email_address == 'email'){
+           $('.preferred_email').removeClass('hidden');
+           $('.institutional_email').addClass('hidden');
+       } else {
+           $('.preferred_email').addClass('hidden');
+           $('.institutional_email').removeClass('hidden');
+       }
     });
 
     /* populating Email template */
@@ -324,6 +339,16 @@ $(document).ready(function() {
         e.preventDefault();
         var request_input = $("#search_input").val().replace(/,(\s*)/g, "|");
         table.column(0).search("^("+request_input+")$", 1, 0).draw();
+    });
+
+    /* Advance search */
+    $('button#adv_search_reset').on('click', function (e) {
+        e.preventDefault();
+        table
+            .search( '' )
+            .columns().search( '' )
+            .draw();
+
     });
 
 });

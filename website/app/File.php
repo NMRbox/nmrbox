@@ -19,7 +19,7 @@ class File extends NmrModel implements SluggableInterface
     protected $table = 'files';
 
     protected $fillable = [
-        'label'
+        'label',
     ];
 
     protected $sluggable = [
