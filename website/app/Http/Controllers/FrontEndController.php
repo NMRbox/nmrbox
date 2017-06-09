@@ -268,14 +268,9 @@ class FrontEndController extends Controller
             } else {
                 return redirect()->back()->withError(Lang::get('auth/message.login.error'));
             }
-        } catch (UserNotFoundException $e) {
+        } catch (\Illuminate\Database\QueryException $e) {
+            //dd($e);
             return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
-        } catch (UserNotActivatedException $e) {
-            return redirect()->back()->withError(Lang::get('auth/message.account_not_activated'));
-        } catch (UserSuspendedException $e) {
-            return redirect()->back()->withError(Lang::get('auth/message.account_suspended'));
-        } catch (UserBannedException $e) {
-            return redirect()->back()->withError(Lang::get('auth/message.account_banned'));
         }
 
     }
@@ -362,37 +357,45 @@ class FrontEndController extends Controller
      */
     public function updatePersonProfile(Request $request, Person $person)
     {
-        $user = Sentinel::getUser();
-        $person = Person::where('id', $user->id)->get()->first();
+        try {
+            $user = Sentinel::getUser();
+            $person = Person::where('id', $user->id)->get()->first();
 
-        $person->update($request->except(['institution', 'institution_type']));
+            $person->update($request->except(['institution', 'institution_type']));
 
-        $inputInstitution = Input::get('institution');
-        $inputInstitutionType = Input::get('institution_type');
+            $inputInstitution = Input::get('institution');
+            $inputInstitutionType = Input::get('institution_type');
 
-        $existing_institution = Institution::where('name', $inputInstitution)->get();
+            $existing_institution = Institution::where('name', $inputInstitution)->get();
 
-        if( $existing_institution->isEmpty() ) {
-            // then make a new institution like normal
-            $institution = new Institution(array(
-                'name' => Input::get('institution'),
-                'institution_type' => Institution::institution_types[Input::get('institution_type')]
-            ));
+            if( $existing_institution->isEmpty() ) {
+                // then make a new institution like normal
+                $institution = new Institution(array(
+                    'name' => Input::get('institution'),
+                    'institution_type' => Institution::institution_types[Input::get('institution_type')]
+                ));
 
-            $institution->save();
-            $person->institution()->associate($institution);
+                $institution->save();
+                $person->institution()->associate($institution);
+            }
+            else {
+                // use the existing institution
+                $existing_institution = $existing_institution->first();
+                $person->institution()->associate($existing_institution);
+                $existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
+                $existing_institution->save();
+            }
+
+            $person->save();
+
+            return redirect()->back()->withSuccess(Lang::get('users/message.success.update_profile'));
+        } catch (\Illuminate\Database\QueryException $e) {
+            //dd($e);
+            return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
         }
-        else {
-            // use the existing institution
-            $existing_institution = $existing_institution->first();
-            $person->institution()->associate($existing_institution);
-            $existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
-            $existing_institution->save();
-        }
 
-        $person->save();
-
-        return redirect()->back()->withSuccess(Lang::get('users/message.success.update_profile'));
+        // Ooops.. something went wrong
+        return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
     }
 
     /**

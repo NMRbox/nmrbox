@@ -157,7 +157,7 @@ class PersonController extends Controller
 
             return redirect("admin/people");
         }
-        catch (UserExistsException $e) {
+        catch (\Illuminate\Database\QueryException $e) {
             $this->messageBag->add('email', Lang::get('auth/message.account_already_exists'));
         }
 
@@ -230,39 +230,47 @@ class PersonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $person = Person::where('id', $id)->first();
-        $person->update($request->except(['institution', 'institution_type']));
+        try {
+            $person = Person::where('id', $id)->first();
+            $person->update($request->except(['institution', 'institution_type']));
 
 
-        $inputInstitution = Input::get('institution');
-        $inputInstitutionType = Input::get('institution_type');
+            $inputInstitution = Input::get('institution');
+            $inputInstitutionType = Input::get('institution_type');
 
-        $existing_institution = Institution::where('name', $inputInstitution)->get();
+            $existing_institution = Institution::where('name', $inputInstitution)->get();
 
-        if( $existing_institution->isEmpty() ) {
-            // then make a new institution like normal
-            $institution = new Institution(array(
-                'name' => Input::get('institution'),
-                'institution_type' => Institution::institution_types[Input::get('institution_type')]
-            ));
+            if( $existing_institution->isEmpty() ) {
+                // then make a new institution like normal
+                $institution = new Institution(array(
+                    'name' => Input::get('institution'),
+                    'institution_type' => Institution::institution_types[Input::get('institution_type')]
+                ));
 
-            $institution->save();
-            $person->institution()->associate($institution);
+                $institution->save();
+                $person->institution()->associate($institution);
+            }
+            else {
+                // use the existing institution
+                $existing_institution = $existing_institution->first();
+                $person->institution()->associate($existing_institution);
+                $existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
+                $existing_institution->save();
+            }
+
+            if($person->save()){
+                return redirect()->back()->withSuccess(Lang::get('users/message.success.update_profile'));
+
+            }
+
+            return Redirect::back()->withInput()->withErrors($this->messageBag);
+        } catch (\Illuminate\Database\QueryException $e) {
+            //dd($e);
+            return redirect()->back()->withError(Lang::get('users/message.error.update'));
         }
-        else {
-            // use the existing institution
-            $existing_institution = $existing_institution->first();
-            $person->institution()->associate($existing_institution);
-            $existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
-            $existing_institution->save();
-        }
 
-        if($person->save()){
-            return redirect()->back()->withSuccess(Lang::get('users/message.success.update_profile'));
-
-        }
-
-        return Redirect::back()->withInput()->withErrors($this->messageBag);
+        // Ooops.. something went wrong
+        return redirect()->back()->withError(Lang::get('users/message.error.update'));
 
     }
 

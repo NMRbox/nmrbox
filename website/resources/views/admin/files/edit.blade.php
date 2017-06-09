@@ -101,11 +101,11 @@ Edit File
                         <hr>
                         <div class="form-group">
                             <label for="file_name">File label</label>
-                            <input type="text" name="label" id="file_name" placeholder="Enter file label" class="form-control" value="{!! $file->label !!}">
+                            <input type="text" name="label" id="file_name" placeholder="Enter file label. e.g. Document" class="form-control" value="{!! $file->label !!}">
                         </div>
                         <div class="form-group">
                             <label for="file_slug">File Slug</label>
-                            <input type="text" name="slug" id="file_slug" placeholder="Enter file slug" class="form-control" value="{!! $file->slug !!}">
+                            <input type="text" name="slug" id="file_slug" placeholder="Enter file slug. e.g. document (excluding file extension)" class="form-control" value="{!! $file->slug !!}">
                         </div>
                         <div class="form-group">
                             <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="1">

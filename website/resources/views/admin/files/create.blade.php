@@ -44,25 +44,13 @@
                         {{--<form enctype='multipart/form-data' action="" method="post">--}}
                         <form enctype='multipart/form-data' action="" method="post" id="file_upload_form">
                             {!! csrf_field() !!}
-                            {{--<div class="form-group">
-                                <label for="file_name">File label</label>
-                                <input type="text" name="label" id="file_name" placeholder="Enter file label" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="file_slug">File slug</label>
-                                <input type="text" name="name" id="file_slug" placeholder="Enter file slug" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="2">
-                            </div>--}}
-
                             <div class="form-group">
                                 <label for="file_name">File label</label>
-                                <input type="text" name="label" id="file_name" placeholder="Enter file label" class="form-control" value="">
+                                <input type="text" name="label" id="file_name" placeholder="Enter file label. e.g. Document" class="form-control" value="">
                             </div>
                             <div class="form-group">
                                 <label for="file_slug">File Slug</label>
-                                <input type="text" name="slug" id="file_slug" placeholder="Enter file slug" class="form-control" value="">
+                                <input type="text" name="slug" id="file_slug" placeholder="Enter file slug. e.g. document (excluding file extension)" class="form-control" value="">
                             </div>
                             <div class="form-group">
                                 <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="1">
