@@ -47,16 +47,21 @@ class FileController extends Controller
         if($file_name == 'create'){
             return view('admin.files.create',compact(''));
         } else {
-            $file = File::where('slug', 'like', $file_name)->first();
+            try{
+                $file = File::where('slug', 'like', $file_name)->first();
 
-            $headers = array('Content-type' => $file->mime_type, 'Content-length' => $file->size);
+                $headers = array('Content-type' => $file->mime_type, 'Content-length' => $file->size);
 
-            $data = $file->bdata;
-            $unescape = $file->binary_unsql($data);
-            $un64 = base64_decode($unescape);
+                $data = $file->bdata;
+                $unescape = $file->binary_unsql($data);
+                $un64 = base64_decode($unescape);
 
 
-            return response($un64, 200, $headers);
+                return response($un64, 200, $headers);
+            } catch (\Exception $e) {
+                abort(404);
+            }
+
         }
     }
 
