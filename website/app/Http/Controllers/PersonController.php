@@ -553,7 +553,7 @@ class PersonController extends Controller
             /* Saving into DB */
             foreach ($users as $user){
                 $person = Person::find($user['id']);
-                $person->classification()->sync($classifications, false);
+                $person->classification()->sync($classifications);
             }
         }
 
