@@ -344,10 +344,17 @@ $(document).ready(function() {
     /* Advance search */
     $('button#adv_search_reset').on('click', function (e) {
         e.preventDefault();
+        // resetting search-by-id form input field
+        $('.form-inline').find("input[type=text], textarea").val("");
+        // resetting datatables column based filter search input
+        $('#vm-table thead input').val('').change();
+        // resetting datatable filter result
         table
             .search( '' )
             .columns().search( '' )
             .draw();
+        //clearing the filter search
+        table.fnFilterClear();
 
     });
 
