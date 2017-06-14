@@ -91,23 +91,27 @@ Add New Page
                     </h4>
 
                 </div>
-                <div class="modal-body">
+                <div class="modal-body row">
                     <form action="insert_files" method="post" id="file_form">
                         <table class="table" id="table table-bordered">
                             <thead>
                             <tr class="filters">
+                                <th>&nbsp;</th>
                                 <th>Label</th>
-                                <th>Type</th>
+                                <th>Slug/URL</th>
+                                {{--<th>Slug/URL</th>--}}
                             </tr>
                             </thead>
                             <tbody>
                             @forelse ($all_files as $file)
                                 <tr>
-                                    <td class="col-md-9">
+                                    <td class="col-md-1 text-center">
                                         <input type="checkbox" name="files" value="{!! URL::to('files/' . $file->slug) !!}" data-name="{!! $file->label !!}" class="modal_files form-group">&nbsp;&nbsp;
-                                        {!! $file->label !!}
+
                                     </td>
-                                    <td class="col-md-3">{!! $file->mime_type !!}</td>
+                                    <td class="col-md-6">{!! $file->label !!}</td>
+                                    <td class="col-md-5">{!! $file->slug !!}</td>
+                                    {{--<td class="col-md-3">{!! $file->mime_type !!}</td>--}}
                                 </tr>
                             @empty
                                 <tr>
@@ -115,7 +119,7 @@ Add New Page
                                 </tr>
                             @endforelse
                             <tr>
-                                <td class="text-center" colspan="2">
+                                <td class="text-center" colspan="3">
                                     <button type="button" class="btn btn-primary btn-lg col-md-3" value="Insert" id="insert_files">Insert Files</button>
                                 </td>
                             </tr>

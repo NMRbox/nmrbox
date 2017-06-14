@@ -185,7 +185,7 @@ class PageController extends Controller {
 
             // All files information
             //$all_files = File::select('id', 'name','label', 'slug', 'mime_type', 'size')->get()->sortBy('name');
-            $all_files = File::select('id', 'label', 'slug', 'mime_type', 'size')->get()->sortBy('label');
+            $all_files = File::select('id', 'label', 'slug', 'mime_type', 'size')->orderBy('label', 'ASC')->get();
 
         } catch (\Exception $e) {
 	        // Prepare the error message

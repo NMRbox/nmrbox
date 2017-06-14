@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Page;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -166,6 +167,19 @@ class FileController extends Controller
             }
         }
 
+        /* test
+        $old_slug = 'benefits-users2.pdf';
+        $file_slug = 'benefits-users3.pdf';
+        $page = Page::where('content', 'LIKE', '%'.$old_slug.'%')->get()->first();
+        //dd($page);
+
+        $str_rpl = str_replace($old_slug, $file_slug, $page->content);
+        echo "<pre>";
+        print_r($str_rpl);
+        echo "</pre>";
+        die();
+        /* eof test */
+
         // file view
         return view('admin.files.edit',compact('file','all_search_keywords', 'file_search_keywords', 'search_keywords_map'));
     }
@@ -182,6 +196,9 @@ class FileController extends Controller
         // Retrieving the information for requested file
         $file = File::where('id', $id)->get()->first();
 
+        /* old file data */
+        $old_slug = $file->slug;
+
         // all the files that are included to upload
         $all_files = Input::file();
 
@@ -192,6 +209,16 @@ class FileController extends Controller
         $file_label = $file_keyword_metadata['label'];
         $file_slug = $file_keyword_metadata['slug'];
 
+        /* test */
+
+        /*$page = Page::where('content', 'LIKE', '%'.$old_slug.'%')->get()->first();
+
+        $str_rpl = str_replace($old_slug, $file_slug, $page->content);
+        echo "<pre>";
+        print_r($str_rpl);
+        echo "</pre>";
+        die();*/
+        /* test */
 
         // uploading all the files using file handler
         if($all_files){
@@ -226,6 +253,13 @@ class FileController extends Controller
             }
         }
 
+        /* changing the file slug across all the linked pages */
+        $pages = Page::where('content', 'LIKE', '%'.$old_slug.'%')->get();
+
+        foreach ($pages as $page){
+            $page->content = str_replace($old_slug, $file_slug, $page->content);
+            $page->save();
+        }
 
         // returning back to the page
         return response( json_encode( array( 'message' => 'Successfully uploaded. ' ) ), 200 )

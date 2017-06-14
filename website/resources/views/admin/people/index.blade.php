@@ -90,7 +90,7 @@ People Index
                             <a href="#" data-toggle="modal" data-target="#email_modal" class="btn btn-sm btn-primary" id="email_utility"><span class="glyphicon glyphicon-envelope"></span> Send Email</a>
                             <a href="#" data-toggle="modal" data-target="#user_classification_modal" class="btn btn-sm btn-primary" id="user_classification"><span class="glyphicon glyphicon-user"></span> Assign Classification</a>
                             <a href="#" data-target="#adv_search_box" class="btn btn-sm btn-primary" id="adv_search_box_button"><span class="glyphicon glyphicon-search"></span> Search by ID</a>
-                            <button class="btn btn-sm btn-primary" id="adv_search_reset">Reset Filter</button>
+                            <button class="btn btn-sm btn-primary" id="adv_search_reset">Clear Filter</button>
                             <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
                         </div>
                         <br>
