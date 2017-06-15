@@ -3,7 +3,7 @@
 function validate_ldap_password($name,$password)
 {
 	#this stuff should go in config file
-	$host ='nmrbox-buildserver.cam.uchc.edu';
+	$host ='buildserver.nmrbox.org';
 	$port = 5050;
 
 	$addr = gethostbyname($host);
@@ -34,7 +34,7 @@ function validate_ldap_password($name,$password)
 function set_ldap_password($name,$password)
 {
 	#this stuff should go in config file
-	$host ='nmrbox-buildserver.cam.uchc.edu';
+	$host ='buildserver.nmrbox.org';
 	$port = 5050;
 
 	$addr = gethostbyname($host);
