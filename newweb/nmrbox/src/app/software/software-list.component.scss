@@ -1,0 +1,102 @@
+
+/*
+.sw-filters-container {
+  position: relative;
+  display: block;
+  width: 100%;
+
+  .sw-filters {
+    width: 90%;
+    max-width: 900px;
+    margin: 0px auto;
+
+    > a {
+      padding: 5px 0px;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    > a:hover {
+      cursor: pointer;
+    }
+
+    md-select {
+      margin-top: 5px;
+    }
+
+    #software-type {
+      margin-left: 150px;
+    }
+  }
+
+  .sw-menu-wrapper {
+    position: relative;
+    width: 100%;
+    display: block;
+    background-color: #f7f7f7;
+    margin-top: 0px;
+  }
+
+  swiper {
+    width: 900px;
+    height: 70px;
+    background-color: transparent; 
+    margin: 0px auto;   
+
+    .swiper-wrapper {
+        .swiper-slide {
+            width: 120px;
+            height: 40px;
+            margin-top: 15px;
+        }
+        a {
+          position: relative;
+          display: inline-block;
+          width: 120px;
+          height: 40px;
+          background-size: 240px 40px;
+          background-position: -115px 0px;
+          overflow: hidden;
+        }
+        a:hover, .selected a {
+          background-position: 2px 0px;
+          cursor: pointer;
+        }
+    }
+  }
+}
+*/
+
+md-grid-list {
+  max-width: 940px;
+  width: 92%;
+  margin: 10px auto;
+  padding: 10px;
+
+  .sw-card {
+    min-height: 200px;
+    margin: 5px;
+    padding-right: 20px;
+
+    .mat-card-title {
+      font-weight: bold;
+    }
+    .mat-card-content {
+      min-height: 105px;
+      font-weight: 400;
+    }
+    ul.icon-list {
+      height: 65px;
+      bottom: 10px;
+      position: absolute;
+    }
+  }
+}
+
+.mat-grid-tile:hover{
+    cursor: pointer;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12) !important;
+}
+
+.selected-test {
+    background-color: yellow;
+}

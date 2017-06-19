@@ -1,0 +1,44 @@
+<div class="software-details-wrapper">
+  <md-toolbar class="toolbar-transparent">
+    <div class="menu-wrapper">
+      <button (click)="goBack()">
+        <svg width="15px" height="20px" viewBox="0 0 50 80" xml:space="preserve">
+          <polyline fill="none" stroke="#313131" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="
+        45.63,75.8 0.375,38.087 45.63,0.375 "/>
+        </svg> 
+      </button>
+      <span class="page-title">Software Package Details</span>
+    </div>
+  </md-toolbar>
+  <div class="software-details" *ngIf="software">
+    <h1>{{software.short_title}}</h1>
+    <section>
+      <h3>Synopsis</h3>
+      <p>{{software.synopsis}}</p>
+    </section>
+    <section id="sw-detail-description">
+      <h3>Description</h3>
+      <p>{{software.description}}</p>
+    </section>
+    <section>
+      <h3>URL</h3>
+      <p><a href="{{software.url}}" target="_blank">{{software.url}}</a></p>
+    </section>
+    <section class="versions-container col-2">
+      <div>
+        <h3><strong>NMR</strong>box Version</h3>
+        <p>{{software.nmrbox_version}}</p>
+      </div>
+      <div>
+        <h3><strong>Software</strong> Version</h3>
+        <p>{{software.software_version}}</p>
+      </div>
+    </section>
+    <section>
+      <h3>Software Types</h3>
+      <ul>
+        <li *ngFor="let type of software.software_types" class="sw-type-icon-large sw-type-icon-{{type}}"></li>
+      </ul>
+    </section>
+  </div>
+</div>

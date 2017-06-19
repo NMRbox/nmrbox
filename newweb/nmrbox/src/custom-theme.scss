@@ -1,0 +1,667 @@
+/*  Material custom theme
+    Ref: https://material.angular.io/guide/theming
+*/
+
+@import '~@angular/material/_theming.scss';
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:200,300,400,500,600,700,800');
+
+/*
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+*/
+@include mat-core();
+
+/*
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+*/
+$nmrbox-blue: #047E9B;
+$nmrbox-blue-dark: #3A4C51; //#157e99;
+$nmrbox-blue-gray: #a4bbc1;
+$nmrbox-blue-med: #48b0e3;
+$nmrbox-blue-med-light: #cedfe3;
+$nmrbox-blue-light: #f4f9fa;
+$nmrbox-blue-bright: #48d7f9;
+$nmrbox-gray-dark: #313131;
+$nmrbox-gray-med: #777777;
+$nmrbox-gray-light: #f4f4f4;
+$nmrbox-orange: #fc9827;
+
+$nmrbox-app-primary: mat-palette($mat-grey);
+$nmrbox-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$nmrbox-app-warn:    mat-palette($mat-red);
+
+/* Create the theme object (a Sass map containing all of the palettes).*/
+$nmrbox-app-theme: mat-light-theme($nmrbox-app-primary, $nmrbox-app-accent, $nmrbox-app-warn);
+
+/*
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+*/
+@include angular-material-theme($nmrbox-app-theme);
+
+body {
+    margin: 0px;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, p, a, div {
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight: 400;
+  color: $nmrbox-gray-med;
+}
+h1 {
+    margin-top: 0px;
+    font-weight: 200;
+}
+h2 {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 18px;
+}
+p, div {
+    font-size: 14px;
+    line-height: 1.5em;
+    color: $nmrbox-gray-dark;
+}
+a {
+    color: $nmrbox-blue-med;
+    text-decoration: none;
+}
+a:hover {
+    color: $nmrbox-blue-bright;
+    text-decoration: none;
+}
+
+.spacer {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+
+.divider {
+    width: 100%;
+    border-bottom: 1px solid $nmrbox-gray-dark;
+}
+
+.divider-dashed {
+    border-bottom: 1px dashed $nmrbox-gray-dark;
+}
+
+.blue {
+    color: $nmrbox-blue;
+}
+.dark-gray {
+    color: $nmrbox-gray-dark;
+}
+.light-gray {
+    color: $nmrbox-gray-light;
+}
+.blue-bg {
+    background-color: $nmrbox-blue;
+    color: #fff;
+    h1, h2, h3, p, li {
+        color: #fff;
+    }
+}
+.blue-med-light-bg {
+    background-color: $nmrbox-blue-med-light;
+}
+.blue-light-bg {
+    background-color: $nmrbox-blue-light;
+}
+.blue-dark-bg {
+    background-color: $nmrbox-blue-dark;
+    color: #fff;
+    h1, h2, h3, p {
+        color: #fff;
+    }
+}
+.white-bg {
+    background-color: #fff;
+    color: $nmrbox-gray-dark;
+    h1, h2, h3, p {
+        color: $nmrbox-gray-dark;
+    }
+}
+.gray-bg {
+    background-color: $nmrbox-gray-light;
+    color: $nmrbox-gray-dark;
+    h1, h2, h3, p {
+        color: $nmrbox-gray-dark;
+    }
+}
+.orange-bg {
+    background-color: $nmrbox-orange;
+    color: #fff;
+    h1, h2, h3, p {
+        color: #fff;
+    }
+}
+
+/* Custom layout */
+.col-2 {
+    div {
+        display: inline-block;
+        width: 49.5%;
+    }
+}
+
+/* LOGO & ICONS */
+[class*="nmrbox-logo-large"], [class*="sw-type-icon-"], [class*="rp-icon-"] {
+    position: relative;
+    display: inline-block;
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+/* Logo */
+[class*="nmrbox-logo-large"] {
+    width: 360px;
+    height: 60px;
+    background-size: 720px 120px;
+}
+[class*="nmrbox-logo-small"] {
+   /* width: 120px;
+    height: 40px;*/
+    position: relative;
+    height: 18px;
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    background-size: 240px 40px;
+    top: 4px;
+    left: 10px;
+}
+.nmrbox-logo-small-dark, .nmrbox-logo-large-dark {
+    background-image: url('./assets/nmrbox-logo-dark-240x40.svg');
+}
+.nmrbox-logo-small-light, .nmrbox-logo-large-light {
+    background-image: url('./assets/nmrbox-logo-light-240x40.svg');
+}
+.nmrbox-logo-small-blue, .nmrbox-logo-large-blue {
+    background-image: url('./assets/nmrbox-logo-dark-240x40.svg');
+}
+
+/* Icons */
+
+.icon-search {
+    position: absolute;
+    display: block;
+    top: 0px;
+    right: -27px;
+    width: 27px;
+    height: 27px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    background-size: 27px 27px;
+    background-image: url('./assets/icon-search.svg');
+    opacity: 0.3;
+}
+
+ul.icon-list {
+    list-style: none;
+    padding: 0px;
+}
+
+.sw-type-icon-small {
+    width: 75px;
+    height: 13px;
+    background-size: 198px 33px;
+    background-position: 0px 0px;
+    margin-bottom: 4px;
+}
+
+.sw-type-icon-med {
+    width: 120px;
+    height: 40px;
+    background-size: 240px 40px;
+    background-position: 0px 0px;
+}
+
+.sw-type-icon-large {
+    /*width: 150px;*/
+    width: 148px;
+    height: 50px;
+    background-size: 300px 50px;
+    background-position: 0px 0px;
+}
+.rp-icon-large {  /* 506 x 110*/
+    width: 240px;
+    height: 80px;
+    background-size: 480px 80px;
+    background-position: 0px 10px;
+}
+.co-icon-med {
+    width: 180px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 360px 60px;
+    background-position: 0px 5px;
+}
+.co-icon-large {
+    width: 240px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-size: 480px 80px;
+    background-position: 0px 10px;
+}
+.team-icon-large {
+    width: 240px;
+    height: 80px;
+    background-size: 480px 80px;
+    background-position: 0px 10px;
+}
+
+.co-icon-support {
+    background-image: url('./assets/co-icon-support-240x40.svg');
+}
+.co-icon-forum {
+    background-image: url('./assets/co-icon-forum-240x40.svg');
+}
+.co-icon-blog {
+    background-image: url('./assets/co-icon-blog-240x40.svg');
+}
+.co-icon-events {
+    background-image: url('./assets/co-icon-events-240x40.svg');
+}
+
+.team-icon-about {
+    background-image: url('./assets/team-icon-about-240x40.svg');
+}
+.team-icon-integral {
+    background-image: url('./assets/team-icon-integral-240x40.svg');
+}
+.team-icon-leadership {
+    background-image: url('./assets/team-icon-leadership-240x40.svg');
+}
+.team-icon-research {
+    background-image: url('./assets/team-icon-research-240x40.svg');
+}
+
+.sw-type-icon-spectral {
+    background-image: url('./assets/sw-icon-spectral-240x40.svg');
+}
+.sw-type-icon-assignment {
+    background-image: url('./assets/sw-icon-assignment-240x40.svg');
+}
+.sw-type-icon-relaxation {
+    background-image: url('./assets/sw-icon-relaxation-240x40.svg');
+}
+.sw-type-icon-chemical-shift {
+    background-image: url('./assets/sw-icon-chemical-240x40.svg');
+}
+.sw-type-icon-molecular-modeling {
+    background-image: url('./assets/sw-icon-molecular-240x40.svg');
+}
+.sw-type-icon-structure {
+    background-image: url('./assets/sw-icon-structure-240x40.svg');
+}
+.sw-type-icon-rdc, .sw-type-icon-residual-dipole-coupling {
+    background-image: url('./assets/sw-icon-rdc-240x40.svg');
+}
+.rp-icon-metabolmics {
+    background-image: url('./assets/rp-icon-metabolomics-240x40.svg');
+}
+.rp-icon-protein-dynamics {
+    background-image: url('./assets/rp-icon-protein-dynamics-240x40.svg');
+}
+.rp-icon-protein-structure {
+    background-image: url('./assets/rp-icon-protein-structure-240x40.svg');
+}
+.rp-icon-intrinsically {
+    background-image: url('./assets/rp-icon-intrinsically-240x40.svg');
+}
+
+/*** MATERIAL CUSTOM STYLES ***/
+
+.mat-app-background {
+    background: #fff;
+}
+/* Material Toolbar */
+md-toolbar {
+    .page-title {
+        line-height: 1em;
+        font-size: 18px;
+        font-weight: 200;
+        color: #919191;
+        margin-left: 10px;
+    }
+}
+md-toolbar.toolbar-transparent {
+    background-color:$nmrbox-gray-light;
+}
+md-toolbar, .mat-tab-label, .mat-card {
+  font-family: 'Libre Franklin', sans-serif;
+}
+.mat-toolbar .mat-toolbar-row, .mat-toolbar.mat-primary[_ngcontent-c0] {
+  height: 50px !important;
+  min-height: 50px !important;
+}
+
+.mat-button:hover .mat-button-focus-overlay, .mat-button:hover .mat-button-ripple:hover {
+    background-color: transparent;
+}
+
+/* Material Grid List */
+.mat-grid-list {
+    margin-left: 0px; /* to offset tile padding */
+}
+
+.mat-grid-tile.tile-dashed, .mat-grid-tile.tile-dashed-row {
+    border-color: $nmrbox-gray-dark;
+    border-top: 1px dashed;
+    border-right: 1px dashed;
+    border-bottom: 1px dashed;
+    background-color: transparent;
+}
+.mat-grid-tile.tile-dashed-row, .tile-dashed:nth-of-type(3), .tile-dashed:nth-of-type(6), .tile-dashed:nth-of-type(9) , .tile-dashed:nth-of-type(12), .tile-dashed:nth-of-type(15), .tile-dashed:nth-of-type(18) {
+    border-right: 0px;
+}
+.mat-grid-tile.tile-dashed-row {
+    border-top: 0px;
+}
+
+.mat-grid-tile.tile-solid {
+    background-color: transparent;
+}
+.tile-transparent .mat-card {
+    background-color: transparent;
+}
+
+/* Material Card */
+.mat-card {
+    padding: 10px !important;
+}
+.mat-card:not([class*="mat-elevation-z"]) {
+    box-shadow: none !important;
+}
+.mat-card-header-text {
+    margin-left: 0px !important;
+}
+.mat-card-title {
+    font-weight: bold;
+}
+md-grid-tile .mat-card-image {
+    margin: 0 0px 5px 0px !important;
+    width: 100% !important;
+}
+
+md-select {
+    .mat-select-placeholder {
+        font-size: 14px !important;
+    }
+    .mat-select-underline, .mat-select-arrow {
+        display: none;
+    }
+}
+.mat-input-wrapper {
+    margin: 0px !important;
+}
+
+/* Material Tabs */
+.mat-tab-header {
+    border: 0px;
+}
+.mat-ink-bar {
+    display: none;
+}
+
+.mat-tab-labels {
+  width: 910px !important;
+  margin: auto !important;
+}
+
+.mat-tab-label {
+    color: transparent !important;
+    padding: 0px 0px !important;
+    display: inline-block;
+    margin-right: 30px;
+    background-color: transparent !important;
+    width: 130px;
+    min-width: 130px !important;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 360px 60px;
+    background-position: -180px 5px;
+    opacity: 1.0;
+}
+.mat-tab-label-active {
+    background-position: 0px 5px;
+    border: 0px;
+}
+
+community-list {
+    .mat-tab-label:nth-of-type(1) {
+        background-image: url('./assets/co-icon-support-240x40.svg');
+    }
+    .mat-tab-label:nth-of-type(2) {
+        background-image: url('./assets/co-icon-blog-240x40.svg');
+    }
+    .mat-tab-label:nth-of-type(3) {
+        background-image: url('./assets/co-icon-events-240x40.svg');
+    }
+    .mat-tab-label:nth-of-type(4) {
+        background-image: url('./assets/co-icon-forum-240x40.svg');
+    }
+    md-tab-body {
+        background-image: url('/assets/bg-graphics/bg-community-support.png');
+        background-repeat: no-repeat;
+        background-size: 95%;
+        background-position: 0px -300px;
+    }
+}
+team-list {
+    .mat-tab-label {
+        background-position: 0px 5px;
+    }
+    .mat-tab-label-active {
+        background-position: -180px 5px;
+    }
+    .mat-tab-label:nth-of-type(1) {
+        background-image: url('./assets/team-icon-leadership-240x40.svg');
+    }
+    .mat-tab-label:nth-of-type(2) {
+        background-image: url('./assets/team-icon-research-240x40.svg');
+    }
+    .mat-tab-label:nth-of-type(3) {
+        background-image: url('./assets/team-icon-integral-240x40.svg');
+    }
+    .mat-tab-label:nth-of-type(4) {
+        background-image: url('./assets/team-icon-about-240x40.svg');
+    }
+
+    md-tab-body {
+        background-image: url('/assets/bg-graphics/bg-graphic-team.png');
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-position: 0px -300px;
+    }
+}
+
+/* Misc */
+
+.hidden {
+    display: none !important;
+}
+.section-banner {
+    position: relative;
+    display: block;
+    height: 125px;
+    width: 1000px;
+    overflow: none;
+    background-size: 1000px 125px;
+    background-repeat: no-repeat;
+    left: 50%;
+    margin-left: -600px;
+    z-index: 1;
+}
+.section-banner-bg {
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 125px;
+    z-index: 0;
+}
+.section-banner-software {
+    background-image: url('./assets/section-banners/software-banner.png');
+}
+.section-banner-community {
+    background-image: url('./assets/section-banners/community-banner.png');
+}
+.section-banner-team {
+    background-image: url('./assets/section-banners/team-banner.png');
+}
+
+.section-submenu {
+    position: relative;
+    display: block;
+    height: 60px;
+    width: 100%;
+}
+
+/* Swiper */
+.swiper-container {
+    z-index: 2;
+}
+.swiper-pagination-blue {
+    .swiper-pagination-bullet, .swiper-pagination-bullet-active {
+        background: $nmrbox-blue-dark;
+    }
+}
+
+/* Filtering UI */
+#st-select .mat-select-arrow {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+#rp-select, #st-select, #sw-select, #all-software {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+a#all-software {
+  color: rgba(0, 0, 0, 0.38);
+}
+#st-select, #sw-select, #all-software, #search {
+  margin-left: 25px;
+}
+
+.sw-filters-container {
+  position: relative;
+  display: block;
+  width: 100%;
+
+  .sw-filters {
+    width: 90%;
+    max-width: 900px;
+    margin: 0px auto;
+
+    > a {
+      padding: 5px 0px;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    > a:hover {
+      cursor: pointer;
+    }
+
+    md-select {
+      margin-top: 5px;
+    }
+
+    #software-type {
+      margin-left: 150px;
+    }
+  }
+
+  .sw-menu-wrapper {
+    position: relative;
+    width: 100%;
+    display: block;
+    background-color: #f7f7f7;
+    margin-top: 0px;
+  }
+
+  swiper {
+    width: 900px;
+    height: 70px;
+    background-color: transparent; 
+    margin: 0px auto;   
+
+    .swiper-wrapper {
+        .swiper-slide {
+            width: 120px;
+            height: 40px;
+            margin-top: 15px;
+        }
+        a {
+          position: relative;
+          display: inline-block;
+          width: 120px;
+          height: 40px;
+          background-size: 240px 40px;
+          background-position: -115px 0px;
+          overflow: hidden;
+        }
+        a:hover, .selected a {
+          background-position: 2px 0px;
+          cursor: pointer;
+        }
+    }
+  }
+}
+
+.sw-filters-search-only #search {
+  margin-left: 5px;
+  margin-top: 8px;
+}
+
+/* TABS - main container (Community & Team) */
+.tab-group-container {
+  /*width: 920px;*/
+  width: 100%;
+  margin: 0px auto;
+
+  .grid-outer-wrapper {
+    width: 100%;
+    padding: 10px 0px;
+  }
+
+  .grid-content-wrapper {
+    width: 940px;
+    margin: 0px auto;
+
+    h2, h3 {
+      padding-bottom: 0px;
+      margin-bottom: 0px;
+      margin-left: 15px;
+      line-height: 1em;
+      font-weight: 200px;
+    }
+
+    p {
+      color: #313131;
+    }
+  }
+  md-grid-list.workflow-list {
+      margin-left: -15px;
+  }
+}
+
+.section-submenu {
+  position: absolute;
+  width: 100%;
+  height: 48px;
+}

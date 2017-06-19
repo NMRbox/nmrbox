@@ -1,0 +1,44 @@
+<div class="section-banner section-banner-software"></div>
+<div class="section-banner-bg gray-bg"></div>
+<div class="sw-filters-container">
+  <div class="sw-filters">
+    <md-select id="rp-select" placeholder="Research problem" ></md-select>
+    <md-select id="st-select" placeholder="Software type" (click)="swFiltersOpen = !swFiltersOpen"></md-select>
+    <a id="all-software" (click)="getSoftwareList(); $event.stopPropagation(); onSelect(null)">All Software</a>
+    <md-input-container id="search">
+      <input mdInput #searchBox id="search-box" (keyup)="searchSoftware(searchBox.value)" placeholder="search software" />
+      <span class="icon-search"></span>
+    </md-input-container>
+  </div>
+  
+  <div id="software-types-menu" class="sw-menu-wrapper my-fader" [swFiltersOpen]="!swFiltersOpen">
+    <swiper [config]="config">
+        <div class="swiper-wrapper">
+          <div *ngFor="let swt of swtList" class="swiper-slide" [class.selected]="swt.name === filterName" >
+            <a id="{{swt.id}}" class="sw-type-icon-med sw-type-icon-{{swt.name}}" (click)="filterSoftwareType(swt.name, 'swt'); $event.stopPropagation(); onSelect(swt)"></a>
+          </div>
+        </div>
+        <div class="swiper-button-next arrow-right swiper-button-white"></div>
+        <div class="swiper-button-prev arrow-left swiper-button-white"></div>
+    </swiper>
+  </div>
+</div>
+
+
+<md-grid-list class="software-list" cols="3" rowHeight="250px">
+  <md-grid-tile class="tile-dashed" *ngFor="let software of softwareList" (click)="gotoDetail(software); $event.stopPropagation()">
+    <md-card class="sw-card">
+      <md-card-header>
+        <md-card-title>{{software.name}}</md-card-title>
+      </md-card-header>
+      <md-card-content>
+        <p>
+          {{software.synopsis}}
+        </p>
+      </md-card-content>
+      <ul class="icon-list">
+        <li *ngFor="let type of software.software_types" class="sw-type-icon-small sw-type-icon-{{type}}"></li>
+      </ul>
+    </md-card>
+  </md-grid-tile>
+</md-grid-list>

@@ -1,0 +1,243 @@
+<div class="section-banner section-banner-community"></div>
+<div class="section-banner-bg gray-bg"></div>
+
+<div class="section-submenu section-submenu-community blue-bg"></div>
+<div class="tab-group-container">
+
+<md-tab-group (selectedIndexChange)="selectedIndexChange($event)" [selectedIndex]="selectedIndex">
+
+  <md-tab id="com-support" label="Support" class="co-sub-icon co-icon-med co-icon-support">
+    
+  <div class="sw-filters-container">
+      <div class="sw-filters">
+        <md-select id="rp-select" placeholder="Research problem"></md-select>
+        <md-select id="st-select" class="menu-open" placeholder="Software type"></md-select>
+        <md-select id="sw-select" class="menu-open" placeholder="Software package"></md-select>
+        <a id="all-software" (click)="getCommunityList(); $event.stopPropagation()">Clear filters</a>
+        <md-input-container id="search">
+          <input mdInput #searchBox id="search-box" (keyup)="searchSoftware(searchBox.value)" placeholder="search support"/>
+          <span class="icon-search"></span>
+        </md-input-container>
+      </div>
+      <div id="software-types-menu" class="sw-menu-wrapper hidden">
+        <swiper [config]="config">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><a id="sw-spectral" class="sw-type-icon-med sw-type-icon-spectral" (click)="filterSoftwareType('spectral'); $event.stopPropagation()"></a></div>
+                <div class="swiper-slide"><a id="sw-assignment" class="sw-type-icon-med sw-type-icon-assignment" (click)="filterSoftwareType('assignment'); $event.stopPropagation()"></a></div>
+                <div class="swiper-slide"><a id="sw-relaxation" class="sw-type-icon-med sw-type-icon-relaxation" (click)="filterSoftwareType('relaxation'); $event.stopPropagation()"></a></div>
+                <div class="swiper-slide"><a id="sw-chemical-shift" class="sw-type-icon-med sw-type-icon-chemical-shift" (click)="filterSoftwareType('chemical-shift'); $event.stopPropagation()"></a></div>
+                <div class="swiper-slide"><a id="sw-molecular-modeling" class="sw-type-icon-med sw-type-icon-molecular-modeling" (click)="filterSoftwareType('molecular-modeling'); $event.stopPropagation()"></a></div>
+                <div class="swiper-slide"><a id="sw-structure" class="sw-type-icon-med sw-type-icon-structure" (click)="filterSoftwareType('structure'); $event.stopPropagation()"></a></div>
+                <div class="swiper-slide"><a id="sw-rdc" class="sw-type-icon-med sw-type-icon-rdc" (click)="filterSoftwareType('residual-dipole-coupling'); $event.stopPropagation()"></a></div>
+            </div>
+            <div class="swiper-button-next arrow-right swiper-button-white"></div>
+            <div class="swiper-button-prev arrow-left swiper-button-white"></div>
+        </swiper>
+      </div>
+    </div>
+    <div class="grid-outer-wrapper">
+      <div class="grid-content-wrapper">
+      <h3 class="blue">NMRbox Support</h3>
+      <md-grid-list id="support-list" class="software-list grid-dashed" cols="3" rowHeight="180px">
+        <md-grid-tile class="tile-solid tile-transparent" *ngFor="let support of supportNmrboxList" (click)="gotoDetail(support); $event.stopPropagation()">
+          <md-card class="sw-card tile-card-short">
+            <md-card-header>
+              <md-card-title>{{support.name}}</md-card-title>
+            </md-card-header>
+            <md-card-content>
+              <p>
+                {{support.synopsis}}
+              </p>
+              <br/>
+              <a href="/">Read more</a>
+            </md-card-content>
+          </md-card>
+        </md-grid-tile>
+      </md-grid-list>
+      </div>
+    </div>
+    <div class="divider divider-dashed"></div>
+    <div class="grid-outer-wrapper blue-light-bg">
+      <div class="grid-content-wrapper">
+      <h3 class="blue">Tutorials</h3>
+      <md-grid-list id="support-list" class="software-list grid-dashed" cols="3" rowHeight="180px">
+        <md-grid-tile class="tile-solid tile-transparent" *ngFor="let support of supportTutorialList" (click)="gotoDetail(support); $event.stopPropagation()">
+          <md-card class="sw-card tile-card-short">
+            <md-card-header>
+              <md-card-title>{{support.name}}</md-card-title>
+            </md-card-header>
+            <md-card-content>
+              <p>
+                {{support.synopsis}}
+              </p>
+              <br/>
+              <a href="/">Read more</a>
+            </md-card-content>
+          </md-card>
+        </md-grid-tile>
+      </md-grid-list>
+      </div>
+    </div>
+    <div class="divider divider-dashed"></div>
+    <div class="grid-outer-wrapper">
+      <div class="grid-content-wrapper">
+      <h3 class="blue">Software documentation</h3>
+      <md-grid-list id="support-list" class="software-list grid-dashed" cols="3" rowHeight="180px">
+        <md-grid-tile class="tile-solid tile-transparent" *ngFor="let support of supportSwdocList" (click)="gotoDetail(support); $event.stopPropagation()">
+          <md-card class="sw-card tile-card-short">
+            <md-card-header>
+              <md-card-title>{{support.name}}</md-card-title>
+            </md-card-header>
+            <md-card-content>
+              <p>
+                {{support.synopsis}}
+              </p>
+              <br/>
+              <a href="/">Read more</a>
+            </md-card-content>
+          </md-card>
+        </md-grid-tile>
+      </md-grid-list>
+      </div>
+    </div>
+    <div class="divider divider-dashed"></div>
+    <div class="grid-outer-wrapper blue-light-bg">
+      <div class="grid-content-wrapper">
+      <h3 class="blue">Workflow</h3>
+      <md-grid-list class="software-list grid-dashed workflow-list" cols="3" rowHeight="180px">
+        <md-grid-tile class="tile-solid tile-transparent" *ngFor="let support of supportWorkflowList" (click)="gotoDetail(support); $event.stopPropagation()">
+          <md-card class="sw-card tile-card-short">
+            <md-card-header>
+              <md-card-title>{{support.name}}</md-card-title>
+            </md-card-header>
+            <md-card-content>
+              <p>
+                {{support.synopsis}}
+              </p>
+              <br/>
+              <a href="/">Read more</a>
+            </md-card-content>
+          </md-card>
+        </md-grid-tile>
+      </md-grid-list>
+      </div>
+    </div>
+    <div class="divider divider-dashed"></div>
+    <br/>
+    <br/>
+  </md-tab>
+
+  <md-tab id="com-blog" label="Blog" class="co-sub-icon co-icon-med co-icon-blog">
+    <div class="sw-filters-container sw-filters-search-only">
+      <div class="sw-filters">
+        <md-input-container id="search">
+          <input mdInput #searchBox id="search-box" (keyup)="searchSoftware(searchBox.value)" placeholder="search blog" />
+          <span class="icon-search"></span>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="divider divider-dashed hidden"></div>
+    <div class="grid-outer-wrapper gray-bg">
+      <div class="grid-content-wrapper">
+      <h3 class="blue">Most Recent</h3>
+      <md-grid-list class="software-list" cols="3" rowHeight="335px">
+        <md-grid-tile class="tile-solid" *ngFor="let blog of blogMostRecentList" (click)="gotoDetail(blog); $event.stopPropagation()">
+          <md-card class="sw-card">
+            <img md-card-image src="{{blog.url}}">
+            <md-card-header>
+              <md-card-title>{{blog.name}}</md-card-title>
+            </md-card-header>
+            <md-card-content>
+              <p>
+                {{blog.synopsis}}
+              </p>
+              <a href="/">Read more</a>
+            </md-card-content>
+          </md-card>
+        </md-grid-tile>
+      </md-grid-list>
+      </div>
+    </div>
+    <div class="divider divider-dashed"></div>
+    <div class="grid-outer-wrapper blue-bg">
+      <div class="grid-content-wrapper">
+      <h3 class="blue">This Month</h3>
+      <md-grid-list class="software-list" cols="3" rowHeight="335px">
+        <md-grid-tile class="tile-solid" *ngFor="let blog of blogNextList" (click)="gotoDetail(blog); $event.stopPropagation()">
+          <md-card class="sw-card">
+            <img md-card-image src="{{blog.url}}">
+            <md-card-header>
+              <md-card-title>{{blog.name}}</md-card-title>
+            </md-card-header>
+            <md-card-content>
+              <p>
+                {{blog.synopsis}}
+              </p>
+              <a href="/">Read more</a>
+            </md-card-content>
+          </md-card>
+        </md-grid-tile>
+      </md-grid-list>
+      </div>
+    </div>
+  </md-tab>
+
+  <md-tab id="com-events" label="Events">
+    <div class="sw-filters-container sw-filters-search-only">
+      <div class="sw-filters">
+        <md-input-container id="search">
+          <input mdInput #searchBox id="search-box" (keyup.enter)="searchSoftware(searchBox.value)" placeholder="search events" />
+          <span class="icon-search"></span>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="divider divider-dashed"></div>
+    <div class="grid-outer-wrapper gray-bg">
+      <div class="grid-content-wrapper">
+      <h3 class="blue">Upcoming</h3>
+      <md-grid-list class="software-list" cols="3" rowHeight="375px">
+        <md-grid-tile class="tile-solid" *ngFor="let event of eventsCurrentList" (click)="gotoDetail(event); $event.stopPropagation()">
+          <md-card class="sw-card">
+            <img md-card-image src="{{event.url}}">
+            <md-card-header>
+              <md-card-title>{{event.dateEvent}}</md-card-title>
+            </md-card-header>
+            <md-card-content>
+              <p>
+                {{event.name}}
+              </p>
+              <a href="/">Read more</a>
+            </md-card-content>
+          </md-card>
+        </md-grid-tile>
+      </md-grid-list>
+      </div>
+    </div>
+    <div class="divider divider-dashed"></div>
+    <div class="grid-outer-wrapper blue-med-light-bg">
+      <div class="grid-content-wrapper">
+      <h3 class="blue">Past Events</h3>
+      <md-grid-list class="software-list" cols="3" rowHeight="375px">
+        <md-grid-tile class="tile-solid" *ngFor="let event of eventsPastList" (click)="gotoDetail(event); $event.stopPropagation()">
+          <md-card class="sw-card">
+            <img md-card-image src="{{event.url}}">
+            <md-card-header>
+              <md-card-title>{{event.dateEvent}}</md-card-title>
+            </md-card-header>
+            <md-card-content>
+              <p>
+                {{event.name}}
+              </p>
+              <a href="/">Read more</a>
+            </md-card-content>
+          </md-card>
+        </md-grid-tile>
+      </md-grid-list>
+      </div>
+    </div>
+  </md-tab>
+
+  <md-tab id="com-forum" label="Forum">Forum</md-tab>
+
+</md-tab-group>
+</div>

@@ -1,0 +1,35 @@
+<div class="community-details-wrapper">
+  <md-toolbar class="toolbar-transparent">
+    <div class="menu-wrapper">
+      <button (click)="goBack()">
+        <svg width="15px" height="20px" viewBox="0 0 50 80" xml:space="preserve">
+          <polyline fill="none" stroke="#313131" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="
+        45.63,75.8 0.375,38.087 45.63,0.375 "/>
+        </svg> 
+      </button>
+      <span class="page-title"></span>
+    </div>
+  </md-toolbar>
+  <div class="community-details" *ngIf="community">
+    <h1>{{community?.name}}</h1>
+    <section>
+      <p class="subheading">{{community?.dateEvent}}</p>
+      <p class="subheading">{{community?.synopsis}}</p>
+      <img *ngIf="community.url" md-card-image src="{{community?.url}}" />
+      <p *ngIf="community.author" class="subheading">by {{community?.author}}</p>
+      <p>{{community?.authorTitle}}</p>
+    </section>
+    <section id="sw-detail-description">
+      <p>{{community?.description}}</p>
+    </section>
+    <section *ngIf="community.author" id="sw-detail-description">
+      <div class="divider divider-dashed"></div>
+      <h3 class="subheading">{{community?.author}}</h3>
+      <p>{{community?.authorTitle}}<br/>
+      <a *ngIf="community.authorEmail" href='mailto:{{community?.authorEmail}}'>{{community?.authorEmail}}</a>
+      </p>
+      <img md-card-image class="author-photo" src="{{community?.authorPhotoUrl}}" *ngIf="community.authorPhotoUrl" />
+    </section>
+    <br/><br/>
+  </div>
+</div>
