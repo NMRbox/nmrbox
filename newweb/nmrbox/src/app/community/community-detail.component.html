@@ -12,16 +12,23 @@
   </md-toolbar>
   <div class="community-details" *ngIf="community">
     <h1>{{community?.name}}</h1>
-    <section>
+    <section class="section-detail">
       <p class="subheading">{{community?.dateEvent}}</p>
       <p class="subheading">{{community?.synopsis}}</p>
       <img *ngIf="community.url" md-card-image src="{{community?.url}}" />
       <p *ngIf="community.author" class="subheading">by {{community?.author}}</p>
       <p>{{community?.authorTitle}}</p>
+
+      <div *ngIf="community.descriptionHtml; then htmlBlock else plainTextBlock"></div>
+      <ng-template #htmlBlock>
+        <div id="support-detail-description" [innerHTML]="community.descriptionHtml"></div>
+      </ng-template>
+      <ng-template #plainTextBlock>
+        <div class="section-detail-page" id="support-detail-description"><p>{{community?.description}}</p></div>
+      </ng-template>
+
     </section>
-    <section id="sw-detail-description">
-      <p>{{community?.description}}</p>
-    </section>
+
     <section *ngIf="community.author" id="sw-detail-description">
       <div class="divider divider-dashed"></div>
       <h3 class="subheading">{{community?.author}}</h3>

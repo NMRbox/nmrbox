@@ -9,7 +9,7 @@ $nmrbox-blue-dark: #3A4C51;
     width: 2000px;
     height: 2350px;
     overflow: hidden;
-    background-image: url('./../../assets/home-background.svg');
+    background-image: url('./../../assets/bg-graphics/home-background.svg');
     background-size: 71%;
     background-repeat: no-repeat;
     z-index: 1;
@@ -120,6 +120,10 @@ $nmrbox-blue-dark: #3A4C51;
 }
 
 .page-section#home-intro {
+    h1 {
+        margin-bottom: 5px;
+        margin-left: -2px;
+    }
     p {
         padding-right: 35%;
         padding-bottom: 40px;

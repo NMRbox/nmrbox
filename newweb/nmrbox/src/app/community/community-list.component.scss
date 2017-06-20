@@ -6,9 +6,19 @@
       margin: 0px auto;
   }
 }
+.tab-group-container {
+  margin-left: 5px;
 
-.section-banner {
-    margin-left: -605px;
+  .grid-content-wrapper {
+    h3 {
+        margin-left: 16px;
+    }
+
+    p {
+      color: #313131;
+    }
+  }
+  
 }
 
 md-grid-list {
@@ -20,7 +30,7 @@ md-grid-list {
   .sw-card {
     min-height: 300px;
     margin: 5px;
-    padding-right: 20px;
+    padding-right: 18px;
 
     .mat-card-title {
       font-weight: bold;
@@ -43,6 +53,17 @@ md-grid-list {
   .tile-card-short {
     min-height: 150px;
     min-width: 250px;
+  }
+}
+md-grid-list.support-list {
+  margin-left: 2px;
+}
+
+
+
+#com-support-nmrbox .grid-content-wrapper {
+  md-grid-list {
+    margin-left: -15px;
   }
 }
 

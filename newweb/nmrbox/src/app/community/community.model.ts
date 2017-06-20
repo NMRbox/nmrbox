@@ -4,6 +4,7 @@ export class CommunityModel {
   name: string;
   synopsis: string;
   description: string;
+  descriptionHtml: string;
   imgUrl: string;
   url: string;
   dateEvent: string;

@@ -30,6 +30,7 @@ $nmrbox-gray-dark: #313131;
 $nmrbox-gray-med: #777777;
 $nmrbox-gray-light: #f4f4f4;
 $nmrbox-orange: #fc9827;
+$nmrbox-yellow-orange: #f4a127;
 
 $nmrbox-app-primary: mat-palette($mat-grey);
 $nmrbox-app-accent:  mat-palette($mat-pink, A200, A100, A400);
@@ -46,6 +47,7 @@ $nmrbox-app-theme: mat-light-theme($nmrbox-app-primary, $nmrbox-app-accent, $nmr
 @include angular-material-theme($nmrbox-app-theme);
 
 body {
+    height: 100%;
     margin: 0px;
     overflow-x: hidden;
 }
@@ -60,7 +62,8 @@ h1 {
     font-weight: 200;
 }
 h2 {
-    text-transform: uppercase;
+    color: $nmrbox-gray-dark;
+    text-transform: none;
     font-weight: 600;
     font-size: 18px;
 }
@@ -68,6 +71,9 @@ p, div {
     font-size: 14px;
     line-height: 1.5em;
     color: $nmrbox-gray-dark;
+}
+p.subheading {
+    margin-top: 5px;
 }
 a {
     color: $nmrbox-blue-med;
@@ -143,6 +149,9 @@ a:hover {
         color: #fff;
     }
 }
+.yellow-orange-bg {
+    background-color: $nmrbox-yellow-orange;
+}
 
 /* Custom layout */
 .col-2 {
@@ -167,9 +176,14 @@ a:hover {
     height: 60px;
     background-size: 720px 120px;
 }
+[class*="nmrbox-logo-med"] {
+    width: 180px;
+    height: 30px;
+    background-size: 360px 60px;
+    display: block;
+    overflow: hidden;
+}
 [class*="nmrbox-logo-small"] {
-   /* width: 120px;
-    height: 40px;*/
     position: relative;
     height: 18px;
     background-position: 0px 0px;
@@ -178,13 +192,13 @@ a:hover {
     top: 4px;
     left: 10px;
 }
-.nmrbox-logo-small-dark, .nmrbox-logo-large-dark {
+.nmrbox-logo-small-dark, .nmrbox-logo-med-dark, .nmrbox-logo-large-dark {
     background-image: url('./assets/nmrbox-logo-dark-240x40.svg');
 }
-.nmrbox-logo-small-light, .nmrbox-logo-large-light {
+.nmrbox-logo-small-light, .nmrbox-logo-med-light, .nmrbox-logo-large-light {
     background-image: url('./assets/nmrbox-logo-light-240x40.svg');
 }
-.nmrbox-logo-small-blue, .nmrbox-logo-large-blue {
+.nmrbox-logo-small-blue, .nmrbox-logo-med-blue, .nmrbox-logo-large-blue {
     background-image: url('./assets/nmrbox-logo-dark-240x40.svg');
 }
 
@@ -201,7 +215,7 @@ a:hover {
     background-repeat: no-repeat;
     background-position: 0px 0px;
     background-size: 27px 27px;
-    background-image: url('./assets/icon-search.svg');
+    background-image: url('./assets/icons/icon-search.svg');
     opacity: 0.3;
 }
 
@@ -260,63 +274,63 @@ ul.icon-list {
 }
 
 .co-icon-support {
-    background-image: url('./assets/co-icon-support-240x40.svg');
+    background-image: url('./assets/icons/co-icon-support-240x40.svg');
 }
 .co-icon-forum {
-    background-image: url('./assets/co-icon-forum-240x40.svg');
+    background-image: url('./assets/icons/co-icon-forum-240x40.svg');
 }
 .co-icon-blog {
-    background-image: url('./assets/co-icon-blog-240x40.svg');
+    background-image: url('./assets/icons/co-icon-blog-240x40.svg');
 }
 .co-icon-events {
-    background-image: url('./assets/co-icon-events-240x40.svg');
+    background-image: url('./assets/icons/co-icon-events-240x40.svg');
 }
 
 .team-icon-about {
-    background-image: url('./assets/team-icon-about-240x40.svg');
+    background-image: url('./assets/icons/team-icon-about-240x40.svg');
 }
 .team-icon-integral {
-    background-image: url('./assets/team-icon-integral-240x40.svg');
+    background-image: url('./assets/icons/team-icon-integral-240x40.svg');
 }
 .team-icon-leadership {
-    background-image: url('./assets/team-icon-leadership-240x40.svg');
+    background-image: url('./assets/icons/team-icon-leadership-240x40.svg');
 }
 .team-icon-research {
-    background-image: url('./assets/team-icon-research-240x40.svg');
+    background-image: url('./assets/icons/team-icon-research-240x40.svg');
 }
 
 .sw-type-icon-spectral {
-    background-image: url('./assets/sw-icon-spectral-240x40.svg');
+    background-image: url('./assets/icons/sw-icon-spectral-240x40.svg');
 }
 .sw-type-icon-assignment {
-    background-image: url('./assets/sw-icon-assignment-240x40.svg');
+    background-image: url('./assets/icons/sw-icon-assignment-240x40.svg');
 }
 .sw-type-icon-relaxation {
-    background-image: url('./assets/sw-icon-relaxation-240x40.svg');
+    background-image: url('./assets/icons/sw-icon-relaxation-240x40.svg');
 }
 .sw-type-icon-chemical-shift {
-    background-image: url('./assets/sw-icon-chemical-240x40.svg');
+    background-image: url('./assets/icons/sw-icon-chemical-240x40.svg');
 }
 .sw-type-icon-molecular-modeling {
-    background-image: url('./assets/sw-icon-molecular-240x40.svg');
+    background-image: url('./assets/icons/sw-icon-molecular-240x40.svg');
 }
 .sw-type-icon-structure {
-    background-image: url('./assets/sw-icon-structure-240x40.svg');
+    background-image: url('./assets/icons/sw-icon-structure-240x40.svg');
 }
 .sw-type-icon-rdc, .sw-type-icon-residual-dipole-coupling {
-    background-image: url('./assets/sw-icon-rdc-240x40.svg');
+    background-image: url('./assets/icons/sw-icon-rdc-240x40.svg');
 }
 .rp-icon-metabolmics {
-    background-image: url('./assets/rp-icon-metabolomics-240x40.svg');
+    background-image: url('./assets/icons/rp-icon-metabolomics-240x40.svg');
 }
 .rp-icon-protein-dynamics {
-    background-image: url('./assets/rp-icon-protein-dynamics-240x40.svg');
+    background-image: url('./assets/icons/rp-icon-protein-dynamics-240x40.svg');
 }
 .rp-icon-protein-structure {
-    background-image: url('./assets/rp-icon-protein-structure-240x40.svg');
+    background-image: url('./assets/icons/rp-icon-protein-structure-240x40.svg');
 }
 .rp-icon-intrinsically {
-    background-image: url('./assets/rp-icon-intrinsically-240x40.svg');
+    background-image: url('./assets/icons/rp-icon-intrinsically-240x40.svg');
 }
 
 /*** MATERIAL CUSTOM STYLES ***/
@@ -439,22 +453,16 @@ md-select {
 
 community-list {
     .mat-tab-label:nth-of-type(1) {
-        background-image: url('./assets/co-icon-support-240x40.svg');
+        background-image: url('./assets/icons/co-icon-support-240x40.svg');
     }
     .mat-tab-label:nth-of-type(2) {
-        background-image: url('./assets/co-icon-blog-240x40.svg');
+        background-image: url('./assets/icons/co-icon-blog-240x40.svg');
     }
     .mat-tab-label:nth-of-type(3) {
-        background-image: url('./assets/co-icon-events-240x40.svg');
+        background-image: url('./assets/icons/co-icon-events-240x40.svg');
     }
     .mat-tab-label:nth-of-type(4) {
-        background-image: url('./assets/co-icon-forum-240x40.svg');
-    }
-    md-tab-body {
-        background-image: url('/assets/bg-graphics/bg-community-support.png');
-        background-repeat: no-repeat;
-        background-size: 95%;
-        background-position: 0px -300px;
+        background-image: url('./assets/icons/co-icon-forum-240x40.svg');
     }
 }
 team-list {
@@ -465,16 +473,16 @@ team-list {
         background-position: -180px 5px;
     }
     .mat-tab-label:nth-of-type(1) {
-        background-image: url('./assets/team-icon-leadership-240x40.svg');
+        background-image: url('./assets/icons/team-icon-leadership-240x40.svg');
     }
     .mat-tab-label:nth-of-type(2) {
-        background-image: url('./assets/team-icon-research-240x40.svg');
+        background-image: url('./assets/icons/team-icon-research-240x40.svg');
     }
     .mat-tab-label:nth-of-type(3) {
-        background-image: url('./assets/team-icon-integral-240x40.svg');
+        background-image: url('./assets/icons/team-icon-integral-240x40.svg');
     }
     .mat-tab-label:nth-of-type(4) {
-        background-image: url('./assets/team-icon-about-240x40.svg');
+        background-image: url('./assets/icons/team-icon-about-240x40.svg');
     }
 
     md-tab-body {
@@ -528,6 +536,10 @@ team-list {
     width: 100%;
 }
 
+.section-detail p {
+    padding-right: 33%;
+}
+
 /* Swiper */
 .swiper-container {
     z-index: 2;
@@ -564,8 +576,8 @@ a#all-software {
   width: 100%;
 
   .sw-filters {
-    width: 90%;
-    max-width: 900px;
+    width: 95%;
+    max-width: 910px;
     margin: 0px auto;
 
     > a {
@@ -624,7 +636,7 @@ a#all-software {
 }
 
 .sw-filters-search-only #search {
-  margin-left: 5px;
+  margin-left: 3px;
   margin-top: 8px;
 }
 
@@ -664,4 +676,44 @@ a#all-software {
   position: absolute;
   width: 100%;
   height: 48px;
+}
+
+footer {
+    background-color: $nmrbox-blue-dark;
+    width: 100%;
+
+    .footer-wrapper {
+        width: 910px;
+        margin: 0px auto;
+        padding: 10px 10px 30px 10px;
+        color: #fff !important;
+        height: 90px;
+        
+        p {
+            color: #fff;
+            opacity: 0.9;
+        }
+    }
+    md-grid-tile {
+        display: inline-table;
+        padding: 0px 10px;
+        height: 90px;
+    }
+    md-grid-tile#footer-logo{
+        border-right: 1px solid $nmrbox-gray-light;
+        opacity: 0.7;
+
+        span {
+            width: 100px;
+            margin-top: 5px;
+            background-size: 288px 48px;
+        }
+    }
+    md-grid-tile#footer-text {
+        position: relative;
+        top: -14px;
+        font-size: 13px;
+        font-weight: 200;
+        opacity: 0.9;
+    }
 }

@@ -35,10 +35,10 @@
         </swiper>
       </div>
     </div>
-    <div class="grid-outer-wrapper">
+    <div id="com-support-nmrbox" class="grid-outer-wrapper">
       <div class="grid-content-wrapper">
       <h3 class="blue">NMRbox Support</h3>
-      <md-grid-list id="support-list" class="software-list grid-dashed" cols="3" rowHeight="180px">
+      <md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
         <md-grid-tile class="tile-solid tile-transparent" *ngFor="let support of supportNmrboxList" (click)="gotoDetail(support); $event.stopPropagation()">
           <md-card class="sw-card tile-card-short">
             <md-card-header>
@@ -60,7 +60,7 @@
     <div class="grid-outer-wrapper blue-light-bg">
       <div class="grid-content-wrapper">
       <h3 class="blue">Tutorials</h3>
-      <md-grid-list id="support-list" class="software-list grid-dashed" cols="3" rowHeight="180px">
+      <md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
         <md-grid-tile class="tile-solid tile-transparent" *ngFor="let support of supportTutorialList" (click)="gotoDetail(support); $event.stopPropagation()">
           <md-card class="sw-card tile-card-short">
             <md-card-header>
@@ -82,7 +82,7 @@
     <div class="grid-outer-wrapper">
       <div class="grid-content-wrapper">
       <h3 class="blue">Software documentation</h3>
-      <md-grid-list id="support-list" class="software-list grid-dashed" cols="3" rowHeight="180px">
+      <md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
         <md-grid-tile class="tile-solid tile-transparent" *ngFor="let support of supportSwdocList" (click)="gotoDetail(support); $event.stopPropagation()">
           <md-card class="sw-card tile-card-short">
             <md-card-header>
@@ -104,7 +104,7 @@
     <div class="grid-outer-wrapper blue-light-bg">
       <div class="grid-content-wrapper">
       <h3 class="blue">Workflow</h3>
-      <md-grid-list class="software-list grid-dashed workflow-list" cols="3" rowHeight="180px">
+      <md-grid-list class="support-list grid-dashed workflow-list" cols="3" rowHeight="180px">
         <md-grid-tile class="tile-solid tile-transparent" *ngFor="let support of supportWorkflowList" (click)="gotoDetail(support); $event.stopPropagation()">
           <md-card class="sw-card tile-card-short">
             <md-card-header>
