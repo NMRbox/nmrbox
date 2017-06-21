@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'community/:index', component: CommunityListComponent },
   { path: 'team', component: TeamListComponent },
   { path: 'team/:index', component: TeamListComponent },
-  { path: 't/detail', component: TeamDetailComponent },
+  { path: 't/detail', component: TeamDetailComponent }, // Note: 'detail' is a placeholder for ':id'
   { path: '**', redirectTo: '/app', pathMatch: 'full' }
 ];
 

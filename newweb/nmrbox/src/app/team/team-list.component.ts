@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -14,8 +15,13 @@ import { TeamService }  from './team.service';
 })
 export class TeamListComponent implements OnInit {
 
+  // Tabs
+  @Input() selectedIndex: number=0;
+  @Input() routeIndex: number;
+
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private teamService: TeamService
   ) { }
 
@@ -30,7 +36,26 @@ export class TeamListComponent implements OnInit {
         };
 
   ngOnInit(): void {
+    // ROUTES
+    // Tabs: go to specific subsection
+    this.route.params.subscribe( params =>
+        this.routeIndex = params['index']
+    );
 
+    console.log("routeIndex: ", this.routeIndex);
+
+    if(this.routeIndex > -1){
+      this.selectedIndexChange(this.routeIndex);
+    }
+
+  }
+
+   // Tabs
+  selectedIndexChange(index: number): void {
+    if(!index) index = 0;
+    this.selectedIndex = index;
+    this.router.navigate(['/team', index]);
+    //console.log("selectedIndexChange to: ", this.selectedIndex);
   }
 
   gotoDetail(): void {

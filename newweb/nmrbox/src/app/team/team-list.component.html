@@ -3,7 +3,7 @@
 
 <div class="section-submenu section-submenu-team yellow-orange-bg"></div>
 <div class="tab-group-container">
-<md-tab-group>
+<md-tab-group (selectedIndexChange)="selectedIndexChange($event)" [selectedIndex]="selectedIndex">
 
   <md-tab id="team-leadership" label="Leadership" class="co-sub-icon co-icon-med team-icon-leadership">
     <div class="grid-outer-wrapper">
