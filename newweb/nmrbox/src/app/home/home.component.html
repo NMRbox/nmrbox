@@ -19,30 +19,30 @@
         <p>
             <strong>NMR</strong>box is a resource for biomolecular NMR (Nuclear Magnetic Resonance) software. It provides tools for finding the software you need, documentation and tutorials for getting the most out of the software, and cloud-based virtual machines for executing the software.
         </p>
-        <a href="/community"><strong>NMR</strong>box support</a>
+        <a (click)="gotoCommunityPage('support','10'); $event.stopPropagation();"><strong>NMR</strong>box support</a>
     </div>
 </section>
 <section id="home-software" class="page-section white-bg">
     <div class="content">
         <h1 class="blue">It's simple. Let's get started.</h1>
         <p>
-            You can choose by category. Or you can view <a href="/software">all software</a>.
+            You can choose by category. Or you can view <a (click)="gotoSoftwareFilter('all'); $event.stopPropagation();">all software</a>.
         </p>
         <md-grid-list cols="2" rowHeight="320px">
             <md-grid-tile id="rp-tile">
                 <h2 class="grid-tile-title">Research problems</h2>
                 <md-grid-list class="software-list" cols="1" rowHeight="60px">
                     <md-grid-tile class="rp-tile">
-                        <a id="sw-spectral" class="rp-icon-large rp-icon-metabolmics" href="/software/metabolmics"></a>
+                        <a id="sw-spectral" class="rp-icon-large rp-icon-metabolmics" (click)="gotoSoftwareFilter('metabolmics'); $event.stopPropagation();"></a>
                     </md-grid-tile>
                     <md-grid-tile class="rp-tile">
-                        <a id="sw-assignment" class="rp-icon-large rp-icon-protein-dynamics" href="/software/protein-dynamics"></a>
+                        <a id="sw-assignment" class="rp-icon-large rp-icon-protein-dynamics" (click)="gotoSoftwareFilter('protein-dynamics'); $event.stopPropagation();"></a>
                     </md-grid-tile>
                     <md-grid-tile class="rp-tile">
-                        <a id="sw-relaxation" class="rp-icon-large rp-icon-protein-structure" href="/software/protein-structure"></a>
+                        <a id="sw-relaxation" class="rp-icon-large rp-icon-protein-structure" (click)="gotoSoftwareFilter('protein-structure'); $event.stopPropagation();"></a>
                     </md-grid-tile>
                     <md-grid-tile class="rp-tile">
-                        <a id="sw-chemical-shift" class="rp-icon-large rp-icon-intrinsically" href="/software/intrinsically"></a>
+                        <a id="sw-chemical-shift" class="rp-icon-large rp-icon-intrinsically" (click)="gotoSoftwareFilter('intrinsically'); $event.stopPropagation();"></a>
                     </md-grid-tile>
                 </md-grid-list>
             </md-grid-tile>
@@ -50,25 +50,25 @@
                 <h2 class="grid-tile-title">Software types</h2>
                 <md-grid-list class="software-list" cols="2" rowHeight="60px">
                     <md-grid-tile class="software-type-tile">
-                        <a id="sw-spectral" class="sw-type-icon-large sw-type-icon-spectral" href="/software/spectral"></a>
+                        <a id="sw-spectral" class="sw-type-icon-large sw-type-icon-spectral" (click)="gotoSoftwareFilter('spectral'); $event.stopPropagation();"></a>
                     </md-grid-tile>
                     <md-grid-tile class="software-type-tile">
-                        <a id="sw-chemical-shift" class="sw-type-icon-large sw-type-icon-chemical-shift" href="/software/chemical-shift"></a>
+                        <a id="sw-chemical-shift" class="sw-type-icon-large sw-type-icon-chemical-shift" (click)="gotoSoftwareFilter('chemical-shift'); $event.stopPropagation();"></a>
                     </md-grid-tile>
                     <md-grid-tile class="software-type-tile">
-                        <a id="sw-molecular-modeling" class="sw-type-icon-large sw-type-icon-molecular-modeling" href="/software/molecular-modeling"></a>
+                        <a id="sw-molecular-modeling" class="sw-type-icon-large sw-type-icon-molecular-modeling" (click)="gotoSoftwareFilter('molecular-modeling'); $event.stopPropagation();"></a>
                     </md-grid-tile>
                     <md-grid-tile class="software-type-tile">
-                        <a id="sw-structure" class="sw-type-icon-large sw-type-icon-structure" href="/software/structure"></a>
+                        <a id="sw-structure" class="sw-type-icon-large sw-type-icon-structure" (click)="gotoSoftwareFilter('structure'); $event.stopPropagation();"></a>
                     </md-grid-tile>
                     <md-grid-tile class="software-type-tile">
-                        <a id="sw-rdc" class="sw-type-icon-large sw-type-icon-rdc" href="/software/rdc"></a>
+                        <a id="sw-rdc" class="sw-type-icon-large sw-type-icon-rdc" (click)="gotoSoftwareFilter('rdc'); $event.stopPropagation();"></a>
                     </md-grid-tile>
                     <md-grid-tile class="software-type-tile">
-                        <a id="sw-assignment" class="sw-type-icon-large sw-type-icon-assignment" href="/software/assignment"></a>
+                        <a id="sw-assignment" class="sw-type-icon-large sw-type-icon-assignment" (click)="gotoSoftwareFilter('assignment'); $event.stopPropagation();"></a>
                     </md-grid-tile>
                     <md-grid-tile class="software-type-tile">
-                        <a id="sw-relaxation" class="sw-type-icon-large sw-type-icon-relaxation" href="/software/relaxation"></a>
+                        <a id="sw-relaxation" class="sw-type-icon-large sw-type-icon-relaxation" (click)="gotoSoftwareFilter('relaxation'); $event.stopPropagation();"></a>
                     </md-grid-tile>
                 </md-grid-list>
             </md-grid-tile>
@@ -83,22 +83,22 @@
         </p>
         <md-grid-list cols="2" rowHeight="150px">
             <md-grid-tile class="co-tile">
-                <a id="co-support" class="co-icon-large co-icon-support grid-tile-title" href="/community/0"></a>
+                <a id="co-support" class="co-icon-large co-icon-support grid-tile-title" (click)="gotoSection('community','0'); $event.stopPropagation();"></a>
                 <p>It’s all about getting started from workflows, user guides, tutorials, and basic information about NMRbox. We’re here to help you.
                 </p>
             </md-grid-tile>
             <md-grid-tile class="co-tile">
-                <a id="co-forum" class="co-icon-large co-icon-forum grid-tile-title" href="/community/1"></a>
+                <a id="co-forum" class="co-icon-large co-icon-forum grid-tile-title" (click)="gotoSection('community','1'); $event.stopPropagation();"></a>
                 <p>Find out what your colleagues are saying. Add your voice.
                 </p>
             </md-grid-tile>
             <md-grid-tile class="co-tile">
-                <a id="co-blog" class="co-icon-large co-icon-blog grid-tile-title" href="/community/2"></a>
+                <a id="co-blog" class="co-icon-large co-icon-blog grid-tile-title" (click)="gotoSection('community','2'); $event.stopPropagation();"></a>
                 <p>Find out what’s going on in the world of biomolecular NMR. Checkout this month’s featured Researcher. Keep current with the latest case studies and new software.
                 </p>
             </md-grid-tile>
             <md-grid-tile class="co-tile">
-                <a id="co-events" class="co-icon-large co-icon-events grid-tile-title" href="/community/3"></a>
+                <a id="co-events" class="co-icon-large co-icon-events grid-tile-title" (click)="gotoSection('community','3'); $event.stopPropagation();"></a>
                 <p>Conferences. Meetings. Workshops. Podcasts. Our calendar will help you plan ahead.
                 </p>
             </md-grid-tile>
@@ -110,22 +110,22 @@
         <h1 class="white">Learn more about our<br/><strong>NMR</strong>box <strong>team</strong></h1>
         <md-grid-list cols="2" rowHeight="150px">
             <md-grid-tile class="team-tile">
-                <a id="team-leadership" class="team-icon-large team-icon-leadership grid-tile-title" href="/team/0"></a>
+                <a id="team-leadership" class="team-icon-large team-icon-leadership grid-tile-title" (click)="gotoSection('team','0'); $event.stopPropagation();"></a>
                 <p>The leadership behind the NMRbox team is experienced and diverse. We are devoted to transforming the way NMR Community can access and use software tools.
                 </p>
             </md-grid-tile>
             <md-grid-tile class="team-tile">
-                <a id="team-research" class="team-icon-large team-icon-research grid-tile-title" href="/team/1"></a>
+                <a id="team-research" class="team-icon-large team-icon-research grid-tile-title" (click)="gotoSection('team','1'); $event.stopPropagation();"></a>
                 <p>Without these colleagues NMRbox would be just an empty box.
                 </p>
             </md-grid-tile>
             <md-grid-tile class="team-tile">
-                <a id="team-integral" class="team-icon-large team-icon-integral grid-tile-title" href="/team/2"></a>
+                <a id="team-integral" class="team-icon-large team-icon-integral grid-tile-title" (click)="gotoSection('team','2'); $event.stopPropagation();"></a>
                 <p>These colleagues keep the NMRbox in motion. Updating. Integrating. Making our lives easier.
                 </p>
             </md-grid-tile>
             <md-grid-tile class="team-tile">
-                <a id="team-about" class="team-icon-large team-icon-about grid-tile-title" href="/team/3"></a>
+                <a id="team-about" class="team-icon-large team-icon-about grid-tile-title" (click)="gotoSection('team','3'); $event.stopPropagation();"></a>
                 <p>Our mission. Our Story. Our Difference.
                 </p>
             </md-grid-tile>

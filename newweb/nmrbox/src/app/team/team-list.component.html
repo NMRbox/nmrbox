@@ -73,7 +73,7 @@
   <md-tab id="team-research" label="Research" class="co-sub-icon co-icon-med team-icon-research">
     <div class="grid-outer-wrapper">
       <div class="grid-content-wrapper">
-        <h2><a href="/t/detail">Technology Research and Development #1</a></h2>
+        <h2><a (click)="gotoDetail(); $event.stopPropagation();">Technology Research and Development #1</a></h2>
         <p class="subheading">
           A software environment for bio-NMR Data Processing and Analysis: NMRbox
         </p>

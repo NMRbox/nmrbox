@@ -33,7 +33,7 @@ export class TeamListComponent implements OnInit {
 
   }
 
-  gotoDetail(teamModel: TeamModel): void {
-    //this.router.navigate(['/t/detail', teamModel.contentType, teamModel.id]);
+  gotoDetail(): void {
+    this.router.navigate(['/t/detail']);
   }
 }

@@ -14,9 +14,9 @@ const routes: Routes = [
   { path: 'app',     component: HomeComponent },
   { path: '', redirectTo: 'app', pathMatch: 'full' },
   { path: 'software', component: SoftwareListComponent },
-  { path: 'detail/:id', component: SoftwareDetailComponent },
+  { path: 's/:id', component: SoftwareDetailComponent },
   { path: 'software/:filterName', component: SoftwareListComponent },
-  { path: 'com/:type/:id', component: CommunityDetailComponent },
+  { path: 'c/:type/:id', component: CommunityDetailComponent },
   { path: 'community', component: CommunityListComponent },
   { path: 'community/:index', component: CommunityListComponent },
   { path: 'team', component: TeamListComponent },
@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
+  imports: [ RouterModule.forRoot(routes, {useHash: true}) ], // using hash location strategy for more consistent deep linking
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}

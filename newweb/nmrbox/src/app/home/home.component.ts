@@ -31,4 +31,24 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/app']);
   }
 
+  // Navigation
+  gotoSection(section: string, subSection: string): void {
+    this.router.navigate(['/'+section, subSection]);
+  }
+
+  gotoSoftwareFilter(filterName: string): void {
+    if(!filterName || filterName == "all"){
+      this.router.navigate(['/software']);
+    } else {
+      this.router.navigate(['/software', filterName]);
+    }
+  }
+
+  gotoCommunityPage(contentType: string, contentId: string): void {
+    if(!contentType || contentType == "all"){
+      this.router.navigate(['/community']);
+    } else {
+      this.router.navigate(['/c', contentType, contentId]);
+    }
+  }
 }

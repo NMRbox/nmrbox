@@ -52,6 +52,11 @@ body {
     overflow-x: hidden;
 }
 
+app-root {
+    min-height: 750px;
+    display: block;
+}
+
 h1, h2, h3, h4, p, a, div {
   font-family: 'Libre Franklin', sans-serif;
   font-weight: 400;
@@ -82,6 +87,7 @@ a {
 a:hover {
     color: $nmrbox-blue-bright;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .spacer {
@@ -681,6 +687,7 @@ a#all-software {
 footer {
     background-color: $nmrbox-blue-dark;
     width: 100%;
+    overflow: hidden;
 
     .footer-wrapper {
         width: 910px;

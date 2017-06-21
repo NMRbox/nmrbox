@@ -81,11 +81,6 @@ export class CommunityListComponent implements OnInit {
   }
 
   // Tabs
-  setCommunitySection(contentType: string): void {
-    //this.selectedIndex = index;
-    console.log("setCommunitySection to: ", contentType);
-  }
-
   selectedIndexChange(index: number): void {
     if(!index) index = 0;
     this.selectedIndex = index;
@@ -93,6 +88,7 @@ export class CommunityListComponent implements OnInit {
     //console.log("selectedIndexChange to: ", this.selectedIndex);
   }
 
+  // Data & Filters
   getCommunityList(): void {
     this.communityService.getCommunityList().then(communityList => this.communityList = communityList);
   }
@@ -144,11 +140,8 @@ export class CommunityListComponent implements OnInit {
 
   }
 
+  // Navigation
   gotoDetail(community: CommunityModel): void {
-    this.router.navigate(['/com', community.contentType, community.id]);
-  }
-
-  gotoSection(contentType: string): void {
-    this.router.navigate(['/c', contentType]);
+    this.router.navigate(['/c', community.contentType, community.id]);
   }
 }
