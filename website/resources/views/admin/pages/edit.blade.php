@@ -132,7 +132,5 @@ Edit Blog
     <script src="{{ asset('assets/vendors/iCheck/icheck.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/vendors/tags/dist/bootstrap-tagsinput.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/custom_js/add_newpage.js') }}" type="text/javascript"></script>
-    <script type="application/javascript">
-
-    </script>
+    <script src="{{ asset('assets/js/custom_js/summernote_ext.js') }}" type="text/javascript" ></script>
 @stop

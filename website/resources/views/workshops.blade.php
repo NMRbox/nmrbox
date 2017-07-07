@@ -48,7 +48,7 @@
             <div class="row"><br>
                 @forelse($upcoming_workshops as $workshop)
                     {!! BootForm::open(array('url' => URL::to('register_person_workshop'), 'method' => 'post', 'class' => 'form-horizontal')) !!}
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="panel panel-info">
                             <div class="panel-heading">
                                 <h4>{!! $workshop->title !!}</h4>
@@ -70,12 +70,12 @@
                                 {{-- checking whether the user is already registered --}}
                                 @if($person != null)
                                     <button
-                                            @foreach($person->classification as $group)
+                                        @foreach($person->classification as $group)
                                             @if($group->name == $workshop->name)
                                             disabled
                                             @endif
-                                            @endforeach
-                                            name="register" class="btn btn-warning btn_register_workshop" data-workshop="{!! $workshop->name !!}" value="{!! $workshop->name !!}">
+                                        @endforeach
+                                        name="register" class="btn btn-warning btn_register_workshop" data-workshop="{!! $workshop->name !!}" value="{!! $workshop->name !!}">
                                         Register
                                     </button>
                                 @endif
@@ -88,7 +88,11 @@
                 @empty
                     <div class="panel col-md-12">
                         <div class="panel-body">
-                            <p>Stay tuned for upcoming workshops update. Thank you.</p>
+                            <div class="row">
+                                <div class="alert alert-info">
+                                    <p>Stay tuned for upcoming workshops.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endforelse
@@ -102,7 +106,7 @@
             </div>
             <div class="row"><br>
                 @forelse($completed_workshops as $workshop)
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="panel panel-info">
                             <div class="panel-heading heading">
                                 <h4>{!! $workshop->title !!}</h4>
@@ -128,7 +132,11 @@
                 @empty
                     <div class="panel col-md-12">
                         <div class="panel-body">
-                            <p>Stay tuned for workshops update. Thank you.</p>
+                            <div class="row">
+                                <div class="alert alert-info">
+                                    <p>Stay tuned for completed workshops.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endforelse

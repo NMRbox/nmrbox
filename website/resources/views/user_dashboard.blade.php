@@ -260,7 +260,12 @@
                 @empty
                     <div class="panel col-md-12">
                         <div class="panel-body">
-                            <p>Stay tuned for upcoming workshops update. You can explore <a href="workshops">workshop</a> page for completed workshops and available resources.</p>
+                            <div class="row">
+                                <div class="alert alert-info">
+                                    <p>Stay tuned for upcoming workshops update. You can explore <a href="workshops">workshop</a> page for completed workshops and available resources.</p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 @endforelse

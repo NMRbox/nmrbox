@@ -169,26 +169,60 @@ Edit FAQ
 
 {{-- Body Bottom confirm modal --}}
 @section('footer_scripts')
+    {{-- resource/file modal --}}
+    <div class="modal fade" id="resource_modal" tabindex="-1" role="dialog" aria-labelledby="user_delete_confirm_title" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <span id="modal-header-title">Select files to insert - </span>
+                    </h4>
+
+                </div>
+                <div class="modal-body row">
+                    <form action="insert_files" method="post" id="file_form">
+                        <table class="table" id="table table-striped" style="width: 100%;">
+                            <thead>
+                            <tr class="filters">
+                                <th>&nbsp;</th>
+                                <th>Label</th>
+                                <th>Slug/URL</th>
+                                {{--<th>Slug/URL</th>--}}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse ($all_files as $file)
+                                <tr>
+                                    <td class="col-md-1 text-center">
+                                        <input type="checkbox" name="files" value="{!! URL::to('files/' . $file->slug) !!}" data-name="{!! $file->label !!}" class="modal_files form-group">&nbsp;&nbsp;
+
+                                    </td>
+                                    <td class="col-md-6">{!! $file->label !!}</td>
+                                    <td class="col-md-5">{!! $file->slug !!}</td>
+                                    {{--<td class="col-md-3">{!! $file->mime_type !!}</td>--}}
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5">No Files Yet!</td>
+                                </tr>
+                            @endforelse
+                            <tr>
+                                <td class="text-center" colspan="3">
+                                    <button type="button" class="btn btn-primary btn-lg col-md-12" value="Insert" id="insert_files">Insert Files</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
     {{-- WYSING Editor--}}
     <script src="{{ asset('assets/vendors/summernote/summernote.min.js') }}" type="text/javascript" ></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            /* defining the editor buttons & tabs*/
-            $('.textarea').summernote({
-                height: 500,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table', 'hr']],
-                    ['insert', ['link', 'picture']],
-                    ['view', ['fullscreen', 'codeview']]
-                ],
-                placeholder: "Enter answer text."
-            });
-        });
-    </script>
+    <script src="{{ asset('assets/js/custom_js/summernote_ext.js') }}" type="text/javascript" ></script>
 @stop

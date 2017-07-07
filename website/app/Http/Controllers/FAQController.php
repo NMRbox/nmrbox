@@ -22,6 +22,7 @@ use App\Keyword;
 use App\Category;
 use App\Person;
 use App\Software;
+use App\File;
 
 class FAQController extends Controller
 {
@@ -65,9 +66,11 @@ class FAQController extends Controller
         // all person
         $all_person = Person::All();
 
+        // All files information
+        $all_files = File::select('id', 'label', 'slug', 'mime_type', 'size')->get()->sortBy('label');
 
         // make index view
-        return view::make('admin.faqs.index', compact('all_faqs', 'all_softwares', 'all_search_keywords', 'all_person'));
+        return view::make('admin.faqs.index', compact('all_faqs', 'all_softwares', 'all_search_keywords', 'all_person', 'all_files'));
     }
 
     /**
@@ -77,8 +80,11 @@ class FAQController extends Controller
      */
     public function create()
     {
+        // All files information
+        $all_files = File::select('id', 'label', 'slug', 'mime_type', 'size')->get()->sortBy('label');
+
         //make create view
-        return view::make('admin.faqs.create');
+        return view::make('admin.faqs.create', compact('all_files'));
     }
 
     /**
@@ -192,8 +198,11 @@ class FAQController extends Controller
             }
         }
 
+        // All files information
+        $all_files = File::select('id', 'label', 'slug', 'mime_type', 'size')->get()->sortBy('label');
+
         //return view::make('admin.faqs.edit', compact('faq', 'all_keywords', 'keyword_map', 'file_keywords', 'keyword_map', 'all_metadata', 'faq_metadata', 'metadata_map'));
-        return view::make('admin.faqs.edit', compact('faq', 'all_person', 'all_feedback', 'all_softwares', 'software_map', 'faq_softwares', 'all_search_keywords', 'search_keywords_map', 'faq_search_keywords'));
+        return view::make('admin.faqs.edit', compact('faq', 'all_person', 'all_feedback', 'all_softwares', 'software_map', 'faq_softwares', 'all_search_keywords', 'search_keywords_map', 'faq_search_keywords', 'all_files'));
     }
 
     /**

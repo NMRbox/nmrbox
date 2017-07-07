@@ -157,19 +157,19 @@ class WorkshopsController extends Controller
             $classifications = Classification::All();
 
             //Get all the upcoming workshops
-            $upcoming_workshops = Workshop::whereDate('start_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
+            $upcoming_workshops = Workshop::whereDate('end_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
 
             //Get all the completed workshops
-            $completed_workshops = Workshop::whereDate('start_date', '<', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
+            $completed_workshops = Workshop::whereDate('end_date', '<', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'desc')->get();
 
             // View
             return View::make('workshops', compact('upcoming_workshops', 'completed_workshops', 'user', 'person', 'classifications'));
         } else {
             //Get all the upcoming workshops
-            $upcoming_workshops = Workshop::whereDate('start_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
+            $upcoming_workshops = Workshop::whereDate('end_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
 
             //Get all the completed workshops
-            $completed_workshops = Workshop::whereDate('start_date', '<', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
+            $completed_workshops = Workshop::whereDate('end_date', '<', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'desc')->get();
 
             $person = null;
             // View

@@ -120,7 +120,7 @@ Add New Page
                             @endforelse
                             <tr>
                                 <td class="text-center" colspan="3">
-                                    <button type="button" class="btn btn-primary btn-lg col-md-3" value="Insert" id="insert_files">Insert Files</button>
+                                    <button type="button" class="btn btn-primary btn-lg col-md-12" value="Insert" id="insert_files">Insert Files</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -136,4 +136,5 @@ Add New Page
     <script src="{{ asset('assets/vendors/iCheck/icheck.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/vendors/tags/dist/bootstrap-tagsinput.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/custom_js/add_newpage.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/custom_js/summernote_ext.js') }}" type="text/javascript" ></script>
 @stop
