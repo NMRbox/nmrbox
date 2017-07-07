@@ -54,7 +54,7 @@ $(document).ready(function() {
             var file_slug = $(this).val();
 
             /* appending the value to textarea */
-            $('.note-editable.panel-body').append("<p style='font-size: 19px; line-height: 29px;' target='_blank'><a href='"+file_slug+"'>" + file_name +"</a></p>");
+            $('.note-editable.panel-body').append("<p style='font-size: 19px; line-height: 10px;' target='_blank'><a href='"+file_slug+"'>" + file_name +"</a></p>");
             $('textarea.textarea').val($('.note-editable.panel-body').html());
 
         })

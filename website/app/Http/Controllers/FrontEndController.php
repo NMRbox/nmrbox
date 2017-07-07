@@ -238,15 +238,15 @@ class FrontEndController extends Controller
             $ldap = new Ldap;
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
 
-            /* Test (Localhost login code to skip LDAP authentication) */
-            /*$ldap_login = true;
+            /* Test (Localhost login code to skip LDAP authentication)
+            $ldap_login = true;
             $person = Person::where('id', 226)->get()->first();
             if(!$person) {
                 return false;
             }
             // Adding person table information into session
             Session::put('person', $person);
-            Sentinel::loginAndRemember($person);*/
+            Sentinel::loginAndRemember($person);
             /* Eof Test */
 
             // LDAP login response
@@ -309,7 +309,7 @@ class FrontEndController extends Controller
         $classifications = Classification::All();
 
         //Get all the upcoming workshops
-        $workshops = Workshop::whereDate('start_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
+        $workshops = Workshop::whereDate('end_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
 
         return View::make('user_dashboard', compact('user', 'person', 'classifications', 'workshops'));
     }

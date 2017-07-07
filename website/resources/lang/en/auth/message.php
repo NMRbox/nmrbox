@@ -6,7 +6,7 @@
 
 return array(
 
-    'account_already_exists' => 'An account with this name and email already exists.',
+    'account_already_exists' => "An account with this name already exists.  If you already registered for an account, please <a href=".url("login").">signin</a> or request a <a href=".url("forgot-password").">Password Reset</a>. If you do not already have an account, please contact us at <a href='mailto:support@nmrbox.org'>support@nmrbox.org</a>",
     'account_not_found'      => 'Username or password is incorrect, please try again.',
     'account_not_activated'  => 'This user account is not activated.',
     'account_suspended'      => 'User account suspended because of too many login attempts. Try again later.',
@@ -23,7 +23,7 @@ return array(
     ),
 
     'forgot-password' => array(
-        'error'   => 'Email address not found.  Please enter your institutional email address associated with your account and try again.',
+        'error'   => '<b>Email address not found.  Please enter your institutional email address associated with your account and try again.</b>',
         'success' => 'Password recovery email successfully sent.',
     ),
 
