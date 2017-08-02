@@ -125,17 +125,18 @@ People Index
                                 <th class="hidden"></th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Email</th>
+                                {{--<th>Email</th>--}}
                                 <th>Account Name</th>
                                 <th>Institution</th>
                                 <th class="col-md-1">Principal<br>Investigator</th>
                                 <th>Department</th>
                                 <th>Category</th>
                                 <th>Classifications</th>
-                                <th>Address</th>
+                                {{--<th>Address</th>--}}
                                 <th>City</th>
                                 <th>State</th>
-                                <th>Zip</th>
+                                <th>Country</th>
+                                {{--<th>Zip</th>--}}
                                 <th>NMRbox Account #</th>
                             </tr>
                         </thead>
@@ -144,17 +145,18 @@ People Index
                                 <th class="no-search ref_search hidden"></th>
                                 <th class="col-md-1 ref_search">First Name</th>
                                 <th class="col-md-1 ref_search">Last Name</th>
-                                <th class="col-md-1 ref_search">Email</th>
+                                {{--<th class="col-md-1 ref_search">Email</th>--}}
                                 <th class="col-md-1 ref_search">Account Name</th>
                                 <th class="col-md-1 ref_search">Institution</th>
                                 <th class="col-md-1 ref_search">PI</th>
                                 <th class="col-md-1 ref_search">Department</th>
                                 <th class="col-md-1 ref_search">Category</th>
                                 <th class="col-md-1 ref_search">Classifications</th>
-                                <th class="col-md-1 ref_search">Address</th>
+                                {{--<th class="col-md-1 ref_search">Address</th>--}}
                                 <th class="col-md-1 ref_search">City</th>
                                 <th class="col-md-1 ref_search">State</th>
-                                <th class="col-md-1 ref_search">Zip</th>
+                                <th class="col-md-1 ref_search">Country</th>
+                                {{--<th class="col-md-1 ref_search">Zip</th>--}}
                                 <th class="col-md-1 no-search ref_search"></th>
                             </tr>
                         </thead>
@@ -165,7 +167,7 @@ People Index
                                     <td class="hidden">{!! $person->id !!}</td>
                                     <td class="col-md-1">{!! $person->first_name !!}</td>
                                     <td class="col-md-1">{!! $person->last_name !!}</td>
-                                    <td class="col-md-1">{!! $person->email !!}</td>
+                                    {{--<td class="col-md-1">{!! $person->email !!}</td>--}}
                                     <td class="col-md-1">{!! $person->nmrbox_acct !!}</td>
                                     <td class="col-md-1">{!! $person->institution()->get()->first() !!}</td>
                                     <td class="col-md-1">{!! $person->pi !!}</td>
@@ -176,10 +178,11 @@ People Index
                                             <div>{!! $group->name !!}</div>
                                         @endforeach
                                     </td>
-                                    <td class="col-md-1">{!! $person->address1 !!}</td>
+                                    {{--<td class="col-md-1">{!! $person->address1 !!}</td>--}}
                                     <td class="col-md-1">{!! $person->city !!}</td>
                                     <td class="col-md-1">{!! $person->state_province !!}</td>
-                                    <td class="col-md-1">{!! $person->zip_code !!}</td>
+                                    <td class="col-md-1">{!! $person->country !!}</td>
+                                    {{--<td class="col-md-1">{!! $person->zip_code !!}</td>--}}
                                     <td class="col-md-1">
                                         <a href="{!! URL::to('admin/people/' . $person->id . '/edit' ) !!}"><i class="fa fa-fw fa-pencil text-warning" title="Update person"></i></a>
                                         <a href="#" ><i class="fa fa-fw fa-times text-danger delete-person" data-url="{!! route("person.delete", array('person' => $person->id)) !!}" data-person_name="{!! $person->first_name . " " . $person->last_name !!}" title="Delete person"></i></a>
