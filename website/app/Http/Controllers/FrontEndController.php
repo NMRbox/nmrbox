@@ -235,10 +235,10 @@ class FrontEndController extends Controller
 
         try {
             // Adding custom LDAP library class and authenticating
-            $ldap = new Ldap;
-            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
+            /*$ldap = new Ldap;
+            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));*/
 
-            /* Test (Localhost login code to skip LDAP authentication)
+            /* Test (Localhost login code to skip LDAP authentication) */
             $ldap_login = true;
             $person = Person::where('id', 226)->get()->first();
             if(!$person) {
@@ -719,6 +719,17 @@ class FrontEndController extends Controller
     }
 
 
+    /**
+     * Downloadable VM
+     *
+     * @return Redirect
+     */
+    public function downloadVM()
+    {
+        // DB entry goes here
+        //return Redirect::route('my-account')->with('success', 'Your request has been received. You will receive a confirmation email in next 2 hrs along with required instructions.');
+        return redirect()->back()->withSuccess('Your request has been received. You will receive a confirmation email in next 2 hrs along with required instructions.');
+    }
 
 
 }

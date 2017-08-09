@@ -375,6 +375,9 @@ Route::group(array('middleware' => 'SentinelUser'), function () {
 Route::get('my-account', array('as' => 'my-account', 'uses' => 'FrontEndController@myAccount'));
 });
 
+# downloadable VM form
+Route::post('download_vm',array('as' => 'download_vm','uses' => 'FrontEndController@downloadVM'));
+
 # contact form
 Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@postContact'));
 

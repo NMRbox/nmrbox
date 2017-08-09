@@ -270,7 +270,39 @@
                     </div>
                 @endforelse
             </div>
-@stop
+
+            {{-- VM download tiles --}}
+            <div class="row">
+                <div class="welcome text-left">
+                    <h3 class="text-left">Request Downloadable VM</h3>
+                </div>
+                <div class="row"><br>
+
+                    {!! BootForm::open(array('url'=>route('download_vm'), 'class' => 'form ' )) !!}
+
+                    <div class="form-group col-lg-4">
+                        {!! BootForm::text('vm_username', "VM username", $person->nmrbox_acct , array('class' => 'form-control', 'maxlength'=> 64, 'required' => 'required', 'disabled'))!!}
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        {!! BootForm::select('vm', "VM Versions",
+                                [null=>'Please Select'] + [1=>'Version 1'] + [2=>'Version 2'] + [3=>'Version 3'], null, array('class' => 'form-control select_pi', 'maxlength'=> 32, 'required' => 'required')) !!}
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        {!! BootForm::text('vm_password', "VM Password", null, array('class' => 'form-control', 'maxlength'=> 32, 'required' => 'required'))!!}
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        {!! BootForm::submit('Request for Downloadable VM', array('class'=>'btn btn-primary btn-lg btn-block ')) !!}
+                    </div>
+                    {!! BootForm::close() !!}
+
+                </div>
+            </div>
+
+
+            @stop
 
 {{-- page level scripts --}}
 @section('footer_scripts')
