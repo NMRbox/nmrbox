@@ -70,7 +70,10 @@ class ChandraController extends Controller {
         if( Page::where('slug', '=', $name)->exists() ) {
             // $name is the page's slug
             $page = Page::where('slug', $name)->get()->first();
-            return View::make('basic_page')->with('page', $page);
+            //dd($page);
+            //return View::make('basic_page')->with('page', $page);
+            return response( json_encode( array( 'data' => $page ) ), 200 )
+                ->header( 'Content-Type', 'application/json' );
         }
         else
         {

@@ -294,7 +294,7 @@
                     </div>
 
                     <div class="form-group col-lg-4">
-                        {!! BootForm::submit('Request for Downloadable VM', array('class'=>'btn btn-primary btn-lg btn-block ')) !!}
+                        {!! BootForm::submit('Request Downloadable VM', array('class'=>'btn btn-primary btn-lg btn-block ')) !!}
                     </div>
                     {!! BootForm::close() !!}
 
