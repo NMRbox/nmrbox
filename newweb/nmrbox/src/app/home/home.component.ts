@@ -44,11 +44,13 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  gotoCommunityPage(contentType: string, contentId: string): void {
+  //gotoCommunityPage(contentType: string, contentId: string): void {
+  gotoCommunityPage(contentType: string): void {
     if(!contentType || contentType == "all"){
       this.router.navigate(['/community']);
     } else {
-      this.router.navigate(['/c', contentType, contentId]);
+      //this.router.navigate(['/c', contentType, contentId]);
+      this.router.navigate(['/c', contentType]);
     }
   }
 }

@@ -6,7 +6,26 @@
 <md-tab-group (selectedIndexChange)="selectedIndexChange($event)" [selectedIndex]="selectedIndex">
 
   <md-tab id="team-leadership" label="Leadership" class="co-sub-icon co-icon-med team-icon-leadership">
+    <!-- test -->
     <div class="grid-outer-wrapper">
+      <div class="grid-content-wrapper">
+        <div class="community-details" *ngIf="pageContent">
+          <section class="section-detail">
+
+            <div *ngIf="pageContent.content; then htmlBlock else plainTextBlock"></div>
+            <ng-template #htmlBlock>
+              <div id="support-detail-description" [innerHTML]="pageContent.content"></div>
+            </ng-template>
+
+          </section>
+
+          <br/><br/>
+        </div>
+      </div>
+    </div>
+
+    <!-- eof test -->
+    <!--<div class="grid-outer-wrapper">
       <div class="grid-content-wrapper">
         <h3>Director</h3>
         <p>
@@ -66,7 +85,7 @@
           <a href="mailto:moraru@uchc.edu">moraru@uchc.edu</a>
         </p>
       </div>
-    </div>
+    </div>-->
     <br/><br/>
   </md-tab>
 

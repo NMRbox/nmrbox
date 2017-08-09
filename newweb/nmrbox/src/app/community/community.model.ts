@@ -1,9 +1,11 @@
 export class CommunityModel {
   id: number;
   contentType: string;
+  title: string;
   name: string;
   synopsis: string;
   description: string;
+  content: string;
   descriptionHtml: string;
   imgUrl: string;
   url: string;

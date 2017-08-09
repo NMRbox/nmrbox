@@ -83,6 +83,8 @@ export class SoftwareListComponent implements OnInit {
 
   }
 
+  // Calling the 'SoftwareService' mock API (software.service.ts) to pull a list of all 'software' records from the mock database (software-data.service.ts)
+  // It also runs a 'getSwtList' function to pull a list of all 'software type' records from the same mock database.
   getSoftwareList(): void {
     this.softwareService.getSoftwareList().then(softwareList => this.softwareList = softwareList);
     this.clearFilters();

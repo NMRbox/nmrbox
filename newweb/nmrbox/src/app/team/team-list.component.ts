@@ -15,6 +15,8 @@ import { TeamService }  from './team.service';
 })
 export class TeamListComponent implements OnInit {
 
+  @Input() pageContent: TeamModel;
+
   // Tabs
   @Input() selectedIndex: number=0;
   @Input() routeIndex: number;
@@ -36,6 +38,10 @@ export class TeamListComponent implements OnInit {
         };
 
   ngOnInit(): void {
+
+
+    this.showPageContent('people-leadership');
+
     // ROUTES
     // Tabs: go to specific subsection
     this.route.params.subscribe( params =>
@@ -55,10 +61,16 @@ export class TeamListComponent implements OnInit {
     if(!index) index = 0;
     this.selectedIndex = index;
     this.router.navigate(['/team', index]);
-    //console.log("selectedIndexChange to: ", this.selectedIndex);
+    console.log("selectedIndexChange to: ", this.selectedIndex);
   }
 
   gotoDetail(): void {
     this.router.navigate(['/t/detail']);
   }
+
+  /* test for page content */
+    showPageContent(pageName: string): void {
+        this.teamService.getPageContent(pageName).then(pageContent => this.pageContent = pageContent);
+
+    }
 }

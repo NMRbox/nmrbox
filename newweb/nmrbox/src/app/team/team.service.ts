@@ -7,12 +7,11 @@ import { TeamModel } from './team.model';
 @Injectable()
 export class TeamService {
 
-  private baseUrl = 'api/communityList';  // URL to web api
-
+  private baseUrl = 'https://webdev.nmrbox.org:8001/';  // URL to web api
   private supportUrl = 'api/comSupportList';  // URL to web api
   private blogUrl = 'api/comBlogList';  // URL to web api
   private eventsUrl = 'api/comEventsList';  // URL to web api
-  
+
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
@@ -25,7 +24,23 @@ export class TeamService {
       .catch(this.handleError);
   }
 
-  getCommunityList(): Promise<TeamModel[]> {
+  getPageContent(type: string): Promise<TeamModel> {
+
+//      let url = 'http://nmrbox.dev/documentation';
+
+      let url = this.baseUrl + `/${type}`;
+
+      console.log("getSoftware URL: ", url);
+
+      return this.http
+          .get(url)
+          .toPromise()
+          .then(response => response.json().data as TeamModel)
+          .catch(this.handleError);
+
+  }
+
+  /*getCommunityList(): Promise<TeamModel[]> {
     return this.http
       .get(this.blogUrl)
       .toPromise()
@@ -62,7 +77,7 @@ export class TeamService {
       .toPromise()
       .then(response => response.json().data as TeamModel[])
       .catch(this.handleError);
-  }
+  }*/
 
   getDetail(id: number, type: string): Promise<TeamModel> {
     
@@ -106,7 +121,7 @@ export class TeamService {
       .catch(this.handleError);
   }
 
-  searchSoftware(term: string): Promise<TeamModel[]> {
+  /*searchSoftware(term: string): Promise<TeamModel[]> {
 
     //let url = this.blogUrl + '?name=' + name;
 
@@ -144,7 +159,7 @@ export class TeamService {
         .get(`${this.eventsUrl}/?dateCurrent=${dateCurrent}`)
         .toPromise()
         .then((r: Response) => r.json().data as TeamModel[]);
-  }
+  }*/
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

@@ -12,6 +12,7 @@
   </md-toolbar>
   <div class="community-details" *ngIf="community">
     <h1>{{community?.name}}</h1>
+    <h1>{{community?.title}}</h1>
     <section class="section-detail">
       <p class="subheading">{{community?.dateEvent}}</p>
       <p class="subheading">{{community?.synopsis}}</p>
@@ -19,9 +20,9 @@
       <p *ngIf="community.author" class="subheading">by {{community?.author}}</p>
       <p>{{community?.authorTitle}}</p>
 
-      <div *ngIf="community.descriptionHtml; then htmlBlock else plainTextBlock"></div>
+      <div *ngIf="community.content; then htmlBlock else plainTextBlock"></div>
       <ng-template #htmlBlock>
-        <div id="support-detail-description" [innerHTML]="community.descriptionHtml"></div>
+        <div id="support-detail-description" [innerHTML]="community.content"></div>
       </ng-template>
       <ng-template #plainTextBlock>
         <div class="section-detail-page" id="support-detail-description"><p>{{community?.description}}</p></div>

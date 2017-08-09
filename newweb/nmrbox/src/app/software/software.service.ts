@@ -21,6 +21,7 @@ export class SoftwareService {
       .toPromise()
       .then(res => res.json().data as SoftwareModel)
       .catch(this.handleError);
+
   }
 
   getSoftwareList(): Promise<SoftwareModel[]> {
@@ -40,9 +41,7 @@ export class SoftwareService {
   }
 
   getFilter(name: string): Promise<FilterModel> {
-    
     console.log("getSwt, name: ", name);
-
     return this.http
       .get(`api/swtList/?name=${name}`)
       .toPromise()

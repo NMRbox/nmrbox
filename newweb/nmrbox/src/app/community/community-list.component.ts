@@ -141,7 +141,11 @@ export class CommunityListComponent implements OnInit {
   }
 
   // Navigation
-  gotoDetail(community: CommunityModel): void {
-    this.router.navigate(['/c', community.contentType, community.id]);
+  //gotoDetail(community: CommunityModel): void {
+  gotoDetail(pageUrl: string): void {
+    //this.router.navigate(['/c', community.contentType, community.id]);
+      console.log('component url : ', pageUrl);
+    this.router.navigate(['/c', pageUrl]);
   }
+
 }

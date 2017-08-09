@@ -7,8 +7,9 @@ import { CommunityModel } from './community.model';
 @Injectable()
 export class CommunityService {
 
+  // test url
+  private appUrl = 'https://webdev.nmrbox.org:8001'; // Main site url
   private baseUrl = 'api/communityList';  // URL to web api
-
   private supportUrl = 'api/comSupportList';  // URL to web api
   private blogUrl = 'api/comBlogList';  // URL to web api
   private eventsUrl = 'api/comEventsList';  // URL to web api
@@ -83,13 +84,27 @@ export class CommunityService {
       .catch(this.handleError);
   }
 
+    /* test (redirecting from router for page details */
+    getPageContent(pageUrl: string): Promise<CommunityModel> {
+
+        let url = this.appUrl + '/' + pageUrl;
+        console.log("URL: ", url);
+        return this.http
+          .get(url)
+          .toPromise()
+          .then(response => response.json().data as CommunityModel)
+          .catch(this.handleError);
+    }
+    /* test */
+
   //getSoftware(type: string, id: number): Promise<CommunityModel> {
   getCommunityDetail(id: number, type: string): Promise<CommunityModel> {
-    
+
     let baseUrl = `${this.blogUrl}`;
 
-    console.log("getSoftware TYPE: ", type); 
-    
+    console.log("ID: ", id);
+    console.log("TYPE: ", type);
+
     if(type == "support"){
       baseUrl = `${this.supportUrl}`;
     } else if(type == "blog") {
@@ -98,16 +113,69 @@ export class CommunityService {
       baseUrl = `${this.eventsUrl}`;
     }
 
-    let url = baseUrl + `/${id}`;
+    //let url = baseUrl + `/${id}`;
+    let url = 'https://webdev.nmrbox.org:8001/documentation';
 
     console.log("getSoftware URL: ", url);
-    
+
     return this.http
       .get(url)
       .toPromise()
       .then(response => response.json().data as CommunityModel)
       .catch(this.handleError);
+
   }
+
+  /* test function */
+    filterSupportType(supportType: string): Promise<CommunityModel[]> {
+        let url = this.appUrl;
+        if(supportType == "workflow"){
+            let url = this.appUrl; // should be like http://nmrbox.dev/overview
+        } else if(supportType == "tutorial") {
+            let url = this.appUrl;
+        } else if(supportType == "swdoc"){
+            let url = this.appUrl;
+        } else {
+            let url = this.appUrl;
+        }
+
+        return this.http
+            //.get(`${this.supportUrl}/?supportType=${supportType}`)
+            .get(url)
+            .toPromise()
+            .then((r: Response) => r.json().data as CommunityModel[]);
+    }
+
+    /*filterSupportType(supportType: string): Promise<CommunityModel[]> {
+
+        return this.http
+            .get(`${this.supportUrl}/?supportType=${supportType}`)
+            .toPromise()
+            .then((r: Response) => r.json().data as CommunityModel[]);
+    }*/
+
+    filterSoftwareType(softwareType: string): Promise<CommunityModel[]> {
+
+        return this.http
+            .get(`${this.supportUrl}/?software_types=${softwareType}`)
+            .toPromise()
+            .then((r: Response) => r.json().data as CommunityModel[]);
+    }
+
+    filterMostRecent(dateCurrent: boolean): Promise<CommunityModel[]> {
+
+        return this.http
+            .get(`${this.blogUrl}/?dateCurrent=${dateCurrent}`)
+            .toPromise()
+            .then((r: Response) => r.json().data as CommunityModel[]);
+    }
+    filterCurrentEvents(dateCurrent: boolean): Promise<CommunityModel[]> {
+
+        return this.http
+            .get(`${this.eventsUrl}/?dateCurrent=${dateCurrent}`)
+            .toPromise()
+            .then((r: Response) => r.json().data as CommunityModel[]);
+    }
 
   update(software: CommunityModel): Promise<CommunityModel> {
     const url = `${this.baseUrl}/${software.id}`;
@@ -132,36 +200,6 @@ export class CommunityService {
 
     return this.http
         .get(`${this.supportUrl}/?name=${term}`)
-        .toPromise()
-        .then((r: Response) => r.json().data as CommunityModel[]);
-  }
-
-  filterSoftwareType(softwareType: string): Promise<CommunityModel[]> {
-
-    return this.http
-        .get(`${this.supportUrl}/?software_types=${softwareType}`)
-        .toPromise()
-        .then((r: Response) => r.json().data as CommunityModel[]);
-  }
-
-  filterSupportType(supportType: string): Promise<CommunityModel[]> {
-
-    return this.http
-        .get(`${this.supportUrl}/?supportType=${supportType}`)
-        .toPromise()
-        .then((r: Response) => r.json().data as CommunityModel[]);
-  }
-  filterMostRecent(dateCurrent: boolean): Promise<CommunityModel[]> {
-
-    return this.http
-        .get(`${this.blogUrl}/?dateCurrent=${dateCurrent}`)
-        .toPromise()
-        .then((r: Response) => r.json().data as CommunityModel[]);
-  }
-  filterCurrentEvents(dateCurrent: boolean): Promise<CommunityModel[]> {
-
-    return this.http
-        .get(`${this.eventsUrl}/?dateCurrent=${dateCurrent}`)
         .toPromise()
         .then((r: Response) => r.json().data as CommunityModel[]);
   }

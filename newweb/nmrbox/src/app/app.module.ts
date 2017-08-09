@@ -42,7 +42,7 @@ import { AppRoutingModule } from './app-routing.module';
     HttpModule,
     BrowserAnimationsModule,
     MdButtonModule, MdCheckboxModule, MdInputModule, MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdListModule, MdGridListModule, MdTabsModule, MdCardModule, MdChipsModule, // material.io modules
-    InMemoryWebApiModule.forRoot(SoftwareDataService),
+    //InMemoryWebApiModule.forRoot(SoftwareDataService),
     SwiperModule,
     AppRoutingModule
   ],

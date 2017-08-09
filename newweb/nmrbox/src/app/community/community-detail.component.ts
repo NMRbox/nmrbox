@@ -21,9 +21,13 @@ export class CommunityDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params
+    /*this.route.params
       .switchMap((params: Params) => this.communityService.getCommunityDetail(+params['id'], params['type']))
-      .subscribe(community => this.community = community);
+      .subscribe(community => this.community = community);*/
+    /* test (new community details page) */
+      this.route.params
+        .switchMap((params: Params) => this.communityService.getPageContent(params['pageUrl']))
+        .subscribe(community => this.community = community);
   }
 
   goBack(): void {

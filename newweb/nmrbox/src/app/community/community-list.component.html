@@ -38,7 +38,7 @@
     <div id="com-support-nmrbox" class="grid-outer-wrapper">
       <div class="grid-content-wrapper">
       <h3 class="blue">NMRbox Support</h3>
-      <md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
+      <!--<md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
         <md-grid-tile class="tile-solid tile-transparent" *ngFor="let support of supportNmrboxList" (click)="gotoDetail(support); $event.stopPropagation()">
           <md-card class="sw-card tile-card-short">
             <md-card-header>
@@ -50,6 +50,53 @@
               </p>
               <br/>
               <a href="/">Read more</a>
+            </md-card-content>
+          </md-card>
+        </md-grid-tile>
+      </md-grid-list>-->
+        <md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
+          <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('documentation'); $event.stopPropagation()">
+            <md-card class="sw-card tile-card-short">
+              <md-card-header>
+                <md-card-title>Getting Started</md-card-title>
+              </md-card-header>
+              <md-card-content>
+                <p>
+                  NMRbox documentation
+                </p>
+                <br/>
+                <!--<a href="/">Read more</a>-->
+                <a (click)="gotoDetail('documentation'); $event.stopPropagation();">Read More</a>
+              </md-card-content>
+            </md-card>
+          </md-grid-tile>
+
+          <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('/'); $event.stopPropagation()">
+          <md-card class="sw-card tile-card-short">
+            <md-card-header>
+              <md-card-title>NMRbox FAQs</md-card-title>
+            </md-card-header>
+            <md-card-content>
+              <p>
+                Here are some tips and answers to frequently asked questions from our NMRbox Community.
+              </p>
+              <br/>
+              <a href="/">Read more</a>
+            </md-card-content>
+          </md-card>
+        </md-grid-tile>
+
+        <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('contact-us'); $event.stopPropagation()">
+          <md-card class="sw-card tile-card-short">
+            <md-card-header>
+              <md-card-title>Contact NMRbox support</md-card-title>
+            </md-card-header>
+            <md-card-content>
+              <p>
+                We have a team ready to assist you with your NMRbox support needs
+              </p>
+              <br/>
+              <a (click)="gotoDetail('contact-us')">Read more</a>
             </md-card-content>
           </md-card>
         </md-grid-tile>
