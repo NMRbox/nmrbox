@@ -34,14 +34,14 @@ $(document).ready(function () {
             data: 'name=' + name + '&_token=' + $('input#user_csrf_token').val(),
             dataType: 'json',
             success: function(response) {
+                $("#all_workshops").load(location.href + " #all_workshops");
                 $('#success_msg').html(response.message);
-                show_alert('success');
+                show_alert('success', 'no');
                 window.scrollTo(0,0);
-                location.reload();
             },
             error: function (response) {
                 $('#error_msg').html(" You already have been registered for this workshop.");
-                show_alert('error');
+                show_alert('error', 'no');
             }
         })
     });

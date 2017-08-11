@@ -227,7 +227,7 @@ class WorkshopsController extends Controller
         }
 
         if($classification->save() !== false){
-            return response( json_encode( array( 'message' => 'Successfully registered. ', 'type' => 'success' ) ), 200 )
+            return response( json_encode( array( 'message' => 'Thank you for registering for a workshop.  You will receive more information from NMRbox staff by email as the workshop date approaches.', 'type' => 'success' ) ), 200 )
                 ->header( 'Content-Type', 'application/json' );
         } else {
             return response( json_encode( array( 'message' => 'Sorry, workshop registration unsuccessful. Try again. ', 'type' => 'error' ) ), 200 )

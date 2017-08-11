@@ -45,7 +45,7 @@
                     <span id="error_msg"></span>
                 </div>
             </div>
-            <div class="row"><br>
+            <div class="row" id="all_workshops"><br>
                 @forelse($upcoming_workshops as $workshop)
                     {!! BootForm::open(array('url' => URL::to('register_person_workshop'), 'method' => 'post', 'class' => 'form-horizontal')) !!}
                     <div class="col-md-6">
