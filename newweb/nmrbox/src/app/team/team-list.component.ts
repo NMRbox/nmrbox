@@ -58,10 +58,21 @@ export class TeamListComponent implements OnInit {
 
    // Tabs
   selectedIndexChange(index: number): void {
+
     if(!index) index = 0;
     this.selectedIndex = index;
-    this.router.navigate(['/team', index]);
-    console.log("selectedIndexChange to: ", this.selectedIndex);
+
+    if (index === 0){
+        this.showPageContent('people-leadership');
+    }
+    else if (index === 1) {
+        this.showPageContent('people-trd');
+    }
+    else if (index === 2) {
+        this.showPageContent('people-integral');
+    }
+    //this.router.navigate(['/team', index]);
+    console.log("selectedIndexChange to: ", index);
   }
 
   gotoDetail(): void {

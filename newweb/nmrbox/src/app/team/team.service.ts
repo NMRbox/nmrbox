@@ -7,7 +7,8 @@ import { TeamModel } from './team.model';
 @Injectable()
 export class TeamService {
 
-  private baseUrl = 'https://webdev.nmrbox.org:8001/';  // URL to web api
+  private appUrl = 'https://webdev.nmrbox.org:8001'; // Main site url
+  private baseUrl = 'api/teamSupportList/';  // URL to web api
   private supportUrl = 'api/comSupportList';  // URL to web api
   private blogUrl = 'api/comBlogList';  // URL to web api
   private eventsUrl = 'api/comEventsList';  // URL to web api
@@ -24,11 +25,12 @@ export class TeamService {
       .catch(this.handleError);
   }
 
-  getPageContent(type: string): Promise<TeamModel> {
+  /*getPageContent(type: string): Promise<TeamModel> {
 
 //      let url = 'http://nmrbox.dev/documentation';
 
-      let url = this.baseUrl + `/${type}`;
+      let url: string;
+      url = this.appUrl + `/${type}`;
 
       console.log("getSoftware URL: ", url);
 
@@ -38,46 +40,20 @@ export class TeamService {
           .then(response => response.json().data as TeamModel)
           .catch(this.handleError);
 
-  }
-
-  /*getCommunityList(): Promise<TeamModel[]> {
-    return this.http
-      .get(this.blogUrl)
-      .toPromise()
-      .then(response => response.json().data as TeamModel[])
-      .catch(this.handleError);
-  }
-
-  getSupportList(): Promise<TeamModel[]> {
-    return this.http
-      .get(this.supportUrl)
-      .toPromise()
-      .then(response => response.json().data as TeamModel[])
-      .catch(this.handleError);
-  }
-  getSupportSubList(): Promise<TeamModel[]> {
-    return this.http
-      .get(this.supportUrl)
-      .toPromise()
-      .then(response => response.json().data as TeamModel[])
-      .catch(this.handleError);
-  }
-
-  getBlogList(): Promise<TeamModel[]> {
-    return this.http
-      .get(this.blogUrl)
-      .toPromise()
-      .then(response => response.json().data as TeamModel[])
-      .catch(this.handleError);
-  }
-
-  getEventsList(): Promise<TeamModel[]> {
-    return this.http
-      .get(this.eventsUrl)
-      .toPromise()
-      .then(response => response.json().data as TeamModel[])
-      .catch(this.handleError);
   }*/
+
+    /* test (redirecting from router for page details */
+    getPageContent(pageUrl: string): Promise<TeamModel> {
+
+        let url = this.appUrl + '/' + pageUrl;
+        console.log("URL: ", url);
+        return this.http
+            .get(url)
+            .toPromise()
+            .then(response => response.json().data as TeamModel)
+            .catch(this.handleError);
+    }
+    /* test */
 
   getDetail(id: number, type: string): Promise<TeamModel> {
     
@@ -120,46 +96,6 @@ export class TeamService {
       .then(() => null)
       .catch(this.handleError);
   }
-
-  /*searchSoftware(term: string): Promise<TeamModel[]> {
-
-    //let url = this.blogUrl + '?name=' + name;
-
-    return this.http
-        .get(`${this.supportUrl}/?name=${term}`)
-        .toPromise()
-        .then((r: Response) => r.json().data as TeamModel[]);
-  }
-
-  filterSoftwareType(softwareType: string): Promise<TeamModel[]> {
-
-    return this.http
-        .get(`${this.supportUrl}/?software_types=${softwareType}`)
-        .toPromise()
-        .then((r: Response) => r.json().data as TeamModel[]);
-  }
-
-  filterSupportType(supportType: string): Promise<TeamModel[]> {
-
-    return this.http
-        .get(`${this.supportUrl}/?supportType=${supportType}`)
-        .toPromise()
-        .then((r: Response) => r.json().data as TeamModel[]);
-  }
-  filterMostRecent(dateCurrent: boolean): Promise<TeamModel[]> {
-
-    return this.http
-        .get(`${this.blogUrl}/?dateCurrent=${dateCurrent}`)
-        .toPromise()
-        .then((r: Response) => r.json().data as TeamModel[]);
-  }
-  filterCurrentEvents(dateCurrent: boolean): Promise<TeamModel[]> {
-
-    return this.http
-        .get(`${this.eventsUrl}/?dateCurrent=${dateCurrent}`)
-        .toPromise()
-        .then((r: Response) => r.json().data as TeamModel[]);
-  }*/
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

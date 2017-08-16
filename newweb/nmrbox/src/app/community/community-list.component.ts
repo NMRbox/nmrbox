@@ -116,7 +116,6 @@ export class CommunityListComponent implements OnInit {
 
     if(supportType == "nmrbox"){
       this.communityService.filterSupportType(supportType).then(supportNmrboxList => this.supportNmrboxList = supportNmrboxList);
-
     } else if (supportType == "tutorial"){
       this.communityService.filterSupportType(supportType).then(supportTutorialList => this.supportTutorialList = supportTutorialList);
     } else if (supportType == "swdoc"){

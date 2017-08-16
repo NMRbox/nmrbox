@@ -92,6 +92,22 @@
   <md-tab id="team-research" label="Research" class="co-sub-icon co-icon-med team-icon-research">
     <div class="grid-outer-wrapper">
       <div class="grid-content-wrapper">
+        <div class="community-details" *ngIf="pageContent">
+          <section class="section-detail">
+
+            <div *ngIf="pageContent.content; then htmlBlock else plainTextBlock"></div>
+            <ng-template #htmlBlock>
+              <div id="support-detail-description" [innerHTML]="pageContent.content"></div>
+            </ng-template>
+
+          </section>
+
+          <br/><br/>
+        </div>
+      </div>
+    </div>
+    <!--<div class="grid-outer-wrapper">
+      <div class="grid-content-wrapper">
         <h2><a (click)="gotoDetail(); $event.stopPropagation();">Technology Research and Development #1</a></h2>
         <p class="subheading">
           A software environment for bio-NMR Data Processing and Analysis: NMRbox
@@ -140,12 +156,28 @@
           Hesam Dashti
         </p>
       </div>
-    </div>
+    </div>-->
     <br/><br/>
   </md-tab>
 
   <md-tab id="team-integral" label="Integral">
     <div class="grid-outer-wrapper">
+      <div class="grid-content-wrapper">
+        <div class="community-details" *ngIf="pageContent">
+          <section class="section-detail">
+
+            <div *ngIf="pageContent.content; then htmlBlock else plainTextBlock"></div>
+            <ng-template #htmlBlock>
+              <div id="support-detail-description" [innerHTML]="pageContent.content"></div>
+            </ng-template>
+
+          </section>
+
+          <br/><br/>
+        </div>
+      </div>
+    </div>
+    <!--<div class="grid-outer-wrapper">
       <div class="grid-content-wrapper">
         <h2>External Advisory Board</h2>
         <p>
@@ -239,7 +271,7 @@
           <strong>Terry Wright </strong><br/>
         </p>
       </div>
-    </div>
+    </div>-->
     <br/><br/>
   </md-tab>
 
