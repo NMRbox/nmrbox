@@ -335,6 +335,18 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{workshop}/delete', array('as' => 'workshop.delete', 'uses' => 'WorkshopsController@destroy'));
     });
 
+
+    # Workshop Management
+    Route::model('vmdownload', 'App\VMDownload');
+    Route::group(array('prefix' => 'vmdownload'), function () {
+        Route::get('/', array('as' => 'admin/vmdownload', 'uses' => 'VMDownloadController@index'));
+        Route::get('create', array('as' => 'vmdownload.create', 'uses' => 'VMDownloadController@create'));
+        Route::post('create', array('as' => 'vmdownload.store', 'uses' => 'VMDownloadController@store'));
+        Route::get('{vmdownload}/edit', array('as' => 'vmdownload.edit', 'uses' => 'VMDownloadController@edit'));
+        Route::put('{vmdownload}/edit', array('as' => 'vmdownload.update', 'uses' => 'VMDownloadController@update'));
+        Route::get('{vmdownload}/delete', array('as' => 'vmdownload.delete', 'uses' => 'VMDownloadController@destroy'));
+    });
+
     //Remaining pages will be called from below controller method
     //in real world scenario, you may be required to define all routes manually
     Route::get('{name?}', 'ChandraController@showView');

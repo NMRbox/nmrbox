@@ -141,6 +141,7 @@
                 </li>
             </ul>
         </li>
+
         {{-- TODO: if the lab roles related table remove permanently from the DB, then all the lab roles related pages should be deleted. --}}
         {{--<li class="menu-dropdown {{ (Request::is('admin/lab_roles') || Request::is('admin/lab_roles/create') || Request::is('admin/lab_roles/*') ? 'active' : '') }}">
             <a href="#">

@@ -46,7 +46,7 @@ $(document).ready(function () {
         })
     });
 
-    // deleting confirmation
+tab     // deleting confirmation
     $('.delete_workshop').on("click", function(event) {
         event.preventDefault();
         var button = $(event.target);

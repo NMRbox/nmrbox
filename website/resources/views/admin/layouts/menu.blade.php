@@ -110,7 +110,7 @@
                 </li>
             </ul>
         </li>--}}
-        <li class="menu-dropdown {{ (Request::is('admin/vm') || Request::is('admin/vm/create') || Request::is('admin/vm/*') ? 'active' : '') }}">
+        <li class="menu-dropdown {{ (Request::is('admin/vm') || Request::is('admin/vm/create') || Request::is('admin/vm/*') || Request::is('admin/vmdownload') || Request::is('admin/vmdownload/*') ? 'active' : '') }}">
             <a href="#">
                 <i class="menu-icon  fa fa-fw fa-cubes"></i>
                 <span>VM Versions</span>
@@ -120,6 +120,11 @@
                 <li {{ (Request::is('admin/vm') ? 'class=active' : '') }}>
                     <a href="{{ URL::to('admin/vm') }}">
                         VM Index
+                    </a>
+                </li>
+                <li {{ (Request::is('admin/vmdownload') ? 'class=active' : '') }}>
+                    <a href="{{ URL::to('admin/vmdownload') }}">
+                        VM Downloads Index
                     </a>
                 </li>
             </ul>

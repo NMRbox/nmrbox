@@ -4,7 +4,7 @@
     array('class' => 'input-lg', 'required' => 'required', 'placeholder'=>'Software Name', "onkeyup"=>"javascript:this.value=this.value.toUpperCase();"))!!}
 
 {!! BootForm::select('display', "Display this package publicly on the website?",
-    array("0"=>"No", "1"=>"Yes"), $software->display, array()) !!}
+    array("false"=>"No", "true"=>"Yes"), $software->boolToString($software->display), array()) !!}
 
 {!! BootForm::text('short_title', "Short Title", null,
     array('class' => 'input-lg', 'required' => 'false', 'placeholder'=>'Short title for software'))!!}

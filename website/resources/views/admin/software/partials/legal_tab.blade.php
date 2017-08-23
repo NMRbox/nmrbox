@@ -33,7 +33,6 @@
 {!! BootForm::select('commercial_release', "Permission for commercial release?",
     array("false"=>"No", "true"=>"Yes"), $software->boolToString($software->commercial_release), array()) !!}
 
-
 {!! BootForm::select('devel_redistribute_doc', "Has developer given permission to redistribute documentation?",
     array("false"=>"No", "true"=>"Yes"), $software->boolToString($software->devel_redistribute_doc), array()) !!}
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\VMDownload;
 use Illuminate\Http\Request;
 use App\Institution;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
@@ -25,6 +26,7 @@ use App\Classification;
 use App\ClassificationPerson;
 use App\Reminder;
 use App\Workshop;
+use App\VM;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use App\Library\Ldap;
 
@@ -311,7 +313,10 @@ class FrontEndController extends Controller
         //Get all the upcoming workshops
         $workshops = Workshop::whereDate('end_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
 
-        return View::make('user_dashboard', compact('user', 'person', 'classifications', 'workshops'));
+        //fetching all the downloadable VMs
+        $vms = VM::where('downloadable', 'true')->lists('name', 'id')->all();
+
+        return View::make('user_dashboard', compact('user', 'person', 'classifications', 'workshops', 'vms'));
     }
 
 
@@ -726,9 +731,35 @@ class FrontEndController extends Controller
      */
     public function downloadVM()
     {
-        // DB entry goes here
-        //return Redirect::route('my-account')->with('success', 'Your request has been received. You will receive a confirmation email in next 2 hrs along with required instructions.');
-        return redirect()->back()->withSuccess('Your request has been received. You will receive a confirmation email in next 2 hrs along with required instructions.');
+        // loggedin checking
+        if (!Sentinel::check()) {
+            return Redirect::route('my-account');
+        }
+
+        try {
+            // get user details
+            $user = Sentinel::getUser();
+
+            // DB entry goes here
+            $downloadable_vm = new VMDownload(
+                array(
+                    'person_id' => $user->id,
+                    'vm_id' => Input::get('vm'),
+                    'username' => Input::get('vm_username'),
+                    'password' => Input::get('vm_password'),
+                )
+            );
+
+            $downloadable_vm->save();
+
+            return redirect()->back()->withSuccess('Your request has been received. An email with a custom generated downloadable link will be sent to you in next few hours.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            //dd($e);
+            // Redirect to the user page
+            return redirect()->back()->withError('Downloadable VM request has already been received. You will receive an email shortly. ');
+            //return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
+        }
+
     }
 
 

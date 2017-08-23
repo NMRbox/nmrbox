@@ -73,12 +73,12 @@ class PageController extends Controller {
         }
         $popular = Page::orderBy('views','DESC')->first();
         // Show the page
-        return View('pages.show', compact('page','popular'));
+        //return View('pages.show', compact('page','popular'));
 
         /* Angular JSON response */
         //return Response::json(Comment::get());
-        /*return response( json_encode( array( 'content' => $page, 'message' => 'Password reset successfully. ', 'type' => 'success' ) ), 200 )
-            ->header( 'Content-Type', 'application/json' );*/
+        return response( json_encode( array( 'content' => $page, 'message' => 'Password reset successfully. ', 'type' => 'success' ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
 
     }
 

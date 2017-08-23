@@ -65,6 +65,9 @@
             </div>
             <div class="row">
                 <br>
+                <div class="col-md-12">
+                    @include('notifications')
+                </div>
             </div>
             <div class="row">
                 <div class="alert alert-success hidden" id="success-alert">
@@ -279,18 +282,33 @@
                 <div class="row"><br>
 
                     {!! BootForm::open(array('url'=>route('download_vm'), 'class' => 'form ' )) !!}
-
-                    <div class="form-group col-lg-4">
-                        {!! BootForm::text('vm_username', "VM username", $person->nmrbox_acct , array('class' => 'form-control', 'maxlength'=> 64, 'required' => 'required', 'disabled'))!!}
+                    <div class="form-group col-lg-12">
+                        The following form allows you to request a downloadable copy of NMRbox that you can run on your local workstation.  After you submit the form, you will receive an email with a custom link for downloading your VM.  This process may take several hours.
                     </div>
 
-                    <div class="form-group col-lg-4">
+                    <div class="form-group col-lg-12">
+                        Please select the VM version you wish to download:
+                    </div>
+
+                    <div class="form-group col-lg-6">
                         {!! BootForm::select('vm', "VM Versions",
-                                [null=>'Please Select'] + [1=>'Version 1'] + [2=>'Version 2'] + [3=>'Version 3'], null, array('class' => 'form-control select_pi', 'maxlength'=> 32, 'required' => 'required')) !!}
+                    [null=>'Please Select'] + $vms, null, array('class' => 'form-control select_pi', 'maxlength'=> 32, 'required' => 'required')) !!}
                     </div>
 
-                    <div class="form-group col-lg-4">
+                    <div class="form-goup col-lg-12">
+                        We will create a user account inside the VM.  Please select your desired username and password:
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        {!! BootForm::text('vm_username', "VM username", $person->nmrbox_acct , array('class' => 'form-control', 'maxlength'=> 64, 'required' => 'required'))!!}
+                    </div>
+
+                    <div class="form-group col-lg-6">
                         {!! BootForm::text('vm_password', "VM Password", null, array('class' => 'form-control', 'maxlength'=> 32, 'required' => 'required'))!!}
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        Note: The username and password do not have to be the same as your NMRbox account.  You can choose whatever you like.  Your account will be given root privileges allowing you to make additional changes, as needed.
                     </div>
 
                     <div class="form-group col-lg-4">

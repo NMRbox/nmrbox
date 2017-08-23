@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-Edit VM
+Edit Keywords
 @parent
 @stop
 
@@ -10,7 +10,7 @@ Edit VM
 @section('content')
 <section class="content-header">
     <h1>
-        Edit VM
+        Edit Keywords
     </h1>
     <ol class="breadcrumb">
         <li>
