@@ -188,7 +188,7 @@ $(document).ready(function () {
             url: 'register_person_workshop',
             data: 'name=' + name + '&_token=' + $('input#user_csrf_token').val(),
             dataType: 'json',
-            success: function(response) {
+            /*success: function(response) {
                 $('#success_msg').html(response.message);
                 show_alert('success');
                 window.scrollTo(0,0);
@@ -197,6 +197,16 @@ $(document).ready(function () {
             error: function (response) {
                 $('#error_msg').html(" You already have been registered for this workshop.");
                 show_alert('error');
+            }*/
+            success: function(response) {
+                $("#all_workshops").load(location.href + " #all_workshops");
+                $('#success_msg').html(response.message);
+                show_alert('success', 'no');
+                window.scrollTo(0,0);
+            },
+            error: function (response) {
+                $('#error_msg').html(" You already have been registered for this workshop.");
+                show_alert('error', 'no');
             }
         })
 

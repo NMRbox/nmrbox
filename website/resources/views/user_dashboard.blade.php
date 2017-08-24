@@ -219,14 +219,33 @@
             </div>
 
             {{-- workshops tiles --}}
-            <div class="row">
+            <div class="row" id="all_workshops">
                 <div class="welcome text-left">
                     <h3 class="text-left">Upcoming workshops</h3>
                 </div>
                 <div class="row"><br></div>
-                @forelse($workshops as $workshop)
+                @if(count($workshops) > 0)
+                    <div class="row">
+                        <div class="alert alert-info">
+                            <p>To register for all the upcoming workshops please visit - <a href="{!! url("/workshops") !!}" class="btn btn-md btn-warning"><i class="fa fa-calendar fa-lg"> Workshops page </i></a></p>
+                        </div>
+                    </div>
+                @else
+                    <div class="panel col-md-12">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="alert alert-info">
+                                    <p>Stay tuned for upcoming workshops update. You can explore <a href="workshops">workshop</a> page for completed workshops and available resources.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                @endif
+
+                {{--@forelse($workshops as $workshop)
                     {!! BootForm::open(array('url' => URL::to('register_person_workshop'), 'method' => 'post', 'class' => 'form-horizontal')) !!}
-                        {{--{!! Form::open() !!}--}}
+                        --}}{{--{!! Form::open() !!}--}}{{--
                         <div class="col-md-4">
                             <div class="panel panel-info">
                                 <div class="panel-heading">
@@ -246,7 +265,7 @@
                                         <a href="{!! $workshop->url !!}" target="_blank">Program flyer</a>
                                         @endif
                                     </p>
-                                    {{-- checking whether the user is already registered --}}
+                                    --}}{{-- checking whether the user is already registered --}}{{--
                                     <button
                                     @foreach($person->classification as $group)
                                         @if($group->name == $workshop->name)
@@ -271,7 +290,7 @@
 
                         </div>
                     </div>
-                @endforelse
+                @endforelse--}}
             </div>
 
             {{-- VM download tiles --}}
