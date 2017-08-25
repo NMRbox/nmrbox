@@ -11,7 +11,8 @@ Use App\VM;
 Use App\SoftwareVersion;
 Use App\Author;
 Use App\Citation;
-use Symfony\Component\Debug\Exception\UndefinedFunctionException;Use View;
+use Symfony\Component\Debug\Exception\UndefinedFunctionException;
+Use View;
 
 class RegistryController extends Controller
 {
@@ -21,8 +22,19 @@ class RegistryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $all_software = Software::All()->sortBy('short_title', SORT_NATURAL|SORT_FLAG_CASE);
-        return View::make("registry.index", compact('all_software'));
+        /*$all_software = Software::All()->sortBy('short_title', SORT_NATURAL|SORT_FLAG_CASE);
+        return View::make("registry.index", compact('all_software'));*/
+
+        /* test for Angular response */
+        $all_software = Software::select('id', 'name', 'short_title', 'synopsis', 'description', 'slug')
+            ->where('display', '=', 'true')
+            ->get();
+            //->sortBy('short_title', SORT_NATURAL|SORT_FLAG_CASE);
+
+        //dd($all_software);
+        return response( json_encode( array( 'data' => $all_software ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
+
     }
 
     /**
@@ -32,7 +44,10 @@ class RegistryController extends Controller
      */
     public function getSoftware($param) {
 
-        $software = Software::where('slug', $param)->first();
+        $software = Software::select('id', 'name', 'short_title', 'synopsis', 'description', 'slug', 'url')
+            ->where('slug', $param)
+            ->where('display', '=', 'true')
+            ->first();
 
         $all_files = $software->files()->get();
         $attached_citations = $software->citations;
@@ -45,8 +60,11 @@ class RegistryController extends Controller
 
         $all_keywords = $software->keywords()->get();
 
-        return View::make("registry.software", compact('software', 'all_files', 'vm_version_pairs', 'attached_citations',
-            'all_keywords'));
+        /*return View::make("registry.software", compact('software', 'all_files', 'vm_version_pairs', 'attached_citations',
+            'all_keywords'));*/
+        return response( json_encode( array( 'data' => $software ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
+
     }
 
 

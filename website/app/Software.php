@@ -47,6 +47,23 @@ class Software extends NmrModel implements SluggableInterface
         'save_to'    => 'slug',
     ];
 
+    /*protected $hidden = [
+        'public_release',
+        'display',
+        'free_to_redistribute',
+        'devel_contacted',
+        'license_comment',
+        'devel_include',
+        'custom_license',
+        'uchc_legal_approve',
+        'execute_license',
+        'non_profit_release',
+        'academic_release',
+        'government_release',
+        'commercial_release',
+        'devel_redistribute_doc',
+    ];*/
+
     public function __toString()
     {
         return $this->slug;
