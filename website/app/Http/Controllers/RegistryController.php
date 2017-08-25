@@ -22,18 +22,18 @@ class RegistryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        /*$all_software = Software::All()->sortBy('short_title', SORT_NATURAL|SORT_FLAG_CASE);
-        return View::make("registry.index", compact('all_software'));*/
+        $all_software = Software::All()->sortBy('short_title', SORT_NATURAL|SORT_FLAG_CASE);
+        return View::make("registry.index", compact('all_software'));
 
         /* test for Angular response */
-        $all_software = Software::select('id', 'name', 'short_title', 'synopsis', 'description', 'slug')
+        /*$all_software = Software::select('id', 'name', 'short_title', 'synopsis', 'description', 'slug')
             ->where('display', '=', 'true')
             ->get();
             //->sortBy('short_title', SORT_NATURAL|SORT_FLAG_CASE);
 
         //dd($all_software);
         return response( json_encode( array( 'data' => $all_software ) ), 200 )
-            ->header( 'Content-Type', 'application/json' );
+            ->header( 'Content-Type', 'application/json' );*/
 
     }
 
@@ -44,8 +44,8 @@ class RegistryController extends Controller
      */
     public function getSoftware($param) {
 
-        $software = Software::select('id', 'name', 'short_title', 'synopsis', 'description', 'slug', 'url')
-            ->where('slug', $param)
+        //$software = Software::select('id', 'name', 'short_title', 'synopsis', 'description', 'slug', 'url')
+        $software = Software::where('slug', $param)
             ->where('display', '=', 'true')
             ->first();
 
@@ -60,10 +60,10 @@ class RegistryController extends Controller
 
         $all_keywords = $software->keywords()->get();
 
-        /*return View::make("registry.software", compact('software', 'all_files', 'vm_version_pairs', 'attached_citations',
-            'all_keywords'));*/
-        return response( json_encode( array( 'data' => $software ) ), 200 )
-            ->header( 'Content-Type', 'application/json' );
+        return View::make("registry.software", compact('software', 'all_files', 'vm_version_pairs', 'attached_citations',
+            'all_keywords'));
+        /*return response( json_encode( array( 'data' => $software ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );*/
 
     }
 
