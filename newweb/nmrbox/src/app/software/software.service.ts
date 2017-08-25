@@ -8,8 +8,8 @@ import { FilterModel } from './../filter.model';
 @Injectable()
 export class SoftwareService {
 
-    private appUrl = 'https://webdev.nmrbox.org:8001/registry';  // URL to web api
-    private baseUrl = 'api/softwareList';  // URL to web api
+  private appUrl = 'https://webdev.nmrbox.org:8001/registry';  // URL to web api
+  private baseUrl = 'api/softwareList';  // URL to web api
   private swtUrl = 'api/swtList';  // URL to web api
   private testUrl = 'api/spectralSoftware';
   private headers = new Headers({'Content-Type': 'application/json'});
@@ -32,6 +32,7 @@ export class SoftwareService {
       .then(response => response.json().data as SoftwareModel[])
       .catch(this.handleError);
   }
+
   getSwtList(): Promise<FilterModel[]> {
     console.log("getSwtList");
     return this.http
@@ -51,7 +52,7 @@ export class SoftwareService {
   }
 
   getSoftware(slug: string): Promise<SoftwareModel> {
-      console.log("Slug : ", slug);
+
     const url = `${this.appUrl}/${slug}`;
     return this.http
       .get(url)
