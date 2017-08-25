@@ -131,6 +131,7 @@ export class SoftwareListComponent implements OnInit {
   }
 
   gotoDetail(software: SoftwareModel): void {
-    this.router.navigate(['/s', software.id]);
+    this.router.navigate(['/s', software.slug]);
+    //this.router.navigate(['/s', software.id]);
   }
 }

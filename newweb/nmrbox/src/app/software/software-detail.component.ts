@@ -21,7 +21,8 @@ export class SoftwareDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params
-      .switchMap((params: Params) => this.softwareService.getSoftware(+params['id']))
+      //.switchMap((params: Params) => this.softwareService.getSoftware(+params['id']))
+      .switchMap((params: Params) => this.softwareService.getSoftware(params['slug']))
       .subscribe(software => this.software = software);
   }
 

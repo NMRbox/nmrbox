@@ -35,6 +35,9 @@ import { TeamService } from './team/team.service';
 // Router
 import { AppRoutingModule } from './app-routing.module';
 
+// CommonModule
+import { CommonModule } from '@angular/common';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { AppRoutingModule } from './app-routing.module';
     MdButtonModule, MdCheckboxModule, MdInputModule, MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdListModule, MdGridListModule, MdTabsModule, MdCardModule, MdChipsModule, // material.io modules
     //InMemoryWebApiModule.forRoot(SoftwareDataService),
     SwiperModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CommonModule
   ],
   declarations: [
     AppComponent,

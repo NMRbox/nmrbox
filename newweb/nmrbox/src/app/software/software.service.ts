@@ -9,6 +9,7 @@ import { FilterModel } from './../filter.model';
 export class SoftwareService {
 
   private baseUrl = 'api/softwareList';  // URL to web api
+  private appUrl = 'http://nmrbox.dev/registry';  // URL to web api
   private swtUrl = 'api/swtList';  // URL to web api
   private testUrl = 'api/spectralSoftware';
   private headers = new Headers({'Content-Type': 'application/json'});
@@ -26,7 +27,7 @@ export class SoftwareService {
 
   getSoftwareList(): Promise<SoftwareModel[]> {
     return this.http
-      .get(this.baseUrl)
+      .get(this.appUrl)
       .toPromise()
       .then(response => response.json().data as SoftwareModel[])
       .catch(this.handleError);
@@ -49,14 +50,24 @@ export class SoftwareService {
       .catch(this.handleError);
   }
 
-  getSoftware(id: number): Promise<SoftwareModel> {
-    const url = `${this.baseUrl}/${id}`;
+  getSoftware(slug: string): Promise<SoftwareModel> {
+      console.log("Slug : ", slug);
+    const url = `${this.appUrl}/${slug}`;
     return this.http
       .get(url)
       .toPromise()
       .then(response => response.json().data as SoftwareModel)
       .catch(this.handleError);
   }
+
+  /*getSoftware(id: number): Promise<SoftwareModel> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http
+      .get(url)
+      .toPromise()
+      .then(response => response.json().data as SoftwareModel)
+      .catch(this.handleError);
+  }*/
 
   update(software: SoftwareModel): Promise<SoftwareModel> {
     const url = `${this.baseUrl}/${software.id}`;
