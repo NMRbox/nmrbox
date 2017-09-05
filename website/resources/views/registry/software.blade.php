@@ -76,10 +76,12 @@
                             <h3>Description</h3>
                             <p>{!! $software->description !!} </p>
 
+                            @if($software->url != null)
                             <h3>URL</h3>
                             <p>
                                 <a href="{!! $software->url !!}">{!! $software->url !!}</a>
                             </p>
+                            @endif
 
                             <h3>Versions</h3>
 
