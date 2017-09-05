@@ -22,7 +22,14 @@ class Workshop extends Model
         'start_date',
         'end_date',
         'location',
+        'attendance_max',
     ];
 
-
+    /**
+     * pivot relation with classifications_person table
+     */
+    public function person() {
+        return $this->belongsToMany('App\Person', 'classification_person', 'name', 'person_id')
+            ->withPivot('name', 'person_id');
+    }
 }
