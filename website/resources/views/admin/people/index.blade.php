@@ -9,6 +9,9 @@ People Index
 @section('header_styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/datatables/css/dataTables.bootstrap.css') }}" />
     <style type="text/css">
+
+        #vm-table.all-selected > tbody > tr > td {    background-color:#9FAFD1; }
+
         table tr.selected td {
             background: #9FAFD1;
         }
@@ -191,7 +194,6 @@ People Index
                             @endforeach
                         @endif
                         </tbody>
-
                     </table>
                 </div>
             </div>

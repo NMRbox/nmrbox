@@ -84,16 +84,18 @@ $(document).ready(function() {
         $(table.rows( { filter:'applied' } ).data()).each(function(key, row) {
             selected.push(row[0]);
         });
-        console.log(selected);
-        $('#vm-table tbody tr').addClass('selected');
+        //console.log(selected);
+        //$('table#vm-table tbody tr').addClass('selected');
+        $("#vm-table").addClass('all-selected');
+
     });
 
     /* Deselect all the refined field*/
     $('a#btn_deselect_all').on('click', function(e) {
         e.preventDefault();
         selected = [];
-        console.log(selected);
-        $('#vm-table tbody tr').removeClass('selected');
+        //console.log(selected);
+        $('#vm-table').removeClass('selected');
     });
 
     /* show/hide mail recipient box */
