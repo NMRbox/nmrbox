@@ -343,9 +343,12 @@ $(document).ready(function() {
         table.column(0).search("^("+request_input+")$", 1, 0).draw();
     });
 
-    /* Advance search */
+    /* Advance search reset / clear filter*/
     $('button#adv_search_reset').on('click', function (e) {
         e.preventDefault();
+        // resetting select all/ deselect all
+        selected = [];
+        $('#vm-table').removeClass('all-selected');
         // resetting search-by-id form input field
         $('.form-inline').find("input[type=text], textarea").val("");
         // resetting datatables column based filter search input
@@ -357,7 +360,6 @@ $(document).ready(function() {
             .draw();
         //clearing the filter search
         table.fnFilterClear();
-
     });
 
 });
