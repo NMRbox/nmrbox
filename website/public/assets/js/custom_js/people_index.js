@@ -95,7 +95,7 @@ $(document).ready(function() {
         e.preventDefault();
         selected = [];
         //console.log(selected);
-        $('#vm-table').removeClass('selected');
+        $('#vm-table').removeClass('all-selected');
     });
 
     /* show/hide mail recipient box */
