@@ -99,7 +99,9 @@ class FAQController extends Controller
         try {
             $faq = new FAQ(array(
                 'question' => $request->question,
-                'answer' => $request->answer
+                'answer' => $request->answer,
+                'slug' => $request->slug,
+
             ));
 
             $faq->save();
@@ -223,6 +225,7 @@ class FAQController extends Controller
             $faq = FAQ::where('id', $id)->get()->first();
             $faq->question = $request->input('question');
             $faq->answer = $request->input('answer');
+            $faq->slug = $request->input('slug');
             $faq->save();
 
             /* software mapping */
@@ -324,7 +327,8 @@ class FAQController extends Controller
         $new_faq = new FAQ(array(
             'id' => $faq->id,
             'question' => $faq->question,
-            'answer' => $answer
+            'answer' => $answer,
+            'slug' => $faq->slug
         ));
 
         /* Returing the converted result */
@@ -342,6 +346,7 @@ class FAQController extends Controller
     {
         /* all faqs*/
         $faqs = FAQ::All();
+        //dd($faqs);
 
         foreach($faqs as $key => $value){
             $all_faqs[] = $this->convert_to_string($value->id);

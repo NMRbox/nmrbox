@@ -49,12 +49,12 @@
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
-                                           href="{!! '#'.$faq->id !!}">
+                                           href="{!! '#'.$faq->slug !!}" id="accordion-link-{!! $faq->slug !!}">
                                             Q:&nbsp;{!! $faq->question !!}
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="{!! $faq->id !!}" class="panel-collapse collapse">
+                                <div id="{!! $faq->slug !!}" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <h5><span class="label label-primary">Answer</span></h5>
                                         <p>
@@ -198,9 +198,9 @@
             });
 
             // initiating accordion carousel for collapse/hide
-            $('.carousel').carousel({
+            /*$('.carousel').carousel({
                 interval: 3000
-            });
+            });*/
 
 
             /* Initializing Datatable for search option*/
@@ -217,6 +217,12 @@
                 faq_table.search($(this).val()).draw();
             })
 
+
+            var hash = window.location.hash.replace('#', '');
+            console.log(hash);
+            if($('a#accordion-link-' + hash).length > 0) {
+                $('a#accordion-link-' + hash).trigger('click');
+            }
 
         })
 

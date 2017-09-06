@@ -17,7 +17,8 @@ class FAQ extends Model
     protected $fillable = [
         'id',
         'answer',
-        'question'
+        'question',
+        'slug'
     ];
 
     /**
