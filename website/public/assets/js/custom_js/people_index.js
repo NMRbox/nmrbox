@@ -42,8 +42,6 @@ $(document).ready(function() {
         ]
     });
 
-
-
     /* search empty field in table */
     $('#search_empty_val').on('click', function(e){
         e.preventDefault();
@@ -68,7 +66,12 @@ $(document).ready(function() {
         } else {
             selected.splice(index, 1);
         }
-        $(this).toggleClass('selected');
+
+        if ( $('#vm-table').hasClass('all-selected') ) {
+            $(this).toggleClass('unselected');
+        } else {
+            $(this).toggleClass('selected');
+        }
     });
 
     /* targeting all the filtered data from the table */
@@ -84,8 +87,6 @@ $(document).ready(function() {
         $(table.rows( { filter:'applied' } ).data()).each(function(key, row) {
             selected.push(row[0]);
         });
-        //console.log(selected);
-        //$('table#vm-table tbody tr').addClass('selected');
         $("#vm-table").addClass('all-selected');
 
     });
@@ -94,8 +95,8 @@ $(document).ready(function() {
     $('a#btn_deselect_all').on('click', function(e) {
         e.preventDefault();
         selected = [];
-        //console.log(selected);
         $('#vm-table').removeClass('all-selected');
+        $('#vm-table > tbody > tr').removeClass('unselected');
     });
 
     /* show/hide mail recipient box */

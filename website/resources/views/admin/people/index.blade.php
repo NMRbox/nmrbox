@@ -11,6 +11,7 @@ People Index
     <style type="text/css">
 
         #vm-table.all-selected > tbody > tr > td {    background-color:#9FAFD1; }
+        #vm-table.all-selected > tbody > tr.unselected > td {  background-color: #FFFFFF; }
 
         table tr.selected td {
             background: #9FAFD1;
