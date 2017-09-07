@@ -9,12 +9,12 @@
 
 namespace App\library {
 
-    use App\Http\Requests\Request;
     use Auth;
-    use Cartalyst\Sentinel\Laravel\Facades\Activation;
+    use Lang;
     use Sentinel;
     use Session;
     use App\Person;
+    use Illuminate\Http\Request;
 
     class Ldap
     {
@@ -31,12 +31,13 @@ namespace App\library {
             $host = env('LDAP_HOST');
             $port = env('LDAP_PORT');
             $addr = gethostbyname($host);
+
             $client = stream_socket_client("tcp://$addr:$port",$errno,$errorMessage);
 
             /* user credential */
             $username = $credentials['username'];
             $password = $credentials['password'];
-            
+
 
             /* XML parsing for LDAP*/
             $xml = new \SimpleXMLElement('<ldap/>');
@@ -62,27 +63,6 @@ namespace App\library {
 
                 // Adding user var into sentinel session logged user
                 Sentinel::loginAndRemember($person);
-
-                // removing users -> persons test
-                /*
-                $user = User::where('person_id', $person->id)->first();
-                //$user = Sentinel::findById(1);
-
-                if(!$user){
-                    return false;
-                }
-
-                // Adding user var into sentinel session logged user
-                Sentinel::loginAndRemember($user);
-
-
-                // Adding person table information into session
-                Session::put('person', $person);
-
-                // replace auth with sentinel
-                //Auth::loginUsingId($user->id);
-                */
-                // eof removing users -> persons test
 
                 return true;
             }

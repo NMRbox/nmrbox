@@ -120,6 +120,18 @@ class FrontEndController extends Controller
 
         //$activate = true; //make it false if you don't want to activate user automatically
 
+        /* reCaptcha validation */
+        $rules = array(
+            'g-recaptcha-response' => 'required|recaptcha',
+        );
+        // Create a new validator instance from our validation rules
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            // Ooops.. something went wrong
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+
         try {
             $email = Input::get('email');
             if( strlen($email) <= 0 ) {
@@ -270,9 +282,9 @@ class FrontEndController extends Controller
             } else {
                 return redirect()->back()->withError(Lang::get('auth/message.login.error'));
             }
-        } catch (\Illuminate\Database\QueryException $e) {
+        } catch (\ErrorException $e) {
             //dd($e);
-            return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
+            return redirect()->back()->withError(Lang::get('auth/message.server_conn_error'));
         }
 
     }
