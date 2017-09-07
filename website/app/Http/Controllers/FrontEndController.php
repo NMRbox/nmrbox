@@ -286,6 +286,14 @@ class FrontEndController extends Controller
             //dd($e);
             return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
         } catch (\ErrorException $e) {
+            /* trigger an email to support@nmrbox.org */
+            $data = array("Password malfunction detected.");
+
+            // Send the registration acknowledge email
+            Mail::send('emails.server-malfunction', $data, function ($m) {
+                $m->to('support@nmrbox.org');
+                $m->subject('Buildserver malfunction detected');
+            });
             //dd($e);
             return redirect()->back()->withError(Lang::get('auth/message.server_conn_error'));
         }
