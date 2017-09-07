@@ -14,7 +14,8 @@
         "barryvdh/laravel-debugbar": "^2.0",
         "barryvdh/laravel-ide-helper": "^2.1",
         "watson/bootstrap-form": "^1.0",
-        "doctrine/dbal": "~2.3"
+        "doctrine/dbal": "~2.3",
+        "waavi/recaptcha": "1.0.x"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

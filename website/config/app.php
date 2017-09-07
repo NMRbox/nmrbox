@@ -152,7 +152,10 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         App\Providers\ChandraCrudGeneratorServiceProvider::class,
-        Watson\BootstrapForm\BootstrapFormServiceProvider::class
+        Watson\BootstrapForm\BootstrapFormServiceProvider::class,
+
+        /* google recaptcha */
+        Waavi\ReCaptcha\ReCaptchaServiceProvider::class,
 
     ],
 
@@ -210,6 +213,9 @@ return [
         'Reminder'   => 'Cartalyst\Sentinel\Laravel\Facades\Reminder',
         'Sentinel'   => 'Cartalyst\Sentinel\Laravel\Facades\Sentinel',
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
+        /* Google reCaptcha */
+        'ReCaptcha' => Waavi\ReCaptcha\Facades\ReCaptcha::class,
 
     ],
 

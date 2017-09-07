@@ -133,7 +133,13 @@
                         </div>
 
                         <div class="form-group col-lg-12">
+                            {!! ReCaptcha::render() !!}
+                            {!! $errors->first('g-recaptcha-response','<p class="alert alert-danger">:message</p>')!!}
+                        </div>
+
+                        <div class="form-group col-lg-12">
                             {!! BootForm::submit('Register', array('class'=>'btn btn-primary btn-lg btn-block ')) !!}
+
                         </div>
 
                         {!! BootForm::close() !!}
@@ -167,4 +173,5 @@
     <script type="text/javascript" src="{{ asset('assets/vendors/iCheck/icheck.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/frontend/register.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/country-region-list/jquery.crs.min.js') }}"></script>
+    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
 @stop
