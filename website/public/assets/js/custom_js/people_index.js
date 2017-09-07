@@ -351,6 +351,8 @@ $(document).ready(function() {
         // resetting select all/ deselect all
         selected = [];
         $('#vm-table').removeClass('all-selected');
+        $('#vm-table > tbody > tr').removeClass('selected');
+        $('#vm-table > tbody > tr').removeClass('unselected');
         // resetting search-by-id form input field
         $('.form-inline').find("input[type=text], textarea").val("");
         // resetting datatables column based filter search input
