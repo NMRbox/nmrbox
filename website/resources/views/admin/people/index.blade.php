@@ -13,22 +13,9 @@ People Index
         #vm-table.all-selected > tbody > tr > td {    background-color:#9FAFD1; }
         #vm-table.all-selected > tbody > tr.unselected > td {  background-color: #FFFFFF; }
 
-        table tr.selected td {
-            background: #9FAFD1;
-        }
-
-        table thead tr th input {
-            margin:0;
-            padding:0;
-            width: 150px;
-        }
-
-        body{
-            width: 100%;
-            position: relative;
-            bottom: 0;
-            overflow-x: scroll;
-        }
+        table tr.selected td { background: #9FAFD1; }
+        table thead tr th input { margin:0; padding:0; width: 150px; }
+        body{ width: 100%; position: relative; bottom: 0; overflow-x: scroll; }
 
         /* overflow scrollbar styling */
         ::-webkit-scrollbar {

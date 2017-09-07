@@ -282,6 +282,9 @@ class FrontEndController extends Controller
             } else {
                 return redirect()->back()->withError(Lang::get('auth/message.login.error'));
             }
+        } catch (\Illuminate\Database\QueryException $e) {
+            //dd($e);
+            return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
         } catch (\ErrorException $e) {
             //dd($e);
             return redirect()->back()->withError(Lang::get('auth/message.server_conn_error'));

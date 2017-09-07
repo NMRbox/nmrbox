@@ -96,6 +96,7 @@ $(document).ready(function() {
         e.preventDefault();
         selected = [];
         $('#vm-table').removeClass('all-selected');
+        $('#vm-table > tbody > tr').removeClass('selected');
         $('#vm-table > tbody > tr').removeClass('unselected');
     });
 
