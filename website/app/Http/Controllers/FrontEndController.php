@@ -89,39 +89,8 @@ class FrontEndController extends Controller
      */
     public function postRegister(Request $request)
     {
-        // Declare the rules for the form validation
-        /*$rules = array(
-            'first_name' => 'required|min:1|unique:persons',
-            'last_name' =>  'required|min:1|unique:persons',
-            'email' => 'email|max:255',
-            'email_institution' => 'required|email|max:255',
-            'job_title' =>  'required',
-            'institution' =>  'required',
-            'institution_type' =>  'required',
-            'department' =>  'required|min:1|max:256',
-            'pi' =>  'required|min:1|max:64',
-            'address1' =>  'required|min:1|max:128',
-            'address2' =>  'max:128',
-            'address3' =>  'max:128',
-            'city' =>  'required|min:1|max:64',
-            'state_province' =>  'required|min:1|max:32',
-            'zip_code' =>  'required|min:1|max:32',
-            'country' =>  'required|min:1|max:64',
-            'time_zone_id' =>  'required|integer'
-        );
-
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        if ($validator->fails()) {
-            // Ooops.. something went wrong
-            return Redirect::back()->withInput()->withErrors($validator);
-        }*/
-
-        //$activate = true; //make it false if you don't want to activate user automatically
-
         /* reCaptcha validation */
-        $rules = array(
+        /*$rules = array(
             'g-recaptcha-response' => 'required|recaptcha',
         );
         // Create a new validator instance from our validation rules
@@ -130,7 +99,7 @@ class FrontEndController extends Controller
         if ($validator->fails()) {
             // Ooops.. something went wrong
             return Redirect::back()->withInput()->withErrors($validator);
-        }
+        }*/
 
         try {
             $email = Input::get('email');
