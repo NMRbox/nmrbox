@@ -66,7 +66,8 @@ class WorkshopsController extends Controller
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
                 'url' => $request->url,
-                'location' => $request->location
+                'location' => $request->location,
+                'attendance_max' => $request->attendance_max
             ));
 
             $workshop->save();
@@ -124,7 +125,7 @@ class WorkshopsController extends Controller
             $workshop->start_date = $request->input('start_date');
             $workshop->end_date = $request->input('end_date');
             $workshop->location = $request->input('location');
-
+            $workshop->attendance_max = $request->input('attendance_max');
 
             $workshop->save();
         } catch (\Exception $e){

@@ -62,6 +62,7 @@ Edit Workshop
                             {!! BootForm::date('end_date', "End Date", null, array('class' => 'input-lg', 'required' => 'required'))!!}
                             {!! BootForm::text('url', "URL", null, array('class' => 'input-lg'))!!}
                             {!! BootForm::textarea('location', "Location", null, array('class' => 'input-lg', 'required' => 'required'))!!}
+                            {!! BootForm::textarea('attendance_max', "Max Attendance", null, array('class' => 'input-lg', 'required' => 'required'))!!}
                             {!! BootForm::submit('Save') !!}
                         </div>
                         {!! Form::close() !!}
