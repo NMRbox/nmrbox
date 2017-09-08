@@ -22,7 +22,7 @@ class Workshop extends Model
         'start_date',
         'end_date',
         'location',
-        'attendance_max',
+        'attendance_max'
     ];
 
     /**

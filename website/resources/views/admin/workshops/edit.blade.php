@@ -1,6 +1,5 @@
 @extends('admin/layouts/default')
 
-{Occupancyite Title --}}
 @section('title')
 Edit Workshop
 @parent

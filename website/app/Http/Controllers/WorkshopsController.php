@@ -124,7 +124,7 @@ class WorkshopsController extends Controller
             $workshop->start_date = $request->input('start_date');
             $workshop->end_date = $request->input('end_date');
             $workshop->location = $request->input('location');
-            $workshop->attendance_max = $request->input('attendance_max');
+            $workshop->attendance_max = ($request->input('attendance_max') == "")?null:$request->input('attendance_max');
             $workshop->save();
         } catch (\Exception $e){
             // something went wrong - probably has entries in email_person table
