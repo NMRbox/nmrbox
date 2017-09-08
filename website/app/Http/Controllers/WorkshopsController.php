@@ -67,7 +67,7 @@ class WorkshopsController extends Controller
                 'end_date' => $request->end_date,
                 'url' => $request->url,
                 'location' => $request->location,
-                'attendance_max' => $request->attendance_max
+                'attendance_max' => ($request->attendance_max == "")?null:$request->attendance_max
             ));
 
             $workshop->save();
