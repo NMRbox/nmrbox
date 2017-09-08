@@ -90,7 +90,7 @@ class FrontEndController extends Controller
     public function postRegister(Request $request)
     {
         /* reCaptcha validation */
-        /*$rules = array(
+        $rules = array(
             'g-recaptcha-response' => 'required|recaptcha',
         );
         // Create a new validator instance from our validation rules
@@ -99,7 +99,7 @@ class FrontEndController extends Controller
         if ($validator->fails()) {
             // Ooops.. something went wrong
             return Redirect::back()->withInput()->withErrors($validator);
-        }*/
+        }
 
         try {
             $email = Input::get('email');
@@ -260,7 +260,7 @@ class FrontEndController extends Controller
 
             // Send the registration acknowledge email
             Mail::send('emails.server-malfunction', $data, function ($m) {
-                $m->to('support@nmrbox.org');
+                $m->to('mosrur@gmail.com');
                 $m->subject('Buildserver malfunction detected');
             });
             //dd($e);

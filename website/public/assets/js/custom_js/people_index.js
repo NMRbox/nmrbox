@@ -46,9 +46,6 @@ $(document).ready(function() {
     $('#search_empty_val').on('click', function(e){
         e.preventDefault();
         table.column(4).search("^$", 1, 0).draw();
-        //table.column(col_index).search( '^'+this.value+'$', true, false ).draw();
-
-        //table.search("FieldName is NULL").draw();
     });
 
     /* Advance search option based on particular db fields */
@@ -66,38 +63,32 @@ $(document).ready(function() {
         } else {
             selected.splice(index, 1);
         }
+        $(this).toggleClass('selected');
 
-        if ( $('#vm-table').hasClass('all-selected') ) {
-            $(this).toggleClass('unselected');
-        } else {
-            $(this).toggleClass('selected');
-        }
     });
 
-    /* targeting all the filtered data from the table */
-    /*//var all_rows = table.rows().data();
-    var all_rows = table.rows( { filter:'applied' } ).data();
-    console.log(all_rows);*/
 
     /* Select all the refined field*/
     $('a#btn_select_all').on('click', function(e) {
         e.preventDefault();
         selected = [];
-        //$(all_rows).each(function(key, row) {
-        $(table.rows( { filter:'applied' } ).data()).each(function(key, row) {
-            selected.push(row[0]);
-        });
-        $("#vm-table").addClass('all-selected');
 
+        var rows = table.$('tr', {"filter":"applied"}).addClass('selected');
+        if(rows.length == 0) {
+            table.$('tr').addClass('selected');
+        }
+
+        rows.each(function(){
+            var r_selected = table.row(this);
+            selected.push($(this).attr('id'));
+        });
     });
 
     /* Deselect all the refined field*/
     $('a#btn_deselect_all').on('click', function(e) {
         e.preventDefault();
         selected = [];
-        $('#vm-table').removeClass('all-selected');
-        $('#vm-table > tbody > tr').removeClass('selected');
-        $('#vm-table > tbody > tr').removeClass('unselected');
+        table.$('tr').removeClass('selected');
     });
 
     /* show/hide mail recipient box */
@@ -350,9 +341,7 @@ $(document).ready(function() {
         e.preventDefault();
         // resetting select all/ deselect all
         selected = [];
-        $('#vm-table').removeClass('all-selected');
-        $('#vm-table > tbody > tr').removeClass('selected');
-        $('#vm-table > tbody > tr').removeClass('unselected');
+        table.$('tr').removeClass('selected');
         // resetting search-by-id form input field
         $('.form-inline').find("input[type=text], textarea").val("");
         // resetting datatables column based filter search input

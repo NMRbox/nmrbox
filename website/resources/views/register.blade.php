@@ -132,10 +132,10 @@
                                     $timezones_for_select, 169, array('required' => 'required')) !!}
                         </div>
 
-                        {{--<div class="form-group col-lg-12">
+                        <div class="form-group col-lg-12">
                             {!! ReCaptcha::render() !!}
                             {!! $errors->first('g-recaptcha-response','<p class="alert alert-danger">:message</p>')!!}
-                        </div>--}}
+                        </div>
 
                         <div class="form-group col-lg-12">
                             {!! BootForm::submit('Register', array('class'=>'btn btn-primary btn-lg btn-block ')) !!}

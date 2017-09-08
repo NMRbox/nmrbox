@@ -66,7 +66,17 @@
                                     @if($workshop->url)
                                     <a href="{!! $workshop->url !!}" target="_blank">More infomation</a>
                                     @endif
+                                    <br>
+                                    @if($workshop->attendance_max != null)
+                                        Attendance - {!! $workshop->person->count() !!}/{!! $workshop->attendance_max !!}
+                                    @endif
+
                                 </p>
+                                <!--test-->
+                                <p>
+
+                                </p>
+                                <!-- eof test -->
                                 {{-- checking whether the user is already registered --}}
                                 @if($person != null)
                                     <button

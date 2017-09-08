@@ -1,6 +1,6 @@
 @extends('admin/layouts/default')
 
-{{-- Web site Title --}}
+{Occupancyite Title --}}
 @section('title')
 Edit Workshop
 @parent
@@ -62,7 +62,7 @@ Edit Workshop
                             {!! BootForm::date('end_date', "End Date", null, array('class' => 'input-lg', 'required' => 'required'))!!}
                             {!! BootForm::text('url', "URL", null, array('class' => 'input-lg'))!!}
                             {!! BootForm::textarea('location', "Location", null, array('class' => 'input-lg', 'required' => 'required'))!!}
-                            {!! BootForm::textarea('attendance_max', "Max Attendance", null, array('class' => 'input-lg', 'required' => 'required'))!!}
+                            {!! BootForm::text('attendance_max', "Max Attendance", null, array('class' => 'input-lg'))!!}
                             {!! BootForm::submit('Save') !!}
                         </div>
                         {!! Form::close() !!}

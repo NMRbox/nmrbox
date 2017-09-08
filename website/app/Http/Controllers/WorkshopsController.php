@@ -71,7 +71,6 @@ class WorkshopsController extends Controller
             ));
 
             $workshop->save();
-            //$this->messageBag->add('email', Lang::get('emails/message.success.create'));
         }
         catch (UserExistsException $e) {
             $this->messageBag->add('workshop', Lang::get('workshops/message.error.create'));
@@ -126,16 +125,13 @@ class WorkshopsController extends Controller
             $workshop->end_date = $request->input('end_date');
             $workshop->location = $request->input('location');
             $workshop->attendance_max = $request->input('attendance_max');
-
             $workshop->save();
         } catch (\Exception $e){
-
             // something went wrong - probably has entries in email_person table
             return redirect()->back()->withError(Lang::get('workshops/message.error.update'));
         }
 
         // redirect with success message
-        //return redirect('admin/email');
         return redirect()->back()->withSuccess(Lang::get('workshops/message.success.update'));
     }
 
