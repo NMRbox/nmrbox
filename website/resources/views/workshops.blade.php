@@ -78,18 +78,24 @@
                                 </p>
                                 <!-- eof test -->
                                 {{-- checking whether the user is already registered --}}
-                                @if($person != null)
-                                    <button
-                                        @foreach($person->classification as $group)
-                                            @if($group->name == $workshop->name)
-                                            disabled
-                                            @endif
-                                        @endforeach
-                                        name="register" class="btn btn-warning btn_register_workshop" data-workshop="{!! $workshop->name !!}" value="{!! $workshop->name !!}">
-                                        Register
+                                @if($workshop->attendance_max == $workshop->person->count() && $workshop->attendance_max != null)
+                                    <button disabled name="register" class="btn btn-secondary " data-workshop="{!! $workshop->name !!}" value="{!! $workshop->name !!}">
+                                        Registration Full
                                     </button>
+                                @else
+                                    @if($person != null)
+                                        <button
+                                                @foreach($person->classification as $group)
+                                                @if($group->name == $workshop->name)
+                                                disabled
+                                                @endif
+                                                @endforeach
+                                                name="register" class="btn btn-warning btn_register_workshop" data-workshop="{!! $workshop->name !!}" value="{!! $workshop->name !!}">
+                                            Register
+                                        </button>
+                                    @endif
                                 @endif
-                                {{-- csrf token --}}
+                                    {{-- csrf token --}}
                                 <input type="hidden" name="_token" id="user_csrf_token" value="{!! csrf_token() !!}" />
                             </div>
                         </div>
