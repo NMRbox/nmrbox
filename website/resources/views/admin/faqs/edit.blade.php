@@ -72,7 +72,7 @@ Edit FAQ
                     <div class="col-sm-12 col-md-12 form-group">
                         {!! BootForm::text('question', "Question", $faq->question, array('placeholder' => 'Enter Question', 'class' => 'input-lg', 'required' => 'required'))!!}
                         {!! BootForm::textarea('answer', "Answer", $faq->answer, array('class' => 'input-lg textarea form-control', 'required' => 'required', 'rows' => '2', 'placeholder'=>'Place some text here', 'style'=>'style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"'))!!}
-                        {!! BootForm::text('slug', "Slug", $faq->slug, array('placeholder' => 'Enter Question', 'class' => 'input-lg', 'required' => 'required'))!!}
+                        {!! BootForm::text('slug', "Slug", $faq->slug, array('placeholder' => 'Enter Slug', 'class' => 'input-lg', 'required' => 'required'))!!}
                     </div>
                     {{-- software / metadata section --}}
                     <div class="form-group">
