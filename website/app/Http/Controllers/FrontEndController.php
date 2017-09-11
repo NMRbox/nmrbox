@@ -260,7 +260,7 @@ class FrontEndController extends Controller
 
             // Send the registration acknowledge email
             Mail::send('emails.server-malfunction', $data, function ($m) {
-                $m->to('mosrur@gmail.com');
+                $m->to('support@nmrbox.org');
                 $m->subject('Buildserver malfunction detected');
             });
             //dd($e);
