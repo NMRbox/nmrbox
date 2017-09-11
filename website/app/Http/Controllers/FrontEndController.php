@@ -260,7 +260,7 @@ class FrontEndController extends Controller
 
             // Send the registration acknowledge email
             Mail::send('emails.server-malfunction', $data, function ($m) {
-                $m->to('support@nmrbox.org');
+                $m->to(env('NMRBOX_SUPPORT_EMAIL'));
                 $m->subject('Buildserver malfunction detected');
             });
             //dd($e);
@@ -648,30 +648,44 @@ class FrontEndController extends Controller
             return back()->with('error', Lang::get('auth/message.forgot-password-confirm.request_expired'));
         } else {
 
-            //making credential array for LDAP verification
-            $credential['username'] = $user->nmrbox_acct;
-            $credential['password'] = $request->get('password');
+            try {
+                //making credential array for LDAP verification
+                $credential['username'] = $user->nmrbox_acct;
+                $credential['password'] = $request->get('password');
 
-            // Adding custom LDAP library class and authenticating
-            $ldap = new Ldap;
-            $ldap_status = $ldap->ldap_set_password($credential);
+                // Adding custom LDAP library class and authenticating
+                $ldap = new Ldap;
+                $ldap_status = $ldap->ldap_set_password($credential);
 
-            // LDAP login response
-            if($ldap_status !== false){
-                // update reminder table
-                $reminder_update = Reminder::where('id', $reminder->id)
-                                            ->update(
-                                                array(
-                                                    'completed' => true,
-                                                    'completed_at'    => date('Y-m-d H:i:s'),
-                                                )
-                                            );
+                // LDAP login response
+                // LDAP login response
+                if($ldap_status !== false){
+                    // update reminder table
+                    $reminder_update = Reminder::where('id', $reminder->id)
+                        ->update(
+                            array(
+                                'completed' => true,
+                                'completed_at'    => date('Y-m-d H:i:s'),
+                            )
+                        );
 
-                // Password successfully reseted
-                return Redirect::route('login')->with('success', Lang::get('auth/message.forgot-password-confirm.success'));
-            } else {
-                // Ooops.. something went wrong
-                return back()->with('error', nl2br(Lang::get('auth/message.forgot-password-confirm.complexity_error')) );
+                    // Password successfully reseted
+                    return Redirect::route('login')->with('success', Lang::get('auth/message.forgot-password-confirm.success'));
+                } else {
+                    // Ooops.. something went wrong
+                    return back()->with('error', nl2br(Lang::get('auth/message.forgot-password-confirm.complexity_error')) );
+                }
+            } catch (\ErrorException $e) {
+                /* trigger an email to support@nmrbox.org */
+                $data = array("Password malfunction detected.");
+
+                // Send the registration acknowledge email
+                Mail::send('emails.server-malfunction', $data, function ($m) {
+                    $m->to(env('NMRBOX_SUPPORT_EMAIL'));
+                    $m->subject('Buildserver malfunction detected');
+                });
+                //dd($e);
+                return redirect()->back()->withError(Lang::get('auth/message.server_conn_error'));
             }
         }
     }
