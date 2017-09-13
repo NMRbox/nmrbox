@@ -7,6 +7,8 @@ export class SoftwareModel {
   url: string;
   slug: string;
   software_types: Array<string>;
-  nmrbox_version: number;
-  software_version: number;
+  nmrbox_version: Array<string>;
+  software_version: Array<string>;
+  /*nmrbox_version: number;
+  software_version: number;*/
 }

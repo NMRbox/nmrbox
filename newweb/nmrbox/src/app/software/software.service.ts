@@ -8,9 +8,12 @@ import { FilterModel } from './../filter.model';
 @Injectable()
 export class SoftwareService {
 
-  private appUrl = 'https://webdev.nmrbox.org:8001/registry';  // URL to web api
+  private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
+  //private appUrl = 'http://nmrbox.dev';  // URL to web api
   private baseUrl = 'api/softwareList';  // URL to web api
-  private swtUrl = 'api/swtList';  // URL to web api
+  private swtUrl = 'registry';  // URL to web api
+  private swtFltrUrl = 'registry/filter-software-search';  // URL to web api
+  private swtMtDtUrl = 'registry/software-metadata';  // URL to web api
   private testUrl = 'api/spectralSoftware';
   private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -27,16 +30,15 @@ export class SoftwareService {
 
   getSoftwareList(): Promise<SoftwareModel[]> {
     return this.http
-      .get(this.appUrl)
+      .get(this.appUrl + `/` + this.swtUrl)
       .toPromise()
       .then(response => response.json().data as SoftwareModel[])
       .catch(this.handleError);
   }
 
   getSwtList(): Promise<FilterModel[]> {
-    console.log("getSwtList");
     return this.http
-      .get(this.swtUrl)
+      .get(this.appUrl + `/` + this.swtUrl)
       .toPromise()
       .then(response => response.json().data as FilterModel[])
       .catch(this.handleError);
@@ -44,8 +46,9 @@ export class SoftwareService {
 
   getFilter(name: string): Promise<FilterModel> {
     console.log("getSwt, name: ", name);
+    console.log("URL: ", this.appUrl + `/?name=${name}`);
     return this.http
-      .get(`api/swtList/?name=${name}`)
+        .get(this.appUrl + `/?name=${name}`)
       .toPromise()
       .then(response => response.json().data as FilterModel)
       .catch(this.handleError);
@@ -53,7 +56,8 @@ export class SoftwareService {
 
   getSoftware(slug: string): Promise<SoftwareModel> {
 
-    const url = `${this.appUrl}/${slug}`;
+    const url = this.appUrl + `/` + this.swtUrl + `/` + slug;
+    console.log(url);
     return this.http
       .get(url)
       .toPromise()
@@ -61,14 +65,16 @@ export class SoftwareService {
       .catch(this.handleError);
   }
 
-  /*getSoftware(id: number): Promise<SoftwareModel> {
-    const url = `${this.baseUrl}/${id}`;
-    return this.http
-      .get(url)
-      .toPromise()
-      .then(response => response.json().data as SoftwareModel)
-      .catch(this.handleError);
-  }*/
+  getSoftwareMetaData(slug: string): Promise<SoftwareModel[]> {
+
+      const url = this.appUrl + `/` + this.swtMtDtUrl + `/` + slug;
+      console.log(url);
+      return this.http
+          .get(url)
+          .toPromise()
+          .then(response => response.json().data as SoftwareModel[])
+          .catch(this.handleError);
+  }
 
   update(software: SoftwareModel): Promise<SoftwareModel> {
     const url = `${this.baseUrl}/${software.id}`;
@@ -89,16 +95,21 @@ export class SoftwareService {
 
   searchSoftware(term: string): Promise<SoftwareModel[]> {
 
-    let url = this.baseUrl + '?name=' + name;
+    let url;
+
+    if ( term ) {
+        url = this.appUrl + `/` + this.swtFltrUrl + `/${term}`;
+    } else {
+        url = this.appUrl + `/` + this.swtUrl ;
+    }
 
     return this.http
-        .get(`api/softwareList/?name=${term}`)
+        .get(url)
         .toPromise()
         .then((r: Response) => r.json().data as SoftwareModel[]);
   }
 
   filterSoftwareType(softwareType: string, filterType: string): Promise<SoftwareModel[]> {
-    //let filterType = "swt";
     let url = `api/softwareList/?software_types=${softwareType}`;
     //let url = `api/softwareList/?research_problems=${softwareType}`;
 

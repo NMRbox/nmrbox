@@ -27,17 +27,23 @@
     <section class="versions-container col-2">
       <div>
         <h3><strong>NMR</strong>box Version</h3>
-        <p>{{software.nmrbox_version}}</p>
+        <!--<p>{{softwareVM.nmrbox_version}}</p>-->
+        <section>
+          <p *ngFor="let type of softwareVM.nmrbox_version" class="">{{type}}</p>
+        </section>
       </div>
       <div>
         <h3><strong>Software</strong> Version</h3>
-        <p>{{software.software_version}}</p>
+        <!--<p>{{softwareVM.software_version}}</p>-->
+        <section>
+          <p *ngFor="let type of softwareVM.software_version" class="">{{type}}</p>
+        </section>
       </div>
     </section>
     <section>
       <h3>Software Types</h3>
       <ul>
-        <li *ngFor="let type of software.software_types" class="sw-type-icon-large sw-type-icon-{{type}}"></li>
+        <!--<li *ngFor="let type of software.software_types" class="sw-type-icon-large sw-type-icon-{{type}}"></li>-->
       </ul>
     </section>
   </div>

@@ -12,6 +12,7 @@ import { SoftwareService }  from './software.service';
 })
 export class SoftwareDetailComponent implements OnInit {
   software: SoftwareModel;
+  softwareVM: SoftwareModel[];
 
   constructor(
     private softwareService: SoftwareService,
@@ -21,9 +22,18 @@ export class SoftwareDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params
+        .switchMap((params: Params) => this.softwareService.getSoftware(params['slug']))
+        .subscribe(software => this.software = software);
       //.switchMap((params: Params) => this.softwareService.getSoftware(+params['id']))
-      .switchMap((params: Params) => this.softwareService.getSoftware(params['slug']))
-      .subscribe(software => this.software = software);
+      //this.softwareService.getSoftwareMetaData(params['slug']).then(softwareMetaData => this.softwareVM = softwareMetaData);
+
+      this.route.params
+          .switchMap((params: Params) => this.softwareService.getSoftwareMetaData(params['slug']))
+          .subscribe(softwareMetaData => this.softwareVM = softwareMetaData);
+  }
+
+  getSoftwareMetaData(slug: string): void {
+      this.softwareService.getSoftwareMetaData(slug).then(softwareMetaData => this.softwareVM = softwareMetaData);
   }
 
   save(): void {
