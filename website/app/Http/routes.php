@@ -45,7 +45,9 @@ Route::group(array('prefix' => 'registry'), function() {
     //All basic routes defined here
     Route::get('/', array('as' => 'registry','uses' => 'RegistryController@index'));
     Route::get('{software}', array('as' => 'software-page','uses' => 'RegistryController@getSoftware'));
+    Route::get('software-metadata/{software}', array('as' => 'software-metadata','uses' => 'RegistryController@getSoftwareMetaData'));
     Route::post('software-search', array('as' => 'software-search','uses' => 'RegistryController@postRegistrySearch'));
+    Route::get('filter-software-search/{software}', array('as' => 'filter-software-search','uses' => 'RegistryController@filterSoftwares'));
 });
 
 /* Keywords management */

@@ -658,7 +658,6 @@ class FrontEndController extends Controller
                 $ldap_status = $ldap->ldap_set_password($credential);
 
                 // LDAP login response
-                // LDAP login response
                 if($ldap_status !== false){
                     // update reminder table
                     $reminder_update = Reminder::where('id', $reminder->id)
