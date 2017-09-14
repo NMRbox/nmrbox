@@ -13,12 +13,15 @@
   <div class="software-details" *ngIf="software">
     <h1>{{software.short_title}}</h1>
     <section>
+      <h3>{{software.long_title}}</h3>
+    </section>
+    <section>
       <h3>Synopsis</h3>
       <p>{{software.synopsis}}</p>
     </section>
     <section id="sw-detail-description">
       <h3>Description</h3>
-      <p>{{software.description}}</p>
+      <div [innerHTML]="software.description"></div>
     </section>
     <section>
       <h3>URL</h3>

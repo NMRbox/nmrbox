@@ -2,6 +2,7 @@ export class SoftwareModel {
   id: number;
   name: string;
   short_title: string;
+  long_title: string;
   synopsis: string;
   description: string;
   url: string;
