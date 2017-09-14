@@ -8,8 +8,8 @@ import { FilterModel } from './../filter.model';
 @Injectable()
 export class SoftwareService {
 
-  private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
-  //private appUrl = 'http://nmrbox.dev';  // URL to web api
+  //private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
+  private appUrl = 'http://nmrbox.dev';  // URL to web api
   private baseUrl = 'api/softwareList';  // URL to web api
   private swtUrl = 'registry';  // URL to web api
   private swtFltrUrl = 'registry/filter-software-search';  // URL to web api
@@ -67,13 +67,14 @@ export class SoftwareService {
 
   getSoftwareMetaData(slug: string): Promise<SoftwareModel[]> {
 
-      const url = this.appUrl + `/` + this.swtMtDtUrl + `/` + slug;
+      const url = this.appUrl + `/` + this.swtMtDtUrl + `/` + slug ;
       console.log(url);
+
       return this.http
-          .get(url)
-          .toPromise()
-          .then(response => response.json().data as SoftwareModel[])
-          .catch(this.handleError);
+              .get(url)
+              .toPromise()
+              .then(response => response.json().data as SoftwareModel[])
+              .catch(this.handleError);
   }
 
   update(software: SoftwareModel): Promise<SoftwareModel> {

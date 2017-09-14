@@ -9,6 +9,15 @@ export class SoftwareModel {
   software_types: Array<string>;
   nmrbox_version: Array<string>;
   software_version: Array<string>;
+  citation: string;
+  title: string;
+  first_name: string;
+  last_name: string;
+  journal: any;
+  year: any;
+  volume: any;
+  issue: any;
+  authors: string;
   /*nmrbox_version: number;
   software_version: number;*/
 }
