@@ -29,6 +29,8 @@ export class CommunityListComponent implements OnInit {
 
   //@Input() eventsList: CommunityModel[];
   eventsList: CommunityModel[];
+  upcoming: CommunityModel[];
+  completed: CommunityModel[];
   @Input() eventsCurrentList: CommunityModel[];
   @Input() eventsPastList: CommunityModel[];
   
@@ -70,9 +72,11 @@ export class CommunityListComponent implements OnInit {
     /* Workshops */
     //this.filterCurrentEvents(true);
     //this.filterCurrentEvents();
-    this.getEventsList();
+    //this.getEventsList();
+      this.route.params
+          .switchMap((params: Params) => this.communityService.getEventsList())
+          .subscribe(eventsList => this.eventsList = eventsList);
 
-    // ROUTES
 
     // Tabs: go to specific subsection
     this.route.params.subscribe( params =>
