@@ -144,7 +144,24 @@ class WorkshopsController extends Controller
      */
     public function showAll()
     {
-        if(Sentinel::check()){
+
+        //Get all the upcoming workshops
+        $upcoming_workshops = Workshop::whereDate('end_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
+
+        foreach ($upcoming_workshops as $upcoming){
+            $workshops['upcoming'][] = $upcoming;
+        }
+
+        //Get all the completed workshops
+        $completed_workshops = Workshop::whereDate('end_date', '<', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'desc')->get();
+
+        foreach ($completed_workshops as $completed){
+            $workshops['completed'][] = $completed;
+        }
+
+        return response( json_encode( array('data' => $workshops, ) ), 200 )->header( 'Content-Type', 'application/json' );
+
+        /*if(Sentinel::check()){
 
             //$user = Sentinel::getUser(); //removing user->person test
             $user = Sentinel::getUser();
@@ -171,7 +188,8 @@ class WorkshopsController extends Controller
             $person = null;
             // View
             return View::make('workshops', compact('upcoming_workshops', 'completed_workshops', 'person'));
-        }
+        }*/
+
     }
     /**
      * Remove the specified resource from storage.
