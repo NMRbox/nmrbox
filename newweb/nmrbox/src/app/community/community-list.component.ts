@@ -27,7 +27,8 @@ export class CommunityListComponent implements OnInit {
   @Input() blogMostRecentList: CommunityModel[];
   @Input() blogNextList: CommunityModel[];
 
-  @Input() eventsList: CommunityModel[];
+  //@Input() eventsList: CommunityModel[];
+  eventsList: CommunityModel[];
   @Input() eventsCurrentList: CommunityModel[];
   @Input() eventsPastList: CommunityModel[];
   
