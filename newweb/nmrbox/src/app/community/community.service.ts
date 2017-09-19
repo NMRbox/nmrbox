@@ -8,12 +8,14 @@ import { CommunityModel } from './community.model';
 export class CommunityService {
 
   // test url
-  private appUrl = 'https://webdev.nmrbox.org:8001'; // Main site url
+  private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
+  //private appUrl = 'http://nmrbox.dev';  // URL to web api
   private baseUrl = 'api/communityList';  // URL to web api
   private supportUrl = 'api/comSupportList';  // URL to web api
   private blogUrl = 'api/comBlogList';  // URL to web api
-  private eventsUrl = 'api/comEventsList';  // URL to web api
-  
+  private eventsUrl = 'workshops';  // URL to web api
+  //private eventsUrl = 'api/comEventsList';  // URL to web api
+
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
@@ -78,7 +80,7 @@ export class CommunityService {
 
   getEventsList(): Promise<CommunityModel[]> {
     return this.http
-      .get(this.eventsUrl)
+      .get(this.appUrl + `/` + this.eventsUrl)
       .toPromise()
       .then(response => response.json().data as CommunityModel[])
       .catch(this.handleError);
@@ -86,7 +88,6 @@ export class CommunityService {
 
     /* test (redirecting from router for page details */
     getPageContent(pageUrl: string): Promise<CommunityModel> {
-
         let url = this.appUrl + '/' + pageUrl;
         console.log("URL: ", url);
         return this.http
@@ -95,7 +96,7 @@ export class CommunityService {
           .then(response => response.json().data as CommunityModel)
           .catch(this.handleError);
     }
-    /* test */
+
 
   //getSoftware(type: string, id: number): Promise<CommunityModel> {
   getCommunityDetail(id: number, type: string): Promise<CommunityModel> {
@@ -169,13 +170,21 @@ export class CommunityService {
             .toPromise()
             .then((r: Response) => r.json().data as CommunityModel[]);
     }
+    filterCurrentEvents(): Promise<CommunityModel[]> {
+
+        return this.http
+            .get(this.appUrl + `/` + this.eventsUrl)
+            .toPromise()
+            .then((r: Response) => r.json().data as CommunityModel[]);
+    }
+    /*
     filterCurrentEvents(dateCurrent: boolean): Promise<CommunityModel[]> {
 
         return this.http
             .get(`${this.eventsUrl}/?dateCurrent=${dateCurrent}`)
             .toPromise()
             .then((r: Response) => r.json().data as CommunityModel[]);
-    }
+    }*/
 
   update(software: CommunityModel): Promise<CommunityModel> {
     const url = `${this.baseUrl}/${software.id}`;

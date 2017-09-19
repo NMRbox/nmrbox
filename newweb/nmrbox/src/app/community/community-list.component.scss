@@ -28,15 +28,15 @@ md-grid-list {
   padding: 0px;
 
   .sw-card {
-    min-height: 300px;
-    margin: 5px;
-    padding-right: 18px;
+    min-width: 200px;
+    /*margin: 5px;
+    padding-right: 10px;*/
 
-    .mat-card-title {
+    /*.mat-card-title {
       font-weight: bold;
     }
     .mat-card-content {
-      /*min-height: 105px;*/
+      !*min-height: 105px;*!
       font-weight: 400;
     }
     ul.icon-list {
@@ -45,9 +45,37 @@ md-grid-list {
       position: absolute;
     }
     p {
-      line-height: 1.3em;
+      line-height: 1em;
+      margin-bottom: 5px;
+    }*/
+  }
+
+
+  .workshop-card {
+    width: 450px;
+    height: 200px;
+    margin: 10px;
+    background: #f4f4f4;
+    border: 1px solid #d9edf7;
+    md-card-header {
+      margin: 0px;
+      font-weight: bold;
+      background: #d9edf7;
+      padding: 10px;
+
+    }
+    .mat-card-title {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    md-card-content{
+      padding: 10px;
+    }
+    p {
+      line-height: 1em;
       margin-bottom: 5px;
     }
+
   }
 
   .tile-card-short {

@@ -63,8 +63,13 @@ export class CommunityListComponent implements OnInit {
     this.filterSupportType('workflow');
 
     //this.getBlogList();
+    /* Blog posts */
     this.filterBlogMostRecent(true);
-    this.filterCurrentEvents(true);
+
+    /* Workshops */
+    //this.filterCurrentEvents(true);
+    //this.filterCurrentEvents();
+    this.getEventsList();
 
     // ROUTES
 
@@ -132,10 +137,11 @@ export class CommunityListComponent implements OnInit {
 
   }
 
-  filterCurrentEvents(dateCurrent: boolean): void {
+  filterCurrentEvents(): void {
     // Latest  
-    this.communityService.filterCurrentEvents(dateCurrent).then(eventsCurrentList => this.eventsCurrentList = eventsCurrentList);
-    this.communityService.filterCurrentEvents(false).then(eventsPastList => this.eventsPastList = eventsPastList);
+    /*this.communityService.filterCurrentEvents(dateCurrent).then(eventsCurrentList => this.eventsCurrentList = eventsCurrentList);
+    this.communityService.filterCurrentEvents(dateCurrent).then(eventsCurrentList => this.eventsCurrentList = eventsCurrentList);*/
+    this.communityService.filterCurrentEvents().then(eventsCurrentList => this.eventsCurrentList = eventsCurrentList);
 
   }
 
