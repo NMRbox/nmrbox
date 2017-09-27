@@ -25,8 +25,10 @@ class Person extends EloquentUser
         'pi',
         'nmrbox_acct',
         'institution',
+        'institution_id',
         'department',
         'position',
+        'job_title',
         'address1',
         'address2',
         'address3',
@@ -38,13 +40,13 @@ class Person extends EloquentUser
     ];
 
     const positions = [
-        'PI',
-        'Undergraduate Student',
-        'Graduate Student',
-        'Postdoc',
-        'Faculty',
-        'Staff',
-        'Other'
+        'PI' => 'PI',
+        'Undergraduate Student' => 'Undergraduate Student',
+        'Graduate Student' => 'Graduate Student',
+        'Postdoc' => 'Postdoc',
+        'Faculty' => 'Faculty',
+        'Staff' => 'Staff',
+        'Other' => 'Other'
     ];
 
     public $timestamps = false;

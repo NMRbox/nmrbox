@@ -13,6 +13,7 @@ use View;
 use Validator;
 use Input;
 use Session;
+use Cookie;
 use Redirect;
 use Lang;
 use URL;
@@ -355,6 +356,7 @@ class FrontEndController extends Controller
     public function updatePersonProfile(Request $request, Person $person)
     {
         try {
+
             $user = Sentinel::getUser();
             $person = Person::where('id', $user->id)->get()->first();
 
@@ -398,8 +400,13 @@ class FrontEndController extends Controller
     /**
      * update user details and display
      */
-    public function updateProfile()
+    /*public function updateProfile()
     {
+        echo "<pre>";
+        print_r($array);
+        echo "</pre>";
+        die();
+
         $user = Sentinel::getUser();
         $person = Person::where('id', $user->id)->get()->first();
 
@@ -438,7 +445,7 @@ class FrontEndController extends Controller
         return Redirect::route('my-account')->withInput()->with('error', $error);
 
 
-    }
+    }*/
 
     /**
      * Verifying the LDAP authentication before reseting password

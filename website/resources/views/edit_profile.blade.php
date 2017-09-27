@@ -71,58 +71,7 @@
             </div>
 
             <div class="row">
-                <!-- edit form column -->
-                {{--{!! BootForm::horizontal(array('model'=>$person, 'update'=>'update_profile')) !!}--}}
-                {{--{!! BootForm::horizontal(array('model'=>$person, 'store'=>'person.store', 'update'=>'person.update_profile')) !!}
-                <div class="col-md-10 col-sm-10 col-xs-12 personal-info">
-                    <br>
-                    {!! Form::token() !!}
-                    {!! BootForm::text('first_name', "First Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
-                    {!! BootForm::text('last_name', "Last Name", null, array('class' => 'input-lg', 'required' => 'required'))!!}
-                    {!! BootForm::email('email', "Preferred Email", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
-                    {!! BootForm::email('email_institution', "Institutional Email", null, array('class' => 'form-control input-lg', 'required' => 'required')) !!}
-                    {!! BootForm::select('job_title', "Job Title",
-                        $person_positions, null, array('maxlength'=> 32, 'required' => 'required')) !!}
 
-                    {!! BootForm::text('institution', "Institution", null, array('class' => 'input-lg', 'maxlength'=> 256, 'required' => 'required'))!!}
-                    {!! BootForm::select('institution_type', "Institution Type",
-                        $person_institution_types, 0, array( 'maxlength'=> 256, 'required' => 'required')) !!}
-
-                    {!! BootForm::text('department', "Department", null, array('class' => 'input-lg', 'maxlength'=> 256, 'required' => 'required'))!!}
-                    {!! BootForm::text('pi', "PI", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
-
-                    {!! BootForm::text('address1', "Address Line 1", null, array('class' => 'input-lg', 'maxlength'=> 128, 'required' => 'required'))!!}
-                    {!! BootForm::text('address2', "Address Line 2", null, array('class' => 'input-lg', 'maxlength'=> 128))!!}
-                    {!! BootForm::text('address3', "Address Line 3", null, array('class' => 'input-lg', 'maxlength'=> 128))!!}
-                    {!! BootForm::text('city', "City", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}
-                    --}}{{--{!! BootForm::text('state_province', "State or Province", null, array('class' => 'input-lg', 'maxlength'=> 32, 'required' => 'required'))!!}--}}{{--
-                    <div class="form-group col-lg-6">
-                        --}}{{--{!! BootForm::text('state_province', "State or Province", null, array('class' => 'form-control', 'maxlength'=> 32, 'required' => 'required'))!!}--}}{{--
-                        <label for="state_province" class="control-label">State or Province</label>
-                        <div class="form-group">
-                            <select name='state_province' class="form-control" id="ct" data-show-default-option="true" data-default-option="Select State or Province" data-default-value="Connecticut" required></select>
-                        </div>
-                    </div>
-                    {!! BootForm::text('zip_code', "Zip Code", null, array('class' => 'input-lg', 'maxlength'=> 32, 'required' => 'required'))!!}
-                    --}}{{--{!! BootForm::text('country', "Country", null, array('class' => 'input-lg', 'maxlength'=> 64, 'required' => 'required'))!!}--}}{{--
-                    <div class="form-group col-lg-12">
-                        --}}{{--{!! BootForm::text('country', "Country", null, array('class' => 'form-control', 'maxlength'=> 64, 'required' => 'required'))!!}--}}{{--
-                        <label for="country" class="control-label">Country</label>
-                        <div class="form-group">
-                            <select name='country' class="crs-country form-control" data-region-id="ct" data-default-value-option="true" data-default-value="United States" required></select>
-                        </div>
-                    </div>
-                    {!! BootForm::select('time_zone_id', "Time Zone",
-                        $timezones_for_select, 169, array('required' => 'required')) !!}
-
-                    {!! BootForm::submit('Update profile') !!}
-                </div>
-                {!! BootForm::close() !!}--}}
-            </div>
-
-            <div class="row">
-
-                {{--{!! BootForm::open(array('url'=>route('register'), 'class' => 'form ' )) !!}--}}
                 {!! BootForm::open(array('model'=>$person, 'store'=>'person.store', 'update'=>'person.update_profile', 'class' => 'form')) !!}
 
                 <div class="form-group col-lg-6">
@@ -192,7 +141,6 @@
                 </div>
 
                 <div class="form-group col-lg-12">
-                    {{--{!! BootForm::text('country', "Country", null, array('class' => 'form-control', 'maxlength'=> 64, 'required' => 'required'))!!}--}}
                     <label for="country" class="control-label">Country</label>
                     <div class="form-group">
                         <select name='country' class="crs-country form-control" data-region-id="ct" data-default-value-option="true" data-default-value="United States" required></select>
@@ -205,7 +153,7 @@
                 </div>
 
                 <div class="form-group col-lg-12">
-                    {!! BootForm::submit('Register', array('class'=>'btn btn-primary btn-lg btn-block ')) !!}
+                    {!! BootForm::submit('Update', array('class'=>'btn btn-primary btn-lg btn-block ')) !!}
                 </div>
 
                 {!! BootForm::close() !!}
