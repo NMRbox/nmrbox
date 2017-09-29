@@ -1,5 +1,5 @@
 <?php
-header('Access-Control-Allow-Origin: https://webdev.nmrbox.org:8001');
+header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token, X-CSRF-TOKEN, X-XSRF-TOKEN, Authorization');
 
 $params = json_decode(file_get_contents('php://input'),true);
