@@ -129,7 +129,6 @@
                 </div>
 
                 <div class="form-group col-lg-6">
-                    {{--{!! BootForm::text('state_province', "State or Province", null, array('class' => 'form-control', 'maxlength'=> 32, 'required' => 'required'))!!}--}}
                     <label for="state_province" class="control-label">State or Province</label>
                     <div class="form-group">
                         <select name='state_province' class="form-control" id="ct" data-show-default-option="true" data-default-option="Select State or Province" data-default-value="Connecticut" required></select>

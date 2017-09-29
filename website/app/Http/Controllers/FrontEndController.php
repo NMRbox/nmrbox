@@ -176,6 +176,169 @@ class FrontEndController extends Controller
         return redirect()->back()->withError(Lang::get('auth/message.signup.error'));
     }
 
+    /* Angular Frontend signin and signup */
+    public function signin(Request $request)
+    {
+        //$credentials = $request->only('username', 'password');
+
+        // Declare the rules for the form validation
+        $rules = array(
+            'username'    => 'required',
+            'password' => 'required|between:3,32',
+        );
+
+        // Create a new validator instance from our validation rules
+        $validator = Validator::make(Input::all(), $rules);
+
+        // If validation fails, we'll exit the operation now.
+        if ($validator->fails()) {
+            // Ooops.. something went wrong
+            //return Redirect::back()->withInput()->withErrors($validator);
+            return response()->json([
+                'error' => 'validation failed!'
+            ], 401);
+        }
+
+        try {
+            // Adding custom LDAP library class and authenticating
+            $ldap = new Ldap;
+            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
+
+            /* Test (Localhost login code to skip LDAP authentication) */
+            /*$ldap_login = true;
+            $person = Person::where('id', 226)->get()->first();
+            if(!$person) {
+                return false;
+            }
+            // Adding person table information into session
+            Session::put('person', $person);
+            Sentinel::loginAndRemember($person);*/
+            /* Eof Test */
+
+            // LDAP login response
+            if($ldap_login === true){
+                if ($person = Sentinel::check())
+                {
+                    // Assigning user classification
+                    $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
+                    foreach ($user_classification as $key => $value) {
+                        if ($value->name == 'admin'){
+                            $is_admin = true;
+                            Session::put('user_is_admin', $is_admin);
+                        }
+                    }
+                }
+                //return redirect()->back()->withSuccess(Lang::get('auth/message.login.success'));
+                //return Redirect::route("my-account")->with('success', Lang::get('auth/message.login.success'));
+                return response()->json([
+                    'person_id' => $person->id,
+                    'success' => Lang::get('auth/message.login.success')
+                ], 200);
+            } else {
+                //return redirect()->back()->withError(Lang::get('auth/message.login.error'));
+                return response()->json([
+                    'error' => Lang::get('auth/message.login.error')
+                ], 401);
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            //dd($e);
+            return response()->json([
+                'error' => Lang::get('auth/message.account_not_found')
+            ], 401);
+        } catch (\ErrorException $e) {
+            return response()->json([
+                'error' => Lang::get('auth/message.server_conn_error')
+            ], 401);
+        }
+
+    }
+
+    // SingUP
+    public function signup(Request $request)
+    {
+
+        try {
+            $email = Input::get('email');
+            if( strlen($email) <= 0 ) {
+                $email = Input::get('email_institution');
+            }
+
+            // register the person
+            $person = new Person(array(
+                'first_name' => Input::get('first_name'),
+                'last_name' => Input::get('last_name'),
+                'email' => $email,
+                'email_institution' => Input::get('email_institution'),
+                'pi' => Input::get('pi'),
+                'institution_id' => 9, // set to unassigned, but update immediately after saving the model
+                'department' => Input::get('department'),
+                'job_title' => Input::get('job_title'),
+                'address1' => Input::get('address1'),
+                'address2' => Input::get('address2'),
+                'address3' => Input::get('address3'),
+                'city' => Input::get('city'),
+                'state_province' => Input::get('state_province'),
+                'zip_code' => Input::get('zip_code'),
+                'country' => Input::get('country'),
+                'time_zone_id' => Input::get('time_zone_id')
+            ));
+
+
+            /* institution check from user given inst. name */
+            $inputInstitution = Input::get('institution');
+            $inputInstitutionType = Input::get('institution_type');
+            $existing_institution = Institution::where('name', 'LIKE', '%'.$inputInstitution.'%')->get()->first();
+
+            /* Existing institution check */
+            if( !$existing_institution ) {
+                // then add a new institution and associate with person entry
+                $institution = new Institution(array(
+                    'name' => Input::get('institution'),
+                    'institution_type' => Institution::institution_types[Input::get('institution_type')]
+                ));
+
+                $institution->save();
+                $person->institution()->associate($institution);
+            }
+            else {
+                /* associating old institution data with person entry */
+                $person->institution()->associate($existing_institution);
+                /*$existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
+                $existing_institution->save();*/
+            }
+
+
+
+            /* Save person entry and return to successful page. */
+            if($person->save()){
+                // Data to be used on the email view
+                $data = array(
+                    'person' => Person::where('id', $person->id)->get()->first(),
+                );
+                // Send the registration acknowledge email
+                Mail::send('emails.register-activate', $data, function ($m) use ($person) {
+                    $m->to($person->email, $person->first_name . ' ' . $person->last_name);
+                    $m->subject('NMRbox registration received');
+                });
+
+                //return View::make('registration-successful')->with('success', Lang::get('auth/message.signup.success'));
+                return response()->json([
+                    'success' => Lang::get('auth/message.signup.success')
+                ], 201);
+            }
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            //dd($e);
+            //return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
+            return response()->json([
+                'error' => Lang::get('auth/message.account_already_exists')
+            ], 401);
+        }
+
+    }
+
+
+    /* Eof Angular frontend signin and signup */
     /**
      * Account sign in.
      *
@@ -200,6 +363,8 @@ class FrontEndController extends Controller
      *
      * @return Redirect
      */
+
+
     public function postLogin()
     {
         // Declare the rules for the form validation
@@ -267,7 +432,6 @@ class FrontEndController extends Controller
             //dd($e);
             return redirect()->back()->withError(Lang::get('auth/message.server_conn_error'));
         }
-
     }
 
     /**
@@ -397,55 +561,6 @@ class FrontEndController extends Controller
         return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
     }
 
-    /**
-     * update user details and display
-     */
-    /*public function updateProfile()
-    {
-        echo "<pre>";
-        print_r($array);
-        echo "</pre>";
-        die();
-
-        $user = Sentinel::getUser();
-        $person = Person::where('id', $user->id)->get()->first();
-
-        $user->email = Input::get('email');
-
-        // the person attached to the user
-        $person->first_name = Input::get('first_name');
-        $person->last_name = Input::get('last_name');
-
-        // Was the user's person record updated?
-        if ($person->save()) {
-            // if so, continue
-        }
-        else {
-            // Prepare the error message
-            $error = Lang::get('users/message.error.update');
-
-            // Redirect to the user page
-            return Redirect::route('my-account')->withInput()->with('error', $error);
-        }
-
-        // Was the user updated?
-        if ($user->save()) {
-            // Prepare the success message
-            $success = Lang::get('users/message.success.update');
-
-            // Redirect to the user page
-            return Redirect::route('my-account')->with('success', $success);
-        }
-
-        // Prepare the error message
-        $error = Lang::get('users/message.error.update');
-
-
-        // Redirect to the user page
-        return Redirect::route('my-account')->withInput()->with('error', $error);
-
-
-    }*/
 
     /**
      * Verifying the LDAP authentication before reseting password
