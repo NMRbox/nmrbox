@@ -1,21 +1,6 @@
 <md-toolbar color="primary">
     
     <div class="nav-wrapper">
-      <!--
-      <span class="nav-tab" id="nav-tab-1">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="50,5  100,5  125,30  125,80  100,105  50,105  25,80  25, 30" /></svg>
-      </span>
-      <span class="nav-tab" id="nav-tab-2">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="50,5  100,5  125,30  125,80  100,105  50,105  25,80  25, 30" /></svg>
-      </span>
-      <span class="nav-tab" id="nav-tab-3">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="50,5  100,5  125,30  125,80  100,105  50,105  25,80  25, 30" /></svg>
-      </span>
-      <span class="nav-tab" id="nav-tab-4">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="50,5  100,5  125,30  125,80  100,105  50,105  25,80  25, 30" /></svg>
-      </span>
-      -->
-        
       <nav class="main-navbar">
         <a md-button routerLink="/app" routerLinkActive="active">
           <span class="nav-tab">
@@ -44,10 +29,16 @@
       </nav>
       <span class="spacer"></span>
       <nav class="secondary-navbar">
-        <a md-button routerLink="/app" routerLinkActive="active">Login</a>
+        <a md-button routerLink="/signin" routerLinkActive="active">Sign in</a>
         <span>|</span>
-        <a md-button routerLink="/app" routerLinkActive="active">Sign up</a>
+        <a md-button routerLink="/signup" routerLinkActive="active">Sign up</a>
+        <span>|</span>
+        <a md-button routerLink="/user-dashboard" routerLinkActive="active">My Account</a>
+        <span>|</span>
+        <a md-button (click)="signOut()" routerLinkActive="active">Sign out</a>
       </nav>
     </div>
+  <div>
+  </div>
 </md-toolbar>
 <router-outlet></router-outlet>

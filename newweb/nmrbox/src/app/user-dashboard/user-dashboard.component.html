@@ -1,0 +1,167 @@
+<div class="container">
+
+  <div class="row">
+    <div class="welcome">
+      <h3>My Account</h3>
+    </div>
+    <div class="row">
+      <br>
+      <div class="col-md-12">
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="alert alert-info">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <p>Welcome to your NMRbox user dashboard!  This interface is under active development and additional tools / panels that provide user-specific information will be posted here.</p>
+      </div>
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-sm-12 col-md-6 toppad">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Profile - </h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class=" col-md-12 col-lg-12 ">
+                <table class="table table-user-information">
+                  <tbody>
+                  <tr>
+                    <td>Preferred Email:</td>
+                    <td><a href=""></a></td>
+                  </tr>
+                  <tr>
+                    <td>Institution:</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Department</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Principal Investigator:</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Address</td>
+                    <td></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <div class="text-right">
+              <a href="#" data-original-title="Edit user profile" data-toggle="tooltip" type="button"
+                 class="btn btn-sm btn-warning"><i class="fa fa-pencil fa-2x"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 toppad">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">User Account</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class=" col-md-12 col-lg-12 ">
+                <table class="table table-user-information">
+                  <tbody>
+                  <tr>
+                    <td>User ID:</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Institutional Email: </td>
+                    <td><a href=""></a></td>
+                  </tr>
+                  <tr>
+                    <td>Password: </td>
+                    <td>
+                      <input type="hidden" name="password" id="ldap_pass" class="password">
+                      <span style="display: none; cursor:pointer;">
+                                                        <i data-target="ldap_pass" class="fa fa-eye fa-1x showHide"></i>
+                                                    </span>
+                      <span id="pass_asterisk">******</span>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Classification Group</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Status</td>
+                    <td>Active<br>&nbsp;</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <div class="text-right">
+              <a href="#" role="button" rel="tooltip" data-original-title="Change password" data-toggle="modal" data-target="#pass_confirm_modal" class="btn btn-sm btn-warning" id="edit_ldap_pass"><i class="fa fa-key fa-2x"></i></a>
+              <input type="hidden" name="change-password" value="Save" id="save_ldap_pass" class="btn btn-primary">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="welcome text-left">
+        <h3 class="text-left">Request Downloadable VM</h3>
+      </div>
+      <div class="row"><br>
+
+        <form method="POST" accept-charset="UTF-8" class="form " role="form">
+
+          <div class="form-group col-lg-12">
+            The following form allows you to request a downloadable copy of NMRbox that you can run on your local workstation.  After you submit the form, you will receive an email with a custom link for downloading your VM.  This process may take several hours.
+          </div>
+
+          <div class="form-group col-lg-12">
+            Please select the VM version you wish to download:
+          </div>
+
+          <div class="form-group col-lg-6">
+            <div class="form-group "><label for="vm" class="control-label">VM Versions</label><div><select class="form-control form-control select_pi" maxlength="32" required="required" id="vm" name="vm"><option value="" selected="selected">Please Select</option><option value="3">release_3</option></select></div></div>
+          </div>
+
+          <div class="form-goup col-lg-12">
+            We will create a user account inside the VM.  Please select your desired username and password:
+          </div>
+
+          <div class="form-group col-lg-6">
+            <div class="form-group "><label for="vm_username" class="control-label">VM username</label><div><input class="form-control form-control" maxlength="64" required="required" id="vm_username" name="vm_username" type="text" value="mchowdhury" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAYJJREFUOBGVVLuKwkAUPRFRY2GlhRKDVRpBMFgJgRQ2C37HCvmCdOpnuE0qWzvZBf8hTbC2SLAKqQQfTXbumAy6xE0cmMx9nHNm5t4h0nK5/IjjeMVmFwWGJEk+g30uFosfgpfeIRMh2eiLbBokUGjnO/z+feSUHhN5dr1eh6ZpT7C3BHq9HiaTSbZArVYTiWq1ClYs4T/mRDAxyrROp1Pouo71eo0oimBZFo7HIxzHecr9JZP/1hWyBKT5fB5Tgo55uVw4hq5wvV6z8CLGrhgwZyZOkJIJkUcmDGulwpYVrwEF8oZhGOj3+2g2m7xWh8OBi4gT/CcwHo9hmiZ838d2u+WFTvGl5G2nfuY6Go04WZZlqKqK2+0mcCQwyxNpNBpQFAWVSgXD4RCDwUAIlFkXvpmnikhipN0h93w+43Q6YbPZwLZtdDodAS9UA8/z0G63+QMjJhUwHS+7QH1OWoXdbocwDNFqtRAEAfb7PecT5qUAQ1Bt6EejsAnXddNNBZkwv/3KjSrHve9/AAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"></div></div>
+          </div>
+
+          <div class="form-group col-lg-6">
+            <div class="form-group "><label for="vm_password" class="control-label">VM Password</label><div><input class="form-control form-control" maxlength="32" required="required" id="vm_password" name="vm_password" type="text"></div></div>
+          </div>
+
+          <div class="form-group col-lg-12">
+            Note: The username and password do not have to be the same as your NMRbox account.  You can choose whatever you like.  Your account will be given root privileges allowing you to make additional changes, as needed.
+          </div>
+
+          <div class="form-group col-lg-4">
+            <div class="form-group"><div><input class="btn btn-primary btn-lg btn-block " type="submit" value="Request Downloadable VM"></div></div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+    </div>
+
+</div>

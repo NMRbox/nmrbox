@@ -23,6 +23,9 @@ import { CommunityListComponent }  from './community/community-list.component';
 import { TeamDetailComponent }  from './team/team-detail.component';
 import { TeamListComponent }  from './team/team-list.component';
 import { HomeComponent }  from './home/home.component';
+import { SignupComponent } from './authentication/signup.component';
+import { SigninComponent } from './authentication/signin.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 
 // Application animation components
 import { FaderComponent } from './fader.component';
@@ -31,6 +34,7 @@ import { FaderComponent } from './fader.component';
 import { SoftwareService } from './software/software.service';
 import { CommunityService } from './community/community.service';
 import { TeamService } from './team/team.service';
+import { AuthenticationService } from './authentication/authentication.service';
 
 // Router
 import { AppRoutingModule } from './app-routing.module';
@@ -38,17 +42,23 @@ import { AppRoutingModule } from './app-routing.module';
 // CommonModule
 import { CommonModule } from '@angular/common';
 
+// Fontawesome
+import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
+import { ProfileUpdateComponent } from './user-dashboard/profile-update.component';
+import { FaqsComponent } from './faqs/faqs.component';
+import { PasswordResetComponent } from './authentication/password-reset.component';
+
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    MdButtonModule, MdCheckboxModule, MdInputModule, MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdListModule, MdGridListModule, MdTabsModule, MdCardModule, MdChipsModule, // material.io modules
-    //InMemoryWebApiModule.forRoot(SoftwareDataService),
+    MdButtonModule, MdCheckboxModule, MdInputModule, MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdListModule, MdGridListModule, MdTabsModule, MdCardModule, MdChipsModule,
     SwiperModule,
     AppRoutingModule,
-    CommonModule
+    CommonModule,
+      AngularFontAwesomeModule
   ],
   declarations: [
     AppComponent,
@@ -59,9 +69,19 @@ import { CommonModule } from '@angular/common';
     TeamDetailComponent,
     TeamListComponent,
     HomeComponent,
-    FaderComponent
+    FaderComponent,
+    SignupComponent,
+    SigninComponent,
+    UserDashboardComponent,
+    ProfileUpdateComponent,
+    FaqsComponent,
+    PasswordResetComponent
   ],
-  providers: [SoftwareService, CommunityService, TeamService],
+  providers: [
+      SoftwareService,
+      CommunityService,
+      TeamService,
+      AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

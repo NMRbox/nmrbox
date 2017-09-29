@@ -9,22 +9,28 @@ import { CommunityListComponent }  from './community/community-list.component';
 import { TeamDetailComponent }  from './team/team-detail.component';
 import { TeamListComponent }  from './team/team-list.component';
 import { HomeComponent }  from './home/home.component';
+import { SignupComponent } from './authentication/signup.component';
+import { SigninComponent } from './authentication/signin.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+
 
 const routes: Routes = [
   { path: 'app',     component: HomeComponent },
   { path: '', redirectTo: 'app', pathMatch: 'full' },
   { path: 'software', component: SoftwareListComponent },
-  //{ path: 's/:id', component: SoftwareDetailComponent },
   { path: 's/:slug', component: SoftwareDetailComponent },
   { path: 'software/:filterName', component: SoftwareListComponent },
-  //{ path: 'c/:type/:id', component: CommunityDetailComponent },
   { path: 'c/:pageUrl', component: CommunityDetailComponent },
   { path: 'community', component: CommunityListComponent },
   { path: 'community/:index', component: CommunityListComponent },
   { path: 'team', component: TeamListComponent },
   { path: 'team/:index', component: TeamListComponent },
   { path: 't/detail', component: TeamDetailComponent }, // Note: 'detail' is a placeholder for ':id'
-  { path: '**', redirectTo: '/app', pathMatch: 'full' }
+  //{ path: '**', redirectTo: '/app', pathMatch: 'full' },
+  { path: 'signup', component: SignupComponent },
+  { path: 'signin', component: SigninComponent },
+  { path: 'signout', component: SigninComponent },
+  { path: 'user-dashboard', component: UserDashboardComponent }
 ];
 
 @NgModule({

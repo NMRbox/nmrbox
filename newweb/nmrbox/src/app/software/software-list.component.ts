@@ -16,7 +16,6 @@ import { FilterModel } from './../filter.model';
   styleUrls: [ './software-list.component.scss' ]
 })
 export class SoftwareListComponent implements OnInit {
-  //softwareList: SoftwareModel[];
   @Input() softwareList: SoftwareModel[];
   @Output() listChange: EventEmitter<SoftwareModel[]> = new EventEmitter<SoftwareModel[]>();
   selectedSoftware: SoftwareModel;
@@ -59,13 +58,7 @@ export class SoftwareListComponent implements OnInit {
     this.route.params.subscribe( params =>
         this.filterName = params['filterName']
     );
-    //console.log("filterName: ", this.filterName);
-    /*
-    this.route.params.subscribe( params =>
-        this.filterType = params['filterType']
-    );
-    console.log("filterType: ", this.filterType);
-    */
+
     
     // check for filter
     if(!this.filterName){ 
@@ -132,6 +125,5 @@ export class SoftwareListComponent implements OnInit {
 
   gotoDetail(software: SoftwareModel): void {
     this.router.navigate(['/s', software.slug]);
-    //this.router.navigate(['/s', software.id]);
   }
 }
