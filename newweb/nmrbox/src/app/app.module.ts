@@ -35,6 +35,7 @@ import { SoftwareService } from './software/software.service';
 import { CommunityService } from './community/community.service';
 import { TeamService } from './team/team.service';
 import { AuthenticationService } from './authentication/authentication.service';
+import { UserDashboardService } from './user-dashboard/user-dashboard.service';
 
 // Router
 import { AppRoutingModule } from './app-routing.module';
@@ -43,7 +44,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 
 // Fontawesome
-import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
 import { ProfileUpdateComponent } from './user-dashboard/profile-update.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { PasswordResetComponent } from './authentication/password-reset.component';
@@ -57,8 +57,7 @@ import { PasswordResetComponent } from './authentication/password-reset.componen
     MdButtonModule, MdCheckboxModule, MdInputModule, MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdListModule, MdGridListModule, MdTabsModule, MdCardModule, MdChipsModule,
     SwiperModule,
     AppRoutingModule,
-    CommonModule,
-      AngularFontAwesomeModule
+    CommonModule
   ],
   declarations: [
     AppComponent,
@@ -81,7 +80,9 @@ import { PasswordResetComponent } from './authentication/password-reset.componen
       SoftwareService,
       CommunityService,
       TeamService,
-      AuthenticationService],
+      AuthenticationService,
+      UserDashboardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

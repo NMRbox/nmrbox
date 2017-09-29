@@ -5,8 +5,8 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthenticationService {
-    private appUrl = 'http://nmrbox.dev';  // URL to web api
-    //private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
+    //private appUrl = 'http://nmrbox.dev';  // URL to web api
+    private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
     private signinUrl = 'signin';  // URL to signin
     private signupUrl = 'signup';  // URL to signup
     private authUrl = 'auth.php';  // URL to signup
@@ -82,7 +82,6 @@ export class AuthenticationService {
                     const message = response.json().message;
                     const person_id = response.json().person_id;
                     if (message === 'success') {
-                        console.log(person_id);
                         this.setCookie('logged_in', '1');
                         this.setCookie('person_id', person_id);
                         this.router.navigateByUrl('user-dashboard');
