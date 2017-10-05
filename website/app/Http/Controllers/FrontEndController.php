@@ -176,11 +176,16 @@ class FrontEndController extends Controller
         return redirect()->back()->withError(Lang::get('auth/message.signup.error'));
     }
 
-    /* Angular Frontend signin and signup */
+    /*
+     *
+     *
+     *
+     * * Angular Frontend signin, signup and user_details
+     *
+     *
+     * */
     public function signin(Request $request)
     {
-        //$credentials = $request->only('username', 'password');
-
         // Declare the rules for the form validation
         $rules = array(
             'username'    => 'required',
@@ -206,7 +211,7 @@ class FrontEndController extends Controller
 
             /* Test (Localhost login code to skip LDAP authentication) */
             /*$ldap_login = true;
-            $person = Person::where('id', 226)->get()->first();
+            $person = Person::where('id', 69)->get()->first();
             if(!$person) {
                 return false;
             }
@@ -246,9 +251,16 @@ class FrontEndController extends Controller
                 'error' => Lang::get('auth/message.account_not_found')
             ], 401);
         } catch (\ErrorException $e) {
-            return response()->json([
-                'error' => Lang::get('auth/message.server_conn_error')
-            ], 401);
+            /* trigger an email to support@nmrbox.org */
+            $data = array("Password malfunction detected.");
+
+            // Send the registration acknowledge email
+            Mail::send('emails.server-malfunction', $data, function ($m) {
+                $m->to(env('NMRBOX_SUPPORT_EMAIL'));
+                $m->subject('Buildserver malfunction detected');
+            });
+            //dd($e);
+            return redirect()->back()->withError(Lang::get('auth/message.server_conn_error'));
         }
 
     }
@@ -337,8 +349,39 @@ class FrontEndController extends Controller
 
     }
 
+    /**
+     * get user details and display
+     */
+    public function person_details($id)
+    {
+        // the person attached to the user
+        $person = Person::where('id', $id)->get()->first();
+        $person['institution'] = $person->institution()->get()->first()->name;
 
-    /* Eof Angular frontend signin and signup */
+        // fetching all classification groups
+        $person['classifications'] = Classification::All();
+
+        //Get all the upcoming workshops
+        $workshops = Workshop::whereDate('end_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
+
+        //fetching all the downloadable VMs
+        $vms = VM::where('downloadable', 'true')->lists('name', 'id')->all();
+
+        return response( json_encode( array('data' => $person, ) ), 200 )->header( 'Content-Type', 'application/json' );
+
+    }
+
+
+    /*
+         *
+         *
+         *
+         * * Eof Angular frontend signin and signup
+         *
+         *
+         * */
+
+
     /**
      * Account sign in.
      *

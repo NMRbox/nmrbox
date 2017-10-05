@@ -356,11 +356,13 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 });
 
 #FrontEndController Group
-#Angular Frontend singin and signup
-
+#Angular Frontend singin, signup and user_details
 Route::post('signup', array( 'as' => 'signup', 'uses' => 'FrontEndController@signup'));
 Route::post('signin', array( 'as' => 'signin', 'uses' => 'FrontEndController@signin'));
-
+Route::model('person', 'App\Person');
+Route::group(array('prefix' => 'person'), function () {
+    Route::get('{person}', array('as' => 'person', 'uses' => 'FrontEndController@person_details'));
+});
 
 # Login
 Route::get('login', array('as' => 'login','uses' => 'FrontEndController@getLogin'));
