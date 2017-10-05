@@ -19,12 +19,12 @@
     </div>
 
 
-    <div class="row">
+    <div class="row" *ngIf="person">
 
       <div class="col-sm-12 col-md-6 toppad">
         <div class="panel panel-info">
           <div class="panel-heading">
-            <h3 class="panel-title">Profile - </h3>
+            <h3 class="panel-title">Profile - {{person.first_name}}&nbsp;{{person.last_name}}</h3>
           </div>
           <div class="panel-body">
             <div class="row">
@@ -33,23 +33,23 @@
                   <tbody>
                   <tr>
                     <td>Preferred Email:</td>
-                    <td><a href=""></a></td>
+                    <td><a href="mailto: {{person.email}}">{{person.email}}</a></td>
                   </tr>
                   <tr>
                     <td>Institution:</td>
-                    <td></td>
+                    <td>{{person.institution}}</td>
                   </tr>
                   <tr>
                     <td>Department</td>
-                    <td></td>
+                    <td>{{person.department}}</td>
                   </tr>
                   <tr>
                     <td>Principal Investigator:</td>
-                    <td></td>
+                    <td>{{person.pi}}</td>
                   </tr>
                   <tr>
                     <td>Address</td>
-                    <td></td>
+                    <td>{{person.address1}}<br>{{person.city}}, {{person.state_province}} {{person.zip_code}}</td>
                   </tr>
                   </tbody>
                 </table>
@@ -59,7 +59,7 @@
           <div class="panel-footer">
             <div class="text-right">
               <a href="#" data-original-title="Edit user profile" data-toggle="tooltip" type="button"
-                 class="btn btn-sm btn-warning"><i class="fa fa-pencil fa-2x"></i></a>
+                 class="btn btn-sm btn-warning"><i class="fa fa-pencil fa-2x"></i>Update Profile</a>
             </div>
           </div>
         </div>
@@ -77,11 +77,11 @@
                   <tbody>
                   <tr>
                     <td>User ID:</td>
-                    <td></td>
+                    <td>{{person.nmrbox_acct}}</td>
                   </tr>
                   <tr>
                     <td>Institutional Email: </td>
-                    <td><a href=""></a></td>
+                    <td><a href="mailto: {{person.email_institution}}">{{person.email_institution}}</a></td>
                   </tr>
                   <tr>
                     <td>Password: </td>
@@ -96,7 +96,11 @@
                   </tr>
                   <tr>
                     <td>Classification Group</td>
-                    <td></td>
+                    <td>
+                      <div *ngFor="let classification of person.classifications">
+                        {{classification.name}}
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td>Status</td>
@@ -109,7 +113,7 @@
           </div>
           <div class="panel-footer">
             <div class="text-right">
-              <a href="#" role="button" rel="tooltip" data-original-title="Change password" data-toggle="modal" data-target="#pass_confirm_modal" class="btn btn-sm btn-warning" id="edit_ldap_pass"><i class="fa fa-key fa-2x"></i></a>
+              <a href="#" role="button" rel="tooltip" data-original-title="Change password" data-toggle="modal" data-target="#pass_confirm_modal" class="btn btn-sm btn-warning" id="edit_ldap_pass"><i class="fa fa-key fa-2x"></i>Change Password</a>
               <input type="hidden" name="change-password" value="Save" id="save_ldap_pass" class="btn btn-primary">
             </div>
           </div>

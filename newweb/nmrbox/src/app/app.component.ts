@@ -18,6 +18,10 @@ export class AppComponent {
         private authService: AuthenticationService
     ) { }
 
+    isLoggedIn() {
+        return this.authService.getCookie('person_id');
+    }
+
     signOut() {
         this.authService.deleteCookie('person_id');
         this.authService.deleteCookie('logged_in');

@@ -6,6 +6,8 @@ import { Observable} from 'rxjs/Observable';
 
 /* Import the service */
 import { AuthenticationService } from '../authentication/authentication.service';
+import { UserDashboardService} from './user-dashboard.service';
+import {PersonModel} from "./person.model";
 
 @Component({
   selector: 'user-dashboard',
@@ -13,11 +15,13 @@ import { AuthenticationService } from '../authentication/authentication.service'
   styleUrls: ['./user-dashboard.component.css']
 })
 export class UserDashboardComponent implements OnInit {
+    person: PersonModel;
 
   constructor(
       private router: Router,
       private route: ActivatedRoute,
-      private authService: AuthenticationService
+      private authService: AuthenticationService,
+      private userDashboardService: UserDashboardService
   ) { }
 
   ngOnInit() {
@@ -25,6 +29,11 @@ export class UserDashboardComponent implements OnInit {
       if (person_id === '' && person_id.length === 0) {
           this.router.navigateByUrl('signin');
       }
+
+      this.getPersonDetails(person_id);
+  }
+  getPersonDetails(id: string): void {
+        this.userDashboardService.getPersonDetails(id).then(person => this.person = person);
   }
 
 }
