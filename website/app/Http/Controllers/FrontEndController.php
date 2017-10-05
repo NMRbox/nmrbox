@@ -356,10 +356,11 @@ class FrontEndController extends Controller
     {
         // the person attached to the user
         $person = Person::where('id', $id)->get()->first();
+        // Fetching person institution name
         $person['institution'] = $person->institution()->get()->first()->name;
 
         // fetching all classification groups
-        $person['classifications'] = Classification::All();
+        $person['classifications'] = $person->classification()->get();
 
         //Get all the upcoming workshops
         $workshops = Workshop::whereDate('end_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
