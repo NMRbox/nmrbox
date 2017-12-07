@@ -17,13 +17,16 @@ class SentinelUser
      */
     public function handle($request, Closure $next)
     {
-        if (!Sentinel::check()) {
+        /*if (!Sentinel::check()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
                 return Redirect::route('login');
             }
-        }
+        }*/
+        if(!Session::has('person'))
+            return Redirect::route('login');
+
         return $next($request);
     }
 }

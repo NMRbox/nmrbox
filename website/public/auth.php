@@ -5,8 +5,8 @@ header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 
 $params = json_decode(file_get_contents('php://input'),true);
 
-//$site_url = 'http://nmrbox.dev';
-$site_url = 'https://webdev.nmrbox.org:8001';
+$site_url = 'http://nmrbox.dev';
+//$site_url = 'https://webdev.nmrbox.org:8001';
 $url = '';
 
 if(isset($params['request_type']) && $params['request_type'] == 'signin') {
@@ -29,12 +29,13 @@ error_reporting(E_ALL);
 $ch = curl_init();
 
 curl_setopt($ch, CURLOPT_URL,$url);
-curl_setopt($ch, CURLOPT_PORT, 8001);
+//curl_setopt($ch, CURLOPT_PORT, 8001);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
 
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
 
 // in real life you should use something like:
 // curl_setopt($ch, CURLOPT_POSTFIELDS,
@@ -50,7 +51,7 @@ $decode = json_decode($server_output);
 
 
 if(isset($decode->success)) {
-    echo json_encode(array('status'=>200,'message'=>'success','person_id' => $decode->person_id, 'notification'=>$decode->success));
+    echo json_encode(array('status'=>200,'message'=>'success','person_id' => $decode->person_id, 'notification'=>$decode->success, 'token' => $decode->token, 'session' => $decode->session));
 } else {
     echo json_encode(array('status'=>401,'message'=>'fail', 'notification'=> ($decode->error ? $decode->error : '')));
 }

@@ -1,8 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Requests\Request;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Redirect;
 use Sentinel;
+use Session;
 use View;
 use App\Page;
 
@@ -31,21 +33,22 @@ class ChandraController extends Controller {
 
     public function showHome()
     {
-    	if(Sentinel::check())
+/*    	//if(Sentinel::check())
+    	if(Session::has('person') && Session::has('user_is_admin'))
 			return View::make('admin/index');
 		else
-			return Redirect::to('admin/login')->with('error', 'You must be logged in!');
+			return Redirect::to('login')->with('error', 'You must be logged in!');*/
+        return View::make('admin/index');
     }
 
     public function showView($name=null)
     {
-
-    	if(View::exists('admin/'.$name))
+        if(View::exists('admin/'.$name))
 		{
 			if(Sentinel::check())
 				return View::make('admin/'.$name);
 			else
-				return Redirect::to('admin/login')->with('error', 'You must be logged in!');
+				return Redirect::to('login')->with('error', 'You must be logged in!');
 		}
 		else
 		{
@@ -71,9 +74,9 @@ class ChandraController extends Controller {
             // $name is the page's slug
             $page = Page::where('slug', $name)->get()->first();
             //dd($page);
-            return View::make('basic_page')->with('page', $page);
-            /*return response( json_encode( array( 'data' => $page ) ), 200 )
-                ->header( 'Content-Type', 'application/json' );*/
+            //return View::make('basic_page')->with('page', $page);
+            return response( json_encode( array( 'data' => $page ) ), 200 )
+                ->header( 'Content-Type', 'application/json' );
         }
         else
         {

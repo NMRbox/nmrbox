@@ -33,7 +33,7 @@
                     <fieldset>
                         <h2>Please Sign In</h2>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="username" placeholder="Username" value="{!! Input::old('username') !!}">
+                            <input type="text" class="form-control" name="username" placeholder="Username" value="{!! $user['username'] !!}" readonly>
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" name="password" placeholder="Password">

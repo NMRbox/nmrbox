@@ -13,6 +13,11 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         '/signin',
-        '/signup'
+        '/signup',
+        '/updateProfile/*',
+        '/password-forgot',
+        '/password-forgot-confirm',
+        '/password-reset',
+        '/downloadable-vm'
     ];
 }

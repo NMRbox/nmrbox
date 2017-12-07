@@ -18,10 +18,20 @@ class SentinelAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(!Sentinel::check())
+        /*if(!Sentinel::check())
             return Redirect::to('login')->with('error', 'You must be logged in!');
         elseif(!Session::has('user_is_admin'))
-            return Redirect::to('my-account');
+            return Redirect::to('my-account');*/
+        //dd($request->user);
+        /* if request coming with username from Angular frontend*/
+        if($request->username)
+            Session::put('username', $request->username);
+
+        //dd(Session::get('username'));
+
+        if(!Session::has('person') and !Session::has('user_is_admin'))
+            //return Redirect::route('login/'.$request->user);
+            return Redirect::route('login');
 
         return $next($request);
     }

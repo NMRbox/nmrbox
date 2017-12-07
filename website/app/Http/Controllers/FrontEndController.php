@@ -9,6 +9,7 @@ use App\Institution;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 
 use Sentinel;
+use JWTAuth;
 use View;
 use Validator;
 use Input;
@@ -30,8 +31,6 @@ use App\Workshop;
 use App\VM;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use App\Library\Ldap;
-
-
 
 class FrontEndController extends Controller
 {
@@ -176,211 +175,32 @@ class FrontEndController extends Controller
         return redirect()->back()->withError(Lang::get('auth/message.signup.error'));
     }
 
-    /*
-     *
-     *
-     *
-     * * Angular Frontend signin, signup and user_details
-     *
-     *
-     * */
-    public function signin(Request $request)
+
+    /*public function getAuthenticatedUser()
     {
-        // Declare the rules for the form validation
-        $rules = array(
-            'username'    => 'required',
-            'password' => 'required|between:3,32',
-        );
-
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            // Ooops.. something went wrong
-            //return Redirect::back()->withInput()->withErrors($validator);
-            return response()->json([
-                'error' => 'validation failed!'
-            ], 401);
-        }
-
         try {
-            // Adding custom LDAP library class and authenticating
-            $ldap = new Ldap;
-            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
 
-            /* Test (Localhost login code to skip LDAP authentication) */
-            /*$ldap_login = true;
-            $person = Person::where('id', 69)->get()->first();
-            if(!$person) {
-                return false;
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
             }
-            // Adding person table information into session
-            Session::put('person', $person);
-            Sentinel::loginAndRemember($person);*/
-            /* Eof Test */
 
-            // LDAP login response
-            if($ldap_login === true){
-                if ($person = Sentinel::check())
-                {
-                    // Assigning user classification
-                    $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
-                    foreach ($user_classification as $key => $value) {
-                        if ($value->name == 'admin'){
-                            $is_admin = true;
-                            Session::put('user_is_admin', $is_admin);
-                        }
-                    }
-                }
-                //return redirect()->back()->withSuccess(Lang::get('auth/message.login.success'));
-                //return Redirect::route("my-account")->with('success', Lang::get('auth/message.login.success'));
-                return response()->json([
-                    'person_id' => $person->id,
-                    'success' => Lang::get('auth/message.login.success')
-                ], 200);
-            } else {
-                //return redirect()->back()->withError(Lang::get('auth/message.login.error'));
-                return response()->json([
-                    'error' => Lang::get('auth/message.login.error')
-                ], 401);
-            }
-        } catch (\Illuminate\Database\QueryException $e) {
-            //dd($e);
-            return response()->json([
-                'error' => Lang::get('auth/message.account_not_found')
-            ], 401);
-        } catch (\ErrorException $e) {
-            /* trigger an email to support@nmrbox.org */
-            $data = array("Password malfunction detected.");
+        } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
 
-            // Send the registration acknowledge email
-            Mail::send('emails.server-malfunction', $data, function ($m) {
-                $m->to(env('NMRBOX_SUPPORT_EMAIL'));
-                $m->subject('Buildserver malfunction detected');
-            });
-            //dd($e);
-            return redirect()->back()->withError(Lang::get('auth/message.server_conn_error'));
+            return response()->json(['token_expired'], $e->getStatusCode());
+
+        } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
         }
 
-    }
-
-    // SingUP
-    public function signup(Request $request)
-    {
-
-        try {
-            $email = Input::get('email');
-            if( strlen($email) <= 0 ) {
-                $email = Input::get('email_institution');
-            }
-
-            // register the person
-            $person = new Person(array(
-                'first_name' => Input::get('first_name'),
-                'last_name' => Input::get('last_name'),
-                'email' => $email,
-                'email_institution' => Input::get('email_institution'),
-                'pi' => Input::get('pi'),
-                'institution_id' => 9, // set to unassigned, but update immediately after saving the model
-                'department' => Input::get('department'),
-                'job_title' => Input::get('job_title'),
-                'address1' => Input::get('address1'),
-                'address2' => Input::get('address2'),
-                'address3' => Input::get('address3'),
-                'city' => Input::get('city'),
-                'state_province' => Input::get('state_province'),
-                'zip_code' => Input::get('zip_code'),
-                'country' => Input::get('country'),
-                'time_zone_id' => Input::get('time_zone_id')
-            ));
-
-
-            /* institution check from user given inst. name */
-            $inputInstitution = Input::get('institution');
-            $inputInstitutionType = Input::get('institution_type');
-            $existing_institution = Institution::where('name', 'LIKE', '%'.$inputInstitution.'%')->get()->first();
-
-            /* Existing institution check */
-            if( !$existing_institution ) {
-                // then add a new institution and associate with person entry
-                $institution = new Institution(array(
-                    'name' => Input::get('institution'),
-                    'institution_type' => Institution::institution_types[Input::get('institution_type')]
-                ));
-
-                $institution->save();
-                $person->institution()->associate($institution);
-            }
-            else {
-                /* associating old institution data with person entry */
-                $person->institution()->associate($existing_institution);
-                /*$existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
-                $existing_institution->save();*/
-            }
-
-
-
-            /* Save person entry and return to successful page. */
-            if($person->save()){
-                // Data to be used on the email view
-                $data = array(
-                    'person' => Person::where('id', $person->id)->get()->first(),
-                );
-                // Send the registration acknowledge email
-                Mail::send('emails.register-activate', $data, function ($m) use ($person) {
-                    $m->to($person->email, $person->first_name . ' ' . $person->last_name);
-                    $m->subject('NMRbox registration received');
-                });
-
-                //return View::make('registration-successful')->with('success', Lang::get('auth/message.signup.success'));
-                return response()->json([
-                    'success' => Lang::get('auth/message.signup.success')
-                ], 201);
-            }
-
-        } catch (\Illuminate\Database\QueryException $e) {
-            //dd($e);
-            //return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
-            return response()->json([
-                'error' => Lang::get('auth/message.account_already_exists')
-            ], 401);
-        }
-
-    }
-
-    /**
-     * get user details and display
-     */
-    public function person_details($id)
-    {
-        // the person attached to the user
-        $person = Person::where('id', $id)->get()->first();
-        // Fetching person institution name
-        $person['institution'] = $person->institution()->get()->first()->name;
-
-        // fetching all classification groups
-        $person['classifications'] = $person->classification()->get();
-
-        //Get all the upcoming workshops
-        $workshops = Workshop::whereDate('end_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
-
-        //fetching all the downloadable VMs
-        $vms = VM::where('downloadable', 'true')->lists('name', 'id')->all();
-
-        return response( json_encode( array('data' => $person, ) ), 200 )->header( 'Content-Type', 'application/json' );
-
-    }
-
-
-    /*
-         *
-         *
-         *
-         * * Eof Angular frontend signin and signup
-         *
-         *
-         * */
+        // the token is valid and we have found the user via the sub claim
+        return response()->json(compact('user'));
+    }*/
 
 
     /**
@@ -388,18 +208,30 @@ class FrontEndController extends Controller
      *
      * @return View
      */
-    public function getLogin()
+    public function getLogin(Request $request)
     {
+        /* Retrieving user details from token */
+        //$token = JWTAuth::getToken();
+        //$user = $this->getAuthenticatedUser();
+        //dd(Session::all());
+
+
         // Is the user logged in?
-        if (Sentinel::check()) {
+        //if (Sentinel::check()) {
+        if (Session::has('person')) {
             return Redirect::route('my-account');
-        } else { //TODO: remove this else part later after v5 release.
-            // Log the user out
-            Sentinel::logout(null, true);
         }
 
+        if( Session::has('username')){
+            $user['username'] = Session::get('username');
+        } else {
+            $user['username'] = null;
+        }
+
+
+
         // Show the login page
-        return View::make('login');
+        return View::make('login', compact('user'));
     }
 
     /**
@@ -409,7 +241,7 @@ class FrontEndController extends Controller
      */
 
 
-    public function postLogin()
+    public function postLogin(Request $request)
     {
         // Declare the rules for the form validation
         $rules = array(
@@ -432,19 +264,30 @@ class FrontEndController extends Controller
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
 
             /* Test (Localhost login code to skip LDAP authentication) */
-            /*$ldap_login = true;
-            $person = Person::where('id', 226)->get()->first();
-            if(!$person) {
-                return false;
-            }
-            // Adding person table information into session
-            Session::put('person', $person);
-            Sentinel::loginAndRemember($person);*/
+            //$ldap_login = true;
             /* Eof Test */
 
             // LDAP login response
             if($ldap_login === true){
-                if ($person = Sentinel::check())
+                /* collect userid using username from person table */
+                $username = $request->input('username');
+                $person = Person::where('nmrbox_acct', $username)->first();
+                if(!$person) {
+                    return response()->json([
+                        'message' => Lang::get('auth/message.account_not_found'),
+                        'type' => 'error'
+                    ], 200);
+                }
+
+                // Adding person table information into session
+                Session::put('person', $person);
+
+                // Adding JWT-Auth Token
+                $token = JWTAuth::fromUser($person);
+                $set_token = JWTAuth::setToken($token);
+                $parse_token = JWTAuth::getToken();
+
+                if ($parse_token == true)
                 {
                     // Assigning user classification
                     $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
@@ -454,9 +297,13 @@ class FrontEndController extends Controller
                             Session::put('user_is_admin', $is_admin);
                         }
                     }
+                    return View::make('admin/index');
+
+                    return Redirect::route("my-account")
+                        ->with('success', Lang::get('auth/message.login.success'))
+                        ;
                 }
                 //return redirect()->back()->withSuccess(Lang::get('auth/message.login.success'));
-                return Redirect::route("my-account")->with('success', Lang::get('auth/message.login.success'));
 
             } else {
                 return redirect()->back()->withError(Lang::get('auth/message.login.error'));
@@ -483,7 +330,7 @@ class FrontEndController extends Controller
      *
      * @return Redirect
      */
-    public function getLogout()
+    public function getLogout(Request $request)
     {
         // Log the user out
         Sentinel::logout(null, true);
@@ -493,6 +340,12 @@ class FrontEndController extends Controller
             Session::flush();
         }
 
+        // clear the jwt auth token
+        $token = JWTAuth::getToken();
+        //dd($token);
+        if($token)
+            JWTAuth::invalidate($token);
+
         // Redirect to the users page
         return Redirect::to('homepage')->with('success', 'You have successfully logged out!');
     }
@@ -500,13 +353,26 @@ class FrontEndController extends Controller
     /**
      * get user details and display
      */
-    public function myAccount()
+    public function myAccount(Request $request)
     {
-        //$user = Sentinel::getUser(); //removing user->person test
-        $user = Sentinel::getUser();
+        //dd(Session::all());
+        /* Retrieving user details from token */
 
+        /*$person = JWTAuth::parseToken()->toUser();
+
+        if(!$person){
+            $request['token'] = Session::get('auth_token');
+            $person = JWTAuth::parseToken()->toUser();
+        }*/
+
+        $person = Person::where('id', Session::get('person')->id)->get()->first();
+        //dd($user);
+
+        // taking user information from token and skipping Sentinel check
+        /*$user = Sentinel::getUser();
+        dd($user);
         // the person attached to the user
-        $person = Person::where('id', $user->id)->get()->first();
+        $person = Person::where('id', $user->id)->get()->first();*/
 
         // fetching all classification groups
         $classifications = Classification::All();
@@ -529,7 +395,9 @@ class FrontEndController extends Controller
      */
     public function editProfile()
     {
-        $user = Sentinel::getUser();
+        //dd(Session::get('person')->id);
+        //$user = Sentinel::getUser();
+        $user = Session::get('person');
 
         // person details
         $person = Person::where('id', $user->id)->get()->first();
@@ -932,6 +800,587 @@ class FrontEndController extends Controller
         }
 
     }
+
+    /*
+     *
+     *
+     *
+     * * Angular Frontend signin, signup, forget password, reset password and user_details
+     *
+     *
+     * */
+    public function signin(Request $request)
+    {
+        // Declare the rules for the form validation
+        $rules = array(
+            'username'    => 'required',
+            'password' => 'required|between:3,32',
+        );
+
+        // Create a new validator instance from our validation rules
+        $validator = Validator::make(Input::all(), $rules);
+
+        // If validation fails, we'll exit the operation now.
+        if ($validator->fails()) {
+            // Ooops.. validation failed
+            return response()->json([
+                'message' => 'validation failed! Please, try again.',
+                'type' => 'error'
+            ], 200);
+        }
+
+        try {
+            // Adding custom LDAP library class and authenticating
+            $ldap = new Ldap;
+            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
+
+            /* Test (Localhost login code to skip LDAP authentication) */
+            //$ldap_login = true;
+            /* Eof Test */
+
+            // LDAP login response
+            if($ldap_login === true){
+                /* collect userid using username from person table */
+                $username = $request->input('username');
+                $person = Person::where('nmrbox_acct', $username)->first();
+                if(!$person) {
+                    return response()->json([
+                        'message' => Lang::get('auth/message.account_not_found'),
+                        'type' => 'error'
+                    ], 200);
+                }
+
+                // Adding person table information into session
+                Session::put('person', $person);
+
+                // Adding JWT-Auth Token
+                $token = JWTAuth::fromUser($person);
+                $set_token = JWTAuth::setToken($token);
+                $parse_token = JWTAuth::getToken();
+
+                if ($parse_token == true)
+                {
+                    // Assigning user classification
+                    $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
+                    foreach ($user_classification as $key => $value) {
+                        if ($value->name == 'admin'){
+                            $is_admin = true;
+                            Session::put('user_is_admin', $is_admin);
+                        }
+                    }
+                }
+
+                return response()->json([
+                    'token' => $token,
+                    'user_is_admin' => Session::get('user_is_admin'),
+                    'person_id' => $person->id,
+                    'message' => Lang::get('auth/message.login.success'),
+                    'type' => 'success'
+                ], 200);
+            } else {
+                return response()->json([
+                    'message' => Lang::get('auth/message.login.error'),
+                    'type' => 'error'
+                ], 200);
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return response()->json([
+                'message' => Lang::get('auth/message.account_not_found'),
+                'type' => 'error'
+            ], 200);
+        } catch (\ErrorException $e) {
+            /* trigger an email to support@nmrbox.org */
+            $data = array("Password malfunction detected.");
+
+            // Send the registration acknowledge email
+            Mail::send('emails.server-malfunction', $data, function ($m) {
+                $m->to(env('NMRBOX_SUPPORT_EMAIL'));
+                $m->subject('Buildserver malfunction detected');
+            });
+            return response()->json([
+                'message' => Lang::get('auth/message.server_conn_error'),
+                'type' => 'error'
+            ], 200);
+        }
+    }
+
+    // SingUP
+    public function signup(Request $request)
+    {
+        try {
+            $email = Input::get('email');
+            if( strlen($email) <= 0 ) {
+                $email = Input::get('email_institution');
+            }
+
+            // register the person
+            $person = new Person(array(
+                'first_name' => Input::get('first_name'),
+                'last_name' => Input::get('last_name'),
+                'email' => $email,
+                'email_institution' => Input::get('email_institution'),
+                'pi' => Input::get('pi'),
+                'institution_id' => 9, // set to unassigned, but update immediately after saving the model
+                'department' => Input::get('department'),
+                'job_title' => Input::get('job_title'),
+                'address1' => Input::get('address1'),
+                'address2' => Input::get('address2'),
+                'address3' => Input::get('address3'),
+                'city' => Input::get('city'),
+                'state_province' => Input::get('state_province'),
+                'zip_code' => Input::get('zip_code'),
+                'country' => Input::get('country'),
+                'time_zone_id' => Input::get('time_zone_id')
+            ));
+
+
+            /* institution check from user given inst. name */
+            $inputInstitution = Input::get('institution');
+            $inputInstitutionType = Input::get('institution_type');
+            $existing_institution = Institution::where('name', 'LIKE', '%'.$inputInstitution.'%')->get()->first();
+
+            /* Existing institution check */
+            if( !$existing_institution ) {
+                // then add a new institution and associate with person entry
+                $institution = new Institution(array(
+                    'name' => Input::get('institution'),
+                    'institution_type' => Institution::institution_types[Input::get('institution_type')]
+                ));
+
+                $institution->save();
+                $person->institution()->associate($institution);
+            }
+            else {
+                /* associating old institution data with person entry */
+                $person->institution()->associate($existing_institution);
+                /*$existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
+                $existing_institution->save();*/
+            }
+
+
+
+            /* Save person entry and return to successful page. */
+            if($person->save()){
+                // Data to be used on the email view
+                $data = array(
+                    'person' => Person::where('id', $person->id)->get()->first(),
+                );
+                // Send the registration acknowledge email
+                Mail::send('emails.register-activate', $data, function ($m) use ($person) {
+                    $m->to($person->email, $person->first_name . ' ' . $person->last_name);
+                    $m->subject('NMRbox registration received');
+                });
+
+                //return View::make('registration-successful')->with('success', Lang::get('auth/message.signup.success'));
+                return response()->json([
+                    'message' => Lang::get('auth/message.signup.success'),
+                    'type' => 'success'
+                ], 200);
+            }
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            //dd($e);
+            //return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
+            return response()->json([
+                'message' => Lang::get('auth/message.account_already_exists'),
+                'type' => 'error'
+            ], 200);
+        }
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateProfile(Request $request, $person_id)
+    {
+        try {
+
+            //$user = Sentinel::getUser();
+            $person = Person::where('id', $person_id)->get()->first();
+
+            $person->update($request->except(['institution', 'institution_type']));
+
+            $inputInstitution = Input::get('institution');
+            $inputInstitutionType = Input::get('institution_type');
+
+            $existing_institution = Institution::where('name', $inputInstitution)->get();
+
+            if( $existing_institution->isEmpty() ) {
+                // then make a new institution like normal
+                $institution = new Institution(array(
+                    'name' => Input::get('institution'),
+                    'institution_type' => Institution::institution_types[Input::get('institution_type')]
+                ));
+
+                $institution->save();
+                $person->institution()->associate($institution);
+            }
+            else {
+                // use the existing institution
+                $existing_institution = $existing_institution->first();
+                $person->institution()->associate($existing_institution);
+                $existing_institution->institution_type = Institution::institution_types[Input::get('institution_type')];
+                $existing_institution->save();
+            }
+
+            $person->save();
+
+            //return redirect()->back()->withSuccess(Lang::get('users/message.success.update_profile'));
+            return response()->json([
+                'message' => Lang::get('users/message.success.update_profile'),
+                'type' => 'success'
+            ], 200);
+        } catch (\Illuminate\Database\QueryException $e) {
+            //dd($e);
+            //return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
+            return response()->json([
+                'message' => Lang::get('auth/message.account_already_exists'),
+                'type' => 'error'
+            ], 200);
+        }
+
+        // Ooops.. something went wrong
+        //return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
+
+    }
+
+    /**
+     * get user details and display
+     */
+    public function person_details($id)
+    {
+        // the person attached to the user
+        $person = Person::where('id', $id)->get()->first();
+        // Fetching person institution name
+        $person['institution'] = $person->institution()->get()->first()->name;
+
+        // fetching all classification groups
+        $person['classifications'] = $person->classification()->get();
+
+        //Get all the upcoming workshops
+        $workshops = Workshop::whereDate('end_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
+
+        //fetching all the downloadable VMs
+        $vms = VM::where('downloadable', 'true')->lists('name', 'id')->all();
+
+        return response( json_encode( array('data' => $person, ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
+
+    }
+
+    /**
+     * Password reset through user dashboard
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword(Request $request)
+    {
+        // Declare the rules for the form validation
+        $rules = array(
+            'current_pass' => 'required',
+            'new_pass' => 'required',
+            'confirm_new_pass' => 'required|same:new_pass'
+        );
+
+        // Create a new validator instance from our dynamic rules
+        $validator = Validator::make(Input::all(), $rules);
+
+        // If validation fails, we'll exit the operation now.
+        if ($validator->fails()) {
+            // Ooops.. something went wrong
+            return response()->json([
+                'message' => 'Validation failed. Please, try again.',
+                'type' => 'error'
+            ], 200);
+
+        }
+
+        $person_id = $request->get('person_id');
+        $person = Person::where('id', $person_id)->first();
+
+        // LDAP credential
+        $credential['username'] = $person['nmrbox_acct'];
+        $credential['password'] = $request->input('current_pass');
+
+        try {
+            // Verifying LDAP password
+            $ldap = new Ldap;
+            $ldap_authentication = $ldap->ldap_authenticate($credential);
+
+            // LDAP login response
+            if($ldap_authentication !== false){
+                $new_credential['username'] = $person->nmrbox_acct;
+                $new_credential['password'] = $request->get('new_pass');
+
+                // Adding custom LDAP library class and authenticating
+                $ldap = new Ldap;
+                $ldap_reset = $ldap->ldap_set_password($credential);
+
+                // LDAP login response
+                if($ldap_reset !== false){
+                    return response( json_encode( array( 'message' => 'Password reset successfully. ', 'type' => 'success' ) ), 200 )
+                        ->header( 'Content-Type', 'application/json' );
+                } else {
+                    return response( json_encode( array( 'message' => 'Sorry, password reset unsuccessful. Try again. ', 'type' => 'error' ) ), 200 )
+                        ->header( 'Content-Type', 'application/json' );
+                }
+            } else {
+                return response( json_encode( array( 'message' => 'Sorry, authentication unsuccessful. Try again. ', 'type' => 'error' ) ), 200 )
+                    ->header( 'Content-Type', 'application/json' );
+            }
+        } catch (\ErrorException $e) {
+            /* trigger an email to support@nmrbox.org */
+            $data = array("LDAP Server malfunction detected.");
+
+            // Send the registration acknowledge email
+            Mail::send('emails.server-malfunction', $data, function ($m) {
+                $m->to(env('NMRBOX_SUPPORT_EMAIL'));
+                $m->subject('Buildserver malfunction detected');
+            });
+            return response()->json([
+                'message' => Lang::get('auth/message.server_conn_error'),
+                'type' => 'error'
+            ], 200);
+        }
+    }
+
+    /**
+     * Forgot password form processing page.
+     *
+     * @return Redirect
+     */
+    public function forgotPassword(Request $request)
+    {
+        // Declare the rules for the validator
+        $rules = array(
+            'email' => 'required|email',
+        );
+
+        // Create a new validator instance from our dynamic rules
+        $validator = Validator::make(Input::all(), $rules);
+
+        // If validation fails, we'll exit the operation now.
+        if ($validator->fails()) {
+            // Ooops.. something went wrong
+            //return Redirect::to(URL::previous())->withInput()->withErrors($validator);
+            return response()->json([
+                'message' => 'Invalid Email address. Please, provide your valid institutional email address.',
+                'type' => 'error'
+            ], 200);
+
+        }
+
+        try {
+            // Get the user password recovery code
+            $user = Person::where('email_institution', Input::get('email'))->first();
+
+            if (!$user) {
+                // something went wrong
+                /*return response( json_encode( array(
+                    'message' => Lang::get('auth/message.forgot-password.error'),
+                    'type' => 'error'
+                ) ), 401 )
+                    ->header( 'Content-Type', 'application/json' );*/
+                return response()->json([
+                    'message' => Lang::get('auth/message.forgot-password.error'),
+                    'type' => 'error'
+                ], 200);
+
+            }
+
+            $reminder_code = Crypt::encrypt($user->id);
+
+            $reminder = new Reminder(array(
+                'user_id' => $user->id,
+                'code'    => $reminder_code,
+            ));
+
+            $reminder->save();
+
+            // Data to be used on the email view
+            $data = array(
+                'user' => $user,
+                'forgotPasswordUrl' => URL::route('forgot-password-confirm', [$user->id, $reminder_code]),
+            );
+
+            // Send the activation code through email
+            Mail::send('emails.forgot-password', $data, function ($m) use ($user) {
+                $m->to($user->email_institution, $user->first_name . ' ' . $user->last_name);
+                $m->subject('NMRbox Account Password Recovery');
+            });
+
+            // return successful message
+            return response()-> json( array( 'message' => 'Forgot password request was successful. ', 'type' => 'success' ), 200 );
+
+        } catch (\Exception $e) {
+            // something went wrong
+            return response()-> json( array( 'message' => Lang::get('auth/message.forgot-password.error'), 'type' => 'error' ), 200 );
+        }
+    }
+
+    /**
+     * Forgot Password Confirmation form processing page.
+     *
+     * @param  string $passwordResetCode
+     * @return Redirect
+     */
+    //public function confirmForgotPassword($userId, $passwordResetCode, Request $request)
+    public function confirmForgotPassword(Request $request)
+    {
+        // Declare the rules for the form validation
+        $rules = array(
+            'nmrbox_acct' => 'required',
+            'password' => 'required',
+            'password_confirm' => 'required|same:password'
+        );
+
+        // Create a new validator instance from our dynamic rules
+        $validator = Validator::make(Input::all(), $rules);
+
+        // If validation fails, we'll exit the operation now.
+        if ($validator->fails()) {
+            // Ooops.. something went wrong
+            //return Redirect::route('forgot-password-confirm', $passwordResetCode)->withInput()->withErrors($validator);
+            //return Redirect::to(URL::previous())->withInput()->withErrors($validator);
+            return response()->json([
+                'message' => 'Validate failed. Please, try again.',
+                'type' => 'error'
+            ], 401);
+
+        }
+
+        // decoding request field
+        $userId = $request->get('person_id');
+        $user = Person::where('id', $userId)->first();
+
+        // Pass reset code from request
+        $passwordResetCode = $request->get('pass_reset_code');
+
+        // checking whether user has an entry in the DB & pass reset request in Reminder table
+        if ($user->nmrbox_acct != trim($request->get('nmrbox_acct'))) {
+            // Ooops.. something went wrong
+            //return back()->with('error', Lang::get('auth/message.forgot-password-confirm.account_error'));
+            return response()->json([
+                'message' => Lang::get('auth/message.forgot-password-confirm.account_error'),
+                'type' => 'error'
+            ], 401);
+
+        } elseif (
+        !$reminder = Reminder::where('user_id', $user->id)
+            ->where('code', $passwordResetCode)
+            ->where('completed', 'false')
+            ->first()) {
+            // Ooops.. something went wrong
+            //return back()->with('error', Lang::get('auth/message.forgot-password-confirm.request_expired'));
+            return response()->json([
+                'message' => Lang::get('auth/message.forgot-password-confirm.request_expired'),
+                'type' => 'error'
+            ], 401);
+        } else {
+
+            try {
+                //making credential array for LDAP verification
+                $credential['username'] = $user->nmrbox_acct;
+                $credential['password'] = $request->get('password');
+
+                // Adding custom LDAP library class and authenticating
+                $ldap = new Ldap;
+                $ldap_status = $ldap->ldap_set_password($credential);
+
+                // LDAP login response
+                if ($ldap_status !== false) {
+                    // update reminder table
+                    $reminder_update = Reminder::where('id', $reminder->id)
+                        ->update(
+                            array(
+                                'completed' => true,
+                                'completed_at' => date('Y-m-d H:i:s'),
+                            )
+                        );
+
+                    // Password successfully reseted
+                    //return Redirect::route('login')->with('success', Lang::get('auth/message.forgot-password-confirm.success'));
+                    return response()-> json( array( 'message' => Lang::get('auth/message.forgot-password-confirm.success'), 'type' => 'success' ), 200 );
+                } else {
+                    // Ooops.. something went wrong
+                    //return back()->with('error', nl2br(Lang::get('auth/message.forgot-password-confirm.complexity_error')));
+                    return response()-> json( array(
+                        'message' => Lang::get('auth/message.forgot-password-confirm.complexity_error'),
+                        'type' => 'success' ),
+                        200 );
+                }
+            } catch (\ErrorException $e) {
+                /* trigger an email to support@nmrbox.org */
+                $data = array("Password malfunction detected.");
+
+                // Send the registration acknowledge email
+                Mail::send('emails.server-malfunction', $data, function ($m) {
+                    $m->to(env('NMRBOX_SUPPORT_EMAIL'));
+                    $m->subject('Buildserver malfunction detected');
+                });
+                //dd($e);
+                //return redirect()->back()->withError(Lang::get('auth/message.server_conn_error'));
+                return response()-> json( array(
+                    'message' => Lang::get('auth/message.server_conn_error'),
+                    'type' => 'success' ),
+                    200 );
+            }
+        }
+    }
+
+    /**
+     * Downloadable VM
+     *
+     * @return Redirect
+     */
+    public function downloadableVM(Request $request)
+    {
+        try {
+            // get user details
+            $person_id = $request->get('person_id');
+            $person = Person::where('id', $person_id)->get()->first();
+
+            // DB entry goes here
+            $downloadable_vm = new VMDownload(
+                array(
+                    'person_id' => $person->id,
+                    'vm_id' => Input::get('vm'),
+                    'username' => Input::get('vm_username'),
+                    'password' => Input::get('vm_password'),
+                )
+            );
+
+            $downloadable_vm->save();
+
+            return response()-> json( array(
+                'message' => 'Your request has been received. An email with a custom generated downloadable link will be sent to you in next few hours.',
+                'type' => 'success'
+            ), 200 );
+        } catch (\Illuminate\Database\QueryException $e) {
+            // Redirect to the user page
+            return response()-> json( array(
+                'message' => 'Downloadable VM request has already been received. You will receive an email shortly.',
+                'type' => 'success'
+            ), 200 );
+
+        }
+
+    }
+
+    /*
+         *
+         *
+         *
+         * * Eof Angular frontend signin and signup
+         *
+         *
+         * */
 
 
 }

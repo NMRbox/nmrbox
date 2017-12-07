@@ -89,9 +89,10 @@ Route::group(array('prefix' => 'files'), function() {
 
 // protected routes
 Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), function () {
+    //Route::get('/{username}', array('as' => 'dashboard','uses' => 'ChandraController@showHome'));
     Route::get('/', array('as' => 'dashboard','uses' => 'ChandraController@showHome'));
 
-    # User Management
+    /*# User Management
     Route::group(array('prefix' => 'users'), function () {
         Route::get('/', array('as' => 'users', 'uses' => 'UsersController@getIndex'));
         Route::get('create',array('as' => 'users.create', 'uses' => 'UsersController@getCreate'));
@@ -101,9 +102,9 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{userId}/delete', array('as' => 'delete/user', 'uses' => 'UsersController@getDelete'));
         Route::get('{userId}/confirm-delete', array('as' => 'confirm-delete/user', 'uses' => 'UsersController@getModalDelete'));
         Route::get('{userId}/restore', array('as' => 'restore/user', 'uses' => 'UsersController@getRestore'));
-    });
+    });*/
 
-    # Group Management
+    /*# Group Management
     Route::group(array('prefix' => 'groups'), function () {
         Route::get('/', array('as' => 'groups', 'uses' => 'GroupsController@getIndex'));
         Route::get('create', array('as' => 'create/group', 'uses' => 'GroupsController@getCreate'));
@@ -113,9 +114,9 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{groupId}/delete', array('as' => 'delete/group', 'uses' => 'GroupsController@getDelete'));
         Route::get('{groupId}/confirm-delete', array('as' => 'confirm-delete/group', 'uses' => 'GroupsController@getModalDelete'));
         Route::get('{groupId}/restore', array('as' => 'restore/group', 'uses' => 'GroupsController@getRestore'));
-    });
+    });*/
 
-    /*routes for blog*/
+    /*routes for blog
     Route::group(array('prefix' => 'blog','before' => 'Sentinel'), function () {
         Route::get('/', array('as' => 'blogs', 'uses' => 'BlogController@getIndex'));
         Route::get('create', array('as' => 'create/blog', 'uses' => 'BlogController@getCreate'));
@@ -127,7 +128,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{blog}/restore', array('as' => 'restore/blog', 'uses' => 'BlogController@getRestore'));
         Route::get('{blog}/show', array('as' => 'blog/show', 'uses' => 'BlogController@show'));
         Route::post('{blog}/storecomment', array('as' => 'restore/blog', 'uses' => 'BlogController@storecomment'));
-    });
+    });*/
 
     /*routes for blog category*/
     Route::group(array('prefix' => 'blogcategory','before' => 'Sentinel'), function () {
@@ -338,7 +339,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
     });
 
 
-    # Workshop Management
+    # VMDownload Management
     Route::model('vmdownload', 'App\VMDownload');
     Route::group(array('prefix' => 'vmdownload'), function () {
         Route::get('/', array('as' => 'admin/vmdownload', 'uses' => 'VMDownloadController@index'));
@@ -356,9 +357,6 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 });
 
 #FrontEndController Group
-#Angular Frontend singin, signup and user_details
-Route::post('signup', array( 'as' => 'signup', 'uses' => 'FrontEndController@signup'));
-Route::post('signin', array( 'as' => 'signin', 'uses' => 'FrontEndController@signin'));
 Route::model('person', 'App\Person');
 Route::group(array('prefix' => 'person'), function () {
     Route::get('{person}', array('as' => 'person', 'uses' => 'FrontEndController@person_details'));
@@ -393,7 +391,9 @@ Route::post('forgot-password-confirm/{userId}/{passwordResetCode}', 'FrontEndCon
 # My account display and update details
 Route::get('update_profile', array('as' => 'update_profile', 'uses' => 'FrontEndController@editProfile'));
 Route::put('{person}/update_profile', array('as' => 'person.update_profile', 'uses' => 'FrontEndController@updatePersonProfile'));
-Route::group(array('middleware' => 'SentinelUser'), function () {
+//Route::group(array('middleware' => 'SentinelUser'), function () {
+Route::group(array(), function () {
+//Route::get('my-account/{token}', array('as' => 'my-account', 'uses' => 'FrontEndController@myAccount'));
 Route::get('my-account', array('as' => 'my-account', 'uses' => 'FrontEndController@myAccount'));
 });
 
@@ -421,6 +421,18 @@ Route::get('blog/{slug}/tag', 'BlogController@getBlogTagFrontend');
 Route::get('blog/{slug?}', 'BlogController@getBlogFrontend');
 Route::post('blog/{blog}/comment', 'BlogController@storeCommentFrontend');
 Route::get('{name?}', 'ChandraController@showFrontEndView');
+
+#Angular Frontend singin, signup and user_details
+Route::group(['middleware' => ['cors', 'session']], function () {
+
+    Route::post('signup', array( 'as' => 'signup', 'uses' => 'FrontEndController@signup'));
+    Route::post('signin', array( 'as' => 'signin', 'uses' => 'FrontEndController@signin'));
+    Route::post('updateProfile/{person_id}', array( 'as' => 'updateProfile', 'uses' => 'FrontEndController@updateProfile'));
+    Route::post('password-reset', array( 'as' => 'password-reset', 'uses' => 'FrontEndController@changePassword'));
+    Route::post('password-forgot', array( 'as' => 'password-forgot', 'uses' => 'FrontEndController@forgotPassword'));
+    Route::post('password-forgot-confirm', array( 'as' => 'password-forgot-confirm', 'uses' => 'FrontEndController@confirmForgotPassword'));
+    Route::post('downloadable-vm', array( 'as' => 'downloadable-vm', 'uses' => 'FrontEndController@downloadableVM'));
+});
 
 # End of frontend views
 

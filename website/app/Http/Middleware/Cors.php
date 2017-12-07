@@ -21,3 +21,5 @@ class Cors
             ->header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token, X-CSRF-TOKEN, X-XSRF-TOKEN, Authorization');
     }
 }
+
+

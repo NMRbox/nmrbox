@@ -9,12 +9,13 @@
 
 namespace App\library {
 
-    use Auth;
-    use Lang;
-    use Sentinel;
-    use Session;
-    use App\Person;
-    use Illuminate\Http\Request;
+use Auth;
+use JWTAuth;
+use Lang;
+use Sentinel;
+use Session;
+use App\Person;
+use Illuminate\Http\Request;
 
     class Ldap
     {
@@ -53,7 +54,7 @@ namespace App\library {
 
             if(strstr($result, 'success') !== false) {
                 /* collect userid using username from person table */
-                $person = Person::where('nmrbox_acct', $username)->first();
+                /*$person = Person::where('nmrbox_acct', $username)->first();
                 if(!$person) {
                     return false;
                 }
@@ -62,8 +63,16 @@ namespace App\library {
                 Session::put('person', $person);
 
                 // Adding user var into sentinel session logged user
-                Sentinel::loginAndRemember($person);
+                //Sentinel::loginAndRemember($person);
 
+                // Adding JWT-Auth Token
+                $token = JWTAuth::fromUser($person);
+                $set_token = JWTAuth::setToken($token);
+
+                //$parse_token = JWTAuth::getToken();
+
+
+                return $token;*/
                 return true;
             }
 

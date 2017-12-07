@@ -2,20 +2,26 @@
 
 namespace App;
 
+use Eloquent;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Person extends EloquentUser
-//class Person extends NmrModel
+class Person extends Eloquent implements Authenticatable
+//class Person extends EloquentUser
 {
+    use AuthenticableTrait;
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'persons';
+
+    // overriding primary keys and turning off auto increment
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'first_name',
