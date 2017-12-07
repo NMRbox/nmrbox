@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/Rx';
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class AuthenticationService {
@@ -15,6 +16,17 @@ export class AuthenticationService {
 
     constructor(private http: Http, private router: Router) {
 
+    }
+
+    private _serverError(err: any) {
+        console.log('sever error:', err);  // debug
+        if(err instanceof Response) {
+            return Observable.throw((response: Response) => response.json() || 'backend server error');
+            // if you're using lite-server, use the following line
+            // instead of the line above:
+            //return Observable.throw(err.text() || 'backend server error');
+        }
+        return Observable.throw(err || 'backend server error');
     }
 
     signup(
@@ -81,12 +93,14 @@ export class AuthenticationService {
             .map(
                 (response: Response) => {
                     console.log(response);
-                    const person_id = response.json().person_id;
-                    const user_is_admin = response.json().user_is_admin;
-                    const token = response.json().token;
-                    const base64Url = token.split('.')[1];
-                    const base64 = base64Url.replace('-', '+').replace('_', '/');
-                    return {person_id: person_id, user_is_admin: user_is_admin, token: token, decoded: JSON.parse(window.atob(base64))};
+                    if(response.json().person_id != null){
+                        const person_id = response.json().person_id;
+                        const user_is_admin = response.json().user_is_admin;
+                        const token = response.json().token;
+                        const base64Url = token.split('.')[1];
+                        const base64 = base64Url.replace('-', '+').replace('_', '/');
+                        return {person_id: person_id, user_is_admin: user_is_admin, token: token, decoded: JSON.parse(window.atob(base64))};
+                    }
                 }
             )
             .do(
@@ -94,8 +108,10 @@ export class AuthenticationService {
                     localStorage.setItem('person_id', tokenData.person_id);
                     localStorage.setItem('user_is_admin', tokenData.user_is_admin);
                     localStorage.setItem('token', tokenData.token);
+                    this.router.navigateByUrl('user-dashboard');
                 }
             )
+            .catch(this._serverError);
         ;
     }
 

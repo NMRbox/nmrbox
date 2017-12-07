@@ -3,8 +3,10 @@
     <div class="container">
 
       <div class="col-md-12">
-        <!-- Notifications -->
-
+          {{ notifications.message }}
+          <div class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}" *ngIf="notifications.message?.length > 0">
+              {{ notifications.message }}
+          </div>
         <br>
       </div>
 

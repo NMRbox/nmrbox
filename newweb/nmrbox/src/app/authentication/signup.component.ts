@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit {
           form.value.time_zone_id,
           )
           .subscribe(
-              response => this.router.navigateByUrl('user-dashboard'),
+              response => this.router.navigateByUrl('signin'),
               //error => console.log(error)
               response => this.notifications = response,
           );

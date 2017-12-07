@@ -1,7 +1,5 @@
 <div class="container">
   <div class="col-md-12">
-    <!-- Notifications -->
-
     <br>
   </div>
 
@@ -14,6 +12,10 @@
           <span class="nmrbox-logo-large-blue text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </a>
       <hr>
+      <div class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}" *ngIf="notifications.message?.length > 0">
+        {{ notifications.message }}
+      </div>
+      <br>
 
       <form (ngSubmit)="onSignin(f)" #f="ngForm">
         <input name="_token" type="hidden" value="bg7HRLleekdYo3bahftY7K6AsjlZRJZEdLdTVUea">
