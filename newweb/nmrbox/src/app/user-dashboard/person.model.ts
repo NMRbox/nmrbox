@@ -21,4 +21,5 @@ export class PersonModel {
     time_zone_id: number;
     classifications: Array<string>;
     name: string;
+    notification: Array<string>;
 }

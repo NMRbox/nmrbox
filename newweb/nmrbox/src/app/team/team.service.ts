@@ -8,6 +8,7 @@ import { TeamModel } from './team.model';
 export class TeamService {
 
   private appUrl = 'https://webdev.nmrbox.org:8001'; // Main site url
+  //private appUrl = 'http://nmrbox.dev';  // URL to web api
   private baseUrl = 'api/teamSupportList/';  // URL to web api
   private supportUrl = 'api/comSupportList';  // URL to web api
   private blogUrl = 'api/comBlogList';  // URL to web api
@@ -46,7 +47,7 @@ export class TeamService {
     getPageContent(pageUrl: string): Promise<TeamModel> {
 
         let url = this.appUrl + '/' + pageUrl;
-        console.log("URL: ", url);
+        //console.log("URL: ", url);
         return this.http
             .get(url)
             .toPromise()
@@ -59,7 +60,7 @@ export class TeamService {
     
     let baseUrl = `${this.blogUrl}`;
 
-    console.log("getSoftware TYPE: ", type); 
+    //console.log("getSoftware TYPE: ", type);
     
     if(type == "support"){
       baseUrl = `${this.supportUrl}`;
@@ -71,7 +72,7 @@ export class TeamService {
 
     let url = baseUrl + `/${id}`;
 
-    console.log("getSoftware URL: ", url);
+    //console.log("getSoftware URL: ", url);
     
     return this.http
       .get(url)

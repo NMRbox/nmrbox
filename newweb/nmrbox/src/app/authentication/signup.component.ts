@@ -14,6 +14,7 @@ import { AuthenticationService } from './authentication.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+    public notifications: any = {message: '', type: ''};
 
   constructor(
       private router: Router,
@@ -45,8 +46,9 @@ export class SignupComponent implements OnInit {
           form.value.time_zone_id,
           )
           .subscribe(
-              //response => console.log(response),
+              response => this.router.navigateByUrl('user-dashboard'),
               //error => console.log(error)
+              response => this.notifications = response,
           );
   }
 

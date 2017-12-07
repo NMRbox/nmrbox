@@ -26,6 +26,11 @@ import { HomeComponent }  from './home/home.component';
 import { SignupComponent } from './authentication/signup.component';
 import { SigninComponent } from './authentication/signin.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { ProfileUpdateComponent } from './user-dashboard/profile-update.component';
+import { FaqsComponent } from './faqs/faqs.component';
+import { PasswordResetComponent } from './authentication/password-reset.component';
+import { ForgetPasswordComponent } from './password-management/forget-password.component';
+import { ForgetPasswordConfirmComponent } from './password-management/forget-password-confirm.component';
 
 // Application animation components
 import { FaderComponent } from './fader.component';
@@ -36,6 +41,7 @@ import { CommunityService } from './community/community.service';
 import { TeamService } from './team/team.service';
 import { AuthenticationService } from './authentication/authentication.service';
 import { UserDashboardService } from './user-dashboard/user-dashboard.service';
+import {PasswordManagementService} from './password-management/password-management.service';
 
 // Router
 import { AppRoutingModule } from './app-routing.module';
@@ -43,21 +49,19 @@ import { AppRoutingModule } from './app-routing.module';
 // CommonModule
 import { CommonModule } from '@angular/common';
 
-// Fontawesome
-import { ProfileUpdateComponent } from './user-dashboard/profile-update.component';
-import { FaqsComponent } from './faqs/faqs.component';
-import { PasswordResetComponent } from './authentication/password-reset.component';
+// Container
+import { ShowHideContainer} from './authentication/show-hide-container';
 
 @NgModule({
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    BrowserAnimationsModule,
-    MdButtonModule, MdCheckboxModule, MdInputModule, MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdListModule, MdGridListModule, MdTabsModule, MdCardModule, MdChipsModule,
-    SwiperModule,
-    AppRoutingModule,
-    CommonModule
+      BrowserModule,
+      FormsModule,
+      HttpModule,
+      BrowserAnimationsModule,
+      MdButtonModule, MdCheckboxModule, MdInputModule, MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdListModule, MdGridListModule, MdTabsModule, MdCardModule, MdChipsModule,
+      SwiperModule,
+      AppRoutingModule,
+      CommonModule
   ],
   declarations: [
     AppComponent,
@@ -74,14 +78,18 @@ import { PasswordResetComponent } from './authentication/password-reset.componen
     UserDashboardComponent,
     ProfileUpdateComponent,
     FaqsComponent,
-    PasswordResetComponent
+    PasswordResetComponent,
+    ForgetPasswordComponent,
+    ForgetPasswordConfirmComponent,
+    ShowHideContainer
   ],
   providers: [
       SoftwareService,
       CommunityService,
       TeamService,
       AuthenticationService,
-      UserDashboardService
+      UserDashboardService,
+      PasswordManagementService
   ],
   bootstrap: [AppComponent]
 })

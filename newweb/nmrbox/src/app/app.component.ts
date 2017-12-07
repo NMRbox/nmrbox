@@ -19,12 +19,13 @@ export class AppComponent {
     ) { }
 
     isLoggedIn() {
-        return this.authService.getCookie('person_id');
+        return this.authService.getToken('person_id');
     }
 
     signOut() {
-        this.authService.deleteCookie('person_id');
-        this.authService.deleteCookie('logged_in');
+        this.authService.deleteToken('person_id');
+        this.authService.deleteToken('token');
+        this.authService.deleteToken('user_is_admin');
         this.router.navigateByUrl('app');
     }
 }

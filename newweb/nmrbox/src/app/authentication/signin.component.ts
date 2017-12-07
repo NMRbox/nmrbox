@@ -21,7 +21,8 @@ export class SigninComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const person_id = this.authService.getCookie('person_id');
+    //const person_id = this.authService.getCookie('person_id');
+    const person_id = this.authService.getToken('person_id');
     if (person_id != null && person_id.length > 0 ) {
       this.router.navigateByUrl('user-dashboard');
     }
@@ -31,14 +32,23 @@ export class SigninComponent implements OnInit {
   onSignin(form: NgForm) {
       this.authService.signin(form.value.username, form.value.password)
           .subscribe(
-              //tokenData => console.log(tokenData),
-              //error => console.log(error)
+              //this.router.navigateByUrl('user-dashboard');
+              tokenData => [
+                  token => console.log(tokenData),
+                  person_id => console.log(person_id)
+              ],
+              error => console.log(error)
           );
   }
 
   signOut() {
+    /*
     this.authService.deleteCookie('person_id');
     this.authService.deleteCookie('logged_in');
+    */
+
+    this.authService.deleteToken('token');
+    this.authService.deleteToken('person_id');
   }
 
 }

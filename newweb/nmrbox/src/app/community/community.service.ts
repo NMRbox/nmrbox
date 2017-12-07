@@ -13,8 +13,9 @@ export class CommunityService {
   private baseUrl = 'api/communityList';  // URL to web api
   private supportUrl = 'api/comSupportList';  // URL to web api
   private blogUrl = 'api/comBlogList';  // URL to web api
-  private eventsUrl = 'workshops';  // URL to web api
-  //private eventsUrl = 'api/comEventsList';  // URL to web api
+  private eventsUrl = 'workshops';  // URL to events page
+  private documentationUrl = 'workshops';  // URL to documentation page
+
 
   private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -115,7 +116,8 @@ export class CommunityService {
     }
 
     //let url = baseUrl + `/${id}`;
-    let url = 'https://webdev.nmrbox.org:8001/documentation';
+    //let url = 'https://webdev.nmrbox.org:8001/documentation';
+    let url = this.appUrl + '/' + this.documentationUrl;
 
     console.log("getSoftware URL: ", url);
 

@@ -18,6 +18,13 @@
       </div>
     </div>
 
+    <div class="alert alert-info" *ngIf="isAdmin">
+      <p>Access the administrative section using the button - <a href="{{appUrl}}/admin/{{person.nmrbox_acct}}" class="btn btn-md btn-primary"><i class="fa fa-cog fa-lg"> Admin Panel</i></a></p>
+    </div>
+
+    <div class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}" *ngIf="notifications.message?.length > 0">
+      {{ notifications.message }}
+    </div>
 
     <div class="row" *ngIf="person">
 
@@ -58,8 +65,9 @@
           </div>
           <div class="panel-footer">
             <div class="text-right">
-              <a href="#" data-original-title="Edit user profile" data-toggle="tooltip" type="button"
-                 class="btn btn-sm btn-warning"><i class="fa fa-pencil fa-2x"></i>Update Profile</a>
+              <!--<a routerLink="/signin" data-original-title="Edit user profile" data-toggle="tooltip" type="button"
+                 class="btn btn-sm btn-warning"><i class="fa fa-pencil fa-2x"></i>Update Profile</a>-->
+              <a md-button routerLink="/profile-update" routerLinkActive="active">Update Profile</a>
             </div>
           </div>
         </div>
@@ -70,8 +78,10 @@
           <div class="panel-heading">
             <h3 class="panel-title">User Account</h3>
           </div>
+          <form (ngSubmit)="onPasswordResetSubmit(passReset)" #passReset="ngForm">
           <div class="panel-body">
             <div class="row">
+
               <div class=" col-md-12 col-lg-12 ">
                 <table class="table table-user-information">
                   <tbody>
@@ -83,15 +93,38 @@
                     <td>Institutional Email: </td>
                     <td><a href="mailto: {{person.email_institution}}">{{person.email_institution}}</a></td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="!showHide">
                     <td>Password: </td>
                     <td>
-                      <input type="hidden" name="password" id="ldap_pass" class="password">
-                      <span style="display: none; cursor:pointer;">
-                                                        <i data-target="ldap_pass" class="fa fa-eye fa-1x showHide"></i>
-                                                    </span>
-                      <span id="pass_asterisk">******</span>
+                      <span>******</span>
+                    </td>
+                  </tr>
 
+                  <tr *ngIf="showHide">
+                    <td>Current Password: </td>
+                    <td>
+                      <input type="password" name="old_password" autocomplete="off" ngModel required>
+                      <span id="show_pass_box" style="cursor:pointer;">
+                          <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr *ngIf="showHide">
+                    <td>New Password: </td>
+                    <td>
+                      <input type="password" name="new_password" class="password" autocomplete="off" ngModel required>
+                      <span style="cursor:pointer;">
+                          <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr *ngIf="showHide">
+                    <td>Confirm New Password: </td>
+                    <td>
+                      <input type="password" name="conf_password" class="password" autocomplete="off" ngModel required>
+                      <span id="" style="cursor:pointer;">
+                          <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
+                      </span>
                     </td>
                   </tr>
                   <tr>
@@ -113,10 +146,11 @@
           </div>
           <div class="panel-footer">
             <div class="text-right">
-              <a href="#" role="button" rel="tooltip" data-original-title="Change password" data-toggle="modal" data-target="#pass_confirm_modal" class="btn btn-sm btn-warning" id="edit_ldap_pass"><i class="fa fa-key fa-2x"></i>Change Password</a>
-              <input type="hidden" name="change-password" value="Save" id="save_ldap_pass" class="btn btn-primary">
+              <a md-button *ngIf="showHide" type="submit" (click)="onPasswordResetSubmit(passReset)">Save</a>
+              <a md-button (click)="changeShowStatus()">Password Reset</a>
             </div>
           </div>
+          </form>
         </div>
       </div>
     </div>
@@ -128,7 +162,7 @@
       </div>
       <div class="row"><br>
 
-        <form method="POST" accept-charset="UTF-8" class="form " role="form">
+        <form #downloadVM="ngForm" (ngSubmit)="onDownloadVMSubmit(downloadVM)">
 
           <div class="form-group col-lg-12">
             The following form allows you to request a downloadable copy of NMRbox that you can run on your local workstation.  After you submit the form, you will receive an email with a custom link for downloading your VM.  This process may take several hours.
@@ -139,7 +173,12 @@
           </div>
 
           <div class="form-group col-lg-6">
-            <div class="form-group "><label for="vm" class="control-label">VM Versions</label><div><select class="form-control form-control select_pi" maxlength="32" required="required" id="vm" name="vm"><option value="" selected="selected">Please Select</option><option value="3">release_3</option></select></div></div>
+            <div class="form-group "><label for="vm" class="control-label">VM Versions</label>
+              <select class="form-control form-control select_pi" maxlength="32" required="required" id="vm" name="vm" required ngModel>
+                <option value="" selected="selected">Please Select</option>
+                <option value="3">release_3</option>
+              </select>
+            </div>
           </div>
 
           <div class="form-goup col-lg-12">
@@ -147,11 +186,17 @@
           </div>
 
           <div class="form-group col-lg-6">
-            <div class="form-group "><label for="vm_username" class="control-label">VM username</label><div><input class="form-control form-control" maxlength="64" required="required" id="vm_username" name="vm_username" type="text" value="mchowdhury" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAYJJREFUOBGVVLuKwkAUPRFRY2GlhRKDVRpBMFgJgRQ2C37HCvmCdOpnuE0qWzvZBf8hTbC2SLAKqQQfTXbumAy6xE0cmMx9nHNm5t4h0nK5/IjjeMVmFwWGJEk+g30uFosfgpfeIRMh2eiLbBokUGjnO/z+feSUHhN5dr1eh6ZpT7C3BHq9HiaTSbZArVYTiWq1ClYs4T/mRDAxyrROp1Pouo71eo0oimBZFo7HIxzHecr9JZP/1hWyBKT5fB5Tgo55uVw4hq5wvV6z8CLGrhgwZyZOkJIJkUcmDGulwpYVrwEF8oZhGOj3+2g2m7xWh8OBi4gT/CcwHo9hmiZ838d2u+WFTvGl5G2nfuY6Go04WZZlqKqK2+0mcCQwyxNpNBpQFAWVSgXD4RCDwUAIlFkXvpmnikhipN0h93w+43Q6YbPZwLZtdDodAS9UA8/z0G63+QMjJhUwHS+7QH1OWoXdbocwDNFqtRAEAfb7PecT5qUAQ1Bt6EejsAnXddNNBZkwv/3KjSrHve9/AAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"></div></div>
+            <div class="form-group ">
+              <label for="vm_username" class="control-label">VM username</label>
+              <input class="form-control form-control" maxlength="64" id="vm_username" name="vm_username" type="text" value="mchowdhury" autocomplete="off" required ngModel>
+            </div>
           </div>
 
           <div class="form-group col-lg-6">
-            <div class="form-group "><label for="vm_password" class="control-label">VM Password</label><div><input class="form-control form-control" maxlength="32" required="required" id="vm_password" name="vm_password" type="text"></div></div>
+            <div class="form-group ">
+              <label for="vm_password" class="control-label">VM Password</label>
+              <input class="form-control form-control" maxlength="32" id="vm_password" name="vm_password" type="password" required ngModel="">
+          </div>
           </div>
 
           <div class="form-group col-lg-12">
@@ -159,7 +204,9 @@
           </div>
 
           <div class="form-group col-lg-4">
-            <div class="form-group"><div><input class="btn btn-primary btn-lg btn-block " type="submit" value="Request Downloadable VM"></div></div>
+            <div class="form-group">
+              <input class="btn btn-primary btn-lg btn-block " type="submit" value="Request Downloadable VM">
+            </div>
           </div>
         </form>
 
