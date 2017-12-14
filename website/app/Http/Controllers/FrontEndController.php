@@ -89,6 +89,7 @@ class FrontEndController extends Controller
      */
     public function postRegister(Request $request)
     {
+        
         /* reCaptcha validation */
         $rules = array(
             'g-recaptcha-response' => 'required|recaptcha',
@@ -824,18 +825,18 @@ class FrontEndController extends Controller
         if ($validator->fails()) {
             // Ooops.. validation failed
             return response()->json([
-                'message' => 'validation failed! Please, try again.',
+                'message' => Lang::get('auth/message.login.error_validation'),
                 'type' => 'error'
             ], 200);
         }
 
         try {
             // Adding custom LDAP library class and authenticating
-            $ldap = new Ldap;
-            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
+            /*$ldap = new Ldap;
+            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));*/
 
             /* Test (Localhost login code to skip LDAP authentication) */
-            //$ldap_login = true;
+            $ldap_login = true;
             /* Eof Test */
 
             // LDAP login response
@@ -1206,7 +1207,8 @@ class FrontEndController extends Controller
             // Data to be used on the email view
             $data = array(
                 'user' => $user,
-                'forgotPasswordUrl' => URL::route('forgot-password-confirm', [$user->id, $reminder_code]),
+                'forgotPasswordUrl' => "http://webdev.nmrbox.org:8000/forgot-password-confirm/". $user->id ."/". $reminder_code,
+                //'forgotPasswordUrl' => URL::route('forgot-password-confirm', [$user->id, $reminder_code]),
             );
 
             // Send the activation code through email

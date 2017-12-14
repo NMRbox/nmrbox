@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\PageRequest;
 use App\Page;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Session;
 use Sentinel;
 use Response;
 use Input;
@@ -216,7 +217,7 @@ class PageController extends Controller {
 	    // creating the object
         $page = Page::where('id', $page_id)->first();
 
-        $page->user_id = Sentinel::getUser()->id;
+        $page->user_id = Session::get('person')->id;
         $page->update($request->except('image','_method','tags'));
 
         return Redirect('admin/pages')->withSuccess(Lang::get('page/message.success.update'));

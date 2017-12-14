@@ -10,9 +10,11 @@ $(document).ready(function(){
         e.preventDefault();
         var val = $(this).val();
         console.log(val);
-        if(val == '0'){
+        if(val == 'PI'){
             var last_name = $("input[name='last_name']").val();
             $("input[name='pi']").val(last_name);
+        } else {
+            $("input[name='pi']").val('');
         }
     });
 });

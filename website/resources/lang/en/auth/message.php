@@ -15,6 +15,7 @@ return array(
 
     'login' => array(
         'error'   => 'Username or password is incorrect, please try again.',
+        'error_validation'   => 'Validation failed, please try again.',
         'success' => 'You have successfully logged in.',
     ),
 

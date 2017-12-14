@@ -359,7 +359,8 @@ class FAQController extends Controller
         $all_metadata = SearchKeyword::All();*/
 
         // make index view
-        return view::make('faq', compact('all_faqs'));
+        //return view::make('faq', compact('all_faqs'));
+        return response( json_encode( array('data' => $all_faqs, ) ), 200 )->header( 'Content-Type', 'application/json' );
     }
 
     /**

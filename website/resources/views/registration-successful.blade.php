@@ -55,6 +55,6 @@
     <script>
         setTimeout(function(){
             window.location.href="{{ route("home") }}";
-        }, 4000);
+        }, 10000);
     </script>
 @stop
