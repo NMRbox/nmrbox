@@ -47,7 +47,6 @@ export class SignupComponent implements OnInit {
           )
           .subscribe(
               response => this.router.navigateByUrl('signin'),
-              //error => console.log(error)
               response => this.notifications = response,
           );
   }

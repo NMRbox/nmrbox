@@ -72,10 +72,10 @@ export class CommunityListComponent implements OnInit {
     /* Workshops */
     //this.filterCurrentEvents(true);
     //this.filterCurrentEvents();
-    //this.getEventsList();
-      this.route.params
+    this.getEventsList();
+      /*this.route.params
           .switchMap((params: Params) => this.communityService.getEventsList())
-          .subscribe(eventsList => this.eventsList = eventsList);
+          .subscribe(eventsList => this.eventsList = eventsList);*/
 
 
     // Tabs: go to specific subsection

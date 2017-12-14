@@ -6,7 +6,7 @@ import { Observable} from 'rxjs/Observable';
 declare const $: any;
 declare const jQuery: any;
 
-/* Import the service */
+/* Import service files */
 import { AuthenticationService } from '../authentication/authentication.service';
 import { UserDashboardService} from './user-dashboard.service';
 import {PersonModel} from "./person.model";
@@ -14,7 +14,7 @@ import {PersonModel} from "./person.model";
 @Component({
   selector: 'user-dashboard',
   templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.css']
+  styleUrls: ['./user-dashboard.component.scss']
 })
 export class UserDashboardComponent implements OnInit, AfterViewInit {
     person: PersonModel;

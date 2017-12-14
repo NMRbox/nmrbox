@@ -33,14 +33,7 @@ export class SigninComponent implements OnInit {
   onSignin(form: NgForm) {
       this.authService.signin(form.value.username, form.value.password)
           .subscribe(
-              //this.router.navigateByUrl('user-dashboard');
-              response => this.router.navigateByUrl('user-dashboard'),
               response => this.notifications = response
-              /*tokenData => [
-                  token => console.log(tokenData),
-                  person_id => console.log(person_id)
-              ],
-              error => console.log(error)*/
           )
   }
 

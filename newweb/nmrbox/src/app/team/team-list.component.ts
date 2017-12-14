@@ -64,12 +64,12 @@ export class TeamListComponent implements OnInit {
 
     if (index === 0){
         this.showPageContent('people-leadership');
-    }
-    else if (index === 1) {
-        this.showPageContent('people-trd');
-    }
-    else if (index === 2) {
-        this.showPageContent('people-integral');
+    } else if (index === 1) {
+        this.showPageContent('overview');
+    } else if (index === 2) {
+        this.showPageContent('people-technical-staff');
+    } else if (index === 3) {
+        this.showPageContent('people-eab');
     }
     //this.router.navigate(['/team', index]);
     console.log("selectedIndexChange to: ", index);

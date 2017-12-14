@@ -48,6 +48,15 @@ export class CommunityService {
   }
   */
 
+  /* Workshop events lists */
+    getEventsList(): Promise<CommunityModel[]> {
+        return this.http
+            .get(this.appUrl + `/` + this.eventsUrl)
+            .toPromise()
+            .then(response => response.json().data as CommunityModel[])
+            .catch(this.handleError);
+    }
+
   getCommunityList(): Promise<CommunityModel[]> {
     return this.http
       .get(this.blogUrl)
@@ -79,13 +88,7 @@ export class CommunityService {
       .catch(this.handleError);
   }
 
-  getEventsList(): Promise<CommunityModel[]> {
-    return this.http
-      .get(this.appUrl + `/` + this.eventsUrl)
-      .toPromise()
-      .then(response => response.json().data as CommunityModel[])
-      .catch(this.handleError);
-  }
+
 
     /* test (redirecting from router for page details */
     getPageContent(pageUrl: string): Promise<CommunityModel> {

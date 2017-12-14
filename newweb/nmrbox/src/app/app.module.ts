@@ -16,13 +16,13 @@ import { SwiperModule } from '../../node_modules/angular2-useful-swiper';
 
 // Application components
 import { AppComponent } from './app.component';
-import { SoftwareDetailComponent }  from './software/software-detail.component';
-import { SoftwareListComponent }  from './software/software-list.component';
-import { CommunityDetailComponent }  from './community/community-detail.component';
-import { CommunityListComponent }  from './community/community-list.component';
-import { TeamDetailComponent }  from './team/team-detail.component';
-import { TeamListComponent }  from './team/team-list.component';
-import { HomeComponent }  from './home/home.component';
+import { SoftwareDetailComponent } from './software/software-detail.component';
+import { SoftwareListComponent } from './software/software-list.component';
+import { CommunityDetailComponent } from './community/community-detail.component';
+import { CommunityListComponent } from './community/community-list.component';
+import { TeamDetailComponent } from './team/team-detail.component';
+import { TeamListComponent } from './team/team-list.component';
+import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './authentication/signup.component';
 import { SigninComponent } from './authentication/signin.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
@@ -41,7 +41,8 @@ import { CommunityService } from './community/community.service';
 import { TeamService } from './team/team.service';
 import { AuthenticationService } from './authentication/authentication.service';
 import { UserDashboardService } from './user-dashboard/user-dashboard.service';
-import {PasswordManagementService} from './password-management/password-management.service';
+import { PasswordManagementService } from './password-management/password-management.service';
+import { FaqsService } from './faqs/faqs.service';
 
 // Router
 import { AppRoutingModule } from './app-routing.module';
@@ -81,6 +82,7 @@ import { ShowHideContainer} from './authentication/show-hide-container';
     PasswordResetComponent,
     ForgetPasswordComponent,
     ForgetPasswordConfirmComponent,
+    FaqsComponent,
     ShowHideContainer
   ],
   providers: [
@@ -89,7 +91,8 @@ import { ShowHideContainer} from './authentication/show-hide-container';
       TeamService,
       AuthenticationService,
       UserDashboardService,
-      PasswordManagementService
+      PasswordManagementService,
+      FaqsService
   ],
   bootstrap: [AppComponent]
 })

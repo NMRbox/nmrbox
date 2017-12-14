@@ -62,8 +62,7 @@ export class ProfileUpdateComponent implements OnInit {
             form.value.time_zone_id,
         )
             .subscribe(
-                //response => console.log(response),
-                //error => console.log(error)
+                response => this.notifications = response
             );
     }
 

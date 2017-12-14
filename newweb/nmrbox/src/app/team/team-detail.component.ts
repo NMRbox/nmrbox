@@ -22,7 +22,7 @@ export class TeamDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params
-      .switchMap((params: Params) => this.teamService.getDetail(+params['id'], params['type']))
+      .switchMap((params: Params) => this.teamService.getPageContent(params['type']))
       .subscribe(teamModel => this.teamModel = teamModel);
   }
 

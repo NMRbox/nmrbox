@@ -1,49 +1,52 @@
-<div class="container">
-  <div class="col-md-12">
-    <br>
-  </div>
+<div class="page-wrapper">
+  <md-toolbar class="toolbar-transparent">
+    <div class="menu-wrapper">
+      <div><br><br>
 
-  <div class="row" >
-    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-
-      <!-- NMRbox logo -->
-
-      <a md-button routerLink="/app" routerLinkActive="active" class="text-center">
-          <span class="nmrbox-logo-large-blue text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      </a>
-      <hr>
-      <div class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}" *ngIf="notifications.message?.length > 0">
-        {{ notifications.message }}
       </div>
-      <br>
+      <span class="page-title">Sign In</span>
+    </div>
+  </md-toolbar>
+  <div class="page-details">
+    <div class="container nmrbox-custom-container">
+      <div class="row" >
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-2 col-md-offset-2">
+          <form (ngSubmit)="onSignin(f)" #f="ngForm">
+            <input name="_token" type="hidden" value="bg7HRLleekdYo3bahftY7K6AsjlZRJZEdLdTVUea">
+            <fieldset>
+              <h2>Please Sign In</h2>
+              <hr>
 
-      <form (ngSubmit)="onSignin(f)" #f="ngForm">
-        <input name="_token" type="hidden" value="bg7HRLleekdYo3bahftY7K6AsjlZRJZEdLdTVUea">
-        <fieldset>
-          <h2>Please Sign In</h2>
-          <div class="form-group">
-            <input type="text" class="form-control" name="username" placeholder="Username" ngModel required value="" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAYJJREFUOBGVVLuKwkAUPRFRY2GlhRKDVRpBMFgJgRQ2C37HCvmCdOpnuE0qWzvZBf8hTbC2SLAKqQQfTXbumAy6xE0cmMx9nHNm5t4h0nK5/IjjeMVmFwWGJEk+g30uFosfgpfeIRMh2eiLbBokUGjnO/z+feSUHhN5dr1eh6ZpT7C3BHq9HiaTSbZArVYTiWq1ClYs4T/mRDAxyrROp1Pouo71eo0oimBZFo7HIxzHecr9JZP/1hWyBKT5fB5Tgo55uVw4hq5wvV6z8CLGrhgwZyZOkJIJkUcmDGulwpYVrwEF8oZhGOj3+2g2m7xWh8OBi4gT/CcwHo9hmiZ838d2u+WFTvGl5G2nfuY6Go04WZZlqKqK2+0mcCQwyxNpNBpQFAWVSgXD4RCDwUAIlFkXvpmnikhipN0h93w+43Q6YbPZwLZtdDodAS9UA8/z0G63+QMjJhUwHS+7QH1OWoXdbocwDNFqtRAEAfb7PecT5qUAQ1Bt6EejsAnXddNNBZkwv/3KjSrHve9/AAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password"  ngModel required autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAYJJREFUOBGVVLuKwkAUPRFRY2GlhRKDVRpBMFgJgRQ2C37HCvmCdOpnuE0qWzvZBf8hTbC2SLAKqQQfTXbumAy6xE0cmMx9nHNm5t4h0nK5/IjjeMVmFwWGJEk+g30uFosfgpfeIRMh2eiLbBokUGjnO/z+feSUHhN5dr1eh6ZpT7C3BHq9HiaTSbZArVYTiWq1ClYs4T/mRDAxyrROp1Pouo71eo0oimBZFo7HIxzHecr9JZP/1hWyBKT5fB5Tgo55uVw4hq5wvV6z8CLGrhgwZyZOkJIJkUcmDGulwpYVrwEF8oZhGOj3+2g2m7xWh8OBi4gT/CcwHo9hmiZ838d2u+WFTvGl5G2nfuY6Go04WZZlqKqK2+0mcCQwyxNpNBpQFAWVSgXD4RCDwUAIlFkXvpmnikhipN0h93w+43Q6YbPZwLZtdDodAS9UA8/z0G63+QMjJhUwHS+7QH1OWoXdbocwDNFqtRAEAfb7PecT5qUAQ1Bt6EejsAnXddNNBZkwv/3KjSrHve9/AAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
-          </div>
-          <span class="button-checkbox">
-            <div class="icheckbox_minimal-blue" style="position: relative;">
+              <div class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}" *ngIf="notifications.message?.length > 0">
+                {{ notifications.message }}
               </div>
-                            <a routerLink="/forgot-password" class="btn btn-link pull-right">Forgot Password?</a>
-				        </span>
-          <br><br>
-          <div class="form-group row">
-            <div class="col-xs-6 col-sm-6 col-md-6">
-              <input type="submit" class="btn btn-lg btn-success btn-block" value="Sign In">
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
-              <a routerLink="/signup" class="btn btn-lg btn-primary btn-block" style="color: #fff;">Sign Up</a>
-            </div>
-          </div>
-        </fieldset>
-      </form>
+              <br>
 
+              <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="Username" ngModel required value="" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAYJJREFUOBGVVLuKwkAUPRFRY2GlhRKDVRpBMFgJgRQ2C37HCvmCdOpnuE0qWzvZBf8hTbC2SLAKqQQfTXbumAy6xE0cmMx9nHNm5t4h0nK5/IjjeMVmFwWGJEk+g30uFosfgpfeIRMh2eiLbBokUGjnO/z+feSUHhN5dr1eh6ZpT7C3BHq9HiaTSbZArVYTiWq1ClYs4T/mRDAxyrROp1Pouo71eo0oimBZFo7HIxzHecr9JZP/1hWyBKT5fB5Tgo55uVw4hq5wvV6z8CLGrhgwZyZOkJIJkUcmDGulwpYVrwEF8oZhGOj3+2g2m7xWh8OBi4gT/CcwHo9hmiZ838d2u+WFTvGl5G2nfuY6Go04WZZlqKqK2+0mcCQwyxNpNBpQFAWVSgXD4RCDwUAIlFkXvpmnikhipN0h93w+43Q6YbPZwLZtdDodAS9UA8/z0G63+QMjJhUwHS+7QH1OWoXdbocwDNFqtRAEAfb7PecT5qUAQ1Bt6EejsAnXddNNBZkwv/3KjSrHve9/AAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password"  ngModel required autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAYJJREFUOBGVVLuKwkAUPRFRY2GlhRKDVRpBMFgJgRQ2C37HCvmCdOpnuE0qWzvZBf8hTbC2SLAKqQQfTXbumAy6xE0cmMx9nHNm5t4h0nK5/IjjeMVmFwWGJEk+g30uFosfgpfeIRMh2eiLbBokUGjnO/z+feSUHhN5dr1eh6ZpT7C3BHq9HiaTSbZArVYTiWq1ClYs4T/mRDAxyrROp1Pouo71eo0oimBZFo7HIxzHecr9JZP/1hWyBKT5fB5Tgo55uVw4hq5wvV6z8CLGrhgwZyZOkJIJkUcmDGulwpYVrwEF8oZhGOj3+2g2m7xWh8OBi4gT/CcwHo9hmiZ838d2u+WFTvGl5G2nfuY6Go04WZZlqKqK2+0mcCQwyxNpNBpQFAWVSgXD4RCDwUAIlFkXvpmnikhipN0h93w+43Q6YbPZwLZtdDodAS9UA8/z0G63+QMjJhUwHS+7QH1OWoXdbocwDNFqtRAEAfb7PecT5qUAQ1Bt6EejsAnXddNNBZkwv/3KjSrHve9/AAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+              </div>
+              <span class="button-checkbox">
+                <div class="icheckbox_minimal-blue" style="position: relative;">
+                  </div>
+                                <a routerLink="/forgot-password" class="btn btn-link pull-right">Forgot Password?</a>
+                            </span>
+              <br><br>
+              <div class="form-group row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <input type="submit" class="btn btn-lg btn-success btn-block" value="Sign In">
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <a routerLink="/signup" class="btn btn-lg btn-primary btn-block" style="color: #fff;">Sign Up</a>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+
+        </div>
+      </div>
     </div>
   </div>
 </div>

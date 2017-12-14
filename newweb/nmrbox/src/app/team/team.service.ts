@@ -56,30 +56,30 @@ export class TeamService {
     }
     /* test */
 
-  getDetail(id: number, type: string): Promise<TeamModel> {
-    
-    let baseUrl = `${this.blogUrl}`;
+    getDetail(id: number, type: string): Promise<TeamModel> {
 
-    //console.log("getSoftware TYPE: ", type);
-    
-    if(type == "support"){
-      baseUrl = `${this.supportUrl}`;
-    } else if(type == "blog") {
-      baseUrl = `${this.blogUrl}`;
-    } else {
-      baseUrl = `${this.eventsUrl}`;
+      let baseUrl = `${this.blogUrl}`;
+
+      //console.log("getSoftware TYPE: ", type);
+
+      if(type == "support"){
+        baseUrl = `${this.supportUrl}`;
+      } else if(type == "blog") {
+        baseUrl = `${this.blogUrl}`;
+      } else {
+        baseUrl = `${this.eventsUrl}`;
+      }
+
+      let url = baseUrl + `/${id}`;
+
+      //console.log("getSoftware URL: ", url);
+
+      return this.http
+        .get(url)
+        .toPromise()
+        .then(response => response.json().data as TeamModel)
+        .catch(this.handleError);
     }
-
-    let url = baseUrl + `/${id}`;
-
-    //console.log("getSoftware URL: ", url);
-    
-    return this.http
-      .get(url)
-      .toPromise()
-      .then(response => response.json().data as TeamModel)
-      .catch(this.handleError);
-  }
 
   update(software: TeamModel): Promise<TeamModel> {
     const url = `${this.baseUrl}/${software.id}`;

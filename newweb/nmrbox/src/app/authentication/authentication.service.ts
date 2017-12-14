@@ -92,27 +92,24 @@ export class AuthenticationService {
                 }), {headers: this.headers})
             .map(
                 (response: Response) => {
-                    console.log(response);
-                    if(response.json().person_id != null){
+                    //console.log(response.json().type);
+                    if ( response.json().type !== 'error') {
                         const person_id = response.json().person_id;
                         const user_is_admin = response.json().user_is_admin;
                         const token = response.json().token;
                         const base64Url = token.split('.')[1];
                         const base64 = base64Url.replace('-', '+').replace('_', '/');
-                        return {person_id: person_id, user_is_admin: user_is_admin, token: token, decoded: JSON.parse(window.atob(base64))};
+                        //return {person_id: person_id, user_is_admin: user_is_admin, token: token, decoded: JSON.parse(window.atob(base64))};
+
+                        localStorage.setItem('person_id', person_id);
+                        localStorage.setItem('user_is_admin', user_is_admin);
+                        localStorage.setItem('token', token);
+                        this.router.navigateByUrl('user-dashboard');
+                    } else {
+                        return response.json();
                     }
                 }
-            )
-            .do(
-                tokenData => {
-                    localStorage.setItem('person_id', tokenData.person_id);
-                    localStorage.setItem('user_is_admin', tokenData.user_is_admin);
-                    localStorage.setItem('token', tokenData.token);
-                    this.router.navigateByUrl('user-dashboard');
-                }
-            )
-            .catch(this._serverError);
-        ;
+            );
     }
 
     public getToken(name: string) {
@@ -190,15 +187,9 @@ export class AuthenticationService {
                 }), {headers: this.headers})
             .map(
                 (response: Response) => {
-                    const message = response.json().message;
-                    if (message === 'success') {
-                        this.router.navigateByUrl('my-account');
-                    } else {
-                        console.log('couldnt save data');
-                    }
+                    return response.json();
                 }
-            )
-            ;
+            );
     }
 
 }

@@ -9,7 +9,7 @@
   <md-tab id="com-support" label="Support" class="co-sub-icon co-icon-med co-icon-support">
     
   <div class="sw-filters-container">
-      <div class="sw-filters">
+      <!--<div class="sw-filters">
         <md-select id="rp-select" placeholder="Research problem"></md-select>
         <md-select id="st-select" class="menu-open" placeholder="Software type"></md-select>
         <md-select id="sw-select" class="menu-open" placeholder="Software package"></md-select>
@@ -18,7 +18,7 @@
           <input mdInput #searchBox id="search-box" (keyup)="searchSoftware(searchBox.value)" placeholder="search support"/>
           <span class="icon-search"></span>
         </md-input-container>
-      </div>
+      </div>-->
       <div id="software-types-menu" class="sw-menu-wrapper hidden">
         <swiper [config]="config">
             <div class="swiper-wrapper">
@@ -38,22 +38,7 @@
     <div id="com-support-nmrbox" class="grid-outer-wrapper">
       <div class="grid-content-wrapper">
       <h3 class="blue">NMRbox Support</h3>
-      <!--<md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
-        <md-grid-tile class="tile-solid tile-transparent" *ngFor="let support of supportNmrboxList" (click)="gotoDetail(support); $event.stopPropagation()">
-          <md-card class="sw-card tile-card-short">
-            <md-card-header>
-              <md-card-title>{{support.name}}</md-card-title>
-            </md-card-header>
-            <md-card-content>
-              <p>
-                {{support.synopsis}}
-              </p>
-              <br/>
-              <a href="/">Read more</a>
-            </md-card-content>
-          </md-card>
-        </md-grid-tile>
-      </md-grid-list>-->
+
         <md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
           <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('documentation'); $event.stopPropagation()">
             <md-card class="sw-card tile-card-short">
@@ -107,22 +92,7 @@
     <div class="grid-outer-wrapper blue-light-bg">
       <div class="grid-content-wrapper">
       <h3 class="blue">Tutorials</h3>
-      <!--<md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
-        <md-grid-tile class="tile-solid tile-transparent" *ngFor="let support of supportTutorialList" (click)="gotoDetail(support); $event.stopPropagation()">
-          <md-card class="sw-card tile-card-short">
-            <md-card-header>
-              <md-card-title>Getting started</md-card-title>
-            </md-card-header>
-            <md-card-content>
-              <p>
-                NMRbox Documentation
-              </p>
-              <br/>
-              <a (click)="gotoDetail('overview'); $event.stopPropagation();">Read More</a>
-            </md-card-content>
-          </md-card>
-        </md-grid-tile>
-      </md-grid-list>-->
+
           <md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
               <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('acknowledge-us'); $event.stopPropagation()">
                   <md-card class="sw-card tile-card-short">
@@ -155,20 +125,7 @@
                   </md-card>
               </md-grid-tile>
 
-              <!--<md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('contact-us'); $event.stopPropagation()">
-                  <md-card class="sw-card tile-card-short">
-                      <md-card-header>
-                          <md-card-title>Contact NMRbox support</md-card-title>
-                      </md-card-header>
-                      <md-card-content>
-                          <p>
-                              We have a team ready to assist you with your NMRbox support needs
-                          </p>
-                          <br/>
-                          <a (click)="gotoDetail('contact-us')">Read more</a>
-                      </md-card-content>
-                  </md-card>
-              </md-grid-tile>-->
+
           </md-grid-list>
 
       </div>
@@ -177,22 +134,6 @@
     <div class="grid-outer-wrapper">
       <div class="grid-content-wrapper">
       <h3 class="blue">Software documentation</h3>
-      <!--<md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
-        <md-grid-tile class="tile-solid tile-transparent" *ngFor="let support of supportSwdocList" (click)="gotoDetail(support); $event.stopPropagation()">
-          <md-card class="sw-card tile-card-short">
-            <md-card-header>
-              <md-card-title>{{support.name}}</md-card-title>
-            </md-card-header>
-            <md-card-content>
-              <p>
-                {{support.synopsis}}
-              </p>
-              <br/>
-              <a href="/">Read more</a>
-            </md-card-content>
-          </md-card>
-        </md-grid-tile>
-      </md-grid-list>-->
           <md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
               <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('documentation'); $event.stopPropagation()">
                   <md-card class="sw-card tile-card-short">
@@ -326,14 +267,6 @@
   </md-tab>
 
   <md-tab id="com-events" label="Events">
-    <!--<div class="sw-filters-container sw-filters-search-only">
-      <div class="sw-filters">
-        <md-input-container id="search">
-          <input mdInput #searchBox id="search-box" (keyup.enter)="searchSoftware(searchBox.value)" placeholder="search events" />
-          <span class="icon-search"></span>
-        </md-input-container>
-      </div>
-    </div>-->
     <div class="divider divider-dashed"></div>
     <div class="grid-outer-wrapper gray-bg">
       <div class="grid-content-wrapper">

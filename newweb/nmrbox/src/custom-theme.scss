@@ -46,6 +46,7 @@ $nmrbox-app-theme: mat-light-theme($nmrbox-app-primary, $nmrbox-app-accent, $nmr
 */
 @include angular-material-theme($nmrbox-app-theme);
 
+
 body {
     height: 100%;
     margin: 0px;
@@ -658,7 +659,7 @@ a#all-software {
   }
 
   .grid-content-wrapper {
-    width: 940px;
+    width: 910px;
     margin: 0px auto;
 
     h2, h3 {
@@ -724,3 +725,66 @@ footer {
         opacity: 0.9;
     }
 }
+
+/* Page styles */
+.page-wrapper {
+
+    .page-details {
+        margin-top: 20px;
+    }
+
+    .page-details > h1, section, .menu-wrapper {
+        width: 100%;
+        max-width: 900px;
+        margin: 0px auto;
+    }
+    .menu-wrapper {
+        min-height: 50px;
+        margin-bottom: 10px;
+
+        .page-title {
+            margin-top: 40px;
+            padding: 12px 10px 10px 0px;
+            font-size: 24px;
+            font-variant: inherit;
+            font-weight: 300;
+            margin-left: 0;
+        }
+    }
+
+    h3 {
+        font-weight: 500;
+    }
+
+}
+
+.container{
+    @media (min-width: 768px) {
+        &.nmrbox-custom-container{
+            width:600px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        &.nmrbox-custom-container{
+            width:720px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        &.nmrbox-custom-container{
+            width:910px;
+        }
+    }
+
+}
+
+.tab-group-container{
+    .grid-content-wrapper {
+        line-height: 1.2em;
+        h2, h3{
+            margin-left: 0 !important;
+        }
+    }
+}
+
