@@ -141,7 +141,7 @@ class PageController extends Controller {
         try {
 
             $page = new Page($request->except('image','tags','featured','slug'));
-            $page->user_id = Sentinel::getUser()->id;
+            $page->user_id = Session::get('person')->id;
             $page->save();
 
             // unfortunately need to save twice to get around the auto-slugging

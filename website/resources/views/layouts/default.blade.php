@@ -120,7 +120,7 @@
                     <li {{ (Request::is('registry') ? 'class=active' : '') }}><a href="{{ URL::to('registry') }}"> Registry</a></li>
 
                     {{--based on anyone login or not display menu items--}}
-                    @if(Sentinel::guest())
+                    @if(Session::get('person')->id)
                         <li><a href="{{ URL::to('login') }}">Sign in</a>
                     @else
                         <li {{ (Request::is('my-account') ? 'class=active' : '') }}><a href="{{ URL::to('my-account') }}">My Account</a>

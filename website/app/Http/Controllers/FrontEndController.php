@@ -286,7 +286,8 @@ class FrontEndController extends Controller
                 // Adding JWT-Auth Token
                 $token = JWTAuth::fromUser($person);
                 $set_token = JWTAuth::setToken($token);
-                $parse_token = JWTAuth::getToken();
+                //$parse_token = JWTAuth::getToken();
+                $parse_token = Sentinel::login($person);
 
                 if ($parse_token == true)
                 {
@@ -341,11 +342,11 @@ class FrontEndController extends Controller
             Session::flush();
         }
 
-        // clear the jwt auth token
+        /*// clear the jwt auth token
         $token = JWTAuth::getToken();
         //dd($token);
         if($token)
-            JWTAuth::invalidate($token);
+            JWTAuth::invalidate($token);*/
 
         // Redirect to the users page
         return Redirect::to('homepage')->with('success', 'You have successfully logged out!');
@@ -903,6 +904,31 @@ class FrontEndController extends Controller
                 'type' => 'error'
             ], 200);
         }
+    }
+
+    /**
+     * Logout page.
+     *
+     * @return Redirect
+     */
+    public function signOut(Request $request)
+    {
+        // Log the user out
+        Sentinel::logout(null, true);
+
+        //clear the admin session value
+        if(Session::has('user_is_admin')){
+            Session::flush();
+        }
+
+        // clear the jwt auth token
+        $token = JWTAuth::getToken();
+        //dd($token);
+        if($token)
+            JWTAuth::invalidate($token);
+
+        // Redirect to the users page
+        return Redirect::to('homepage')->with('success', 'You have successfully logged out!');
     }
 
     // SingUP
