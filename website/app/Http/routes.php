@@ -415,6 +415,7 @@ Route::post('faq-ratings', array('as' => 'faq-ratings', 'uses' => 'FAQController
 
 # Homepage
 Route::get('/', array('as' => 'home', 'uses' => 'ChandraController@showFrontEndView'));
+Route::get('nuscon-home', array('as' => 'nuscon-home', 'uses' => 'ChandraController@showFrontEndView'));
 
 Route::get('blog', array('as' => 'blog', 'uses' => 'BlogController@getIndexFrontend'));
 Route::get('blog/{slug}/tag', 'BlogController@getBlogTagFrontend');
