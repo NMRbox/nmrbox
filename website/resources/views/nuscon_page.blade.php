@@ -10,7 +10,6 @@
     @section('header_styles')
     @stop
 
-
     {{-- Page content --}}
     @section('content')
             <!-- Container Section Start -->
@@ -32,7 +31,6 @@
                             </span>
                         @endif
                     @endif
-
 
                 </div>
 
