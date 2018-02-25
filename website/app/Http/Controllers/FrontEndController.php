@@ -6,9 +6,9 @@ use App\Http\Requests;
 use App\VMDownload;
 use Illuminate\Http\Request;
 use App\Institution;
-use Cartalyst\Sentinel\Laravel\Facades\Activation;
+//use Cartalyst\Sentinel\Laravel\Facades\Activation;
 
-use Sentinel;
+//use Sentinel;
 use JWTAuth;
 use View;
 use Validator;
@@ -29,7 +29,7 @@ use App\ClassificationPerson;
 use App\Reminder;
 use App\Workshop;
 use App\VM;
-use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
+//use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use App\Library\Ldap;
 
 class FrontEndController extends Controller
@@ -261,11 +261,11 @@ class FrontEndController extends Controller
 
         try {
             // Adding custom LDAP library class and authenticating
-            $ldap = new Ldap;
-            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
+            /*$ldap = new Ldap;
+            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));*/
 
             /* Test (Localhost login code to skip LDAP authentication) */
-            //$ldap_login = true;
+            $ldap_login = true;
             /* Eof Test */
 
             // LDAP login response
@@ -286,8 +286,8 @@ class FrontEndController extends Controller
                 // Adding JWT-Auth Token
                 $token = JWTAuth::fromUser($person);
                 $set_token = JWTAuth::setToken($token);
-                //$parse_token = JWTAuth::getToken();
-                $parse_token = Sentinel::login($person);
+                $parse_token = JWTAuth::getToken();
+                //$parse_token = Sentinel::login($person);
 
                 if ($parse_token == true)
                 {
@@ -335,19 +335,23 @@ class FrontEndController extends Controller
     public function getLogout(Request $request)
     {
         // Log the user out
-        Sentinel::logout(null, true);
+        //Sentinel::logout(null, true);
 
         //clear the admin session value
         if(Session::has('user_is_admin')){
             Session::flush();
         }
 
-        /*// clear the jwt auth token
+        if(Session::has('person')){
+            Session::flush();
+        }
+
+        // clear the jwt auth token
         $token = JWTAuth::getToken();
         //dd($token);
         if($token)
             JWTAuth::invalidate($token);
-        */
+
 
         // Redirect to the users page
         return Redirect::to('homepage')->with('success', 'You have successfully logged out!');
@@ -367,6 +371,10 @@ class FrontEndController extends Controller
             $request['token'] = Session::get('auth_token');
             $person = JWTAuth::parseToken()->toUser();
         }*/
+
+        if(!Session::has('person')){
+            return redirect::to('login');
+        }
 
         $person = Person::where('id', Session::get('person')->id)->get()->first();
         //dd($user);

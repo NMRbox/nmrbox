@@ -28,8 +28,9 @@
                 <img class="center-block" src="{{ asset('assets/img/logo/nmrbox-logo-sm.png') }}"><hr>
                 <!-- Notifications -->
                 @include('notifications')
-                <form role="form" action="{{ route('login') }}" class="omb_loginForm"  autocomplete="off" method="POST">
-                    {!! Form::token() !!}
+                {{--<form role="form" action="{{ route('login') }}" class="omb_loginForm"  autocomplete="off" method="POST">--}}
+                {!! BootForm::open(array('url'=>route('login'), 'class' => 'form ' )) !!}
+
                     <fieldset>
                         <h2>Please Sign In</h2>
                         <div class="form-group">
@@ -52,7 +53,8 @@
                             </div>
                         </div>
                     </fieldset>
-                </form>
+                {!! BootForm::close() !!}
+                {{--</form>--}}
             </div>
         </div>
     </div>

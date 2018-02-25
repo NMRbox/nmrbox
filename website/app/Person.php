@@ -58,16 +58,6 @@ class Person extends Eloquent implements Authenticatable
     public $timestamps = false;
 
     /**
-     * pivot relation with user table
-     */
-    /*
-     * replacing user -> person
-     * public function user() {
-        return $this->hasOne('App\User');
-    }
-    */
-
-    /**
      * pivot relation with institution table
      */
     public function institution() {
