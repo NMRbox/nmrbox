@@ -32,4 +32,12 @@ class Workshop extends Model
         return $this->belongsToMany('App\Person', 'classification_person', 'name', 'person_id')
             ->withPivot('name', 'person_id');
     }
+
+    /**
+     * pivot relation with classifications_person table
+     */
+    public function scopeattendances() {
+        return $this->belongsToMany('App\Person', 'classification_person', 'name', 'person_id')->whereNotNull('name');
+            //->withPivot('name', 'person_id');
+    }
 }

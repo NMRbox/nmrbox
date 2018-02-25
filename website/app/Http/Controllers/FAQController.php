@@ -321,13 +321,13 @@ class FAQController extends Controller
         /* converting bytea to string */
         $answer_bytea = stream_get_contents($faq->answer);
         $answer_string = pg_unescape_bytea($answer_bytea);
-        $answer = htmlspecialchars($answer_string);
+        //$answer = htmlspecialchars($answer_string);
 
         /* New faq object */
         $new_faq = new FAQ(array(
             'id' => $faq->id,
             'question' => $faq->question,
-            'answer' => $answer,
+            'answer' => $answer_string,
             'slug' => $faq->slug
         ));
 
@@ -360,7 +360,38 @@ class FAQController extends Controller
 
         // make index view
         //return view::make('faq', compact('all_faqs'));
-        return response( json_encode( array('data' => $all_faqs, ) ), 200 )->header( 'Content-Type', 'application/json' );
+        //return response()-> json( array('data' => $all_faqs, ) ), 200 )->header( 'Content-Type', 'application/json' );
+        return response()-> json( array(
+            'data' => $all_faqs
+        ), 200 );
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function searchFAQs($term = null)
+    {
+        /* all faqs*/
+        if(isset($term)){
+
+            $faqs = FAQ::where('question', 'LIKE', '%'.strtolower($term).'%')
+                ->orWhere('answer', 'LIKE', '%'.strtolower($term).'%')
+                ->get();
+        } else {
+            $faqs = FAQ::all();
+        }
+
+
+        foreach($faqs as $key => $value){
+            $all_faqs[] = $this->convert_to_string($value->id);
+        }
+
+        return response()-> json( array(
+            'data' => $all_faqs
+        ), 200 );
     }
 
     /**

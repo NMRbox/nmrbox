@@ -14,11 +14,8 @@ return array(
         'create'    => 'Workshop was successfully created.',
         'update'    => 'Workshop was successfully updated.',
         'delete'    => 'Workshop was successfully deleted.',
-        'ban'       => 'Workshop was successfully banned.',
-        'unban'     => 'Workshop was successfully unbanned.',
-        'suspend'   => 'Workshop was successfully suspended.',
-        'unsuspend' => 'Workshop was successfully unsuspended.',
-        'restored'  => 'Workshop was successfully restored.'
+        'register' => 'Thank you for registering for the event. You will receive more information from NMRbox staff by email as the event date approaches.',
+        'already_registered' => 'You are already registered for the events. You will receive more information from NMRbox staff by email as the event date approaches.'
     ),
 
     'error' => array(

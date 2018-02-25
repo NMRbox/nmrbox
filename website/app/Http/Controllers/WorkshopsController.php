@@ -149,6 +149,8 @@ class WorkshopsController extends Controller
         $upcoming_workshops = Workshop::whereDate('end_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
 
         foreach ($upcoming_workshops as $upcoming){
+            // Counting the max attendance
+            $upcoming->attendance = ClassificationPerson::where('classification_person.name', $upcoming->name)->count();
             $workshops['upcoming'][] = $upcoming;
         }
 
@@ -158,6 +160,8 @@ class WorkshopsController extends Controller
         foreach ($completed_workshops as $completed){
             $workshops['completed'][] = $completed;
         }
+
+        //$workshops['upcoming']['attendance'] = Workshop::attendance();
 
         return response( json_encode( array('data' => $workshops, ) ), 200 )->header( 'Content-Type', 'application/json' );
 
@@ -219,6 +223,49 @@ class WorkshopsController extends Controller
      */
     public function registerPersonWorkshop(Request $request){
 
+        // Retrieving the users list from person table
+        $user_id = $request->input('userid');
+        $user = Person::where('id', $user_id)->get()->first();
+
+        // the classification input list
+        $classification = $request->input('workshopid');
+
+        /* Check workshop registration */
+        $check_registration = ClassificationPerson::where('person_id', $user_id)
+            ->where('name', $classification)
+            ->get()
+            ->first();
+
+        if($check_registration){
+            return response( json_encode( array( 'message' => Lang::get('workshops/message.success.already_registered'), 'type' => 'info' ) ), 200 )
+                ->header( 'Content-Type', 'application/json' );
+        }
+
+        try{
+
+            /* Saving the data into DB */
+            if(!empty($classification)){
+                $classification = new ClassificationPerson(array(
+                    'person_id' => $user->id,
+                    'name' => $classification
+                ));
+            }
+
+            if($classification->save() !== false){
+                return response( json_encode( array( 'message' => Lang::get('workshops/message.success.register'), 'type' => 'success' ) ), 200 )
+                    ->header( 'Content-Type', 'application/json' );
+            }
+
+        } catch ( \Illuminate\Database\QueryException $e ){
+                return response( json_encode( array( 'message' => 'Sorry, workshop registration unsuccessful. Try again. ', 'type' => 'error' ) ), 200 )
+                    ->header( 'Content-Type', 'application/json' );
+        }
+
+    }
+
+    /*
+    public function registerPersonWorkshop(Request $request){
+
         if(!$request->ajax()) {
             return App::abort(403);
         }
@@ -230,10 +277,9 @@ class WorkshopsController extends Controller
         // the classification input list
         $classification = $request->input('name', true);
 
-        /* Saving the data into DB */
+
         if(!empty($classification)){
-            /*$classification = Classification::find($classification);
-            $classification->person()->sync($user, false);*/
+
             $classification = new ClassificationPerson(array(
                 'person_id' => $user->id,
                 'name' => $classification
@@ -248,5 +294,5 @@ class WorkshopsController extends Controller
             return response( json_encode( array( 'message' => 'Sorry, workshop registration unsuccessful. Try again. ', 'type' => 'error' ) ), 200 )
                 ->header( 'Content-Type', 'application/json' );
         }
-    }
+    }*/
 }

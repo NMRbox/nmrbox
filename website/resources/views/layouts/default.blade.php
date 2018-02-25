@@ -84,16 +84,17 @@
                         </ul>
                     </li>
 
-                    <li class="dropdown {{ (Request::is('outreach') ||
+                    {{--<li class="dropdown {{ (Request::is('outreach') ||
                                             Request::is('workshops') ||
                                             Request::is('meetings')
                                         ? 'active' : '') }}">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Outreach</a>
-                        <ul class="dropdown-menu" role="menu">
+                        <a href="{{ URL::to('events') }}" class="dropdown-toggle" data-toggle="dropdown"> Outreach</a>
+                        --}}{{--<ul class="dropdown-menu" role="menu">
                             <li><a href="{{ URL::to('workshops') }}">Workshops</a></li>
                             <li><a href="{{ URL::to('meetings') }}">Meetings</a></li>
-                        </ul>
-                    </li>
+                        </ul>--}}{{--
+                    </li>--}}
+                    <li {{ (Request::is('events') ? 'class=active' : '') }}><a href="{{ URL::to('events') }}"> Outreach</a></li>
 
                     <li class="dropdown {{ (Request::is('people-leadership') ||
                                             Request::is('people-trd1') ||
@@ -120,7 +121,7 @@
                     <li {{ (Request::is('registry') ? 'class=active' : '') }}><a href="{{ URL::to('registry') }}"> Registry</a></li>
 
                     {{--based on anyone login or not display menu items--}}
-                    @if(Session::get('person')->id)
+                    @if(!Session::has('person'))
                         <li><a href="{{ URL::to('login') }}">Sign in</a>
                     @else
                         <li {{ (Request::is('my-account') ? 'class=active' : '') }}><a href="{{ URL::to('my-account') }}">My Account</a>

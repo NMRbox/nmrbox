@@ -404,13 +404,15 @@ Route::post('download_vm',array('as' => 'download_vm','uses' => 'FrontEndControl
 Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@postContact'));
 
 # Workshop Page
-Route::get('workshops',array('as' => 'workshops','uses' => 'WorkshopsController@showAll'));
-Route::post('workshops',array('as' => 'register_person_workshop', 'uses' => 'WorkshopsController@registerPersonWorkshop'));
-Route::post('register_person_workshop', array('as' => 'register_person_workshop', 'uses' => 'WorkshopsController@registerPersonWorkshop'));
+Route::get('events',array('as' => 'events','uses' => 'WorkshopsController@showAll'));
+/*Route::post('events',array('as' => 'register_person_workshop', 'uses' => 'WorkshopsController@registerPersonWorkshop'));*/
+Route::get('events_register', array('as' => 'events_register', 'uses' => 'WorkshopsController@registerPersonWorkshop'));
+Route::post('events_register', array('as' => 'events_register', 'uses' => 'WorkshopsController@registerPersonWorkshop'));
 
 # FAQ Page
 Route::get('faq',array('as' => 'faq','uses' => 'FAQController@showAllFAQs'));
 Route::post('faq',array('as' => 'faq','uses' => 'FAQController@showAllFAQs'));
+Route::get('faq/{question}',array('as' => 'faq','uses' => 'FAQController@searchFAQs'));
 Route::post('faq-ratings', array('as' => 'faq-ratings', 'uses' => 'FAQController@countFAQRatings'));
 
 # Homepage
@@ -427,6 +429,7 @@ Route::group(['middleware' => ['cors', 'session']], function () {
 
     Route::post('signup', array( 'as' => 'signup', 'uses' => 'FrontEndController@signup'));
     Route::post('signin', array( 'as' => 'signin', 'uses' => 'FrontEndController@signin'));
+    Route::get('signout', array('as' => 'signout','uses' => 'FrontEndController@signOut'));
     Route::post('updateProfile/{person_id}', array( 'as' => 'updateProfile', 'uses' => 'FrontEndController@updateProfile'));
     Route::post('password-reset', array( 'as' => 'password-reset', 'uses' => 'FrontEndController@changePassword'));
     Route::post('password-forgot', array( 'as' => 'password-forgot', 'uses' => 'FrontEndController@forgotPassword'));

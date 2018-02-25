@@ -261,11 +261,11 @@ class FrontEndController extends Controller
 
         try {
             // Adding custom LDAP library class and authenticating
-            $ldap = new Ldap;
-            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
+            /*$ldap = new Ldap;
+            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));*/
 
             /* Test (Localhost login code to skip LDAP authentication) */
-            //$ldap_login = true;
+            $ldap_login = true;
             /* Eof Test */
 
             // LDAP login response
@@ -346,7 +346,8 @@ class FrontEndController extends Controller
         $token = JWTAuth::getToken();
         //dd($token);
         if($token)
-            JWTAuth::invalidate($token);*/
+            JWTAuth::invalidate($token);
+        */
 
         // Redirect to the users page
         return Redirect::to('homepage')->with('success', 'You have successfully logged out!');
