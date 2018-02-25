@@ -5,7 +5,8 @@ import { HttpModule } from '@angular/http';
 
 // Animations & UI
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MdButtonModule, MdCheckboxModule, MdInputModule, MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdListModule, MdGridListModule, MdCardModule, MdTabsModule, MdChipsModule} from '@angular/material';
+import {MdButtonModule, MdCheckboxModule, MdExpansionModule, MdInputModule, MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdListModule, MdGridListModule, MdCardModule, MdTabsModule, MdChipsModule} from '@angular/material';
+
 
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -59,10 +60,10 @@ import { ShowHideContainer} from './authentication/show-hide-container';
       FormsModule,
       HttpModule,
       BrowserAnimationsModule,
-      MdButtonModule, MdCheckboxModule, MdInputModule, MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdListModule, MdGridListModule, MdTabsModule, MdCardModule, MdChipsModule,
+      MdButtonModule, MdCheckboxModule, MdExpansionModule, MdInputModule, MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdListModule, MdGridListModule, MdTabsModule, MdCardModule, MdChipsModule,
       SwiperModule,
       AppRoutingModule,
-      CommonModule
+      CommonModule,
   ],
   declarations: [
     AppComponent,

@@ -8,13 +8,14 @@ import { CommunityModel } from './community.model';
 export class CommunityService {
 
   // test url
-  private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
-  //private appUrl = 'http://nmrbox.dev';  // URL to web api
+  //private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
+  private appUrl = 'http://nmrbox.test';  // URL to web api
   private baseUrl = 'api/communityList';  // URL to web api
   private supportUrl = 'api/comSupportList';  // URL to web api
   private blogUrl = 'api/comBlogList';  // URL to web api
-  private eventsUrl = 'workshops';  // URL to events page
-  private documentationUrl = 'workshops';  // URL to documentation page
+  private eventsUrl = 'events';  // URL to events page
+  private eventRegisterUrl = 'events_register';  // URL to events page
+  private documentationUrl = 'events';  // URL to documentation page
 
 
   private headers = new Headers({'Content-Type': 'application/json'});
@@ -222,4 +223,16 @@ export class CommunityService {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
+
+  /* Workshop registration */
+    workshopRegister(userid: string, workshopid: string) {
+        return this.http.post(this.appUrl + '/' + this.eventRegisterUrl, JSON.stringify(
+            {
+                userid: userid,
+                workshopid: workshopid,
+            }), {headers: this.headers})
+            .map(
+                (response: Response) => response.json()
+            );
+    }
 }

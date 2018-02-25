@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import {FormGroup, FormControl, FormBuilder, Validators, NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute, Params } from '@angular/router';
 
@@ -7,6 +7,7 @@ import { Observable }        from 'rxjs/Observable';
 
 import { CommunityModel }         from './community.model';
 import { CommunityService }  from './community.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
   selector: 'community-list',
@@ -41,10 +42,14 @@ export class CommunityListComponent implements OnInit {
   @Input() selectedIndex: number=0;
   @Input() routeIndex: number;
 
+  /*notification variable*/
+    public notifications: any = {message: '', type: ''};
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private communityService: CommunityService
+    private communityService: CommunityService,
+    private authService: AuthenticationService
   ) { }
 
   config: Object = {
@@ -153,9 +158,28 @@ export class CommunityListComponent implements OnInit {
   // Navigation
   //gotoDetail(community: CommunityModel): void {
   gotoDetail(pageUrl: string): void {
-    //this.router.navigate(['/c', community.contentType, community.id]);
       console.log('component url : ', pageUrl);
     this.router.navigate(['/c', pageUrl]);
   }
+
+  /* workshops registration */
+    onWorkshopRegister(form: NgForm) {
+        const person_id = this.authService.getToken('person_id');
+        const workshop_id = form.value.name;
+        console.log(person_id);
+        console.log(workshop_id);
+
+        this.communityService.workshopRegister(
+            person_id,
+            workshop_id
+        )
+            .subscribe(
+                response => this.notifications = response
+            )
+    }
+
+    isLoggedIn() {
+        return this.authService.getToken('person_id');
+    }
 
 }

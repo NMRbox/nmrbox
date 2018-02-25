@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 export class AppComponent {
   title = 'NMRbox';
   version = '1.0';
+  today: number = Date.now();
 
     constructor(
         private router: Router,
@@ -28,4 +29,6 @@ export class AppComponent {
         this.authService.deleteToken('user_is_admin');
         this.router.navigateByUrl('app');
     }
+
+
 }

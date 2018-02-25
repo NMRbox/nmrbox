@@ -11,9 +11,9 @@ export class FaqsService {
     private handleError: any;
 
     /* Web api urls*/
-    public appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
-    //public appUrl = 'http://nmrbox.dev';  // URL to web api
-    private faqsUrl = 'faq';
+    //public appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
+    public appUrl = 'http://nmrbox.test';  // URL to web api
+    public faqsUrl = 'faq';
 
 
   constructor(
@@ -22,7 +22,16 @@ export class FaqsService {
 
     getAllFaqs(): Promise<FaqsModel> {
         const url = this.appUrl + `/` + this.faqsUrl;
-        console.log(url);
+        return this.http
+            .get(url)
+            .toPromise()
+            .then(response => response.json().data as FaqsModel)
+            .catch(this.handleError);
+    }
+
+    searchFAQs($search_term: string ): Promise<FaqsModel> {
+        const url = this.appUrl + `/` + this.faqsUrl + `/` + $search_term;
+
         return this.http
             .get(url)
             .toPromise()

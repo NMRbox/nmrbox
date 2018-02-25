@@ -10,6 +10,7 @@
   margin-left: 5px;
 
   .grid-content-wrapper {
+
     h3 {
         margin-left: 16px;
     }
@@ -25,7 +26,7 @@ md-grid-list {
   max-width: auto; /* constrained by tab container */
   width: 100%; /* constrained by tab container */
   margin: 10px auto;
-  padding: 0px;
+  padding: 10px;
 
   .sw-card {
     min-width: 200px;
@@ -53,29 +54,35 @@ md-grid-list {
 
   .workshop-card {
     width: 450px;
-    height: 200px;
-    margin: 10px;
+    height: 215px;
+    margin: 20px;
     background: #f4f4f4;
     border: 1px solid #d9edf7;
     md-card-header {
-      margin: 0px;
       font-weight: bold;
       background: #d9edf7;
-      padding: 10px;
+      padding: 20px 10px;
 
     }
     .mat-card-title {
       font-weight: bold;
       font-size: 16px;
-      line-height: 3%;
+      line-height: 2%;
       margin: 6px 0;
     }
     md-card-content{
       padding: 10px;
+      line-height: 5%;
     }
     p {
-      line-height: 1em;
       margin-bottom: 5px;
+    }
+    .button {
+      color: #fff;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 2%;
+      margin: 6px 0;
     }
 
   }

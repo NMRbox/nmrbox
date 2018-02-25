@@ -24,7 +24,17 @@
   </div>
 </div>
 
+<!-- info alert box -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 alert alert-info">
+      <a href="#" class="close" data-dismiss="alert">&times;</a>
+      <p class="text-info">Filtered searching coming soon…</p>
+    </div>
+  </div>
+</div>
 
+<!-- Software registry listings -->
 <md-grid-list class="software-list" cols="3" rowHeight="250px">
   <md-grid-tile class="tile-dashed" *ngFor="let software of softwareList" (click)="gotoDetail(software); $event.stopPropagation()">
     <md-card class="sw-card">

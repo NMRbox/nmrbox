@@ -6,7 +6,7 @@
 
 <md-tab-group (selectedIndexChange)="selectedIndexChange($event)" [selectedIndex]="selectedIndex">
 
-  <md-tab id="com-support" label="Support" class="co-sub-icon co-icon-med co-icon-support">
+    <md-tab id="com-support" label="Support" class="co-sub-icon co-icon-med co-icon-support">
     
   <div class="sw-filters-container">
       <!--<div class="sw-filters">
@@ -56,7 +56,7 @@
             </md-card>
           </md-grid-tile>
 
-        <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('/'); $event.stopPropagation()">
+        <md-grid-tile class="tile-solid tile-transparent" (click)="faqs">
           <md-card class="sw-card tile-card-short">
             <md-card-header>
               <md-card-title>NMRbox FAQs</md-card-title>
@@ -66,7 +66,7 @@
                 Here are some tips and answers to frequently asked questions from our NMRbox Community.
               </p>
               <br/>
-              <a href="/">Read more</a>
+              <a href="/faqs">Read more</a>
             </md-card-content>
           </md-card>
         </md-grid-tile>
@@ -187,22 +187,39 @@
     <div class="divider divider-dashed"></div>
     <div class="grid-outer-wrapper blue-light-bg">
       <div class="grid-content-wrapper">
-      <h3 class="blue">Publications and Journals</h3>
-      <md-grid-list class="support-list grid-dashed workflow-list" cols="3" rowHeight="180px">
-        <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('publications'); $event.stopPropagation()">
-          <md-card class="sw-card tile-card-short">
-            <md-card-header>
-              <md-card-title>NMRbox Publications</md-card-title>
-            </md-card-header>
-            <md-card-content>
-              <p>
-                Lists of NMRbox research journal and publications
-              </p>
-              <br/>
-                <a (click)="gotoDetail('publications')">Read more</a>
-            </md-card-content>
-          </md-card>
-        </md-grid-tile>
+      <h3 class="blue">Publications</h3>
+
+          <md-grid-list class="support-list grid-dashed workflow-list" cols="3" rowHeight="180px">
+            <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('publications'); $event.stopPropagation()">
+              <md-card class="sw-card tile-card-short">
+                <md-card-header>
+                  <md-card-title>NMRbox Publications</md-card-title>
+                </md-card-header>
+                <md-card-content>
+                  <p>
+                    Lists of NMRbox research journal and publications
+                  </p>
+                  <br/>
+                    <a (click)="gotoDetail('publications')">Read more</a>
+                </md-card-content>
+              </md-card>
+            </md-grid-tile>
+
+
+            <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('newsletters'); $event.stopPropagation()">
+              <md-card class="sw-card tile-card-short">
+                <md-card-header>
+                  <md-card-title>NMRbox Newsletter</md-card-title>
+                </md-card-header>
+                <md-card-content>
+                  <p>
+                      Our first edition of the "Inside NMRbox" newsletter is now available
+                  </p>
+                  <br/>
+                    <a (click)="gotoDetail('publications')">Read more</a>
+                </md-card-content>
+              </md-card>
+            </md-grid-tile>
       </md-grid-list>
       </div>
     </div>
@@ -211,7 +228,98 @@
     <br/>
   </md-tab>
 
-  <md-tab id="com-blog" label="Blog" class="co-sub-icon co-icon-med co-icon-blog">
+    <md-tab id="com-events" label="Events">
+        <div class="divider divider-dashed"></div>
+        <div class="grid-outer-wrapper gray-bg">
+            <div class="grid-content-wrapper">
+                <div class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}" *ngIf="notifications.message?.length > 0">
+                    {{ notifications.message }}
+                </div>
+                <br>
+                <div *ngIf="!isLoggedIn()">
+                    <div class="alert alert-info">
+                        Please <a href="/signin">Sign in</a> / <a href="/signin">Sign up</a> first to register for events.
+                    </div>
+                </div>
+                <h2 class="blue">Upcoming</h2>
+                <md-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
+                    <md-grid-tile class="tile-solid" *ngFor="let event of eventsList.upcoming">
+                        <md-card class="workshop-card">
+                            <form (ngSubmit)="onWorkshopRegister(f)" #f="ngForm" (ngSubmit)="onSubmitWorkshops()">
+                                <md-card-header>
+                                    <md-card-title>{{event.title}}</md-card-title>
+                                </md-card-header>
+                                <md-card-content>
+                                    <p>
+                                        {{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}
+                                    </p>
+                                    <p>
+                                        {{event.location}}
+                                    </p>
+                                    <p *ngIf="event.attendance_max != null">
+                                        Attendance - {{event.attendance}}/{{event.attendance_max}}
+                                    </p>
+                                    <p>
+                                        <a href="{{event.url}}">More information</a>
+                                    </p>
+                                    <input type="hidden" name="name" [(ngModel)]="event.name" style="display: block;" />
+
+                                    <div *ngIf="isLoggedIn()">
+                                        <div *ngIf="event.attendance_max !== event.attendance;then regular_button else disable_button">here is ignored</div>
+                                        <ng-template #regular_button>
+                                            <button type="submit" class="btn btn-primary">
+                                                Register
+                                            </button>
+                                        </ng-template>
+                                        <ng-template #disable_button>
+                                            <button class="btn btn-primary" disabled>
+                                                Register
+                                            </button>
+                                        </ng-template>
+                                    </div>
+
+                                </md-card-content>
+                            </form>
+                        </md-card>
+                    </md-grid-tile>
+                </md-grid-list>
+            </div>
+        </div>
+        <div class="divider divider-dashed"></div>
+        <div class="grid-outer-wrapper blue-med-light-bg">
+            <div class="grid-content-wrapper">
+                <h2 class="blue">Past Events</h2>
+                <md-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
+                    <md-grid-tile class="tile-solid" *ngFor="let event of eventsList.completed">
+                        <md-card class="workshop-card">
+                            <md-card-header>
+                                <md-card-title>{{event.title}}</md-card-title>
+                            </md-card-header>
+                            <md-card-content>
+                                <p>
+                                    {{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}
+                                </p>
+                                <p>
+                                    {{event.location}}
+                                </p>
+                                <p>
+                                    <a href="{{event.url}}">More information</a>
+                                </p>
+                            </md-card-content>
+                            <md-card-actions>
+                                <!--<button md-button>LIKE</button>
+                                <button md-button>SHARE</button>-->
+                            </md-card-actions>
+                        </md-card>
+                    </md-grid-tile>
+                </md-grid-list>
+            </div>
+        </div>
+    </md-tab>
+
+    <md-tab id="com-forum" label="Forum">Forum</md-tab>
+
+    <md-tab id="com-blog" label="Blog" class="co-sub-icon co-icon-med co-icon-blog">
     <div class="sw-filters-container sw-filters-search-only">
       <div class="sw-filters">
         <md-input-container id="search">
@@ -266,70 +374,7 @@
     </div>
   </md-tab>
 
-  <md-tab id="com-events" label="Events">
-    <div class="divider divider-dashed"></div>
-    <div class="grid-outer-wrapper gray-bg">
-      <div class="grid-content-wrapper">
-      <h2 class="blue">Upcoming</h2>
-      <md-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
-        <md-grid-tile class="tile-solid" *ngFor="let event of eventsList.upcoming">
-            <md-card class="workshop-card">
-                <md-card-header>
-                    <md-card-title>{{event.title}}</md-card-title>
-                </md-card-header>
-                <md-card-content>
-                    <p>
-                        {{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}
-                    </p>
-                    <p>
-                        {{event.location}}
-                    </p>
-                    <p>
-                        <a href="{{event.url}}">More information</a>
-                    </p>
-                </md-card-content>
-                <md-card-actions>
-                    <!--<button md-button>LIKE</button>
-                    <button md-button>SHARE</button>-->
-                </md-card-actions>
-            </md-card>
-        </md-grid-tile>
-      </md-grid-list>
-      </div>
-    </div>
-    <div class="divider divider-dashed"></div>
-    <div class="grid-outer-wrapper blue-med-light-bg">
-      <div class="grid-content-wrapper">
-      <h2 class="blue">Past Events</h2>
-          <md-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
-              <md-grid-tile class="tile-solid" *ngFor="let event of eventsList.completed">
-                  <md-card class="workshop-card">
-                      <md-card-header>
-                          <md-card-title>{{event.title}}</md-card-title>
-                      </md-card-header>
-                      <md-card-content>
-                          <p>
-                              {{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}
-                          </p>
-                          <p>
-                              {{event.location}}
-                          </p>
-                          <p>
-                              <a href="{{event.url}}">More information</a>
-                          </p>
-                      </md-card-content>
-                      <md-card-actions>
-                          <!--<button md-button>LIKE</button>
-                          <button md-button>SHARE</button>-->
-                      </md-card-actions>
-                  </md-card>
-              </md-grid-tile>
-          </md-grid-list>
-      </div>
-    </div>
-  </md-tab>
 
-  <md-tab id="com-forum" label="Forum">Forum</md-tab>
 
 </md-tab-group>
 </div>

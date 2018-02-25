@@ -19,6 +19,7 @@ export class CommunityModel {
     start_date: string;
     end_date: string;
     location: string;
+    attendance: number;
     attendance_max: number;
     author: string;
     authorTitle: string;

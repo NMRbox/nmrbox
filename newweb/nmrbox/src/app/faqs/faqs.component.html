@@ -7,25 +7,49 @@
             <span class="page-title">FAQ - Frequently Asked Questions</span>
         </div>
     </md-toolbar>
+
     <div class="page-details">
         <div class="nmrbox-custom-container container">
             <div class="sw-filters-container">
                 <div class="sw-filters">
-                    <md-input-container id="search">
-                        <input mdInput #searchBox id="search-box" (keyup)="searchSoftware(searchBox.value)" placeholder="Have a question? Enter a search term here." />
+                    <md-input-container id="search" class="example-full-width">
+                        <input mdInput #searchBox id="search-box" (keyup)="searchFAQs(searchBox.value)" placeholder="search faq" />
                         <span class="icon-search"></span>
                     </md-input-container>
                 </div>
             </div>
-            <div>
-                <table class="table table-borderless">
+
+            <mat-accordion>
+
+                <mat-expansion-panel *ngFor="let faq of faqs"
+                                     (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false"
+                                     >
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <h5>Q.&nbsp;&nbsp;{{faq.question}}</h5>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <!--Type your name and age-->
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <!-- FAQ - answers -->
+                    <div>
+                        <h5><span class="label label-primary">Answer</span></h5>
+                        <div [innerHTML]="faq.answer"></div>
+                        <br>
+                    </div>
+
+                </mat-expansion-panel>
+                <!--<table class="table table-borderless">
                     <thead>
                         <tr><th></th></tr>
                     </thead>
                     <tbody>
-                        <!--<tr *ngFor="let faq of faqs">
+                        &lt;!&ndash;<tr *ngFor="let faq of faqs">
                             <td>{{faq.id}}<br>{{faq.question}}<br>{{faq.answer}}</td>
-                        </tr>-->
+                        </tr>&ndash;&gt;
                         <tr *ngFor="let faq of faqs">
                             <td>
                                 <div class="panel panel-default">
@@ -44,9 +68,9 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table>-->
 
-            </div>
+            </mat-accordion>
         </div>
     </div>
 </div>

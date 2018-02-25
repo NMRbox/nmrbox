@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {FormGroup, FormControl, FormBuilder, Validators, NgForm} from '@angular/forms';
-import { Router } from '@angular/router';
+import {PRIMARY_OUTLET, Router, UrlSegment, UrlSegmentGroup, UrlTree} from '@angular/router';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable} from 'rxjs/Observable';
 
@@ -18,8 +18,11 @@ import { FaqsService } from './faqs.service';
 export class FaqsComponent implements OnInit {
     faqs: FaqsModel;
     allFaqs: FaqsModel[];
-    showHide: boolean;
+    showHide: boolean = false;
+    panelOpenState: boolean = false;
     public notifications: any = {message: '', type: ''};
+    step = 0;
+    slug: string;
 
     constructor(
       private faqService: FaqsService,
@@ -30,12 +33,22 @@ export class FaqsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      /* get all FAQs*/
-      this.getAllFaqs();
+        const tree: UrlTree = this.router.parseUrl(this.router.url);
+        const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
+        const s: UrlSegment[] = g.segments;
+
+        this.slug = (s.length > 1 ? s[1].path : '');
+
+        /* get all FAQs*/
+        this.getAllFaqs();
     }
 
     getAllFaqs(): void {
         this.faqService.getAllFaqs().then(allFaqs => this.faqs = allFaqs);
+    }
+
+    searchFAQs(term: string): void {
+        this.faqService.searchFAQs(term).then(allFaqs => this.faqs = allFaqs);
     }
 
 }
