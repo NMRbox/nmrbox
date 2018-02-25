@@ -70,10 +70,6 @@ class ChandraController extends Controller {
             return Redirect::to('/');
         }
 
-        if($name == 'nuscon-home') {
-            return View::make('nuscon_page')->with('page', $page);​
-        }
-
         if( Page::where('slug', '=', $name)->exists() ) {
             // $name is the page's slug
             $page = Page::where('slug', $name)->get()->first();
