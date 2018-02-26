@@ -7,8 +7,8 @@ import { TeamModel } from './team.model';
 @Injectable()
 export class TeamService {
 
-  //private appUrl = 'https://webdev.nmrbox.org:8001'; // Main site url
-  private appUrl = 'http://nmrbox.test';  // URL to web api
+  private appUrl = 'https://webdev.nmrbox.org:8001'; // Main site url
+  //private appUrl = 'http://nmrbox.test';  // URL to web api
   private baseUrl = 'api/teamSupportList/';  // URL to web api
   private supportUrl = 'api/comSupportList';  // URL to web api
   private blogUrl = 'api/comBlogList';  // URL to web api
