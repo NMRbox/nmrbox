@@ -143,6 +143,8 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\SessionServiceProvider::class,
+
 
         Collective\Html\HtmlServiceProvider::class,
 
@@ -156,6 +158,10 @@ return [
 
         /* google recaptcha */
         Waavi\ReCaptcha\ReCaptchaServiceProvider::class,
+
+        /* JWT-auth*/
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+
 
     ],
 
@@ -216,6 +222,10 @@ return [
 
         /* Google reCaptcha */
         'ReCaptcha' => Waavi\ReCaptcha\Facades\ReCaptcha::class,
+
+        /* JWT-auth */
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
 
     ],
 

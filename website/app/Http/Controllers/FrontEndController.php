@@ -274,10 +274,7 @@ class FrontEndController extends Controller
                 $username = $request->input('username');
                 $person = Person::where('nmrbox_acct', $username)->first();
                 if(!$person) {
-                    return response()->json([
-                        'message' => Lang::get('auth/message.account_not_found'),
-                        'type' => 'error'
-                    ], 200);
+                    return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
                 }
 
                 // Adding person table information into session
