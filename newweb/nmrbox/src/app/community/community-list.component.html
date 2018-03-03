@@ -56,7 +56,7 @@
             </md-card>
           </md-grid-tile>
 
-        <md-grid-tile class="tile-solid tile-transparent" (click)="faqs">
+        <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('faqs'); $event.stopPropagation()">
           <md-card class="sw-card tile-card-short">
             <md-card-header>
               <md-card-title>NMRbox FAQs</md-card-title>
@@ -66,7 +66,7 @@
                 Here are some tips and answers to frequently asked questions from our NMRbox Community.
               </p>
               <br/>
-              <a href="/faqs">Read more</a>
+              <a (click)="gotoDetail('faqs')">Read more</a>
             </md-card-content>
           </md-card>
         </md-grid-tile>

@@ -29,7 +29,7 @@ const routes: Routes = [
     { path: 'events', component: CommunityListComponent },
     { path: 'community', component: CommunityListComponent },
     { path: 'community/:index', component: CommunityListComponent },
-    { path: 'community/1', redirectTo: '/events', pathMatch: 'full' },
+    { path: 'community/1', redirectTo: 'events', pathMatch: 'full' },
     { path: 'team', component: TeamListComponent },
     { path: 'team/:index', component: TeamListComponent },
     { path: 't/detail', component: TeamDetailComponent },

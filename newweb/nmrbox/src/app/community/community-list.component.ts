@@ -159,7 +159,11 @@ export class CommunityListComponent implements OnInit {
   //gotoDetail(community: CommunityModel): void {
   gotoDetail(pageUrl: string): void {
       console.log('component url : ', pageUrl);
-    this.router.navigate(['/c', pageUrl]);
+      if (pageUrl === 'faqs') {
+          this.router.navigate(['faqs']);
+      } else {
+          this.router.navigate(['/c', pageUrl]);
+      }
   }
 
   /* workshops registration */
