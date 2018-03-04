@@ -24,6 +24,4 @@ export class CommunityModel {
     author: string;
     authorTitle: string;
     authorPhotoUrl: string;
-    upcoming: Array<string>;
-    completed: Array<string>;
 }

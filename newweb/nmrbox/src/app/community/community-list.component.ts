@@ -30,8 +30,10 @@ export class CommunityListComponent implements OnInit {
 
   //@Input() eventsList: CommunityModel[];
   eventsList: CommunityModel[];
-  upcoming: CommunityModel[];
-  completed: CommunityModel[];
+  public upcoming: Array<any>;
+  public completed: Array<any>;
+/*  @Input() upcoming: CommunityModel[];
+  @Input() completed: CommunityModel[];*/
   @Input() eventsCurrentList: CommunityModel[];
   @Input() eventsPastList: CommunityModel[];
   
