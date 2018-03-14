@@ -7,7 +7,6 @@ import { CommunityModel } from './community.model';
 @Injectable()
 export class CommunityService {
 
-  // test url
   private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
   //private appUrl = 'http://nmrbox.test';  // URL to web api
   private baseUrl = 'api/communityList';  // URL to web api
@@ -49,14 +48,14 @@ export class CommunityService {
   }
   */
 
-  /* Workshop events lists */
-  getEventsList(): Promise<CommunityModel[]> {
+    /* Workshop events lists */
+    getEventsList(): Promise<CommunityModel[]> {
       return this.http
           .get(this.appUrl + `/` + this.eventsUrl)
           .toPromise()
           .then(response => response.json().data as CommunityModel[])
           .catch(this.handleError);
-  }
+    }
 
     getUpcomingEventsList(): Promise<CommunityModel[]> {
         return this.http
@@ -74,38 +73,28 @@ export class CommunityService {
             .catch(this.handleError);
     }
 
-  getCommunityList(): Promise<CommunityModel[]> {
+    getCommunityList(): Promise<CommunityModel[]> {
     return this.http
       .get(this.blogUrl)
       .toPromise()
       .then(response => response.json().data as CommunityModel[])
       .catch(this.handleError);
-  }
+    }
 
-  getSupportList(): Promise<CommunityModel[]> {
+    getSupportList(): Promise<CommunityModel[]> {
     return this.http
       .get(this.supportUrl)
       .toPromise()
       .then(response => response.json().data as CommunityModel[])
       .catch(this.handleError);
-  }
-  getSupportSubList(): Promise<CommunityModel[]> {
+    }
+    getSupportSubList(): Promise<CommunityModel[]> {
     return this.http
       .get(this.supportUrl)
       .toPromise()
       .then(response => response.json().data as CommunityModel[])
       .catch(this.handleError);
-  }
-
-  getBlogList(): Promise<CommunityModel[]> {
-    return this.http
-      .get(this.blogUrl)
-      .toPromise()
-      .then(response => response.json().data as CommunityModel[])
-      .catch(this.handleError);
-  }
-
-
+    }
 
     /* test (redirecting from router for page details */
     getPageContent(pageUrl: string): Promise<CommunityModel> {

@@ -131,22 +131,6 @@ export class CommunityListComponent implements OnInit {
     }
   }
 
-  /*filterBlogMostRecent(dateCurrent: boolean): void {
-    // Latest  
-    this.communityService.filterMostRecent(dateCurrent).then(blogMostRecentList => this.blogMostRecentList = blogMostRecentList);
-    this.communityService.filterMostRecent(false).then(blogNextList => this.blogNextList = blogNextList);
-
-  }*/
-
-  filterCurrentEvents(): void {
-    // Latest  
-    /*this.communityService.filterCurrentEvents(dateCurrent).then(eventsCurrentList => this.eventsCurrentList = eventsCurrentList);
-    this.communityService.filterCurrentEvents(dateCurrent).then(eventsCurrentList => this.eventsCurrentList = eventsCurrentList);*/
-    this.communityService.filterCurrentEvents().then(eventsCurrentList => this.eventsCurrentList = eventsCurrentList);
-
-  }
-
-  // Navigation
   //gotoDetail(community: CommunityModel): void {
   gotoDetail(pageUrl: string): void {
       console.log('component url : ', pageUrl);
