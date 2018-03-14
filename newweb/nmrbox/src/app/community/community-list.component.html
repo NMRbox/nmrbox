@@ -7,7 +7,7 @@
 <md-tab-group (selectedIndexChange)="selectedIndexChange($event)" [selectedIndex]="selectedIndex">
 
     <md-tab id="com-support" label="Support" class="co-sub-icon co-icon-med co-icon-support">
-    
+
   <div class="sw-filters-container">
       <!--<div class="sw-filters">
         <md-select id="rp-select" placeholder="Research problem"></md-select>
@@ -243,7 +243,7 @@
                 </div>
                 <h2 class="blue">Upcoming</h2>
                 <md-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
-                    <md-grid-tile class="tile-solid" *ngFor="let event of eventsList.upcoming">
+                    <md-grid-tile class="tile-solid" *ngFor="let event of upcoming">
                         <md-card class="workshop-card">
                             <form (ngSubmit)="onWorkshopRegister(f)" #f="ngForm" (ngSubmit)="onSubmitWorkshops()">
                                 <md-card-header>
@@ -290,7 +290,7 @@
             <div class="grid-content-wrapper">
                 <h2 class="blue">Past Events</h2>
                 <md-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
-                    <md-grid-tile class="tile-solid" *ngFor="let event of eventsList.completed">
+                    <md-grid-tile class="tile-solid" *ngFor="let event of completed">
                         <md-card class="workshop-card">
                             <md-card-header>
                                 <md-card-title>{{event.title}}</md-card-title>
@@ -307,8 +307,7 @@
                                 </p>
                             </md-card-content>
                             <md-card-actions>
-                                <!--<button md-button>LIKE</button>
-                                <button md-button>SHARE</button>-->
+
                             </md-card-actions>
                         </md-card>
                     </md-grid-tile>
@@ -317,9 +316,16 @@
         </div>
     </md-tab>
 
-    <md-tab id="com-forum" label="Forum">Forum</md-tab>
+    <md-tab id="com-forum" label="Forum">
+        <div class="divider divider-dashed hidden"></div>
+        <div class="grid-outer-wrapper gray-bg">
+            <div class="grid-content-wrapper">
+                NMRbox forum content coming soon.
+            </div>
+        </div>
+    </md-tab>
 
-    <md-tab id="com-blog" label="Blog" class="co-sub-icon co-icon-med co-icon-blog">
+    <!--<md-tab id="com-blog" label="Blog" class="co-sub-icon co-icon-med co-icon-blog">
     <div class="sw-filters-container sw-filters-search-only">
       <div class="sw-filters">
         <md-input-container id="search">
@@ -372,7 +378,7 @@
       </md-grid-list>
       </div>
     </div>
-  </md-tab>
+  </md-tab>-->
 
 
 

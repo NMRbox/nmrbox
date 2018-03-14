@@ -21,15 +21,13 @@ import { ForgetPasswordConfirmComponent} from './password-management/forget-pass
 
 const routes: Routes = [
     { path: 'app',     component: HomeComponent },
-    { path: '', redirectTo: 'app', pathMatch: 'full' },
+    /*{ path: '', redirectTo: 'app', pathMatch: 'full' },*/
     { path: 'software', component: SoftwareListComponent },
     { path: 's/:slug', component: SoftwareDetailComponent },
     { path: 'software/:filterName', component: SoftwareListComponent },
     { path: 'c/:pageUrl', component: CommunityDetailComponent },
-    { path: 'events', component: CommunityListComponent },
     { path: 'community', component: CommunityListComponent },
     { path: 'community/:index', component: CommunityListComponent },
-    { path: 'community/1', redirectTo: 'events', pathMatch: 'full' },
     { path: 'team', component: TeamListComponent },
     { path: 'team/:index', component: TeamListComponent },
     { path: 't/detail', component: TeamDetailComponent },
@@ -40,9 +38,6 @@ const routes: Routes = [
     { path: 'user-dashboard', component: UserDashboardComponent },
     { path: 'profile-update', component: ProfileUpdateComponent },
     { path: 'faqs', component: FaqsComponent },
-    { path: 'forgot-password', component: ForgetPasswordComponent },
-    { path: 'forgot-password-confirm/:id/:code', component: ForgetPasswordConfirmComponent }
-      //{ path: '**', redirectTo: '/app', pathMatch: 'full' },
 ];
 
 @NgModule({

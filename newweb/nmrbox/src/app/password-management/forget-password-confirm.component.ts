@@ -8,7 +8,9 @@ import { AuthenticationService } from '../authentication/authentication.service'
 import {PersonModel} from '../user-dashboard/person.model';
 
 /* Import container */
-import { ShowHideContainer} from '../authentication/show-hide-container';
+//import { ShowHideContainer} from '../../../../show-hide-container';
+//import { ShowHideContainer } from './show-hide-container';
+import { ShowHideContainer } from '../authentication/show-hide-container';
 
 
 @Component({

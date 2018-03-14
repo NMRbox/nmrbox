@@ -4,9 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 // Animations & UI
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MdButtonModule, MdCheckboxModule, MdExpansionModule, MdInputModule, MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdListModule, MdGridListModule, MdCardModule, MdTabsModule, MdChipsModule} from '@angular/material';
-
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MdButtonModule, MdCheckboxModule, MdInputModule,
+    MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule,
+    MdToolbarModule, MdListModule, MdGridListModule, MdCardModule,
+    MdTabsModule, MdChipsModule
+} from '@angular/material';
 
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -52,49 +55,53 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 
 // Container
-import { ShowHideContainer} from './authentication/show-hide-container';
+import { ShowHideContainer } from './authentication/show-hide-container';
 
 @NgModule({
-  imports: [
-      BrowserModule,
-      FormsModule,
-      HttpModule,
-      BrowserAnimationsModule,
-      MdButtonModule, MdCheckboxModule, MdExpansionModule, MdInputModule, MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdListModule, MdGridListModule, MdTabsModule, MdCardModule, MdChipsModule,
-      SwiperModule,
-      AppRoutingModule,
-      CommonModule,
-  ],
-  declarations: [
-    AppComponent,
-    SoftwareDetailComponent,
-    SoftwareListComponent,
-    CommunityDetailComponent,
-    CommunityListComponent,
-    TeamDetailComponent,
-    TeamListComponent,
-    HomeComponent,
-    FaderComponent,
-    SignupComponent,
-    SigninComponent,
-    UserDashboardComponent,
-    ProfileUpdateComponent,
-    FaqsComponent,
-    PasswordResetComponent,
-    ForgetPasswordComponent,
-    ForgetPasswordConfirmComponent,
-    FaqsComponent,
-    ShowHideContainer
-  ],
-  providers: [
-      SoftwareService,
-      CommunityService,
-      TeamService,
-      AuthenticationService,
-      UserDashboardService,
-      PasswordManagementService,
-      FaqsService
-  ],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        BrowserAnimationsModule,
+        MdButtonModule, MdCheckboxModule,
+        MdInputModule, MdRadioModule, MdSelectModule,
+        MdMenuModule, MdSidenavModule, MdToolbarModule,
+        MdListModule, MdGridListModule, MdTabsModule, MdCardModule,
+        MdChipsModule,
+        SwiperModule,
+        AppRoutingModule,
+        CommonModule,
+    ],
+    declarations: [
+        AppComponent,
+        SoftwareDetailComponent,
+        SoftwareListComponent,
+        CommunityDetailComponent,
+        CommunityListComponent,
+        TeamDetailComponent,
+        TeamListComponent,
+        HomeComponent,
+        FaderComponent,
+        SignupComponent,
+        SigninComponent,
+        UserDashboardComponent,
+        ProfileUpdateComponent,
+        FaqsComponent,
+        PasswordResetComponent,
+        ForgetPasswordComponent,
+        ForgetPasswordConfirmComponent,
+        FaqsComponent,
+        ShowHideContainer
+    ],
+    providers: [
+        SoftwareService,
+        CommunityService,
+        TeamService,
+        AuthenticationService,
+        UserDashboardService,
+        PasswordManagementService,
+        FaqsService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

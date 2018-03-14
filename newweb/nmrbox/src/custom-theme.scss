@@ -346,7 +346,7 @@ ul.icon-list {
     background: #fff;
 }
 /* Material Toolbar */
-md-toolbar {
+mat-toolbar {
     .page-title {
         line-height: 1em;
         font-size: 18px;
@@ -355,10 +355,10 @@ md-toolbar {
         margin-left: 10px;
     }
 }
-md-toolbar.toolbar-transparent {
+mat-toolbar.toolbar-transparent {
     background-color:$nmrbox-gray-light;
 }
-md-toolbar, .mat-tab-label, .mat-card {
+mat-toolbar, .mat-tab-label, .mat-card {
   font-family: 'Libre Franklin', sans-serif;
 }
 .mat-toolbar .mat-toolbar-row, .mat-toolbar.mat-primary[_ngcontent-c0] {
@@ -409,12 +409,12 @@ md-toolbar, .mat-tab-label, .mat-card {
 .mat-card-title {
     font-weight: bold;
 }
-md-grid-tile .mat-card-image {
+mat-grid-tile .mat-card-image {
     margin: 0 0px 5px 0px !important;
     width: 100% !important;
 }
 
-md-select {
+mat-select {
     .mat-select-placeholder {
         font-size: 14px !important;
     }
@@ -492,7 +492,7 @@ team-list {
         background-image: url('./assets/icons/team-icon-about-240x40.svg');
     }
 
-    md-tab-body {
+    mat-tab-body {
         background-image: url('/assets/bg-graphics/bg-graphic-team.png');
         background-repeat: no-repeat;
         background-size: 90%;
@@ -596,7 +596,7 @@ a#all-software {
       cursor: pointer;
     }
 
-    md-select {
+    mat-select {
       margin-top: 5px;
     }
 
@@ -674,7 +674,7 @@ a#all-software {
       color: #313131;
     }
   }
-  md-grid-list.workflow-list {
+  mat-grid-list.workflow-list {
       margin-left: -15px;
   }
 }
@@ -702,7 +702,7 @@ footer {
             opacity: 0.9;
         }
     }
-    md-grid-tile {
+    mat-grid-tile {
         display: inline-table;
         padding: 0px 10px;
         height: 90px;
@@ -711,7 +711,7 @@ footer {
             color: #ffffff;
         }
     }
-    md-grid-tile#footer-logo{
+    mat-grid-tile#footer-logo{
         border-right: 1px solid $nmrbox-gray-light;
         opacity: 0.7;
 
@@ -721,7 +721,7 @@ footer {
             background-size: 288px 48px;
         }
     }
-    md-grid-tile#footer-text {
+    mat-grid-tile#footer-text {
         position: relative;
         top: -14px;
         font-size: 13px;

@@ -8,8 +8,8 @@ import { CommunityModel } from './community.model';
 export class CommunityService {
 
   // test url
-  private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
-  //private appUrl = 'http://nmrbox.test';  // URL to web api
+  //private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
+  private appUrl = 'http://nmrbox.test';  // URL to web api
   private baseUrl = 'api/communityList';  // URL to web api
   private supportUrl = 'api/comSupportList';  // URL to web api
   private blogUrl = 'api/comBlogList';  // URL to web api
@@ -50,11 +50,27 @@ export class CommunityService {
   */
 
   /* Workshop events lists */
-    getEventsList(): Promise<CommunityModel[]> {
+  getEventsList(): Promise<CommunityModel[]> {
+      return this.http
+          .get(this.appUrl + `/` + this.eventsUrl)
+          .toPromise()
+          .then(response => response.json().data as CommunityModel[])
+          .catch(this.handleError);
+  }
+
+    getUpcomingEventsList(): Promise<CommunityModel[]> {
         return this.http
             .get(this.appUrl + `/` + this.eventsUrl)
             .toPromise()
-            .then(response => response.json().data as CommunityModel[])
+            .then(response => response.json().data.upcoming as CommunityModel[])
+            .catch(this.handleError);
+    }
+
+    getCompletedEventsList(): Promise<CommunityModel[]> {
+        return this.http
+            .get(this.appUrl + `/` + this.eventsUrl)
+            .toPromise()
+            .then(response => response.json().data.completed as CommunityModel[])
             .catch(this.handleError);
     }
 

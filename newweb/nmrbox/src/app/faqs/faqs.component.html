@@ -19,193 +19,26 @@
                 </div>
             </div>
 
-            <mat-accordion>
+            <div class="container">
 
-                <mat-expansion-panel *ngFor="let faq of faqs"
-                                     (opened)="panelOpenState = true"
-                                     (closed)="panelOpenState = false"
-                                     >
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            <h5>Q.&nbsp;&nbsp;{{faq.question}}</h5>
-                        </mat-panel-title>
-                        <mat-panel-description>
-                            <!--Type your name and age-->
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
+                <md-card *ngFor="let faq of faqs">
+                    <md-card-header>
+                        <md-card-title (click)="faq.slug=false" *ngIf="faq.slug">
+                            <h5 class="label label-primary">Question - </h5>&nbsp;&nbsp;{{faq.question}}
+                        </md-card-title>
+                        <md-card-title (click)="faq.slug=true" *ngIf="!faq.slug">
+                            <h5 class="label label-default">Question - </h5> &nbsp;&nbsp;{{faq.question}}
+                        </md-card-title>
+                    </md-card-header>
 
-                    <!-- FAQ - answers -->
-                    <div>
-                        <h5><span class="label label-primary">Answer</span></h5>
-                        <div [innerHTML]="faq.answer"></div>
-                        <br>
-                    </div>
-
-                </mat-expansion-panel>
-                <!--<table class="table table-borderless">
-                    <thead>
-                        <tr><th></th></tr>
-                    </thead>
-                    <tbody>
-                        &lt;!&ndash;<tr *ngFor="let faq of faqs">
-                            <td>{{faq.id}}<br>{{faq.question}}<br>{{faq.answer}}</td>
-                        </tr>&ndash;&gt;
-                        <tr *ngFor="let faq of faqs">
-                            <td>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a href="#{{faq.slug}}">
-                                                Q. {{faq.question}}
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <div [innerHTML]="faq.answer"></div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>-->
-
-            </mat-accordion>
+                    <md-card-content *ngIf="!faq.slug">
+                        <div class="">
+                            <h5><span class="label label-default">Answer</span></h5>
+                            <div [innerHTML]="faq.answer"></div>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
         </div>
     </div>
 </div>
-
-
-<!--
-<div class="row">
-  <div class="col-md-9">
-    <div class="panel-group" >
-      <div class="form-group panel-heading">
-        &lt;!&ndash;<input type="text" class="form-control input-lg" placeholder="Have a question? Enter a search term here.">&ndash;&gt;
-      </div>
-
-      <table class="table table-borderless">
-        <thead>
-        <tr><th></th></tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>
-
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a href="#vnc-persistent">
-                    Q:&nbsp;Does my VNC session close when I exit RealVNC Viewer?
-                  </a>
-                </h4>
-              </div>
-              <div class="panel-collapse collapse">
-                <div class="panel-body">
-                  <h5><span class="label label-primary">Answer</span></h5>
-                  <p>
-                  <p><b>No! </b>Once the VNC Server session is started it will remain running until it is either explicitly closed or the NMRbox server is power cycled. You can connect and disconnect to the same VNC session
-                    multiple times and from multiple devices. Calculations that are being performed continue to execute even
-                    when the VNC Viewer is disconnected. This can be convenient when using NMRbox from different locations
-                    such as work and home.</p><p>Note that you can connect to your NMRbox VNC Session multiple times concurrently from the same or
-                  different devices. In this case the Desktop environment is shared (all connections will view the exact same
-                  screen, including mouse movements).</p><p>If your VNC session is not behaving properly you can explicitly kill it by opening a terminal and entering the command "kill-vnc-server" and then selecting the server to kill (generally there will only be one selection).</p>
-                  </p>
-
-                  <div class="hidden" id="box-6">
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        Feedback box
-                      </div>
-                      <div class="panel-body">
-                        <div class="text-right">
-                          <form method="POST" action="https://webdev.nmrbox.org:8001/faq" accept-charset="UTF-8" class="faqForm"><input name="_token" type="hidden" value="uDOwLeBhdL6Fpbr0kTu5VDvSy50de9cUlfQQxHAK">
-                            <input class="input-lg col-md-12 form-group" id="feedback_6" placeholder="Your comments" name="feedback_6" type="text">
-                            <input id="faq-id_6" name="faq-id_6" type="hidden" value="6">
-                            <input id="voteup_6" name="voteup_6" type="hidden" value="0">
-                            <br><br>
-                            <button class="btn btn-primary submit_feedback" value="feedback-submit" id="submit_feedback_6" data-id="6">Submit Feedback</button>
-                          </form>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="panel-footer">
-                  <div class="btn-group btn-group-xs"><span class="btn">Was this question useful?</span>
-                    <a class="btn btn-success btn-yes" href="#" data-id="6" data-value="true"><i class="fa fa-thumbs-up"></i> Yes</a>
-                    <a class="btn btn-danger btn-no" href="#" data-id="6" data-value="false"><i class="fa fa-thumbs-down"></i> No</a>
-                    <input type="hidden" name="_token" value="uDOwLeBhdL6Fpbr0kTu5VDvSy50de9cUlfQQxHAK" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a href="#data-safety" >
-                    Q:&nbsp;Is my data safe?
-                  </a>
-                </h4>
-              </div>
-              <div class="panel-collapse collapse">
-                <div class="panel-body">
-                  <h5><span class="label label-primary">Answer</span></h5>
-                  <p>
-                  <p>There are several answers to this question depending on perspective as described here:</p><p><b>Is the data safe from a mechanical (disk) failure?</b> NMRbox User Home folders are stored on an Enterprise class file server with redundancy to deal with failures of multiple hard drives. In addition, backups of the Users Home folders occur on a regular basis and snapshots of the NMRbox home folders is performed daily. While we have confidence in the file server housing Users Home folders and our backup solution we do encourage Users to copy their important files “off-line” as well. Users can also store their files on /nmr/archive/username. This can be treated as a second home folder and is a private cloud file system with a very high level of redundancy and has data stored in three different physical locations and rivals the protection that Fortune 500 companies use to store their data. The downside of the private cloud file system is that the performance could be somewhat slower than the system where Users Home folders are located, but users should not notice much of a difference.</p><p><b>Is the data safe from other NMRbox users? </b>By default no other NMRbox user has access to your NMRbox Home folder. However, if you change the permissions of your Home folder (something we strongly advise Users not to do) then other NMRbox Users may have access to your files. Likewise, the majority of NMRbox team members do not have access to Users Home folders except the IT professionals that are in charge of maintaining the infrastructure.</p><p><b>Is the data safe from hackers?</b> The NMRbox team takes protecting the NMRbox VMs from hackers seriously and several mechanisms have been put in place to ensure that the NMRbox VMs are protected. However, we cannot guarantee that a breach will not occur. The best protection we can do is to make sure that we have backups of data (which we do) and to encourage Users to not share login information and to use strong passwords (which we are trying to enforce).</p><p><b>Is the data safe from myself? </b>Unlike Windows and OSX, when files are deleted from a terminal they are gone for good and do not end up in a Trash or Recycle Bin. The NMRbox team is creating backups of Users Home folders on a regular basis which may be used to restore data if a User accidentally deletes their files. We have also enabled file system snapshot which will provide a mechanism to restore files that are accidentally deleted. However, these backups and snapshots are designed to recover from catastrophic failures of the system and will require significant effort of the NMRbox team to restore. Thus, the NMRbox team will be happy to help a User who accidentally deletes their files, but the restoration may take a day or two and hopefully should not become a regular occurrence. There is also a limited time that a given backup will be kept before it is over-written (likely 3 days) so it is imperative that you contact the NMRbox team at <a href="support@nmrbox.org">support@nmrbox.org</a> immediately if you need to restore accidentally deleted files.</p><div><br></div>
-                  </p>
-
-                  <div class="hidden" id="box-21">
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        Feedback box
-                      </div>
-                      <div class="panel-body">
-                        <div class="text-right">
-                          <form method="POST" action="https://webdev.nmrbox.org:8001/faq" accept-charset="UTF-8" class="faqForm"><input name="_token" type="hidden" value="uDOwLeBhdL6Fpbr0kTu5VDvSy50de9cUlfQQxHAK">
-                            <input class="input-lg col-md-12 form-group" id="feedback_21" placeholder="Your comments" name="feedback_21" type="text">
-                            <input id="faq-id_21" name="faq-id_21" type="hidden" value="21">
-                            <input id="voteup_21" name="voteup_21" type="hidden" value="0">
-                            <br><br>
-                            <button class="btn btn-primary submit_feedback" value="feedback-submit" id="submit_feedback_21" data-id="21">Submit Feedback</button>
-                          </form>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="panel-footer">
-                  <div class="btn-group btn-group-xs"><span class="btn">Was this question useful?</span>
-                    <a class="btn btn-success btn-yes" href="#" data-id="21" data-value="true"><i class="fa fa-thumbs-up"></i> Yes</a>
-                    <a class="btn btn-danger btn-no" href="#" data-id="21" data-value="false"><i class="fa fa-thumbs-down"></i> No</a>
-                    <input type="hidden" name="_token" id="" value="uDOwLeBhdL6Fpbr0kTu5VDvSy50de9cUlfQQxHAK" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-
-    </div>
-  </div>
-  <div class="col-md-3" style="padding-top: 10px;">
-    <div class="panel panel-default">
-      <div class="panel-heading">Useful Links</div>
-      <div class="panel-body list-group">
-        <a href="https://webdev.nmrbox.org:8001/documentation"class="list-group-item">Documentation</a>
-        <a href="https://webdev.nmrbox.org:8001/licensing"class="list-group-item">Licensing</a>
-        <a href="https://webdev.nmrbox.org:8001/nihresources"class="list-group-item">NIH Biomedical Technology Resources</a>
-      </div>
-    </div>
-  </div>
-</div>
-</div>-->

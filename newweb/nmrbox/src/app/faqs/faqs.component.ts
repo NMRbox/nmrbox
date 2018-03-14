@@ -28,8 +28,9 @@ export class FaqsComponent implements OnInit {
       private faqService: FaqsService,
       private router: Router,
       private route: ActivatedRoute,
-    ) {
-      this.showHide = false;
+    )
+    {
+      this.showHide = true;
     }
 
     ngOnInit(): void {

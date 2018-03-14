@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {FormGroup, FormControl, FormBuilder, Validators, NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute, Params } from '@angular/router';
 
@@ -24,16 +24,14 @@ export class CommunityListComponent implements OnInit {
   @Input() supportSwdocList: CommunityModel[];
   @Input() supportWorkflowList: CommunityModel[];
 
-  @Input() blogList: CommunityModel[];
+  /*@Input() blogList: CommunityModel[];
   @Input() blogMostRecentList: CommunityModel[];
-  @Input() blogNextList: CommunityModel[];
+  @Input() blogNextList: CommunityModel[];*/
 
-  //@Input() eventsList: CommunityModel[];
-  eventsList: CommunityModel[];
-  public upcoming: Array<any>;
-  public completed: Array<any>;
-/*  @Input() upcoming: CommunityModel[];
-  @Input() completed: CommunityModel[];*/
+  @Input() eventsList: CommunityModel[];
+  @Input() upcoming: CommunityModel[];
+  @Input() completed: CommunityModel[];
+
   @Input() eventsCurrentList: CommunityModel[];
   @Input() eventsPastList: CommunityModel[];
   
@@ -46,6 +44,7 @@ export class CommunityListComponent implements OnInit {
 
   /*notification variable*/
     public notifications: any = {message: '', type: ''};
+
 
   constructor(
     private router: Router,
@@ -72,25 +71,14 @@ export class CommunityListComponent implements OnInit {
     this.filterSupportType('swdoc');
     this.filterSupportType('workflow');
 
-    //this.getBlogList();
-    /* Blog posts */
-    this.filterBlogMostRecent(true);
-
     /* Workshops */
-    //this.filterCurrentEvents(true);
-    //this.filterCurrentEvents();
     this.getEventsList();
-      /*this.route.params
-          .switchMap((params: Params) => this.communityService.getEventsList())
-          .subscribe(eventsList => this.eventsList = eventsList);*/
 
 
     // Tabs: go to specific subsection
     this.route.params.subscribe( params =>
         this.routeIndex = params['index']
     );
-
-    console.log("routeIndex: ", this.routeIndex);
 
     if(this.routeIndex > -1){
       this.selectedIndexChange(this.routeIndex);
@@ -102,7 +90,6 @@ export class CommunityListComponent implements OnInit {
     if(!index) index = 0;
     this.selectedIndex = index;
     this.router.navigate(['/community', index]);
-    //console.log("selectedIndexChange to: ", this.selectedIndex);
   }
 
   // Data & Filters
@@ -113,11 +100,13 @@ export class CommunityListComponent implements OnInit {
   getSupportList(): void {
     this.communityService.getSupportList().then(supportList => this.supportList = supportList);
   }
-  getBlogList(): void {
+  /*getBlogList(): void {
     this.communityService.getBlogList().then(blogList => this.blogList = blogList);
-  }
+  }*/
   getEventsList(): void {
     this.communityService.getEventsList().then(eventsList => this.eventsList = eventsList);
+    this.communityService.getUpcomingEventsList().then(upcoming => this.upcoming = upcoming);
+    this.communityService.getCompletedEventsList().then(completed => this.completed = completed);
   }
 
   searchSoftware(term: string): void {
@@ -142,12 +131,12 @@ export class CommunityListComponent implements OnInit {
     }
   }
 
-  filterBlogMostRecent(dateCurrent: boolean): void {
+  /*filterBlogMostRecent(dateCurrent: boolean): void {
     // Latest  
     this.communityService.filterMostRecent(dateCurrent).then(blogMostRecentList => this.blogMostRecentList = blogMostRecentList);
     this.communityService.filterMostRecent(false).then(blogNextList => this.blogNextList = blogNextList);
 
-  }
+  }*/
 
   filterCurrentEvents(): void {
     // Latest  

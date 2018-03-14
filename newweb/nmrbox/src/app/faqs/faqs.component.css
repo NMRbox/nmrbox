@@ -7,3 +7,16 @@
     width: 95%;
     margin: 0 !important;
 }
+
+md-card {
+    margin: 10px 0px;
+}
+
+md-card md-card-header{
+    width: 80%;
+
+}
+
+md-card md-card-header md-card-title {
+
+}
