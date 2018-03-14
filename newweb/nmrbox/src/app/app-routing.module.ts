@@ -21,7 +21,7 @@ import { ForgetPasswordConfirmComponent} from './password-management/forget-pass
 
 const routes: Routes = [
     { path: 'app',     component: HomeComponent },
-    /*{ path: '', redirectTo: 'app', pathMatch: 'full' },*/
+    { path: '', redirectTo: 'app', pathMatch: 'full' },
     { path: 'software', component: SoftwareListComponent },
     { path: 's/:slug', component: SoftwareDetailComponent },
     { path: 'software/:filterName', component: SoftwareListComponent },
@@ -38,10 +38,11 @@ const routes: Routes = [
     { path: 'user-dashboard', component: UserDashboardComponent },
     { path: 'profile-update', component: ProfileUpdateComponent },
     { path: 'faqs', component: FaqsComponent },
+    { path: '**', redirectTo: '/app', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, {useHash: false}) ], // using hash location strategy for more consistent deep linking
+  imports: [ RouterModule.forRoot(routes, {useHash: true}) ], // using hash location strategy for more consistent deep linking
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}
