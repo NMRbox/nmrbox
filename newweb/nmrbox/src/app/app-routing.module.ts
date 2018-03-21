@@ -38,6 +38,7 @@ const routes: Routes = [
     { path: 'user-dashboard', component: UserDashboardComponent },
     { path: 'profile-update', component: ProfileUpdateComponent },
     { path: 'faqs', component: FaqsComponent },
+    { path: 'faqs/:slug', component: FaqsComponent },
     { path: '**', redirectTo: '/app', pathMatch: 'full' }
 ];
 

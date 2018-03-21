@@ -7,9 +7,10 @@
     width: 95%;
     margin: 0 !important;
 }
-
 md-card {
+    width: 75%;
     margin: 10px 0px;
+    border: 1px solid #48b0e3;
 }
 
 md-card md-card-header{
