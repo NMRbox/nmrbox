@@ -18,11 +18,13 @@ import { FaqsService } from './faqs.service';
 export class FaqsComponent implements OnInit {
     faqs: FaqsModel;
     allFaqs: FaqsModel[];
+
     showHide: boolean = false;
     panelOpenState: boolean = false;
     public notifications: any = {message: '', type: ''};
     step = 0;
     slug: string;
+    term: string;
 
     constructor(
       private faqService: FaqsService,
@@ -44,6 +46,7 @@ export class FaqsComponent implements OnInit {
 
         /* get all FAQs*/
         this.getAllFaqs();
+        this.searchFAQs(this.term);
     }
 
     getAllFaqs(): void {
@@ -53,15 +56,5 @@ export class FaqsComponent implements OnInit {
     searchFAQs(term: string): void {
         this.faqService.searchFAQs(term).then(allFaqs => this.faqs = allFaqs);
     }
-
-    gotoElement (url){
-        /*// set the location.hash to the id of
-        // the element you wish to scroll to.
-        $location.hash('bottom');
-
-        // call $anchorScroll()
-        anchorSmoothScroll.scrollTo(url);*/
-
-    };
 
 }

@@ -22,23 +22,6 @@
             <div class="container card-box">
 
                 <md-card *ngFor="let faq of faqs">
-                    <!--<div *ngIf="this.router.url == '/faqs'">
-                        <div (click)="faq.id=false" *ngIf="faq.id">
-                            <div *ngIf=" faq.id ">
-                                <h5 class="label label-primary">Question - </h5><a routerLink="{{faq.slug}}" >&nbsp;&nbsp;{{faq.question}}</a>
-                            </div>
-                        </div>
-                        <div *ngIf="!faq.id" (click)="faq.id=true">
-                            <md-card-content>
-                                <div>
-                                    <div><h5  class="label label-default">Question - </h5> &nbsp;{{faq.question}}</div>
-                                    <h5><span class="label label-default">Answer - </span></h5>
-                                    <div [innerHTML]="faq.answer"></div>
-                                </div>
-                            </md-card-content>
-
-                        </div>
-                    </div>-->
 
                     <div *ngIf="this.router.url != '/faqs/'+faq.slug">
                         <div (click)="faq.id=false" *ngIf="faq.id">
@@ -64,7 +47,7 @@
                                 <h5 class="label label-primary">Question - </h5><a routerLink="/faqs/{{faq.slug}}" >&nbsp;&nbsp;{{faq.question}}</a>
                             </div>
                         </div>
-                        <div (click)="faq.id=false" *ngIf="faq.id">
+                        <div (click)="faq.id=true" *ngIf="faq.id">
                             <md-card-content>
                                 <div>
                                     <div><h5  class="label label-default">Question - </h5> &nbsp;{{faq.question}}</div>
