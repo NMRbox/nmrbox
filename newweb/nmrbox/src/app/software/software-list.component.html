@@ -40,7 +40,7 @@
   <md-grid-tile class="tile-dashed" *ngFor="let software of softwareList" (click)="gotoDetail(software); $event.stopPropagation()">
     <md-card class="sw-card">
       <md-card-header>
-        <md-card-title>{{software.name}}</md-card-title>
+        <md-card-title>{{software.short_title}}</md-card-title>
       </md-card-header>
       <md-card-content>
         <p>

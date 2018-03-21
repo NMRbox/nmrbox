@@ -276,8 +276,10 @@ ul.icon-list {
 .team-icon-large {
     width: 240px;
     height: 80px;
+    background-repeat: no-repeat;
     background-size: 480px 80px;
     background-position: 0px 10px;
+    border: 1px solid red;
 }
 
 .co-icon-support {
@@ -616,8 +618,8 @@ a#all-software {
   swiper {
     width: 900px;
     height: 70px;
-    background-color: transparent; 
-    margin: 0px auto;   
+    background-color: transparent;
+    margin: 0px auto;
 
     .swiper-wrapper {
         .swiper-slide {
@@ -696,7 +698,7 @@ footer {
         padding: 10px 10px 30px 10px;
         color: #ffffff !important;
         height: 90px;
-        
+
         p {
             color: #ffffff;
             opacity: 0.9;
