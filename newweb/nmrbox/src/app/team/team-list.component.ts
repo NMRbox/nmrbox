@@ -16,6 +16,10 @@ import { TeamService }  from './team.service';
 export class TeamListComponent implements OnInit {
 
   @Input() pageContent: TeamModel;
+  @Input() leadershipContent: TeamModel;
+  @Input() researchContent: TeamModel;
+  @Input() staffContent: TeamModel;
+  @Input() advisoryContent: TeamModel;
 
   // Tabs
   @Input() selectedIndex: number=0;
@@ -37,10 +41,14 @@ export class TeamListComponent implements OnInit {
             loop: false
         };
 
+
   ngOnInit(): void {
 
 
-    this.showPageContent('people-leadership');
+    this.showPageContent(0);
+    this.showPageContent(1);
+    this.showPageContent(2);
+    this.showPageContent(3);
 
     // ROUTES
     // Tabs: go to specific subsection
@@ -63,16 +71,16 @@ export class TeamListComponent implements OnInit {
     this.selectedIndex = index;
 
     if (index === 0){
-        this.showPageContent('people-leadership');
+        this.showPageContent(0);
     } else if (index === 1) {
-        this.showPageContent('overview');
+        this.showPageContent(1);
     } else if (index === 2) {
-        this.showPageContent('people-technical-staff');
+        this.showPageContent(2);
     } else if (index === 3) {
-        this.showPageContent('people-eab');
+        this.showPageContent(3);
     }
     //this.router.navigate(['/team', index]);
-    console.log("selectedIndexChange to: ", index);
+    console.log('selectedIndexChange to: ', index);
   }
 
   gotoDetail(): void {
@@ -80,8 +88,15 @@ export class TeamListComponent implements OnInit {
   }
 
   /* test for page content */
-    showPageContent(pageName: string): void {
-        this.teamService.getPageContent(pageName).then(pageContent => this.pageContent = pageContent);
-
+    showPageContent(index: number): void {
+        if (index === 0){
+            this.teamService.getPageContent('people-leadership').then(advisoryContent => this.leadershipContent = advisoryContent);
+        } else if (index === 1) {
+            this.teamService.getPageContent('overview').then(researchContent => this.researchContent = researchContent);
+        } else if (index === 2) {
+            this.teamService.getPageContent('people-technical-staff').then(staffContent => this.staffContent = staffContent);
+        } else if (index === 3) {
+            this.teamService.getPageContent('people-eab').then(advisoryContent => this.advisoryContent = advisoryContent);
+        }
     }
 }

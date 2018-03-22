@@ -9,12 +9,12 @@
     <!-- test -->
     <div class="grid-outer-wrapper">
       <div class="grid-content-wrapper">
-        <div class="community-details" *ngIf="pageContent">
+        <div class="community-details" *ngIf="leadershipContent">
           <section class="section-detail">
 
-            <div *ngIf="pageContent.content; then htmlBlock else plainTextBlock"></div>
+            <div *ngIf="leadershipContent.content; then htmlBlock else plainTextBlock"></div>
             <ng-template #htmlBlock>
-              <div id="support-detail-description" [innerHTML]="pageContent.content"></div>
+              <div id="support-detail-description" [innerHTML]="leadershipContent.content"></div>
             </ng-template>
 
           </section>
@@ -29,12 +29,12 @@
   <md-tab id="team-research" label="Research test" class="co-sub-icon co-icon-med team-icon-research">
     <div class="grid-outer-wrapper">
       <div class="grid-content-wrapper">
-        <div class="community-details" *ngIf="pageContent">
+        <div class="community-details" *ngIf="researchContent">
           <section class="section-detail">
 
-            <div *ngIf="pageContent.content; then htmlBlock else plainTextBlock"></div>
+            <div *ngIf="researchContent.content; then htmlBlock else plainTextBlock"></div>
             <ng-template #htmlBlock>
-              <div id="support-detail-description" [innerHTML]="pageContent.content"></div>
+              <div id="support-detail-description" [innerHTML]="researchContent.content"></div>
             </ng-template>
 
           </section>
@@ -50,12 +50,12 @@
   <md-tab id="team-integral" label="Integral">
     <div class="grid-outer-wrapper">
       <div class="grid-content-wrapper">
-        <div class="community-details" *ngIf="pageContent">
+        <div class="community-details" *ngIf="staffContent">
           <section class="section-detail">
 
-            <div *ngIf="pageContent.content; then htmlBlock else plainTextBlock"></div>
+            <div *ngIf="staffContent.content; then htmlBlock else plainTextBlock"></div>
             <ng-template #htmlBlock>
-              <div id="support-detail-description" [innerHTML]="pageContent.content"></div>
+              <div id="support-detail-description" [innerHTML]="staffContent.content"></div>
             </ng-template>
 
           </section>
@@ -71,12 +71,12 @@
   <md-tab id="team-eab" label="EAB">
     <div class="grid-outer-wrapper">
       <div class="grid-content-wrapper">
-        <div class="community-details" *ngIf="pageContent">
+        <div class="community-details" *ngIf="advisoryContent">
           <section class="section-detail">
 
-            <div *ngIf="pageContent.content; then htmlBlock else plainTextBlock"></div>
+            <div *ngIf="advisoryContent.content; then htmlBlock else plainTextBlock"></div>
             <ng-template #htmlBlock>
-              <div id="support-detail-description" [innerHTML]="pageContent.content"></div>
+              <div id="support-detail-description" [innerHTML]="advisoryContent.content"></div>
             </ng-template>
 
           </section>
@@ -87,14 +87,6 @@
     </div>
 
     <br/><br/>
-  </md-tab>
-
-  <md-tab id="team-about" label="About">
-    <div class="grid-outer-wrapper">
-      <div class="grid-content-wrapper">
-        About page content goes here...
-      </div>
-    </div>
   </md-tab>
 
 </md-tab-group>

@@ -47,7 +47,7 @@ export class TeamService {
     getPageContent(pageUrl: string): Promise<TeamModel> {
 
         let url = this.appUrl + '/' + pageUrl;
-        //console.log("URL: ", url);
+        console.log("URL: ", url);
         return this.http
             .get(url)
             .toPromise()
