@@ -67,7 +67,7 @@ $nmrbox-blue-dark: #3A4C51;
             padding-right: 25%;
         }
     }
-    mat-grid-tile {
+    md-grid-tile {
         text-align: left;
 
         .grid-tile-title {
@@ -106,13 +106,13 @@ $nmrbox-blue-dark: #3A4C51;
 }
 
 .page-section#home-community, .page-section#home-team {
-    mat-grid-tile {
+    md-grid-tile {
         p {
             top: 3.5em;
             left: 49px;
         }
     }
-    mat-grid-tile.team-tile {
+    md-grid-tile.team-tile {
         p {
             color: $nmrbox-dark-gray;
         }
