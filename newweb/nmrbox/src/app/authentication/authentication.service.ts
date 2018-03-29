@@ -7,7 +7,7 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class AuthenticationService {
     //private appUrl = 'http://nmrbox.test';  // URL to web api
-    private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
+    private appUrl = 'https://apidev.nmrbox.org';  // URL to web api
     private signinUrl = 'signin';  // URL to signin
     private signupUrl = 'signup';  // URL to signup
     private profileUpdateUrl = 'updateProfile';  // URL to profileUpdate

@@ -9,7 +9,7 @@ import { PersonModel} from './person.model';
 @Injectable()
 export class UserDashboardService {
     handleError: any;
-    public appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
+    public appUrl = 'https://apidev.nmrbox.org';  // URL to web api
     //public appUrl = 'http://nmrbox.test';  // URL to web api
     private passResetUrl = 'password-reset';  // URL to password reset
     private DownloadableVMUrl = 'downloadable-vm';  // URL to downloadable vm

@@ -7,7 +7,7 @@ import { CommunityModel } from './community.model';
 @Injectable()
 export class CommunityService {
 
-  private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
+  private appUrl = 'https://apidev.nmrbox.org';  // URL to web api
   //private appUrl = 'http://nmrbox.test';  // URL to web api
   private baseUrl = 'api/communityList';  // URL to web api
   private supportUrl = 'api/comSupportList';  // URL to web api
@@ -125,7 +125,7 @@ export class CommunityService {
     }
 
     //let url = baseUrl + `/${id}`;
-    //let url = 'https://webdev.nmrbox.org:8001/documentation';
+    //let url = 'https://apidev.nmrbox.org/documentation';
     let url = this.appUrl + '/' + this.documentationUrl;
 
     console.log("getSoftware URL: ", url);

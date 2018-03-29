@@ -11,7 +11,7 @@ import {promise} from "selenium-webdriver";
 
 @Injectable()
 export class PasswordManagementService {
-    private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
+    private appUrl = 'https://apidev.nmrbox.org';  // URL to web api
     //private appUrl = 'http://nmrbox.dev';  // URL to web api
     private forgotPassUrl = 'password-forgot';  // URL to signin
     private forgotPassConfirmUrl = 'password-forgot-confirm';  // URL to signin

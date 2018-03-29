@@ -11,7 +11,7 @@ export class FaqsService {
     private handleError: any;
 
     /* Web api urls*/
-    public appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
+    public appUrl = 'https://apidev.nmrbox.org';  // URL to web api
     //public appUrl = 'http://nmrbox.test';  // URL to web api
     public faqsUrl = 'faq';
 

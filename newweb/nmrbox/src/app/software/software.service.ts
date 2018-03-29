@@ -8,7 +8,7 @@ import { FilterModel } from './../filter.model';
 @Injectable()
 export class SoftwareService {
 
-  private appUrl = 'https://webdev.nmrbox.org:8001';  // URL to web api
+  private appUrl = 'https://apidev.nmrbox.org';  // URL to web api
   //private appUrl = 'http://nmrbox.test';  // URL to web api
   private baseUrl = 'api/softwareList';  // URL to web api
   private swtUrl = 'registry';  // URL to web api
