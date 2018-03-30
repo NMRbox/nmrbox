@@ -72,12 +72,12 @@ export class TeamListComponent implements OnInit {
 
     if (index === 0){
         this.showPageContent(0);
+    /*} else if (index === 1) {
+        this.showPageContent(1);*/
     } else if (index === 1) {
         this.showPageContent(1);
     } else if (index === 2) {
         this.showPageContent(2);
-    } else if (index === 3) {
-        this.showPageContent(3);
     }
     //this.router.navigate(['/team', index]);
     console.log('selectedIndexChange to: ', index);
@@ -91,11 +91,11 @@ export class TeamListComponent implements OnInit {
     showPageContent(index: number): void {
         if (index === 0){
             this.teamService.getPageContent('people-leadership').then(advisoryContent => this.leadershipContent = advisoryContent);
+        /*} else if (index === 1) {
+            this.teamService.getPageContent('overview').then(researchContent => this.researchContent = researchContent);*/
         } else if (index === 1) {
-            this.teamService.getPageContent('overview').then(researchContent => this.researchContent = researchContent);
-        } else if (index === 2) {
             this.teamService.getPageContent('people-technical-staff').then(staffContent => this.staffContent = staffContent);
-        } else if (index === 3) {
+        } else if (index === 2) {
             this.teamService.getPageContent('people-eab').then(advisoryContent => this.advisoryContent = advisoryContent);
         }
     }

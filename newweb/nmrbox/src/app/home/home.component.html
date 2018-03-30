@@ -20,7 +20,9 @@
             <strong>NMR</strong>box is a resource for biomolecular NMR (Nuclear Magnetic Resonance) software. It provides tools for finding the software you need, documentation and tutorials for getting the most out of the software, and cloud-based virtual machines for executing the software.
         </p>
         <!--<a (click)="gotoCommunityPage('support','10'); $event.stopPropagation();"><strong>NMR</strong>box support</a>-->
-        <a (click)="gotoCommunityPage('documentation'); $event.stopPropagation();"><strong>NMR</strong>box support</a>
+        <a (click)="gotoCommunityPage('contact-us'); $event.stopPropagation();"><strong>NMR</strong>box support</a>
+        <br>
+        <a (click)="gotoCommunityPage('overview'); $event.stopPropagation();"><strong>NMR</strong>box under the hood</a>
     </div>
 </section>
 <section id="home-software" class="page-section white-bg">
@@ -112,23 +114,20 @@
         <md-grid-list cols="2" rowHeight="150px">
             <md-grid-tile class="team-tile">
                 <a id="team-leadership" class="team-icon-large team-icon-leadership grid-tile-title" (click)="gotoSection('team','0'); $event.stopPropagation();"></a>
-                <p>The leadership behind the NMRbox team is experienced and diverse. We are devoted to transforming the way NMR Community can access and use software tools.
-                </p>
+                <p>The NMRbox leadership is experienced and diverse. We are devoted to transforming how the NMR Community utilizes computational tools.</p>
             </md-grid-tile>
-            <md-grid-tile class="team-tile">
+            <!--<md-grid-tile class="team-tile">
                 <a id="team-research" class="team-icon-large team-icon-research grid-tile-title" (click)="gotoSection('team','1'); $event.stopPropagation();"></a>
                 <p>Without these colleagues NMRbox would be just an empty box.
                 </p>
-            </md-grid-tile>
+            </md-grid-tile>-->
             <md-grid-tile class="team-tile">
                 <a id="team-integral" class="team-icon-large team-icon-integral grid-tile-title" (click)="gotoSection('team','2'); $event.stopPropagation();"></a>
-                <p>These colleagues keep the NMRbox in motion. Updating. Integrating. Making our lives easier.
-                </p>
+                <p>These colleagues bring NMRbox features to reality. Updating. Integrating. Making our lives easier.</p>
             </md-grid-tile>
             <md-grid-tile class="team-tile">
                 <a id="team-about" class="team-icon-large team-icon-about grid-tile-title" (click)="gotoSection('team','3'); $event.stopPropagation();"></a>
-                <p>Our mission. Our Story. Our Difference.
-                </p>
+                <p>Perspective and direction from the community.</p>
             </md-grid-tile>
         </md-grid-list>
     </div>
