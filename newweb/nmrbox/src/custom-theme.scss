@@ -619,6 +619,7 @@ a#all-software {
     width: 900px;
     height: 70px;
     background-color: transparent;
+      opacity: 50;
     margin: 0px auto;
 
     .swiper-wrapper {
@@ -792,5 +793,9 @@ footer {
             margin-left: 0 !important;
         }
     }
+}
+
+a:focus, a:active {
+    outline: none;
 }
 

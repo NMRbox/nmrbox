@@ -64,6 +64,7 @@ md-grid-list {
       padding: 20px 10px;
 
     }
+
     .mat-card-title {
       font-weight: bold;
       font-size: 16px;
@@ -142,4 +143,9 @@ md-grid-list.support-list {
   .co-icon-med {
     background-position: 0px 11px;
   }
+}
+
+md-card-title {
+  font-size: 16px;
+  font-weight: bold;
 }

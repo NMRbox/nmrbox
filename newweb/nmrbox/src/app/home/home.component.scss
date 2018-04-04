@@ -125,7 +125,7 @@ $nmrbox-blue-dark: #3A4C51;
         margin-left: -2px;
     }
     p {
-        padding-right: 35%;
+        padding-right: 0.5%;
         padding-bottom: 40px;
     }
 }
@@ -138,10 +138,19 @@ swiper {
         .swiper-slide {
             width: 900px;
             border-right: 5px solid $nmrbox-blue-dark;
+
         }
         img {
             width: 900px;
             height: 362px;
+        }
+        .swiper-slide-next, .swiper-slide-prev {
+            opacity: 0.1;
+            -moz-opacity:0.1;
+            filter: alpha(opacity=20);
+            color: black;
+            background: rgb(0, 0, 0); /* A black background -- fallback */
+            background: rgba(0, 0, 0, 0.8); /* An 80% opaque black background */
         }
     }
     .swiper-button-next, .swiper-button-prev {
