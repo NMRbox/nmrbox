@@ -197,6 +197,8 @@ class SoftwareController extends Controller
     public function update(SoftwareRequest $request, $software_id)
     {
         $software = Software::where('id', $software_id)->get()->first();
+        // strip_tags html tags
+        $request['description'] = strip_tags($request['description'], '<p><a><br>');
         $software->update($request->all());
         return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update'));
     }
