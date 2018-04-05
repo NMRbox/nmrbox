@@ -154,6 +154,9 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{software}/edit', array('as' => 'software.edit', 'uses' => 'SoftwareController@edit'));
         Route::put('{software}/edit', array('as' => 'software.update', 'uses' => 'SoftwareController@update'));
         Route::get('{software}/delete', array('as' => 'delete/software', 'uses' => 'SoftwareController@destroy'));
+        Route::get('striptags', array('as' => 'software.striptags', 'uses' => 'SoftwareController@striptagRegistry'));
+
+
 
         // Tabs within software page
         Route::get('{software}/edit/people', array('as' => 'software.edit-developer', 'uses' => 'SoftwareController@edit'));

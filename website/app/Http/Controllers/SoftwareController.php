@@ -577,5 +577,23 @@ class SoftwareController extends Controller
         return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update_people'));
     }
 
+    /**
+     * Update software description, remove html tags with striptags
+     *
+     */
+    public function striptagRegistry()
+    {
+        $softwares = Software::all();
+
+        foreach ($softwares as $software){
+            $software = Software::where('id', $software->id)->get()->first();
+            $software['description'] = strip_tags($software->description, '<p><a><br>' );
+            $software->update();
+        }
+
+        return redirect()->back()->withSuccess(Lang::get('softwares/message.success.update'));
+    }
+
+
 
 }
