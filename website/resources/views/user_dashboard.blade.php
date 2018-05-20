@@ -227,7 +227,7 @@
                 @if(count($workshops) > 0)
                     <div class="row">
                         <div class="alert alert-info">
-                            <p>To register for all the upcoming workshops please visit - <a href="{!! url("/workshops") !!}" class="btn btn-md btn-warning"><i class="fa fa-calendar fa-lg"> Workshops page </i></a></p>
+                            <p>To register for all the upcoming workshops please visit - <a href="{!! url("/events") !!}" class="btn btn-md btn-warning"><i class="fa fa-calendar fa-lg"> Workshops page </i></a></p>
                         </div>
                     </div>
                 @else
