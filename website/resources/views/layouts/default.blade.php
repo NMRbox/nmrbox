@@ -81,6 +81,7 @@
                             <li><a href="{{ URL::to('licensing') }}">Licensing</a></li>
                             <li><a href="{{ URL::to('nihresources') }}">NIH Biomedical Technology Resources</a></li>
                             <li><a href="{{ URL::to('faq') }}">FAQ</a></li>
+                            <li><a href="{{ URL::to('newsletters') }}">Newsletters</a></li>
                         </ul>
                     </li>
 
