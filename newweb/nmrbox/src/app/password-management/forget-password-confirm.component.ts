@@ -8,8 +8,8 @@ import { AuthenticationService } from '../authentication/authentication.service'
 import {PersonModel} from '../user-dashboard/person.model';
 
 /* Import container */
-//import { ShowHideContainer} from '../../../../show-hide-container';
-//import { ShowHideContainer } from './show-hide-container';
+// import { ShowHideContainer} from '../../../../show-hide-container';
+// import { ShowHideContainer } from './show-hide-container';
 import { ShowHideContainer } from '../authentication/show-hide-container';
 
 
@@ -34,7 +34,7 @@ export class ForgetPasswordConfirmComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-      //console.log(this.router.parseUrl(this.router.url));
+      // console.log(this.router.parseUrl(this.router.url));
       const tree: UrlTree = this.router.parseUrl(this.router.url);
       const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
       const s: UrlSegment[] = g.segments;
@@ -45,7 +45,7 @@ export class ForgetPasswordConfirmComponent implements OnInit {
 
     public onPasswordConfirmSubmit(form: NgForm): void {
       this.passService.forgetPasswordConfirm(
-          //this.authService.getToken('person_id'),
+          // this.authService.getToken('person_id'),
           this.personId,
           form.value.nmrbox_acct,
           form.value.password,
@@ -71,17 +71,16 @@ export class ForgetPasswordConfirmComponent implements OnInit {
                   this.isSubmitting = false;
               }*/
 
-          )
+          );
     }
 
     toggleShow() {
         this.show = !this.show;
         console.log(this.input);
-        if (this.show){
-            this.input.nativeElement.type='text';
-        }
-        else {
-            this.input.nativeElement.type='password';
+        if (this.show) {
+            this.input.nativeElement.type = 'text';
+        } else {
+            this.input.nativeElement.type = 'password';
         }
     }
 

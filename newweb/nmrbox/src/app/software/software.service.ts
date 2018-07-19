@@ -1,4 +1,4 @@
-import { Injectable }    from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
@@ -9,7 +9,7 @@ import { FilterModel } from './../filter.model';
 export class SoftwareService {
 
   private appUrl = 'https://apidev.nmrbox.org';  // URL to web api
-  //private appUrl = 'http://nmrbox.test';  // URL to web api
+  // private appUrl = 'http://nmrbox.test';  // URL to web api
   private baseUrl = 'api/softwareList';  // URL to web api
   private swtUrl = 'registry';  // URL to web api
   private swtFltrUrl = 'registry/filter-software-search';  // URL to web api
@@ -45,8 +45,8 @@ export class SoftwareService {
   }
 
   getFilter(name: string): Promise<FilterModel> {
-    console.log("getSwt, name: ", name);
-    console.log("URL: ", this.appUrl + `/?name=${name}`);
+    console.log('getSwt, name: ', name);
+    console.log('URL: ', this.appUrl + `/?name=${name}`);
     return this.http
         .get(this.appUrl + `/?name=${name}`)
       .toPromise()
@@ -112,20 +112,19 @@ export class SoftwareService {
 
   filterSoftwareType(softwareType: string, filterType: string): Promise<SoftwareModel[]> {
     let url = `api/softwareList/?software_types=${softwareType}`;
-    //let url = `api/softwareList/?research_problems=${softwareType}`;
+    // let url = `api/softwareList/?research_problems=${softwareType}`;
 
-    
-    if(filterType == "swt"){
+
+    if (filterType === 'swt') {
       url = `api/softwareList/?software_types=${softwareType}`;
-    } else if (filterType == "rp") {
+    } else if (filterType === 'rp') {
       url = `api/softwareList/?research_problems=${softwareType}`;
     } else {
       url = `api/softwareList/?research_problems=${softwareType}&software_types=${softwareType}`;
     }
-    
 
     return this.http
-        //.get(`api/softwareList/?software_types=${softwareType}`)
+        // .get(`api/softwareList/?software_types=${softwareType}`)
         .get(url)
         .toPromise()
         .then((r: Response) => r.json().data as SoftwareModel[]);

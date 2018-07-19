@@ -19,8 +19,8 @@ export class FaqsComponent implements OnInit {
     faqs: FaqsModel;
     allFaqs: FaqsModel[];
 
-    showHide: boolean = false;
-    panelOpenState: boolean = false;
+    showHide: false;
+    panelOpenState: false;
     public notifications: any = {message: '', type: ''};
     step = 0;
     slug: string;
@@ -30,8 +30,7 @@ export class FaqsComponent implements OnInit {
       private faqService: FaqsService,
       private router: Router,
       private route: ActivatedRoute,
-    )
-    {
+    ) {
       this.showHide = true;
     }
 

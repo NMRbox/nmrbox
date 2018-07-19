@@ -1,10 +1,10 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Location }               from '@angular/common';
+import { Location } from '@angular/common';
 
-import { SoftwareModel }         from './software.model';
-import { SoftwareService }  from './software.service';
+import { SoftwareModel } from './software.model';
+import { SoftwareService } from './software.service';
 @Component({
   selector: 'software-detail',
   templateUrl: './software-detail.component.html',

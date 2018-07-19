@@ -20,11 +20,11 @@ export class AuthenticationService {
 
     private _serverError(err: any) {
         console.log('sever error:', err);  // debug
-        if(err instanceof Response) {
+        if (err instanceof Response) {
             return Observable.throw((response: Response) => response.json() || 'backend server error');
             // if you're using lite-server, use the following line
             // instead of the line above:
-            //return Observable.throw(err.text() || 'backend server error');
+            // return Observable.throw(err.text() || 'backend server error');
         }
         return Observable.throw(err || 'backend server error');
     }
@@ -92,14 +92,15 @@ export class AuthenticationService {
                 }), {headers: this.headers})
             .map(
                 (response: Response) => {
-                    //console.log(response.json().type);
+                    // console.log(response.json().type);
                     if ( response.json().type !== 'error') {
                         const person_id = response.json().person_id;
                         const user_is_admin = response.json().user_is_admin;
                         const token = response.json().token;
                         const base64Url = token.split('.')[1];
                         const base64 = base64Url.replace('-', '+').replace('_', '/');
-                        //return {person_id: person_id, user_is_admin: user_is_admin, token: token, decoded: JSON.parse(window.atob(base64))};
+                        // return {person_id: person_id, user_is_admin: user_is_admin,
+                        //         token: token, decoded: JSON.parse(window.atob(base64))};
 
                         localStorage.setItem('person_id', person_id);
                         localStorage.setItem('user_is_admin', user_is_admin);
@@ -122,12 +123,12 @@ export class AuthenticationService {
 
 
     public getCookie(name: string) {
-        let ca: Array<string> = document.cookie.split(';');
-        let caLen: number = ca.length;
-        let cookieName = `${name}=`;
+        const ca: Array<string> = document.cookie.split(';');
+        const caLen: number = ca.length;
+        const cookieName = `${name}=`;
         let c: string;
 
-        for (let i: number = 0; i < caLen; i += 1) {
+        for (let i = 0; i < caLen; i += 1) {
             c = ca[i].replace(/^\s+/g, '');
             if (c.indexOf(cookieName) === 0) {
                 return c.substring(cookieName.length, c.length);

@@ -13,7 +13,7 @@ import {PersonModel} from '../user-dashboard/person.model';
   styleUrls: ['./forget-password.component.scss']
 })
 export class ForgetPasswordComponent implements OnInit {
-    //notification: PersonModel[];
+    // notification: PersonModel[];
     public notifications: any = {message: '', type: ''};
     notification_message: Object = {};
     errors: Object = {};
@@ -30,7 +30,7 @@ export class ForgetPasswordComponent implements OnInit {
   ngOnInit() {
   }
 
-  onPasswordSubmit(form: NgForm): void{
+  onPasswordSubmit(form: NgForm): void {
       this.passService.forgetPassword(
             form.value.email,
       )
@@ -53,7 +53,7 @@ export class ForgetPasswordComponent implements OnInit {
                     this.isSubmitting = false;
                 }*/
 
-        )
+        );
   }
 
 

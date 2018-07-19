@@ -12,7 +12,7 @@ export class FaqsService {
 
     /* Web api urls*/
     public appUrl = 'https://apidev.nmrbox.org';  // URL to web api
-    //public appUrl = 'http://nmrbox.test';  // URL to web api
+    // public appUrl = 'http://nmrbox.test';  // URL to web api
     public faqsUrl = 'faq';
 
 

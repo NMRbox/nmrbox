@@ -6,13 +6,13 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
 import {PersonModel} from '../user-dashboard/person.model';
-import {promise} from "selenium-webdriver";
+import {promise} from 'selenium-webdriver';
 
 
 @Injectable()
 export class PasswordManagementService {
     private appUrl = 'https://apidev.nmrbox.org';  // URL to web api
-    //private appUrl = 'http://nmrbox.dev';  // URL to web api
+    // private appUrl = 'http://nmrbox.dev';  // URL to web api
     private forgotPassUrl = 'password-forgot';  // URL to signin
     private forgotPassConfirmUrl = 'password-forgot-confirm';  // URL to signin
     private headers = new Headers({'Content-Type': 'application/json'});

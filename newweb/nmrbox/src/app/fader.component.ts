@@ -17,9 +17,9 @@ import { Component, OnChanges, Input, trigger, state, animate, transition, style
 })
 export class FaderComponent implements OnChanges {
 
-  @Input() isVisible : boolean = true;
-  @Input() swFiltersOpen : boolean = true;
-  //swFiltersOpen
+  @Input() isVisible: true;
+  @Input() swFiltersOpen: true;
+  // swFiltersOpen
   visibility = 'shown';
 
   ngOnChanges() {

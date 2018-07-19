@@ -22,7 +22,7 @@ export class SigninComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //const person_id = this.authService.getCookie('person_id');
+    // const person_id = this.authService.getCookie('person_id');
     const person_id = this.authService.getToken('person_id');
     if (person_id != null && person_id.length > 0 ) {
       this.router.navigateByUrl('user-dashboard');
