@@ -70,8 +70,8 @@ Route::model('keyword', 'App\Stype');
 Route::group(array('prefix' => 'software_types'), function() {
     //All basic routes defined here
     Route::get('/', array('as' => 'tags','uses' => 'KeywordController@index'));
-    Route::get('all-tags', array('as' => 'all-tags','uses' => 'KeywordController@getAllKeywords'));
-    Route::post('all-tags', array('as' => 'all-tags','uses' => 'KeywordController@getAllKeywords'));
+    Route::get('all-stype', array('as' => 'all-tags','uses' => 'SoftwareTypeController@getAllSoftwareTypes'));
+    Route::post('all-stype', array('as' => 'all-tags','uses' => 'SoftwareTypeController@getAllSoftwareTypes'));
 });
 
 /* Keywords management */

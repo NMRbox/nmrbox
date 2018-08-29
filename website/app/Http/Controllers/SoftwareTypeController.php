@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Stype;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -83,5 +84,24 @@ class SoftwareTypeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Populate all the categories
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllSoftwareTypes()
+    {
+        $software_types = Stype::All();
+
+        $all_stypes = array();
+        foreach ($software_types as $key => $val){
+
+            $all_stypes[] = array('id' => $val->id, 'label' => $val->stype);
+        }
+
+        return response( json_encode( array( 'message' => $all_stypes ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );
     }
 }

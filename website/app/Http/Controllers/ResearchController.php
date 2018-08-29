@@ -118,7 +118,7 @@ class ResearchController extends Controller
         $all_researches = array();
         foreach ($research_problems as $key => $val){
 
-            $all_researches[] = array('id' => $val->id, 'label' => $val->name);
+            $all_researches[] = array('id' => $val->id, 'label' => $val->research);
         }
 
         return response( json_encode( array( 'message' => $all_researches ) ), 200 )
