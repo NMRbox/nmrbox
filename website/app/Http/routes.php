@@ -61,8 +61,8 @@ Route::model('research', 'App\Research');
 Route::group(array('prefix' => 'research_problems'), function() {
     //All basic routes defined here
     Route::get('/', array('as' => 'research_problems','uses' => 'ResearchController@index'));
-    Route::get('all_research_problems', array('as' => 'all_research_problems','uses' => 'ResearchController@getAllResearchProblems'));
-    Route::post('all_research_problems', array('as' => 'all_research_problems','uses' => 'ResearchController@getAllResearchProblems'));
+    Route::get('getAll', array('as' => 'getAll','uses' => 'ResearchController@getAllResearchProblems'));
+    Route::post('getAll', array('as' => 'getAll','uses' => 'ResearchController@getAllResearchProblems'));
 });
 
 /* Keywords management */
@@ -70,8 +70,8 @@ Route::model('keyword', 'App\Stype');
 Route::group(array('prefix' => 'software_types'), function() {
     //All basic routes defined here
     Route::get('/', array('as' => 'tags','uses' => 'KeywordController@index'));
-    Route::get('all-stype', array('as' => 'all-tags','uses' => 'SoftwareTypeController@getAllSoftwareTypes'));
-    Route::post('all-stype', array('as' => 'all-tags','uses' => 'SoftwareTypeController@getAllSoftwareTypes'));
+    Route::get('getAll', array('as' => 'getAll','uses' => 'SoftwareTypeController@getAllSoftwareTypes'));
+    Route::post('getAll', array('as' => 'getAll','uses' => 'SoftwareTypeController@getAllSoftwareTypes'));
 });
 
 /* Keywords management */
