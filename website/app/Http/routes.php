@@ -41,13 +41,37 @@ Route::pattern('slug', '[a-z0-9- _]+');
 
 /* Software Registry*/
 Route::model('software', 'App\Software');
+Route::model('research', 'App\SoftwareResearch');
+Route::model('type', 'App\SoftwareType');
 Route::group(array('prefix' => 'registry'), function() {
     //All basic routes defined here
     Route::get('/', array('as' => 'registry','uses' => 'RegistryController@index'));
     Route::get('{software}', array('as' => 'software-page','uses' => 'RegistryController@getSoftware'));
     Route::get('software-metadata/{software}', array('as' => 'software-metadata','uses' => 'RegistryController@getSoftwareMetaData'));
     Route::post('software-search', array('as' => 'software-search','uses' => 'RegistryController@postRegistrySearch'));
+    //Route::post('filter-software-registry', array('as' => 'filter-software-registry','uses' => 'RegistryController@filterSoftwareRegistry'));
+    Route::get('filter-software-registry/{software}', array('as' => 'filter-software-registry','uses' => 'RegistryController@filterSoftwareRegistry'));
     Route::get('filter-software-search/{software}', array('as' => 'filter-software-search','uses' => 'RegistryController@filterSoftwares'));
+    Route::get('software-research/{research}', array('as' => 'filter-software-research','uses' => 'RegistryController@filterSoftwareRsearch'));
+    Route::get('software-type/{type}', array('as' => 'filter-software-research','uses' => 'RegistryController@filterSoftwareType'));
+});
+
+/* Research management */
+Route::model('research', 'App\Research');
+Route::group(array('prefix' => 'research_problems'), function() {
+    //All basic routes defined here
+    Route::get('/', array('as' => 'research_problems','uses' => 'ResearchController@index'));
+    Route::get('all_research_problems', array('as' => 'all_research_problems','uses' => 'ResearchController@getAllResearchProblems'));
+    Route::post('all_research_problems', array('as' => 'all_research_problems','uses' => 'ResearchController@getAllResearchProblems'));
+});
+
+/* Keywords management */
+Route::model('keyword', 'App\Stype');
+Route::group(array('prefix' => 'software_types'), function() {
+    //All basic routes defined here
+    Route::get('/', array('as' => 'tags','uses' => 'KeywordController@index'));
+    Route::get('all-tags', array('as' => 'all-tags','uses' => 'KeywordController@getAllKeywords'));
+    Route::post('all-tags', array('as' => 'all-tags','uses' => 'KeywordController@getAllKeywords'));
 });
 
 /* Keywords management */
@@ -429,7 +453,6 @@ Route::get('{name?}', 'ChandraController@showFrontEndView');
 
 #Angular Frontend singin, signup and user_details
 Route::group(['middleware' => ['cors', 'session']], function () {
-
     Route::post('signup', array( 'as' => 'signup', 'uses' => 'FrontEndController@signup'));
     Route::post('signin', array( 'as' => 'signin', 'uses' => 'FrontEndController@signin'));
     Route::get('signout', array('as' => 'signout','uses' => 'FrontEndController@signOut'));

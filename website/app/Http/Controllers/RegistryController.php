@@ -11,6 +11,10 @@ Use App\VM;
 Use App\SoftwareVersion;
 Use App\Author;
 Use App\Citation;
+Use App\Research;
+Use App\SoftwareResearch;
+Use App\Stype;
+Use App\SoftwareStype;
 use Symfony\Component\Debug\Exception\UndefinedFunctionException;
 Use View;
 
@@ -135,7 +139,61 @@ class RegistryController extends Controller
         //dd($all_software);
         return response( json_encode( array( 'data' => $all_software ) ), 200 )
             ->header( 'Content-Type', 'application/json' );
+    }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function filterSoftwareRegistry($fiels)
+    {
+        $all_software = new software();
+        /*$all_software = Software::orderBy('short_title', 'ASC')
+            ->select('id', 'name', 'short_title', 'synopsis', 'description', 'slug');
+            ->where('short_title', 'ILIKE', '%' . $param . '%');*/
+
+        /* Category search */
+        /*
+        //if($field == 'software_category') {
+            // menu_category relation
+            if($category != null){
+                $cat = new Category();
+                $cat = $cat->keywords();
+                foreach ($category as $key => $val){
+                    $cat = $cat->orWherePivot('keyword_category_id', '=', $val);
+                }
+                $cat = $cat->get();
+
+                if(count($cat) > 0){
+                    $menus = new Keyword();
+                    $menus = $menus->software();
+                    foreach ($cat as $key => $val){
+                        $menus = $menus->orWherePivot('menu_id', '=', $val->id);
+                    }
+                    $menus = $menus->get();
+                    // fetching menu_ids
+                    foreach ($menus as $data){
+                        $menu_id[] = $data->id;
+                    }
+                } else {
+                    $menu_id[]=array();
+                }
+
+            }
+            // fetching software details
+            $all_software = $software->whereIn('id', $menu_id);
+
+
+        //}
+
+        $all_software = $software->where('display', '=', 'TRUE')
+            ->orderBy('short_title', 'ASC')
+            ->get();
+
+        dd($all_software);
+        return response( json_encode( array( 'data' => $all_software ) ), 200 )
+            ->header( 'Content-Type', 'application/json' );*/
     }
 
 
@@ -145,9 +203,9 @@ class RegistryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function postRegistrySearch(Request $request) {
-        if(!$request->ajax()) {
+        /*if(!$request->ajax()) {
             return App::abort(403);
-        }
+        }*/
 
         /* Menu listings */
         $fields = $request->input('field');
@@ -307,5 +365,108 @@ class RegistryController extends Controller
         return response( json_encode( array( 'message' => $soft_array ) ), 200 )
             ->header( 'Content-Type', 'application/json' );
     }
+
+
+
+    /**
+     * Display a listing of the research software.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function filterSoftwareType(Request $request )
+    {
+
+        /* Request input var */
+        //$research_id = $request->input('stype_id');
+        $stype_id = 1;
+
+        try {
+
+            $software_ids = array();
+
+            /* Querying the softwar listings */
+            $software_type = SoftwareStype::where('stype_id', '=', $stype_id)
+                ->get();
+
+            foreach ( $software_type as $data ) {
+                $software_ids [] = $data->software_id;
+            }
+
+            //dd($software_ids);
+            //dd($software_research);
+
+            /* test for Angular response */
+            $all_software = Software::orderBy('short_title', 'ASC')
+                ->select('id', 'name', 'short_title', 'long_title', 'synopsis', 'description', 'slug')
+                ->where('display', '=', 'true')
+                ->whereIn('id', $software_ids)
+                ->get();
+
+            //dd($all_software);
+            return response( json_encode( array( 'data' => $all_software ) ), 200 )
+                ->header( 'Content-Type', 'application/json' );
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            //dd($e);
+            //return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
+            return response()->json([
+                //'message' => Lang::get('auth/message.account_already_exists'),
+                'message' => "No software registry found.",
+                'type' => 'error'
+            ], 200);
+        }
+
+    }
+
+    /**
+     * Display a listing of the research software.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function filterSoftwareRsearch(Request $request )
+    {
+
+        /* Request input var */
+        //$research_id = $request->input('research_id');
+        $research_id = 1;
+
+        try {
+
+            $software_ids = array();
+
+            /* Querying the softwar listings */
+            $software_research = SoftwareResearch::where('research_id', '=', $research_id)
+                ->get();
+
+            foreach ( $software_research as $data ) {
+                $software_ids [] = $data->software_id;
+            }
+
+            //dd($software_ids);
+            //dd($software_research);
+
+            /* test for Angular response */
+            $all_software = Software::orderBy('short_title', 'ASC')
+                ->select('id', 'name', 'short_title', 'long_title', 'synopsis', 'description', 'slug')
+                ->where('display', '=', 'true')
+                ->whereIn('id', $software_ids)
+                ->get();
+
+            //dd($all_software);
+            return response( json_encode( array( 'data' => $all_software ) ), 200 )
+                ->header( 'Content-Type', 'application/json' );
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            //dd($e);
+            //return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
+            return response()->json([
+                //'message' => Lang::get('auth/message.account_already_exists'),
+                'message' => "No software registry found.",
+                'type' => 'error'
+            ], 200);
+        }
+
+    }
+
 }
 
