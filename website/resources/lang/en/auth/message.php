@@ -12,6 +12,7 @@ return array(
     'account_suspended'      => 'User account suspended because of too many login attempts. Try again later.',
     'account_banned'         => 'This user account is banned.',
     'server_conn_error'      => 'We are sorry.  We seem to be having a technical difficulty.  Please check back again later.',
+    'not_autorized'          => 'Sorry! You are not authorized to access this page.',
 
     'login' => array(
         'error'   => 'Username or password is incorrect, please try again.',

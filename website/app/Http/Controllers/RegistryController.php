@@ -373,12 +373,8 @@ class RegistryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function filterSoftwareType(Request $request )
+    public function filterSoftwareType($stype_id)
     {
-
-        /* Request input var */
-        //$research_id = $request->input('stype_id');
-        $stype_id = 1;
 
         try {
 
@@ -392,9 +388,6 @@ class RegistryController extends Controller
                 $software_ids [] = $data->software_id;
             }
 
-            //dd($software_ids);
-            //dd($software_research);
-
             /* test for Angular response */
             $all_software = Software::orderBy('short_title', 'ASC')
                 ->select('id', 'name', 'short_title', 'long_title', 'synopsis', 'description', 'slug')
@@ -402,12 +395,10 @@ class RegistryController extends Controller
                 ->whereIn('id', $software_ids)
                 ->get();
 
-            //dd($all_software);
             return response( json_encode( array( 'data' => $all_software ) ), 200 )
                 ->header( 'Content-Type', 'application/json' );
 
         } catch (\Illuminate\Database\QueryException $e) {
-            //dd($e);
             //return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
             return response()->json([
                 //'message' => Lang::get('auth/message.account_already_exists'),
@@ -423,12 +414,8 @@ class RegistryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function filterSoftwareRsearch(Request $request )
+    public function filterSoftwareRsearch($research_id)
     {
-
-        /* Request input var */
-        //$research_id = $request->input('research_id');
-        $research_id = 1;
 
         try {
 
@@ -442,9 +429,6 @@ class RegistryController extends Controller
                 $software_ids [] = $data->software_id;
             }
 
-            //dd($software_ids);
-            //dd($software_research);
-
             /* test for Angular response */
             $all_software = Software::orderBy('short_title', 'ASC')
                 ->select('id', 'name', 'short_title', 'long_title', 'synopsis', 'description', 'slug')
@@ -452,12 +436,10 @@ class RegistryController extends Controller
                 ->whereIn('id', $software_ids)
                 ->get();
 
-            //dd($all_software);
             return response( json_encode( array( 'data' => $all_software ) ), 200 )
                 ->header( 'Content-Type', 'application/json' );
 
         } catch (\Illuminate\Database\QueryException $e) {
-            //dd($e);
             //return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
             return response()->json([
                 //'message' => Lang::get('auth/message.account_already_exists'),
