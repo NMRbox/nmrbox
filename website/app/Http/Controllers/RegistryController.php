@@ -38,6 +38,7 @@ class RegistryController extends Controller
         foreach ( $all_software as $key => $value ) {
 
             /* Software research section */
+            $research_problems = array();
             $all_research_soft = SoftwareResearch::where('software_id', $value->id)->get();
             foreach ($all_research_soft as $k => $data) {
                 $research = Research::where('id', $data->research_id)->get()->first();
@@ -53,6 +54,7 @@ class RegistryController extends Controller
             }
 
             /* Software types sections */
+            $software_type = array();
             $all_soft_types = SoftwareStype::where('software_id', $value->id)->get();
             foreach ($all_soft_types as $k => $data) {
                 $stype = Stype::where('id', $data->stype_id)->get()->first();
