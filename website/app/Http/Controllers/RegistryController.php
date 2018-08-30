@@ -53,7 +53,7 @@ class RegistryController extends Controller
             $all_soft_types = SoftwareStype::where('software_id', $value->id)->get();
             foreach ($all_soft_types as $k => $data) {
                 $stype = Stype::where('id', $data->stype_id)->get()->first();
-                $stype_id = $stype > id;
+                $stype_id = $stype->id;
                 $stype_label = $stype->research;
 
                 $value ['software_type'] = array(
