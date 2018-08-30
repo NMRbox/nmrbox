@@ -36,8 +36,13 @@ class RegistryController extends Controller
             ->get();
 
         foreach ( $all_software as $key => $value ) {
+            echo "<pre>";
+            print_r($key);
+            print_r($value);
+            echo "</pre>";
+
             /* Software research section */
-            $all_research_soft = SoftwareResearch::where('software_id', $value->id)->get();
+            /*$all_research_soft = SoftwareResearch::where('software_id', $value->id)->get();
             foreach ($all_research_soft as $k => $data) {
                 $research = Research::where('id', $data->research_id)->get()->first();
                 $research_id = $research->id;
@@ -47,10 +52,10 @@ class RegistryController extends Controller
                     'id' => $research_id,
                     'label' => $research_label,
                 );
-            }
+            }*/
 
             /* Software types sections */
-            $all_soft_types = SoftwareStype::where('software_id', $value->id)->get();
+            /*$all_soft_types = SoftwareStype::where('software_id', $value->id)->get();
             foreach ($all_soft_types as $k => $data) {
                 $stype = Stype::where('id', $data->stype_id)->get()->first();
                 $stype_id = $stype->id;
@@ -60,7 +65,9 @@ class RegistryController extends Controller
                     'id' => $stype_id,
                     'label' => $stype_label,
                 );
-            }
+            }*/
+
+
         }
 
 
