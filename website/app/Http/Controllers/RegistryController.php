@@ -34,6 +34,10 @@ class RegistryController extends Controller
             ->select('id', 'name', 'short_title', 'long_title', 'synopsis', 'description', 'slug')
             ->where('display', '=', 'true')
             ->get();
+        $all_software['software_research'][] = array(
+            'id' => 1,
+            'value' => 'lol'
+        );
 
         foreach ( $all_software as $key => $value ) {
             echo "<pre>";
