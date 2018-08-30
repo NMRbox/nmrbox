@@ -34,7 +34,36 @@ class RegistryController extends Controller
             ->select('id', 'name', 'short_title', 'long_title', 'synopsis', 'description', 'slug')
             ->where('display', '=', 'true')
             ->get();
-            //->sortBy('short_title', SORT_NATURAL|SORT_FLAG_CASE);
+
+        foreach ( $all_software as $key => $value ) {
+            /* Software research section */
+            $all_research_soft = SoftwareResearch::where('software_id', $value->id)->get();
+            foreach ($all_research_soft as $k => $data) {
+                $research = Research::where('id', $data->research_id)->get()->first();
+                $research_id = $research->id;
+                $research_label = $research->research;
+
+                $value ['research_problems'] = array(
+                    'id' => $research_id,
+                    'label' => $research_label,
+                );
+            }
+
+            /* Software types sections */
+            $all_soft_types = SoftwareStype::where('software_id', $value->id)->get();
+            foreach ($all_soft_types as $k => $data) {
+                $stype = Stype::where('id', $data->stype_id)->get()->first();
+                $stype_id = $stype > id;
+                $stype_label = $stype->research;
+
+                $value ['software_type'] = array(
+                    'id' => $stype_id,
+                    'label' => $stype_label,
+                );
+            }
+        }
+
+
 
         //dd($all_software);
         return response( json_encode( array( 'data' => $all_software ) ), 200 )

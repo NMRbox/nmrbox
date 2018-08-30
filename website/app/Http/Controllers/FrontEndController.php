@@ -1087,6 +1087,9 @@ class FrontEndController extends Controller
      */
     public function person_details($id)
     {
+        // the person attached to the user
+        $person = Person::where('id', $id)->get()->first();
+
         if(!Session::has('person')){
             return response()-> json( array(
                 'message' => Lang::get('auth/message.not_autorized'),
@@ -1094,8 +1097,7 @@ class FrontEndController extends Controller
                 401 );
         }
 
-        // the person attached to the user
-        $person = Person::where('id', $id)->get()->first();
+
         // Fetching person institution name
         $person['institution'] = $person->institution()->get()->first()->name;
 
