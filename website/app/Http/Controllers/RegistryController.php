@@ -34,54 +34,42 @@ class RegistryController extends Controller
             ->select('id', 'name', 'short_title', 'long_title', 'synopsis', 'description', 'slug')
             ->where('display', '=', 'true')
             ->get();
-        $all_software[1]['software_research'] = array( array(
-            'id' => 1,
-            'value' => 'lol'
-        ));$all_software[0]['software_research'] = array(
-            'id' => 1,
-            'value' => 'lol'
-        );
 
         foreach ( $all_software as $key => $value ) {
-            echo "<pre>";
-            print_r($key);
-            print_r($value);
-            echo "</pre>";
 
             /* Software research section */
-            /*$all_research_soft = SoftwareResearch::where('software_id', $value->id)->get();
+            $all_research_soft = SoftwareResearch::where('software_id', $value->id)->get();
             foreach ($all_research_soft as $k => $data) {
                 $research = Research::where('id', $data->research_id)->get()->first();
                 $research_id = $research->id;
                 $research_label = $research->research;
 
-                $all_software['research_problems'][] = array(
-                    'id' => $research_id,
-                    'label' => $research_label,
+                $all_software[$key]['research_problems'][] = array(
+                    array(
+                        'id' => $research_id,
+                        'label' => $research_label,
+                    )
                 );
-            }*/
+            }
 
             /* Software types sections */
-            /*$all_soft_types = SoftwareStype::where('software_id', $value->id)->get();
+            $all_soft_types = SoftwareStype::where('software_id', $value->id)->get();
             foreach ($all_soft_types as $k => $data) {
                 $stype = Stype::where('id', $data->stype_id)->get()->first();
                 $stype_id = $stype->id;
                 $stype_label = $stype->stype;
 
-                $all_software['software_type'][] = array(
-                    'id' => $stype_id,
-                    'label' => $stype_label,
+                $all_software[$key]['software_type'][] = array(
+                    array(
+                        'id' => $stype_id,
+                        'label' => $stype_label,
+                    )
                 );
-            }*/
+            }
 
 
         }
-
-
-        echo "<pre>";
-        print_r($all_software);
-        echo "</pre>";
-        die();
+        
         //dd($all_software);
         return response( json_encode( array( 'data' => $all_software ) ), 200 )
             ->header( 'Content-Type', 'application/json' );
