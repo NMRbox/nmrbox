@@ -43,7 +43,7 @@ class RegistryController extends Controller
                 $research_id = $research->id;
                 $research_label = $research->research;
 
-                $value ['research_problems'] = array(
+                $all_software ['research_problems'] = array(
                     'id' => $research_id,
                     'label' => $research_label,
                 );
@@ -56,7 +56,7 @@ class RegistryController extends Controller
                 $stype_id = $stype->id;
                 $stype_label = $stype->research;
 
-                $value ['software_type'] = array(
+                $all_software ['software_type'] = array(
                     'id' => $stype_id,
                     'label' => $stype_label,
                 );
