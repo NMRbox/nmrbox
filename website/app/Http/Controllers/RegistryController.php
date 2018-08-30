@@ -43,7 +43,7 @@ class RegistryController extends Controller
                 $research_id = $research->id;
                 $research_label = $research->research;
 
-                $all_software ['research_problems'] = array(
+                $all_software['research_problems'] = array(
                     'id' => $research_id,
                     'label' => $research_label,
                 );
@@ -56,7 +56,7 @@ class RegistryController extends Controller
                 $stype_id = $stype->id;
                 $stype_label = $stype->research;
 
-                $all_software ['software_type'] = array(
+                $all_software['software_type'] = array(
                     'id' => $stype_id,
                     'label' => $stype_label,
                 );
@@ -64,7 +64,10 @@ class RegistryController extends Controller
         }
 
 
-
+        echo "<pre>";
+        print_r($all_software);
+        echo "</pre>";
+        die();
         //dd($all_software);
         return response( json_encode( array( 'data' => $all_software ) ), 200 )
             ->header( 'Content-Type', 'application/json' );
