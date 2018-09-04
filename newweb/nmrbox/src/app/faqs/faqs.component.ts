@@ -1,8 +1,6 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import {FormGroup, FormControl, FormBuilder, Validators, NgForm} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import {PRIMARY_OUTLET, Router, UrlSegment, UrlSegmentGroup, UrlTree} from '@angular/router';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Observable} from 'rxjs/Observable';
+import { ActivatedRoute } from '@angular/router';
 
 /* import model files */
 import { FaqsModel} from './faqs.model';
@@ -19,8 +17,8 @@ export class FaqsComponent implements OnInit {
     faqs: FaqsModel;
     allFaqs: FaqsModel[];
 
-    showHide: false;
-    panelOpenState: false;
+    showHide = false;
+    panelOpenState = false;
     public notifications: any = {message: '', type: ''};
     step = 0;
     slug: string;
