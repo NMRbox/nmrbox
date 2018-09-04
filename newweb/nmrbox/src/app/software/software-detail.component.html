@@ -1,10 +1,10 @@
-<div class="software-details-wrapper">
+<div class="software-details-wrapper" *ngIf="softwareMetaData && software">
   <md-toolbar class="toolbar-transparent">
     <div class="menu-wrapper">
       <button (click)="goBack()">
         <svg width="15px" height="20px" viewBox="0 0 50 80" xml:space="preserve">
           <polyline fill="none" stroke="#313131" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="
-        45.63,75.8 0.375,38.087 45.63,0.375 "/>
+        45.63,75.8 0.375,38.087 45.63,0.375 "></polyline>
         </svg> 
       </button>
       <span class="page-title">Software</span>
@@ -24,7 +24,7 @@
     </section>
     <section id="sw-detail-description">
       <h3>Description</h3>
-      <div innerHTML="{{software.description}}"></div>
+      <div>{{software.description}}</div>
     </section>
     <section>
       <h3>URL</h3>

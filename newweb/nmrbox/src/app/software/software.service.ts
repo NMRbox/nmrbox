@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response, RequestOptions } from '@angular/http';
+import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { SoftwareModel } from './software.model';
-import { FilterModel } from './../filter.model';
+import { FilterModel } from '../filter.model';
+import {SoftwareMetadataModel} from './software-metadata.model';
 
 @Injectable()
 export class SoftwareService {
@@ -65,7 +66,7 @@ export class SoftwareService {
       .catch(this.handleError);
   }
 
-  getSoftwareMetaData(slug: string): Promise<SoftwareModel[]> {
+  getSoftwareMetaData(slug: string): Promise<SoftwareMetadataModel> {
 
       const url = this.appUrl + `/` + this.swtMtDtUrl + `/` + slug ;
       console.log(url);
@@ -73,7 +74,7 @@ export class SoftwareService {
       return this.http
               .get(url)
               .toPromise()
-              .then(response => response.json().data as SoftwareModel[])
+              .then(response => response.json().data as SoftwareMetadataModel)
               .catch(this.handleError);
   }
 
@@ -86,7 +87,7 @@ export class SoftwareService {
       .catch(this.handleError);
   }
 
-  delete(id: number): Promise<void> {
+  delete(id: number): Promise<Response | never> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()

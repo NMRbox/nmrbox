@@ -5,14 +5,15 @@ import { Location } from '@angular/common';
 
 import { SoftwareModel } from './software.model';
 import { SoftwareService } from './software.service';
+import {SoftwareMetadataModel} from './software-metadata.model';
 @Component({
-  selector: 'software-detail',
+  selector: 'app-software-detail',
   templateUrl: './software-detail.component.html',
   styleUrls: [ './software-detail.component.scss' ]
 })
 export class SoftwareDetailComponent implements OnInit {
   software: SoftwareModel;
-  softwareMetaData: SoftwareModel[];
+  softwareMetaData: SoftwareMetadataModel;
 
   constructor(
     private softwareService: SoftwareService,
