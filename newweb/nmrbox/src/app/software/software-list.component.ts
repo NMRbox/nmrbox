@@ -1,21 +1,25 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ActivatedRoute, Params } from '@angular/router';
-
-import { Observable } from 'rxjs/Observable';
-
+import { ActivatedRoute } from '@angular/router';
 import { SoftwareModel } from './software.model';
 import { SoftwareService } from './software.service';
+import { FilterModel } from '../filter.model';
 
-import { FilterModel } from './../filter.model';
+import {MdFormFieldModule, MdInputModule} from '@angular/material';
 
 @Component({
-  selector: 'my-software-list',
+  selector: 'app-my-software-list',
   templateUrl: './software-list.component.html',
   styleUrls: [ './software-list.component.scss' ]
 })
 export class SoftwareListComponent implements OnInit {
+
+  private readonly softwareTypes: {};
+  private readonly researchProblems: {};
+  activeSoftwareType = null;
+  activeResearchProblem = null;
+  filteredList: SoftwareModel[];
 
   config: Object = {
     slidesPerView: 'auto',
@@ -29,95 +33,103 @@ export class SoftwareListComponent implements OnInit {
 
   @Input() softwareList: SoftwareModel[];
   @Output() listChange: EventEmitter<SoftwareModel[]> = new EventEmitter<SoftwareModel[]>();
-  selectedSoftware: SoftwareModel;
 
   // Filters
   @Input() swtList: FilterModel[];
-  @Input() isVisible: true;
-  @Input() swFiltersOpen: true;
+  @Input() isVisible: boolean;
+  @Input() swFiltersOpen: boolean;
   @Input() selectedFilter: FilterModel;
 
   // Filters - routing
   @Input() filterType: string;  // values: 'swt' or 'rp' (i.e. - software type or research problem)
   @Input() filterName: string;
 
-  // TESTING
-  spectralSelected: true;
-  isSelected: true; // testing
+
+  objectKeys = Object.keys;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private softwareService: SoftwareService
-  ) { }
+  ) {
+    this.softwareTypes = {};
+    this.researchProblems = {};
+    this.filteredList = [];
+  }
+
+
+  log(ob) {
+    console.log(ob);
+  }
 
   ngOnInit(): void {
     this.getSoftwareList();
-    this.getSwtList();
 
     // ToDo: get router params (filterType, filterName)
     this.route.params.subscribe( params =>
         this.filterName = params['filterName']
     );
 
-
-    // check for filter
-    if (!this.filterName) {
-      this.clearFilters();
-    } else {
-
-      // Set selectedFilter (FilterModel)
-      this.softwareService.getFilter(this.filterName).then(selectedFilter => this.selectedFilter = selectedFilter);
-
-      // Filter results, based on route
-      this.filterSoftwareType(this.filterName, 'swt');
-
-    } // ENDIF
-
   }
 
-  // Calling the 'SoftwareService' mock API (software.service.ts) to pull a list of all 'software' records from the
-  //   mock database (software-data.service.ts)
-  // It also runs a 'getSwtList' function to pull a list of all 'software type' records from the same mock database.
+
+  hasResearchProblemByID(software: SoftwareModel, id: string) {
+    if (id === null) {
+      return true;
+    }
+    for (const researchProblem of software.research_problems){
+      if (researchProblem['id'] === parseInt(id, 10)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  hasSoftwareTypeByID(software: SoftwareModel, id: string) {
+    if (id === null) {
+      return true;
+    }
+
+    for (const softwareType of software.software_type){
+      if (softwareType['id'] === parseInt(id, 10)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  //
+  filterSelections() {
+    this.filteredList = [];
+
+    for (const software of this.softwareList){
+      if (this.hasResearchProblemByID(software, this.activeResearchProblem) && this.hasSoftwareTypeByID(software, this.activeSoftwareType)) {
+        this.filteredList.push(software);
+      }
+    }
+  }
+
+  // Get the full software list
   getSoftwareList(): void {
-    this.softwareService.getSoftwareList().then(softwareList => this.softwareList = softwareList);
-    this.clearFilters();
+    this.softwareService.getSoftwareList().then(softwareList => {
+      for (const s of softwareList){
+        for (const type of s.software_type) {
+          this.softwareTypes[parseInt(type['id'], 10)] = type['label'];
+        }
+        for (const type of s.research_problems) {
+          this.researchProblems[parseInt(type['id'], 10)] = type['label'];
+        }
+      }
+      this.softwareList = softwareList;
+      this.filterSelections();
+    }
+    );
   }
 
-  getSwtList(): void {
-    this.softwareService.getSwtList().then(swtList => this.swtList = swtList);
-  }
 
   searchSoftware(term: string): void {
     this.softwareService.searchSoftware(term).then(softwareList => this.softwareList = softwareList);
-  }
-  clearFilters(): void {
-    this.displayActiveFilter(null);
-    this.displayActiveRoute(null);
-    this.selectedFilter = null;
-  }
-
-  // ToDo: adapt to handle 'research problem' as well
-  filterSoftwareType(softwareType: string, filterType: string): void {
-
-    // get list of software packages
-    this.softwareService.filterSoftwareType(softwareType, filterType).then(softwareList => this.softwareList = softwareList);
-
-    // update UI & URL to reflect active filter
-    this.displayActiveFilter(softwareType);
-    this.displayActiveRoute(softwareType);
-  }
-
-  displayActiveFilter(softwareType: string): void {
-    this.filterName = softwareType;
-  }
-
-  displayActiveRoute(softwareType: string): void {
-    if (!softwareType) {
-      this.router.navigate(['/software']);
-    } else {
-      this.router.navigate(['/software', softwareType]);
-    }
+    this.filterSelections();
   }
 
   onSelect(filter: FilterModel): void {

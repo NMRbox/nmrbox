@@ -2,9 +2,39 @@
 <div class="section-banner-bg gray-bg"></div>
 <div class="sw-filters-container">
   <div class="sw-filters">
-    <md-select id="rp-select" placeholder="Research problem" ></md-select>
-    <md-select id="st-select" placeholder="Software type" (click)="swFiltersOpen = !swFiltersOpen"></md-select>
-    <a id="all-software" (click)="getSoftwareList(); $event.stopPropagation(); onSelect(null)">All Software</a>
+
+
+      <md-select
+        *ngIf='researchProblems'
+        id="rp-select"
+        [(ngModel)]="activeResearchProblem"
+        placeholder="Research problem">
+        <md-option
+          (click)="filterSelections()"
+          [value]='null'>Show all</md-option>
+        <md-option
+          (click)="filterSelections()"
+          *ngFor="let type_id of objectKeys(researchProblems)"
+          [value]="type_id"
+          (click)="filterSelections()">{{researchProblems[type_id]}}</md-option>
+      </md-select>
+
+      <md-select
+        *ngIf='softwareTypes'
+        id="st-select"
+        placeholder="Software type"
+        [(ngModel)]="activeSoftwareType">
+        <md-option
+          (click)="filterSelections()"
+          [value]='null'>Show all</md-option>
+        <md-option
+          *ngFor="let type_id of objectKeys(softwareTypes)"
+          [value]="type_id"
+          (click)="filterSelections()">{{softwareTypes[type_id]}}</md-option>
+      </md-select>
+
+
+    <a id="all-software" (click)="activeResearchProblem=null;activeSoftwareType=null;getSoftwareList(); $event.stopPropagation(); onSelect(null)">All Software</a>
     <md-input-container id="search">
       <input mdInput #searchBox id="search-box" (keyup)="searchSoftware(searchBox.value)" placeholder="search software" />
       <span class="icon-search"></span>
@@ -24,7 +54,7 @@
   </div>
 </div>
 
-<!-- info alert box -->
+<!-- info alert box
 <div class="container">
   <div class="row">
     <div class="col-md-10 col-md-offset-1 alert alert-info">
@@ -33,11 +63,11 @@
         Search box currently supports filtering by software title.</p>
     </div>
   </div>
-</div>
+</div>-->
 
 <!-- Software registry listings -->
 <md-grid-list class="software-list" cols="3" rowHeight="250px">
-  <md-grid-tile class="tile-dashed" *ngFor="let software of softwareList" (click)="gotoDetail(software); $event.stopPropagation()">
+  <md-grid-tile class="tile-dashed" *ngFor="let software of filteredList" (click)="gotoDetail(software); $event.stopPropagation()">
     <md-card class="sw-card">
       <md-card-header>
         <md-card-title>{{software.short_title}}</md-card-title>

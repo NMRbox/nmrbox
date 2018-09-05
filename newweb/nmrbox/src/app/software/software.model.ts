@@ -7,7 +7,6 @@ export class SoftwareModel {
   description: string;
   url: string;
   slug: string;
-  software_types: Array<string>;
   nmrbox_version: Array<string>;
   software_version: Array<string>;
   citation: string;
@@ -19,6 +18,6 @@ export class SoftwareModel {
   volume: any;
   issue: any;
   authors: string;
-  /*nmrbox_version: number;
-  software_version: number;*/
+  research_problems: Array<Array<string>>;
+  software_type: Array<Array<string>>; // change to 'types' once mosrur is on board
 }

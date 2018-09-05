@@ -15,7 +15,6 @@ export class SoftwareService {
   private swtUrl = 'registry';  // URL to web api
   private swtFltrUrl = 'registry/filter-software-search';  // URL to web api
   private swtMtDtUrl = 'registry/software-metadata';  // URL to web api
-  private testUrl = 'api/spectralSoftware';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
@@ -34,14 +33,6 @@ export class SoftwareService {
       .get(this.appUrl + `/` + this.swtUrl)
       .toPromise()
       .then(response => response.json().data as SoftwareModel[])
-      .catch(this.handleError);
-  }
-
-  getSwtList(): Promise<FilterModel[]> {
-    return this.http
-      .get(this.appUrl + `/` + this.swtUrl)
-      .toPromise()
-      .then(response => response.json().data as FilterModel[])
       .catch(this.handleError);
   }
 
@@ -117,16 +108,16 @@ export class SoftwareService {
 
 
     if (filterType === 'swt') {
-      url = `api/softwareList/?software_types=${softwareType}`;
+      url = `${this.appUrl}/api/softwareList/?software_types=${softwareType}`;
     } else if (filterType === 'rp') {
-      url = `api/softwareList/?research_problems=${softwareType}`;
+      url = `${this.appUrl}/api/softwareList/?research_problems=${softwareType}`;
     } else {
-      url = `api/softwareList/?research_problems=${softwareType}&software_types=${softwareType}`;
+      url = `${this.appUrl}/api/softwareList/?research_problems=${softwareType}&software_types=${softwareType}`;
     }
 
     return this.http
         // .get(`api/softwareList/?software_types=${softwareType}`)
-        .get(url)
+        .get(url, {headers: this.headers})
         .toPromise()
         .then((r: Response) => r.json().data as SoftwareModel[]);
   }

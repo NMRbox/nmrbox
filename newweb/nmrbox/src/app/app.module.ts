@@ -16,7 +16,7 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { SoftwareDataService } from './software/software-data.service';
 
 // 3rd Party Modules
-import { SwiperModule } from '../../node_modules/angular2-useful-swiper';
+import { SwiperModule } from 'angular2-useful-swiper';
 
 // Application components
 import { AppComponent } from './app.component';
