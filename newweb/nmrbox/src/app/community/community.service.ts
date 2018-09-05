@@ -1,5 +1,5 @@
-import { Injectable }    from '@angular/core';
-import { Headers, Http, Response, RequestOptions } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { CommunityModel } from './community.model';
@@ -8,7 +8,6 @@ import { CommunityModel } from './community.model';
 export class CommunityService {
 
   private appUrl = 'https://apidev.nmrbox.org';  // URL to web api
-  //private appUrl = 'http://nmrbox.test';  // URL to web api
   private baseUrl = 'api/communityList';  // URL to web api
   private supportUrl = 'api/comSupportList';  // URL to web api
   private blogUrl = 'api/comBlogList';  // URL to web api
@@ -74,11 +73,12 @@ export class CommunityService {
     }
 
     getCommunityList(): Promise<CommunityModel[]> {
-    return this.http
+      return new Promise<CommunityModel[]>(null);
+    /*return this.http
       .get(this.appUrl + `/` + this.blogUrl)
       .toPromise()
       .then(response => response.json().data as CommunityModel[])
-      .catch(this.handleError);
+      .catch(this.handleError);*/
     }
 
     getSupportList(): Promise<CommunityModel[]> {
@@ -107,27 +107,26 @@ export class CommunityService {
     }
 
 
-  //getSoftware(type: string, id: number): Promise<CommunityModel> {
   getCommunityDetail(id: number, type: string): Promise<CommunityModel> {
 
     let baseUrl = `${this.blogUrl}`;
 
-    console.log("ID: ", id);
-    console.log("TYPE: ", type);
+    console.log('ID: ', id);
+    console.log('TYPE: ', type);
 
-    if(type == "support"){
+    if (type === 'support') {
       baseUrl = `${this.supportUrl}`;
-    } else if(type == "blog") {
+    } else if (type === 'blog') {
       baseUrl = `${this.blogUrl}`;
     } else {
       baseUrl = `${this.eventsUrl}`;
     }
 
-    //let url = baseUrl + `/${id}`;
-    //let url = 'https://apidev.nmrbox.org/documentation';
-    let url = this.appUrl + '/' + this.documentationUrl;
+    // let url = baseUrl + `/${id}`;
+    // let url = 'https://apidev.nmrbox.org/documentation';
+    const url = this.appUrl + '/' + this.documentationUrl;
 
-    console.log("getSoftware URL: ", url);
+    console.log('getSoftware URL: ', url);
 
     return this.http
       .get(url)
@@ -139,22 +138,26 @@ export class CommunityService {
 
   /* test function */
     filterSupportType(supportType: string): Promise<CommunityModel[]> {
+
+
+      return new Promise<CommunityModel[]>(null); /*
+
         let url = this.appUrl;
-        if(supportType == "workflow"){
-            let url = this.appUrl; // should be like http://nmrbox.dev/overview
-        } else if(supportType == "tutorial") {
-            let url = this.appUrl;
-        } else if(supportType == "swdoc"){
-            let url = this.appUrl;
+        if (supportType === 'workflow') {
+            url = this.appUrl; // should be like http://nmrbox.dev/overview
+        } else if (supportType === 'tutorial') {
+            url = this.appUrl;
+        } else if (supportType === 'swdoc') {
+            url = this.appUrl;
         } else {
-            let url = this.appUrl;
+            url = this.appUrl;
         }
 
         return this.http
             //.get(`${this.supportUrl}/?supportType=${supportType}`)
             .get(url)
             .toPromise()
-            .then((r: Response) => r.json().data as CommunityModel[]);
+            .then((r: Response) => r.json().data as CommunityModel[]);*/
     }
 
     /*filterSupportType(supportType: string): Promise<CommunityModel[]> {
@@ -205,22 +208,15 @@ export class CommunityService {
       .catch(this.handleError);
   }
 
-  delete(id: number): Promise<void> {
-    const url = `${this.baseUrl}/${id}`;
-    return this.http.delete(url, {headers: this.headers})
-      .toPromise()
-      .then(() => null)
-      .catch(this.handleError);
-  }
 
   searchSoftware(term: string): Promise<CommunityModel[]> {
 
-    //let url = this.blogUrl + '?name=' + name;
-
+    return new Promise<CommunityModel[]>(null);
+    /*
     return this.http
-        .get(`${this.supportUrl}/?name=${term}`)
+        .get(`${this.appUrl}/${this.supportUrl}/?name=${term}`)
         .toPromise()
-        .then((r: Response) => r.json().data as CommunityModel[]);
+        .then((r: Response) => r.json().data as CommunityModel[]);*/
   }
 
   private handleError(error: any): Promise<any> {

@@ -1,21 +1,19 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import { Observable }        from 'rxjs/Observable';
-
-import { CommunityModel }         from './community.model';
-import { CommunityService }  from './community.service';
+import { CommunityModel } from './community.model';
+import { CommunityService } from './community.service';
 import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
-  selector: 'community-list',
+  selector: 'app-community-list',
   templateUrl: './community-list.component.html',
   styleUrls: [ './community-list.component.scss' ]
 })
 export class CommunityListComponent implements OnInit {
-  //communityList: SoftwareModel[];
+
   @Input() communityList: CommunityModel[];
 
   @Input() supportList: CommunityModel[];
@@ -34,17 +32,26 @@ export class CommunityListComponent implements OnInit {
 
   @Input() eventsCurrentList: CommunityModel[];
   @Input() eventsPastList: CommunityModel[];
-  
+
   @Output() listChange: EventEmitter<CommunityModel[]> = new EventEmitter<CommunityModel[]>();
   selectedCommunity: CommunityModel;
 
   // Tabs
-  @Input() selectedIndex: number=0;
+  @Input() selectedIndex= 0;
   @Input() routeIndex: number;
 
   /*notification variable*/
-    public notifications: any = {message: '', type: ''};
+  public notifications: any = {message: '', type: ''};
 
+  config: Object = {
+    slidesPerView: 'auto',
+    centeredSlides: false,
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+    spaceBetween: 0,
+    speed: 500,
+    loop: false
+  };
 
   constructor(
     private router: Router,
@@ -53,19 +60,9 @@ export class CommunityListComponent implements OnInit {
     private authService: AuthenticationService
   ) { }
 
-  config: Object = {
-            slidesPerView: 'auto',
-            centeredSlides: false,
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            spaceBetween: 0,
-            speed: 500,
-            loop: false
-        };
-
   ngOnInit(): void {
     this.getCommunityList();
-    //this.getSupportList();
+    // this.getSupportList();
     this.filterSupportType('nmrbox');
     this.filterSupportType('tutorial');
     this.filterSupportType('swdoc');
@@ -80,14 +77,14 @@ export class CommunityListComponent implements OnInit {
         this.routeIndex = params['index']
     );
 
-    if(this.routeIndex > -1){
+    if (this.routeIndex > -1){
       this.selectedIndexChange(this.routeIndex);
     }
   }
 
   // Tabs
   selectedIndexChange(index: number): void {
-    if(!index) index = 0;
+    if (!index) index = 0;
     this.selectedIndex = index;
     this.router.navigate(['/community', index]);
   }
@@ -114,24 +111,23 @@ export class CommunityListComponent implements OnInit {
   }
 
   filterSoftwareType(softwareType: string): void {
-    
+
     this.communityService.filterSoftwareType(softwareType).then(communityList => this.communityList = communityList);
   }
 
   filterSupportType(supportType: string): void {
 
-    if(supportType == "nmrbox"){
+    if (supportType === 'nmrbox'){
       this.communityService.filterSupportType(supportType).then(supportNmrboxList => this.supportNmrboxList = supportNmrboxList);
-    } else if (supportType == "tutorial"){
+    } else if (supportType === 'tutorial') {
       this.communityService.filterSupportType(supportType).then(supportTutorialList => this.supportTutorialList = supportTutorialList);
-    } else if (supportType == "swdoc"){
+    } else if (supportType === 'swdoc') {
       this.communityService.filterSupportType(supportType).then(supportSwdocList => this.supportSwdocList = supportSwdocList);
-    } else if (supportType == "workflow"){
+    } else if (supportType === 'workflow') {
       this.communityService.filterSupportType(supportType).then(supportWorkflowList => this.supportWorkflowList = supportWorkflowList);
     }
   }
 
-  //gotoDetail(community: CommunityModel): void {
   gotoDetail(pageUrl: string): void {
       console.log('component url : ', pageUrl);
       if (pageUrl === 'faqs') {
@@ -154,7 +150,7 @@ export class CommunityListComponent implements OnInit {
         )
             .subscribe(
                 response => this.notifications = response
-            )
+            );
     }
 
     isLoggedIn() {
