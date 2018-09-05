@@ -40,11 +40,15 @@
 
 
     <a id="all-software"
-       (click)="activeResearchProblem=null;activeSoftwareType=null;getSoftwareList(); $event.stopPropagation(); onSelect(null)">All
+       (click)="resetSelections(); getSoftwareList(); $event.stopPropagation();">All
       Software</a>
     <mat-form-field id="search">
-      <input matInput #searchBox id="search-box" (keyup)="searchSoftware(searchBox.value)"
-             placeholder="search software"/>
+      <input matInput #searchBox
+             type="search"
+             id="search-box"
+             [(ngModel)]="activeNameSearch"
+             (keyup)="filterSelections()"
+             placeholder="Search software"/>
       <span class="icon-search"></span>
     </mat-form-field>
   </div>
@@ -54,7 +58,7 @@
       <div class="swiper-wrapper">
         <div *ngFor="let swt of swtList" class="swiper-slide" [class.selected]="swt.name === filterName">
           <a id="{{swt.id}}" class="sw-type-icon-med sw-type-icon-{{swt.name}}"
-             (click)="filterSoftwareType(swt.name, 'swt'); $event.stopPropagation(); onSelect(swt)"></a>
+             (click)="filterSoftwareType(swt.name, 'swt'); $event.stopPropagation();"></a>
         </div>
       </div>
       <div class="swiper-button-next arrow-right swiper-button-white"></div>
@@ -62,17 +66,6 @@
     </swiper>
   </div>
 </div>
-
-<!-- info alert box
-<div class="container">
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1 alert alert-info">
-      <a href="#" class="close" data-dismiss="alert">&times;</a>
-      <p class="text-info">Filtered searching by Research Problem and Software Type coming soon.
-        Search box currently supports filtering by software title.</p>
-    </div>
-  </div>
-</div>-->
 
 <!-- Software registry listings -->
 <mat-grid-list class="software-list" cols="3" rowHeight="250px">

@@ -19,6 +19,7 @@ export class SoftwareListComponent implements OnInit {
   private readonly researchProblems: {};
   activeSoftwareType = null;
   activeResearchProblem = null;
+  activeNameSearch = null;
   filteredList: SoftwareModel[];
 
   config: Object = {
@@ -57,11 +58,6 @@ export class SoftwareListComponent implements OnInit {
     this.filteredList = [];
   }
 
-
-  log(ob) {
-    console.log(ob);
-  }
-
   ngOnInit(): void {
     this.getSoftwareList();
 
@@ -73,7 +69,7 @@ export class SoftwareListComponent implements OnInit {
   }
 
 
-  hasResearchProblemByID(software: SoftwareModel, id: string) {
+  hasResearchProblemByID(software: SoftwareModel, id: string): boolean {
     if (id === null) {
       return true;
     }
@@ -85,7 +81,7 @@ export class SoftwareListComponent implements OnInit {
     return false;
   }
 
-  hasSoftwareTypeByID(software: SoftwareModel, id: string) {
+  hasSoftwareTypeByID(software: SoftwareModel, id: string): boolean {
     if (id === null) {
       return true;
     }
@@ -98,13 +94,22 @@ export class SoftwareListComponent implements OnInit {
     return false;
   }
 
-  //
+  matchesNameSearch(software: SoftwareModel, name: string) {
+    if (name === null) {
+      return true;
+    }
+    return software.short_title.toLowerCase().includes(name.toLowerCase());
+  }
+
+  // Filter the software based on the menu
   filterSelections() {
+
     this.filteredList = [];
 
     for (const software of this.softwareList){
       if (this.hasResearchProblemByID(software, this.activeResearchProblem) &&
-          this.hasSoftwareTypeByID(software, this.activeSoftwareType)) {
+          this.hasSoftwareTypeByID(software, this.activeSoftwareType) &&
+          this.matchesNameSearch(software, this.activeNameSearch)) {
         this.filteredList.push(software);
       }
     }
@@ -133,8 +138,10 @@ export class SoftwareListComponent implements OnInit {
     this.filterSelections();
   }
 
-  onSelect(filter: FilterModel): void {
-    this.selectedFilter = filter;
+  resetSelections(): void {
+    this.activeNameSearch = null;
+    this.activeSoftwareType = null;
+    this.activeResearchProblem = null;
   }
 
   gotoDetail(software: SoftwareModel): void {
