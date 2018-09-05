@@ -1,12 +1,12 @@
 <div class="page-wrapper">
-    <md-toolbar class="toolbar-transparent">
+    <mat-toolbar class="toolbar-transparent">
         <div class="menu-wrapper">
             <div><br><br>
 
             </div>
             <span class="page-title">My Account</span>
         </div>
-    </md-toolbar>
+    </mat-toolbar>
     <div class="page-details">
         <div class="nmrbox-custom-container container">
             <div class="row">
@@ -68,7 +68,7 @@
                                     <div class="text-right">
                                         <!--<a routerLink="/signin" data-original-title="Edit user profile" data-toggle="tooltip" type="button"
                                            class="btn btn-sm btn-warning"><i class="fa fa-pencil fa-2x"></i>Update Profile</a>-->
-                                        <a md-button routerLink="/profile-update" routerLinkActive="active">Update Profile</a>
+                                        <a mat-button routerLink="/profile-update" routerLinkActive="active">Update Profile</a>
                                     </div>
                                 </div>
                             </div>
@@ -143,8 +143,8 @@
                                     </div>
                                     <div class="panel-footer">
                                         <div class="text-right">
-                                            <a md-button *ngIf="showHide" type="submit" (click)="onPasswordResetSubmit(passReset)">Save</a>
-                                            <a md-button (click)="changeShowStatus()">Password Reset</a>
+                                            <a mat-button *ngIf="showHide" type="submit" (click)="onPasswordResetSubmit(passReset)">Save</a>
+                                            <a mat-button (click)="changeShowStatus()">Password Reset</a>
                                         </div>
                                     </div>
                                 </form>

@@ -1,26 +1,26 @@
-<md-toolbar color="primary">
+<mat-toolbar color="primary">
 
     <div class="nav-wrapper">
       <nav class="main-navbar">
-        <a md-button routerLink="/app" routerLinkActive="active">
+        <a mat-button routerLink="/app" routerLinkActive="active">
           <span class="nav-tab">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="50,5  100,5  125,30  125,80  100,105  50,105  25,80  25, 30" /></svg>
           </span>
           <span class="nmrbox-logo-small-light">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         </a>
-        <a md-button routerLink="/software" routerLinkActive="active">
+        <a mat-button routerLink="/software" routerLinkActive="active">
           <span class="nav-tab">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="50,5  100,5  125,30  125,80  100,105  50,105  25,80  25, 30" /></svg>
           </span>
           <span>Software</span>
         </a>
-        <a md-button routerLink="/community" routerLinkActive="active">
+        <a mat-button routerLink="/community" routerLinkActive="active">
           <span class="nav-tab">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="50,5  100,5  125,30  125,80  100,105  50,105  25,80  25, 30" /></svg>
           </span>
           <span>Community</span>
         </a>
-        <a md-button routerLink="/team" routerLinkActive="active">
+        <a mat-button routerLink="/team" routerLinkActive="active">
           <span class="nav-tab">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="50,5  100,5  125,30  125,80  100,105  50,105  25,80  25, 30" /></svg>
           </span>
@@ -30,18 +30,18 @@
       <span class="spacer"></span>
       <nav class="secondary-navbar">
         <span *ngIf="!isLoggedIn()">
-          <a md-button routerLink="/signin" routerLinkActive="active">Sign in</a>
+          <a mat-button routerLink="/signin" routerLinkActive="active">Sign in</a>
           <span>|</span>
-          <a md-button routerLink="/signup" routerLinkActive="active">Sign up</a>
+          <a mat-button routerLink="/signup" routerLinkActive="active">Sign up</a>
         </span>
         <span *ngIf="isLoggedIn()">
-          <a md-button routerLink="/user-dashboard" routerLinkActive="active">My Account</a>
+          <a mat-button routerLink="/user-dashboard" routerLinkActive="active">My Account</a>
           <span>|</span>
-          <a md-button (click)="signOut()" routerLinkActive="active">Sign out</a>
+          <a mat-button (click)="signOut()" routerLinkActive="active">Sign out</a>
         </span>
       </nav>
     </div>
   <div>
   </div>
-</md-toolbar>
+</mat-toolbar>
 <router-outlet></router-outlet>

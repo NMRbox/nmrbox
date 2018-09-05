@@ -7,17 +7,17 @@
     width: 95%;
     margin: 0 !important;
 }
-md-card {
+mat-card {
     width: 75%;
     margin: 10px 0px;
     border: 1px solid #48b0e3;
 }
 
-md-card md-card-header{
+mat-card mat-card-header{
     width: 80%;
 
 }
 
-md-card md-card-header md-card-title {
+mat-card mat-card-header mat-card-title {
 
 }

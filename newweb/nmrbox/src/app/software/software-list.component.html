@@ -3,53 +3,62 @@
 <div class="sw-filters-container">
   <div class="sw-filters">
 
-
-      <md-select
+    <mat-form-field>
+      <mat-select
         *ngIf='researchProblems'
-        id="rp-select"
         [(ngModel)]="activeResearchProblem"
         placeholder="Research problem">
-        <md-option
+        <mat-option
           (click)="filterSelections()"
-          [value]='null'>Show all</md-option>
-        <md-option
+          [value]='null'>Show all
+        </mat-option>
+        <mat-option
           (click)="filterSelections()"
           *ngFor="let type_id of objectKeys(researchProblems)"
           [value]="type_id"
-          (click)="filterSelections()">{{researchProblems[type_id]}}</md-option>
-      </md-select>
+          (click)="filterSelections()">{{researchProblems[type_id]}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-      <md-select
+    <mat-form-field>
+      <mat-select
         *ngIf='softwareTypes'
-        id="st-select"
         placeholder="Software type"
         [(ngModel)]="activeSoftwareType">
-        <md-option
+        <mat-option
           (click)="filterSelections()"
-          [value]='null'>Show all</md-option>
-        <md-option
+          [value]='null'>Show all
+        </mat-option>
+        <mat-option
           *ngFor="let type_id of objectKeys(softwareTypes)"
           [value]="type_id"
-          (click)="filterSelections()">{{softwareTypes[type_id]}}</md-option>
-      </md-select>
+          (click)="filterSelections()">{{softwareTypes[type_id]}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
 
-    <a id="all-software" (click)="activeResearchProblem=null;activeSoftwareType=null;getSoftwareList(); $event.stopPropagation(); onSelect(null)">All Software</a>
-    <md-input-container id="search">
-      <input mdInput #searchBox id="search-box" (keyup)="searchSoftware(searchBox.value)" placeholder="search software" />
+    <a id="all-software"
+       (click)="activeResearchProblem=null;activeSoftwareType=null;getSoftwareList(); $event.stopPropagation(); onSelect(null)">All
+      Software</a>
+    <mat-form-field id="search">
+      <input matInput #searchBox id="search-box" (keyup)="searchSoftware(searchBox.value)"
+             placeholder="search software"/>
       <span class="icon-search"></span>
-    </md-input-container>
+    </mat-form-field>
   </div>
 
   <div id="software-types-menu" class="sw-menu-wrapper my-fader" [swFiltersOpen]="!swFiltersOpen">
     <swiper [config]="config">
-        <div class="swiper-wrapper">
-          <div *ngFor="let swt of swtList" class="swiper-slide" [class.selected]="swt.name === filterName" >
-            <a id="{{swt.id}}" class="sw-type-icon-med sw-type-icon-{{swt.name}}" (click)="filterSoftwareType(swt.name, 'swt'); $event.stopPropagation(); onSelect(swt)"></a>
-          </div>
+      <div class="swiper-wrapper">
+        <div *ngFor="let swt of swtList" class="swiper-slide" [class.selected]="swt.name === filterName">
+          <a id="{{swt.id}}" class="sw-type-icon-med sw-type-icon-{{swt.name}}"
+             (click)="filterSoftwareType(swt.name, 'swt'); $event.stopPropagation(); onSelect(swt)"></a>
         </div>
-        <div class="swiper-button-next arrow-right swiper-button-white"></div>
-        <div class="swiper-button-prev arrow-left swiper-button-white"></div>
+      </div>
+      <div class="swiper-button-next arrow-right swiper-button-white"></div>
+      <div class="swiper-button-prev arrow-left swiper-button-white"></div>
     </swiper>
   </div>
 </div>
@@ -66,20 +75,21 @@
 </div>-->
 
 <!-- Software registry listings -->
-<md-grid-list class="software-list" cols="3" rowHeight="250px">
-  <md-grid-tile class="tile-dashed" *ngFor="let software of filteredList" (click)="gotoDetail(software); $event.stopPropagation()">
-    <md-card class="sw-card">
-      <md-card-header>
-        <md-card-title>{{software.short_title}}</md-card-title>
-      </md-card-header>
-      <md-card-content>
+<mat-grid-list class="software-list" cols="3" rowHeight="250px">
+  <mat-grid-tile class="tile-dashed" *ngFor="let software of filteredList"
+                 (click)="gotoDetail(software); $event.stopPropagation()">
+    <mat-card class="sw-card">
+      <mat-card-header>
+        <mat-card-title>{{software.short_title}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
         <p>
           {{software.synopsis}}
         </p>
-      </md-card-content>
+      </mat-card-content>
       <ul class="icon-list">
         <li *ngFor="let type of software.software_types" class="sw-type-icon-small sw-type-icon-{{type}}"></li>
       </ul>
-    </md-card>
-  </md-grid-tile>
-</md-grid-list>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

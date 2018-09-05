@@ -4,20 +4,20 @@
 <div class="section-submenu section-submenu-community blue-bg"></div>
 <div class="tab-group-container">
 
-<md-tab-group (selectedIndexChange)="selectedIndexChange($event)" [selectedIndex]="selectedIndex">
+<mat-tab-group (selectedIndexChange)="selectedIndexChange($event)" [selectedIndex]="selectedIndex">
 
-    <md-tab id="com-support" label="Support" class="co-sub-icon co-icon-med co-icon-support">
+    <mat-tab id="com-support" label="Support" class="co-sub-icon co-icon-med co-icon-support">
 
   <div class="sw-filters-container">
       <!--<div class="sw-filters">
-        <md-select id="rp-select" placeholder="Research problem"></md-select>
-        <md-select id="st-select" class="menu-open" placeholder="Software type"></md-select>
-        <md-select id="sw-select" class="menu-open" placeholder="Software package"></md-select>
+        <mat-select id="rp-select" placeholder="Research problem"></mat-select>
+        <mat-select id="st-select" class="menu-open" placeholder="Software type"></mat-select>
+        <mat-select id="sw-select" class="menu-open" placeholder="Software package"></mat-select>
         <a id="all-software" (click)="getCommunityList(); $event.stopPropagation()">Clear filters</a>
-        <md-input-container id="search">
-          <input mdInput #searchBox id="search-box" (keyup)="searchSoftware(searchBox.value)" placeholder="search support"/>
+        <mat-form-field id="search">
+          <input matInput #searchBox id="search-box" (keyup)="searchSoftware(searchBox.value)" placeholder="search support"/>
           <span class="icon-search"></span>
-        </md-input-container>
+        </mat-form-field>
       </div>-->
       <div id="software-types-menu" class="sw-menu-wrapper hidden">
         <swiper [config]="config">
@@ -39,53 +39,53 @@
       <div class="grid-content-wrapper">
       <h3 class="blue">NMRbox Support</h3>
 
-        <md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
-          <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('documentation'); $event.stopPropagation()">
-            <md-card class="sw-card tile-card-short">
-              <md-card-header>
-                <md-card-title>Getting Started</md-card-title>
-              </md-card-header>
-              <md-card-content>
+        <mat-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
+          <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('documentation'); $event.stopPropagation()">
+            <mat-card class="sw-card tile-card-short">
+              <mat-card-header>
+                <mat-card-title>Getting Started</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
                 <p>
                   NMRbox center overview
                 </p>
                 <br/>
                 <!--<a href="/">Read more</a>-->
                 <a (click)="gotoDetail('overview'); $event.stopPropagation();">Read More</a>
-              </md-card-content>
-            </md-card>
-          </md-grid-tile>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
 
-        <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('faqs'); $event.stopPropagation()">
-          <md-card class="sw-card tile-card-short">
-            <md-card-header>
-              <md-card-title>NMRbox FAQs</md-card-title>
-            </md-card-header>
-            <md-card-content>
+        <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('faqs'); $event.stopPropagation()">
+          <mat-card class="sw-card tile-card-short">
+            <mat-card-header>
+              <mat-card-title>NMRbox FAQs</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
               <p>
                 Here are some tips and answers to frequently asked questions from our NMRbox Community.
               </p>
               <br/>
               <a (click)="gotoDetail('faqs')">Read more</a>
-            </md-card-content>
-          </md-card>
-        </md-grid-tile>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
 
-        <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('contact-us'); $event.stopPropagation()">
-          <md-card class="sw-card tile-card-short">
-            <md-card-header>
-              <md-card-title>Contact NMRbox support</md-card-title>
-            </md-card-header>
-            <md-card-content>
+        <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('contact-us'); $event.stopPropagation()">
+          <mat-card class="sw-card tile-card-short">
+            <mat-card-header>
+              <mat-card-title>Contact NMRbox support</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
               <p>
                 We have a team ready to assist you with your NMRbox support needs
               </p>
               <br/>
               <a (click)="gotoDetail('contact-us')">Read more</a>
-            </md-card-content>
-          </md-card>
-        </md-grid-tile>
-      </md-grid-list>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
       </div>
     </div>
     <div class="divider divider-dashed"></div>
@@ -93,39 +93,39 @@
       <div class="grid-content-wrapper">
       <h3 class="blue">Tutorials</h3>
 
-          <md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
-              <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('acknowledge-us'); $event.stopPropagation()">
-                  <md-card class="sw-card tile-card-short">
-                      <md-card-header>
-                          <md-card-title>Acknowledge NMRbox</md-card-title>
-                      </md-card-header>
-                      <md-card-content>
+          <mat-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
+              <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('acknowledge-us'); $event.stopPropagation()">
+                  <mat-card class="sw-card tile-card-short">
+                      <mat-card-header>
+                          <mat-card-title>Acknowledge NMRbox</mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
                           <p>
                               How to acknowledge NMRbox
                           </p>
                           <br/>
                           <a (click)="gotoDetail('acknowledge-us'); $event.stopPropagation();">Read More</a>
-                      </md-card-content>
-                  </md-card>
-              </md-grid-tile>
+                      </mat-card-content>
+                  </mat-card>
+              </mat-grid-tile>
 
-              <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('initiating-a-collaboration'); $event.stopPropagation()">
-                  <md-card class="sw-card tile-card-short">
-                      <md-card-header>
-                          <md-card-title>Collaboration with NMRbox Team</md-card-title>
-                      </md-card-header>
-                      <md-card-content>
+              <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('initiating-a-collaboration'); $event.stopPropagation()">
+                  <mat-card class="sw-card tile-card-short">
+                      <mat-card-header>
+                          <mat-card-title>Collaboration with NMRbox Team</mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
                           <p>
                               Instruction of how to initiate a collaboration with the NMRbox Team.
                           </p>
                           <br/>
                           <a (click)="gotoDetail('initiating-a-collaboration'); $event.stopPropagation();">Read More</a>
-                      </md-card-content>
-                  </md-card>
-              </md-grid-tile>
+                      </mat-card-content>
+                  </mat-card>
+              </mat-grid-tile>
 
 
-          </md-grid-list>
+          </mat-grid-list>
 
       </div>
     </div>
@@ -133,53 +133,53 @@
     <div class="grid-outer-wrapper">
       <div class="grid-content-wrapper">
       <h3 class="blue">Software documentation</h3>
-          <md-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
-              <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('documentation'); $event.stopPropagation()">
-                  <md-card class="sw-card tile-card-short">
-                      <md-card-header>
-                          <md-card-title>User Guide</md-card-title>
-                      </md-card-header>
-                      <md-card-content>
+          <mat-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
+              <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('documentation'); $event.stopPropagation()">
+                  <mat-card class="sw-card tile-card-short">
+                      <mat-card-header>
+                          <mat-card-title>User Guide</mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
                           <p>
                               NMRbox Dcoumentation
                           </p>
                           <br/>
                           <!--<a href="/">Read more</a>-->
                           <a (click)="gotoDetail('documentation'); $event.stopPropagation();">Read More</a>
-                      </md-card-content>
-                  </md-card>
-              </md-grid-tile>
+                      </mat-card-content>
+                  </mat-card>
+              </mat-grid-tile>
 
-              <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('licensing'); $event.stopPropagation()">
-                  <md-card class="sw-card tile-card-short">
-                      <md-card-header>
-                          <md-card-title>Licensing</md-card-title>
-                      </md-card-header>
-                      <md-card-content>
+              <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('licensing'); $event.stopPropagation()">
+                  <mat-card class="sw-card tile-card-short">
+                      <mat-card-header>
+                          <mat-card-title>Licensing</mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
                           <p>
                               NMRbox User License
                           </p>
                           <br/>
                           <a (click)="gotoDetail('licensing'); $event.stopPropagation();">Read More</a>
-                      </md-card-content>
-                  </md-card>
-              </md-grid-tile>
+                      </mat-card-content>
+                  </mat-card>
+              </mat-grid-tile>
 
-              <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('nihresources'); $event.stopPropagation()">
-                  <md-card class="sw-card tile-card-short">
-                      <md-card-header>
-                          <md-card-title>NIH Resources</md-card-title>
-                      </md-card-header>
-                      <md-card-content>
+              <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('nihresources'); $event.stopPropagation()">
+                  <mat-card class="sw-card tile-card-short">
+                      <mat-card-header>
+                          <mat-card-title>NIH Resources</mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
                           <p>
                               NIH Biomedical Technology Resources
                           </p>
                           <br/>
                           <a (click)="gotoDetail('nihresources')">Read more</a>
-                      </md-card-content>
-                  </md-card>
-              </md-grid-tile>
-          </md-grid-list>
+                      </mat-card-content>
+                  </mat-card>
+              </mat-grid-tile>
+          </mat-grid-list>
 
       </div>
     </div>
@@ -188,46 +188,46 @@
       <div class="grid-content-wrapper">
       <h3 class="blue">Publications</h3>
 
-          <md-grid-list class="support-list grid-dashed workflow-list" cols="3" rowHeight="180px">
-            <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('publications'); $event.stopPropagation()">
-              <md-card class="sw-card tile-card-short">
-                <md-card-header>
-                  <md-card-title>NMRbox Publications</md-card-title>
-                </md-card-header>
-                <md-card-content>
+          <mat-grid-list class="support-list grid-dashed workflow-list" cols="3" rowHeight="180px">
+            <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('publications'); $event.stopPropagation()">
+              <mat-card class="sw-card tile-card-short">
+                <mat-card-header>
+                  <mat-card-title>NMRbox Publications</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
                   <p>
                     Lists of NMRbox research journal and publications
                   </p>
                   <br/>
                     <a (click)="gotoDetail('publications')">Read more</a>
-                </md-card-content>
-              </md-card>
-            </md-grid-tile>
+                </mat-card-content>
+              </mat-card>
+            </mat-grid-tile>
 
 
-            <md-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('newsletters'); $event.stopPropagation()">
-              <md-card class="sw-card tile-card-short">
-                <md-card-header>
-                  <md-card-title>NMRbox Newsletter</md-card-title>
-                </md-card-header>
-                <md-card-content>
+            <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('newsletters'); $event.stopPropagation()">
+              <mat-card class="sw-card tile-card-short">
+                <mat-card-header>
+                  <mat-card-title>NMRbox Newsletter</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
                   <p>
                       Our first edition of the "Inside NMRbox" newsletter is now available
                   </p>
                   <br/>
                     <a (click)="gotoDetail('publications')">Read more</a>
-                </md-card-content>
-              </md-card>
-            </md-grid-tile>
-      </md-grid-list>
+                </mat-card-content>
+              </mat-card>
+            </mat-grid-tile>
+      </mat-grid-list>
       </div>
     </div>
     <div class="divider divider-dashed"></div>
     <br/>
     <br/>
-  </md-tab>
+  </mat-tab>
 
-    <md-tab id="com-events" label="Events">
+    <mat-tab id="com-events" label="Events">
         <div class="divider divider-dashed"></div>
         <div class="grid-outer-wrapper gray-bg">
             <div class="grid-content-wrapper">
@@ -241,14 +241,14 @@
                     </div>
                 </div>
                 <h2 class="blue">Upcoming</h2>
-                <md-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
-                    <md-grid-tile class="tile-solid" *ngFor="let event of upcoming">
-                        <md-card class="workshop-card">
+                <mat-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
+                    <mat-grid-tile class="tile-solid" *ngFor="let event of upcoming">
+                        <mat-card class="workshop-card">
                             <form (ngSubmit)="onWorkshopRegister(f)" #f="ngForm" (ngSubmit)="onSubmitWorkshops()">
-                                <md-card-header>
-                                    <md-card-title>{{event.title}}</md-card-title>
-                                </md-card-header>
-                                <md-card-content>
+                                <mat-card-header>
+                                    <mat-card-title>{{event.title}}</mat-card-title>
+                                </mat-card-header>
+                                <mat-card-content>
                                     <p>
                                         {{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}
                                     </p>
@@ -277,24 +277,24 @@
                                         </ng-template>
                                     </div>
 
-                                </md-card-content>
+                                </mat-card-content>
                             </form>
-                        </md-card>
-                    </md-grid-tile>
-                </md-grid-list>
+                        </mat-card>
+                    </mat-grid-tile>
+                </mat-grid-list>
             </div>
         </div>
         <div class="divider divider-dashed"></div>
         <div class="grid-outer-wrapper blue-med-light-bg">
             <div class="grid-content-wrapper">
                 <h2 class="blue">Past Events</h2>
-                <md-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
-                    <md-grid-tile class="tile-solid" *ngFor="let event of completed">
-                        <md-card class="workshop-card">
-                            <md-card-header>
-                                <md-card-title>{{event.title}}</md-card-title>
-                            </md-card-header>
-                            <md-card-content>
+                <mat-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
+                    <mat-grid-tile class="tile-solid" *ngFor="let event of completed">
+                        <mat-card class="workshop-card">
+                            <mat-card-header>
+                                <mat-card-title>{{event.title}}</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
                                 <p>
                                     {{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}
                                 </p>
@@ -304,18 +304,18 @@
                                 <p>
                                     <a href="{{event.url}}">More information</a>
                                 </p>
-                            </md-card-content>
-                            <md-card-actions>
+                            </mat-card-content>
+                            <mat-card-actions>
 
-                            </md-card-actions>
-                        </md-card>
-                    </md-grid-tile>
-                </md-grid-list>
+                            </mat-card-actions>
+                        </mat-card>
+                    </mat-grid-tile>
+                </mat-grid-list>
             </div>
         </div>
-    </md-tab>
+    </mat-tab>
 
-    <md-tab id="com-forum" label="Forum">
+    <mat-tab id="com-forum" label="Forum">
         <!--<div class="divider divider-dashed hidden"></div>
         <div class="grid-outer-wrapper gray-bg">
 
@@ -335,63 +335,63 @@
 
 
 
-    </md-tab>
+    </mat-tab>
 
 
-    <!--<md-tab id="com-blog" label="Blog" class="co-sub-icon co-icon-med co-icon-blog">
+    <!--<mat-tab id="com-blog" label="Blog" class="co-sub-icon co-icon-med co-icon-blog">
     <div class="sw-filters-container sw-filters-search-only">
       <div class="sw-filters">
-        <md-input-container id="search">
-          <input mdInput #searchBox id="search-box" (keyup)="searchSoftware(searchBox.value)" placeholder="search blog" />
+        <mat-form-field id="search">
+          <input matInput #searchBox id="search-box" (keyup)="searchSoftware(searchBox.value)" placeholder="search blog" />
           <span class="icon-search"></span>
-        </md-input-container>
+        </mat-form-field>
       </div>
     </div>
     <div class="divider divider-dashed hidden"></div>
     <div class="grid-outer-wrapper gray-bg">
       <div class="grid-content-wrapper">
       <h3 class="blue">Most Recent</h3>
-      <md-grid-list class="software-list" cols="3" rowHeight="335px">
-        <md-grid-tile class="tile-solid" *ngFor="let blog of blogMostRecentList" (click)="gotoDetail(blog); $event.stopPropagation()">
-          <md-card class="sw-card">
-            <img md-card-image src="{{blog.url}}">
-            <md-card-header>
-              <md-card-title>{{blog.name}}</md-card-title>
-            </md-card-header>
-            <md-card-content>
+      <mat-grid-list class="software-list" cols="3" rowHeight="335px">
+        <mat-grid-tile class="tile-solid" *ngFor="let blog of blogMostRecentList" (click)="gotoDetail(blog); $event.stopPropagation()">
+          <mat-card class="sw-card">
+            <img mat-card-image src="{{blog.url}}">
+            <mat-card-header>
+              <mat-card-title>{{blog.name}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
               <p>
                 {{blog.synopsis}}
               </p>
               <a href="/">Read more</a>
-            </md-card-content>
-          </md-card>
-        </md-grid-tile>
-      </md-grid-list>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
       </div>
     </div>
     <div class="divider divider-dashed"></div>
     <div class="grid-outer-wrapper blue-bg">
       <div class="grid-content-wrapper">
       <h3 class="blue">This Month</h3>
-      <md-grid-list class="software-list" cols="3" rowHeight="335px">
-        <md-grid-tile class="tile-solid" *ngFor="let blog of blogNextList" (click)="gotoDetail(blog); $event.stopPropagation()">
-          <md-card class="sw-card">
-            <img md-card-image src="{{blog.url}}">
-            <md-card-header>
-              <md-card-title>{{blog.name}}</md-card-title>
-            </md-card-header>
-            <md-card-content>
+      <mat-grid-list class="software-list" cols="3" rowHeight="335px">
+        <mat-grid-tile class="tile-solid" *ngFor="let blog of blogNextList" (click)="gotoDetail(blog); $event.stopPropagation()">
+          <mat-card class="sw-card">
+            <img mat-card-image src="{{blog.url}}">
+            <mat-card-header>
+              <mat-card-title>{{blog.name}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
               <p>
                 {{blog.synopsis}}
               </p>
               <a href="/">Read more</a>
-            </md-card-content>
-          </md-card>
-        </md-grid-tile>
-      </md-grid-list>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
       </div>
     </div>
-  </md-tab>-->
+  </mat-tab>-->
 
-</md-tab-group>
+</mat-tab-group>
 </div>

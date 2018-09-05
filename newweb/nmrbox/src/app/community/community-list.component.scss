@@ -22,7 +22,7 @@
   
 }
 
-md-grid-list {
+mat-grid-list {
   max-width: auto; /* constrained by tab container */
   width: 100%; /* constrained by tab container */
   margin: 10px auto;
@@ -58,7 +58,7 @@ md-grid-list {
     margin: 20px;
     background: #f4f4f4;
     border: 1px solid #d9edf7;
-    md-card-header {
+    mat-card-header {
       font-weight: bold;
       background: #d9edf7;
       padding: 20px 10px;
@@ -71,7 +71,7 @@ md-grid-list {
       line-height: 2%;
       margin: 6px 0;
     }
-    md-card-content{
+    mat-card-content{
       padding: 10px;
       line-height: 5%;
     }
@@ -93,14 +93,14 @@ md-grid-list {
     min-width: 250px;
   }
 }
-md-grid-list.support-list {
+mat-grid-list.support-list {
   margin-left: 2px;
 }
 
 
 
 #com-support-nmrbox .grid-content-wrapper {
-  md-grid-list {
+  mat-grid-list {
     margin-left: -15px;
   }
 }
@@ -110,7 +110,7 @@ md-grid-list.support-list {
     box-shadow: none !important;
     border: 0px;
 }
-.mat-grid-tile:hover md-card {
+.mat-grid-tile:hover mat-card {
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12) !important;
 }
 
@@ -145,7 +145,7 @@ md-grid-list.support-list {
   }
 }
 
-md-card-title {
+mat-card-title {
   font-size: 16px;
   font-weight: bold;
 }

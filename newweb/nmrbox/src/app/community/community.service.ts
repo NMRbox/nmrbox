@@ -75,7 +75,7 @@ export class CommunityService {
 
     getCommunityList(): Promise<CommunityModel[]> {
     return this.http
-      .get(this.blogUrl)
+      .get(this.appUrl + `/` + this.blogUrl)
       .toPromise()
       .then(response => response.json().data as CommunityModel[])
       .catch(this.handleError);
@@ -83,14 +83,14 @@ export class CommunityService {
 
     getSupportList(): Promise<CommunityModel[]> {
     return this.http
-      .get(this.supportUrl)
+      .get(this.appUrl + `/` + this.supportUrl)
       .toPromise()
       .then(response => response.json().data as CommunityModel[])
       .catch(this.handleError);
     }
     getSupportSubList(): Promise<CommunityModel[]> {
     return this.http
-      .get(this.supportUrl)
+      .get(this.appUrl + `/` + this.supportUrl)
       .toPromise()
       .then(response => response.json().data as CommunityModel[])
       .catch(this.handleError);
@@ -98,8 +98,7 @@ export class CommunityService {
 
     /* test (redirecting from router for page details */
     getPageContent(pageUrl: string): Promise<CommunityModel> {
-        let url = this.appUrl + '/' + pageUrl;
-        console.log("URL: ", url);
+        const url = this.appUrl + '/' + pageUrl;
         return this.http
           .get(url)
           .toPromise()

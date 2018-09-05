@@ -6,7 +6,7 @@ import { SoftwareModel } from './software.model';
 import { SoftwareService } from './software.service';
 import { FilterModel } from '../filter.model';
 
-import {MdFormFieldModule, MdInputModule} from '@angular/material';
+import {MatFormFieldModule, MatInputModule} from '@angular/material';
 
 @Component({
   selector: 'app-my-software-list',
@@ -103,7 +103,8 @@ export class SoftwareListComponent implements OnInit {
     this.filteredList = [];
 
     for (const software of this.softwareList){
-      if (this.hasResearchProblemByID(software, this.activeResearchProblem) && this.hasSoftwareTypeByID(software, this.activeSoftwareType)) {
+      if (this.hasResearchProblemByID(software, this.activeResearchProblem) &&
+          this.hasSoftwareTypeByID(software, this.activeSoftwareType)) {
         this.filteredList.push(software);
       }
     }

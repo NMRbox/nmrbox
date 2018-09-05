@@ -1,5 +1,5 @@
 <div class="community-details-wrapper">
-  <md-toolbar class="toolbar-transparent">
+  <mat-toolbar class="toolbar-transparent">
     <div class="menu-wrapper">
       <button (click)="goBack()">
         <svg width="15px" height="20px" viewBox="0 0 50 80" xml:space="preserve">
@@ -9,14 +9,14 @@
       </button>
       <span class="page-title">Community</span>
     </div>
-  </md-toolbar>
+  </mat-toolbar>
   <div class="community-details" *ngIf="community">
     <h1>{{community?.name}}</h1>
     <h1>{{community?.title}}</h1>
     <section class="section-detail">
       <p class="subheading">{{community?.dateEvent}}</p>
       <p class="subheading">{{community?.synopsis}}</p>
-      <img *ngIf="community.url" md-card-image src="{{community?.url}}" />
+      <img *ngIf="community.url" mat-card-image src="{{community?.url}}" />
       <p *ngIf="community.author" class="subheading">by {{community?.author}}</p>
       <p>{{community?.authorTitle}}</p>
 
@@ -36,7 +36,7 @@
       <p>{{community?.authorTitle}}<br/>
       <a *ngIf="community.authorEmail" href='mailto:{{community?.authorEmail}}'>{{community?.authorEmail}}</a>
       </p>
-      <img md-card-image class="author-photo" src="{{community?.authorPhotoUrl}}" *ngIf="community.authorPhotoUrl" />
+      <img mat-card-image class="author-photo" src="{{community?.authorPhotoUrl}}" *ngIf="community.authorPhotoUrl" />
     </section>
     <br/><br/>
   </div>

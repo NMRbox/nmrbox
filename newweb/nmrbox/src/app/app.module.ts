@@ -5,10 +5,10 @@ import { HttpModule } from '@angular/http';
 
 // Animations & UI
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MdButtonModule, MdCheckboxModule, MdInputModule,
-    MdRadioModule, MdSelectModule, MdMenuModule, MdSidenavModule,
-    MdToolbarModule, MdListModule, MdGridListModule, MdCardModule,
-    MdTabsModule, MdChipsModule
+import { MatButtonModule, MatCheckboxModule, MatInputModule,
+    MatRadioModule, MatSelectModule, MatMenuModule, MatSidenavModule,
+    MatToolbarModule, MatListModule, MatGridListModule, MatCardModule,
+    MatTabsModule, MatChipsModule
 } from '@angular/material';
 
 // Imports for loading & configuring the in-memory web api
@@ -63,11 +63,11 @@ import { ShowHideContainer } from './authentication/show-hide-container';
         FormsModule,
         HttpModule,
         BrowserAnimationsModule,
-        MdButtonModule, MdCheckboxModule,
-        MdInputModule, MdRadioModule, MdSelectModule,
-        MdMenuModule, MdSidenavModule, MdToolbarModule,
-        MdListModule, MdGridListModule, MdTabsModule, MdCardModule,
-        MdChipsModule,
+        MatButtonModule, MatCheckboxModule,
+        MatInputModule, MatRadioModule, MatSelectModule,
+        MatMenuModule, MatSidenavModule, MatToolbarModule,
+        MatListModule, MatGridListModule, MatTabsModule, MatCardModule,
+        MatChipsModule,
         SwiperModule,
         AppRoutingModule,
         CommonModule,
