@@ -1,25 +1,26 @@
 /* Filters: Community only */
 .sw-filters-container {
   .sw-filters {
-      width: 100%;
-      max-width: auto; /* constrained by tab container */
-      margin: 0px auto;
+    width: 100%;
+    max-width: auto; /* constrained by tab container */
+    margin: 0px auto;
   }
 }
+
 .tab-group-container {
   margin-left: 5px;
 
   .grid-content-wrapper {
 
     h3 {
-        margin-left: 16px;
+      margin-left: 16px;
     }
 
     p {
       color: #313131;
     }
   }
-  
+
 }
 
 mat-grid-list {
@@ -51,7 +52,6 @@ mat-grid-list {
     }*/
   }
 
-
   .workshop-card {
     width: 450px;
     height: 215px;
@@ -71,7 +71,7 @@ mat-grid-list {
       line-height: 2%;
       margin: 6px 0;
     }
-    mat-card-content{
+    mat-card-content {
       padding: 10px;
       line-height: 5%;
     }
@@ -93,11 +93,10 @@ mat-grid-list {
     min-width: 250px;
   }
 }
+
 mat-grid-list.support-list {
   margin-left: 2px;
 }
-
-
 
 #com-support-nmrbox .grid-content-wrapper {
   mat-grid-list {
@@ -105,13 +104,14 @@ mat-grid-list.support-list {
   }
 }
 
-.mat-grid-tile:hover{
-    cursor: pointer;
-    box-shadow: none !important;
-    border: 0px;
+.mat-grid-tile:hover {
+  cursor: pointer;
+  box-shadow: none !important;
+  border: 0px;
 }
+
 .mat-grid-tile:hover mat-card {
-    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12) !important;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12) !important;
 }
 
 /* Community */
@@ -122,6 +122,7 @@ mat-grid-list.support-list {
   height: 25px;
   overflow: hidden;
 }
+
 .co-submenu {
   width: 940px;
   display: block;

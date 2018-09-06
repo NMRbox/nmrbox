@@ -6,6 +6,7 @@ h1 {
   font-size: 2em;
   margin-bottom: 0;
 }
+
 h2 {
   font-size: 1.5em;
   color: #888;
@@ -42,8 +43,8 @@ h2 {
       max-width: 90px;
 
       polygon {
-        stroke:$nmrbox-blue-gray; 
-        fill:$nmrbox-blue-gray; 
+        stroke: $nmrbox-blue-gray;
+        fill: $nmrbox-blue-gray;
         stroke-width: 1;
       }
     }
@@ -61,8 +62,8 @@ h2 {
         opacity: 1;
       }
       polygon {
-        stroke:#fff; 
-        fill:#fff; 
+        stroke: #fff;
+        fill: #fff;
       }
     }
   }
@@ -78,6 +79,7 @@ h2 {
 .main-navbar {
   float: left;
 }
+
 nav.secondary-navbar {
   float: right;
 
@@ -91,12 +93,14 @@ nav.secondary-navbar {
     color: #fff;
   }
 }
+
 .nav-wrapper {
   position: relative;
   max-width: 910px;
   width: 910px;
   margin: auto;
 }
+
 /*
 nav a {
   padding: 5px 10px;

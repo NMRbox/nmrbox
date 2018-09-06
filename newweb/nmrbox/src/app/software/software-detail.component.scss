@@ -4,7 +4,7 @@
     margin-top: 20px;
   }
 
- .software-details > h1, section, .menu-wrapper {
+  .software-details > h1, section, .menu-wrapper {
     width: 90%;
     max-width: 900px;
     margin: 0px auto;
@@ -15,14 +15,15 @@
 
     button {
       margin-top: 20px;
-      font-family: Arial;
+      font-family: Arial, serif;
       background-color: transparent;
       border: none;
       padding: 12px 10px 10px 0px;
       border-radius: 0px;
       border-right: 1px solid #e0e0e0;
-      cursor: pointer; cursor: hand;
-      
+      cursor: pointer;
+      cursor: hand;
+
       polyline {
         stroke-width: 3;
         transition: all 100ms ease-in-out;
@@ -37,7 +38,7 @@
     }
     button:disabled {
       background-color: #eee;
-      color: #ccc; 
+      color: #ccc;
       cursor: auto;
     }
     .page-title {

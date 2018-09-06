@@ -1,8 +1,6 @@
 .community-details-wrapper {
-  background-image: url('/assets/bg-graphics/bg-community-support.png');
-  background-repeat: no-repeat;
   background-size: 95%;
-  background-position: 0px -165px;
+  background: url('/assets/bg-graphics/bg-community-support.png') no-repeat 0px -165px;
   min-height: calc(100vh - 50px);
   min-height: -webkit-calc(100vh - 50px);
   min-height: -moz-calc(100vh - 50px);
@@ -45,7 +43,7 @@
 
     button {
       margin-top: 20px;
-      font-family: Arial;
+      font-family: Arial, serif;
       background-color: transparent;
       border: none;
       padding: 12px 10px 10px 0px;

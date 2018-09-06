@@ -1,4 +1,4 @@
-#info-box{
+#info-box {
   margin: 0px auto;
 }
 
@@ -29,13 +29,14 @@ mat-grid-list {
   /* indent content of left cards to align with header & rest of page */
   .tile-dashed:nth-of-type(1), .tile-dashed:nth-of-type(4), .tile-dashed:nth-of-type(7), .tile-dashed:nth-of-type(10), .tile-dashed:nth-of-type(13) {
     mat-card-header, mat-card-content, .icon-list {
-        margin-left: 17px;
+      margin-left: 17px;
     }
   }
 }
-.mat-grid-tile:hover{
-    cursor: pointer;
-    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12) !important;
+
+.mat-grid-tile:hover {
+  cursor: pointer;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12) !important;
 }
 
 ::ng-deep .mat-select-value {
