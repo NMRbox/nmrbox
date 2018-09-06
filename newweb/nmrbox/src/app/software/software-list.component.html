@@ -12,11 +12,32 @@
           (click)="filterSelections()"
           [value]='null'>Show all
         </mat-option>
+        <!--
         <mat-option
-          (click)="filterSelections()"
           *ngFor="let type_id of objectKeys(researchProblems)"
           [value]="type_id"
           (click)="filterSelections()">{{researchProblems[type_id]}}
+        </mat-option>-->
+
+        <mat-option
+          value="option1"
+          (click)="filterSelections()">
+          <a class="rp-icon-large rp-icon-metabolomics"></a>Metabolomics
+        </mat-option>
+        <mat-option
+          value="2"
+          (click)="filterSelections()">c
+          <a class="rp-icon-large rp-icon-protein-dynamics"></a>Protein Dynamics
+        </mat-option>
+        <mat-option
+          value="3"
+          (click)="filterSelections()">
+          <a class="rp-icon-large rp-icon-protein-structure"></a>Protein Structure
+        </mat-option>
+        <mat-option
+          value="4"
+          (click)="filterSelections()">
+          <a class="rp-icon-large rp-icon-intrinsically"></a>Intrinsically Disordered Proteins
         </mat-option>
       </mat-select>
     </mat-form-field>
