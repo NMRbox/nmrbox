@@ -24,7 +24,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'app', pathMatch: 'full' },
     { path: 'software', component: SoftwareListComponent },
     { path: 's/:slug', component: SoftwareDetailComponent },
-    { path: 'software/:filterName', component: SoftwareListComponent },
+    { path: 'software/:filterType/:filter', component: SoftwareListComponent },
     { path: 'c/:pageUrl', component: CommunityDetailComponent },
     { path: 'community', component: CommunityListComponent },
     { path: 'community/:index', component: CommunityListComponent },

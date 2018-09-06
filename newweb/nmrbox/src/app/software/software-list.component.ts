@@ -19,8 +19,9 @@ export class SoftwareListComponent implements OnInit {
   researchProblems: {};
   activeSoftwareType;
   activeResearchProblem;
-  activeNameSearch = null;
+  activeNameSearch;
   filteredList: SoftwareModel[];
+  softwareList: SoftwareModel[];
 
   config: Object = {
     slidesPerView: 'auto',
@@ -32,19 +33,9 @@ export class SoftwareListComponent implements OnInit {
     loop: false
   };
 
-  @Input() softwareList: SoftwareModel[];
-  @Output() listChange: EventEmitter<SoftwareModel[]> = new EventEmitter<SoftwareModel[]>();
-
-  // Filters
-  @Input() swtList: FilterModel[];
-  @Input() isVisible: boolean;
-  @Input() swFiltersOpen: boolean;
-  @Input() selectedFilter: FilterModel;
-
-  // Filters - routing
-  @Input() filterType: string;  // values: 'swt' or 'rp' (i.e. - software type or research problem)
-  @Input() filterName: string;
-
+  /* Routing filters */
+  filterType: 'software' | 'research';
+  filter: string;
 
   objectKeys = Object.keys;
 
@@ -63,17 +54,29 @@ export class SoftwareListComponent implements OnInit {
       null: 'Show all'};
     this.activeResearchProblem = null;
     this.activeSoftwareType = null;
+    this.activeNameSearch = null;
   }
 
   ngOnInit(): void {
     this.getSoftwareList();
 
-    // ToDo: get router params (filterType, filterName)
-    this.route.params.subscribe( params =>
-        this.filterName = params['filterName']
-    );
+    const slugMapper = {'metabolomics': '1', 'protein-dynamics': '2', 'protein-structure': '3',
+                        'intrinsically': '4',
+                        'spectral': '1', 'chemical-shift': '2', 'molecular-modeling': '3', 'structure': '4',
+                        'rdc': '5', 'assignment': '6', 'relaxation': '7'};
 
-  }
+    const parent = this;
+    this.route.params.subscribe(function(params) {
+      if (params['filterType'] === 'software') {
+        parent.activeSoftwareType = slugMapper[params['filter']];
+      } else if (params['filterType'] === 'research') {
+        parent.activeResearchProblem = slugMapper[params['filter']];
+      } else if (params['filterType'] === 'name') {
+        parent.activeNameSearch = params['filter'];
+      }
+      parent.filterSelections();
+    });
+  };
 
 
   hasResearchProblemByID(software: SoftwareModel, id: string): boolean {
@@ -111,6 +114,7 @@ export class SoftwareListComponent implements OnInit {
   // Filter the software based on the menu
   filterSelections() {
 
+    if (!this.softwareList){return;}
     this.filteredList = [];
 
     for (const software of this.softwareList){
