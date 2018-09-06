@@ -15,10 +15,10 @@ import {MatFormFieldModule, MatInputModule} from '@angular/material';
 })
 export class SoftwareListComponent implements OnInit {
 
-  private readonly softwareTypes: {};
-  private readonly researchProblems: {};
-  activeSoftwareType = null;
-  activeResearchProblem = null;
+  softwareTypes: {};
+  researchProblems: {};
+  activeSoftwareType;
+  activeResearchProblem;
   activeNameSearch = null;
   filteredList: SoftwareModel[];
 
@@ -53,9 +53,16 @@ export class SoftwareListComponent implements OnInit {
     private route: ActivatedRoute,
     private softwareService: SoftwareService
   ) {
-    this.softwareTypes = {};
-    this.researchProblems = {};
     this.filteredList = [];
+    this.softwareTypes = {'1': 'Spectrum Analysis', '2': 'Chemical Shift',
+      '3': 'Molecular Modeling', '4': 'Structure Visualization',
+      '5': 'Residual Dipolar Coupling', '6': 'Assignment',
+      '7': 'Relaxation', null: 'Show all'};
+    this.researchProblems = {'1': 'Metabolomics', '2': 'Protein Dynamics',
+      '3': 'Protein Structure', '4': 'Intrinsically Disordered Proteins',
+      null: 'Show all'};
+    this.activeResearchProblem = null;
+    this.activeSoftwareType = null;
   }
 
   ngOnInit(): void {
@@ -74,7 +81,7 @@ export class SoftwareListComponent implements OnInit {
       return true;
     }
     for (const researchProblem of software.research_problems){
-      if (researchProblem['id'] === parseInt(id, 10)) {
+      if (String(researchProblem['id']) === id) {
         return true;
       }
     }
@@ -87,7 +94,7 @@ export class SoftwareListComponent implements OnInit {
     }
 
     for (const softwareType of software.software_type){
-      if (softwareType['id'] === parseInt(id, 10)) {
+      if (String(softwareType['id']) === id) {
         return true;
       }
     }
@@ -118,6 +125,7 @@ export class SoftwareListComponent implements OnInit {
   // Get the full software list
   getSoftwareList(): void {
     this.softwareService.getSoftwareList().then(softwareList => {
+      /* We have this hardcoded now
       for (const s of softwareList){
         for (const type of s.software_type) {
           this.softwareTypes[parseInt(type['id'], 10)] = type['label'];
@@ -125,7 +133,7 @@ export class SoftwareListComponent implements OnInit {
         for (const type of s.research_problems) {
           this.researchProblems[parseInt(type['id'], 10)] = type['label'];
         }
-      }
+      } */
       this.softwareList = softwareList;
       this.filterSelections();
     }

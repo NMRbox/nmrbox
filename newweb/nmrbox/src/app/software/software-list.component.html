@@ -3,11 +3,13 @@
 <div class="sw-filters-container">
   <div class="sw-filters">
 
-    <mat-form-field>
+    <mat-form-field *ngIf="researchProblems">
       <mat-select
-        *ngIf='researchProblems'
         [(ngModel)]="activeResearchProblem"
         placeholder="Research problem">
+        <mat-select-trigger>
+          <span>{{researchProblems[activeResearchProblem]}}</span>
+        </mat-select-trigger>
         <mat-option
           (click)="filterSelections()"
           [value]='null'>Show all
@@ -20,42 +22,83 @@
         </mat-option>-->
 
         <mat-option
-          value="option1"
+          value="1"
           (click)="filterSelections()">
-          <a class="rp-icon-large rp-icon-metabolomics"></a>Metabolomics
+          <a class="rp-icon-large rp-icon-metabolomics"></a>
         </mat-option>
         <mat-option
           value="2"
-          (click)="filterSelections()">c
-          <a class="rp-icon-large rp-icon-protein-dynamics"></a>Protein Dynamics
+          (click)="filterSelections()">
+          <a class="rp-icon-large rp-icon-protein-dynamics"></a>
         </mat-option>
         <mat-option
           value="3"
           (click)="filterSelections()">
-          <a class="rp-icon-large rp-icon-protein-structure"></a>Protein Structure
+          <a class="rp-icon-large rp-icon-protein-structure"></a>
         </mat-option>
         <mat-option
           value="4"
           (click)="filterSelections()">
-          <a class="rp-icon-large rp-icon-intrinsically"></a>Intrinsically Disordered Proteins
+          <a class="rp-icon-large rp-icon-intrinsically"></a>
         </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field>
       <mat-select
-        *ngIf='softwareTypes'
         placeholder="Software type"
         [(ngModel)]="activeSoftwareType">
+        <mat-select-trigger>
+          <span>{{softwareTypes[activeSoftwareType]}}</span>
+        </mat-select-trigger>
         <mat-option
           (click)="filterSelections()"
           [value]='null'>Show all
         </mat-option>
         <mat-option
+          value="1"
+          (click)="filterSelections()">
+          <a class="sw-type-icon-large sw-type-icon-spectral"></a>
+        </mat-option>
+        <mat-option
+          value="2"
+          (click)="filterSelections()">
+          <a class="sw-type-icon-large sw-type-icon-chemical-shift"></a>
+        </mat-option>
+        <mat-option
+          value="3"
+          (click)="filterSelections()">
+          <a class="sw-type-icon-large sw-type-icon-molecular-modeling"></a>
+        </mat-option>
+        <mat-option
+          value="4"
+          (click)="filterSelections()">
+          <a class="sw-type-icon-large sw-type-icon-structure"></a>
+        </mat-option>
+        <mat-option
+          value="5"
+          (click)="filterSelections()">
+          <a class="sw-type-icon-large sw-type-icon-rdc"></a>
+        </mat-option>
+        <mat-option
+          value="6"
+          (click)="filterSelections()">
+          <a class="sw-type-icon-large sw-type-icon-assignment"></a>
+        </mat-option>
+        <mat-option
+          value="7"
+          (click)="filterSelections()">
+          <a class="sw-type-icon-large sw-type-icon-relaxation"></a>
+        </mat-option>
+
+
+
+        <!--
+        <mat-option
           *ngFor="let type_id of objectKeys(softwareTypes)"
           [value]="type_id"
           (click)="filterSelections()">{{softwareTypes[type_id]}}
-        </mat-option>
+        </mat-option>-->
       </mat-select>
     </mat-form-field>
 
