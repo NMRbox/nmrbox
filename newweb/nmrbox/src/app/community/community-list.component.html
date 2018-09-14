@@ -39,7 +39,7 @@
       <div class="grid-content-wrapper">
       <h3 class="blue">NMRbox Support</h3>
 
-        <mat-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
+        <mat-grid-list class="support-list grid-dashed" cols="2" rowHeight="180px">
           <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('documentation'); $event.stopPropagation()">
             <mat-card class="sw-card tile-card-short">
               <mat-card-header>
@@ -47,7 +47,7 @@
               </mat-card-header>
               <mat-card-content>
                 <p>
-                  NMRbox center overview
+                  An comprehensive overview of the NMRbox center mission and objectives.
                 </p>
                 <br/>
                 <!--<a href="/">Read more</a>-->
@@ -56,35 +56,48 @@
             </mat-card>
           </mat-grid-tile>
 
-        <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('faqs'); $event.stopPropagation()">
-          <mat-card class="sw-card tile-card-short">
-            <mat-card-header>
-              <mat-card-title>NMRbox FAQs</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <p>
-                Here are some tips and answers to frequently asked questions from our NMRbox Community.
-              </p>
-              <br/>
-              <a (click)="gotoDetail('faqs')">Read more</a>
-            </mat-card-content>
-          </mat-card>
-        </mat-grid-tile>
+          <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('faqs'); $event.stopPropagation()">
+            <mat-card class="sw-card tile-card-short">
+              <mat-card-header>
+                <mat-card-title>NMRbox FAQs</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>
+                  Here are some tips and answers to frequently asked questions from our NMRbox Community.
+                </p>
+                <br/>
+                <a (click)="gotoDetail('faqs')">Read more</a>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('contact-us'); $event.stopPropagation()">
-          <mat-card class="sw-card tile-card-short">
-            <mat-card-header>
-              <mat-card-title>Contact NMRbox support</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <p>
-                We have a team ready to assist you with your NMRbox support needs
-              </p>
-              <br/>
-              <a (click)="gotoDetail('contact-us')">Read more</a>
-            </mat-card-content>
-          </mat-card>
-        </mat-grid-tile>
+          <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('contact-us'); $event.stopPropagation()">
+            <mat-card class="sw-card tile-card-short">
+              <mat-card-header>
+                <mat-card-title>Contact NMRbox support</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>
+                  We have a team ready to assist you with your NMRbox support needs
+                </p>
+                <br/>
+                <a (click)="gotoDetail('contact-us')">Read more</a>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+
+          <mat-grid-tile class="tile-solid tile-transparent">
+            <mat-card class="sw-card tile-card-short">
+              <mat-card-header>
+                <mat-card-title>Forum</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>
+                  Follow the NMRbox community conversations on our <a href="https://groups.google.com/forum/#!forum/nmrbox" target="_blank">Google group</a>
+                </p>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
       </mat-grid-list>
       </div>
     </div>
@@ -315,12 +328,8 @@
         </div>
     </mat-tab>
 
+  <!--
     <mat-tab id="com-forum" label="Forum">
-        <!--<div class="divider divider-dashed hidden"></div>
-        <div class="grid-outer-wrapper gray-bg">
-
-        </div>-->
-
         <div class="divider divider-dashed"></div>
         <div class="grid-outer-wrapper gray-bg">
             <div class="grid-content-wrapper">
@@ -335,7 +344,7 @@
 
 
 
-    </mat-tab>
+    </mat-tab> -->
 
 
     <!--<mat-tab id="com-blog" label="Blog" class="co-sub-icon co-icon-med co-icon-blog">

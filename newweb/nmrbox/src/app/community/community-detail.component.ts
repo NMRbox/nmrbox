@@ -1,13 +1,13 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Location }               from '@angular/common';
+import { Location } from '@angular/common';
 
-import { CommunityModel }         from './community.model';
-import { CommunityService }  from './community.service';
+import { CommunityModel } from './community.model';
+import { CommunityService } from './community.service';
 
 @Component({
-  selector: 'community-detail',
+  selector: 'app-community-detail',
   templateUrl: './community-detail.component.html',
   styleUrls: [ './community-detail.component.scss' ]
 })

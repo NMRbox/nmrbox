@@ -34,7 +34,6 @@ export class CommunityListComponent implements OnInit {
   @Input() eventsPastList: CommunityModel[];
 
   @Output() listChange: EventEmitter<CommunityModel[]> = new EventEmitter<CommunityModel[]>();
-  selectedCommunity: CommunityModel;
 
   // Tabs
   @Input() selectedIndex= 0;
@@ -73,18 +72,22 @@ export class CommunityListComponent implements OnInit {
 
 
     // Tabs: go to specific subsection
-    this.route.params.subscribe( params =>
-        this.routeIndex = params['index']
+    this.route.params.subscribe( params =>{
+        this.routeIndex = params['index'];
+        this.selectedIndex = this.routeIndex;
+    }
     );
 
-    if (this.routeIndex > -1){
+    if (this.routeIndex > -1) {
       this.selectedIndexChange(this.routeIndex);
     }
   }
 
   // Tabs
   selectedIndexChange(index: number): void {
-    if (!index) index = 0;
+    if (!index) {
+      index = 0;
+    }
     this.selectedIndex = index;
     this.router.navigate(['/community', index]);
   }
@@ -117,7 +120,7 @@ export class CommunityListComponent implements OnInit {
 
   filterSupportType(supportType: string): void {
 
-    if (supportType === 'nmrbox'){
+    if (supportType === 'nmrbox') {
       this.communityService.filterSupportType(supportType).then(supportNmrboxList => this.supportNmrboxList = supportNmrboxList);
     } else if (supportType === 'tutorial') {
       this.communityService.filterSupportType(supportType).then(supportTutorialList => this.supportTutorialList = supportTutorialList);
