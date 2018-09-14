@@ -114,7 +114,8 @@ export class SoftwareListComponent implements OnInit {
   // Filter the software based on the menu
   filterSelections() {
 
-    if (!this.softwareList){return;}
+    if (!this.softwareList) { return; }
+
     this.filteredList = [];
 
     for (const software of this.softwareList){
