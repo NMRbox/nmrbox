@@ -104,9 +104,12 @@ export class CommunityListComponent implements OnInit {
     this.communityService.getBlogList().then(blogList => this.blogList = blogList);
   }*/
   getEventsList(): void {
-    this.communityService.getEventsList().then(eventsList => this.eventsList = eventsList);
-    this.communityService.getUpcomingEventsList().then(upcoming => this.upcoming = upcoming);
-    this.communityService.getCompletedEventsList().then(completed => this.completed = completed);
+    this.communityService.getAllEvents().then(events => {
+      console.log(events);
+      this.eventsList = events[0];
+      this.upcoming = events[1];
+      this.completed = events[2];
+    });
   }
 
   searchSoftware(term: string): void {

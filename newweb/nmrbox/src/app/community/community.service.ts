@@ -47,30 +47,18 @@ export class CommunityService {
   }
   */
 
-    /* Workshop events lists */
-    getEventsList(): Promise<CommunityModel[]> {
-      return this.http
-          .get(this.appUrl + `/` + this.eventsUrl)
-          .toPromise()
-          .then(response => response.json().data as CommunityModel[])
-          .catch(this.handleError);
-    }
-
-    getUpcomingEventsList(): Promise<CommunityModel[]> {
-        return this.http
-            .get(this.appUrl + `/` + this.eventsUrl)
-            .toPromise()
-            .then(response => response.json().data.upcoming as CommunityModel[])
-            .catch(this.handleError);
-    }
-
-    getCompletedEventsList(): Promise<CommunityModel[]> {
-        return this.http
-            .get(this.appUrl + `/` + this.eventsUrl)
-            .toPromise()
-            .then(response => response.json().data.completed as CommunityModel[])
-            .catch(this.handleError);
-    }
+  getAllEvents(): Promise<{}> {
+    return this.http
+      .get(this.appUrl + `/` + this.eventsUrl)
+      .toPromise()
+      .then(response => {
+        const response_json = response.json();
+        return [response_json.data as CommunityModel[],
+                response_json.data.upcoming as CommunityModel[],
+                response_json.data.completed as CommunityModel[]];
+      })
+      .catch(this.handleError);
+  }
 
     getCommunityList(): Promise<CommunityModel[]> {
       return new Promise<CommunityModel[]>(null);
