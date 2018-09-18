@@ -566,6 +566,19 @@ team-list {
   z-index: 1;
 }
 
+.section-banner-thinner {
+  position: relative;
+  display: block;
+  height: 165px;
+  width: 1000px;
+  overflow: none;
+  background-size: 1000px 125px;
+  background-repeat: no-repeat;
+  left: 50%;
+  margin-left: -600px;
+  z-index: 1;
+}
+
 .section-banner-bg {
   position: absolute;
   top: 50px;
@@ -577,7 +590,7 @@ team-list {
 }
 
 .section-banner-software {
-  background-image: url('./assets/section-banners/software-banner.png');
+  background-image: url('./assets/section-banners/software-banner-trimmed.png');
 }
 
 .section-banner-community {
