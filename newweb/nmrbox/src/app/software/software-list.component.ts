@@ -36,8 +36,8 @@ export class SoftwareListComponent implements OnInit {
   /* Routing filters */
   filterType: 'software' | 'research';
   filter: string;
-
-  objectKeys = Object.keys;
+  private researchSlugs;
+  private softwareSlugs;
 
   constructor(
     private router: Router,
@@ -49,9 +49,14 @@ export class SoftwareListComponent implements OnInit {
       '3': 'Molecular Modeling', '4': 'Structure Visualization',
       '5': 'Residual Dipolar Coupling', '6': 'Assignment',
       '7': 'Relaxation', null: 'Show all'};
+    this.softwareSlugs = {'1': 'spectral', '2': 'chemical-shift', '3': 'molecular-modeling', '4': 'structure',
+                          '5': 'rdc', '6': 'assignment', '7': 'relaxation'};
     this.researchProblems = {'1': 'Metabolomics', '2': 'Protein Dynamics',
       '3': 'Protein Structure', '4': 'Intrinsically Disordered Proteins',
       null: 'Show all'};
+    this.researchSlugs = {'1': 'metabolomics', '2': 'protein-dynamics', '3': 'protein-structure',
+      '4': 'intrinsically',
+    };
     this.activeResearchProblem = null;
     this.activeSoftwareType = null;
     this.activeNameSearch = null;
@@ -64,6 +69,7 @@ export class SoftwareListComponent implements OnInit {
                         'intrinsically': '4',
                         'spectral': '1', 'chemical-shift': '2', 'molecular-modeling': '3', 'structure': '4',
                         'rdc': '5', 'assignment': '6', 'relaxation': '7'};
+
 
     const parent = this;
     this.route.params.subscribe(function(params) {

@@ -144,7 +144,7 @@
         </p>
       </mat-card-content>
       <ul class="icon-list">
-        <li *ngFor="let type of software.software_types" class="sw-type-icon-small sw-type-icon-{{type}}"></li>
+        <li *ngFor="let type of software.software_type" class="sw-type-icon-small sw-type-icon-{{softwareSlugs[type['id']]}}"></li>
       </ul>
     </mat-card>
   </mat-grid-tile>
