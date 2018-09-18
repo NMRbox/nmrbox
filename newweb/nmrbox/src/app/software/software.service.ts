@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
+import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
 import { SoftwareModel } from './software.model';
@@ -9,8 +10,6 @@ import {SoftwareMetadataModel} from './software-metadata.model';
 @Injectable()
 export class SoftwareService {
 
-  private appUrl = 'https://apidev.nmrbox.org';  // URL to web api
-  // private appUrl = 'http://nmrbox.test';  // URL to web api
   private baseUrl = 'api/softwareList';  // URL to web api
   private swtUrl = 'registry';  // URL to web api
   private swtFltrUrl = 'registry/filter-software-search';  // URL to web api
@@ -30,7 +29,7 @@ export class SoftwareService {
 
   getSoftwareList(): Promise<SoftwareModel[]> {
     return this.http
-      .get(this.appUrl + `/` + this.swtUrl)
+      .get(environment.appUrl + `/` + this.swtUrl)
       .toPromise()
       .then(response => response.json().data as SoftwareModel[])
       .catch(this.handleError);
@@ -38,9 +37,9 @@ export class SoftwareService {
 
   getFilter(name: string): Promise<FilterModel> {
     console.log('getSwt, name: ', name);
-    console.log('URL: ', this.appUrl + `/?name=${name}`);
+    console.log('URL: ', environment.appUrl + `/?name=${name}`);
     return this.http
-        .get(this.appUrl + `/?name=${name}`)
+        .get(environment.appUrl + `/?name=${name}`)
       .toPromise()
       .then(response => response.json().data as FilterModel)
       .catch(this.handleError);
@@ -48,7 +47,7 @@ export class SoftwareService {
 
   getSoftware(slug: string): Promise<SoftwareModel> {
 
-    const url = this.appUrl + `/` + this.swtUrl + `/` + slug;
+    const url = environment.appUrl + `/` + this.swtUrl + `/` + slug;
     console.log(url);
     return this.http
       .get(url)
@@ -59,7 +58,7 @@ export class SoftwareService {
 
   getSoftwareMetaData(slug: string): Promise<SoftwareMetadataModel> {
 
-      const url = this.appUrl + `/` + this.swtMtDtUrl + `/` + slug ;
+      const url = environment.appUrl + `/` + this.swtMtDtUrl + `/` + slug ;
       console.log(url);
 
       return this.http
@@ -91,9 +90,9 @@ export class SoftwareService {
     let url;
 
     if ( term ) {
-        url = this.appUrl + `/` + this.swtFltrUrl + `/${term}`;
+        url = environment.appUrl + `/` + this.swtFltrUrl + `/${term}`;
     } else {
-        url = this.appUrl + `/` + this.swtUrl ;
+        url = environment.appUrl + `/` + this.swtUrl ;
     }
 
     return this.http
@@ -108,11 +107,11 @@ export class SoftwareService {
 
 
     if (filterType === 'swt') {
-      url = `${this.appUrl}/api/softwareList/?software_types=${softwareType}`;
+      url = `${environment.appUrl}/api/softwareList/?software_types=${softwareType}`;
     } else if (filterType === 'rp') {
-      url = `${this.appUrl}/api/softwareList/?research_problems=${softwareType}`;
+      url = `${environment.appUrl}/api/softwareList/?research_problems=${softwareType}`;
     } else {
-      url = `${this.appUrl}/api/softwareList/?research_problems=${softwareType}&software_types=${softwareType}`;
+      url = `${environment.appUrl}/api/softwareList/?research_problems=${softwareType}&software_types=${softwareType}`;
     }
 
     return this.http

@@ -1,103 +1,98 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import {FormGroup, FormControl, FormBuilder, Validators, NgForm} from '@angular/forms';
-import { Router } from '@angular/router';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Observable} from 'rxjs/Observable';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
+
 declare const $: any;
 declare const jQuery: any;
 
 /* Import service files */
-import { AuthenticationService } from '../authentication/authentication.service';
-import { UserDashboardService} from './user-dashboard.service';
-import {PersonModel} from "./person.model";
+import {AuthenticationService} from '../authentication/authentication.service';
+import {UserDashboardService} from './user-dashboard.service';
+import {PersonModel} from './person.model';
 
 @Component({
-  selector: 'user-dashboard',
+  selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.scss']
 })
 export class UserDashboardComponent implements OnInit, AfterViewInit {
-    person: PersonModel;
-    isAdmin: string;
-    showHide: boolean;
-    appUrl: string;
-    public notifications: any = {message: '', type: ''};
+  person: PersonModel;
+  isAdmin: string;
+  showHide: boolean;
+  public notifications: any = {message: '', type: ''};
 
 
-    constructor(
-      private router: Router,
-      private route: ActivatedRoute,
-      private authService: AuthenticationService,
-      private userDashboardService: UserDashboardService,
-
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthenticationService,
+    private userDashboardService: UserDashboardService,
   ) {
-        this.showHide = false;
+    this.showHide = false;
+  }
+
+  ngOnInit() {
+    const person_id = this.authService.getToken('person_id');
+    if (person_id === '' && person_id.length === 0) {
+      this.router.navigateByUrl('signin');
     }
 
-    ngOnInit() {
-        // App url
-        this.appUrl = this.userDashboardService.appUrl;
+    /* user profile*/
+    this.getPersonDetails(person_id);
 
-        const person_id = this.authService.getToken('person_id');
-        if (person_id === '' && person_id.length === 0) {
-          this.router.navigateByUrl('signin');
-        }
+    /* is admin checking */
+    this.isAdmin = this.authService.getToken('user_is_admin');
+    console.log(this.isAdmin);
 
-        /* user profile*/
-        this.getPersonDetails(person_id);
+    /* Script */
+    $(document).ready(function () {
 
-        /* is admin checking */
-        this.isAdmin = this.authService.getToken('user_is_admin');
-        console.log(this.isAdmin);
+    });
+  }
 
-        /* Script */
-      $(document).ready(function () {
+  getPersonDetails(id: string): void {
+    this.userDashboardService.getPersonDetails(id).then(person => this.person = person);
+  }
 
-      });
-    }
+  isUserAdmin(id: string) {
+    return this.authService.getToken('is_user_admin');
+  }
 
-    getPersonDetails(id: string): void {
-        this.userDashboardService.getPersonDetails(id).then(person => this.person = person);
-    }
+  ngAfterViewInit() {
+    jQuery('#test').on('click', function (e) {
+      e.preventDefault();
+      console.log('hello');
+      alert('hello');
+    });
+  }
 
-    isUserAdmin(id: string) {
-        return this.authService.getToken('is_user_admin');
-    }
+  onPasswordResetSubmit(form: NgForm): void {
+    this.userDashboardService.SubmitResetPassword(
+      this.authService.getToken('person_id'),
+      form.value.old_password,
+      form.value.new_password,
+      form.value.conf_password,
+    )
+      .subscribe(
+        response => this.notifications = response,
+      )
+  }
 
-    ngAfterViewInit() {
-      jQuery('#test').on('click', function (e) {
-          e.preventDefault();
-          console.log('hello');
-          alert('hello');
-      });
-    }
+  onDownloadVMSubmit(form: NgForm): void {
+    this.userDashboardService.SubmitDownloadVM(
+      this.authService.getToken('person_id'),
+      form.value.vm,
+      form.value.vm_username,
+      form.value.vm_password,
+    )
+      .subscribe(
+        response => this.notifications = response,
+      );
+  }
 
-    onPasswordResetSubmit(form: NgForm): void{
-        this.userDashboardService.SubmitResetPassword(
-            this.authService.getToken('person_id'),
-            form.value.old_password,
-            form.value.new_password,
-            form.value.conf_password,
-        )
-            .subscribe(
-                response => this.notifications = response,
-            )
-    }
-
-    onDownloadVMSubmit(form: NgForm): void{
-        this.userDashboardService.SubmitDownloadVM(
-            this.authService.getToken('person_id'),
-            form.value.vm,
-            form.value.vm_username,
-            form.value.vm_password,
-        )
-            .subscribe(
-                response => this.notifications = response,
-            )
-    }
-
-    changeShowStatus(){
-        this.showHide = !this.showHide;
-    }
+  changeShowStatus() {
+    this.showHide = !this.showHide;
+  }
 
 }

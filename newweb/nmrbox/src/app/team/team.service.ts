@@ -1,14 +1,13 @@
-import { Injectable }    from '@angular/core';
-import { Headers, Http, Response, RequestOptions } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Headers, Http} from '@angular/http';
+import {environment} from '../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
-import { TeamModel } from './team.model';
+import {TeamModel} from './team.model';
 
 @Injectable()
 export class TeamService {
 
-  private appUrl = 'https://apidev.nmrbox.org'; // Main site url
-  //private appUrl = 'http://nmrbox.test';  // URL to web api
   private baseUrl = 'api/teamSupportList/';  // URL to web api
   private supportUrl = 'api/comSupportList';  // URL to web api
   private blogUrl = 'api/comBlogList';  // URL to web api
@@ -16,11 +15,12 @@ export class TeamService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+  }
 
   create(name: string): Promise<TeamModel> {
     return this.http
-      .post(this.baseUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .post(environment.appUrl + '/' + this.baseUrl, JSON.stringify({name: name}), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data as TeamModel)
       .catch(this.handleError);
@@ -43,43 +43,40 @@ export class TeamService {
 
   }*/
 
-    /* test (redirecting from router for page details */
-    getPageContent(pageUrl: string): Promise<TeamModel> {
+  /* test (redirecting from router for page details */
+  getPageContent(pageUrl: string): Promise<TeamModel> {
 
-        let url = this.appUrl + '/' + pageUrl;
-        console.log("URL: ", url);
-        return this.http
-            .get(url)
-            .toPromise()
-            .then(response => response.json().data as TeamModel)
-            .catch(this.handleError);
+    const url = environment.appUrl + '/' + pageUrl;
+    console.log('URL: ', url);
+    return this.http
+      .get(url)
+      .toPromise()
+      .then(response => response.json().data as TeamModel)
+      .catch(this.handleError);
+  }
+
+  /* test */
+
+  getDetail(id: number, type: string): Promise<TeamModel> {
+
+    let baseUrl = `${environment.appUrl}/${this.blogUrl}`;
+
+    if (type === 'support') {
+      baseUrl = `${this.supportUrl}`;
+    } else if (type === 'blog') {
+      baseUrl = `${this.blogUrl}`;
+    } else {
+      baseUrl = `${this.eventsUrl}`;
     }
-    /* test */
 
-    getDetail(id: number, type: string): Promise<TeamModel> {
+    const url = baseUrl + `/${id}`;
 
-      let baseUrl = `${this.blogUrl}`;
-
-      //console.log("getSoftware TYPE: ", type);
-
-      if(type == "support"){
-        baseUrl = `${this.supportUrl}`;
-      } else if(type == "blog") {
-        baseUrl = `${this.blogUrl}`;
-      } else {
-        baseUrl = `${this.eventsUrl}`;
-      }
-
-      let url = baseUrl + `/${id}`;
-
-      //console.log("getSoftware URL: ", url);
-
-      return this.http
-        .get(url)
-        .toPromise()
-        .then(response => response.json().data as TeamModel)
-        .catch(this.handleError);
-    }
+    return this.http
+      .get(url)
+      .toPromise()
+      .then(response => response.json().data as TeamModel)
+      .catch(this.handleError);
+  }
 
   update(software: TeamModel): Promise<TeamModel> {
     const url = `${this.baseUrl}/${software.id}`;
@@ -87,14 +84,6 @@ export class TeamService {
       .put(url, JSON.stringify(software), {headers: this.headers})
       .toPromise()
       .then(() => software)
-      .catch(this.handleError);
-  }
-
-  delete(id: number): Promise<void> {
-    const url = `${this.baseUrl}/${id}`;
-    return this.http.delete(url, {headers: this.headers})
-      .toPromise()
-      .then(() => null)
       .catch(this.handleError);
   }
 
