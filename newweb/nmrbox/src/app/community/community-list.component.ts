@@ -105,7 +105,6 @@ export class CommunityListComponent implements OnInit {
   }*/
   getEventsList(): void {
     this.communityService.getAllEvents().then(events => {
-      console.log(events);
       this.eventsList = events[0];
       this.upcoming = events[1];
       this.completed = events[2];
@@ -132,15 +131,6 @@ export class CommunityListComponent implements OnInit {
     } else if (supportType === 'workflow') {
       this.communityService.filterSupportType(supportType).then(supportWorkflowList => this.supportWorkflowList = supportWorkflowList);
     }
-  }
-
-  gotoDetail(pageUrl: string): void {
-      console.log('component url : ', pageUrl);
-      if (pageUrl === 'faqs') {
-          this.router.navigate(['faqs']);
-      } else {
-          this.router.navigate(['/c', pageUrl]);
-      }
   }
 
   /* workshops registration */

@@ -40,7 +40,7 @@
       <h3 class="blue">NMRbox Support</h3>
 
         <mat-grid-list class="support-list grid-dashed" cols="2" rowHeight="180px">
-          <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('documentation'); $event.stopPropagation()">
+          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/overview">
             <mat-card class="sw-card tile-card-short">
               <mat-card-header>
                 <mat-card-title>Getting Started</mat-card-title>
@@ -51,12 +51,12 @@
                 </p>
                 <br/>
                 <!--<a href="/">Read more</a>-->
-                <a (click)="gotoDetail('overview'); $event.stopPropagation();">Read More</a>
+                <a routerLink="/c/overview">Read More</a>
               </mat-card-content>
             </mat-card>
           </mat-grid-tile>
 
-          <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('faqs'); $event.stopPropagation()">
+          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/faqs">
             <mat-card class="sw-card tile-card-short">
               <mat-card-header>
                 <mat-card-title>NMRbox FAQs</mat-card-title>
@@ -66,12 +66,12 @@
                   Here are some tips and answers to frequently asked questions from our NMRbox Community.
                 </p>
                 <br/>
-                <a (click)="gotoDetail('faqs')">Read more</a>
+                <a routerLink="/faqs">Read more</a>
               </mat-card-content>
             </mat-card>
           </mat-grid-tile>
 
-          <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('contact-us'); $event.stopPropagation()">
+          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/contact-us">
             <mat-card class="sw-card tile-card-short">
               <mat-card-header>
                 <mat-card-title>Contact NMRbox support</mat-card-title>
@@ -81,12 +81,12 @@
                   We have a team ready to assist you with your NMRbox support needs
                 </p>
                 <br/>
-                <a (click)="gotoDetail('contact-us')">Read more</a>
+                <a routerLink="/c/contact-us">Read more</a>
               </mat-card-content>
             </mat-card>
           </mat-grid-tile>
 
-          <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('contact-us'); $event.stopPropagation()" style="width:100%">
+          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/team/0">
             <mat-card class="sw-card tile-card-short">
               <mat-card-header>
                 <mat-card-title>NMRbox Team</mat-card-title>
@@ -123,7 +123,7 @@
       <h3 class="blue">Tutorials</h3>
 
           <mat-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
-              <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('acknowledge-us'); $event.stopPropagation()">
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/acknowledge-us">
                   <mat-card class="sw-card tile-card-short">
                       <mat-card-header>
                           <mat-card-title>Acknowledge NMRbox</mat-card-title>
@@ -133,12 +133,12 @@
                               How to acknowledge NMRbox
                           </p>
                           <br/>
-                          <a (click)="gotoDetail('acknowledge-us'); $event.stopPropagation();">Read More</a>
+                          <a routerLink="/c/acknowledge-us">Read More</a>
                       </mat-card-content>
                   </mat-card>
               </mat-grid-tile>
 
-              <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('initiating-a-collaboration'); $event.stopPropagation()">
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/initiating-a-collaboration">
                   <mat-card class="sw-card tile-card-short">
                       <mat-card-header>
                           <mat-card-title>Collaboration with NMRbox Team</mat-card-title>
@@ -148,7 +148,7 @@
                               Instruction of how to initiate a collaboration with the NMRbox Team.
                           </p>
                           <br/>
-                          <a (click)="gotoDetail('initiating-a-collaboration'); $event.stopPropagation();">Read More</a>
+                          <a routerLink="/c/initiating-a-collaboration">Read More</a>
                       </mat-card-content>
                   </mat-card>
               </mat-grid-tile>
@@ -163,7 +163,7 @@
       <div class="grid-content-wrapper">
       <h3 class="blue">Software documentation</h3>
           <mat-grid-list class="support-list grid-dashed" cols="3" rowHeight="180px">
-              <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('documentation'); $event.stopPropagation()">
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/documentation">
                   <mat-card class="sw-card tile-card-short">
                       <mat-card-header>
                           <mat-card-title>User Guide</mat-card-title>
@@ -174,12 +174,12 @@
                           </p>
                           <br/>
                           <!--<a href="/">Read more</a>-->
-                          <a (click)="gotoDetail('documentation'); $event.stopPropagation();">Read More</a>
+                          <a routerLink="/c/documentation">Read More</a>
                       </mat-card-content>
                   </mat-card>
               </mat-grid-tile>
 
-              <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('licensing'); $event.stopPropagation()">
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/licensing">
                   <mat-card class="sw-card tile-card-short">
                       <mat-card-header>
                           <mat-card-title>Licensing</mat-card-title>
@@ -189,12 +189,12 @@
                               NMRbox User License
                           </p>
                           <br/>
-                          <a (click)="gotoDetail('licensing'); $event.stopPropagation();">Read More</a>
+                          <a routerLink="/c/licensing">Read More</a>
                       </mat-card-content>
                   </mat-card>
               </mat-grid-tile>
 
-              <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('nihresources'); $event.stopPropagation()">
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/nihresources">
                   <mat-card class="sw-card tile-card-short">
                       <mat-card-header>
                           <mat-card-title>NIH Resources</mat-card-title>
@@ -204,7 +204,7 @@
                               NIH Biomedical Technology Resources
                           </p>
                           <br/>
-                          <a (click)="gotoDetail('nihresources')">Read more</a>
+                          <a routerLink="/c/nihresources">Read more</a>
                       </mat-card-content>
                   </mat-card>
               </mat-grid-tile>
@@ -218,7 +218,7 @@
       <h3 class="blue">Publications</h3>
 
           <mat-grid-list class="support-list grid-dashed workflow-list" cols="3" rowHeight="180px">
-            <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('publications'); $event.stopPropagation()">
+            <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/publications">
               <mat-card class="sw-card tile-card-short">
                 <mat-card-header>
                   <mat-card-title>NMRbox Publications</mat-card-title>
@@ -228,13 +228,13 @@
                     Lists of NMRbox research journal and publications
                   </p>
                   <br/>
-                    <a (click)="gotoDetail('publications')">Read more</a>
+                    <a routerLink="/c/publications">Read more</a>
                 </mat-card-content>
               </mat-card>
             </mat-grid-tile>
 
 
-            <mat-grid-tile class="tile-solid tile-transparent" (click)="gotoDetail('newsletters'); $event.stopPropagation()">
+            <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/newsletters">
               <mat-card class="sw-card tile-card-short">
                 <mat-card-header>
                   <mat-card-title>NMRbox Newsletter</mat-card-title>
@@ -244,7 +244,7 @@
                       Our first edition of the "Inside NMRbox" newsletter is now available
                   </p>
                   <br/>
-                    <a (click)="gotoDetail('publications')">Read more</a>
+                    <a routerLink="/c/newsletters">Read more</a>
                 </mat-card-content>
               </mat-card>
             </mat-grid-tile>
@@ -377,7 +377,7 @@
       <div class="grid-content-wrapper">
       <h3 class="blue">Most Recent</h3>
       <mat-grid-list class="software-list" cols="3" rowHeight="335px">
-        <mat-grid-tile class="tile-solid" *ngFor="let blog of blogMostRecentList" (click)="gotoDetail(blog); $event.stopPropagation()">
+        <mat-grid-tile class="tile-solid" *ngFor="let blog of blogMostRecentList" routerLink="/c/blog">
           <mat-card class="sw-card">
             <img mat-card-image src="{{blog.url}}">
             <mat-card-header>
@@ -399,7 +399,7 @@
       <div class="grid-content-wrapper">
       <h3 class="blue">This Month</h3>
       <mat-grid-list class="software-list" cols="3" rowHeight="335px">
-        <mat-grid-tile class="tile-solid" *ngFor="let blog of blogNextList" (click)="gotoDetail(blog); $event.stopPropagation()">
+        <mat-grid-tile class="tile-solid" *ngFor="let blog of blogNextList" routerLink="/c/blog">
           <mat-card class="sw-card">
             <img mat-card-image src="{{blog.url}}">
             <mat-card-header>
