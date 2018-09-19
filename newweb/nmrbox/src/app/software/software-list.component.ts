@@ -49,7 +49,7 @@ export class SoftwareListComponent implements OnInit {
       '3': 'Molecular Modeling', '4': 'Structure Visualization',
       '5': 'Residual Dipolar Coupling', '6': 'Assignment',
       '7': 'Relaxation', null: 'Show all'};
-    this.softwareSlugs = {'1': 'spectral', '2': 'chemical-shift', '3': 'molecular-modeling', '4': 'structure',
+    this.softwareSlugs = {'1': 'spectral', '2': 'chemical', '3': 'molecular', '4': 'structure',
                           '5': 'rdc', '6': 'assignment', '7': 'relaxation'};
     this.researchProblems = {'1': 'Metabolomics', '2': 'Protein Dynamics',
       '3': 'Protein Structure', '4': 'Intrinsically Disordered Proteins',
