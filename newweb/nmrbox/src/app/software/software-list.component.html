@@ -9,7 +9,8 @@
         <mat-select-trigger>
           <img src="./assets/icons/software_menu/rp-icon-{{researchSlugs[activeResearchProblem]}}-menu.svg"
                [alt]="researchProblems[activeResearchProblem]"
-               [title]="researchProblems[activeResearchProblem]">
+               [title]="researchProblems[activeResearchProblem]"
+               *ngIf="activeResearchProblem">
         </mat-select-trigger>
         <mat-option
           (click)="filterSelections()"
@@ -52,7 +53,8 @@
         <mat-select-trigger>
           <img src="./assets/icons/software_menu/sw-icon-{{softwareSlugs[activeSoftwareType]}}-menu.svg"
                [alt]="softwareTypes[activeSoftwareType]"
-               [title]="softwareTypes[activeSoftwareType]">
+               [title]="softwareTypes[activeSoftwareType]"
+               *ngIf="activeSoftwareType">
         </mat-select-trigger>
         <mat-option
           (click)="filterSelections()"
