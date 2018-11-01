@@ -20,7 +20,7 @@ export class UserDashboardService {
 
   getPersonDetails(id: string): Promise<PersonModel> {
     const url = environment.appUrl + `/` + this.personUrl + `/` + id;
-    console.log(url);
+
     return this.http
       .get(url)
       .toPromise()

@@ -34,7 +34,7 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     const person_id = this.authService.getToken('person_id');
-    if (person_id === '' && person_id.length === 0) {
+    if (!person_id) {
       this.router.navigateByUrl('signin');
     }
 
