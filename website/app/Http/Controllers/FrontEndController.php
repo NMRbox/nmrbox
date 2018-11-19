@@ -359,7 +359,7 @@ class FrontEndController extends Controller
      */
     public function myAccount(Request $request)
     {
-        //dd(Session::all());
+        dd(Session::all());
         /* Retrieving user details from token */
 
         /*$person = JWTAuth::parseToken()->toUser();
