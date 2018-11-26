@@ -359,15 +359,15 @@ class FrontEndController extends Controller
      */
     public function myAccount(Request $request)
     {
-        dd(Session::all());
+        //dd(Session::all());
         /* Retrieving user details from token */
 
-        /*$person = JWTAuth::parseToken()->toUser();
+        $person = JWTAuth::parseToken()->toUser();
 
         if(!$person){
             $request['token'] = Session::get('auth_token');
             $person = JWTAuth::parseToken()->toUser();
-        }*/
+        }
 
         if(!Session::has('person')){
             return redirect::to('login');
@@ -1087,6 +1087,8 @@ class FrontEndController extends Controller
      */
     public function person_details($id)
     {
+        dd(Session::all());
+        
         // the person attached to the user
         $person = Person::where('id', $id)->get()->first();
 
