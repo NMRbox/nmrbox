@@ -1087,15 +1087,6 @@ class FrontEndController extends Controller
      */
     public function person_details($id)
     {
-        //dd(Session::all());
-        echo "<pre>";
-        print_r($id);
-        echo "</pre>";
-        echo "<pre>";
-        print_r(Session::all());
-        echo "</pre>";
-        die();
-
         // the person attached to the user
         $person = Person::where('id', $id)->get()->first();
 
