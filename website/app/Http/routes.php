@@ -386,7 +386,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 #FrontEndController Group
 Route::model('person', 'App\Person');
 Route::group(array('prefix' => 'person'), function () {
-    Route::get('{person}', array('as' => 'person', 'uses' => 'FrontEndController@person_details'));
+    Route::get('{person_id}', array('as' => 'person', 'uses' => 'FrontEndController@person_details'));
 });
 
 # Login
