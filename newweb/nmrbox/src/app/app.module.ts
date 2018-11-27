@@ -56,6 +56,7 @@ import { CommonModule } from '@angular/common';
 
 // Container
 import { ShowHideContainer } from './authentication/show-hide-container';
+import { SupportComponent } from './support/support.component';
 
 @NgModule({
     imports: [
@@ -91,7 +92,8 @@ import { ShowHideContainer } from './authentication/show-hide-container';
         ForgetPasswordComponent,
         ForgetPasswordConfirmComponent,
         FaqsComponent,
-        ShowHideContainer
+        ShowHideContainer,
+        SupportComponent
     ],
     providers: [
         SoftwareService,

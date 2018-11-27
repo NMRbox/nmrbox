@@ -7,6 +7,7 @@ import { SoftwareListComponent } from './software/software-list.component';
 import { SoftwareDetailComponent } from './software/software-detail.component';
 import { CommunityDetailComponent } from './community/community-detail.component';
 import { CommunityListComponent } from './community/community-list.component';
+import {SupportComponent} from './support/support.component';
 import { TeamDetailComponent } from './team/team-detail.component';
 import { TeamListComponent } from './team/team-list.component';
 import { SignupComponent } from './authentication/signup.component';
@@ -18,7 +19,6 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { ForgetPasswordComponent} from './password-management/forget-password.component';
 import { ForgetPasswordConfirmComponent} from './password-management/forget-password-confirm.component';
 
-
 const routes: Routes = [
     { path: 'app',     component: HomeComponent },
     { path: '', redirectTo: 'app', pathMatch: 'full' },
@@ -28,6 +28,8 @@ const routes: Routes = [
     { path: 'c/:pageUrl', component: CommunityDetailComponent },
     { path: 'community', component: CommunityListComponent },
     { path: 'community/:index', component: CommunityListComponent },
+    { path: 'support', component: SupportComponent },
+    { path: 'support/', component: SupportComponent },
     { path: 'team', component: TeamListComponent },
     { path: 'team/:index', component: TeamListComponent },
     { path: 't/detail', component: TeamDetailComponent },
