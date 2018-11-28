@@ -1,0 +1,358 @@
+/* Filters: Community only */
+.sw-filters-container {
+  .sw-filters {
+    width: 100%;
+    max-width: auto; /* constrained by tab container */
+    margin: 0px auto;
+  }
+}
+
+.tab-group-container {
+  margin-left: 5px;
+
+  .grid-content-wrapper {
+
+    h3 {
+      margin-left: 16px;
+    }
+
+    p {
+      color: #313131;
+    }
+  }
+
+}
+
+mat-grid-list {
+  max-width: auto; /* constrained by tab container */
+  width: 100%; /* constrained by tab container */
+  margin: 10px auto;
+  padding: 10px;
+
+  .sw-card {
+    min-width: 200px;
+    /*margin: 5px;
+    padding-right: 10px;*/
+
+    /*.mat-card-title {
+      font-weight: bold;
+    }
+    .mat-card-content {
+      !*min-height: 105px;*!
+      font-weight: 400;
+    }
+    ul.icon-list {
+      height: 65px;
+      bottom: 10px;
+      position: absolute;
+    }
+    p {
+      line-height: 1em;
+      margin-bottom: 5px;
+    }*/
+  }
+
+  .workshop-card {
+    width: 450px;
+    height: 215px;
+    margin: 20px;
+    background: #f4f4f4;
+    border: 1px solid #d9edf7;
+    mat-card-header {
+      font-weight: bold;
+      background: #d9edf7;
+      padding: 20px 10px;
+
+    }
+
+    .mat-card-title {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 2%;
+      margin: 6px 0;
+    }
+    mat-card-content {
+      padding: 10px;
+      line-height: 5%;
+    }
+    p {
+      margin-bottom: 5px;
+    }
+    .button {
+      color: #fff;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 2%;
+      margin: 6px 0;
+    }
+
+  }
+
+  .tile-card-short {
+    min-height: 150px;
+    min-width: 250px;
+  }
+}
+
+mat-grid-list.support-list {
+  margin-left: 2px;
+}
+
+#com-support-nmrbox .grid-content-wrapper {
+  mat-grid-list {
+    margin-left: -15px;
+  }
+}
+
+.mat-grid-tile:hover {
+  cursor: pointer;
+  box-shadow: none !important;
+  border: 0px;
+}
+
+.mat-grid-tile:hover mat-card {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12) !important;
+}
+
+/* Community */
+.mat-card-header {
+  font-size: 13px;
+  line-height: 1em;
+  margin-bottom: 5px;
+  height: 25px;
+  overflow: hidden;
+}
+
+.co-submenu {
+  width: 940px;
+  display: block;
+  margin: 0px auto;
+  list-style: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 300;
+
+  strong {
+    font-weight: 500;
+  }
+
+  li {
+    padding-top: 0px;
+    display: inline-block;
+    margin-right: 20px;
+  }
+  .co-icon-med {
+    background-position: 0px 11px;
+  }
+}
+
+mat-card-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.community-details-wrapper {
+  background-size: 95%;
+  background: url('/assets/bg-graphics/bg-community-support.png') no-repeat 0px -165px;
+  min-height: calc(100vh - 50px);
+  min-height: -webkit-calc(100vh - 50px);
+  min-height: -moz-calc(100vh - 50px);
+  min-height: -o-calc(100vh - 50px);
+
+  h1, .subheading, h2 {
+    color: #000;
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: 300;
+  }
+  .subheading {
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .community-details {
+    margin-top: 20px;
+  }
+
+  img {
+    width: 400px;
+    height: 300px;
+    margin-left: 0px;
+  }
+  img.author-photo {
+    width: 160px;
+    height: 210px;
+  }
+
+  .community-details > h1, section, .menu-wrapper {
+    width: 90%;
+    max-width: 900px;
+    margin: 0px auto;
+  }
+  .menu-wrapper {
+    min-height: 50px;
+    margin-bottom: 10px;
+
+    button {
+      margin-top: 20px;
+      font-family: Arial, serif;
+      background-color: transparent;
+      border: none;
+      padding: 12px 10px 10px 0px;
+      border-radius: 0px;
+      border-right: 1px solid #e0e0e0;
+      cursor: pointer; cursor: hand;
+
+      polyline {
+        stroke-width: 3;
+        transition: all 100ms ease-in-out;
+      }
+    }
+    button:hover {
+      background-color: transparent;
+      polyline {
+        stroke-width: 6;
+        transition: all 100ms ease-in-out;
+      }
+    }
+    button:disabled {
+      background-color: #eee;
+      color: #ccc;
+      cursor: auto;
+    }
+    .page-title {
+      position: relative;
+      top: -3px;
+    }
+  }
+
+  h3 {
+    color: #000;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 0px;
+  }
+  p {
+    margin-top: 0px;
+  }
+
+
+  #support-detail-description p {
+    padding-right: 33%;
+  }
+
+  .versions-container {
+    width: 100%;
+    border-top: 1px dashed;
+    border-bottom: 1px dashed;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0px;
+  }
+}
+
+.community-details-wrapper {
+  background-size: 95%;
+  background: url('/assets/bg-graphics/bg-community-support.png') no-repeat 0px -165px;
+  min-height: calc(100vh - 50px);
+  min-height: -webkit-calc(100vh - 50px);
+  min-height: -moz-calc(100vh - 50px);
+  min-height: -o-calc(100vh - 50px);
+
+  h1, .subheading, h2 {
+    color: #000;
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: 300;
+  }
+  .subheading {
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .community-details {
+    margin-top: 20px;
+  }
+
+  img {
+    width: 400px;
+    height: 300px;
+    margin-left: 0px;
+  }
+  img.author-photo {
+    width: 160px;
+    height: 210px;
+  }
+
+  .community-details > h1, section, .menu-wrapper {
+    width: 90%;
+    max-width: 900px;
+    margin: 0px auto;
+  }
+  .menu-wrapper {
+    min-height: 50px;
+    margin-bottom: 10px;
+
+    button {
+      margin-top: 20px;
+      font-family: Arial, serif;
+      background-color: transparent;
+      border: none;
+      padding: 12px 10px 10px 0px;
+      border-radius: 0px;
+      border-right: 1px solid #e0e0e0;
+      cursor: pointer; cursor: hand;
+
+      polyline {
+        stroke-width: 3;
+        transition: all 100ms ease-in-out;
+      }
+    }
+    button:hover {
+      background-color: transparent;
+      polyline {
+        stroke-width: 6;
+        transition: all 100ms ease-in-out;
+      }
+    }
+    button:disabled {
+      background-color: #eee;
+      color: #ccc;
+      cursor: auto;
+    }
+    .page-title {
+      position: relative;
+      top: -3px;
+    }
+  }
+
+  h3 {
+    color: #000;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 0px;
+  }
+  p {
+    margin-top: 0px;
+  }
+
+
+  #support-detail-description p {
+    padding-right: 33%;
+  }
+
+  .versions-container {
+    width: 100%;
+    border-top: 1px dashed;
+    border-bottom: 1px dashed;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0px;
+  }
+}
