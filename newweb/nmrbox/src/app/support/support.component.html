@@ -6,19 +6,16 @@
 
   <mat-tab-group (selectedIndexChange)="selectedIndexChange($event)" [selectedIndex]="selectedIndex">
 
-    <mat-tab id="com-support" label="Support" class="co-sub-icon co-icon-med co-icon-support">
+    <!--
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <h3>Support</h3>
+      </ng-template><h2>the tab</h2></mat-tab>-->
+
+    <mat-tab id="com-support" label="Support" class="co-sub-icon co-icon-med co-icon-support" >
 
       <div class="sw-filters-container">
-        <!--<div class="sw-filters">
-          <mat-select id="rp-select" placeholder="Research problem"></mat-select>
-          <mat-select id="st-select" class="menu-open" placeholder="Software type"></mat-select>
-          <mat-select id="sw-select" class="menu-open" placeholder="Software package"></mat-select>
-          <a id="all-software" (click)="getCommunityList(); $event.stopPropagation()">Clear filters</a>
-          <mat-form-field id="search">
-            <input matInput #searchBox id="search-box" (keyup)="searchSoftware(searchBox.value)" placeholder="search support"/>
-            <span class="icon-search"></span>
-          </mat-form-field>
-        </div>-->
+
         <div id="software-types-menu" class="sw-menu-wrapper hidden">
           <swiper [config]="config">
             <div class="swiper-wrapper">
