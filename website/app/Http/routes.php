@@ -384,10 +384,10 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 });
 
 #FrontEndController Group
-Route::model('person', 'App\Person');
+/*Route::model('person', 'App\Person');
 Route::group(array('prefix' => 'person'), function () {
     Route::get('{person_id}', array('as' => 'person', 'uses' => 'FrontEndController@person_details'));
-});
+});*/
 
 # Login
 Route::get('login', array('as' => 'login','uses' => 'FrontEndController@getLogin'));
@@ -461,6 +461,11 @@ Route::group(['middleware' => ['cors', 'session']], function () {
     Route::post('password-forgot', array( 'as' => 'password-forgot', 'uses' => 'FrontEndController@forgotPassword'));
     Route::post('password-forgot-confirm', array( 'as' => 'password-forgot-confirm', 'uses' => 'FrontEndController@confirmForgotPassword'));
     Route::post('downloadable-vm', array( 'as' => 'downloadable-vm', 'uses' => 'FrontEndController@downloadableVM'));
+
+    Route::model('person', 'App\Person');
+    Route::group(array('prefix' => 'person'), function () {
+        Route::get('{person_id}', array('as' => 'person', 'uses' => 'FrontEndController@person_details'));
+    });
 });
 
 # End of frontend views
