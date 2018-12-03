@@ -19,6 +19,7 @@ class VerifyCsrfToken extends BaseVerifier
         '/password-forgot-confirm',
         '/password-reset',
         '/downloadable-vm',
-        '/events_register'
+        '/events_register',
+        '/person/*'
     ];
 }
