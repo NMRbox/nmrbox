@@ -1087,16 +1087,10 @@ class FrontEndController extends Controller
      */
     public function person_details($id)
     {
-        echo "<pre>";
-        print_r($id);
-        echo "</pre>";
-        echo "<pre>";
-        print_r(Session::get('person'));
-        echo "</pre>";
         // the person attached to the user
         $person = Person::where('id', $id)->get()->first();
 
-        if(!Session::has('person')){
+        if (!Session()->exists('person')) {
             return response()-> json( array(
                 'message' => Lang::get('auth/message.not_autorized'),
                 'type' => 'error' ),
