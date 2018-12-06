@@ -452,7 +452,7 @@ Route::post('blog/{blog}/comment', 'BlogController@storeCommentFrontend');
 Route::get('{name?}', 'ChandraController@showFrontEndView');
 
 #Angular Frontend singin, signup and user_details
-Route::group(['middleware' => ['cors', 'session']], function () {
+Route::group(['middleware' => ['cors']], function () {
     Route::post('signup', array( 'as' => 'signup', 'uses' => 'FrontEndController@signup'));
     Route::post('signin', array( 'as' => 'signin', 'uses' => 'FrontEndController@signin'));
     Route::get('signout', array('as' => 'signout','uses' => 'FrontEndController@signOut'));
