@@ -860,6 +860,7 @@ class FrontEndController extends Controller
 
                 // Adding person table information into session
                 $session = Session::put('person', $person);
+                Session::save();
                 echo "<pre>";
                 print_r($session);
                 echo "</pre>";
