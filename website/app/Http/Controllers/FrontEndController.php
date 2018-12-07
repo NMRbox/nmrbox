@@ -882,7 +882,7 @@ class FrontEndController extends Controller
                     'token' => $token,
                     //'token' => Session::getId(),
                     'user_is_admin' => $is_admin,
-                    'person_id' => $person->id,
+                    'person_id' => Session::getId(),
                     'message' => Lang::get('auth/message.login.success'),
                     'type' => 'success'
                 ];
