@@ -873,7 +873,7 @@ class FrontEndController extends Controller
                     'type' => 'success'
                 ];
                 $request->session()->push('person', $user_data);
-                $request->session()->save();
+                //$request->session()->save();
 
                 if ($parse_token == true)
                 {
@@ -1100,7 +1100,7 @@ class FrontEndController extends Controller
         // the person attached to the user
         $person = Person::where('id', $id)->get()->first();
 
-        if (!Session()::has('person')) {
+        if (!Session::has('person')) {
             return response()-> json( array(
                 'message' => Lang::get('auth/message.not_autorized'),
                 'type' => 'error' ),
