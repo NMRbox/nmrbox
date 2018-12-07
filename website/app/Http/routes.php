@@ -464,7 +464,7 @@ Route::group(['middleware' => ['cors', 'session']], function () {
 
     Route::model('person', 'App\Person');
     Route::group(array('prefix' => 'person'), function () {
-        Route::get('{person_idq}', array('as' => 'person', 'uses' => 'FrontEndController@person_details'));
+        Route::get('{person}', array('as' => 'person', 'uses' => 'FrontEndController@person_details'));
     });
 });
 
