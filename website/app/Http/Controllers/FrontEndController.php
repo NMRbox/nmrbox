@@ -872,7 +872,7 @@ class FrontEndController extends Controller
                     'message' => Lang::get('auth/message.login.success'),
                     'type' => 'success'
                 ];
-                $request->session()->push('test', $user_data);
+                $request->session()->push('person', $user_data);
                 $request->session()->save();
 
                 if ($parse_token == true)
