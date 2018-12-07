@@ -860,20 +860,12 @@ class FrontEndController extends Controller
 
 
                 // Adding JWT-Auth Token
-                $token = JWTAuth::fromUser($person);
+                /*$token = JWTAuth::fromUser($person);
                 $set_token = JWTAuth::setToken($token);
-                $parse_token = JWTAuth::getToken();
+                $parse_token = JWTAuth::getToken();*/
+                $parse_token = true;
 
-                // Adding person table information into session
-                $user_data = [
-                    'token' => $token,
-                    'user_is_admin' => Session::get('user_is_admin'),
-                    'person_id' => $person->id,
-                    'message' => Lang::get('auth/message.login.success'),
-                    'type' => 'success'
-                ];
-                $request->session()->push('person', $user_data);
-                //$request->session()->save();
+
 
                 if ($parse_token == true)
                 {
@@ -882,10 +874,20 @@ class FrontEndController extends Controller
                     foreach ($user_classification as $key => $value) {
                         if ($value->name == 'admin'){
                             $is_admin = true;
-                            Session::put('user_is_admin', $is_admin);
+                            //Session::put('user_is_admin', $is_admin);
                         }
                     }
                 }
+                // Adding person table information into session
+                $user_data = [
+                    //'token' => $token,
+                    'user_is_admin' => $is_admin,
+                    'person_id' => $person->id,
+                    'message' => Lang::get('auth/message.login.success'),
+                    'type' => 'success'
+                ];
+                $request->session()->push('person', $user_data);
+                //$request->session()->save();
 
                 return response()->json($user_data, 200);
             } else {
@@ -1094,7 +1096,7 @@ class FrontEndController extends Controller
         print_r($id);
         echo "</pre>";
         echo "<pre>";
-        print_r(Session::get('person'));
+        print_r(Session::all());
         echo "</pre>";
         die();
         // the person attached to the user
