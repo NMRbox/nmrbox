@@ -858,21 +858,19 @@ class FrontEndController extends Controller
                     ], 200);
                 }
 
-                // Adding person table information into session
-                Session::put('person', $person);
-                Session::put('test', 'lol');
-                Session::save();
-                echo "<pre>";
-                print_r(Session::get('person'));echo "</pre>";
-                echo "<pre>";
-                print_r(Session::get('test'));
-                echo "</pre>";
-                die();
 
                 // Adding JWT-Auth Token
                 $token = JWTAuth::fromUser($person);
                 $set_token = JWTAuth::setToken($token);
                 $parse_token = JWTAuth::getToken();
+
+                // Adding person table information into session
+                $request->session()->put('token', $token);
+                $request->session()->save();
+                echo "<pre>";
+                print_r(Session::get('token'));
+                echo "</pre>";
+                die();
 
                 if ($parse_token == true)
                 {
