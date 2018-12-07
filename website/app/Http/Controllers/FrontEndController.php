@@ -858,20 +858,22 @@ class FrontEndController extends Controller
                     ], 200);
                 }
 
-                // Adding person table information into session
-                $request->session()->push('person', $person);
-                $request->session()->save();
-                echo "<pre>";
-                print_r(Session::get('person'));echo "</pre>";
-                echo "<pre>";
-                print_r(Session::get('test'));
-                echo "</pre>";
-                die();
 
                 // Adding JWT-Auth Token
                 $token = JWTAuth::fromUser($person);
                 $set_token = JWTAuth::setToken($token);
                 $parse_token = JWTAuth::getToken();
+
+                // Adding person table information into session
+                $user_data = [
+                    'token' => $token,
+                    'user_is_admin' => Session::get('user_is_admin'),
+                    'person_id' => $person->id,
+                    'message' => Lang::get('auth/message.login.success'),
+                    'type' => 'success'
+                ];
+                $request->session()->push('test', $user_data);
+                $request->session()->save();
 
                 if ($parse_token == true)
                 {
@@ -885,13 +887,7 @@ class FrontEndController extends Controller
                     }
                 }
 
-                return response()->json([
-                    'token' => $token,
-                    'user_is_admin' => Session::get('user_is_admin'),
-                    'person_id' => $person->id,
-                    'message' => Lang::get('auth/message.login.success'),
-                    'type' => 'success'
-                ], 200);
+                return response()->json($user_data, 200);
             } else {
                 return response()->json([
                     'message' => Lang::get('auth/message.login.error'),
