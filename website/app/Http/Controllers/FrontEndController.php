@@ -1091,7 +1091,7 @@ class FrontEndController extends Controller
     public function person_details(Request $request)
     {
         echo "<pre>";
-        print_r($request);
+        print_r($request->input('id'));
         echo "</pre>";
         echo "<pre>";
         print_r($request->session()->get('person'));
