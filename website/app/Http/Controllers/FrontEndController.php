@@ -881,6 +881,7 @@ class FrontEndController extends Controller
                 // Adding person table information into session
                 $user_data = [
                     //'token' => $token,
+                    'token' => Session::getId(),
                     'user_is_admin' => $is_admin,
                     'person_id' => $person->id,
                     'message' => Lang::get('auth/message.login.success'),
@@ -1096,7 +1097,7 @@ class FrontEndController extends Controller
         print_r($id);
         echo "</pre>";
         echo "<pre>";
-        print_r(Session::all());
+        print_r(Session::getId());
         echo "</pre>";
         die();
         // the person attached to the user
