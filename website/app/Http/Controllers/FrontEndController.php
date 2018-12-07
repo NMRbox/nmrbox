@@ -1088,13 +1088,13 @@ class FrontEndController extends Controller
     /**
      * get user details and display
      */
-    public function person_details(Request $request)
+    public function person_details($id)
     {
         echo "<pre>";
-        print_r($request->input('id'));
+        print_r($id);
         echo "</pre>";
         echo "<pre>";
-        print_r($request->session()->get('person'));
+        print_r(Session::get('person'));
         echo "</pre>";
         die();
         // the person attached to the user
