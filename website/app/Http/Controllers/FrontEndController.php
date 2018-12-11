@@ -1093,14 +1093,15 @@ class FrontEndController extends Controller
      */
     public function person_details($id)
     {
+        $session_data = NmrboxSession::where('id', $id)->get()->first();
         echo "<pre>";
         print_r($id);
         echo "</pre>";
         echo "<pre>";
-        print_r(Session::getId());
+        print_r( Cookie::get('cookieName'));
         echo "</pre>";
         echo "<pre>";
-        print_r(NmrboxSession::All());
+        print_r(unserialize(base64_decode($session_data->payload)));
         echo "</pre>";
         die();
         // the person attached to the user
