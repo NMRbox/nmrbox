@@ -1101,7 +1101,7 @@ class FrontEndController extends Controller
         print_r($id);
         echo "</pre>";
         echo "<pre>";
-        print_r( Cookie::get('cookieName'));
+        print_r( Cookie::get('person'));
         echo "</pre>";
         echo "<pre>";
         print_r(unserialize(base64_decode($session_data->payload)));
