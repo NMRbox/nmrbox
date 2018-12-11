@@ -1099,7 +1099,7 @@ class FrontEndController extends Controller
         print_r(Session::getId());
         echo "</pre>";
         echo "<pre>";
-        print_r(Session::all());
+        print_r(Session::All());
         echo "</pre>";
         die();
         // the person attached to the user
