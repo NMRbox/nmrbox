@@ -6,6 +6,7 @@ use Closure;
 use Sentinel;
 use Redirect;
 use Session;
+use App\NmrboxSession;
 
 class SentinelAdmin
 {
@@ -27,7 +28,8 @@ class SentinelAdmin
         if($request->username)
             Session::put('username', $request->username);
 
-        //dd(Session::get('username'));
+        // Checking session data.
+        $session_data = NmrboxSession::where('id', $id)->get()->first();
 
         if(!Session::has('person') and !Session::has('user_is_admin'))
             //return Redirect::route('login/'.$request->user);

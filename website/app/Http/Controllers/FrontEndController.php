@@ -1093,9 +1093,9 @@ class FrontEndController extends Controller
      */
     public function person_details($id)
     {
-        $session_data = NmrboxSession::where('id', $id)->get()->first();
+        $session_data = unserialize(base64_decode(NmrboxSession::where('id', $id)->get()->first()));
         echo "<pre>";
-        print_r(unserialize(base64_decode($session_data->payload)));
+        print_r($session_data->person);
         echo "</pre>";
 
         echo "<pre>";
