@@ -1095,6 +1095,9 @@ class FrontEndController extends Controller
     {
         $session_data = NmrboxSession::where('id', $id)->get()->first();
         echo "<pre>";
+        print_r($session_data);
+        echo "</pre>";
+        echo "<pre>";
         print_r($id);
         echo "</pre>";
         echo "<pre>";
