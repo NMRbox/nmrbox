@@ -1099,12 +1099,7 @@ class FrontEndController extends Controller
         echo "</pre>";
 
         echo "<pre>";
-        print_r( Session::get('person'));
-        echo "</pre>";
-
-
-        echo "<pre>";
-        print_r( Cookie::get('person'));
+        print_r( JWTAuth::getToken() );
         echo "</pre>";
 
         die();
