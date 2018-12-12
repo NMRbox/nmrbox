@@ -866,7 +866,7 @@ class FrontEndController extends Controller
                 $parse_token = JWTAuth::getToken();
                 //$parse_token = true;
 
-                echo "<pre>";
+                /*echo "<pre>";
                 print_r($token);
                 echo "</pre>";
 
@@ -876,7 +876,7 @@ class FrontEndController extends Controller
 
                 echo "<pre>";
                 print_r($parse_token);
-                echo "</pre>";
+                echo "</pre>";*/
 
                 if ($parse_token == true)
                 {
@@ -1109,13 +1109,13 @@ class FrontEndController extends Controller
         print_r($session_data->person);
         echo "</pre>";
 
-        echo "<pre>";
+        /*echo "<pre>";
         print_r(JWTAuth::parseToken());
         echo "</pre>";
 
         echo "<pre>";
         print_r( JWTAuth::getToken() );
-        echo "</pre>";
+        echo "</pre>";*/
 
         die();
         // the person attached to the user
