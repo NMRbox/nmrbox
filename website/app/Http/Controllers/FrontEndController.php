@@ -881,6 +881,7 @@ class FrontEndController extends Controller
                     'token' => $token,
                     'user_is_admin' => $is_admin,
                     'person_id' => Session::getId(),
+                    'user' => $person->id,
                     'message' => Lang::get('auth/message.login.success'),
                     'type' => 'success'
                 ];
@@ -1091,17 +1092,14 @@ class FrontEndController extends Controller
     public function person_details($id)
     {
         echo "<pre>";
-        print_r('Id'.$id);
+        print_r($id);
         echo "</pre>";
+        //Session::put()
 
         $session_data = NmrboxSession::where('id', $id)->get()->first();
 
         echo "<pre>";
-        print_r('lol'.Session::getId());
-        echo "</pre>";
-
-        echo "<pre>";
-        print_r($session_data);
+        print_r(unserialize(base64_decode($session_data->payload)));
         echo "</pre>";
 
 
