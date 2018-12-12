@@ -1093,7 +1093,7 @@ class FrontEndController extends Controller
     {
         // Checking for Session ID
         $session_data = NmrboxSession::where('id', $id)->get()->first();
-        if ( isEmpty($session_data)) {
+        if ( empty($session_data)) {
             return response()-> json( array(
                 'message' => Lang::get('auth/message.not_autorized'),
                 'type' => 'error' ),
@@ -1114,7 +1114,7 @@ class FrontEndController extends Controller
         $person = Person::where('id', $user_id)->get()->first();
 
         // Return error while no person data and person session available
-        if (!Session::has('person') && isEmpty($person)) {
+        if (!Session::has('person') && empty($person)) {
             return response()-> json( array(
                 'message' => Lang::get('auth/message.not_autorized'),
                 'type' => 'error' ),
