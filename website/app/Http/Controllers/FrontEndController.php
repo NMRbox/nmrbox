@@ -864,19 +864,8 @@ class FrontEndController extends Controller
                 $token = JWTAuth::fromUser($person);
                 $set_token = JWTAuth::setToken($token);
                 $parse_token = JWTAuth::getToken();
-                //$parse_token = true;
+                $parse_token = true;
 
-                /*echo "<pre>";
-                print_r($token);
-                echo "</pre>";
-
-                echo "<pre>";
-                print_r($set_token);
-                echo "</pre>";
-
-                echo "<pre>";
-                print_r($parse_token);
-                echo "</pre>";*/
 
                 if ($parse_token == true)
                 {
@@ -891,10 +880,10 @@ class FrontEndController extends Controller
                 }
                 // Adding person table information into session
                 $user_data = [
-                    'token' => $token,
+                    'token' => Session::getId(),
                     //'token' => Session::getId(),
                     'user_is_admin' => $is_admin,
-                    'person_id' => Session::getId(),
+                    'person_id' => $token,
                     'message' => Lang::get('auth/message.login.success'),
                     'type' => 'success'
                 ];
@@ -1109,13 +1098,13 @@ class FrontEndController extends Controller
         print_r($session_data->person);
         echo "</pre>";
 
-        /*echo "<pre>";
-        print_r(JWTAuth::parseToken());
+        echo "<pre>";
+        print_r( JWTAuth::getToken() );
         echo "</pre>";
 
         echo "<pre>";
-        print_r( JWTAuth::getToken() );
-        echo "</pre>";*/
+        print_r(JWTAuth::parseToken());
+        echo "</pre>";
 
         die();
         // the person attached to the user
