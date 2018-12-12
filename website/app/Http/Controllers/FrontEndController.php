@@ -1105,12 +1105,13 @@ class FrontEndController extends Controller
         Session::push('person', $session_payload['person'][0]);
 
         $user_data = Session::get('person');
+        $user_id = $user_data[0]['user'];
         var_dump($user_data);
-        var_dump($user_data->user);
+        var_dump($user_id);
 
 
         // the person attached to the user
-        $person = Person::where('id', $user_data->user)->get()->first();
+        $person = Person::where('id', $user_id)->get()->first();
         echo "<pre>";
         print_r($person);
         echo "</pre>";
