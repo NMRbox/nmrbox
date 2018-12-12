@@ -1091,20 +1091,30 @@ class FrontEndController extends Controller
      */
     public function person_details($id)
     {
-
+        // Checking for Session ID
         $session_data = NmrboxSession::where('id', $id)->get()->first();
+        if ( isEmpty($session_data)) {
+            return response()-> json( array(
+                'message' => Lang::get('auth/message.not_autorized'),
+                'type' => 'error' ),
+                401 );
+        }
+
+        // Retrieving session payload
         $session_payload = unserialize(base64_decode($session_data->payload));
 
+        // Replacing session variable for cross domain access
         Session::push('person', $session_payload['person'][0]);
 
+        // fetching session data
         $user_data = Session::get('person');
         $user_id = $user_data[0]['user'];
 
-        // the person attached to the user
+        // Fetching the user data from person table
         $person = Person::where('id', $user_id)->get()->first();
 
-
-        if (!Session::has('person')) {
+        // Return error while no person data and person session available
+        if (!Session::has('person') && isEmpty($person)) {
             return response()-> json( array(
                 'message' => Lang::get('auth/message.not_autorized'),
                 'type' => 'error' ),
