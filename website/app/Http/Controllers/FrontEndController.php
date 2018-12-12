@@ -1106,7 +1106,7 @@ class FrontEndController extends Controller
 
         $user_data = Session::get('person');
 
-        var_dump(Session::get('person'));
+        var_dump($user_data['id']);
 
 
         // the person attached to the user
