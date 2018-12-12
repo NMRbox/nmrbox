@@ -877,14 +877,14 @@ class FrontEndController extends Controller
                     }
                 }
                 // Adding person table information into session
-                $user_data = [
+                $user_data = array(
                     'token' => $token,
                     'user_is_admin' => $is_admin,
                     'person_id' => Session::getId(),
                     'user' => $person->id,
                     'message' => Lang::get('auth/message.login.success'),
                     'type' => 'success'
-                ];
+                );
                 $request->session()->push('person', $user_data);
                 //$request->session()->save();
 
@@ -1094,14 +1094,17 @@ class FrontEndController extends Controller
         echo "<pre>";
         print_r($id);
         echo "</pre>";
-        //Session::put()
+        Session::get('person');
 
         $session_data = NmrboxSession::where('id', $id)->get()->first();
-
+        $session_payload = unserialize(base64_decode($session_data->payload));
         echo "<pre>";
-        print_r(unserialize(base64_decode($session_data->payload)));
+        print_r($session_payload['person'][0]);
         echo "</pre>";
 
+        Session::push('person', $session_payload['person'][0]);
+
+        Session::get('person');
 
         die();
         // the person attached to the user
