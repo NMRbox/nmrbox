@@ -1098,13 +1098,6 @@ class FrontEndController extends Controller
         print_r($session_data->person);
         echo "</pre>";
 
-        echo "<pre>";
-        print_r( JWTAuth::getToken() );
-        echo "</pre>";
-
-        echo "<pre>";
-        print_r(JWTAuth::parseToken());
-        echo "</pre>";
 
         die();
         // the person attached to the user
