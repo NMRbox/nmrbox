@@ -866,6 +866,17 @@ class FrontEndController extends Controller
                 $parse_token = JWTAuth::getToken();
                 //$parse_token = true;
 
+                echo "<pre>";
+                print_r($token);
+                echo "</pre>";
+
+                echo "<pre>";
+                print_r($set_token);
+                echo "</pre>";
+
+                echo "<pre>";
+                print_r($parse_token);
+                echo "</pre>";
 
                 if ($parse_token == true)
                 {
@@ -880,10 +891,10 @@ class FrontEndController extends Controller
                 }
                 // Adding person table information into session
                 $user_data = [
-                    'token' => Session::getId(),
+                    'token' => $token,
                     //'token' => Session::getId(),
                     'user_is_admin' => $is_admin,
-                    'person_id' => $token,
+                    'person_id' => Session::getId(),
                     'message' => Lang::get('auth/message.login.success'),
                     'type' => 'success'
                 ];
@@ -1093,10 +1104,10 @@ class FrontEndController extends Controller
      */
     public function person_details($id)
     {
-        /*$session_data = unserialize(base64_decode(NmrboxSession::where('id', $id)->get()->first()));
+        $session_data = unserialize(base64_decode(NmrboxSession::where('id', $id)->get()->first()));
         echo "<pre>";
         print_r($session_data->person);
-        echo "</pre>";*/
+        echo "</pre>";
 
         echo "<pre>";
         print_r(JWTAuth::parseToken());
