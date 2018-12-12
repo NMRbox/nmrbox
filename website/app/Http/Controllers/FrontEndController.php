@@ -880,15 +880,20 @@ class FrontEndController extends Controller
                 }
                 // Adding person table information into session
                 $user_data = [
-                    'token' => Session::getId(),
+                    'token' => $token,
                     //'token' => Session::getId(),
                     'user_is_admin' => $is_admin,
-                    'person_id' => $token,
-                    'message' => Lang::get('auth/message.login.success'),
-                    'type' => 'success'
+                    'person_id' => Session::getId(),
+                    //'message' => Lang::get('auth/message.login.success'),
+                    //'type' => 'success'
                 ];
                 $request->session()->push('person', $user_data);
                 //$request->session()->save();
+
+                $user_data = [
+                    'message' => Lang::get('auth/message.login.success'),
+                    'type' => 'success'
+                ];
 
                 return response()->json($user_data, 200);
             } else {
