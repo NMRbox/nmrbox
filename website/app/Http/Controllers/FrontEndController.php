@@ -1091,31 +1091,18 @@ class FrontEndController extends Controller
      */
     public function person_details($id)
     {
-        echo "<pre>";
-        print_r($id);
-        echo "</pre>";
-        Session::get('person');
 
         $session_data = NmrboxSession::where('id', $id)->get()->first();
         $session_payload = unserialize(base64_decode($session_data->payload));
-        echo "<pre>";
-        print_r($session_payload['person'][0]);
-        echo "</pre>";
 
         Session::push('person', $session_payload['person'][0]);
 
         $user_data = Session::get('person');
         $user_id = $user_data[0]['user'];
-        var_dump($user_data);
-        var_dump($user_id);
-
 
         // the person attached to the user
         $person = Person::where('id', $user_id)->get()->first();
-        echo "<pre>";
-        print_r($person);
-        echo "</pre>";
-        die();
+
 
         if (!Session::has('person')) {
             return response()-> json( array(
