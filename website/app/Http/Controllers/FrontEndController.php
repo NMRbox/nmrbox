@@ -864,7 +864,6 @@ class FrontEndController extends Controller
                 $token = JWTAuth::fromUser($person);
                 $set_token = JWTAuth::setToken($token);
                 $parse_token = JWTAuth::getToken();
-                $parse_token = true;
 
 
                 if ($parse_token == true)
@@ -874,26 +873,19 @@ class FrontEndController extends Controller
                     foreach ($user_classification as $key => $value) {
                         if ($value->name == 'admin'){
                             $is_admin = true;
-                            //Session::put('user_is_admin', $is_admin);
                         }
                     }
                 }
                 // Adding person table information into session
                 $user_data = [
                     'token' => $token,
-                    //'token' => Session::getId(),
                     'user_is_admin' => $is_admin,
                     'person_id' => Session::getId(),
-                    //'message' => Lang::get('auth/message.login.success'),
-                    //'type' => 'success'
-                ];
-                $request->session()->push('person', $user_data);
-                //$request->session()->save();
-
-                $user_data = [
                     'message' => Lang::get('auth/message.login.success'),
                     'type' => 'success'
                 ];
+                $request->session()->push('person', $user_data);
+                //$request->session()->save();
 
                 return response()->json($user_data, 200);
             } else {
