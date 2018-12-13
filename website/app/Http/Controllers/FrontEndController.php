@@ -1105,11 +1105,17 @@ class FrontEndController extends Controller
         $session_payload = unserialize(base64_decode($session_data->payload));
 
         // Replacing session variable for cross domain access
-        Session::push('person', $session_payload['person'][0]);
+        foreach ( $session_payload['person'] as $key => $value ) {
 
-        // fetching session data
-        $user_data = Session::get('person');
-        $user_id = $user_data[0]['user'];
+            if( $value['person_id'] == $id ) {
+                $user_id = $value['user'];
+
+                Session::push('person', $session_payload['person'][$key]);
+                if( $value['user_is_admin'] == true ) {
+                    Session::push('user_is_admin', true);
+                }
+            }
+        }
 
         // Fetching the user data from person table
         $person = Person::where('id', $user_id)->get()->first();
