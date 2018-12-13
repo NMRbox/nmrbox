@@ -28,16 +28,6 @@ class SentinelAdmin
         if($request->username)
             Session::put('username', $request->username);
 
-        // Checking session data.
-        //$session_data = NmrboxSession::where('id', $id)->get()->first();
-        echo "<pre>";
-        print_r(Session::get('person'));
-        echo "</pre>";
-
-        echo "<pre>";
-        print_r(Session::get('user_is_admin'));
-        echo "</pre>";
-
         if(!Session::has('person') and !Session::has('user_is_admin'))
             //return Redirect::route('login/'.$request->user);
             return Redirect::route('login');
