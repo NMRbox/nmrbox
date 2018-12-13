@@ -876,9 +876,7 @@ class FrontEndController extends Controller
                         }
                     }
                 }
-                echo "<pre>";
-                print_r(Session::getId());
-                echo "</pre>";
+
                 // Adding person table information into session
                 $user_data = array(
                     'token' => $token,
