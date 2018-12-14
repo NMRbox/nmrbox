@@ -33,11 +33,6 @@ class ChandraController extends Controller {
 
     public function showHome()
     {
-/*    	//if(Sentinel::check())
-    	if(Session::has('person') && Session::has('user_is_admin'))
-			return View::make('admin/index');
-		else
-			return Redirect::to('login')->with('error', 'You must be logged in!');*/
         return View::make('admin/index');
     }
 

@@ -116,44 +116,6 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
     //Route::get('/{username}', array('as' => 'dashboard','uses' => 'ChandraController@showHome'));
     Route::get('/', array('as' => 'dashboard','uses' => 'ChandraController@showHome'));
 
-    /*# User Management
-    Route::group(array('prefix' => 'users'), function () {
-        Route::get('/', array('as' => 'users', 'uses' => 'UsersController@getIndex'));
-        Route::get('create',array('as' => 'users.create', 'uses' => 'UsersController@getCreate'));
-        Route::post('create', 'UsersController@postCreate');
-        Route::get('{userId}/edit', array('as' => 'users.edit', 'uses' => 'UsersController@getEdit'));
-        Route::post('{userId}/edit', 'UsersController@postEdit');
-        Route::get('{userId}/delete', array('as' => 'delete/user', 'uses' => 'UsersController@getDelete'));
-        Route::get('{userId}/confirm-delete', array('as' => 'confirm-delete/user', 'uses' => 'UsersController@getModalDelete'));
-        Route::get('{userId}/restore', array('as' => 'restore/user', 'uses' => 'UsersController@getRestore'));
-    });*/
-
-    /*# Group Management
-    Route::group(array('prefix' => 'groups'), function () {
-        Route::get('/', array('as' => 'groups', 'uses' => 'GroupsController@getIndex'));
-        Route::get('create', array('as' => 'create/group', 'uses' => 'GroupsController@getCreate'));
-        Route::post('create', 'GroupsController@postCreate');
-        Route::get('{groupId}/edit', array('as' => 'update/group', 'uses' => 'GroupsController@getEdit'));
-        Route::post('{groupId}/edit', 'GroupsController@postEdit');
-        Route::get('{groupId}/delete', array('as' => 'delete/group', 'uses' => 'GroupsController@getDelete'));
-        Route::get('{groupId}/confirm-delete', array('as' => 'confirm-delete/group', 'uses' => 'GroupsController@getModalDelete'));
-        Route::get('{groupId}/restore', array('as' => 'restore/group', 'uses' => 'GroupsController@getRestore'));
-    });*/
-
-    /*routes for blog
-    Route::group(array('prefix' => 'blog','before' => 'Sentinel'), function () {
-        Route::get('/', array('as' => 'blogs', 'uses' => 'BlogController@getIndex'));
-        Route::get('create', array('as' => 'create/blog', 'uses' => 'BlogController@getCreate'));
-        Route::post('create', 'BlogController@postCreate');
-        Route::get('{blog}/edit', array('as' => 'update/blog', 'uses' => 'BlogController@getEdit'));
-        Route::post('{blog}/edit', 'BlogController@postEdit');
-        Route::get('{blog}/delete', array('as' => 'delete/blog', 'uses' => 'BlogController@getDelete'));
-        Route::get('{blog}/confirm-delete', array('as' => 'confirm-delete/blog', 'uses' => 'BlogController@getModalDelete'));
-        Route::get('{blog}/restore', array('as' => 'restore/blog', 'uses' => 'BlogController@getRestore'));
-        Route::get('{blog}/show', array('as' => 'blog/show', 'uses' => 'BlogController@show'));
-        Route::post('{blog}/storecomment', array('as' => 'restore/blog', 'uses' => 'BlogController@storecomment'));
-    });*/
-
     /*routes for blog category*/
     Route::group(array('prefix' => 'blogcategory','before' => 'Sentinel'), function () {
         Route::get('/', array('as' => 'blogcategories', 'uses' => 'BlogCategoryController@getIndex'));

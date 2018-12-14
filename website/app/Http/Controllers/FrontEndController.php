@@ -1109,10 +1109,10 @@ class FrontEndController extends Controller
 
             if( $value['person_id'] == $id ) {
                 $user_id = $value['user'];
-
-                Session::push('person', $session_payload['person'][$key]);
+                // TODO: needs to update person session key with session ID.
+                Session::put('person', $session_payload['person'][$key]);
                 if( $value['user_is_admin'] == true ) {
-                    Session::push('user_is_admin', true);
+                    Session::put('user_is_admin', true);
                 }
             }
         }
