@@ -1112,7 +1112,7 @@ class FrontEndController extends Controller
                 $user_id = $value['user'];
                 $person = Person::where('id', $user_id)->get()->first();
                 // TODO: needs to update person session key with session ID.
-                Session::put('person', [$session_payload['person'][$key], $person]);
+                Session::put('person', array_merge($person, $session_payload['person'][$key]));
                 if( $value['user_is_admin'] == true ) {
                     Session::put('user_is_admin', true);
                 }
