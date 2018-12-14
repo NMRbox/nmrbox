@@ -22,6 +22,15 @@ class SentinelAdmin
         /* if request coming with username from Angular frontend*/
         if($request->username)
             Session::put('username', $request->username);
+        echo "<pre>";
+        print_r(Session::get('person'));
+        echo "</pre>";
+
+        echo "<pre>";
+        print_r(Session::get('user_is_admin'));
+        echo "</pre>";
+
+        die();
 
         if(!Session::has('person') and !Session::has('user_is_admin')) {
             //return Redirect::route('login/'.$request->user);

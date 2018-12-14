@@ -1108,17 +1108,16 @@ class FrontEndController extends Controller
         foreach ( $session_payload['person'] as $key => $value ) {
 
             if( $value['person_id'] == $id ) {
+                // Fetching the user data from person table
                 $user_id = $value['user'];
+                $person = Person::where('id', $user_id)->get()->first();
                 // TODO: needs to update person session key with session ID.
-                Session::put('person', $session_payload['person'][$key]);
+                Session::put('person', [$session_payload['person'][$key], $person]);
                 if( $value['user_is_admin'] == true ) {
                     Session::put('user_is_admin', true);
                 }
             }
         }
-
-        // Fetching the user data from person table
-        $person = Person::where('id', $user_id)->get()->first();
 
         // Return error while no person data and person session available
         if (!Session::has('person') && empty($person)) {
