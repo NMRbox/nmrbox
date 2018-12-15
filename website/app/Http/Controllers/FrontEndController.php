@@ -844,7 +844,7 @@ class FrontEndController extends Controller
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
 
             /* Test (Localhost login code to skip LDAP authentication) */
-            $ldap_login = true;
+            //$ldap_login = true;
             /* Eof Test */
 
             // LDAP login response
@@ -887,7 +887,6 @@ class FrontEndController extends Controller
                     'type' => 'success'
                 );
                 $request->session()->push('person', $user_data);
-                //$request->session()->save();
 
                 return response()->json($user_data, 200);
             } else {
