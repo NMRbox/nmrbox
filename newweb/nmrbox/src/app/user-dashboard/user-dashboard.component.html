@@ -144,7 +144,8 @@
                                     <div class="panel-footer">
                                         <div class="text-right">
                                             <a mat-button *ngIf="showHide" type="submit" (click)="onPasswordResetSubmit(passReset)">Save</a>
-                                            <a mat-button (click)="changeShowStatus()">Password Reset</a>
+                                            <a *ngIf="!showHide" mat-button (click)="changeShowStatus()">Password Reset</a>
+                                            <a *ngIf="showHide" mat-button (click)="changeShowStatus()">Cancel</a>
                                         </div>
                                     </div>
                                 </form>

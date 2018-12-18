@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, FormBuilder, Validators, NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Observable} from 'rxjs/Observable';
 
 /* Import services */
 import {AuthenticationService} from '../authentication/authentication.service';
@@ -40,7 +39,6 @@ export class ProfileUpdateComponent implements OnInit {
     getPersonDetails(id: string): void {
         this.userService.getPersonDetails(id).then(person => {
           this.person = person;
-          console.log(this.person);
         });
     }
 
