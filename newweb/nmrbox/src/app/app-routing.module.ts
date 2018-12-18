@@ -29,7 +29,7 @@ const routes: Routes = [
     { path: 'community', component: CommunityListComponent },
     { path: 'community/:index', component: CommunityListComponent },
     { path: 'support', component: SupportComponent },
-    { path: 'support/', component: SupportComponent },
+    { path: 'support/:index', component: SupportComponent },
     { path: 'team', component: TeamListComponent },
     { path: 'team/:index', component: TeamListComponent },
     { path: 't/detail', component: TeamDetailComponent },
