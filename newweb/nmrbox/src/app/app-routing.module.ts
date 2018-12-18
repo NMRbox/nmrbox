@@ -7,7 +7,7 @@ import { SoftwareListComponent } from './software/software-list.component';
 import { SoftwareDetailComponent } from './software/software-detail.component';
 import { CommunityDetailComponent } from './community/community-detail.component';
 import { CommunityListComponent } from './community/community-list.component';
-import {SupportComponent} from './support/support.component';
+import { SupportComponent } from './support/support.component';
 import { TeamDetailComponent } from './team/team-detail.component';
 import { TeamListComponent } from './team/team-list.component';
 import { SignupComponent } from './authentication/signup.component';
@@ -36,6 +36,7 @@ const routes: Routes = [
     { path: 'signup', component: SignupComponent },
     { path: 'signin', component: SigninComponent },
     { path: 'signout', component: SigninComponent },
+    { path: 'forgot-password', component: ForgetPasswordComponent},
     { path: 'password-reset', component: PasswordResetComponent },
     { path: 'user-dashboard', component: UserDashboardComponent },
     { path: 'profile-update', component: ProfileUpdateComponent },

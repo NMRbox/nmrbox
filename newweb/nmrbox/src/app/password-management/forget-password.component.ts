@@ -4,8 +4,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 /* Import the service */
 import { PasswordManagementService } from './password-management.service';
-import { AuthenticationService } from '../authentication/authentication.service';
-import {PersonModel} from '../user-dashboard/person.model';
 
 @Component({
   selector: 'app-forget-password',
@@ -13,7 +11,6 @@ import {PersonModel} from '../user-dashboard/person.model';
   styleUrls: ['./forget-password.component.scss']
 })
 export class ForgetPasswordComponent implements OnInit {
-    // notification: PersonModel[];
     public notifications: any = {message: '', type: ''};
     notification_message: Object = {};
     errors: Object = {};
@@ -23,8 +20,7 @@ export class ForgetPasswordComponent implements OnInit {
   constructor(
       private router: Router,
       private route: ActivatedRoute,
-      private passService: PasswordManagementService,
-      private authService: AuthenticationService
+      private passService: PasswordManagementService
   ) { }
 
   ngOnInit() {
