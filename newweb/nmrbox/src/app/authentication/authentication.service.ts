@@ -105,6 +105,7 @@ export class AuthenticationService {
             localStorage.setItem('person_id', person_id);
             localStorage.setItem('user_is_admin', user_is_admin);
             localStorage.setItem('token', token);
+
             this.router.navigateByUrl('user-dashboard');
           } else {
             return response.json();

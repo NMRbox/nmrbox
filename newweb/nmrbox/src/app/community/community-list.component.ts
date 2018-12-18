@@ -72,7 +72,7 @@ export class CommunityListComponent implements OnInit {
 
 
     // Tabs: go to specific subsection
-    this.route.params.subscribe( params =>{
+    this.route.params.subscribe( params => {
         this.routeIndex = params['index'];
         this.selectedIndex = this.routeIndex;
     }

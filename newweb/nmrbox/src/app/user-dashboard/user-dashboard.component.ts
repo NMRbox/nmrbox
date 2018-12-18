@@ -16,7 +16,7 @@ import {PersonModel} from './person.model';
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.scss']
 })
-export class UserDashboardComponent implements OnInit, AfterViewInit {
+export class UserDashboardComponent implements OnInit {
   person: PersonModel;
   isAdmin: string;
   showHide: boolean;
@@ -43,12 +43,6 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
 
     /* is admin checking */
     this.isAdmin = this.authService.getToken('user_is_admin');
-    console.log(this.isAdmin);
-
-    /* Script */
-    $(document).ready(function () {
-
-    });
   }
 
   getPersonDetails(id: string): void {
@@ -57,14 +51,6 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
 
   isUserAdmin(id: string) {
     return this.authService.getToken('is_user_admin');
-  }
-
-  ngAfterViewInit() {
-    jQuery('#test').on('click', function (e) {
-      e.preventDefault();
-      console.log('hello');
-      alert('hello');
-    });
   }
 
   onPasswordResetSubmit(form: NgForm): void {
