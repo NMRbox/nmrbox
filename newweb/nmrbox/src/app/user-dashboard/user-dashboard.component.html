@@ -104,10 +104,10 @@
                                                     <tr *ngIf="showHide">
                                                         <td>Current Password: </td>
                                                         <td>
-                                                            <input type="password" name="old_password" autocomplete="off" ngModel required>
+                                                            <input type="password" name="old_password" autocomplete="off" required ngModel>
                                                             <span id="show_pass_box" style="cursor:pointer;">
-                          <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
-                      </span>
+                                                                <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                     <tr *ngIf="showHide">
@@ -115,8 +115,8 @@
                                                         <td>
                                                             <input type="password" name="new_password" class="password" autocomplete="off" ngModel required>
                                                             <span style="cursor:pointer;">
-                          <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
-                      </span>
+                                                                <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                     <tr *ngIf="showHide">
@@ -124,8 +124,8 @@
                                                         <td>
                                                             <input type="password" name="conf_password" class="password" autocomplete="off" ngModel required>
                                                             <span id="" style="cursor:pointer;">
-                          <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
-                      </span>
+                                                                <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -170,10 +170,10 @@
                                 </div>
 
                                 <div class="form-group col-lg-6">
-                                    <div class="form-group "><label for="vm" class="control-label">VM Versions</label>
-                                        <select class="form-control form-control select_pi" maxlength="32" required="required" id="vm" name="vm" required ngModel>
-                                            <option value="" selected="selected">Please Select</option>
-                                            <option value="3">release_3</option>
+                                    <div class="form-group "><label for="vm_id" class="control-label">VM Versions</label>
+                                        <select class="form-control form-control select_pi" maxlength="32" required="required" id="vm_id" name="vm_id" ngModel>
+                                            <option value="">Please Select</option>
+                                            <option value="3" selected="selected">release_3</option>
                                         </select>
                                     </div>
                                 </div>
@@ -185,14 +185,14 @@
                                 <div class="form-group col-lg-6">
                                     <div class="form-group ">
                                         <label for="vm_username" class="control-label">VM username</label>
-                                        <input class="form-control form-control" maxlength="64" id="vm_username" name="vm_username" type="text" value="{{person.nmrbox_acct}}" autocomplete="off" required [ngModel]>
+                                        <input class="form-control form-control" maxlength="64" id="vm_username" name="vm_username" type="text" [ngModel]="person.nmrbox_acct" autocomplete="off" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group col-lg-6">
                                     <div class="form-group ">
                                         <label for="vm_password" class="control-label">VM Password</label>
-                                        <input class="form-control form-control" maxlength="32" id="vm_password" name="vm_password" type="password" required [ngModel]>
+                                        <input class="form-control form-control" maxlength="32" id="vm_password" name="vm_password" type="password" required="required" ngModel>
                                     </div>
                                 </div>
 

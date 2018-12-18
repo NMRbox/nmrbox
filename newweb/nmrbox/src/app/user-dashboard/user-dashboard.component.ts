@@ -1,10 +1,7 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
-
-declare const $: any;
-declare const jQuery: any;
 
 /* Import service files */
 import {AuthenticationService} from '../authentication/authentication.service';
@@ -62,13 +59,14 @@ export class UserDashboardComponent implements OnInit {
     )
       .subscribe(
         response => this.notifications = response,
-      )
+      );
   }
 
   onDownloadVMSubmit(form: NgForm): void {
+
     this.userDashboardService.SubmitDownloadVM(
       this.authService.getToken('person_id'),
-      form.value.vm,
+      form.value.vm_id,
       form.value.vm_username,
       form.value.vm_password,
     )
