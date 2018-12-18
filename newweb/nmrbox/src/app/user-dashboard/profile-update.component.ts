@@ -38,7 +38,10 @@ export class ProfileUpdateComponent implements OnInit {
     }
 
     getPersonDetails(id: string): void {
-        this.userService.getPersonDetails(id).then(person => this.person = person);
+        this.userService.getPersonDetails(id).then(person => {
+          this.person = person;
+          console.log(this.person);
+        });
     }
 
     onProfileUpdate(form: NgForm) {

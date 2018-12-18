@@ -7,6 +7,7 @@ export class PersonModel {
     email: string;
     email_institution: string;
     institution: string;
+    institution_type: number;
     pi: string;
     department: string;
     position: string;
