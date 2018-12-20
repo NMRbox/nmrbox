@@ -129,11 +129,13 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Classification Group</td>
+                                                        <td>Classification Groups</td>
                                                         <td>
-                                                            <div *ngFor="let classification of person.classifications">
+                                                          <ng-container *ngFor="let classification of person.classifications">
+                                                            <div *ngIf="classification.web_role" [title]="classification.definition">
                                                                 {{classification.name}}
                                                             </div>
+                                                          </ng-container>
                                                         </td>
                                                     </tr>
                                                     </tbody>

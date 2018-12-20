@@ -1,3 +1,10 @@
+export class ClassificationModel {
+  name: string;
+  web_role: boolean;
+  pivot: {};
+  definition: string;
+}
+
 export class PersonModel {
     id: number;
     first_name: string;
@@ -20,7 +27,7 @@ export class PersonModel {
     zip_code: number;
     country: string;
     time_zone_id: number;
-    classifications: Array<string>;
+    classifications: Array<ClassificationModel>;
     name: string;
     notification: Array<string>;
 }
