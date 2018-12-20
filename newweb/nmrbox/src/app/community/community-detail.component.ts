@@ -1,4 +1,6 @@
-import 'rxjs/add/operator/switchMap';
+
+import {switchMap} from 'rxjs/operators';
+
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Location} from '@angular/common';
@@ -26,8 +28,8 @@ export class CommunityDetailComponent implements OnInit {
       .switchMap((params: Params) => this.communityService.getCommunityDetail(+params['id'], params['type']))
       .subscribe(community => this.community = community);*/
     /* test (new community details page) */
-    this.route.params
-      .switchMap((params: Params) => this.communityService.getPageContent(params['pageUrl']))
+    this.route.params.pipe(
+      switchMap((params: Params) => this.communityService.getPageContent(params['pageUrl'])))
       .subscribe(community => this.community = community);
   }
 

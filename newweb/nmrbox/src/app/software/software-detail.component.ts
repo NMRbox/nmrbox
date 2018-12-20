@@ -1,4 +1,6 @@
-import 'rxjs/add/operator/switchMap';
+
+import {switchMap} from 'rxjs/operators';
+
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Location} from '@angular/common';
@@ -24,12 +26,12 @@ export class SoftwareDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params
-      .switchMap((params: Params) => this.softwareService.getSoftware(params['slug']))
+    this.route.params.pipe(
+      switchMap((params: Params) => this.softwareService.getSoftware(params['slug'])))
       .subscribe(software => this.software = software);
 
-    this.route.params
-      .switchMap((params: Params) => this.softwareService.getSoftwareMetaData(params['slug']))
+    this.route.params.pipe(
+      switchMap((params: Params) => this.softwareService.getSoftwareMetaData(params['slug'])))
       .subscribe(softwareMetaData => this.softwareMetaData = softwareMetaData);
   }
 

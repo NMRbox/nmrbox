@@ -1,4 +1,6 @@
-import 'rxjs/add/operator/switchMap';
+
+import {switchMap} from 'rxjs/operators';
+
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Location} from '@angular/common';
@@ -22,8 +24,8 @@ export class TeamDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params
-      .switchMap((params: Params) => this.teamService.getPageContent(params['type']))
+    this.route.params.pipe(
+      switchMap((params: Params) => this.teamService.getPageContent(params['type'])))
       .subscribe(teamModel => this.teamModel = teamModel);
   }
 

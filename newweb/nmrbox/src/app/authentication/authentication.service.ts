@@ -1,8 +1,10 @@
+
+import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {HttpHeaders, HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
-import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class AuthenticationService {
@@ -56,8 +58,8 @@ export class AuthenticationService {
           country: country,
           time_zone_id: time_zone_id,
           request_type: 'signup'
-        }), {headers: this.headers})
-      .map(
+        }), {headers: this.headers}).pipe(
+      map(
         response => {
           const message = response['message'];
           if (message === 'success') {
@@ -66,7 +68,7 @@ export class AuthenticationService {
             console.log('couldnt save data');
           }
         }
-      )
+      ))
       ;
   }
 
@@ -76,8 +78,8 @@ export class AuthenticationService {
         username: username,
         password: password,
         request_type: 'signin'
-      }), {headers: this.headers})
-      .map(
+      }), {headers: this.headers}).pipe(
+      map(
         response => {
 
           if (response['type'] !== 'error') {
@@ -94,7 +96,7 @@ export class AuthenticationService {
             return response;
           }
         }
-      );
+      ));
   }
 
   public getToken(name: string) {
