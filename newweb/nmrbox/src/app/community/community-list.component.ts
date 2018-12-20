@@ -113,15 +113,6 @@ export class CommunityListComponent implements OnInit {
     });
   }
 
-  searchSoftware(term: string): void {
-    this.communityService.searchSoftware(term).then(communityList => this.communityList = communityList);
-  }
-
-  filterSoftwareType(softwareType: string): void {
-
-    this.communityService.filterSoftwareType(softwareType).then(communityList => this.communityList = communityList);
-  }
-
   filterSupportType(supportType: string): void {
 
     if (supportType === 'nmrbox') {

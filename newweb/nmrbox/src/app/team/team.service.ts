@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http} from '@angular/http';
+import {HttpHeaders, HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
@@ -13,16 +13,16 @@ export class TeamService {
   private blogUrl = 'api/comBlogList';  // URL to web api
   private eventsUrl = 'api/comEventsList';  // URL to web api
 
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   create(name: string): Promise<TeamModel> {
     return this.http
       .post(environment.appUrl + '/' + this.baseUrl, JSON.stringify({name: name}), {headers: this.headers})
       .toPromise()
-      .then(res => res.json().data as TeamModel)
+      .then(res => res['data'] as TeamModel)
       .catch(this.handleError);
   }
 
@@ -51,7 +51,7 @@ export class TeamService {
     return this.http
       .get(url)
       .toPromise()
-      .then(response => response.json().data as TeamModel)
+      .then(response => response['data'] as TeamModel)
       .catch(this.handleError);
   }
 
@@ -74,7 +74,7 @@ export class TeamService {
     return this.http
       .get(url)
       .toPromise()
-      .then(response => response.json().data as TeamModel)
+      .then(response => response['data'] as TeamModel)
       .catch(this.handleError);
   }
 

@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
 
 /* import model */
 import {FaqsModel} from './faqs.model';
@@ -12,7 +11,7 @@ export class FaqsService {
   private handleError: any;
   public faqsUrl = 'faq';
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   getAllFaqs(): Promise<FaqsModel> {
@@ -20,7 +19,7 @@ export class FaqsService {
     return this.http
       .get(url)
       .toPromise()
-      .then(response => response.json().data as FaqsModel)
+      .then(response => response['data'] as FaqsModel)
       .catch(this.handleError);
   }
 
@@ -29,7 +28,7 @@ export class FaqsService {
     return this.http
       .get(url)
       .toPromise()
-      .then(response => response.json().data as FaqsModel)
+      .then(response => response['data'] as FaqsModel)
       .catch(this.handleError);
   }
 }

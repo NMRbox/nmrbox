@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, Response} from '@angular/http';
+import {HttpHeaders, HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
@@ -12,18 +12,17 @@ export class SoftwareService {
 
   private baseUrl = 'api/softwareList';  // URL to web api
   private swtUrl = 'registry';  // URL to web api
-  private swtFltrUrl = 'registry/filter-software-search';  // URL to web api
   private swtMtDtUrl = 'registry/software-metadata';  // URL to web api
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   create(name: string): Promise<SoftwareModel> {
     return this.http
       .post(this.baseUrl, JSON.stringify({name: name}), {headers: this.headers})
       .toPromise()
-      .then(res => res.json().data as SoftwareModel)
+      .then(res => res['data'] as SoftwareModel)
       .catch(this.handleError);
 
   }
@@ -32,7 +31,7 @@ export class SoftwareService {
     return this.http
       .get(environment.appUrl + `/` + this.swtUrl)
       .toPromise()
-      .then(response => response.json().data as SoftwareModel[])
+      .then(response => response['data'] as SoftwareModel[])
       .catch(this.handleError);
   }
 
@@ -42,7 +41,7 @@ export class SoftwareService {
     return this.http
       .get(environment.appUrl + `/?name=${name}`)
       .toPromise()
-      .then(response => response.json().data as FilterModel)
+      .then(response => response['data'] as FilterModel)
       .catch(this.handleError);
   }
 
@@ -53,7 +52,7 @@ export class SoftwareService {
     return this.http
       .get(url)
       .toPromise()
-      .then(response => response.json().data as SoftwareModel)
+      .then(response => response['data'] as SoftwareModel)
       .catch(this.handleError);
   }
 
@@ -65,7 +64,7 @@ export class SoftwareService {
     return this.http
       .get(url)
       .toPromise()
-      .then(response => response.json().data as SoftwareMetadataModel)
+      .then(response => response['data'] as SoftwareMetadataModel)
       .catch(this.handleError);
   }
 
@@ -75,14 +74,6 @@ export class SoftwareService {
       .put(url, JSON.stringify(software), {headers: this.headers})
       .toPromise()
       .then(() => software)
-      .catch(this.handleError);
-  }
-
-  delete(id: number): Promise<Response | never> {
-    const url = `${this.baseUrl}/${id}`;
-    return this.http.delete(url, {headers: this.headers})
-      .toPromise()
-      .then(() => null)
       .catch(this.handleError);
   }
 

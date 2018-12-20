@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, Response} from '@angular/http';
+import {HttpHeaders, HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
 @Injectable()
@@ -7,33 +7,16 @@ export class PasswordManagementService {
 
   private forgotPassUrl = 'password-forgot';  // URL to signin
   private forgotPassConfirmUrl = 'password-forgot-confirm';  // URL to signin
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   forgetPassword(email: string) {
     return this.http
       .post(environment.appUrl + '/' + this.forgotPassUrl, JSON.stringify({
         email: email
-      }), {headers: this.headers})
-      .map(
-        (response: Response) => response.json()
-        /*(response: Response) => {
-            //console.log(response);
-            const message = response.json().message;
-            const type = response.json().type;
-            return {message: message, type: type};
-        }*/
-      )
-      /*
-      .do(
-          response => {
-              localStorage.setItem('person_id', tokenData.person_id);
-              localStorage.setItem('token', tokenData.token);
-              this.router.navigateByUrl('user-dashboard');
-          }
-      )*/;
+      }), {headers: this.headers});
   }
 
   forgetPasswordConfirm(
@@ -50,24 +33,7 @@ export class PasswordManagementService {
         password: password,
         password_confirm: password_confirm,
         pass_reset_code: pass_reset_confirm
-      }), {headers: this.headers})
-      .map(
-        (response: Response) => response.json()
-        /*(response: Response) => {
-            //console.log(response);
-            const message = response.json().message;
-            const type = response.json().type;
-            return {message: message, type: type};
-        }*/
-      )
-      /*
-      .do(
-          response => {
-              localStorage.setItem('person_id', tokenData.person_id);
-              localStorage.setItem('token', tokenData.token);
-              this.router.navigateByUrl('user-dashboard');
-          }
-      )*/;
+      }), {headers: this.headers});
   }
 
 }

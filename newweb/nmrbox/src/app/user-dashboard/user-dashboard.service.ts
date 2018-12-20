@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, Response} from '@angular/http';
+import {HttpHeaders, HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
@@ -13,9 +13,9 @@ export class UserDashboardService {
   private passResetUrl = 'password-reset';  // URL to password reset
   private DownloadableVMUrl = 'downloadable-vm';  // URL to downloadable vm
   private personUrl = 'person';  // URL to web api
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   getPersonDetails(id: string): Promise<PersonModel> {
@@ -24,7 +24,7 @@ export class UserDashboardService {
     return this.http
       .get(url)
       .toPromise()
-      .then(response => response.json().data as PersonModel)
+      .then(response => response['data'] as PersonModel)
       .catch(this.handleError);
   }
 
@@ -40,10 +40,7 @@ export class UserDashboardService {
         current_pass: current_pass,
         new_pass: new_pass,
         confirm_new_pass: confirm_new_pass
-      }), {headers: this.headers})
-      .map(
-        (response: Response) => response.json()
-      );
+      }), {headers: this.headers});
   }
 
   SubmitDownloadVM(
@@ -58,9 +55,6 @@ export class UserDashboardService {
         vm_id: vm_id,
         vm_username: vm_username,
         vm_password: vm_password
-      }), {headers: this.headers})
-      .map(
-        (response: Response) => response.json()
-      );
+      }), {headers: this.headers});
   }
 }

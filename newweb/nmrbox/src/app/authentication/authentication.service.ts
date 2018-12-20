@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, Response} from '@angular/http';
+import {HttpHeaders, HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthenticationService {
@@ -9,10 +10,9 @@ export class AuthenticationService {
   private signinUrl = 'signin';  // URL to signin
   private signupUrl = 'signup';  // URL to signup
   private profileUpdateUrl = 'updateProfile';  // URL to profileUpdate
-  private authUrl = 'auth.php';  // URL to Laravel CURL page
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-  constructor(private http: Http, private router: Router) {
+  constructor(private http: HttpClient, private router: Router) {
 
   }
 
@@ -58,8 +58,8 @@ export class AuthenticationService {
           request_type: 'signup'
         }), {headers: this.headers})
       .map(
-        (response: Response) => {
-          const message = response.json().message;
+        response => {
+          const message = response['message'];
           if (message === 'success') {
             this.router.navigateByUrl('signin');
           } else {
@@ -78,16 +78,12 @@ export class AuthenticationService {
         request_type: 'signin'
       }), {headers: this.headers})
       .map(
-        (response: Response) => {
-          // console.log(response.json().type);
-          if (response.json().type !== 'error') {
-            const person_id = response.json().person_id;
-            const user_is_admin = response.json().user_is_admin;
-            const token = response.json().token;
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace('-', '+').replace('_', '/');
-            // return {person_id: person_id, user_is_admin: user_is_admin,
-            //         token: token, decoded: JSON.parse(window.atob(base64))};
+        response => {
+
+          if (response['type'] !== 'error') {
+            const person_id = response['person_id'];
+            const user_is_admin = response['user_is_admin'];
+            const token = response['token'];
 
             localStorage.setItem('person_id', person_id);
             localStorage.setItem('user_is_admin', user_is_admin);
@@ -95,7 +91,7 @@ export class AuthenticationService {
 
             this.router.navigateByUrl('user-dashboard');
           } else {
-            return response.json();
+            return response;
           }
         }
       );
@@ -107,30 +103,6 @@ export class AuthenticationService {
 
   public deleteToken(name: string) {
     return localStorage.removeItem(name);
-  }
-
-
-  public getCookie(name: string) {
-    const ca: Array<string> = document.cookie.split(';');
-    const caLen: number = ca.length;
-    const cookieName = `${name}=`;
-    let c: string;
-
-    for (let i = 0; i < caLen; i += 1) {
-      c = ca[i].replace(/^\s+/g, '');
-      if (c.indexOf(cookieName) === 0) {
-        return c.substring(cookieName.length, c.length);
-      }
-    }
-    return '';
-  }
-
-  public deleteCookie(name) {
-    document.cookie = name + '=' + ';' + '-1;';
-  }
-
-  public setCookie(name: string, value: string) {
-    document.cookie = name + '=' + value + ';';
   }
 
   updateProfile(
@@ -173,12 +145,7 @@ export class AuthenticationService {
           zip_code: zip_code,
           country: country,
           time_zone_id: time_zone_id,
-        }), {headers: this.headers})
-      .map(
-        (response: Response) => {
-          return response.json();
-        }
-      );
+        }), {headers: this.headers});
   }
 
 }
