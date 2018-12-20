@@ -29,7 +29,6 @@
     "@angular/router": "^4.1.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
-    "angular-in-memory-web-api": "~0.3.0",
     "angular2-useful-swiper": "^4.0.3",
     "axios": "^0.16.2",
     "body-parser": "^1.17.2",
