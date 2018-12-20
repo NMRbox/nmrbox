@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
 import {Router} from '@angular/router';
-import 'rxjs/Rx';
-import {Observable} from 'rxjs/Observable';
 import {environment} from '../../environments/environment';
 
 @Injectable()
@@ -16,17 +14,6 @@ export class AuthenticationService {
 
   constructor(private http: Http, private router: Router) {
 
-  }
-
-  private _serverError(err: any) {
-    console.log('sever error:', err);  // debug
-    if (err instanceof Response) {
-      return Observable.throw((response: Response) => response.json() || 'backend server error');
-      // if you're using lite-server, use the following line
-      // instead of the line above:
-      // return Observable.throw(err.text() || 'backend server error');
-    }
-    return Observable.throw(err || 'backend server error');
   }
 
   signup(

@@ -1,11 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptions, Response} from '@angular/http';
-import {Router} from '@angular/router';
+import {Headers, Http, Response} from '@angular/http';
 import {environment} from '../../environments/environment';
-import 'rxjs/Rx';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
-
 
 @Injectable()
 export class PasswordManagementService {
@@ -13,9 +8,8 @@ export class PasswordManagementService {
   private forgotPassUrl = 'password-forgot';  // URL to signin
   private forgotPassConfirmUrl = 'password-forgot-confirm';  // URL to signin
   private headers = new Headers({'Content-Type': 'application/json'});
-  options: RequestOptions;
 
-  constructor(private http: Http, private router: Router) {
+  constructor(private http: Http) {
   }
 
   forgetPassword(email: string) {

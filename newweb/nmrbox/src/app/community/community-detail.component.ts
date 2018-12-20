@@ -1,15 +1,15 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Location } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Params} from '@angular/router';
+import {Location} from '@angular/common';
 
-import { CommunityModel } from './community.model';
-import { CommunityService } from './community.service';
+import {CommunityModel} from './community.model';
+import {CommunityService} from './community.service';
 
 @Component({
   selector: 'app-community-detail',
   templateUrl: './community-detail.component.html',
-  styleUrls: [ './community-detail.component.scss' ]
+  styleUrls: ['./community-detail.component.scss']
 })
 export class CommunityDetailComponent implements OnInit {
   community: CommunityModel;
@@ -18,16 +18,17 @@ export class CommunityDetailComponent implements OnInit {
     private communityService: CommunityService,
     private route: ActivatedRoute,
     private location: Location
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     /*this.route.params
       .switchMap((params: Params) => this.communityService.getCommunityDetail(+params['id'], params['type']))
       .subscribe(community => this.community = community);*/
     /* test (new community details page) */
-      this.route.params
-        .switchMap((params: Params) => this.communityService.getPageContent(params['pageUrl']))
-        .subscribe(community => this.community = community);
+    this.route.params
+      .switchMap((params: Params) => this.communityService.getPageContent(params['pageUrl']))
+      .subscribe(community => this.community = community);
   }
 
   goBack(): void {

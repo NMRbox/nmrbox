@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
 import {environment} from '../../environments/environment';
 import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
 
 /* import model */
 import {PersonModel} from './person.model';
@@ -16,7 +15,8 @@ export class UserDashboardService {
   private personUrl = 'person';  // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
   getPersonDetails(id: string): Promise<PersonModel> {
     const url = environment.appUrl + `/` + this.personUrl + `/` + id;

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 /* Import the service */
-import { AuthenticationService } from './authentication/authentication.service';
+import {AuthenticationService} from './authentication/authentication.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -12,23 +12,23 @@ import {Router} from '@angular/router';
 export class AppComponent {
   title = 'NMRbox';
   version = '1.0';
-  today: number = Date.now();
 
-    constructor(
-        private router: Router,
-        private authService: AuthenticationService
-    ) { }
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService
+  ) {
+  }
 
-    isLoggedIn() {
-        return this.authService.getToken('person_id');
-    }
+  isLoggedIn() {
+    return this.authService.getToken('person_id');
+  }
 
-    signOut() {
-        this.authService.deleteToken('person_id');
-        this.authService.deleteToken('token');
-        this.authService.deleteToken('user_is_admin');
-        this.router.navigateByUrl('app');
-    }
+  signOut() {
+    this.authService.deleteToken('person_id');
+    this.authService.deleteToken('token');
+    this.authService.deleteToken('user_is_admin');
+    this.router.navigateByUrl('app');
+  }
 
 
 }

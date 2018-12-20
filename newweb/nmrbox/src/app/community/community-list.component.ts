@@ -1,16 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
-import { CommunityModel } from './community.model';
-import { CommunityService } from './community.service';
-import { AuthenticationService } from '../authentication/authentication.service';
+import {CommunityModel} from './community.model';
+import {CommunityService} from './community.service';
+import {AuthenticationService} from '../authentication/authentication.service';
 
 @Component({
   selector: 'app-community-list',
   templateUrl: './community-list.component.html',
-  styleUrls: [ './community-list.component.scss' ]
+  styleUrls: ['./community-list.component.scss']
 })
 export class CommunityListComponent implements OnInit {
 
@@ -36,7 +36,7 @@ export class CommunityListComponent implements OnInit {
   @Output() listChange: EventEmitter<CommunityModel[]> = new EventEmitter<CommunityModel[]>();
 
   // Tabs
-  @Input() selectedIndex= 0;
+  @Input() selectedIndex = 0;
   @Input() routeIndex: number;
 
   /*notification variable*/
@@ -57,7 +57,8 @@ export class CommunityListComponent implements OnInit {
     private route: ActivatedRoute,
     private communityService: CommunityService,
     private authService: AuthenticationService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.getCommunityList();
@@ -72,10 +73,10 @@ export class CommunityListComponent implements OnInit {
 
 
     // Tabs: go to specific subsection
-    this.route.params.subscribe( params => {
+    this.route.params.subscribe(params => {
         this.routeIndex = params['index'];
         this.selectedIndex = this.routeIndex;
-    }
+      }
     );
 
     if (this.routeIndex > -1) {
@@ -100,6 +101,7 @@ export class CommunityListComponent implements OnInit {
   getSupportList(): void {
     this.communityService.getSupportList().then(supportList => this.supportList = supportList);
   }
+
   /*getBlogList(): void {
     this.communityService.getBlogList().then(blogList => this.blogList = blogList);
   }*/
@@ -134,23 +136,23 @@ export class CommunityListComponent implements OnInit {
   }
 
   /* workshops registration */
-    onWorkshopRegister(form: NgForm) {
-        const person_id = this.authService.getToken('person_id');
-        const workshop_id = form.value.name;
-        console.log(person_id);
-        console.log(workshop_id);
+  onWorkshopRegister(form: NgForm) {
+    const person_id = this.authService.getToken('person_id');
+    const workshop_id = form.value.name;
+    console.log(person_id);
+    console.log(workshop_id);
 
-        this.communityService.workshopRegister(
-            person_id,
-            workshop_id
-        )
-            .subscribe(
-                response => this.notifications = response
-            );
-    }
+    this.communityService.workshopRegister(
+      person_id,
+      workshop_id
+    )
+      .subscribe(
+        response => this.notifications = response
+      );
+  }
 
-    isLoggedIn() {
-        return this.authService.getToken('person_id');
-    }
+  isLoggedIn() {
+    return this.authService.getToken('person_id');
+  }
 
 }

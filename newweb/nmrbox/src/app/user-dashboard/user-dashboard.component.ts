@@ -29,9 +29,6 @@ export class UserDashboardComponent implements OnInit {
     this.showHide = false;
   }
 
-  log(it) {console.log(it);}
-
-
   ngOnInit() {
     const person_id = this.authService.getToken('person_id');
     if (!person_id) {

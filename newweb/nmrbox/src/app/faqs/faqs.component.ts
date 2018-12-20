@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {PRIMARY_OUTLET, Router, UrlSegment, UrlSegmentGroup, UrlTree} from '@angular/router';
-import {ActivatedRoute} from '@angular/router';
 
 /* import model files */
 import {FaqsModel} from './faqs.model';
@@ -15,19 +14,15 @@ import {FaqsService} from './faqs.service';
 })
 export class FaqsComponent implements OnInit {
   faqs: FaqsModel;
-  allFaqs: FaqsModel[];
 
   showHide = false;
-  panelOpenState = false;
   public notifications: any = {message: '', type: ''};
-  step = 0;
   slug: string;
   term: string;
 
   constructor(
     private faqService: FaqsService,
-    private router: Router,
-    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.showHide = true;
   }

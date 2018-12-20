@@ -1,6 +1,5 @@
-
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -11,21 +10,23 @@ export class HomeComponent implements OnInit {
   title = 'Home Page';
 
   config: Object = {
-            pagination: '.swiper-pagination',
-            paginationClickable: true,
-            slidesPerView: 'auto',
-            centeredSlides: true,
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            spaceBetween: 0,
-            speed: 1500,
-            autoplay: 4000,
-            autoplayDisableOnInteraction: false,
-            loop: true
-        };
+    pagination: '.swiper-pagination',
+    paginationClickable: true,
+    slidesPerView: 'auto',
+    centeredSlides: true,
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+    spaceBetween: 0,
+    speed: 1500,
+    autoplay: 4000,
+    autoplayDisableOnInteraction: false,
+    loop: true
+  };
+
   constructor(
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.router.navigate(['/app']);
@@ -37,11 +38,11 @@ export class HomeComponent implements OnInit {
   }
 
   gotoSoftwareFilter(filterType: string = null, filterValue: string = null): void {
-   if (!filterType || ! filterValue) {
-     this.router.navigate(['/software']);
-   } else {
-     this.router.navigate(['/software', filterType, filterValue]);
-   }
+    if (!filterType || !filterValue) {
+      this.router.navigate(['/software']);
+    } else {
+      this.router.navigate(['/software', filterType, filterValue]);
+    }
   }
 
   gotoCommunityPage(contentType: string): void {

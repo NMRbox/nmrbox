@@ -28,10 +28,6 @@
     "member-ordering": [
       true,
       {"order": [
-        "public-static-field",
-        "public-instance-field",
-        "private-static-field",
-        "private-instance-field",
         "public-instance-method",
         "protected-instance-method",
         "private-instance-method"
