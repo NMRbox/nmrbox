@@ -26,33 +26,20 @@ export class TeamService {
       .catch(this.handleError);
   }
 
-  /*getPageContent(type: string): Promise<TeamModel> {
-
-//      let url = 'http://nmrbox.dev/documentation';
-
-      let url: string;
-      url = this.appUrl + `/${type}`;
-
-      console.log("getSoftware URL: ", url);
-
-      return this.http
-          .get(url)
-          .toPromise()
-          .then(response => response.json().data as TeamModel)
-          .catch(this.handleError);
-
-  }*/
-
   /* test (redirecting from router for page details */
-  getPageContent(pageUrl: string): Promise<TeamModel> {
+  getPageContent(pageUrl: string): Promise<any> {
 
+    return new Promise((resolve, reject) => {
+      resolve('<h1>Currently invalid "' + pageUrl + '": waiting for new static page access method. </h1>');
+    });
+/*
     const url = environment.appUrl + '/' + pageUrl;
     console.log('URL: ', url);
     return this.http
-      .get(url)
+      .get(url, {responseType: 'text'})
       .toPromise()
-      .then(response => response['data'] as TeamModel)
-      .catch(this.handleError);
+      .then(response => response)
+      .catch(this.handleError);*/
   }
 
   /* test */

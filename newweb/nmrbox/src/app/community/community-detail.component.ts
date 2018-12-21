@@ -1,12 +1,10 @@
-
-import {switchMap} from 'rxjs/operators';
-
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 
 import {CommunityModel} from './community.model';
 import {CommunityService} from './community.service';
+
 
 @Component({
   selector: 'app-community-detail',
@@ -15,6 +13,7 @@ import {CommunityService} from './community.service';
 })
 export class CommunityDetailComponent implements OnInit {
   community: CommunityModel;
+  @ViewChild('someVar') insertElement: ElementRef;
 
   constructor(
     private communityService: CommunityService,
@@ -24,50 +23,18 @@ export class CommunityDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /*this.route.params
-      .switchMap((params: Params) => this.communityService.getCommunityDetail(+params['id'], params['type']))
-      .subscribe(community => this.community = community);*/
-    /* test (new community details page) */
-    this.route.params.pipe(
-      switchMap((params: Params) => this.communityService.getPageContent(params['pageUrl'])))
-      .subscribe(community => this.community = community);
+    const parent = this;
+    this.route.params.subscribe(params => {
+      this.communityService.getPageContent(params['pageUrl']).then(response => {
+        //const el = document.createElement('html');
+        //el.innerHTML = response;
+        //parent.insertElement['nativeElement'].appendChild(el.getElementsByClassName('container-fluid')[0]);
+        parent.community = response;
+      });
+    });
   }
 
   goBack(): void {
     this.location.back();
   }
 }
-
-/*
-import { CommunityModel }         from './community.model';
-import { CommunityService }  from './community.service';
-@Component({
-  selector: 'community-detail',
-  templateUrl: './community-detail.component.html',
-  styleUrls: [ './community-detail.component.scss' ]
-})
-export class CommunityDetailComponent implements OnInit {
-  software: CommunityModel;
-
-  constructor(
-    private communityService: CommunityService,
-    private route: ActivatedRoute,
-    private location: Location
-  ) {}
-
-  ngOnInit(): void {
-    this.route.params
-      .switchMap((params: Params) => this.communityService.getSoftware(+params['id']))
-      .subscribe(software => this.software = software);
-  }
-
-  save(): void {
-  this.communityService.update(this.software)
-    .then(() => this.goBack());
-  }
-
-  goBack(): void {
-    this.location.back();
-  }
-}
-*/

@@ -65,7 +65,9 @@ export class TeamListComponent implements OnInit {
   // Tabs
   selectedIndexChange(index: number): void {
 
-    if (!index) index = 0;
+    if (!index) {
+      index = 0;
+    }
     this.selectedIndex = index;
 
     if (index === 0) {

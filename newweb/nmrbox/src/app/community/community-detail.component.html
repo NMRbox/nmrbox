@@ -10,7 +10,8 @@
       <span class="page-title">Community</span>
     </div>
   </mat-toolbar>
-  <div class="community-details" *ngIf="community">
+  <div class="community-details" [innerHTML]="community" #someVar></div>
+  <div class="community-details" *ngIf="community && false">
     <h1>{{community?.name}}</h1>
     <h1>{{community?.title}}</h1>
     <section class="section-detail">

@@ -30,25 +30,6 @@ export class CommunityService {
       .catch(this.handleError);
   }
 
-  /*
-  getCommunitySection(contentType: string): Promise<CommunityModel[]> {
-
-    console.log("getCommunitySection contentType: ", contentType);
-
-    // ToDo: switch 'url' based on contentType
-
-    return this.http
-      .get(this.blogUrl)
-      .toPromise()
-      .then(response => response.json().data as CommunityModel[])
-      .catch(this.handleError);
-  }
-
-  getCommunityIndex(index: number) {
-      console.log("getCommunityIndex index: ", index);
-  }
-  */
-
   getAllEvents(): Promise<{}> {
     return this.http
       .get(environment.appUrl + `/` + this.eventsUrl)
@@ -88,13 +69,19 @@ export class CommunityService {
   }
 
   /* test (redirecting from router for page details */
-  getPageContent(pageUrl: string): Promise<CommunityModel> {
+  getPageContent(pageUrl: string) {
+
+    return new Promise((resolve, reject) => {
+      resolve('<h1>Currently invalid "' + pageUrl + '": waiting for new static page access method. </h1>');
+    });
+    /*
     const url = environment.appUrl + '/' + pageUrl;
+
     return this.http
-      .get(url)
+      .get(url, {responseType: 'text'})
       .toPromise()
-      .then(response => response['data'] as CommunityModel)
-      .catch(this.handleError);
+      .then(response => response)
+      .catch(this.handleError);*/
   }
 
   /* test function */
