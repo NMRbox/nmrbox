@@ -8,60 +8,38 @@
       </div>
     </mat-toolbar>-->
 
-    <div class="page-details">
-        <div class="nmrbox-custom-container container">
-            <div class="sw-filters-container">
-                <div class="sw-filters">
-                    <mat-form-field id="search" class="example-full-width">
-                        <input matInput #searchBox id="search-box" (keyup)="searchFAQs(searchBox.value)" placeholder="search faq" />
-                        <span class="icon-search"></span>
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="container card-box">
-
-                <mat-card *ngFor="let faq of faqs">
-
-                    <div *ngIf="this.router.url != '/faqs/'+faq.slug">
-                        <div (click)="faq.id=false" *ngIf="faq.id">
-                            <div *ngIf=" faq.id ">
-                                <h5 class="label label-primary">Question - </h5><a routerLink="/faqs/{{faq.slug}}" >&nbsp;&nbsp;{{faq.question}}</a>
-                            </div>
-                        </div>
-                        <div (click)="faq.id=true" *ngIf="!faq.id">
-                            <mat-card-content>
-                                <div>
-                                    <div><h5  class="label label-default">Question - </h5> &nbsp;{{faq.question}}</div>
-                                    <h5><span class="label label-default">Answer - </span></h5>
-                                    <div [innerHTML]="faq.answer"></div>
-                                </div>
-                            </mat-card-content>
-
-                        </div>
-                    </div>
-
-                    <div *ngIf="this.router.url == '/faqs/'+faq.slug">
-                        <div (click)="faq.id=true" *ngIf="!faq.id">
-                            <div *ngIf=" faq.id ">
-                                <h5 class="label label-primary">Question - </h5><a routerLink="/faqs/{{faq.slug}}" >&nbsp;&nbsp;{{faq.question}}</a>
-                            </div>
-                        </div>
-                        <div (click)="faq.id=true" *ngIf="faq.id">
-                            <mat-card-content>
-                                <div>
-                                    <div><h5  class="label label-default">Question - </h5> &nbsp;{{faq.question}}</div>
-                                    <h5><span class="label label-default">Answer - </span></h5>
-                                    <div [innerHTML]="faq.answer"></div>
-                                </div>
-                            </mat-card-content>
-
-                        </div>
-                    </div>
-
-                </mat-card>
-            </div>
+  <div class="page-details">
+    <div class="nmrbox-custom-container container">
+      <div class="sw-filters-container">
+        <div class="sw-filters">
+          <mat-form-field id="search" class="example-full-width">
+            <input matInput #searchBox id="search-box" (keyup)="searchFAQs(searchBox.value)" placeholder="Search FAQs"/>
+            <span class="icon-search"></span>
+          </mat-form-field>
         </div>
+      </div>
 
+      <div class="container card-box">
+        <mat-card *ngFor="let faq of faqService.faqs">
+          <div>
+            <div (click)="toggleSlug(faq.slug)">
+              <div>
+                <h5 class="label label-primary">Question</h5><a class="left-pad">{{faq.question}}</a>
+              </div>
+            </div>
+            <div (click)="toggleSlug(faq.slug)" *ngIf="slug==faq.slug">
+              <mat-card-content>
+                <div>
+                  <h5><span class="label label-default">Answer</span></h5>
+                  <div [innerHTML]="faq.answer"></div>
+                </div>
+              </mat-card-content>
+
+            </div>
+          </div>
+        </mat-card>
+      </div>
     </div>
+
+  </div>
 </div>

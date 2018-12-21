@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {PRIMARY_OUTLET, Router, UrlSegment, UrlSegmentGroup, UrlTree} from '@angular/router';
-
-/* import model files */
-import {FaqsModel} from './faqs.model';
+import {ActivatedRoute} from '@angular/router';
 
 /* import service files */
 import {FaqsService} from './faqs.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-faqs',
@@ -13,41 +11,41 @@ import {FaqsService} from './faqs.service';
   styleUrls: ['./faqs.component.css']
 })
 export class FaqsComponent implements OnInit {
-  faqs: FaqsModel;
-
-  showHide = false;
   public notifications: any = {message: '', type: ''};
   slug: string;
   term: string;
 
   constructor(
+    private route: ActivatedRoute,
     private faqService: FaqsService,
     private router: Router
   ) {
-    this.showHide = true;
   }
 
   ngOnInit(): void {
-    const tree: UrlTree = this.router.parseUrl(this.router.url);
-    const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
-    const s: UrlSegment[] = g.segments;
 
-    this.slug = (s.length > 1 ? s[1].path : '');
+    /* Determine if they are viewing a specific FAQ */
+    const parent = this;
+    this.route.params.subscribe(function (params) {
+      parent.slug = params['slug'];
+    });
 
-
-    /* get all FAQs*/
-    this.getAllFaqs();
     if (this.term) {
       this.searchFAQs(this.term);
     }
   }
 
-  getAllFaqs(): void {
-    this.faqService.getAllFaqs().then(allFaqs => this.faqs = allFaqs);
+  toggleSlug(slug) {
+    if (this.slug === slug) {
+      this.slug = undefined;
+      this.router.navigate(['faqs']);
+    } else {
+      this.slug = slug;
+      this.router.navigate(['faqs', slug]);
+    }
   }
 
   searchFAQs(term: string): void {
-    this.faqService.searchFAQs(term).then(allFaqs => this.faqs = allFaqs);
+    this.faqService.searchFAQs(term);
   }
-
 }

@@ -1,34 +1,42 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-
+import {map} from 'rxjs/operators';
 
 /* import model */
 import {FaqsModel} from './faqs.model';
 
 @Injectable()
 export class FaqsService {
-  private handleError: any;
   public faqsUrl = 'faq';
+  public allFAQs: Array<FaqsModel>;
+  public faqs: Array<FaqsModel>;
 
   constructor(private http: HttpClient) {
-  }
+    this.allFAQs = [];
+    this.faqs = [];
 
-  getAllFaqs(): Promise<FaqsModel> {
     const url = environment.appUrl + `/` + this.faqsUrl;
-    return this.http
-      .get(url)
-      .toPromise()
-      .then(response => response['data'] as FaqsModel)
-      .catch(this.handleError);
+    const parent = this;
+    this.http.get(url).pipe(
+      map(response => {
+        for (const faq of response['data']) {
+          parent.allFAQs.push(faq as FaqsModel);
+        }
+        parent.faqs = parent.allFAQs;
+      })).subscribe();
   }
 
-  searchFAQs(search_term: string): Promise<FaqsModel> {
-    const url = environment.appUrl + `/` + this.faqsUrl + `/` + search_term;
-    return this.http
-      .get(url)
-      .toPromise()
-      .then(response => response['data'] as FaqsModel)
-      .catch(this.handleError);
+  searchFAQs(term: string): void {
+    this.faqs = [];
+    term = term.toLowerCase();
+    for (const faq of this.allFAQs) {
+      if (faq.question.toLowerCase().indexOf(term) > -1) {
+        this.faqs.push(faq);
+      }
+      if (faq.answer.toLowerCase().indexOf(term) > -1) {
+        this.faqs.push(faq);
+      }
+    }
   }
 }
