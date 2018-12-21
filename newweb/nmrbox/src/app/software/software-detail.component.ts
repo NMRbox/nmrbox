@@ -35,15 +35,6 @@ export class SoftwareDetailComponent implements OnInit {
       .subscribe(softwareMetaData => this.softwareMetaData = softwareMetaData);
   }
 
-  getSoftwareMetaData(slug: string): void {
-    this.softwareService.getSoftwareMetaData(slug).then(softwareMetaData => this.softwareMetaData = softwareMetaData);
-  }
-
-  save(): void {
-    this.softwareService.update(this.software)
-      .then(() => this.goBack());
-  }
-
   goBack(): void {
     this.location.back();
   }
