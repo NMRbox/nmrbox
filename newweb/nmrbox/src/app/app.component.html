@@ -47,12 +47,12 @@
       <nav class="secondary-navbar">
         <span *ngIf="!isLoggedIn()">
           <a mat-button routerLink="/signin" routerLinkActive="active">Sign in</a>
-          <span>|</span>
+          <span class="half_em">|</span>
           <a mat-button routerLink="/signup" routerLinkActive="active">Sign up</a>
         </span>
         <span *ngIf="isLoggedIn()">
           <a mat-button routerLink="/user-dashboard" routerLinkActive="active">My Account</a>
-          <span>&nbsp;|&nbsp;</span>
+          <span class="half_em">|</span>
           <a mat-button (click)="signOut()" routerLinkActive="active">Sign out</a>
         </span>
       </nav>
