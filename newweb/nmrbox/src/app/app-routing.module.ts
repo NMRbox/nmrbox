@@ -46,7 +46,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, {useHash: true}) ], // using hash location strategy for more consistent deep linking
+  imports: [ RouterModule.forRoot(routes, {useHash: true, scrollPositionRestoration: 'enabled'}) ], // using hash location strategy for more consistent deep linking
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}
