@@ -1,8 +1,7 @@
-import {AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 /* import service files */
 import {FaqsService} from './faqs.service';
-
 
 
 @Component({
@@ -15,7 +14,6 @@ export class FaqsComponent implements OnInit, AfterViewChecked {
   slug: string;
   term: string;
 
-  @ViewChild('active') scroll;
   constructor(
     private route: ActivatedRoute,
     private faqService: FaqsService,
@@ -25,9 +23,10 @@ export class FaqsComponent implements OnInit, AfterViewChecked {
 
   // Scrolls to the active FAQ
   ngAfterViewChecked() {
-    if (this.scroll) {
-      this.scroll.nativeElement.scrollIntoView();
-      window.scrollBy(0, -50);
+    const el = document.getElementById('active');
+    if (el) {
+      document.getElementById('active').scrollIntoView();
+      window.scrollBy(0, -20);
     }
   }
 
