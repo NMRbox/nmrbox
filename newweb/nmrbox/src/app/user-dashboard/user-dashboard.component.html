@@ -20,7 +20,7 @@
 
 
                     <div class="alert alert-info" *ngIf="isAdmin">
-                        <p>Access the administrative section using the button - <a href="{{appUrl}}/admin" class="btn btn-md btn-primary"><i class="fa fa-cog fa-lg"> Admin Panel</i></a></p>
+                        <p>Access the administrative section using the button - <a [href]="apiURL + '/admin'" class="btn btn-md btn-primary"><i class="fa fa-cog fa-lg"> Admin Panel</i></a></p>
                     </div>
 
                     <div class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}" *ngIf="notifications.message?.length > 0">

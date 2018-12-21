@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {AuthenticationService} from '../authentication/authentication.service';
 import {UserDashboardService} from './user-dashboard.service';
 import {PersonModel} from './person.model';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -17,6 +18,8 @@ export class UserDashboardComponent implements OnInit {
   person: PersonModel;
   isAdmin: string;
   showHide: boolean;
+  apiURL = environment.appUrl;
+
   public notifications: any = {message: '', type: ''};
 
 
