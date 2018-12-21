@@ -4,7 +4,6 @@ import {environment} from '../../environments/environment';
 
 
 import {SoftwareModel} from './software.model';
-import {FilterModel} from '../filter.model';
 import {SoftwareMetadataModel} from './software-metadata.model';
 
 @Injectable()
@@ -32,16 +31,6 @@ export class SoftwareService {
       .get(environment.appUrl + `/` + this.swtUrl)
       .toPromise()
       .then(response => response['data'] as SoftwareModel[])
-      .catch(this.handleError);
-  }
-
-  getFilter(name: string): Promise<FilterModel> {
-    console.log('getSwt, name: ', name);
-    console.log('URL: ', environment.appUrl + `/?name=${name}`);
-    return this.http
-      .get(environment.appUrl + `/?name=${name}`)
-      .toPromise()
-      .then(response => response['data'] as FilterModel)
       .catch(this.handleError);
   }
 
