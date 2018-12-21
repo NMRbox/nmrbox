@@ -10,7 +10,7 @@
       <span class="page-title">Community</span>
     </div>
   </mat-toolbar>
-  <div class="community-details" [innerHTML]="community" #someVar></div>
+  <div class="community-details" [innerHTML]="community"></div>
   <div class="community-details" *ngIf="community && false">
     <h1>{{community?.name}}</h1>
     <h1>{{community?.title}}</h1>
@@ -26,7 +26,7 @@
         <div id="support-detail-description" [innerHTML]="community.content"></div>
       </ng-template>
       <ng-template #plainTextBlock>
-        <div class="section-detail-page" id="support-detail-description"><p>{{community?.description}}</p></div>
+        <div class="section-detail-page"><p>{{community?.description}}</p></div>
       </ng-template>
 
     </section>

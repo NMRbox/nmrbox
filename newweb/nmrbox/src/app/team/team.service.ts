@@ -29,17 +29,13 @@ export class TeamService {
   /* test (redirecting from router for page details */
   getPageContent(pageUrl: string): Promise<any> {
 
-    return new Promise((resolve, reject) => {
-      resolve('<h1>Currently invalid "' + pageUrl + '": waiting for new static page access method. </h1>');
-    });
-/*
     const url = environment.appUrl + '/' + pageUrl;
     console.log('URL: ', url);
     return this.http
       .get(url, {responseType: 'text'})
       .toPromise()
       .then(response => response)
-      .catch(this.handleError);*/
+      .catch(this.handleError);
   }
 
   /* test */

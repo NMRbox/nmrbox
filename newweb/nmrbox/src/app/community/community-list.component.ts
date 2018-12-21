@@ -61,16 +61,8 @@ export class CommunityListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCommunityList();
-    // this.getSupportList();
-    this.filterSupportType('nmrbox');
-    this.filterSupportType('tutorial');
-    this.filterSupportType('swdoc');
-    this.filterSupportType('workflow');
-
     /* Workshops */
     this.getEventsList();
-
 
     // Tabs: go to specific subsection
     this.route.params.subscribe(params => {
@@ -93,37 +85,12 @@ export class CommunityListComponent implements OnInit {
     this.router.navigate(['/community', index]);
   }
 
-  // Data & Filters
-  getCommunityList(): void {
-    this.communityService.getCommunityList().then(communityList => this.communityList = communityList);
-  }
-
-  getSupportList(): void {
-    this.communityService.getSupportList().then(supportList => this.supportList = supportList);
-  }
-
-  /*getBlogList(): void {
-    this.communityService.getBlogList().then(blogList => this.blogList = blogList);
-  }*/
   getEventsList(): void {
     this.communityService.getAllEvents().then(events => {
       this.eventsList = events[0];
       this.upcoming = events[1];
       this.completed = events[2];
     });
-  }
-
-  filterSupportType(supportType: string): void {
-
-    if (supportType === 'nmrbox') {
-      this.communityService.filterSupportType(supportType).then(supportNmrboxList => this.supportNmrboxList = supportNmrboxList);
-    } else if (supportType === 'tutorial') {
-      this.communityService.filterSupportType(supportType).then(supportTutorialList => this.supportTutorialList = supportTutorialList);
-    } else if (supportType === 'swdoc') {
-      this.communityService.filterSupportType(supportType).then(supportSwdocList => this.supportSwdocList = supportSwdocList);
-    } else if (supportType === 'workflow') {
-      this.communityService.filterSupportType(supportType).then(supportWorkflowList => this.supportWorkflowList = supportWorkflowList);
-    }
   }
 
   /* workshops registration */

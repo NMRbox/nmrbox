@@ -16,14 +16,15 @@
         <br>
         <div *ngIf="!isLoggedIn()">
           <div class="alert alert-info">
-            Please <a href="/signin">Sign in</a> / <a href="/signin">Sign up</a> first to register for events.
+            Please <a routerLink="/signin">Sign in</a> / <a routerLink="/signup">Sign up</a> first to register for events.
           </div>
         </div>
         <h2 class="blue">Upcoming</h2>
         <mat-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
+          <h3 *ngIf="!upcoming">No upcoming events.</h3>
           <mat-grid-tile class="tile-solid" *ngFor="let event of upcoming">
             <mat-card class="workshop-card">
-              <form (ngSubmit)="onWorkshopRegister(f)" #f="ngForm" (ngSubmit)="onSubmitWorkshops()">
+              <form (ngSubmit)="onWorkshopRegister(f)" #f="ngForm">
                 <mat-card-header>
                   <mat-card-title>{{event.title}}</mat-card-title>
                 </mat-card-header>
@@ -38,7 +39,7 @@
                     Attendance - {{event.attendance}}/{{event.attendance_max}}
                   </p>
                   <p>
-                    <a href="{{event.url}}">More information</a>
+                    <a [href]="event.url">More information</a>
                   </p>
                   <input type="hidden" name="name" [(ngModel)]="event.name" style="display: block;" />
 
@@ -81,7 +82,7 @@
                   {{event.location}}
                 </p>
                 <p>
-                  <a href="{{event.url}}">More information</a>
+                  <a [href]="event.url">More information</a>
                 </p>
               </mat-card-content>
               <mat-card-actions>
