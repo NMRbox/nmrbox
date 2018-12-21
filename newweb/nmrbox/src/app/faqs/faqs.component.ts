@@ -1,25 +1,34 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-
+import {AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 /* import service files */
 import {FaqsService} from './faqs.service';
-import {Router} from '@angular/router';
+
+
 
 @Component({
   selector: 'app-faqs',
   templateUrl: './faqs.component.html',
   styleUrls: ['./faqs.component.css']
 })
-export class FaqsComponent implements OnInit {
+export class FaqsComponent implements OnInit, AfterViewChecked {
   public notifications: any = {message: '', type: ''};
   slug: string;
   term: string;
 
+  @ViewChild('active') scroll;
   constructor(
     private route: ActivatedRoute,
     private faqService: FaqsService,
     private router: Router
   ) {
+  }
+
+  // Scrolls to the active FAQ
+  ngAfterViewChecked() {
+    if (this.scroll) {
+      this.scroll.nativeElement.scrollIntoView();
+      window.scrollBy(0, -50);
+    }
   }
 
   ngOnInit(): void {
@@ -38,7 +47,6 @@ export class FaqsComponent implements OnInit {
   toggleSlug(slug) {
     if (this.slug === slug) {
       this.slug = undefined;
-      this.router.navigate(['faqs']);
     } else {
       this.slug = slug;
       this.router.navigate(['faqs', slug]);
