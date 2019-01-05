@@ -80,12 +80,7 @@ class ChandraController extends Controller {
         }
         else
         {
-            return response()-> json( array(
-                'message' => Lang::get('auth/message.not_autorized'),
-                'type' => 'error' ),
-                401 );
-
-            /*if(View::exists($name))
+            if(View::exists($name))
             {
                 return View($name);
             }
@@ -95,7 +90,7 @@ class ChandraController extends Controller {
                     'message' => Lang::get('auth/message.not_autorized'),
                     'type' => 'error' ),
                     401 );
-            }*/
+            }
         }
     }
 
