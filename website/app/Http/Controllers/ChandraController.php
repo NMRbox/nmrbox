@@ -57,7 +57,11 @@ class ChandraController extends Controller {
         if($name == '') {
             $name = 'homepage';
             $page = Page::where('slug', $name)->get()->first();
-            return View::make('blank')->with('page', $page);
+            //return View::make('blank')->with('page', $page);
+            return response()-> json( array(
+                'message' => Lang::get('auth/message.not_autorized'),
+                'type' => 'error' ),
+                401 );
         }
 
         // prevent users from viewing homepage dynamic page outside of site root
@@ -68,20 +72,29 @@ class ChandraController extends Controller {
         if( Page::where('slug', '=', $name)->exists() ) {
             // $name is the page's slug
             $page = Page::where('slug', $name)->get()->first();
-            //dd($page);
+            dd($page);
             //return View::make('basic_page')->with('page', $page);
             return response( json_encode( array( 'data' => $page ) ), 200 )
                 ->header( 'Content-Type', 'application/json' );
         }
         else
         {
-            if(View::exists($name))
+            return response()-> json( array(
+                'message' => Lang::get('auth/message.not_autorized'),
+                'type' => 'error' ),
+                401 );
+
+            /*if(View::exists($name))
             {
                 return View($name);
             }
             else {
-                return View('404');
-            }
+                //return View('404');
+                return response()-> json( array(
+                    'message' => Lang::get('auth/message.not_autorized'),
+                    'type' => 'error' ),
+                    401 );
+            }*/
         }
     }
 

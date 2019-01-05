@@ -1174,6 +1174,7 @@ class FrontEndController extends Controller
 
         }
 
+        // TODO: refactor fetching person data
         $person_id = $request->get('person_id');
         $person = Person::where('id', $person_id)->first();
 
