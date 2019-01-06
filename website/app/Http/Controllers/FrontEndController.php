@@ -1183,13 +1183,9 @@ class FrontEndController extends Controller
         $person_id = $request->get('person_id');
         $person = $this->sessionPlayLoad($person_id);
         //$person = Person::where('id', $person_id)->first();
-        echo "<pre>";
-        print_r($person);
-        echo "</pre>";
-        die();
 
         // LDAP credential
-        $credential['username'] = $person['nmrbox_acct'];
+        $credential['username'] = $person->nmrbox_acct;
         $credential['password'] = $request->input('current_pass');
 
         try {
