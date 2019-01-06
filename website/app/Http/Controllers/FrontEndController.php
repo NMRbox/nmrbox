@@ -818,6 +818,39 @@ class FrontEndController extends Controller
      *
      *
      * */
+    public function sessionPlayLoad( $id ) {
+        // Checking for Session ID
+        $session_data = NmrboxSession::where('id', $id)->get()->first();
+        if ( empty($session_data)) {
+            return response()-> json( array(
+                'message' => Lang::get('auth/message.not_autorized'),
+                'type' => 'error' ),
+                401 );
+        }
+
+        // Retrieving session payload
+        $session_payload = unserialize(base64_decode($session_data->payload));
+
+        // Replacing session variable for cross domain access
+        foreach ( $session_payload['person'] as $key => $value ) {
+
+            if( $value['person_id'] == $id ) {
+                // Fetching the user data from person table
+                $user_id = $value['user'];
+                $person = Person::where('id', $user_id)->get()->first();
+                //$person[] = ;
+                // TODO: needs to update person session key with session ID.
+                Session::put('token', $session_payload['person'][$key]);
+                Session::put('person', $person);
+                if( $value['user_is_admin'] == true ) {
+                    Session::put('user_is_admin', true);
+                }
+            }
+        }
+
+        return $person;
+    }
+
     public function signin(Request $request)
     {
         // Declare the rules for the form validation
@@ -1091,35 +1124,7 @@ class FrontEndController extends Controller
      */
     public function person_details($id)
     {
-        // Checking for Session ID
-        $session_data = NmrboxSession::where('id', $id)->get()->first();
-        if ( empty($session_data)) {
-            return response()-> json( array(
-                'message' => Lang::get('auth/message.not_autorized'),
-                'type' => 'error' ),
-                401 );
-        }
-
-        // Retrieving session payload
-        $session_payload = unserialize(base64_decode($session_data->payload));
-
-        // Replacing session variable for cross domain access
-        foreach ( $session_payload['person'] as $key => $value ) {
-
-            if( $value['person_id'] == $id ) {
-                // Fetching the user data from person table
-                $user_id = $value['user'];
-                $person = Person::where('id', $user_id)->get()->first();
-                //$person[] = ;
-                // TODO: needs to update person session key with session ID.
-                Session::put('token', $session_payload['person'][$key]);
-                Session::put('person', $person);
-                if( $value['user_is_admin'] == true ) {
-                    Session::put('user_is_admin', true);
-                }
-            }
-        }
-
+        $person = $this->sessionPlayLoad( $id );
         // Return error while no person data and person session available
         if (!Session::has('person') && empty($person)) {
             return response()-> json( array(
@@ -1176,7 +1181,12 @@ class FrontEndController extends Controller
 
         // TODO: refactor fetching person data
         $person_id = $request->get('person_id');
-        $person = Person::where('id', $person_id)->first();
+        $person = $this->sessionPlayLoad($person_id);
+        //$person = Person::where('id', $person_id)->first();
+        echo "<pre>";
+        print_r($person);
+        echo "</pre>";
+        die();
 
         // LDAP credential
         $credential['username'] = $person['nmrbox_acct'];
