@@ -1071,7 +1071,8 @@ class FrontEndController extends Controller
         try {
 
             //$user = Sentinel::getUser();
-            $person = Person::where('id', $person_id)->get()->first();
+            //$person = Person::where('id', $person_id)->get()->first();
+            $person = $this->sessionPlayLoad($person_id);
 
             $person->update($request->except(['institution', 'institution_type']));
 
