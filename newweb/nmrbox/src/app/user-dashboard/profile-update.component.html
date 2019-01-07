@@ -9,8 +9,6 @@
       <br>
     </div>
 
-    <div class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}" *ngIf="notifications.message?.length > 0" [innerHTML]="notifications.message"></div>
-
     <div class="row" *ngIf="person">
 
         <form (ngSubmit)="onProfileUpdate(f)" #f="ngForm">
@@ -71,7 +69,7 @@
             <div class="form-group col-lg-6">
                 <div class="form-group "><label for="institution_type" class="control-label">Institution Type</label>
                     <div>
-                        <select [ngModel]="person.institution_type" class="form-control form-control" maxlength="256" required="required" id="institution_type" name="institution_type">
+                        <select [ngModel]="person.institution_type" class="form-control form-control" maxlength="256" required id="institution_type" name="institution_type">
                             <option value="undefined" selected="selected">Please Select</option>
                             <option value="0">Academic</option>
                             <option value="1">Non-profit</option>
@@ -153,7 +151,8 @@
             <div class="form-group col-lg-12">
                 <div class="form-group">
                     <div>
-                        <input class="btn btn-primary btn-lg btn-block " type="submit" value="Update Profile">
+                      <div class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}" *ngIf="notifications.message?.length > 0" [innerHTML]="notifications.message"></div>
+                      <input class="btn btn-primary btn-lg btn-block " type="submit" value="Update Profile">
                     </div>
                 </div>
             </div>

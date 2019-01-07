@@ -64,7 +64,8 @@ export class ProfileUpdateComponent implements OnInit {
       form.value.time_zone_id,
     )
       .subscribe(
-        response => this.notifications = response
+        response => this.notifications = response,
+        () => this.notifications = {'message': 'A server error happened.', 'type': 'error'}
       );
   }
 
