@@ -1147,8 +1147,13 @@ class FrontEndController extends Controller
         //fetching all the downloadable VMs
         $vms = VM::where('downloadable', 'true')->lists('name', 'id')->all();
 
-        return response( json_encode( array('data' => $person, ) ), 200 )
-            ->header( 'Content-Type', 'application/json' );
+        // Fetching person institution type
+        $person['person_institution_types'] = Institution::institution_types;
+
+        return response()-> json( array(
+            'data' => $person ,
+            'type' => 'success' ),
+            200 );
 
     }
 
