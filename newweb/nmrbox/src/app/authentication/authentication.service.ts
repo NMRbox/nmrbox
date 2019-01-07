@@ -65,7 +65,7 @@ export class AuthenticationService {
           if (message === 'success') {
             this.router.navigateByUrl('signin');
           } else {
-            console.log('couldnt save data');
+            console.log('Couldn\'t save data');
           }
         }
       ))
