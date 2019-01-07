@@ -1137,18 +1137,10 @@ class FrontEndController extends Controller
 
         // Fetching person institution name
         $person['institution'] = $person->institution()->get()->first()->name;
+        $person['institution_types'] = Institution::institution_types;
 
         // fetching all classification groups
         $person['classifications'] = $person->classification()->get();
-
-        //Get all the upcoming workshops
-        $workshops = Workshop::whereDate('end_date', '>=', date('Y-m-d').' 00:00:00')->orderBy('start_date', 'asc')->get();
-
-        //fetching all the downloadable VMs
-        $vms = VM::where('downloadable', 'true')->lists('name', 'id')->all();
-
-        // Fetching person institution type
-        $person['person_institution_types'] = Institution::institution_types;
 
         return response()-> json( array(
             'data' => $person ,
