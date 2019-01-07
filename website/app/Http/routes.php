@@ -405,13 +405,13 @@ Route::get('faq/{question}',array('as' => 'faq','uses' => 'FAQController@searchF
 Route::post('faq-ratings', array('as' => 'faq-ratings', 'uses' => 'FAQController@countFAQRatings'));
 
 # Homepage
-Route::get('/', array('as' => 'home', 'uses' => 'ChandraController@showFrontEndView'));
+Route::get('/', array('as' => 'home', 'uses' => 'ChandraController@showHomepage'));
+Route::get('/pages/{slug}', 'ChandraController@getPage');
 
 Route::get('blog', array('as' => 'blog', 'uses' => 'BlogController@getIndexFrontend'));
 Route::get('blog/{slug}/tag', 'BlogController@getBlogTagFrontend');
 Route::get('blog/{slug?}', 'BlogController@getBlogFrontend');
 Route::post('blog/{blog}/comment', 'BlogController@storeCommentFrontend');
-Route::get('{name?}', 'ChandraController@showFrontEndView');
 
 #Angular Frontend singin, signup and user_details
 Route::group(['middleware' => ['cors', 'session']], function () {

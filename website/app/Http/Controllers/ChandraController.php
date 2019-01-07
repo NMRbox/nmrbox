@@ -51,7 +51,7 @@ class ChandraController extends Controller {
 		}
     }
 
-    public function showFrontEndView($name=null)
+    public function showHomepage($name=null)
     {
         // this is a special case for the home page. If more special cases arise, refactor into a more structured solution
         if($name == '') {
@@ -67,12 +67,8 @@ class ChandraController extends Controller {
 
         if( Page::where('slug', '=', $name)->exists() ) {
             // $name is the page's slug
-            $page = Page::where('slug', $name)->get()->first();
 
-            return response()-> json( array(
-                'data' => $page,
-                'type' => 'success' ),
-                400 );
+            $this->getPage($name);
         }
         else
         {
@@ -83,7 +79,7 @@ class ChandraController extends Controller {
                 return response()-> json( array(
                     'data' => $page,
                     'type' => 'success' ),
-                    400 );
+                    200 );
                 //return View($name);
             }
             else {
@@ -93,6 +89,24 @@ class ChandraController extends Controller {
                     'type' => 'error' ),
                     401 );
             }
+        }
+    }
+
+    public function getPage( $name=null )
+    {
+        // this is a special case for the home page. If more special cases arise, refactor into a more structured solution
+        if( $name == '' || $name == 'homepage' ) {
+            $this->showHomepage($name);
+        }
+
+        if( Page::where('slug', '=', $name)->exists() ) {
+            // $name is the page's slug
+            $page = Page::where('slug', $name)->get()->first();
+
+            return response()-> json( array(
+                'data' => $page,
+                'type' => 'success' ),
+                200 );
         }
     }
 
