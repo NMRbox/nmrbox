@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {CommunityService} from './community.service';
+import {CommunityModel} from './community.model';
 
 
 @Component({
@@ -10,7 +11,7 @@ import {CommunityService} from './community.service';
   styleUrls: ['./community-detail.component.scss']
 })
 export class CommunityDetailComponent implements OnInit {
-  community: string;
+  community: CommunityModel;
 
   constructor(
     private communityService: CommunityService,
@@ -21,7 +22,7 @@ export class CommunityDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.community = this.communityService.getPageContent(params['pageUrl']);
+      this.communityService.getPageContent(params['pageUrl']).then(response => this.community = response);
     });
   }
 

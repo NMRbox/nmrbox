@@ -10,35 +10,12 @@
       <span class="page-title">Community</span>
     </div>
   </mat-toolbar>
-  <div class="community-details" [innerHTML]="community"></div>
-  <div class="community-details" *ngIf="community && false">
-    <h1>{{community?.name}}</h1>
-    <h1>{{community?.title}}</h1>
+  <div class="community-details" *ngIf="community">
+    <h1 [innerHTML]="community.title"></h1>
     <section class="section-detail">
-      <p class="subheading">{{community?.dateEvent}}</p>
-      <p class="subheading">{{community?.synopsis}}</p>
-      <img *ngIf="community.url" mat-card-image src="{{community?.url}}" />
-      <p *ngIf="community.author" class="subheading">by {{community?.author}}</p>
-      <p>{{community?.authorTitle}}</p>
-
-      <div *ngIf="community.content; then htmlBlock else plainTextBlock"></div>
-      <ng-template #htmlBlock>
-        <div id="support-detail-description" [innerHTML]="community.content"></div>
-      </ng-template>
-      <ng-template #plainTextBlock>
-        <div class="section-detail-page"><p>{{community?.description}}</p></div>
-      </ng-template>
-
+      <p class="subheading" [innerHTML]="community.subheader"></p>
+      <p class="subheading">Last updated at {{community.updated_at}}.</p>
+      <div id="support-detail-description" [innerHTML]="community.content"></div>
     </section>
-
-    <section *ngIf="community.author" id="sw-detail-description">
-      <div class="divider divider-dashed"></div>
-      <h3 class="subheading">{{community?.author}}</h3>
-      <p>{{community?.authorTitle}}<br/>
-      <a *ngIf="community.authorEmail" href='mailto:{{community?.authorEmail}}'>{{community?.authorEmail}}</a>
-      </p>
-      <img mat-card-image class="author-photo" src="{{community?.authorPhotoUrl}}" *ngIf="community.authorPhotoUrl" />
-    </section>
-    <br/><br/>
   </div>
 </div>

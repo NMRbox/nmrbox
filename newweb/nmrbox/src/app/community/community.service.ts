@@ -27,20 +27,15 @@ export class CommunityService {
       .catch(this.handleError);
   }
 
+  getPageContent(pageUrl: string): Promise<CommunityModel> {
 
-  /* test (redirecting from router for page details */
-  getPageContent(pageUrl: string) {
-
-     return '<h1>Currently invalid "' + pageUrl + '": waiting for new static page access method. </h1>';
-
-    /*
     const url = environment.appUrl + '/' + pageUrl;
 
     return this.http
-      .get(url, {responseType: 'text'})
+      .get(url)
       .toPromise()
-      .then(response => response)
-      .catch(this.handleError);*/
+      .then(response => response['data'] as CommunityModel);
+    // .catch(error => Promise.resolve(this.dummy));
   }
 
   /* Workshop registration */
@@ -51,8 +46,6 @@ export class CommunityService {
         workshopid: workshopid,
       }), {headers: this.headers});
   }
-
-
 
   private handleError(error: any): Promise<never> {
     console.error('An error occurred', error); // for demo purposes only
