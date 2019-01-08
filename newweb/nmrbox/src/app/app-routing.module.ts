@@ -20,8 +20,7 @@ import {ForgetPasswordComponent} from './password-management/forget-password.com
 // import {ForgetPasswordConfirmComponent} from './password-management/forget-password-confirm.component';
 
 const routes: Routes = [
-  {path: 'app', component: HomeComponent},
-  {path: '', redirectTo: 'app', pathMatch: 'full'},
+  {path: '', component: HomeComponent},
   {path: 'software', component: SoftwareListComponent},
   {path: 's/:slug', component: SoftwareDetailComponent},
   {path: 'software/:filterType/:filter', component: SoftwareListComponent},
