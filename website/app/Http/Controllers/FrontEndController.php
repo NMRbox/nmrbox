@@ -1141,7 +1141,7 @@ class FrontEndController extends Controller
         $institution_id = $person->institution()->get()->first()->name;
 
         $institution = new Institution();
-        $person['institution_type2'] = $institution->where( 'id', $institution_id )->toSql();
+        $person['institution_type2'] = $institution->where( 'name', $institution_id )->get()->first();
 
         // fetching all classification groups
         $person['classifications'] = $person->classification()->get();
