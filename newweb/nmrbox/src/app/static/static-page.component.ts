@@ -21,7 +21,9 @@ export class StaticPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.staticPageService.getPageContent(params['pageUrl']).then(response => this.staticPage = response);
+      if (params['pageUrl'] !== undefined) {
+        this.staticPageService.getPageContent(params['pageUrl']).then(response => this.staticPage = response);
+      }
     });
   }
 
