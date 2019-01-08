@@ -23,19 +23,19 @@ export class TeamService {
       .post(environment.appUrl + '/' + this.baseUrl, JSON.stringify({name: name}), {headers: this.headers})
       .toPromise()
       .then(res => res['data'] as TeamModel)
-      .catch(this.handleError);
+      .catch(TeamService.handleError);
   }
 
   /* test (redirecting from router for page details */
   getPageContent(pageUrl: string): Promise<any> {
 
-    const url = environment.appUrl + '/' + pageUrl;
+    const url = environment.appUrl + '/pages/' + pageUrl;
     console.log('URL: ', url);
     return this.http
       .get(url, {responseType: 'text'})
       .toPromise()
       .then(response => response)
-      .catch(this.handleError);
+      .catch(TeamService.handleError);
   }
 
   /* test */
@@ -58,7 +58,7 @@ export class TeamService {
       .get(url)
       .toPromise()
       .then(response => response['data'] as TeamModel)
-      .catch(this.handleError);
+      .catch(TeamService.handleError);
   }
 
   update(software: TeamModel): Promise<TeamModel> {
@@ -67,10 +67,10 @@ export class TeamService {
       .put(url, JSON.stringify(software), {headers: this.headers})
       .toPromise()
       .then(() => software)
-      .catch(this.handleError);
+      .catch(TeamService.handleError);
   }
 
-  private handleError(error: any): Promise<any> {
+  private static handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }

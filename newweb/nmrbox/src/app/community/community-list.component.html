@@ -35,9 +35,13 @@
                   <p>
                     {{event.location}}
                   </p>
-                  <p *ngIf="event.attendance_max != null">
-                    Attendance - {{event.attendance}}/{{event.attendance_max}}
-                  </p>
+                  <ng-container *ngIf="event.attendance_max != null">
+                    <p *ngIf="event.attendance != null; else maxOnly">Attendance - {{event.attendance}}/{{event.attendance_max}}</p>
+                    <ng-template #maxOnly>
+                      <p>Max attendance - {{event.attendance_max}}</p>
+                    </ng-template>
+                  </ng-container>
+
                   <p>
                     <a [href]="event.url">More information</a>
                   </p>

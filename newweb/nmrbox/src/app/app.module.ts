@@ -19,7 +19,7 @@ import {SwiperModule} from 'angular2-useful-swiper';
 import {AppComponent} from './app.component';
 import {SoftwareDetailComponent} from './software/software-detail.component';
 import {SoftwareListComponent} from './software/software-list.component';
-import {CommunityDetailComponent} from './community/community-detail.component';
+import {StaticPageComponent} from './static/static-page.component';
 import {CommunityListComponent} from './community/community-list.component';
 import {TeamDetailComponent} from './team/team-detail.component';
 import {TeamListComponent} from './team/team-list.component';
@@ -50,6 +50,7 @@ import {CommonModule} from '@angular/common';
 
 // Container
 import {SupportComponent} from './support/support.component';
+import {StaticPageService} from './static/static-page.service';
 
 @NgModule({
   imports: [
@@ -70,7 +71,7 @@ import {SupportComponent} from './support/support.component';
     AppComponent,
     SoftwareDetailComponent,
     SoftwareListComponent,
-    CommunityDetailComponent,
+    StaticPageComponent,
     CommunityListComponent,
     TeamDetailComponent,
     TeamListComponent,
@@ -94,7 +95,8 @@ import {SupportComponent} from './support/support.component';
     AuthenticationService,
     UserDashboardService,
     PasswordManagementService,
-    FaqsService
+    FaqsService,
+    StaticPageService
   ],
   bootstrap: [AppComponent]
 })

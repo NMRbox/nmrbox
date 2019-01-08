@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {CommunityModel} from './community.model';
+import {EventModel} from './event.model';
 
 @Injectable()
 export class CommunityService {
@@ -20,22 +20,11 @@ export class CommunityService {
       .toPromise()
       .then(response => {
         const response_json = response;
-        return [response_json['data'] as CommunityModel[],
-          response_json['data']['upcoming'] as CommunityModel[],
-          response_json['data']['completed'] as CommunityModel[]];
+        return [response_json['data'] as EventModel[],
+          response_json['data']['upcoming'] as EventModel[],
+          response_json['data']['completed'] as EventModel[]];
       })
-      .catch(this.handleError);
-  }
-
-  getPageContent(pageUrl: string): Promise<CommunityModel> {
-
-    const url = environment.appUrl + '/pages/' + pageUrl;
-
-    return this.http
-      .get(url)
-      .toPromise()
-      .then(response => response['data'] as CommunityModel);
-    // .catch(error => Promise.resolve(this.dummy));
+      .catch(CommunityService.handleError);
   }
 
   /* Workshop registration */
@@ -47,8 +36,8 @@ export class CommunityService {
       }), {headers: this.headers});
   }
 
-  private handleError(error: any): Promise<never> {
+  private static handleError(error: any): Promise<never> {
     console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+    return Promise.reject(error.message);
   }
 }

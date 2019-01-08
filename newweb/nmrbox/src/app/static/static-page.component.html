@@ -5,17 +5,17 @@
         <svg width="15px" height="20px" viewBox="0 0 50 80" xml:space="preserve">
           <polyline fill="none" stroke="#313131" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="
         45.63,75.8 0.375,38.087 45.63,0.375 "></polyline>
-        </svg> 
+        </svg>
       </button>
-      <span class="page-title">Community</span>
+      <span *ngIf="staticPage" class="page-title" [innerHTML]="staticPage.title"></span>
     </div>
   </mat-toolbar>
-  <div class="community-details" *ngIf="community">
-    <h1 [innerHTML]="community.title"></h1>
+  <div class="community-details" *ngIf="staticPage">
+    <h1 [innerHTML]="staticPage.title"></h1>
     <section class="section-detail">
-      <p class="subheading" [innerHTML]="community.subheader"></p>
-      <div id="support-detail-description" [innerHTML]="community.content"></div>
-      <p>Last updated at {{community.updated_at}}.</p>
+      <p class="subheading" [innerHTML]="staticPage.subheader"></p>
+      <div id="support-detail-description" [innerHTML]="staticPage.content"></div>
+      <p *ngIf="staticPage.updated_at">Last updated at {{staticPage.updated_at}}.</p>
     </section>
   </div>
 </div>

@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
 
-import {CommunityModel} from './community.model';
+import {EventModel} from '../static/static-page.model';
 import {CommunityService} from './community.service';
 import {AuthenticationService} from '../authentication/authentication.service';
 
@@ -14,26 +14,22 @@ import {AuthenticationService} from '../authentication/authentication.service';
 })
 export class CommunityListComponent implements OnInit {
 
-  @Input() communityList: CommunityModel[];
+  @Input() communityList: EventModel[];
 
-  @Input() supportList: CommunityModel[];
-  @Input() supportNmrboxList: CommunityModel[];
-  @Input() supportTutorialList: CommunityModel[];
-  @Input() supportSwdocList: CommunityModel[];
-  @Input() supportWorkflowList: CommunityModel[];
+  @Input() supportList: EventModel[];
+  @Input() supportNmrboxList: EventModel[];
+  @Input() supportTutorialList: EventModel[];
+  @Input() supportSwdocList: EventModel[];
+  @Input() supportWorkflowList: EventModel[];
 
-  /*@Input() blogList: CommunityModel[];
-  @Input() blogMostRecentList: CommunityModel[];
-  @Input() blogNextList: CommunityModel[];*/
+  @Input() eventsList: EventModel[];
+  @Input() upcoming: EventModel[];
+  @Input() completed: EventModel[];
 
-  @Input() eventsList: CommunityModel[];
-  @Input() upcoming: CommunityModel[];
-  @Input() completed: CommunityModel[];
+  @Input() eventsCurrentList: EventModel[];
+  @Input() eventsPastList: EventModel[];
 
-  @Input() eventsCurrentList: CommunityModel[];
-  @Input() eventsPastList: CommunityModel[];
-
-  @Output() listChange: EventEmitter<CommunityModel[]> = new EventEmitter<CommunityModel[]>();
+  @Output() listChange: EventEmitter<EventModel[]> = new EventEmitter<EventModel[]>();
 
   // Tabs
   @Input() selectedIndex = 0;

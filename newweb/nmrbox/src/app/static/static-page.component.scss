@@ -1,6 +1,6 @@
 .community-details-wrapper {
   background-size: 95%;
-  background: url('/assets/bg-graphics/bg-community-support.png') no-repeat 0px -165px;
+  background: url('../../assets/bg-graphics/bg-community-support.png') no-repeat 0px -165px;
   min-height: calc(100vh - 50px);
   min-height: -webkit-calc(100vh - 50px);
   min-height: -moz-calc(100vh - 50px);
@@ -9,15 +9,18 @@
   h1, .subheading, h2 {
     color: #000;
   }
+
   h1 {
     font-size: 32px;
     font-weight: 300;
+    padding: .5em 0 .5em 0;
   }
+
   .subheading {
     font-weight: 600;
     font-size: 18px;
   }
-  
+
   .community-details {
     margin-top: 20px;
   }
@@ -25,18 +28,20 @@
   img {
     width: 400px;
     height: 300px;
-    margin-left: 0px;
+    margin-left: 0;
   }
+
   img.author-photo {
     width: 160px;
     height: 210px;
   }
 
- .community-details > h1, section, .menu-wrapper {
+  .community-details > h1, section, .menu-wrapper {
     width: 90%;
     max-width: 900px;
-    margin: 0px auto;
+    margin: 0 auto;
   }
+
   .menu-wrapper {
     min-height: 50px;
     margin-bottom: 10px;
@@ -46,28 +51,32 @@
       font-family: Arial, serif;
       background-color: transparent;
       border: none;
-      padding: 12px 10px 10px 0px;
-      border-radius: 0px;
+      padding: 12px 10px 10px 0;
+      border-radius: 0;
       border-right: 1px solid #e0e0e0;
-      cursor: pointer; cursor: hand;
-      
+      cursor: hand;
+
       polyline {
         stroke-width: 3;
         transition: all 100ms ease-in-out;
       }
     }
+
     button:hover {
       background-color: transparent;
+
       polyline {
         stroke-width: 6;
         transition: all 100ms ease-in-out;
       }
     }
+
     button:disabled {
       background-color: #eee;
-      color: #ccc; 
+      color: #ccc;
       cursor: auto;
     }
+
     .page-title {
       position: relative;
       top: -3px;
@@ -78,10 +87,11 @@
     color: #000;
     font-weight: 500;
     font-size: 14px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
+
   p {
-    margin-top: 0px;
+    margin-top: 0;
   }
 
 
@@ -97,6 +107,6 @@
 
   ul {
     list-style: none;
-    padding: 0px;
+    padding: 0;
   }
 }

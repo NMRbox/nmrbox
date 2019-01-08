@@ -1,4 +1,4 @@
-export class CommunityModel {
+export class EventModel {
   'subheader': string;
   'user_id': string;
   'title': string;
@@ -8,4 +8,8 @@ export class CommunityModel {
   'content': string;
   'deleted_at': string;
   'slug': string;
+
+  constructor(title) {
+    this.title = title;
+  }
 }
