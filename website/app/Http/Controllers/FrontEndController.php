@@ -1143,7 +1143,7 @@ class FrontEndController extends Controller
         echo "<pre>";
         print_r($institution);
         echo "</pre>";
-        $person['institution_type2'] = $institution->where( 'id', $institution_id )->get();
+        $person['institution_type2'] = $institution::where( 'id', $institution_id )->get()->first();
 
         // fetching all classification groups
         $person['classifications'] = $person->classification()->get();
