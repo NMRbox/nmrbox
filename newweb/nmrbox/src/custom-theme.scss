@@ -550,6 +550,13 @@ app-team-list {
   }
 }*/
 
+app-team-list {
+  mat-tab-body {
+    background-size: 90%;
+    background: url('/assets/bg-graphics/bg-graphic-team.png') no-repeat 0px -300px;
+  }
+}
+
 /* Misc */
 
 .hidden {
