@@ -1137,7 +1137,9 @@ class FrontEndController extends Controller
 
         // Fetching person institution name
         $person['institution'] = $person->institution()->get()->first()->name;
-        $person['institution_type'] = $person->institution()->get()->first()->institution_type;
+
+        // Fetching all institution types
+        $person['institution_types'] = Institution::institution_types;
 
         // fetching all classification groups
         $person['classifications'] = $person->classification()->get();
