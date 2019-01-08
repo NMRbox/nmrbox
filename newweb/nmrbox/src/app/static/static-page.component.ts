@@ -5,7 +5,7 @@ import {StaticPageService} from './static-page.service';
 import {EventModel} from './static-page.model';
 
 @Component({
-  selector: 'app-community-detail',
+  selector: 'app-static-page',
   templateUrl: './static-page.component.html',
   styleUrls: ['./static-page.component.scss']
 })
