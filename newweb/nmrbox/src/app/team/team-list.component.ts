@@ -22,7 +22,9 @@ export class TeamListComponent implements OnInit {
     // Tabs: go to specific subsection
     this.route.params.subscribe(params => {
         this.tabIndex = params['index'];
-        this.selectedIndexChange(this.tabIndex);
+        if (this.tabIndex > 0) {
+          this.selectedIndexChange(this.tabIndex);
+        }
       }
     );
   }

@@ -64,12 +64,11 @@ export class CommunityListComponent implements OnInit {
     this.route.params.subscribe(params => {
         this.routeIndex = params['index'];
         this.selectedIndex = this.routeIndex;
+        if (this.selectedIndex > 0) {
+          this.selectedIndexChange(this.selectedIndex);
+        }
       }
     );
-
-    if (this.routeIndex > -1) {
-      this.selectedIndexChange(this.routeIndex);
-    }
   }
 
   // Tabs
