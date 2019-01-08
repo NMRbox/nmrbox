@@ -51,7 +51,8 @@ import {CommonModule} from '@angular/common';
 // Container
 import {SupportComponent} from './support/support.component';
 import {StaticPageService} from './static/static-page.service';
-import { EmbeddedStaticComponent } from './static/embedded-static.component';
+import {EmbeddedStaticComponent} from './static/embedded-static.component';
+import {SafeHtmlPipe} from './pipes/safe-html.pipe';
 
 @NgModule({
   imports: [
@@ -86,10 +87,9 @@ import { EmbeddedStaticComponent } from './static/embedded-static.component';
     ForgetPasswordComponent,
     ForgetPasswordConfirmComponent,
     FaqsComponent,
-
     SupportComponent,
-
-    EmbeddedStaticComponent
+    EmbeddedStaticComponent,
+    SafeHtmlPipe
   ],
   providers: [
     SoftwareService,
