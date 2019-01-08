@@ -149,26 +149,8 @@ class FAQController extends Controller
             );
 
         }
-        /*echo "<pre>";
-        print_r($all_feedback);
-        echo "</pre>";
-        die();*/
-
         // All user details
         $all_person = Person::All();
-
-        // All ratings
-        /*$faq_ratings = $faq->ratings()->get();
-        /*echo "<pre>";
-        print_r($faq_ratings);
-        echo "</pre>";*/
-
-
-        /*foreach ($faq->ratings as $rating){
-            $data[] = $rating->pivot->person_id;
-
-        }*/
-
 
         // Software / FAQ Mapping
         $all_softwares = Software::All();
@@ -180,9 +162,6 @@ class FAQController extends Controller
             if($keyed->has($software->name)) {
                 $software_map->push($software->name);
                 $software->present = true;
-            }
-            else {
-//              $keyword_map->push($keyword->label, false);
             }
         }
 
@@ -203,7 +182,6 @@ class FAQController extends Controller
         // All files information
         $all_files = File::select('id', 'label', 'slug', 'mime_type', 'size')->get()->sortBy('label');
 
-        //return view::make('admin.faqs.edit', compact('faq', 'all_keywords', 'keyword_map', 'file_keywords', 'keyword_map', 'all_metadata', 'faq_metadata', 'metadata_map'));
         return view::make('admin.faqs.edit', compact('faq', 'all_person', 'all_feedback', 'all_softwares', 'software_map', 'faq_softwares', 'all_search_keywords', 'search_keywords_map', 'faq_search_keywords', 'all_files'));
     }
 
