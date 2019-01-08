@@ -1,0 +1,8 @@
+<div class="community-details" *ngIf="staticPage">
+  <h1 [innerHTML]="staticPage.title"></h1>
+  <section class="section-detail">
+    <p class="subheading" [innerHTML]="staticPage.subheader"></p>
+    <div id="support-detail-description" [innerHTML]="staticPage.content"></div>
+    <br><p *ngIf="staticPage.updated_at">Last updated at {{staticPage.updated_at}}.</p>
+  </section>
+</div>
