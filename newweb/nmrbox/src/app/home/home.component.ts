@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -23,33 +22,10 @@ export class HomeComponent implements OnInit {
     loop: true
   };
 
-  constructor(
-    private router: Router
-  ) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.router.navigate(['/app']);
   }
 
-  // Navigation
-  gotoSection(section: string, subSection: string): void {
-    this.router.navigate(['/' + section, subSection]);
-  }
-
-  gotoSoftwareFilter(filterType: string = null, filterValue: string = null): void {
-    if (!filterType || !filterValue) {
-      this.router.navigate(['/software']);
-    } else {
-      this.router.navigate(['/software', filterType, filterValue]);
-    }
-  }
-
-  gotoCommunityPage(contentType: string): void {
-    if (!contentType || contentType === 'all') {
-      this.router.navigate(['/community']);
-    } else {
-      this.router.navigate(['/c', contentType]);
-    }
-  }
 }
