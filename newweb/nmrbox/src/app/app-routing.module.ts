@@ -8,7 +8,6 @@ import {SoftwareDetailComponent} from './software/software-detail.component';
 import {StaticPageComponent} from './static/static-page.component';
 import {CommunityListComponent} from './community/community-list.component';
 import {SupportComponent} from './support/support.component';
-import {TeamDetailComponent} from './team/team-detail.component';
 import {TeamListComponent} from './team/team-list.component';
 import {SignupComponent} from './authentication/signup.component';
 import {SigninComponent} from './authentication/signin.component';
@@ -31,7 +30,6 @@ const routes: Routes = [
   {path: 'support/:index', component: SupportComponent},
   {path: 'team', component: TeamListComponent},
   {path: 'team/:index', component: TeamListComponent},
-  {path: 't/detail', component: TeamDetailComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'signin', component: SigninComponent},
   {path: 'signout', component: SigninComponent},

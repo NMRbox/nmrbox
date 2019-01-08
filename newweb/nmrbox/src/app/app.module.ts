@@ -21,7 +21,6 @@ import {SoftwareDetailComponent} from './software/software-detail.component';
 import {SoftwareListComponent} from './software/software-list.component';
 import {StaticPageComponent} from './static/static-page.component';
 import {CommunityListComponent} from './community/community-list.component';
-import {TeamDetailComponent} from './team/team-detail.component';
 import {TeamListComponent} from './team/team-list.component';
 import {HomeComponent} from './home/home.component';
 import {SignupComponent} from './authentication/signup.component';
@@ -36,7 +35,6 @@ import {ForgetPasswordConfirmComponent} from './password-management/forget-passw
 // Application services
 import {SoftwareService} from './software/software.service';
 import {CommunityService} from './community/community.service';
-import {TeamService} from './team/team.service';
 import {AuthenticationService} from './authentication/authentication.service';
 import {UserDashboardService} from './user-dashboard/user-dashboard.service';
 import {PasswordManagementService} from './password-management/password-management.service';
@@ -75,7 +73,6 @@ import {SafeHtmlPipe} from './pipes/safe-html.pipe';
     SoftwareListComponent,
     StaticPageComponent,
     CommunityListComponent,
-    TeamDetailComponent,
     TeamListComponent,
     HomeComponent,
     SignupComponent,
@@ -94,7 +91,6 @@ import {SafeHtmlPipe} from './pipes/safe-html.pipe';
   providers: [
     SoftwareService,
     CommunityService,
-    TeamService,
     AuthenticationService,
     UserDashboardService,
     PasswordManagementService,
