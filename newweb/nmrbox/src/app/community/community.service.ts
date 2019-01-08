@@ -29,7 +29,7 @@ export class CommunityService {
 
   getPageContent(pageUrl: string): Promise<CommunityModel> {
 
-    const url = environment.appUrl + '/' + pageUrl;
+    const url = environment.appUrl + '/pages/' + pageUrl;
 
     return this.http
       .get(url)
