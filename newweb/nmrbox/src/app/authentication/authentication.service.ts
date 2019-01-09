@@ -10,9 +10,6 @@ import {UserAuthModel} from './user-auth.model';
 @Injectable()
 export class AuthenticationService {
 
-  private signinUrl = 'signin';  // URL to signin
-  private signupUrl = 'signup';  // URL to signup
-  private profileUpdateUrl = 'updateProfile';  // URL to profileUpdate
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   private userData: UserAuthModel;
@@ -43,7 +40,7 @@ export class AuthenticationService {
     time_zone_id: number,
   ) {
     return this.http
-      .post(environment.appUrl + '/' + this.signupUrl, JSON.stringify(
+      .post(environment.appUrl + '/' + environment.signupUrl, JSON.stringify(
         {
           first_name: first_name,
           last_name: last_name,
@@ -79,7 +76,7 @@ export class AuthenticationService {
 
   signin(username: string, password: string) {
     return this.http
-      .post(environment.appUrl + '/' + this.signinUrl, JSON.stringify({
+      .post(environment.appUrl + '/' + environment.signinUrl, JSON.stringify({
         username: username,
         password: password,
         request_type: 'signin'
@@ -128,7 +125,7 @@ export class AuthenticationService {
     time_zone_id: number,
   ) {
     return this.http
-      .post(environment.appUrl + '/' + this.profileUpdateUrl + '/' + this.userID, JSON.stringify(
+      .post(environment.appUrl + '/' + environment.profileUpdateUrl + '/' + this.userID, JSON.stringify(
         {
           first_name: first_name,
           last_name: last_name,

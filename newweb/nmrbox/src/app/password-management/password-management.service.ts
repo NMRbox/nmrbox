@@ -5,8 +5,7 @@ import {environment} from '../../environments/environment';
 @Injectable()
 export class PasswordManagementService {
 
-  private forgotPassUrl = 'password-forgot';  // URL to signin
-  private forgotPassConfirmUrl = 'password-forgot-confirm';  // URL to signin
+
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) {
@@ -14,7 +13,7 @@ export class PasswordManagementService {
 
   forgetPassword(email: string) {
     return this.http
-      .post(environment.appUrl + '/' + this.forgotPassUrl, JSON.stringify({
+      .post(environment.appUrl + '/' + environment.forgotPassUrl, JSON.stringify({
         email: email
       }), {headers: this.headers});
   }
@@ -27,7 +26,7 @@ export class PasswordManagementService {
     pass_reset_confirm: string
   ) {
     return this.http
-      .post(environment.appUrl + '/' + this.forgotPassConfirmUrl, JSON.stringify({
+      .post(environment.appUrl + '/' + environment.forgotPassConfirmUrl, JSON.stringify({
         person_id: person_id,
         nmrbox_acct: nmrbox_acct,
         password: password,

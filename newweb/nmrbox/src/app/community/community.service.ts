@@ -6,9 +6,6 @@ import {EventModel} from './event.model';
 @Injectable()
 export class CommunityService {
 
-  private eventsUrl = 'events';  // URL to events page
-  private eventRegisterUrl = 'events_register';  // URL to events page
-
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) {
@@ -16,7 +13,7 @@ export class CommunityService {
 
   getAllEvents(): Promise<{}> {
     return this.http
-      .get(environment.appUrl + `/` + this.eventsUrl)
+      .get(environment.appUrl + `/` + environment.eventsUrl)
       .toPromise()
       .then(response => {
         const response_json = response;
@@ -29,7 +26,7 @@ export class CommunityService {
 
   /* Workshop registration */
   workshopRegister(userid: string, workshopid: string) {
-    return this.http.post(environment.appUrl + '/' + this.eventRegisterUrl, JSON.stringify(
+    return this.http.post(environment.appUrl + '/' + environment.eventRegisterUrl, JSON.stringify(
       {
         userid: userid,
         workshopid: workshopid,

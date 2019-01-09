@@ -8,7 +8,7 @@ import {FaqsModel} from './faqs.model';
 
 @Injectable()
 export class FaqsService {
-  public faqsUrl = 'faq';
+
   public allFAQs: Array<FaqsModel>;
   public faqs: Array<FaqsModel>;
 
@@ -16,7 +16,7 @@ export class FaqsService {
     this.allFAQs = [];
     this.faqs = [];
 
-    const url = environment.appUrl + `/` + this.faqsUrl;
+    const url = environment.appUrl + `/` + environment.faqsUrl;
     const parent = this;
     this.http.get(url).pipe(
       map(response => {

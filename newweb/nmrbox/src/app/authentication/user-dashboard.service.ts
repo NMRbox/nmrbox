@@ -10,16 +10,13 @@ import {PersonModel} from './person.model';
 export class UserDashboardService {
   handleError: any;
 
-  private passResetUrl = 'password-reset';  // URL to password reset
-  private downloadableVMUrl = 'downloadable-vm';  // URL to downloadable vm
-  private personUrl = 'person';  // URL to web api
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) {
   }
 
   getPersonDetails(id: string): Promise<PersonModel> {
-    const url = environment.appUrl + `/` + this.personUrl + `/` + id;
+    const url = environment.appUrl + `/` + environment.personUrl + `/` + id;
 
     return this.http
       .get(url)
@@ -34,7 +31,7 @@ export class UserDashboardService {
     new_pass: string,
     confirm_new_pass: string
   ) {
-    return this.http.post(environment.appUrl + '/' + this.passResetUrl, JSON.stringify(
+    return this.http.post(environment.appUrl + '/' + environment.passResetUrl, JSON.stringify(
       {
         person_id: person_id,
         current_pass: current_pass,
@@ -49,7 +46,7 @@ export class UserDashboardService {
     vm_username: string,
     vm_password: string
   ) {
-    return this.http.post(environment.appUrl + '/' + this.downloadableVMUrl, JSON.stringify(
+    return this.http.post(environment.appUrl + '/' + environment.downloadableVMUrl, JSON.stringify(
       {
         person_id: person_id,
         vm_id: vm_id,

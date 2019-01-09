@@ -1,4 +1,19 @@
 export const environment = {
   production: true,
-  appUrl: 'https://apidev.nmrbox.org'
+
+  // URLs
+  appUrl: 'https://apidev.nmrbox.org',
+  passResetUrl: 'password-reset',
+  downloadableVMUrl: 'downloadable-vm',
+  personUrl: 'person',
+  signinUrl: 'signin',
+  signupUrl: 'signup',
+  profileUpdateUrl: 'updateProfile',
+  faqsUrl: 'faq',
+  eventsUrl: 'events',
+  eventRegisterUrl: 'events_register',
+  forgotPassUrl: 'password-forgot',
+  forgotPassConfirmUrl: 'password-forgot-confirm',
+  softwareRegistryUrl: 'registry',
+  softwareRegistryMetaUrl: 'registry/software-metadata'
 };

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpHeaders, HttpClient} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
 
@@ -9,26 +9,12 @@ import {SoftwareMetadataModel} from './software-metadata.model';
 @Injectable()
 export class SoftwareService {
 
-  private baseUrl = 'api/softwareList';  // URL to web api
-  private swtUrl = 'registry';  // URL to web api
-  private swtMtDtUrl = 'registry/software-metadata';  // URL to web api
-  private headers = new HttpHeaders({'Content-Type': 'application/json'});
-
   constructor(private http: HttpClient) {
-  }
-
-  create(name: string): Promise<SoftwareModel> {
-    return this.http
-      .post(this.baseUrl, JSON.stringify({name: name}), {headers: this.headers})
-      .toPromise()
-      .then(res => res['data'] as SoftwareModel)
-      .catch(this.handleError);
-
   }
 
   getSoftwareList(): Promise<SoftwareModel[]> {
     return this.http
-      .get(environment.appUrl + `/` + this.swtUrl)
+      .get(environment.appUrl + `/` + environment.softwareRegistryUrl)
       .toPromise()
       .then(response => response['data'] as SoftwareModel[])
       .catch(this.handleError);
@@ -36,8 +22,7 @@ export class SoftwareService {
 
   getSoftware(slug: string): Promise<SoftwareModel> {
 
-    const url = environment.appUrl + `/` + this.swtUrl + `/` + slug;
-    console.log(url);
+    const url = environment.appUrl + `/` + environment.softwareRegistryUrl + `/` + slug;
     return this.http
       .get(url)
       .toPromise()
@@ -47,22 +32,11 @@ export class SoftwareService {
 
   getSoftwareMetaData(slug: string): Promise<SoftwareMetadataModel> {
 
-    const url = environment.appUrl + `/` + this.swtMtDtUrl + `/` + slug;
-    console.log(url);
-
+    const url = environment.appUrl + `/` + environment.softwareRegistryMetaUrl + `/` + slug;
     return this.http
       .get(url)
       .toPromise()
       .then(response => response['data'] as SoftwareMetadataModel)
-      .catch(this.handleError);
-  }
-
-  update(software: SoftwareModel): Promise<SoftwareModel> {
-    const url = `${this.baseUrl}/${software.id}`;
-    return this.http
-      .put(url, JSON.stringify(software), {headers: this.headers})
-      .toPromise()
-      .then(() => software)
       .catch(this.handleError);
   }
 
