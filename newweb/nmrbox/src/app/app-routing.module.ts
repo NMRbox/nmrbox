@@ -39,7 +39,7 @@ const routes: Routes = [
   {path: 'profile-update', component: ProfileUpdateComponent},
   {path: 'faqs', component: FaqsComponent},
   {path: 'faqs/:slug', component: FaqsComponent},
-  {path: '**', redirectTo: '/app', pathMatch: 'full'}
+  {path: '**', redirectTo: '/', pathMatch: 'full'}
 ];
 
 @NgModule({
