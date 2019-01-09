@@ -16,7 +16,7 @@ import {environment} from '../../environments/environment';
 })
 export class UserDashboardComponent implements OnInit {
   person: PersonModel;
-  isAdmin: string;
+  isAdmin: boolean;
   showHide: boolean;
   apiURL = environment.appUrl;
 
@@ -42,15 +42,11 @@ export class UserDashboardComponent implements OnInit {
     this.getPersonDetails(person_id);
 
     /* is admin checking */
-    this.isAdmin = this.authService.getToken('user_is_admin');
+    this.isAdmin = this.authService.isAdmin();
   }
 
   getPersonDetails(id: string): void {
     this.userDashboardService.getPersonDetails(id).then(person => this.person = person);
-  }
-
-  isUserAdmin(id: string) {
-    return this.authService.getToken('is_user_admin');
   }
 
   onPasswordResetSubmit(form: NgForm): void {
