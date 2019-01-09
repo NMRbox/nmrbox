@@ -780,13 +780,13 @@ class FrontEndController extends Controller
     public function downloadVM()
     {
         // loggedin checking
-        if (!Sentinel::check()) {
+        if (!Session::has('person')) {
             return Redirect::route('my-account');
         }
 
         try {
             // get user details
-            $user = Sentinel::getUser();
+            $user = Session::get('person');;
 
             // DB entry goes here
             $downloadable_vm = new VMDownload(
@@ -802,10 +802,10 @@ class FrontEndController extends Controller
 
             return redirect()->back()->withSuccess('Your request has been received. An email with a custom generated downloadable link will be sent to you in next few hours.');
         } catch (\Illuminate\Database\QueryException $e) {
-            //dd($e);
+
             // Redirect to the user page
             return redirect()->back()->withError('Downloadable VM request has already been received. You will receive an email shortly. ');
-            //return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
+
         }
 
     }
@@ -1143,6 +1143,9 @@ class FrontEndController extends Controller
 
         // fetching all classification groups
         $person['classifications'] = $person->classification()->get();
+
+        // Fetching all downloadable vm lists.
+        $person['downloadableVm'] = VM::where('downloadable', 'true')->lists('name', 'id')->all();
 
         return response()-> json( array(
             'data' => $person ,
