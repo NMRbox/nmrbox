@@ -359,7 +359,11 @@ class FAQController extends Controller
                 ->orWhere('answer', 'LIKE', '%'.strtolower($term).'%')
                 ->get();
         } else {
-            $faqs = FAQ::all();
+            //$faqs = FAQ::all();
+            return response()-> json( array(
+                'message' => 'No data found.',
+                'type' => 'error' ),
+                401 );
         }
 
 

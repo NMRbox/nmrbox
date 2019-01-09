@@ -1289,8 +1289,7 @@ class FrontEndController extends Controller
             // Data to be used on the email view
             $data = array(
                 'user' => $user,
-                'forgotPasswordUrl' => "http://webdev.nmrbox.org:8000/forgot-password-confirm/". $user->id ."/". $reminder_code,
-                //'forgotPasswordUrl' => URL::route('forgot-password-confirm', [$user->id, $reminder_code]),
+                'forgotPasswordUrl' => URL::route('forgot-password-confirm', [$user->id, $reminder_code]),
             );
 
             // Send the activation code through email
