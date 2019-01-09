@@ -22,7 +22,6 @@ export class EmbeddedStaticComponent implements OnInit {
   ngOnInit(): void {
     // Get the page if we only have the URL
     if (!this.staticPage) {
-      console.log('getting in inside', this.pageURL);
       this.staticPageService.getPageContent(this.pageURL).then(response => this.staticPage = response);
     }
 
