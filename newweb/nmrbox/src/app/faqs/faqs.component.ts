@@ -16,7 +16,7 @@ export class FaqsComponent implements OnInit, AfterViewChecked {
 
   constructor(
     private route: ActivatedRoute,
-    private faqService: FaqsService,
+    public faqService: FaqsService,
     private router: Router
   ) {
   }
