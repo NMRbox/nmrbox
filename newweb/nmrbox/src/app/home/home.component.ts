@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-home-page',
@@ -7,6 +8,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  appURL;
   config: Object = {
     pagination: '.swiper-pagination',
     paginationClickable: true,
@@ -25,6 +27,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.appURL = environment.appUrl;
   }
 
 }
