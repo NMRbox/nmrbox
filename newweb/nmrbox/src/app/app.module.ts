@@ -36,7 +36,7 @@ import {ForgetPasswordConfirmComponent} from './password-management/forget-passw
 import {SoftwareService} from './software/software.service';
 import {CommunityService} from './community/community.service';
 import {AuthenticationService} from './authentication/authentication.service';
-import {UserDashboardService} from './user-dashboard/user-dashboard.service';
+import {UserDashboardService} from './authentication/user-dashboard.service';
 import {PasswordManagementService} from './password-management/password-management.service';
 import {FaqsService} from './faqs/faqs.service';
 

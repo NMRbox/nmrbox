@@ -5,8 +5,8 @@ import {ActivatedRoute} from '@angular/router';
 
 /* Import service files */
 import {AuthenticationService} from '../authentication/authentication.service';
-import {UserDashboardService} from './user-dashboard.service';
-import {PersonModel} from './person.model';
+import {UserDashboardService} from '../authentication/user-dashboard.service';
+import {PersonModel} from '../authentication/person.model';
 import {environment} from '../../environments/environment';
 
 @Component({

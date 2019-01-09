@@ -5,10 +5,10 @@ import {ActivatedRoute} from '@angular/router';
 
 /* Import services */
 import {AuthenticationService} from '../authentication/authentication.service';
-import {UserDashboardService} from './user-dashboard.service';
+import {UserDashboardService} from '../authentication/user-dashboard.service';
 
 /* Import model */
-import {PersonModel} from './person.model';
+import {PersonModel} from '../authentication/person.model';
 
 @Component({
   selector: 'app-profile-update',

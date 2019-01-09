@@ -11,7 +11,7 @@ export class UserDashboardService {
   handleError: any;
 
   private passResetUrl = 'password-reset';  // URL to password reset
-  private DownloadableVMUrl = 'downloadable-vm';  // URL to downloadable vm
+  private downloadableVMUrl = 'downloadable-vm';  // URL to downloadable vm
   private personUrl = 'person';  // URL to web api
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -49,7 +49,7 @@ export class UserDashboardService {
     vm_username: string,
     vm_password: string
   ) {
-    return this.http.post(environment.appUrl + '/' + this.DownloadableVMUrl, JSON.stringify(
+    return this.http.post(environment.appUrl + '/' + this.downloadableVMUrl, JSON.stringify(
       {
         person_id: person_id,
         vm_id: vm_id,
