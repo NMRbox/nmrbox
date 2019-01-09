@@ -5,7 +5,6 @@ import {ActivatedRoute} from '@angular/router';
 
 /* Import services */
 import {AuthenticationService} from '../authentication/authentication.service';
-import {UserDashboardService} from '../authentication/user-dashboard.service';
 
 /* Import model */
 import {PersonModel} from '../authentication/person.model';
@@ -22,23 +21,16 @@ export class ProfileUpdateComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthenticationService,
-    private userService: UserDashboardService,
+    private authService: AuthenticationService
   ) {
   }
 
   ngOnInit() {
-    if (!this.authService.userID) {
+    if (!this.authService.personData) {
       this.router.navigateByUrl('signin');
     }
 
-    this.getPersonDetails(this.authService.userID);
-  }
-
-  getPersonDetails(id: string): void {
-    this.userService.getPersonDetails(id).then(person => {
-      this.person = person;
-    });
+    this.person = this.authService.personData;
   }
 
   onProfileUpdate(form: NgForm) {

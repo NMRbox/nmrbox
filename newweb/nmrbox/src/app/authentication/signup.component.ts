@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSignup(form: NgForm) {
-    this.authService.signup(
+    this.authService.signUp(
       form.value.first_name,
       form.value.last_name,
       form.value.email,
@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit {
       form.value.time_zone_id,
     )
       .subscribe(
-        response => this.router.navigateByUrl('signin'),
+        () => this.router.navigateByUrl('signin'),
         response => this.notifications = response,
       );
   }

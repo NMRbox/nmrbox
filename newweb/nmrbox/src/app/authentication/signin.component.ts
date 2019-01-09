@@ -29,7 +29,7 @@ export class SigninComponent implements OnInit {
   }
 
   onSignin(form: NgForm) {
-    this.authService.signin(form.value.username, form.value.password)
+    this.authService.signIn(form.value.username, form.value.password)
       .subscribe(
         response => this.notifications = response
       );

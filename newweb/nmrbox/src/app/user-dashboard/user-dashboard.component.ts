@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {ActivatedRoute} from '@angular/router';
 
 /* Import service files */
 import {AuthenticationService} from '../authentication/authentication.service';
-import {UserDashboardService} from '../authentication/user-dashboard.service';
 import {PersonModel} from '../authentication/person.model';
 import {environment} from '../../environments/environment';
 
@@ -24,9 +22,7 @@ export class UserDashboardComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     public authService: AuthenticationService,
-    private userDashboardService: UserDashboardService,
   ) {
     this.showHide = false;
   }
@@ -36,21 +32,11 @@ export class UserDashboardComponent implements OnInit {
       this.router.navigateByUrl('signin');
     }
 
-    /* user profile*/
-    this.getPersonDetails(this.authService.userID);
-  }
-
-  getPersonDetails(id: string): void {
-    this.userDashboardService.getPersonDetails(id).then(person => this.person = person);
+    this.person = this.authService.personData;
   }
 
   onPasswordResetSubmit(form: NgForm): void {
-    this.userDashboardService.SubmitResetPassword(
-      this.authService.userID,
-      form.value.old_password,
-      form.value.new_password,
-      form.value.conf_password,
-    )
+    this.authService.submitResetPassword(form.value.old_password, form.value.new_password, form.value.conf_password)
       .subscribe(
         response => this.notifications = response,
       );
@@ -58,12 +44,7 @@ export class UserDashboardComponent implements OnInit {
 
   onDownloadVMSubmit(form: NgForm): void {
 
-    this.userDashboardService.SubmitDownloadVM(
-      this.authService.userID,
-      form.value.vm_id,
-      form.value.vm_username,
-      form.value.vm_password,
-    )
+    this.authService.submitDownloadVM(form.value.vm_id, form.value.vm_username, form.value.vm_password)
       .subscribe(
         response => this.notifications = response,
       );

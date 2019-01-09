@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
@@ -14,39 +14,12 @@ import {AuthenticationService} from '../authentication/authentication.service';
 })
 export class CommunityListComponent implements OnInit {
 
-  @Input() communityList: EventModel[];
-
-  @Input() supportList: EventModel[];
-  @Input() supportNmrboxList: EventModel[];
-  @Input() supportTutorialList: EventModel[];
-  @Input() supportSwdocList: EventModel[];
-  @Input() supportWorkflowList: EventModel[];
-
-  @Input() eventsList: EventModel[];
-  @Input() upcoming: EventModel[];
-  @Input() completed: EventModel[];
-
-  @Input() eventsCurrentList: EventModel[];
-  @Input() eventsPastList: EventModel[];
-
-  @Output() listChange: EventEmitter<EventModel[]> = new EventEmitter<EventModel[]>();
-
-  // Tabs
-  @Input() selectedIndex = 0;
-  @Input() routeIndex: number;
+  upcoming: EventModel[];
+  completed: EventModel[];
+  selectedIndex = 0;
 
   /*notification variable*/
   public notifications: any = {message: '', type: ''};
-
-  config: Object = {
-    slidesPerView: 'auto',
-    centeredSlides: false,
-    nextButton: '.swiper-button-next',
-    prevButton: '.swiper-button-prev',
-    spaceBetween: 0,
-    speed: 500,
-    loop: false
-  };
 
   constructor(
     private router: Router,
@@ -62,8 +35,7 @@ export class CommunityListComponent implements OnInit {
 
     // Tabs: go to specific subsection
     this.route.params.subscribe(params => {
-        this.routeIndex = params['index'];
-        this.selectedIndex = this.routeIndex;
+        this.selectedIndex = params['index'];
         if (this.selectedIndex > 0) {
           this.selectedIndexChange(this.selectedIndex);
         }
@@ -82,9 +54,8 @@ export class CommunityListComponent implements OnInit {
 
   getEventsList(): void {
     this.communityService.getAllEvents().then(events => {
-      this.eventsList = events[0];
-      this.upcoming = events[1];
-      this.completed = events[2];
+      this.upcoming = events[0];
+      this.completed = events[1];
     });
   }
 
@@ -92,12 +63,10 @@ export class CommunityListComponent implements OnInit {
   onWorkshopRegister(form: NgForm) {
     const workshop_id = form.value.name;
 
-    this.communityService.workshopRegister(
-      this.authService.userID,
-      workshop_id
-    )
+    this.authService.workshopRegister(workshop_id)
       .subscribe(
-        response => this.notifications = response
+        response => this.notifications = response,
+        error => this.notifications = error.message
       );
   }
 }

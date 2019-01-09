@@ -16,7 +16,6 @@ import {UserDashboardComponent} from './user-dashboard/user-dashboard.component'
 import {ProfileUpdateComponent} from './user-dashboard/profile-update.component';
 import {FaqsComponent} from './faqs/faqs.component';
 import {ForgetPasswordComponent} from './password-management/forget-password.component';
-// import {ForgetPasswordConfirmComponent} from './password-management/forget-password-confirm.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},

@@ -30,14 +30,11 @@ import {ProfileUpdateComponent} from './user-dashboard/profile-update.component'
 import {FaqsComponent} from './faqs/faqs.component';
 import {PasswordResetComponent} from './authentication/password-reset.component';
 import {ForgetPasswordComponent} from './password-management/forget-password.component';
-import {ForgetPasswordConfirmComponent} from './password-management/forget-password-confirm.component';
 
 // Application services
 import {SoftwareService} from './software/software.service';
 import {CommunityService} from './community/community.service';
 import {AuthenticationService} from './authentication/authentication.service';
-import {UserDashboardService} from './authentication/user-dashboard.service';
-import {PasswordManagementService} from './password-management/password-management.service';
 import {FaqsService} from './faqs/faqs.service';
 
 // Router
@@ -82,7 +79,6 @@ import {SafeHtmlPipe} from './pipes/safe-html.pipe';
     FaqsComponent,
     PasswordResetComponent,
     ForgetPasswordComponent,
-    ForgetPasswordConfirmComponent,
     FaqsComponent,
     SupportComponent,
     EmbeddedStaticComponent,
@@ -92,8 +88,6 @@ import {SafeHtmlPipe} from './pipes/safe-html.pipe';
     SoftwareService,
     CommunityService,
     AuthenticationService,
-    UserDashboardService,
-    PasswordManagementService,
     FaqsService,
     StaticPageService
   ],
