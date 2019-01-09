@@ -16,8 +16,14 @@ export class SoftwareService {
     return this.http
       .get(environment.appUrl + `/` + environment.softwareRegistryUrl)
       .toPromise()
-      .then(response => response['data'] as SoftwareModel[])
-      .catch(this.handleError);
+      .then(response => {
+          if (response && response['data']) {
+            return response['data'] as SoftwareModel[];
+          } else {
+            return [{}] as SoftwareModel[];
+          }
+        },
+        () => []);
   }
 
   getSoftware(slug: string): Promise<SoftwareModel> {
@@ -26,8 +32,14 @@ export class SoftwareService {
     return this.http
       .get(url)
       .toPromise()
-      .then(response => response['data'] as SoftwareModel)
-      .catch(this.handleError);
+      .then(response => {
+          if (response && response['data']) {
+            return response['data'] as SoftwareModel;
+          } else {
+            return {} as SoftwareModel;
+          }
+        },
+        () => new SoftwareModel(slug));
   }
 
   getSoftwareMetaData(slug: string): Promise<SoftwareMetadataModel> {
@@ -36,12 +48,13 @@ export class SoftwareService {
     return this.http
       .get(url)
       .toPromise()
-      .then(response => response['data'] as SoftwareMetadataModel)
-      .catch(this.handleError);
-  }
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+      .then(response => {
+          if (response && response['data']) {
+            return response['data'] as SoftwareMetadataModel;
+          } else {
+            return {} as SoftwareMetadataModel;
+          }
+        },
+        () => new SoftwareMetadataModel());
   }
 }

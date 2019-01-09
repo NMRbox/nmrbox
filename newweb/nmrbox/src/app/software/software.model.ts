@@ -1,3 +1,24 @@
+export class Author {
+  id: number;
+  first_name: string;
+  last_name: string;
+}
+
+export class Citation {
+  id: number;
+  citation_type_id: number;
+  title: string;
+  year: number;
+  journal: string;
+  volume: string;
+  issue: string;
+  publisher: string;
+  note: string;
+  pages: string;
+  source_key: string;
+  authors: Author[];
+}
+
 export class SoftwareModel {
   id: number;
   name: string;
@@ -5,19 +26,14 @@ export class SoftwareModel {
   long_title: string;
   synopsis: string;
   description: string;
-  url: string;
   slug: string;
-  nmrbox_version: Array<string>;
-  software_version: Array<string>;
-  citation: string;
-  title: string;
-  first_name: string;
-  last_name: string;
-  journal: any;
-  year: any;
-  volume: any;
-  issue: any;
-  authors: string;
+  url: string;
+  citations: Citation[];
   research_problems: Array<Array<string>>;
-  software_type: Array<Array<string>>; // change to 'types' once mosrur is on board
+  software_type: Array<Array<string>>;
+
+  constructor(slug: string) {
+    this.name = slug;
+    this.long_title = 'An error occurred, no software package was found with the given name.';
+  }
 }
