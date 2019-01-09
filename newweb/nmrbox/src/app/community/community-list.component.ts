@@ -90,22 +90,14 @@ export class CommunityListComponent implements OnInit {
 
   /* workshops registration */
   onWorkshopRegister(form: NgForm) {
-    const person_id = this.authService.getToken('person_id');
     const workshop_id = form.value.name;
-    console.log(person_id);
-    console.log(workshop_id);
 
     this.communityService.workshopRegister(
-      person_id,
+      this.authService.userID,
       workshop_id
     )
       .subscribe(
         response => this.notifications = response
       );
   }
-
-  isLoggedIn() {
-    return this.authService.getToken('person_id');
-  }
-
 }

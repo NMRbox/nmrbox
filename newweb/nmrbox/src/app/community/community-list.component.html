@@ -14,7 +14,7 @@
           {{ notifications.message }}
         </div>
         <br>
-        <div *ngIf="!isLoggedIn()">
+        <div *ngIf="!authService.userID">
           <div class="alert alert-info">
             Please <a routerLink="/signin">Sign in</a> / <a routerLink="/signup">Sign up</a> first to register for events.
           </div>
@@ -47,7 +47,7 @@
                   </p>
                   <input type="hidden" name="name" [(ngModel)]="event.name" style="display: block;" />
 
-                  <div *ngIf="isLoggedIn()">
+                  <div *ngIf="authService.userID">
                     <div *ngIf="event.attendance_max !== event.attendance;then regular_button else disable_button">here is ignored</div>
                     <ng-template #regular_button>
                       <button type="submit" class="btn btn-primary">

@@ -45,12 +45,12 @@
       </nav>
       <span class="spacer"></span>
       <nav class="secondary-navbar">
-        <span *ngIf="!isLoggedIn()">
+        <span *ngIf="!this.authService.userID">
           <a mat-button routerLink="/signin" routerLinkActive="active">Sign in</a>
           <span class="half_em">|</span>
           <a mat-button routerLink="/signup" routerLinkActive="active">Sign up</a>
         </span>
-        <span *ngIf="isLoggedIn()">
+        <span *ngIf="this.authService.userID">
           <a mat-button routerLink="/user-dashboard" routerLinkActive="active">My Account</a>
           <span class="half_em">|</span>
           <a mat-button (click)="signOut()" routerLinkActive="active">Sign out</a>

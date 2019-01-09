@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 import {HttpHeaders, HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+import {UserAuthModel} from './user-auth.model';
 
 
 @Injectable()
@@ -14,8 +15,12 @@ export class AuthenticationService {
   private profileUpdateUrl = 'updateProfile';  // URL to profileUpdate
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-  constructor(private http: HttpClient, private router: Router) {
+  private userData: UserAuthModel;
+  public userID: string;
+  public isAdmin: boolean;
 
+  constructor(private http: HttpClient, private router: Router) {
+    this.assignFromJSON(JSON.parse(localStorage.getItem('userAuthData')));
   }
 
   signup(
@@ -83,14 +88,8 @@ export class AuthenticationService {
         response => {
 
           if (response['type'] !== 'error') {
-            const person_id = response['person_id'];
-            const user_is_admin = response['user_is_admin'];
-            const token = response['token'];
-
-            localStorage.setItem('person_id', person_id);
-            localStorage.setItem('user_is_admin', user_is_admin);
-            localStorage.setItem('token', token);
-
+            this.assignFromJSON(response);
+            // noinspection JSIgnoredPromiseFromCall
             this.router.navigateByUrl('user-dashboard');
           } else {
             return response;
@@ -99,16 +98,14 @@ export class AuthenticationService {
       ));
   }
 
-  public getToken(name: string) {
-    return localStorage.getItem(name);
-  }
+  signOut() {
+    localStorage.removeItem('userAuthData');
+    this.userData = null;
+    this.userID = null;
+    this.isAdmin = false;
 
-  public isAdmin() {
-    return JSON.parse(this.getToken('user_is_admin'));
-  }
-
-  public deleteToken(name: string) {
-    return localStorage.removeItem(name);
+    // noinspection JSIgnoredPromiseFromCall
+    this.router.navigateByUrl('');
   }
 
   updateProfile(
@@ -130,9 +127,8 @@ export class AuthenticationService {
     country: string,
     time_zone_id: number,
   ) {
-    const person_id = this.getToken('person_id');
     return this.http
-      .post(environment.appUrl + '/' + this.profileUpdateUrl + '/' + person_id, JSON.stringify(
+      .post(environment.appUrl + '/' + this.profileUpdateUrl + '/' + this.userID, JSON.stringify(
         {
           first_name: first_name,
           last_name: last_name,
@@ -152,6 +148,19 @@ export class AuthenticationService {
           country: country,
           time_zone_id: time_zone_id,
         }), {headers: this.headers});
+  }
+
+  private assignFromJSON(response: {}) {
+    if (response) {
+      localStorage.setItem('userAuthData', JSON.stringify(response));
+      this.userID = response['person_id'];
+      this.isAdmin = response['user_is_admin'];
+      this.userData = response as UserAuthModel;
+    } else {
+      this.userData = null;
+      this.isAdmin = false;
+      this.userID = null;
+    }
   }
 
 }

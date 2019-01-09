@@ -16,7 +16,6 @@ import {environment} from '../../environments/environment';
 })
 export class UserDashboardComponent implements OnInit {
   person: PersonModel;
-  isAdmin: boolean;
   showHide: boolean;
   apiURL = environment.appUrl;
 
@@ -26,23 +25,19 @@ export class UserDashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthenticationService,
+    public authService: AuthenticationService,
     private userDashboardService: UserDashboardService,
   ) {
     this.showHide = false;
   }
 
   ngOnInit() {
-    const person_id = this.authService.getToken('person_id');
-    if (!person_id) {
+    if (!this.authService.userID) {
       this.router.navigateByUrl('signin');
     }
 
     /* user profile*/
-    this.getPersonDetails(person_id);
-
-    /* is admin checking */
-    this.isAdmin = this.authService.isAdmin();
+    this.getPersonDetails(this.authService.userID);
   }
 
   getPersonDetails(id: string): void {
@@ -51,7 +46,7 @@ export class UserDashboardComponent implements OnInit {
 
   onPasswordResetSubmit(form: NgForm): void {
     this.userDashboardService.SubmitResetPassword(
-      this.authService.getToken('person_id'),
+      this.authService.userID,
       form.value.old_password,
       form.value.new_password,
       form.value.conf_password,
@@ -64,7 +59,7 @@ export class UserDashboardComponent implements OnInit {
   onDownloadVMSubmit(form: NgForm): void {
 
     this.userDashboardService.SubmitDownloadVM(
-      this.authService.getToken('person_id'),
+      this.authService.userID,
       form.value.vm_id,
       form.value.vm_username,
       form.value.vm_password,

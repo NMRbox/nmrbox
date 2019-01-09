@@ -19,7 +19,7 @@
                     </div>
 
 
-                    <div class="alert alert-info" *ngIf="isAdmin">
+                    <div class="alert alert-info" *ngIf="authService.isAdmin">
                         <p>Access the administrative section using the button - <a [href]="apiURL + '/admin'" class="btn btn-md btn-primary"><i class="fa fa-cog fa-lg"> Admin Panel</i></a></p>
                     </div>
 
@@ -104,8 +104,10 @@
                                                     <tr *ngIf="showHide">
                                                         <td>Current Password: </td>
                                                         <td>
+                                                          <label>
                                                             <input type="password" name="old_password" autocomplete="off" required ngModel>
-                                                            <span id="show_pass_box" style="cursor:pointer;">
+                                                          </label>
+                                                          <span id="show_pass_box" style="cursor:pointer;">
                                                                 <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
                                                             </span>
                                                         </td>
@@ -113,8 +115,10 @@
                                                     <tr *ngIf="showHide">
                                                         <td>New Password: </td>
                                                         <td>
+                                                          <label>
                                                             <input type="password" name="new_password" class="password" autocomplete="off" ngModel required>
-                                                            <span style="cursor:pointer;">
+                                                          </label>
+                                                          <span style="cursor:pointer;">
                                                                 <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
                                                             </span>
                                                         </td>
@@ -122,8 +126,10 @@
                                                     <tr *ngIf="showHide">
                                                         <td>Confirm New Password: </td>
                                                         <td>
+                                                          <label>
                                                             <input type="password" name="conf_password" class="password" autocomplete="off" ngModel required>
-                                                            <span id="" style="cursor:pointer;">
+                                                          </label>
+                                                          <span id="" style="cursor:pointer;">
                                                                 <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
                                                             </span>
                                                         </td>
