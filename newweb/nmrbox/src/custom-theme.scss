@@ -501,11 +501,15 @@ mat-select {
   opacity: 1.0;
 }*/
 
-.mat-tab-label-active {
-  background-position: 0px 5px;
-  border: 0px;
-  background-color: #007088;
-  opacity: 0;
+app-community-list {
+  .mat-tab-label-active {
+    background-color: #007088;
+  }
+}
+app-team-list {
+  .mat-tab-label-active {
+    background-color: #007088;
+  }
 }
 
 /*
@@ -553,6 +557,9 @@ app-team-list {
 }*/
 
 app-team-list {
+  .mat-tab-label-active {
+    background-color: #E08F38;
+  }
   mat-tab-body {
     background-size: 90%;
     background: url('/assets/bg-graphics/bg-graphic-team.png') no-repeat 0px -300px;
