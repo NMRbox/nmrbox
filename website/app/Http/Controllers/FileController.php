@@ -67,6 +67,32 @@ class FileController extends Controller
     }
 
     /**
+     * Load the requested file
+     *
+     * @param  File $file
+     * @return \Illuminate\Http\Response
+     */
+    public function loadFile( $file_name )
+    {
+        try{
+            $file = File::where('slug', 'like', $file_name)->first();
+
+            $headers = array('Content-type' => $file->mime_type, 'Content-length' => $file->size);
+
+            $data = $file->bdata;
+            $unescape = $file->binary_unsql($data);
+            $un64 = base64_decode($unescape);
+
+
+            return response($un64, 200, $headers);
+        } catch (\Exception $e) {
+            abort(404);
+        }
+
+
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
