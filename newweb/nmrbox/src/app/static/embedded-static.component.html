@@ -1,7 +1,9 @@
 <div class="community-details" *ngIf="staticPage">
   <h1 [innerHTML]="staticPage.title"></h1>
   <section class="section-detail">
+    <a *ngIf="adminUser" [href]="appUrl + '/admin/pages/' + pageURL + '/edit'">Edit this page</a>
     <p class="subheading" [innerHTML]="staticPage.subheader"></p>
     <div id="support-detail-description" [innerHTML]="staticPage.content | safeHtml"></div>
+    <br><p *ngIf="staticPage.updated_at">Last updated at {{staticPage.updated_at}}.</p>
   </section>
 </div>

@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {StaticPageService} from './static-page.service';
-import {EventModel} from './static-page.model';
+import {StaticPageModel} from './static-page.model';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-embedded-static-detail',
@@ -9,7 +10,9 @@ import {EventModel} from './static-page.model';
 })
 export class EmbeddedStaticComponent implements OnInit {
   @Input() pageURL: string;
-  staticPage: EventModel;
+  @Input() staticPage: StaticPageModel;
+  adminUser: boolean;
+  appUrl: string;
 
   constructor(
     private staticPageService: StaticPageService
@@ -17,6 +20,13 @@ export class EmbeddedStaticComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.staticPageService.getPageContent(this.pageURL).then(response => this.staticPage = response);
+    // Get the page if we only have the URL
+    if (!this.staticPage) {
+      console.log('getting in inside', this.pageURL);
+      this.staticPageService.getPageContent(this.pageURL).then(response => this.staticPage = response);
+    }
+
+    this.adminUser = this.staticPageService.getAdmin();
+    this.appUrl = environment.appUrl;
   }
 }

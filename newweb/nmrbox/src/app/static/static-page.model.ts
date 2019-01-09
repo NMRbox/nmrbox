@@ -1,4 +1,4 @@
-export class EventModel {
+export class StaticPageModel {
   'subheader': string;
   'user_id': string;
   'title': string;

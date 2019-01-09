@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {StaticPageService} from './static-page.service';
-import {EventModel} from './static-page.model';
+import {StaticPageModel} from './static-page.model';
 
 @Component({
   selector: 'app-static-page',
@@ -10,7 +10,8 @@ import {EventModel} from './static-page.model';
   styleUrls: ['./static-page.component.scss']
 })
 export class StaticPageComponent implements OnInit {
-  staticPage: EventModel;
+  staticPage: StaticPageModel;
+  pageURL: string;
 
   constructor(
     private staticPageService: StaticPageService,
@@ -23,6 +24,7 @@ export class StaticPageComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params['pageUrl'] !== undefined) {
         this.staticPageService.getPageContent(params['pageUrl']).then(response => this.staticPage = response);
+        this.pageURL = params['pageUrl'];
       }
     });
   }

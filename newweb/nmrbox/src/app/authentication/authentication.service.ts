@@ -103,6 +103,10 @@ export class AuthenticationService {
     return localStorage.getItem(name);
   }
 
+  public isAdmin() {
+    return JSON.parse(this.getToken('user_is_admin'));
+  }
+
   public deleteToken(name: string) {
     return localStorage.removeItem(name);
   }

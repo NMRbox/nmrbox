@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
 
-import {EventModel} from '../static/static-page.model';
+import {EventModel} from './event.model';
 import {CommunityService} from './community.service';
 import {AuthenticationService} from '../authentication/authentication.service';
 
