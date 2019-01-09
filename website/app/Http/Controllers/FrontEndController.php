@@ -1140,18 +1140,11 @@ class FrontEndController extends Controller
 
         // Fetching user specific institution type id
         $institution_types = Institution::institution_types;
-        echo "<pre>";
-        print_r($institution_types);
-        echo "</pre>";
         foreach ( $institution_types as $key => $value ) {
             $institution_name = Institution::where('name', 'LIKE', $person['institution'])->first();
-
-
             if ( $value == $institution_name->institution_type ) {
                 $person['institution_type'] = $key;
-
             }
-
         }
 
         // fetching all classification groups
