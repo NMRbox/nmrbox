@@ -23,8 +23,9 @@
                         <p>Access the administrative section using the button - <a [href]="apiURL + '/admin'" class="btn btn-md btn-primary"><i class="fa fa-cog fa-lg"> Admin Panel</i></a></p>
                     </div>
 
-                    <div class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}" *ngIf="notifications.message?.length > 0">
-                        {{ notifications.message }}
+                    <div *ngIf="notifications?.message && notifications.type"
+                         class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}"
+                         [innerHTML]="notifications.message | safeHtml">
                     </div>
 
                     <div class="row" *ngIf="person">

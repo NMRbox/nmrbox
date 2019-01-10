@@ -153,7 +153,10 @@
             <div class="form-group col-lg-12">
                 <div class="form-group">
                     <div>
-                      <div class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}" *ngIf="notifications?.message?.length > 0" [innerHTML]="notifications.message"></div>
+                      <div *ngIf="notifications?.message && notifications.type"
+                           class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}"
+                           [innerHTML]="notifications.message | safeHtml">
+                      </div>
                       <input class="btn btn-primary btn-lg btn-block " type="submit" value="Update Profile">
                     </div>
                 </div>

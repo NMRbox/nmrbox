@@ -963,8 +963,10 @@
               </div>
 
               <div class="col-md-12">
-                <div class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}"
-                     *ngIf="notifications.message?.length > 0" [innerHTML]="notifications.message | safeHtml"></div>
+                <div *ngIf="notifications?.message && notifications.type"
+                     class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}"
+                     [innerHTML]="notifications.message | safeHtml">
+                </div>
                 <br>
               </div>
 

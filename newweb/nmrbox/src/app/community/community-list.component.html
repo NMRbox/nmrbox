@@ -10,8 +10,9 @@
     <div class="divider divider-dashed"></div>
     <div class="grid-outer-wrapper gray-bg">
       <div class="grid-content-wrapper">
-        <div class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}" *ngIf="notifications.message?.length > 0">
-          {{ notifications.message }}
+        <div *ngIf="notifications?.message && notifications.type"
+             class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}"
+             [innerHTML]="notifications.message | safeHtml">
         </div>
         <br>
         <div *ngIf="!authService.userID">
