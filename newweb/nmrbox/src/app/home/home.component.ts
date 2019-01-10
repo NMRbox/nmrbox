@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {EventModel} from '../community/event.model';
 import {CommunityService} from '../community/community.service';
+import {AuthenticationService} from '../authentication/authentication.service';
 
 @Component({
   selector: 'app-home-page',
@@ -12,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   appURL: string;
   upcomingEvents: EventModel[];
+  public notifications: any = {message: '', type: ''};
 
   config: Object = {
     pagination: '.swiper-pagination',
@@ -27,7 +29,8 @@ export class HomeComponent implements OnInit {
     loop: true
   };
 
-  constructor(public communityService: CommunityService) {
+  constructor(public communityService: CommunityService,
+              public authService: AuthenticationService) {
     this.upcomingEvents = [];
   }
 
@@ -39,4 +42,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  onWorkshopRegister(workshopName) {
+
+    this.authService.workshopRegister(workshopName)
+      .subscribe(
+        response => this.notifications = response,
+        error => this.notifications = error
+      );
+  }
 }

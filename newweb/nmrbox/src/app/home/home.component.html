@@ -1,23 +1,35 @@
 <swiper [config]="config">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" *ngFor="let event of upcomingEvents" routerLink="/community">
+      <div class="swiper-slide" *ngFor="let event of upcomingEvents">
         <mat-card class="workshop-card">
+          <form (ngSubmit)="onWorkshopRegister(event.name)">
             <mat-card-header>
-              <mat-card-title>Upcoming NMRbox event: {{event.title}}</mat-card-title>
+              <mat-card-title [innerHTML]="event.title"></mat-card-title>
             </mat-card-header>
             <mat-card-content>
               <p>{{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}</p>
               <p>{{event.location}}</p>
               <ng-container *ngIf="event.attendance_max != null">
-                <p *ngIf="event.attendance != null; else maxOnly">Attendance - {{event.attendance}}
-                  /{{event.attendance_max}}</p>
-                <ng-template #maxOnly>
-                  <p>Max attendance - {{event.attendance_max}}</p>
+                <p *ngIf="event.attendance !== null">Attendance - {{event.attendance}}/{{event.attendance_max}}</p>
+                <p *ngIf="event.attendance === null">Max attendance - {{event.attendance_max}}</p>
+                <p><a [href]="event.url" target="_blank">More information</a></p>
+                <div *ngIf="authService.userID; else signin">
+                  <button *ngIf="authService.hasClassification(event.name); else register"
+                          class="btn btn-primary" disabled>You are already registered!</button>
+                  <ng-template #register>
+                    <button *ngIf="event.attendance_max > event.attendance; else disable_button"
+                            class="btn btn-primary" type="submit">Register</button>
+                    <ng-template #disable_button>
+                      <button class="btn btn-primary" disabled>Registration Full</button>
+                    </ng-template>
+                  </ng-template>
+                </div>
+                <ng-template #signin>
+                  <button class="btn btn-primary" routerLink="/signin">Please sign in to register</button>
                 </ng-template>
               </ng-container>
-
-              <p><a [href]="event.url">More information</a></p>
             </mat-card-content>
+          </form>
         </mat-card>
       </div>
       <div class="swiper-slide"><img alt="Home banner 1." width=1000 height=400 [src]="appURL + '/files/home-banner-1.png'" /></div>
@@ -30,7 +42,10 @@
     <div class="swiper-button-next arrow-right swiper-button-black"></div>
     <div class="swiper-button-prev arrow-left swiper-button-black"></div>
 </swiper>
-
+<div *ngIf="notifications?.message && notifications.type"
+     class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}"
+     [innerHTML]="notifications.message | safeHtml">
+</div>
 <div id="home-page-bg"></div>
 
 <section id="home-intro" class="page-section gray-bg">
