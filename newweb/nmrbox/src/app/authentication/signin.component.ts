@@ -31,7 +31,8 @@ export class SigninComponent implements OnInit {
   onSignin(form: NgForm) {
     this.authService.signIn(form.value.username, form.value.password)
       .subscribe(
-        response => this.notifications = response
+        response => this.notifications = response,
+        () => this.notifications = {'message': 'Server error.', 'type': 'error'}
       );
   }
 

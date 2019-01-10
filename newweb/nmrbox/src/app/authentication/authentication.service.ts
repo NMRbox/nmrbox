@@ -71,12 +71,10 @@ export class AuthenticationService {
         }), {headers: this.headers}).pipe(
         map(
           response => {
-            const message = response['message'];
-            if (message === 'success') {
+            if (response['type'] === 'success') {
               this.router.navigateByUrl('signin');
-            } else {
-              console.log('Couldn\'t save data');
             }
+            return response;
           }
         ))
       ;
@@ -113,7 +111,7 @@ export class AuthenticationService {
 
   signOut() {
     localStorage.removeItem('userAuthData');
-    localStorage.removeItem('personDate');
+    localStorage.removeItem('personData');
     this.authData = null;
     this.personData = null;
     this.userID = null;
