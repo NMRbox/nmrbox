@@ -1,6 +1,6 @@
 <swiper [config]="config">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" *ngFor="let event of upcomingEvents">
+      <div class="swiper-slide" *ngFor="let event of upcomingEvents" routerLink="/community">
         <mat-card class="workshop-card">
             <mat-card-header>
               <mat-card-title>Upcoming NMRbox event: {{event.title}}</mat-card-title>
@@ -19,7 +19,6 @@
               <p><a [href]="event.url">More information</a></p>
             </mat-card-content>
         </mat-card>
-
       </div>
       <div class="swiper-slide"><img alt="Home banner 1." width=1000 height=400 [src]="appURL + '/files/home-banner-1.png'" /></div>
       <div class="swiper-slide"><img alt="Home banner 2." width=1000 height=400 [src]="appURL + '/files/home-banner-2.png'" /></div>
