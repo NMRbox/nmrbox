@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
 
@@ -18,7 +17,6 @@ export class CommunityListComponent implements OnInit {
   completed: EventModel[];
   selectedIndex = 0;
 
-  /*notification variable*/
   public notifications: any = {message: '', type: ''};
 
   constructor(
@@ -54,19 +52,17 @@ export class CommunityListComponent implements OnInit {
 
   getEventsList(): void {
     this.communityService.getAllEvents().then(events => {
-      this.upcoming = events[0];
-      this.completed = events[1];
+      this.upcoming = events[0] as EventModel[];
+      this.completed = events[1] as EventModel[];
     });
   }
 
-  /* workshops registration */
-  onWorkshopRegister(form: NgForm) {
-    const workshop_id = form.value.name;
-
-    this.authService.workshopRegister(workshop_id)
+  onWorkshopRegister(workshopName) {
+    this.authService.workshopRegister(workshopName)
       .subscribe(
         response => this.notifications = response,
-        error => this.notifications = error.message
+        error => this.notifications = error,
+        () => this.getEventsList()
       );
   }
 }

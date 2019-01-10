@@ -36,7 +36,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.appURL = environment.appUrl;
+    this.getEventsList();
+  }
 
+  getEventsList(): void {
     this.communityService.getAllEvents().then(events => {
       this.upcomingEvents = events[0] as EventModel[];
     });
@@ -47,7 +50,8 @@ export class HomeComponent implements OnInit {
     this.authService.workshopRegister(workshopName)
       .subscribe(
         response => this.notifications = response,
-        error => this.notifications = error
+        error => this.notifications = error,
+        () => this.getEventsList()
       );
   }
 }

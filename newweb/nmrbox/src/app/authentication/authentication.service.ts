@@ -213,8 +213,6 @@ export class AuthenticationService {
     if (!this.authData) {
       return;
     }
-
-    console.log('Updating person information.');
     this.http.get(environment.appUrl + `/` + environment.personUrl + `/` + this.userID).subscribe(
       personResponse => this.assignFromJSON(this.authData, personResponse['data']),
       () => this.signOut());
@@ -248,6 +246,7 @@ export class AuthenticationService {
 
   private loadUserCredentials() {
     this.authData = JSON.parse(localStorage.getItem('userAuthData')) as UserAuthModel;
+    this.personData = JSON.parse(localStorage.getItem('personData')) as PersonModel;
 
     if (this.authData) {
       this.userID = this.authData['person_id'];
