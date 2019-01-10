@@ -147,6 +147,18 @@ export class AuthenticationService {
       }), {headers: this.headers});
   }
 
+  hasClassification(searchClassification: string) {
+    if (!this.personData) {
+      return false;
+    }
+    for (const classification of this.personData.classifications) {
+      if (searchClassification === classification['name']) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   updateProfile(
     first_name: string,
     last_name: string,
