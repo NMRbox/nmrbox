@@ -203,24 +203,35 @@ export class AuthenticationService {
           time_zone_id: time_zone_id,
         }), {headers: this.headers}).pipe(map(
           response => {
-            this.http.get(environment.appUrl + `/` + environment.personUrl + `/` + this.userID).subscribe(
-              personResponse => this.assignFromJSON(this.authData, personResponse['data']),
-              () => this.signOut());
-
+            this.fetchPersonInfo();
             return response;
           }
       ));
+  }
+
+  fetchPersonInfo() {
+    if (!this.authData) {
+      return;
+    }
+
+    console.log('Updating person information.');
+    this.http.get(environment.appUrl + `/` + environment.personUrl + `/` + this.userID).subscribe(
+      personResponse => this.assignFromJSON(this.authData, personResponse['data']),
+      () => this.signOut());
   }
 
   workshopRegister(workshopid: string) {
     if (!this.userID) {
       this.router.navigateByUrl('signin');
     }
-    return this.http.post(environment.appUrl + '/' + environment.eventRegisterUrl, JSON.stringify(
-      {
-        userid: this.authData.user,
-        workshopid: workshopid,
-      }), {headers: this.headers});
+
+    const subscribeData = {userid: this.authData.user, workshopid: workshopid};
+    return this.http.post(environment.appUrl + '/' + environment.eventRegisterUrl, JSON.stringify(subscribeData), {headers: this.headers})
+      .pipe(map(
+      response => {
+        this.fetchPersonInfo();
+        return response;
+      }));
   }
 
   private assignFromJSON(authResponse: {}, personResponse: {}) {
@@ -237,10 +248,11 @@ export class AuthenticationService {
 
   private loadUserCredentials() {
     this.authData = JSON.parse(localStorage.getItem('userAuthData')) as UserAuthModel;
-    this.personData = JSON.parse(localStorage.getItem('personData')) as PersonModel;
-    if (this.authData && this.personData) {
+
+    if (this.authData) {
       this.userID = this.authData['person_id'];
       this.isAdmin = this.authData['user_is_admin'];
+      this.fetchPersonInfo();
     } else {
       this.userID = null;
       this.isAdmin = false;
