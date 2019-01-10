@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'software', component: SoftwareListComponent},
   {path: 's/:slug', component: SoftwareDetailComponent},
   {path: 'software/:filterType/:filter', component: SoftwareListComponent},
-  {path: 'c/:pageUrl', component: StaticPageComponent},
+  {path: 'pages/:pageUrl', component: StaticPageComponent},
   {path: 'community', component: CommunityListComponent},
   {path: 'community/:index', component: CommunityListComponent},
   {path: 'support', component: SupportComponent},

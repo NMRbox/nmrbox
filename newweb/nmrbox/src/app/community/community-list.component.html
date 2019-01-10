@@ -82,7 +82,7 @@
 
 
           <mat-grid-list class="support-list grid-dashed workflow-list" cols="3" rowHeight="180px">
-            <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/publications">
+            <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/publications">
               <mat-card class="sw-card tile-card-short">
                 <mat-card-header>
                   <mat-card-title>NMRbox Publications</mat-card-title>
@@ -92,12 +92,12 @@
                     Lists of NMRbox research journal and publications
                   </p>
                   <br/>
-                  <a routerLink="/c/publications">Read more</a>
+                  <a routerLink="/pages/publications">Read more</a>
                 </mat-card-content>
               </mat-card>
             </mat-grid-tile>
 
-            <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/acknowledge-us">
+            <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/acknowledge-us">
               <mat-card class="sw-card tile-card-short">
                 <mat-card-header>
                   <mat-card-title>Acknowledge NMRbox</mat-card-title>
@@ -107,7 +107,7 @@
                     How to acknowledge NMRbox
                   </p>
                   <br/>
-                  <a routerLink="/c/acknowledge-us">Read More</a>
+                  <a routerLink="/pages/acknowledge-us">Read More</a>
                 </mat-card-content>
               </mat-card>
             </mat-grid-tile>
@@ -124,7 +124,7 @@
       <h3 class="blue">NMRbox Community</h3>
 
         <mat-grid-list class="support-list grid-dashed" cols="2" rowHeight="180px">
-          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/overview">
+          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/overview">
             <mat-card class="sw-card tile-card-short">
               <mat-card-header>
                 <mat-card-title>Center Overview</mat-card-title>
@@ -135,12 +135,12 @@
                 </p>
                 <br/>
                 <!--<a href="/">Read more</a>-->
-                <a routerLink="/c/overview">Read More</a>
+                <a routerLink="/pages/overview">Read More</a>
               </mat-card-content>
             </mat-card>
           </mat-grid-tile>
 
-          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/initiating-a-collaboration">
+          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/initiating-a-collaboration">
             <mat-card class="sw-card tile-card-short">
               <mat-card-header>
                 <mat-card-title>Collaboration with NMRbox Team</mat-card-title>
@@ -150,7 +150,7 @@
                   Instruction of how to initiate a collaboration with the NMRbox Team.
                 </p>
                 <br/>
-                <a routerLink="/c/initiating-a-collaboration">Read More</a>
+                <a routerLink="/pages/initiating-a-collaboration">Read More</a>
               </mat-card-content>
             </mat-card>
           </mat-grid-tile>
@@ -181,7 +181,7 @@
             </mat-card>
           </mat-grid-tile>
 
-          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/newsletters">
+          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/newsletters">
             <mat-card class="sw-card tile-card-short">
               <mat-card-header>
                 <mat-card-title>NMRbox Newsletter</mat-card-title>
@@ -191,7 +191,7 @@
                   Our first edition of the "Inside NMRbox" newsletter is now available
                 </p>
                 <br/>
-                <a routerLink="/c/newsletters">Read more</a>
+                <a routerLink="/pages/newsletters">Read more</a>
               </mat-card-content>
             </mat-card>
           </mat-grid-tile>
@@ -208,7 +208,7 @@
         <h3 class="blue">Teams</h3>
 
         <mat-grid-list class="support-list grid-dashed workflow-list" cols="3" rowHeight="180px">
-          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/people-leadership">
+          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/people-leadership">
             <mat-card class="sw-card tile-card-short">
               <mat-card-header>
                 <mat-card-title>Leadership</mat-card-title>
@@ -218,12 +218,12 @@
                   Information about the leaders of the NMRbox project.
                 </p>
                 <br/>
-                <a routerLink="/c/people-leadership">Read more</a>
+                <a routerLink="/pages/people-leadership">Read more</a>
               </mat-card-content>
             </mat-card>
           </mat-grid-tile>
 
-          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/people-all-staff">
+          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/people-all-staff">
             <mat-card class="sw-card tile-card-short">
               <mat-card-header>
                 <mat-card-title>Staff</mat-card-title>
@@ -233,12 +233,12 @@
                   A list of the NMRbox staff members.
                 </p>
                 <br/>
-                <a routerLink="/c/people-all-staff">Read More</a>
+                <a routerLink="/pages/people-all-staff">Read More</a>
               </mat-card-content>
             </mat-card>
           </mat-grid-tile>
 
-          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/people-eab">
+          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/people-eab">
             <mat-card class="sw-card tile-card-short">
               <mat-card-header>
                 <mat-card-title>Advisory</mat-card-title>
@@ -248,7 +248,7 @@
                   The advisory board members.
                 </p>
                 <br/>
-                <a routerLink="/c/people-eab">Read More</a>
+                <a routerLink="/pages/people-eab">Read More</a>
               </mat-card-content>
             </mat-card>
           </mat-grid-tile>
@@ -273,7 +273,7 @@
       <div class="grid-content-wrapper">
       <h3 class="blue">Most Recent</h3>
       <mat-grid-list class="software-list" cols="3" rowHeight="335px">
-        <mat-grid-tile class="tile-solid" *ngFor="let blog of blogMostRecentList" routerLink="/c/blog">
+        <mat-grid-tile class="tile-solid" *ngFor="let blog of blogMostRecentList" routerLink="/pages/blog">
           <mat-card class="sw-card">
             <img mat-card-image src="{{blog.url}}">
             <mat-card-header>
@@ -295,7 +295,7 @@
       <div class="grid-content-wrapper">
       <h3 class="blue">This Month</h3>
       <mat-grid-list class="software-list" cols="3" rowHeight="335px">
-        <mat-grid-tile class="tile-solid" *ngFor="let blog of blogNextList" routerLink="/c/blog">
+        <mat-grid-tile class="tile-solid" *ngFor="let blog of blogNextList" routerLink="/pages/blog">
           <mat-card class="sw-card">
             <img mat-card-image src="{{blog.url}}">
             <mat-card-header>
