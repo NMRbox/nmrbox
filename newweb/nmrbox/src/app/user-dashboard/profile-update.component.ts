@@ -1,26 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, AfterViewInit, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {ActivatedRoute} from '@angular/router';
-
-/* Import services */
 import {AuthenticationService} from '../authentication/authentication.service';
-
-/* Import model */
 import {PersonModel} from '../authentication/person.model';
+
+/* Import country updater code */
+import * as crs from '../../javascript/crs.min';
 
 @Component({
   selector: 'app-profile-update',
   templateUrl: './profile-update.component.html',
   styleUrls: ['./profile-update.component.css']
 })
-export class ProfileUpdateComponent implements OnInit {
+export class ProfileUpdateComponent implements OnInit, AfterViewInit {
   person: PersonModel;
   public notifications: any = {message: '', type: ''};
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private authService: AuthenticationService
   ) {
   }
@@ -31,6 +28,10 @@ export class ProfileUpdateComponent implements OnInit {
     }
 
     this.person = this.authService.personData;
+  }
+
+  ngAfterViewInit() {
+    crs.init();
   }
 
   onProfileUpdate(form: NgForm) {

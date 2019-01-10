@@ -1,28 +1,26 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, AfterViewInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Router} from '@angular/router';
-import {ActivatedRoute} from '@angular/router';
 
-/* Import the service */
 import {AuthenticationService} from './authentication.service';
 
+/* Import country updater code */
+import * as crs from '../../javascript/crs.min';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements AfterViewInit {
   public notifications: any = {message: '', type: ''};
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
     private authService: AuthenticationService
   ) {
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    crs.init();
   }
 
   onSignup(form: NgForm) {
