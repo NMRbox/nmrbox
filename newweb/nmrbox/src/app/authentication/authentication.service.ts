@@ -191,7 +191,15 @@ export class AuthenticationService {
           zip_code: zip_code,
           country: country,
           time_zone_id: time_zone_id,
-        }), {headers: this.headers});
+        }), {headers: this.headers}).pipe(map(
+          response => {
+            this.http.get(environment.appUrl + `/` + environment.personUrl + `/` + this.userID).subscribe(
+              personResponse => this.assignFromJSON(this.authData, personResponse['data']),
+              () => this.signOut());
+
+            return response;
+          }
+      ));
   }
 
   workshopRegister(workshopid: string) {

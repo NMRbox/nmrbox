@@ -18,7 +18,7 @@ export class PersonModel {
     pi: string;
     department: string;
     position: string;
-    downloadableVm: Array;
+    downloadableVm: Array<Array<string>>;
     job_title: string;
     address1: string;
     address2: string;

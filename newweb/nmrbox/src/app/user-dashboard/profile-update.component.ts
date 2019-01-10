@@ -55,7 +55,7 @@ export class ProfileUpdateComponent implements OnInit {
     )
       .subscribe(
         response => this.notifications = response,
-        () => this.notifications = {'message': 'A server error happened.', 'type': 'error'}
+        () => this.notifications = {'message': 'An unhandled server error happened.', 'type': 'error'}
       );
   }
 
