@@ -15,53 +15,37 @@
              [innerHTML]="notifications.message | safeHtml">
         </div>
         <br>
-        <div *ngIf="!authService.userID">
-          <div class="alert alert-info">
-            Please <a routerLink="/signin">Sign in</a> / <a routerLink="/signup">Sign up</a> first to register for events.
-          </div>
-        </div>
         <h2 class="blue">Upcoming</h2>
         <mat-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
           <h3 *ngIf="!upcoming">No upcoming events.</h3>
           <mat-grid-tile class="tile-solid" *ngFor="let event of upcoming">
             <mat-card class="workshop-card">
-              <form (ngSubmit)="onWorkshopRegister(f)" #f="ngForm">
+              <form (ngSubmit)="onWorkshopRegister(event.name)">
                 <mat-card-header>
-                  <mat-card-title>{{event.title}}</mat-card-title>
+                  <mat-card-title [innerHTML]="event.title"></mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                  <p>
-                    {{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}
-                  </p>
-                  <p>
-                    {{event.location}}
-                  </p>
+                  <p>{{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}</p>
+                  <p>{{event.location}}</p>
                   <ng-container *ngIf="event.attendance_max != null">
-                    <p *ngIf="event.attendance != null; else maxOnly">Attendance - {{event.attendance}}/{{event.attendance_max}}</p>
-                    <ng-template #maxOnly>
-                      <p>Max attendance - {{event.attendance_max}}</p>
+                    <p *ngIf="event.attendance !== null">Attendance - {{event.attendance}}/{{event.attendance_max}}</p>
+                    <p *ngIf="event.attendance === null">Max attendance - {{event.attendance_max}}</p>
+                    <p><a [href]="event.url" target="_blank">More information</a></p>
+                    <div *ngIf="authService.userID; else signin">
+                      <button *ngIf="authService.hasClassification(event.name); else register"
+                              class="btn btn-primary" disabled type="button">You are already registered!</button>
+                      <ng-template #register>
+                        <button *ngIf="event.attendance_max > event.attendance; else disable_button"
+                                class="btn btn-primary" type="submit">Register</button>
+                        <ng-template #disable_button>
+                          <button class="btn btn-primary" type="button" disabled>Registration Full</button>
+                        </ng-template>
+                      </ng-template>
+                    </div>
+                    <ng-template #signin>
+                      <button class="btn btn-primary" routerLink="/signin" type="button">Please sign in to register</button>
                     </ng-template>
                   </ng-container>
-
-                  <p>
-                    <a [href]="event.url">More information</a>
-                  </p>
-                  <input type="hidden" name="name" [(ngModel)]="event.name" style="display: block;" />
-
-                  <div *ngIf="authService.userID">
-                    <div *ngIf="event.attendance_max !== event.attendance;then regular_button else disable_button">here is ignored</div>
-                    <ng-template #regular_button>
-                      <button type="submit" class="btn btn-primary">
-                        Register
-                      </button>
-                    </ng-template>
-                    <ng-template #disable_button>
-                      <button class="btn btn-primary" disabled>
-                        Register
-                      </button>
-                    </ng-template>
-                  </div>
-
                 </mat-card-content>
               </form>
             </mat-card>
@@ -80,19 +64,10 @@
                 <mat-card-title>{{event.title}}</mat-card-title>
               </mat-card-header>
               <mat-card-content>
-                <p>
-                  {{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}
-                </p>
-                <p>
-                  {{event.location}}
-                </p>
-                <p>
-                  <a [href]="event.url">More information</a>
-                </p>
+                <p>{{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}</p>
+                <p>{{event.location}}</p>
+                <p><a [href]="event.url">More information</a></p>
               </mat-card-content>
-              <mat-card-actions>
-
-              </mat-card-actions>
             </mat-card>
           </mat-grid-tile>
         </mat-grid-list>
@@ -164,27 +139,6 @@
               </mat-card-content>
             </mat-card>
           </mat-grid-tile>
-
-          <!--
-          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/team/0">
-            <mat-card class="sw-card tile-card-short">
-              <mat-card-header>
-                <mat-card-title>NMRbox Team</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <p>
-                  Learn more about the NMRbox team
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </p>
-                <br/>
-                <a routerLink="/team/0">Read more</a>
-              </mat-card-content>
-            </mat-card>
-          </mat-grid-tile>-->
 
           <mat-grid-tile class="tile-solid tile-transparent" routerLink="/c/initiating-a-collaboration">
             <mat-card class="sw-card tile-card-short">
