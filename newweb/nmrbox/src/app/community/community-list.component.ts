@@ -25,7 +25,7 @@ export class CommunityListComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private communityService: CommunityService,
-    private authService: AuthenticationService
+    public authService: AuthenticationService
   ) {
   }
 
