@@ -159,3 +159,41 @@ swiper {
     display: none;
   }
 }
+
+
+.workshop-card {
+  width: auto;
+  height: calc(100% - 4em);
+  margin: 2em;
+  background: #f4f4f4;
+  border: 1px solid #d9edf7;
+
+  mat-card-header {
+    font-weight: bold;
+    background: #d9edf7;
+    padding: 20px 10px;
+
+  }
+
+  .mat-card-title {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 2%;
+    margin: 6px 0;
+  }
+  mat-card-content {
+    padding: 10px;
+    line-height: 5%;
+  }
+  p {
+    margin-bottom: 5px;
+  }
+  .button {
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 2%;
+    margin: 6px 0;
+  }
+
+}

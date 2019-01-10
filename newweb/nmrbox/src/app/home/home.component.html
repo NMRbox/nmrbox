@@ -1,8 +1,29 @@
 <swiper [config]="config">
     <div class="swiper-wrapper">
-        <div class="swiper-slide"><img alt="Home banner 1." width=1000 height=400 [src]="appURL + '/files/home-banner-1.png'" /></div>
-        <div class="swiper-slide"><img alt="Home banner 2." width=1000 height=400 [src]="appURL + '/files/home-banner-2.png'" /></div>
-        <div class="swiper-slide"><img alt="Home banner 3." width=1000 height=400 [src]="appURL + '/files/home-banner-3.png'" /></div>
+      <div class="swiper-slide" *ngFor="let event of upcomingEvents">
+        <mat-card class="workshop-card">
+            <mat-card-header>
+              <mat-card-title>Upcoming NMRbox event: {{event.title}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>{{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}</p>
+              <p>{{event.location}}</p>
+              <ng-container *ngIf="event.attendance_max != null">
+                <p *ngIf="event.attendance != null; else maxOnly">Attendance - {{event.attendance}}
+                  /{{event.attendance_max}}</p>
+                <ng-template #maxOnly>
+                  <p>Max attendance - {{event.attendance_max}}</p>
+                </ng-template>
+              </ng-container>
+
+              <p><a [href]="event.url">More information</a></p>
+            </mat-card-content>
+        </mat-card>
+
+      </div>
+      <div class="swiper-slide"><img alt="Home banner 1." width=1000 height=400 [src]="appURL + '/files/home-banner-1.png'" /></div>
+      <div class="swiper-slide"><img alt="Home banner 2." width=1000 height=400 [src]="appURL + '/files/home-banner-2.png'" /></div>
+      <div class="swiper-slide"><img alt="Home banner 3." width=1000 height=400 [src]="appURL + '/files/home-banner-3.png'" /></div>
     </div>
     <!-- Add Pagination -->
     <div class="swiper-pagination swiper-pagination-blue"></div>
