@@ -358,6 +358,14 @@ class FAQController extends Controller
             $faqs = FAQ::where('question', 'LIKE', '%'.strtolower($term).'%')
                 ->orWhere('answer', 'LIKE', '%'.strtolower($term).'%')
                 ->get();
+
+            foreach($faqs as $key => $value){
+                $all_faqs[] = $this->convert_to_string($value->id);
+            }
+
+            return response()-> json( array(
+                'data' => $all_faqs
+            ), 200 );
         } else {
             //$faqs = FAQ::all();
             return response()-> json( array(
@@ -365,15 +373,6 @@ class FAQController extends Controller
                 'type' => 'error' ),
                 401 );
         }
-
-
-        foreach($faqs as $key => $value){
-            $all_faqs[] = $this->convert_to_string($value->id);
-        }
-
-        return response()-> json( array(
-            'data' => $all_faqs
-        ), 200 );
     }
 
     /**
