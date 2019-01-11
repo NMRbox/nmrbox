@@ -70,11 +70,21 @@ class ChandraController extends Controller {
 
             $this->getPage($name);
         } else {
-            //return View('404');
-            return response()-> json( array(
-                'message' => Lang::get('auth/message.not_autorized'),
-                'type' => 'error' ),
-                404 );
+            if(View::exists($name)) {
+                $page = Page::where('slug', $name)->get()->first();
+
+                return response()-> json( array(
+                    'message' => Lang::get('auth/message.not_autorized'),
+                    'type' => 'error' ),
+                    401 );
+                //return View($name);
+            } else {
+                //return View('404');
+                return response()-> json( array(
+                    'message' => Lang::get('auth/message.not_autorized'),
+                    'type' => 'error' ),
+                    401 );
+            }
         }
     }
 
