@@ -73,7 +73,7 @@ class ChandraController extends Controller {
             return response()-> json( array(
                 'message' => Lang::get('auth/message.not_autorized'),
                 'type' => 'error' ),
-                404 );
+                201 );
 
         }
     }
@@ -92,7 +92,7 @@ class ChandraController extends Controller {
             return response()-> json( array(
                 'message' => Lang::get('auth/message.not_autorized'),
                 'type' => 'error' ),
-                404 );
+                201 );
 
         }
     }
