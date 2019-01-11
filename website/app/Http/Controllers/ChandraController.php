@@ -70,31 +70,16 @@ class ChandraController extends Controller {
 
             $this->getPage($name);
         } else {
-            if(View::exists($name)) {
-                $page = Page::where('slug', $name)->get()->first();
+            return response()-> json( array(
+                'message' => Lang::get('auth/message.not_autorized'),
+                'type' => 'error' ),
+                401 );
 
-                return response()-> json( array(
-                    'message' => Lang::get('auth/message.not_autorized'),
-                    'type' => 'error' ),
-                    401 );
-                //return View($name);
-            } else {
-                //return View('404');
-                return response()-> json( array(
-                    'message' => Lang::get('auth/message.not_autorized'),
-                    'type' => 'error' ),
-                    404 );
-            }
         }
     }
 
     public function getPage( $name=null )
     {
-        // this is a special case for the home page. If more special cases arise, refactor into a more structured solution
-        if( $name == '' || $name == 'homepage' ) {
-            $this->showHomepage($name);
-        }
-
         if( Page::where('slug', '=', $name)->exists() ) {
             // $name is the page's slug
             $page = Page::where('slug', $name)->get()->first();
@@ -107,7 +92,8 @@ class ChandraController extends Controller {
             return response()-> json( array(
                 'message' => Lang::get('auth/message.not_autorized'),
                 'type' => 'error' ),
-                404 );
+                401 );
+
         }
     }
 
