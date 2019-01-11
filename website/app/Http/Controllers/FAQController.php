@@ -359,13 +359,20 @@ class FAQController extends Controller
                 ->orWhere('answer', 'LIKE', '%'.strtolower($term).'%')
                 ->get();
 
-            foreach($faqs as $key => $value){
-                $all_faqs[] = $this->convert_to_string($value->id);
-            }
+            if( !empty( $faqs ) ) {
+                foreach($faqs as $key => $value){
+                    $all_faqs[] = $this->convert_to_string($value->id);
+                }
 
-            return response()-> json( array(
-                'data' => $all_faqs
-            ), 200 );
+                return response()-> json( array(
+                    'data' => $all_faqs
+                ), 200 );
+            } else {
+                return response()-> json( array(
+                    'message' => 'No data found.',
+                    'type' => 'error' ),
+                    401 );
+            }
         } else {
             //$faqs = FAQ::all();
             return response()-> json( array(
