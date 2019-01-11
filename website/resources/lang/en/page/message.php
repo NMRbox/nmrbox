@@ -7,7 +7,7 @@
 return array(
 
     'page_exists'              => 'Page already exists!',
-    'page_not_found'           => 'Page [:id] does not exist.',
+    'page_not_found'           => 'Page does not exist.',
 
     'success' => array(
         'create'    => 'Page was successfully created.',
