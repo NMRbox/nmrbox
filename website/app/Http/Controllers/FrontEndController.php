@@ -1154,7 +1154,7 @@ class FrontEndController extends Controller
         $person['downloadableVm'] = VM::where('downloadable', 'true')->lists('name', 'id')->all();
         $downloadableVm = VM::where('downloadable', 'true')->lists('name', 'id')->all();
         foreach ($downloadableVm as $key => $value ) {
-            $Vms = array(
+            $Vms[] = array(
                 $key,
                 $value
             );
