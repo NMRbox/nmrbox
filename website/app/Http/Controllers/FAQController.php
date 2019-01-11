@@ -371,6 +371,7 @@ class FAQController extends Controller
                     'data' => $all_faqs
                 ), 200 );
             } else {
+                return response()-> json( array(
                     'message' => 'No data found.',
                     'type' => 'error' ),
                     401 );
