@@ -17,6 +17,10 @@ export class StaticPageService {
       .toPromise()
       .then(response => {
           if (response && response['data']) {
+            response['data']['content'] = response['data']['content'].replace(/(https*:\/\/)*nmrbox.org\/([a-zA-Z0-9-]+)/g,
+              '/#/pages/$2');
+            response['data']['content'] = response['data']['content'].replace(/((https*:\/\/)*nmrbox.org)*\/files\/(.+?)"/g,
+              environment.appUrl + '/files/$3"');
             return response['data'] as StaticPageModel;
           } else {
             return new StaticPageModel('No such page exists: ' + pageUrl);
