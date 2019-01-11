@@ -365,7 +365,9 @@ class FAQController extends Controller
             print_r($faqs);
             echo "</pre>";
 
-            if( $faqs !== null ) {
+            if( FAQ::where('question', 'LIKE', '%'.strtolower($term).'%')
+                ->orWhere('answer', 'LIKE', '%'.strtolower($term).'%')
+                ->exists()) {
                 echo "<pre>";
                 print_r('not empty');
                 echo "</pre>";
