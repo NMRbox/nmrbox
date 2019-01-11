@@ -84,6 +84,7 @@ class ChandraController extends Controller {
             echo "<pre>";
             print_r('found page');
             echo "</pre>";
+            die();
             // $name is the page's slug
             $page = Page::where('slug', $name)->get()->first();
 
