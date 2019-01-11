@@ -69,6 +69,12 @@ class ChandraController extends Controller {
             // $name is the page's slug
 
             $this->getPage($name);
+        } else {
+            //return View('404');
+            return response()-> json( array(
+                'message' => Lang::get('auth/message.not_autorized'),
+                'type' => 'error' ),
+                401 );
         }
     }
 
