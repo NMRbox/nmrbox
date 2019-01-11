@@ -86,7 +86,10 @@ class FileController extends Controller
 
             return response($un64, 200, $headers);
         } catch (\Exception $e) {
-            abort(404);
+            return response()-> json( array(
+                'message' => 'File not found.',
+                'type' => 'error' ),
+                404 );
         }
 
 
