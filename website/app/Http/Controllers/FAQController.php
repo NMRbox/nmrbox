@@ -361,8 +361,14 @@ class FAQController extends Controller
             $faqs = FAQ::where('question', 'LIKE', '%'.strtolower($term).'%')
                 ->orWhere('answer', 'LIKE', '%'.strtolower($term).'%')
                 ->get();
+            echo "<pre>";
+            print_r($faqs);
+            echo "</pre>";
 
             if( !empty( $faqs ) ) {
+                echo "<pre>";
+                print_r('not empty');
+                echo "</pre>";
                 foreach($faqs as $key => $value){
                     $all_faqs[] = $this->convert_to_string($value->id);
                 }
@@ -371,6 +377,9 @@ class FAQController extends Controller
                     'data' => $all_faqs
                 ), 200 );
             } else {
+                echo "<pre>";
+                print_r('its empty');
+                echo "</pre>";
                 return response()-> json( array(
                     'message' => 'No data found.',
                     'type' => 'error' ),
