@@ -354,6 +354,9 @@ class FAQController extends Controller
     {
         /* all faqs*/
         if(isset($term)){
+            echo "<pre>";
+            print_r('its here');
+            echo "</pre>";
 
             $faqs = FAQ::where('question', 'LIKE', '%'.strtolower($term).'%')
                 ->orWhere('answer', 'LIKE', '%'.strtolower($term).'%')
@@ -374,6 +377,9 @@ class FAQController extends Controller
                     401 );
             }
         } else {
+            echo "<pre>";
+            print_r('no items');
+            echo "</pre>";
             //$faqs = FAQ::all();
             return response()-> json( array(
                 'message' => 'No data found.',
