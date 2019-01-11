@@ -71,7 +71,7 @@ class ChandraController extends Controller {
             $this->getPage($name);
         } else {
             return response()-> json( array(
-                'message' => Lang::get('page/message.page_not_found'),
+                'message' => 'page_not_found.',
                 'type' => 'error' ),
                 401 );
 
@@ -90,7 +90,7 @@ class ChandraController extends Controller {
                 200 );
         } else {
             return response()-> json( array(
-                'message' => Lang::get('page/message.page_not_found'),
+                'message' => 'Page not found.',
                 'type' => 'error' ),
                 404 );
 
