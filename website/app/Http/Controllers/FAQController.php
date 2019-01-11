@@ -365,7 +365,7 @@ class FAQController extends Controller
             print_r($faqs);
             echo "</pre>";
 
-            if( !is_null( $faqs ) ) {
+            if( $faqs !== null ) {
                 echo "<pre>";
                 print_r('not empty');
                 echo "</pre>";
