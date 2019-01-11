@@ -81,6 +81,9 @@ class ChandraController extends Controller {
     public function getPage( $name=null )
     {
         if( Page::where('slug', '=', $name)->exists() ) {
+            echo "<pre>";
+            print_r('found page');
+            echo "</pre>";
             // $name is the page's slug
             $page = Page::where('slug', $name)->get()->first();
 
@@ -89,6 +92,10 @@ class ChandraController extends Controller {
                 'type' => 'success' ),
                 200 );
         } else {
+            echo "<pre>";
+            print_r('did not found anything.');
+            echo "</pre>";
+            die();
             return response()-> json( array(
                 'message' => Lang::get('auth/message.not_autorized'),
                 'type' => 'error' ),
