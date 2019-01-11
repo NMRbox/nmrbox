@@ -80,10 +80,6 @@ class ChandraController extends Controller {
 
     public function getPage( $name=null )
     {
-        echo "<pre>";
-        print_r(Page::where('slug', '=', $name)->exists());
-        echo "</pre>";
-        die();
         if( Page::where('slug', '=', $name)->exists() ) {
             // $name is the page's slug
             $page = Page::where('slug', $name)->get()->first();
