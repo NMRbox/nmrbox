@@ -922,9 +922,9 @@ class FrontEndController extends Controller
                 $user_data = array(
                     'token' => $token,
                     'user_is_admin' => ( $is_admin == true ? true : false ),
-                    'person_id' => Session::getId(),
+                    'person_id' => $person->id,
                     'user' => $person->id,
-                    'message' => 'Successfully logged in.',
+                    'message' => Lang::get('auth/message.login.success'),
                     'type' => 'success'
                 );
                 echo "<pre>";
