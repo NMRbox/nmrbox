@@ -871,7 +871,7 @@ class FrontEndController extends Controller
             ], 200);
         }
 
-        try {
+        //try {
             // Adding custom LDAP library class and authenticating
             $ldap = new Ldap;
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
@@ -928,13 +928,13 @@ class FrontEndController extends Controller
                     'type' => 'error'
                 ], 400);
             }
-        } catch (\Illuminate\Database\QueryException $e) {
+        /*} catch (\Illuminate\Database\QueryException $e) {
             return response()->json([
                 'message' => Lang::get('auth/message.account_not_found'),
                 'type' => 'error'
             ], 400);
         } catch (\ErrorException $e) {
-            /* trigger an email to support@nmrbox.org */
+            // trigger an email to support@nmrbox.org
             $data = array("Password malfunction detected.");
 
             // Send the registration acknowledge email
@@ -946,7 +946,7 @@ class FrontEndController extends Controller
                 'message' => Lang::get('auth/message.server_conn_error'),
                 'type' => 'error'
             ], 401);
-        }
+        }*/
     }
 
     /**
