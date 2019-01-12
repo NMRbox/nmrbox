@@ -924,7 +924,7 @@ class FrontEndController extends Controller
                     'user_is_admin' => ( $is_admin == true ? true : false ),
                     'person_id' => Session::getId(),
                     'user' => $person->id,
-                    'message' => Lang::get('auth/message.login.success'),
+                    'message' => 'Successfully logged in.',
                     'type' => 'success'
                 );
                 echo "<pre>";
