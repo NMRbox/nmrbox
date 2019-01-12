@@ -907,7 +907,6 @@ class FrontEndController extends Controller
 
                 if ($parse_token == true)
                 {
-                    echo "lol again.";
                     // Assigning user classification
                     $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
                     foreach ($user_classification as $key => $value) {
@@ -916,7 +915,9 @@ class FrontEndController extends Controller
                         }
                     }
                 }
-
+                echo "<pre>";
+                print_r($is_admin);
+                echo "</pre>";
                 // Adding person table information into session
                 $user_data = array(
                     'token' => $token,
