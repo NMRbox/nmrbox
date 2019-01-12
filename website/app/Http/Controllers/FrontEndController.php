@@ -894,21 +894,16 @@ class FrontEndController extends Controller
 
                 // Adding JWT-Auth Token
                 $token = JWTAuth::fromUser($person);
-                echo "<pre>";
-                print_r($token);
-                echo "</pre>";
                 $set_token = JWTAuth::setToken($token);
                 $parse_token = JWTAuth::getToken();
-                echo "<pre>";
-                print_r($parse_token);
-                echo "</pre>";
-
-
 
                 if ($parse_token == true)
                 {
                     // Assigning user classification
                     $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
+                    echo "<pre>";
+                    print_r($user_classification);
+                    echo "</pre>";
                     foreach ($user_classification as $key => $value) {
                         if ($value->name == 'admin'){
                             $is_admin = true;
