@@ -899,6 +899,9 @@ class FrontEndController extends Controller
                 echo "</pre>";
                 $set_token = JWTAuth::setToken($token);
                 $parse_token = JWTAuth::getToken();
+                echo "<pre>";
+                print_r($parse_token);
+                echo "</pre>";
 
 
 
