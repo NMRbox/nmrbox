@@ -868,7 +868,7 @@ class FrontEndController extends Controller
             return response()->json([
                 'message' => Lang::get('auth/message.login.error_validation'),
                 'type' => 'error'
-            ], 200);
+            ], 401);
         }
 
         //try {
