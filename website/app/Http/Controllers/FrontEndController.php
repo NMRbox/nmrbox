@@ -886,6 +886,7 @@ class FrontEndController extends Controller
 
             // LDAP login response
             if($ldap_login === true){
+                echo "lol";
                 /* collect userid using username from person table */
                 $username = $request->input('username');
                 $person = Person::where('nmrbox_acct', $username)->first();
@@ -927,6 +928,7 @@ class FrontEndController extends Controller
 
                 return response()->json($user_data, 200);
             } else {
+                echo "not lol";
                 return response()->json([
                     'message' => Lang::get('auth/message.login.error'),
                     'type' => 'error'
