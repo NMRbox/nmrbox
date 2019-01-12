@@ -875,10 +875,6 @@ class FrontEndController extends Controller
             // Adding custom LDAP library class and authenticating
             $ldap = new Ldap;
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
-            echo "<pre>";
-            print_r($ldap_login);
-            echo "</pre>";
-
 
             /* Test (Localhost login code to skip LDAP authentication) */
             //$ldap_login = true;
@@ -886,7 +882,6 @@ class FrontEndController extends Controller
 
             // LDAP login response
             if($ldap_login == true){
-                echo "lol";
                 /* collect userid using username from person table */
                 $username = $request->input('username');
                 $person = Person::where('nmrbox_acct', $username)->first();
@@ -896,6 +891,9 @@ class FrontEndController extends Controller
                         'type' => 'error'
                     ], 401);
                 }
+                echo "<pre>";
+                print_r($person);
+                echo "</pre>";
 
 
                 // Adding JWT-Auth Token
