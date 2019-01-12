@@ -891,13 +891,12 @@ class FrontEndController extends Controller
                         'type' => 'error'
                     ], 401);
                 }
-                echo "<pre>";
-                print_r($person);
-                echo "</pre>";
-
 
                 // Adding JWT-Auth Token
                 $token = JWTAuth::fromUser($person);
+                echo "<pre>";
+                print_r($token);
+                echo "</pre>";
                 $set_token = JWTAuth::setToken($token);
                 $parse_token = JWTAuth::getToken();
 
