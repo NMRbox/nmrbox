@@ -901,21 +901,14 @@ class FrontEndController extends Controller
                 {
                     // Assigning user classification
                     $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
-                    echo "<pre>";
-                    print_r($user_classification);
-                    echo "</pre>";
+
                     foreach ($user_classification as $key => $value) {
                         if ($value->name == 'admin'){
                             $is_admin = true;
                         }
                     }
                 }
-                echo "<pre>";
-                var_dump($is_admin);
-                echo "</pre>";
-                echo "<pre>";
-                print_r(Session::getId());
-                echo "</pre>";
+
                 // Adding person table information into session
                 $user_data = array(
                     'token' => $token,
@@ -925,9 +918,7 @@ class FrontEndController extends Controller
                     'message' => Lang::get('auth/message.login.success'),
                     'type' => 'success'
                 );
-                echo "<pre>";
-                print_r($user_data);
-                echo "</pre>";
+
                 $request->session()->push('person', $user_data);
 
                 return response()->json([
@@ -935,7 +926,6 @@ class FrontEndController extends Controller
                     'type' => 'success'
                 ], 200);
             } else {
-                echo "not lol";
                 return response()->json([
                     'message' => Lang::get('auth/message.login.error'),
                     'type' => 'error'
