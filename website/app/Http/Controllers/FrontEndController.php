@@ -926,7 +926,7 @@ class FrontEndController extends Controller
                 return response()->json([
                     'message' => Lang::get('auth/message.login.error'),
                     'type' => 'error'
-                ], 200);
+                ], 400);
             }
         } catch (\Illuminate\Database\QueryException $e) {
             return response()->json([
