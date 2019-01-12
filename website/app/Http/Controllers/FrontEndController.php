@@ -911,6 +911,7 @@ class FrontEndController extends Controller
                 echo "<pre>";
                 print_r($parse_token);
                 echo "</pre>";
+                die();
 
 
                 if ($parse_token == true)
