@@ -881,7 +881,7 @@ class FrontEndController extends Controller
             /* Eof Test */
 
             // LDAP login response
-            if($ldap_login == true){
+            if($ldap_login === true){
                 /* collect userid using username from person table */
                 $username = $request->input('username');
                 $person = Person::where('nmrbox_acct', $username)->first();
@@ -892,6 +892,7 @@ class FrontEndController extends Controller
                     ], 401);
                 }
 
+
                 // Adding JWT-Auth Token
                 $token = JWTAuth::fromUser($person);
                 $set_token = JWTAuth::setToken($token);
@@ -901,7 +902,6 @@ class FrontEndController extends Controller
                 {
                     // Assigning user classification
                     $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
-
                     foreach ($user_classification as $key => $value) {
                         if ($value->name == 'admin'){
                             $is_admin = true;
@@ -918,13 +918,9 @@ class FrontEndController extends Controller
                     'message' => Lang::get('auth/message.login.success'),
                     'type' => 'success'
                 );
-
                 $request->session()->push('person', $user_data);
 
-                return response()->json([
-                    'message' => Lang::get('auth/message.login.success'),
-                    'type' => 'success'
-                ], 200);
+                return response()->json($user_data, 200);
             } else {
                 return response()->json([
                     'message' => Lang::get('auth/message.login.error'),
