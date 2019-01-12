@@ -916,13 +916,16 @@ class FrontEndController extends Controller
                     }
                 }
                 echo "<pre>";
-                print_r($is_admin);
+                var_dump($is_admin);
+                echo "</pre>";
+                echo "<pre>";
+                print_r(Session::getId());
                 echo "</pre>";
                 // Adding person table information into session
                 $user_data = array(
                     'token' => $token,
                     'user_is_admin' => ( $is_admin == true ? true : false ),
-                    'person_id' => $person->id,
+                    'person_id' => Session::getId(),
                     'user' => $person->id,
                     'message' => Lang::get('auth/message.login.success'),
                     'type' => 'success'
