@@ -921,12 +921,15 @@ class FrontEndController extends Controller
                 // Adding person table information into session
                 $user_data = array(
                     'token' => $token,
-                    'user_is_admin' => $is_admin,
+                    'user_is_admin' => ( $is_admin == true ? true : false ),
                     'person_id' => Session::getId(),
                     'user' => $person->id,
                     'message' => Lang::get('auth/message.login.success'),
                     'type' => 'success'
                 );
+                echo "<pre>";
+                print_r($user_data);
+                echo "</pre>";
                 $request->session()->push('person', $user_data);
 
                 return response()->json([
