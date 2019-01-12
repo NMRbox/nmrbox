@@ -932,7 +932,7 @@ class FrontEndController extends Controller
             return response()->json([
                 'message' => Lang::get('auth/message.account_not_found'),
                 'type' => 'error'
-            ], 200);
+            ], 400);
         } catch (\ErrorException $e) {
             /* trigger an email to support@nmrbox.org */
             $data = array("Password malfunction detected.");
@@ -945,7 +945,7 @@ class FrontEndController extends Controller
             return response()->json([
                 'message' => Lang::get('auth/message.server_conn_error'),
                 'type' => 'error'
-            ], 200);
+            ], 401);
         }
     }
 
