@@ -885,7 +885,7 @@ class FrontEndController extends Controller
             /* Eof Test */
 
             // LDAP login response
-            if($ldap_login === true){
+            if($ldap_login == true){
                 echo "lol";
                 /* collect userid using username from person table */
                 $username = $request->input('username');
@@ -902,16 +902,7 @@ class FrontEndController extends Controller
                 $token = JWTAuth::fromUser($person);
                 $set_token = JWTAuth::setToken($token);
                 $parse_token = JWTAuth::getToken();
-                echo "<pre>";
-                print_r($token);
-                echo "</pre>";
-                echo "<pre>";
-                print_r($set_token);
-                echo "</pre>";
-                echo "<pre>";
-                print_r($parse_token);
-                echo "</pre>";
-                die();
+
 
 
                 if ($parse_token == true)
@@ -936,7 +927,10 @@ class FrontEndController extends Controller
                 );
                 $request->session()->push('person', $user_data);
 
-                return response()->json($user_data, 200);
+                return response()->json([
+                    'message' => Lang::get('auth/message.login.success'),
+                    'type' => 'success'
+                ], 200);
             } else {
                 echo "not lol";
                 return response()->json([
