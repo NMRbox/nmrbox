@@ -894,7 +894,7 @@ class FrontEndController extends Controller
                     return response()->json([
                         'message' => Lang::get('auth/message.account_not_found'),
                         'type' => 'error'
-                    ], 200);
+                    ], 401);
                 }
 
 
@@ -902,6 +902,15 @@ class FrontEndController extends Controller
                 $token = JWTAuth::fromUser($person);
                 $set_token = JWTAuth::setToken($token);
                 $parse_token = JWTAuth::getToken();
+                echo "<pre>";
+                print_r($token);
+                echo "</pre>";
+                echo "<pre>";
+                print_r($set_token);
+                echo "</pre>";
+                echo "<pre>";
+                print_r($parse_token);
+                echo "</pre>";
 
 
                 if ($parse_token == true)
