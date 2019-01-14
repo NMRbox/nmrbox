@@ -1199,20 +1199,9 @@ class FrontEndController extends Controller
 
         }
 
-        echo "<pre>";
-        print_r(Input::all());
-        echo "</pre>";
-
         // TODO: refactor fetching person data
         $person_id = $request->get('person_id');
-        echo "<pre>";
-        print_r($person_id);
-        echo "</pre>";
         $person = $this->sessionPlayLoad($person_id);
-        echo "<pre>";
-        print_r($person);
-        echo "</pre>";
-        die();
 
         // LDAP credential
         $credential['username'] = $person->nmrbox_acct;
@@ -1230,7 +1219,7 @@ class FrontEndController extends Controller
 
                 // Adding custom LDAP library class and authenticating
                 $ldap = new Ldap;
-                $ldap_reset = $ldap->ldap_set_password($credential);
+                $ldap_reset = $ldap->ldap_set_password($new_credential);
 
                 // LDAP login response
                 if($ldap_reset !== false){
