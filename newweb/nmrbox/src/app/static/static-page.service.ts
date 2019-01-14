@@ -28,7 +28,7 @@ export class StaticPageService {
             return new StaticPageModel('No such page exists: ' + pageUrl);
           }
         },
-        error => new StaticPageModel(error));
+        () => new StaticPageModel('No such page exists: ' + pageUrl));
   };
 
 }
