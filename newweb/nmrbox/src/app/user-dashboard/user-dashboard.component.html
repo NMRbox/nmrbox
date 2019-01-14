@@ -66,9 +66,7 @@
                                 </div>
                                 <div class="panel-footer">
                                     <div class="text-right">
-                                        <!--<a routerLink="/signin" data-original-title="Edit user profile" data-toggle="tooltip" type="button"
-                                           class="btn btn-sm btn-warning"><i class="fa fa-pencil fa-2x"></i>Update Profile</a>-->
-                                        <a mat-button routerLink="/profile-update" routerLinkActive="active">Update Profile</a>
+                                        <a class="btn btn-md btn-primary" routerLink="/profile-update" routerLinkActive="active">Update Profile</a>
                                     </div>
                                 </div>
                             </div>
@@ -150,11 +148,11 @@
                                         </div>
                                     </div>
                                     <div class="panel-footer">
-                                        <div class="text-right">
-                                            <a mat-button *ngIf="showHide" type="submit" (click)="onPasswordResetSubmit(passReset)">Save</a>
-                                            <a *ngIf="!showHide" mat-button (click)="changeShowStatus()">Password Reset</a>
-                                            <a *ngIf="showHide" mat-button (click)="changeShowStatus()">Cancel</a>
-                                        </div>
+                                      <div class="text-right">
+                                        <a class="btn btn-md btn-primary" *ngIf="!showHide" (click)="changeShowStatus()">Password Reset</a>
+                                        <input class="btn btn-md btn-primary right-pad" *ngIf="showHide" [disabled]="!passReset.valid" type="submit" (click)="onPasswordResetSubmit(passReset)" value="Save">
+                                        <a class="btn btn-md btn-primary" *ngIf="showHide" (click)="changeShowStatus()">Cancel</a>
+                                      </div>
                                     </div>
                                 </form>
                             </div>

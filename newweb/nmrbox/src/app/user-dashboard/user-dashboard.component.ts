@@ -39,6 +39,7 @@ export class UserDashboardComponent implements OnInit {
     this.authService.submitResetPassword(form.value.old_password, form.value.new_password, form.value.conf_password)
       .subscribe(
         response => this.notifications = response,
+        error => this.notifications = error.error
       );
   }
 
@@ -47,6 +48,7 @@ export class UserDashboardComponent implements OnInit {
     this.authService.submitDownloadVM(form.value.vm_id, form.value.vm_username, form.value.vm_password)
       .subscribe(
         response => this.notifications = response,
+        error => this.notifications = error.error
       );
   }
 
