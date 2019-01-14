@@ -182,8 +182,7 @@
                                     <div class="form-group "><label for="vm_id" class="control-label">VM Versions</label>
                                         <select class="form-control form-control select_pi" maxlength="32" required="required" id="vm_id" name="vm_id" ngModel>
                                             <option value="">Please Select</option>
-
-                                            <option value="3" selected="selected">release_3</option>
+                                            <option *ngFor="let vm of person.downloadableVm" [value]="vm[0]">{{vm[1]}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -195,7 +194,7 @@
                                 <div class="form-group col-lg-6">
                                     <div class="form-group ">
                                         <label for="vm_username" class="control-label">VM username</label>
-                                        <input class="form-control form-control" maxlength="64" id="vm_username" name="vm_username" type="text" [ngModel]="person.nmrbox_acct" autocomplete="off" required>
+                                        <input class="form-control form-control" maxlength="64" id="vm_username" name="vm_username" type="text" [ngModel]="person.nmrbox_acct" autocomplete="off" required="required">
                                     </div>
                                 </div>
 
@@ -212,7 +211,7 @@
 
                                 <div class="form-group col-lg-4">
                                     <div class="form-group">
-                                        <input class="btn btn-primary btn-lg btn-block " type="submit" value="Request Downloadable VM">
+                                        <input [disabled]="!downloadVM.valid" class="btn btn-primary btn-lg btn-block" type="submit" value="Request Downloadable VM">
                                     </div>
                                 </div>
                             </form>
