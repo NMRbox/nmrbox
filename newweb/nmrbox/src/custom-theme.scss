@@ -655,7 +655,7 @@ a#all-software {
   color: rgba(0, 0, 0, 0.38);
 }
 
-#st-select, #sw-select, #all-software, #search {
+#st-select, #sw-select {
   margin-left: 25px;
 }
 
@@ -725,7 +725,7 @@ a#all-software {
   }
 }
 
-.sw-filters-search-only #search {
+.sw-filters-search-only {
   margin-left: 3px;
   margin-top: 8px;
 }

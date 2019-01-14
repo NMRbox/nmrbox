@@ -16,35 +16,30 @@
           (click)="filterSelections()"
           [value]='null'>Show all
         </mat-option>
-        <!--
-        <mat-option
-          *ngFor="let type_id of objectKeys(researchProblems)"
-          [value]="type_id"
-          (click)="filterSelections()">{{researchProblems[type_id]}}
-        </mat-option>-->
-
         <mat-option
           value="1"
           (click)="filterSelections()">
-          <img src="./assets/icons/software_menu/rp-icon-metabolomics-menu.svg" alt="Metabolomics" title="Metabolomics" height="30">
+          <img src="/assets/icons/software_menu/rp-icon-metabolomics-menu.svg" alt="Metabolomics" title="Metabolomics" height="30">
         </mat-option>
         <mat-option
           value="2"
           (click)="filterSelections()">
-          <img src="./assets/icons/software_menu/rp-icon-protein-dynamics-menu.svg" alt="Protein Dynamics" title="Protein Dynamics" height="30">
+          <img src="/assets/icons/software_menu/rp-icon-protein-dynamics-menu.svg" alt="Protein Dynamics" title="Protein Dynamics" height="30">
         </mat-option>
         <mat-option
           value="3"
           (click)="filterSelections()">
-          <img src="./assets/icons/software_menu/rp-icon-protein-structure-menu.svg" alt="Protein Structure" title="Protein Structure" height="30">
+          <img src="/assets/icons/software_menu/rp-icon-protein-structure-menu.svg" alt="Protein Structure" title="Protein Structure" height="30">
         </mat-option>
         <mat-option
           value="4"
           (click)="filterSelections()">
-          <img src="./assets/icons/software_menu/rp-icon-intrinsically-menu.svg" alt="Intrinsically Disordered Proteins" title="Intrinsically Disordered Proteins" height="30">
+          <img src="/assets/icons/software_menu/rp-icon-intrinsically-menu.svg" alt="Intrinsically Disordered Proteins" title="Intrinsically Disordered Proteins" height="30">
         </mat-option>
       </mat-select>
     </mat-form-field>
+
+    <span class="spacer-span">and</span>
 
     <mat-form-field>
       <mat-select
@@ -95,45 +90,25 @@
           (click)="filterSelections()">
           <img src="./assets/icons/software_menu/sw-icon-relaxation-menu.svg" alt="Relaxation" title="Relaxation" height="22">
         </mat-option>
-
-
-
-        <!--
-        <mat-option
-          *ngFor="let type_id of objectKeys(softwareTypes)"
-          [value]="type_id"
-          (click)="filterSelections()">{{softwareTypes[type_id]}}
-        </mat-option>-->
       </mat-select>
     </mat-form-field>
 
+    <span class="spacer-span">and</span>
 
-    <a id="all-software"
-       (click)="resetSelections(); getSoftwareList(); $event.stopPropagation();">All
-      Software</a>
-    <mat-form-field id="search">
-      <input matInput #searchBox
+    <mat-form-field>
+      <input matInput
              type="search"
              id="search-box"
              [(ngModel)]="activeNameSearch"
              (keyup)="filterSelections()"
              placeholder="Search software"/>
-      <span class="icon-search"></span>
+      <!--<span class="icon-search"></span>-->
     </mat-form-field>
-  </div>
 
-  <!--<div id="software-types-menu" class="sw-menu-wrapper my-fader" [swFiltersOpen]="!swFiltersOpen">
-    <swiper [config]="config">
-      <div class="swiper-wrapper">
-        <div *ngFor="let swt of swtList" class="swiper-slide" [class.selected]="swt.name === filterName">
-          <a id="{{swt.id}}" class="sw-type-icon-med sw-type-icon-{{swt.name}}"
-             (click)="filterSoftwareType(swt.name, 'swt'); $event.stopPropagation();"></a>
-        </div>
-      </div>
-      <div class="swiper-button-next arrow-right swiper-button-white"></div>
-      <div class="swiper-button-prev arrow-left swiper-button-white"></div>
-    </swiper>
-  </div>-->
+    <span class="spacer-span">or</span>
+
+    <a id="all-software" (click)="resetSelections(); getSoftwareList(); $event.stopPropagation();">Reset Search</a>
+  </div>
 </div>
 
 <!-- Software registry listings -->
