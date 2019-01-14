@@ -32,7 +32,13 @@ export class SigninComponent implements OnInit {
     this.authService.signIn(form.value.username, form.value.password)
       .subscribe(
         response => this.notifications = response,
-        () => this.notifications = {'message': 'Server error.', 'type': 'error'}
+        error => {
+          if (error.error && error.error.message) {
+            this.notifications = error.error;
+          } else {
+            this.notifications = {'message': 'Server error.', 'type': 'error'};
+          }
+        }
       );
   }
 
