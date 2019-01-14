@@ -285,16 +285,16 @@ ul.icon-list {
 .co-icon-large {
   width: 240px;
   height: 80px;
+  background-repeat: no-repeat;
   background-size: 480px 80px;
-  background: no-repeat 0px 10px;
+  background-position: 0 10px;
 }
 
 .team-icon-large {
   width: 240px;
   height: 80px;
   background-size: 480px 80px;
-  background: no-repeat 0px 10px;
-
+  background-position: 0 10px;
 }
 
 .co-icon-support {
