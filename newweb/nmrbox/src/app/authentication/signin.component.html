@@ -23,11 +23,11 @@
               <br>
 
               <div class="form-group">
-                <input type="text" class="form-control" name="username" placeholder="Username" ngModel required value=""
+                <input type="text" class="form-control" name="username" placeholder="Username" ngModel required="required" value=""
                        autocomplete="off">
               </div>
               <div class="form-group">
-                <input type="password" class="form-control" name="password" placeholder="Password" ngModel required
+                <input type="password" class="form-control" name="password" placeholder="Password" ngModel required="required"
                        autocomplete="off">
               </div>
 
@@ -39,7 +39,7 @@
               <br><br>
               <div class="form-group row">
                 <div class="col-xs-6 col-sm-6 col-md-6">
-                  <input type="submit" class="btn btn-lg btn-success btn-block" value="Sign In">
+                  <input [disabled]="!f.valid" type="submit" class="btn btn-lg btn-success btn-block" value="Sign In">
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
                   <a routerLink="/signup" class="btn btn-lg btn-primary btn-block" style="color: #fff;">Sign Up</a>
