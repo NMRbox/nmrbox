@@ -11,7 +11,6 @@ import {SupportComponent} from './support/support.component';
 import {TeamListComponent} from './team/team-list.component';
 import {SignupComponent} from './authentication/signup.component';
 import {SigninComponent} from './authentication/signin.component';
-import {PasswordResetComponent} from './authentication/password-reset.component';
 import {UserDashboardComponent} from './user-dashboard/user-dashboard.component';
 import {ProfileUpdateComponent} from './user-dashboard/profile-update.component';
 import {FaqsComponent} from './faqs/faqs.component';
@@ -33,7 +32,6 @@ const routes: Routes = [
   {path: 'signin', component: SigninComponent},
   {path: 'signout', component: SigninComponent},
   {path: 'forgot-password', component: ForgetPasswordComponent},
-  {path: 'password-reset', component: PasswordResetComponent},
   {path: 'user-dashboard', component: UserDashboardComponent},
   {path: 'profile-update', component: ProfileUpdateComponent},
   {path: 'faqs', component: FaqsComponent},

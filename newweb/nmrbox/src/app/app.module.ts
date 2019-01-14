@@ -28,7 +28,6 @@ import {SigninComponent} from './authentication/signin.component';
 import {UserDashboardComponent} from './user-dashboard/user-dashboard.component';
 import {ProfileUpdateComponent} from './user-dashboard/profile-update.component';
 import {FaqsComponent} from './faqs/faqs.component';
-import {PasswordResetComponent} from './authentication/password-reset.component';
 import {ForgetPasswordComponent} from './password-management/forget-password.component';
 
 // Application services
@@ -77,7 +76,6 @@ import {SafeHtmlPipe} from './pipes/safe-html.pipe';
     UserDashboardComponent,
     ProfileUpdateComponent,
     FaqsComponent,
-    PasswordResetComponent,
     ForgetPasswordComponent,
     FaqsComponent,
     SupportComponent,
