@@ -875,6 +875,9 @@ class FrontEndController extends Controller
             // Adding custom LDAP library class and authenticating
             $ldap = new Ldap;
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
+            echo "<pre>";
+            print_r($ldap_login);
+            echo "</pre>";
 
             /* Test (Localhost login code to skip LDAP authentication) */
             //$ldap_login = true;
@@ -1192,14 +1195,24 @@ class FrontEndController extends Controller
             return response()->json([
                 'message' => 'Validation failed. Please, try again.',
                 'type' => 'error'
-            ], 200);
+            ], 400);
 
         }
 
+        echo "<pre>";
+        print_r(Input::all());
+        echo "</pre>";
+
         // TODO: refactor fetching person data
         $person_id = $request->get('person_id');
+        echo "<pre>";
+        print_r($person_id);
+        echo "</pre>";
         $person = $this->sessionPlayLoad($person_id);
-        //$person = Person::where('id', $person_id)->first();
+        echo "<pre>";
+        print_r($person);
+        echo "</pre>";
+        die();
 
         // LDAP credential
         $credential['username'] = $person->nmrbox_acct;
@@ -1224,11 +1237,11 @@ class FrontEndController extends Controller
                     return response( json_encode( array( 'message' => 'Password reset successfully. ', 'type' => 'success' ) ), 200 )
                         ->header( 'Content-Type', 'application/json' );
                 } else {
-                    return response( json_encode( array( 'message' => 'Sorry, password reset unsuccessful. Try again. ', 'type' => 'error' ) ), 200 )
+                    return response( json_encode( array( 'message' => 'Sorry, password reset unsuccessful. Try again. ', 'type' => 'error' ) ), 400 )
                         ->header( 'Content-Type', 'application/json' );
                 }
             } else {
-                return response( json_encode( array( 'message' => 'Sorry, authentication unsuccessful. Try again. ', 'type' => 'error' ) ), 200 )
+                return response( json_encode( array( 'message' => 'Sorry, authentication unsuccessful. Try again. ', 'type' => 'error' ) ), 400 )
                     ->header( 'Content-Type', 'application/json' );
             }
         } catch (\ErrorException $e) {
@@ -1243,7 +1256,7 @@ class FrontEndController extends Controller
             return response()->json([
                 'message' => Lang::get('auth/message.server_conn_error'),
                 'type' => 'error'
-            ], 200);
+            ], 400);
         }
     }
 
