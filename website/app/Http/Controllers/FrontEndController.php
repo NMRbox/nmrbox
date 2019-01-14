@@ -875,9 +875,6 @@ class FrontEndController extends Controller
             // Adding custom LDAP library class and authenticating
             $ldap = new Ldap;
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
-            echo "<pre>";
-            print_r($ldap_login);
-            echo "</pre>";
 
             /* Test (Localhost login code to skip LDAP authentication) */
             //$ldap_login = true;
