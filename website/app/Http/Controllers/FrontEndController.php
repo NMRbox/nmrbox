@@ -1442,10 +1442,7 @@ class FrontEndController extends Controller
         $person = Person::where('id', $person_id)->get()->first();
 
         $checkUserVm = VMDownload::where('person_id', $person->id)->get();
-        echo "<pre>";
-        print_r($checkUserVm);
-        echo "</pre>";
-        die();
+
         if ( is_null( $checkUserVm ) ) {
             // DB entry goes here
             $downloadable_vm = new VMDownload(
@@ -1469,7 +1466,6 @@ class FrontEndController extends Controller
                 'message' => 'Downloadable VM request for this release has already been received. You will receive an email shortly.',
                 'type' => 'success'
             ), 200 );
-
         }
     }
 
