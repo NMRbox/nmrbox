@@ -1463,7 +1463,7 @@ class FrontEndController extends Controller
             } else {
                 // Redirect to the user page
                 return response()-> json( array(
-                    'message' => 'Downloadable VM request has already been received. You will receive an email shortly.',
+                    'message' => 'Downloadable VM request for this release has already been received. You will receive an email shortly.',
                     'type' => 'success'
                 ), 200 );
 
