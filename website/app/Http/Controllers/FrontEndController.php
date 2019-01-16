@@ -784,9 +784,17 @@ class FrontEndController extends Controller
             return Redirect::route('my-account');
         }
 
+        // get user details
+        $user = Session::get('person');
+
+        $checkUserVm = VMDownload::where('person_id', 226)->where('vm_id', Input::get('vm'))->get()->first();
+        echo "<pre>";
+        print_r($checkUserVm);
+        echo "</pre>";
+        die();
+
         try {
-            // get user details
-            $user = Session::get('person');;
+
 
             // DB entry goes here
             $downloadable_vm = new VMDownload(
@@ -798,11 +806,7 @@ class FrontEndController extends Controller
                 )
             );
 
-            $checkUserVm = VMDownload::where('person_id', $user->id)->where('vm_id', Input::get('vm'))->get()->first();
-            echo "<pre>";
-            print_r($checkUserVm);
-            echo "</pre>";
-            die();
+
             $downloadable_vm->save();
 
             return redirect()->back()->withSuccess('Your request has been received. An email with a custom generated downloadable link will be sent to you in next few hours.');
