@@ -784,17 +784,9 @@ class FrontEndController extends Controller
             return Redirect::route('my-account');
         }
 
-        // get user details
-        $user = Session::get('person');
-
-        $checkUserVm = VMDownload::where('person_id', 226)->where('vm_id', Input::get('vm'))->get()->first();
-        echo "<pre>";
-        print_r($checkUserVm);
-        echo "</pre>";
-
-
-        if( is_null( $checkUserVm ) ) {
-
+        try {
+            // get user details
+            $user = Session::get('person');;
 
             // DB entry goes here
             $downloadable_vm = new VMDownload(
@@ -809,7 +801,8 @@ class FrontEndController extends Controller
             $downloadable_vm->save();
 
             return redirect()->back()->withSuccess('Your request has been received. An email with a custom generated downloadable link will be sent to you in next few hours.');
-        } else {
+        } catch (\Illuminate\Database\QueryException $e) {
+
             // Redirect to the user page
             return redirect()->back()->withError('Downloadable VM request has already been received. You will receive an email shortly. ');
 
@@ -1449,22 +1442,34 @@ class FrontEndController extends Controller
             $person_id = $request->get('person_id');
             $person = Person::where('id', $person_id)->get()->first();
 
-            // DB entry goes here
-            $downloadable_vm = new VMDownload(
-                array(
-                    'person_id' => $person->id,
-                    'vm_id' => Input::get('vm'),
-                    'username' => Input::get('vm_username'),
-                    'password' => Input::get('vm_password'),
-                )
-            );
+            $checkUserVm = VMDownload::where('person_id', $person->id)->where('vm_id', Input::get('vm'))->get()->first();
+            if ( is_null( $checkUserVm ) ) {
+                // DB entry goes here
+                $downloadable_vm = new VMDownload(
+                    array(
+                        'person_id' => $person->id,
+                        'vm_id' => Input::get('vm'),
+                        'username' => Input::get('vm_username'),
+                        'password' => Input::get('vm_password'),
+                    )
+                );
 
-            $downloadable_vm->save();
+                $downloadable_vm->save();
 
-            return response()-> json( array(
-                'message' => 'Your request has been received. An email with a custom generated downloadable link will be sent to you in next few hours.',
-                'type' => 'success'
-            ), 200 );
+                return response()-> json( array(
+                    'message' => 'Your request has been received. An email with a custom generated downloadable link will be sent to you in next few hours.',
+                    'type' => 'success'
+                ), 200 );
+            } else {
+                // Redirect to the user page
+                return response()-> json( array(
+                    'message' => 'Downloadable VM request has already been received. You will receive an email shortly.',
+                    'type' => 'success'
+                ), 200 );
+
+            }
+
+
         } catch (\Illuminate\Database\QueryException $e) {
             // Redirect to the user page
             return response()-> json( array(
