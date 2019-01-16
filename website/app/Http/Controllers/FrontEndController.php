@@ -1441,7 +1441,7 @@ class FrontEndController extends Controller
         $person_id = $request->get('person_id');
         $person = Person::where('id', $person_id)->get()->first();
 
-        $checkUserVm = VMDownload::where('person_id', $person->id)->get()->first();
+        $checkUserVm = VMDownload::where('person_id', $person->id)->get();
         echo "<pre>";
         print_r($checkUserVm);
         echo "</pre>";
