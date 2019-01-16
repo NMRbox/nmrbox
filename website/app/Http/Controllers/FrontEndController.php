@@ -791,9 +791,9 @@ class FrontEndController extends Controller
         echo "<pre>";
         print_r($checkUserVm);
         echo "</pre>";
-        die();
 
-        try {
+
+        if( is_null( $checkUserVm ) ) {
 
 
             // DB entry goes here
@@ -806,12 +806,10 @@ class FrontEndController extends Controller
                 )
             );
 
-
             $downloadable_vm->save();
 
             return redirect()->back()->withSuccess('Your request has been received. An email with a custom generated downloadable link will be sent to you in next few hours.');
-        } catch (\Illuminate\Database\QueryException $e) {
-
+        } else {
             // Redirect to the user page
             return redirect()->back()->withError('Downloadable VM request has already been received. You will receive an email shortly. ');
 
