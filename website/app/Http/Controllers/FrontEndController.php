@@ -798,6 +798,11 @@ class FrontEndController extends Controller
                 )
             );
 
+            $checkUserVm = VMDownload::where('person_id', $user->id)->where('vm_id', Input::get('vm'))->get()->first();
+            echo "<pre>";
+            print_r($checkUserVm);
+            echo "</pre>";
+            die();
             $downloadable_vm->save();
 
             return redirect()->back()->withSuccess('Your request has been received. An email with a custom generated downloadable link will be sent to you in next few hours.');
