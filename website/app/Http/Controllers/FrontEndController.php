@@ -1445,16 +1445,11 @@ class FrontEndController extends Controller
         $isCheck = VMDownload::where('person_id', $person->id )->where('vm_id', Input::get('vm'))->get()->first();
 
         if ( is_null( $isCheck ) ) {
-            echo "<pre>";
-            print_r("not downloaded");
-            echo "</pre>";
-            die();
-
             // DB entry goes here
             $downloadable_vm = new VMDownload(
                 array(
                     'person_id' => $person->id,
-                    'vm_id' => Input::get('vm'),
+                    'vm_id' => Input::get('vm_id'),
                     'username' => Input::get('vm_username'),
                     'password' => Input::get('vm_password'),
                 )
@@ -1467,10 +1462,7 @@ class FrontEndController extends Controller
                 'type' => 'success'
             ), 200 );
         } else {
-            echo "<pre>";
-            print_r('downloaded already');
-            echo "</pre>";
-            die();
+
             // Redirect to the user page
             return response()-> json( array(
                 'message' => 'Downloadable VM request has already been received. You will receive an email shortly.',
