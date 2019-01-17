@@ -1443,6 +1443,9 @@ class FrontEndController extends Controller
 
         $downloadable_vm = new VMDownload();
         $isCheck = VMDownload::where('person_id', $person->id )->where('vm_id', Input::get('vm'))->get()->first();
+        echo "<pre>";
+        print_r($isCheck);
+        echo "</pre>";
 
         if ( is_null( $isCheck ) ) {
             echo "<pre>";
