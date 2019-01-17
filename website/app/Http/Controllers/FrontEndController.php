@@ -1438,7 +1438,7 @@ class FrontEndController extends Controller
     public function downloadableVM(Request $request)
     {
         // get user details
-        $person_id = Input::get('vm');
+        $person_id = Input::get('person_id');
         $person = $this->sessionPlayLoad( $person_id );
         echo "<pre>";
         print_r($person);
