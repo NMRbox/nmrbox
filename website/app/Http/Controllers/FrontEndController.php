@@ -1437,11 +1437,6 @@ class FrontEndController extends Controller
      */
     public function downloadableVM(Request $request)
     {
-        // loggedin checking
-        if (!Session::has('person')) {
-            return Redirect::route('my-account');
-        }
-
         // get user details
         // get user details
         $user = Session::get('person');;
