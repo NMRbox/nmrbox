@@ -1437,12 +1437,22 @@ class FrontEndController extends Controller
      */
     public function downloadableVM(Request $request)
     {
+        // loggedin checking
+        if (!Session::has('person')) {
+            return Redirect::route('my-account');
+        }
+
+
+
+
         // get user details
-        $person_id = $request->get('person_id');
-        $person = Person::where('id', $person_id)->get()->first();
+        // get user details
+        $user = Session::get('person');;
+        //$person_id = $request->get('person_id');
+        //$person = Person::where( 'pid', $user->id )->get()->first();
 
         $downloadable_vm = new VMDownload();
-        $isCheck = $downloadable_vm->where('person_id', $person_id)->get()->toSql();
+        $isCheck = $downloadable_vm->where('person_id', $user->id )->get()->toSql();
 
         echo "<pre>";
         print_r($isCheck);
@@ -1450,11 +1460,10 @@ class FrontEndController extends Controller
         die();
         try {
 
-
             // DB entry goes here
             $downloadable_vm = new VMDownload(
                 array(
-                    'person_id' => $person->id,
+                    'person_id' => $user->id,
                     'vm_id' => Input::get('vm'),
                     'username' => Input::get('vm_username'),
                     'password' => Input::get('vm_password'),
