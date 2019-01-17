@@ -1437,18 +1437,19 @@ class FrontEndController extends Controller
      */
     public function downloadableVM(Request $request)
     {
+        // get user details
+        $person_id = $request->get('person_id');
+        $person = Person::where('id', $person_id)->get()->first();
+
+        $downloadable_vm = new VMDownload();
+        $isCheck = $downloadable_vm->where('id', $person_id)->get()->first();
+
+        echo "<pre>";
+        print_r($isCheck);
+        echo "</pre>";
+        die();
         try {
-            // get user details
-            $person_id = $request->get('person_id');
-            $person = Person::where('id', $person_id)->get()->first();
 
-            $downloadable_vm = new VMDownload();
-            $isCheck = $downloadable_vm->where('id', $person_id)->get()->first();
-
-            echo "<pre>";
-            print_r($isCheck);
-            echo "</pre>";
-            die();
 
             // DB entry goes here
             $downloadable_vm = new VMDownload(
