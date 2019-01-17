@@ -1440,9 +1440,10 @@ class FrontEndController extends Controller
         // get user details
         $person_id = Input::get('person_id');
         $person = $this->sessionPlayLoad( $person_id );
+        $vmId = Input::get('vm_id');
 
         $downloadable_vm = new VMDownload();
-        $isCheck = VMDownload::where('person_id', $person->id )->where('vm_id', Input::get('vm'))->toSql;
+        $isCheck = VMDownload::where('person_id', $person->id )->where('vm_id', $vmId)->get()->first();
         echo "<pre>";
         print_r($isCheck);
         echo "</pre>";
@@ -1455,7 +1456,7 @@ class FrontEndController extends Controller
             $downloadable_vm = new VMDownload(
                 array(
                     'person_id' => $person->id,
-                    'vm_id' => Input::get('vm_id'),
+                    'vm_id' => $vmId,
                     'username' => Input::get('vm_username'),
                     'password' => Input::get('vm_password'),
                 )
