@@ -1442,7 +1442,7 @@ class FrontEndController extends Controller
         $person = Person::where('id', $person_id)->get()->first();
 
         $downloadable_vm = new VMDownload();
-        $isCheck = $downloadable_vm->where('person_id', $person_id)->get()->first();
+        $isCheck = $downloadable_vm->where('person_id', $person_id)->get()->toSql();
 
         echo "<pre>";
         print_r($isCheck);
