@@ -1442,11 +1442,6 @@ class FrontEndController extends Controller
             return Redirect::route('my-account');
         }
 
-
-        echo "<pre>";
-        print_r(Session::get('person'));
-        echo "</pre>";
-
         // get user details
         // get user details
         $user = Session::get('person');;
@@ -1454,12 +1449,8 @@ class FrontEndController extends Controller
         //$person = Person::where( 'pid', $user->id )->get()->first();
 
         $downloadable_vm = new VMDownload();
-        $isCheck = $downloadable_vm->where('person_id', $user->id )->get()->toSql();
+        $isCheck = VMDownload::where('person_id', $user->id )->where('vm_id', Input::get('vm'))->get()->first();
 
-        echo "<pre>";
-        print_r($isCheck);
-        echo "</pre>";
-        die();
         try {
 
             // DB entry goes here
