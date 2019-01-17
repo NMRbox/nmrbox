@@ -1443,11 +1443,8 @@ class FrontEndController extends Controller
 
         $downloadable_vm = new VMDownload();
         $isCheck = VMDownload::where('person_id', $person->id )->where('vm_id', Input::get('vm'))->get()->first();
-        echo "<pre>";
-        print_r($isCheck);
-        echo "</pre>";
 
-        try {
+        if ( is_null( $isCheck ) ) {
 
             // DB entry goes here
             $downloadable_vm = new VMDownload(
@@ -1465,7 +1462,7 @@ class FrontEndController extends Controller
                 'message' => 'Your request has been received. An email with a custom generated downloadable link will be sent to you in next few hours.',
                 'type' => 'success'
             ), 200 );
-        } catch (\Illuminate\Database\QueryException $e) {
+        } else {
             // Redirect to the user page
             return response()-> json( array(
                 'message' => 'Downloadable VM request has already been received. You will receive an email shortly.',
