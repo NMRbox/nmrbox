@@ -1437,13 +1437,11 @@ class FrontEndController extends Controller
      */
     public function downloadableVM(Request $request)
     {
-        // get user details
-        $person_id = $request->get('person_id');
-        $person = Person::where('id', $person_id)->get()->first();
+        try {
+            // get user details
+            $person_id = $request->get('person_id');
+            $person = Person::where('id', $person_id)->get()->first();
 
-        $checkUserVm = VMDownload::where('person_id', $person->id)->get();
-
-        if ( is_null( $checkUserVm ) ) {
             // DB entry goes here
             $downloadable_vm = new VMDownload(
                 array(
@@ -1460,13 +1458,15 @@ class FrontEndController extends Controller
                 'message' => 'Your request has been received. An email with a custom generated downloadable link will be sent to you in next few hours.',
                 'type' => 'success'
             ), 200 );
-        } else {
+        } catch (\Illuminate\Database\QueryException $e) {
             // Redirect to the user page
             return response()-> json( array(
-                'message' => 'Downloadable VM request for this release has already been received. You will receive an email shortly.',
+                'message' => 'lol re lol',
                 'type' => 'success'
             ), 200 );
+
         }
+
     }
 
     /*
