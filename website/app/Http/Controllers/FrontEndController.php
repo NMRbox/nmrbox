@@ -1443,7 +1443,9 @@ class FrontEndController extends Controller
         }
 
 
-
+        echo "<pre>";
+        print_r(Session::get('person'));
+        echo "</pre>";
 
         // get user details
         // get user details
