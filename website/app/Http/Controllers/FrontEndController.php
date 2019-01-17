@@ -1448,6 +1448,7 @@ class FrontEndController extends Controller
             echo "<pre>";
             print_r($isCheck);
             echo "</pre>";
+            die();
 
             // DB entry goes here
             $downloadable_vm = new VMDownload(
