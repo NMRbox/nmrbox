@@ -1440,9 +1440,9 @@ class FrontEndController extends Controller
         // get user details
         // get user details
         $user = Session::get('person');;
-        //$person_id = $request->get('person_id');
-        //$person = Person::where( 'pid', $user->id )->get()->first();
-
+        echo "<pre>";
+        print_r($user);
+        echo "</pre>";
         $downloadable_vm = new VMDownload();
         $isCheck = VMDownload::where('person_id', $user->id )->where('vm_id', Input::get('vm'))->get()->first();
 
