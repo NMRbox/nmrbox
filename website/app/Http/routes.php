@@ -423,6 +423,7 @@ Route::group(['middleware' => ['cors', 'session']], function () {
     Route::post('password-reset', array( 'as' => 'password-reset', 'uses' => 'FrontEndController@changePassword'));
     Route::post('password-forgot', array( 'as' => 'password-forgot', 'uses' => 'FrontEndController@forgotPassword'));
     Route::post('password-forgot-confirm', array( 'as' => 'password-forgot-confirm', 'uses' => 'FrontEndController@confirmForgotPassword'));
+    Route::get('downloadable-vm', array( 'as' => 'downloadable-vm', 'uses' => 'FrontEndController@downloadableVM'));
     Route::post('downloadable-vm', array( 'as' => 'downloadable-vm', 'uses' => 'FrontEndController@downloadableVM'));
 
     Route::model('person', 'App\Person');
