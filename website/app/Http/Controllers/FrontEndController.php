@@ -1026,8 +1026,6 @@ class FrontEndController extends Controller
                 $existing_institution->save();*/
             }
 
-
-
             /* Save person entry and return to successful page. */
             if($person->save()){
                 // Data to be used on the email view
@@ -1048,12 +1046,10 @@ class FrontEndController extends Controller
             }
 
         } catch (\Illuminate\Database\QueryException $e) {
-            //dd($e);
-            //return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
             return response()->json([
                 'message' => Lang::get('auth/message.account_already_exists'),
                 'type' => 'error'
-            ], 200);
+            ], 400);
         }
 
     }
@@ -1068,9 +1064,6 @@ class FrontEndController extends Controller
     public function updateProfile(Request $request, $person_id)
     {
         try {
-
-            //$user = Sentinel::getUser();
-            //$person = Person::where('id', $person_id)->get()->first();
             $person = $this->sessionPlayLoad($person_id);
 
             $person->update($request->except(['institution', 'institution_type']));
@@ -1111,12 +1104,8 @@ class FrontEndController extends Controller
             return response()->json([
                 'message' => Lang::get('auth/message.account_already_exists'),
                 'type' => 'error'
-            ], 200);
+            ], 400);
         }
-
-        // Ooops.. something went wrong
-        //return redirect()->back()->withError(Lang::get('auth/message.account_already_exists'));
-
     }
 
     /**
@@ -1263,12 +1252,10 @@ class FrontEndController extends Controller
 
         // If validation fails, we'll exit the operation now.
         if ($validator->fails()) {
-            // Ooops.. something went wrong
-            //return Redirect::to(URL::previous())->withInput()->withErrors($validator);
             return response()->json([
                 'message' => 'Invalid Email address. Please, provide your valid institutional email address.',
                 'type' => 'error'
-            ], 200);
+            ], 400);
 
         }
 
@@ -1278,15 +1265,10 @@ class FrontEndController extends Controller
 
             if (!$user) {
                 // something went wrong
-                /*return response( json_encode( array(
-                    'message' => Lang::get('auth/message.forgot-password.error'),
-                    'type' => 'error'
-                ) ), 401 )
-                    ->header( 'Content-Type', 'application/json' );*/
                 return response()->json([
                     'message' => Lang::get('auth/message.forgot-password.error'),
                     'type' => 'error'
-                ], 200);
+                ], 400);
 
             }
 
@@ -1316,7 +1298,7 @@ class FrontEndController extends Controller
 
         } catch (\Exception $e) {
             // something went wrong
-            return response()-> json( array( 'message' => Lang::get('auth/message.forgot-password.error'), 'type' => 'error' ), 200 );
+            return response()-> json( array( 'message' => Lang::get('auth/message.forgot-password.error'), 'type' => 'error' ), 400 );
         }
     }
 
