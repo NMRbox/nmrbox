@@ -1051,7 +1051,6 @@ class FrontEndController extends Controller
                 'type' => 'error'
             ], 400);
         }
-
     }
 
     /**
