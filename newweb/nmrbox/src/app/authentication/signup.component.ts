@@ -45,7 +45,13 @@ export class SignupComponent implements AfterViewInit {
     )
       .subscribe(
         response => this.notifications = response,
-        response => this.notifications = response,
+        error => {
+          if (error.error && error.error.message) {
+            this.notifications = error.error;
+          } else {
+            this.notifications = {'message': 'Server error.', 'type': 'error'};
+          }
+        }
       );
   }
 
