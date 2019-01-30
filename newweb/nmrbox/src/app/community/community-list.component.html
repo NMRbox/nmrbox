@@ -6,7 +6,12 @@
 
   <mat-tab-group (selectedIndexChange)="selectedIndexChange($event)" [selectedIndex]="selectedIndex">
 
-    <mat-tab id="com-events" label="Events">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <img *ngIf="selectedIndex!=0 && selectedIndex != null" src="/assets/icons/tab_menu/events-off.svg" alt="Events">
+        <img *ngIf="selectedIndex == 0 || selectedIndex == null" src="/assets/icons/tab_menu/events-on.svg" alt="Events">
+      </ng-template>
+
       <ng-template matTabContent>
         <div class="divider divider-dashed"></div>
         <div class="grid-outer-wrapper gray-bg">
@@ -82,7 +87,12 @@
       </ng-template>
     </mat-tab>
 
-    <mat-tab label="Publications">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <img *ngIf="selectedIndex!=1" src="/assets/icons/tab_menu/publications-off.svg" alt="Publications">
+        <img *ngIf="selectedIndex==1" src="/assets/icons/tab_menu/publications-on.svg" alt="Publications">
+      </ng-template>
+
       <ng-template matTabContent>
         <div class="grid-outer-wrapper">
           <div class="grid-content-wrapper">
@@ -215,7 +225,12 @@
     </mat-tab>
 
 
-    <mat-tab label="Teams">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <img *ngIf="selectedIndex!=3" src="/assets/icons/tab_menu/teams-off.svg" alt="Teams">
+        <img *ngIf="selectedIndex==3" src="/assets/icons/tab_menu/teams-on.svg" alt="Teams">
+      </ng-template>
+
       <ng-template matTabContent>
         <div class="grid-outer-wrapper">
           <div class="grid-content-wrapper">
