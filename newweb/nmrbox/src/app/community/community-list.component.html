@@ -4,259 +4,273 @@
 <div class="section-submenu section-submenu-community blue-bg"></div>
 <div class="tab-group-container">
 
-<mat-tab-group (selectedIndexChange)="selectedIndexChange($event)" [selectedIndex]="selectedIndex">
+  <mat-tab-group (selectedIndexChange)="selectedIndexChange($event)" [selectedIndex]="selectedIndex">
 
-  <mat-tab id="com-events" label="Events">
-    <div class="divider divider-dashed"></div>
-    <div class="grid-outer-wrapper gray-bg">
-      <div class="grid-content-wrapper">
-        <div *ngIf="notifications?.message && notifications.type"
-             class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}"
-             [innerHTML]="notifications.message | safeHtml">
-        </div>
-        <br>
-        <h2 class="blue">Upcoming</h2>
-        <mat-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
-          <h3 *ngIf="!upcoming">No upcoming events.</h3>
-          <mat-grid-tile class="tile-solid" *ngFor="let event of upcoming">
-            <mat-card class="workshop-card">
-              <form (ngSubmit)="onWorkshopRegister(event.name)">
-                <mat-card-header>
-                  <mat-card-title [innerHTML]="event.title"></mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <p>{{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}</p>
-                  <p>{{event.location}}</p>
-                  <ng-container *ngIf="event.attendance_max != null">
-                    <p *ngIf="event.attendance !== null">Attendance - {{event.attendance}}/{{event.attendance_max}}</p>
-                    <p *ngIf="event.attendance === null">Max attendance - {{event.attendance_max}}</p>
-                    <p><a [href]="event.url" target="_blank">More information</a></p>
-                    <div *ngIf="authService.userID; else signin">
-                      <button *ngIf="authService.hasClassification(event.name); else register"
-                              class="btn btn-primary" disabled type="button">You are already registered!</button>
-                      <ng-template #register>
-                        <button *ngIf="event.attendance_max > event.attendance; else disable_button"
-                                class="btn btn-primary" type="submit">Register</button>
-                        <ng-template #disable_button>
-                          <button class="btn btn-primary" type="button" disabled>Registration Full</button>
+    <mat-tab id="com-events" label="Events">
+      <ng-template matTabContent>
+        <div class="divider divider-dashed"></div>
+        <div class="grid-outer-wrapper gray-bg">
+          <div class="grid-content-wrapper">
+            <div *ngIf="notifications?.message && notifications.type"
+                 class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}"
+                 [innerHTML]="notifications.message | safeHtml">
+            </div>
+            <br>
+            <h2 class="blue">Upcoming</h2>
+            <mat-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
+              <h3 *ngIf="!upcoming">No upcoming events.</h3>
+              <mat-grid-tile class="tile-solid" *ngFor="let event of upcoming">
+                <mat-card class="workshop-card">
+                  <form (ngSubmit)="onWorkshopRegister(event.name)">
+                    <mat-card-header>
+                      <mat-card-title [innerHTML]="event.title"></mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                      <p>{{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}</p>
+                      <p>{{event.location}}</p>
+                      <ng-container *ngIf="event.attendance_max != null">
+                        <p *ngIf="event.attendance !== null">Attendance - {{event.attendance}}
+                          /{{event.attendance_max}}</p>
+                        <p *ngIf="event.attendance === null">Max attendance - {{event.attendance_max}}</p>
+                        <p><a [href]="event.url" target="_blank">More information</a></p>
+                        <div *ngIf="authService.userID; else signin">
+                          <button *ngIf="authService.hasClassification(event.name); else register"
+                                  class="btn btn-primary" disabled type="button">You are already registered!
+                          </button>
+                          <ng-template #register>
+                            <button *ngIf="event.attendance_max > event.attendance; else disable_button"
+                                    class="btn btn-primary" type="submit">Register
+                            </button>
+                            <ng-template #disable_button>
+                              <button class="btn btn-primary" type="button" disabled>Registration Full</button>
+                            </ng-template>
+                          </ng-template>
+                        </div>
+                        <ng-template #signin>
+                          <button class="btn btn-primary" routerLink="/signin" type="button">Please sign in to
+                            register
+                          </button>
                         </ng-template>
-                      </ng-template>
-                    </div>
-                    <ng-template #signin>
-                      <button class="btn btn-primary" routerLink="/signin" type="button">Please sign in to register</button>
-                    </ng-template>
-                  </ng-container>
-                </mat-card-content>
-              </form>
-            </mat-card>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
-    </div>
-    <div class="divider divider-dashed"></div>
-    <div class="grid-outer-wrapper blue-med-light-bg">
-      <div class="grid-content-wrapper">
-        <h2 class="blue">Past Events</h2>
-        <mat-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
-          <mat-grid-tile class="tile-solid" *ngFor="let event of completed">
-            <mat-card class="workshop-card">
-              <mat-card-header>
-                <mat-card-title>{{event.title}}</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <p>{{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}</p>
-                <p>{{event.location}}</p>
-                <p><a [href]="event.url">More information</a></p>
-              </mat-card-content>
-            </mat-card>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
-    </div>
-  </mat-tab>
+                      </ng-container>
+                    </mat-card-content>
+                  </form>
+                </mat-card>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </div>
+        <div class="divider divider-dashed"></div>
+        <div class="grid-outer-wrapper blue-med-light-bg">
+          <div class="grid-content-wrapper">
+            <h2 class="blue">Past Events</h2>
+            <mat-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
+              <mat-grid-tile class="tile-solid" *ngFor="let event of completed">
+                <mat-card class="workshop-card">
+                  <mat-card-header>
+                    <mat-card-title>{{event.title}}</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>{{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}</p>
+                    <p>{{event.location}}</p>
+                    <p><a [href]="event.url">More information</a></p>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
 
     <mat-tab label="Publications">
-      <div class="grid-outer-wrapper">
-        <div class="grid-content-wrapper">
-          <h3 class="blue">Publications</h3>
+      <ng-template matTabContent>
+        <div class="grid-outer-wrapper">
+          <div class="grid-content-wrapper">
+            <h3 class="blue">Publications</h3>
 
 
-          <mat-grid-list class="support-list grid-dashed workflow-list" cols="3" rowHeight="180px">
-            <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/publications">
-              <mat-card class="sw-card tile-card-short">
-                <mat-card-header>
-                  <mat-card-title>NMRbox Publications</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <p>
-                    Lists of NMRbox research journal and publications
-                  </p>
-                  <br/>
-                  <a routerLink="/pages/publications">Read more</a>
-                </mat-card-content>
-              </mat-card>
-            </mat-grid-tile>
+            <mat-grid-list class="support-list grid-dashed workflow-list" cols="3" rowHeight="180px">
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/publications">
+                <mat-card class="sw-card tile-card-short">
+                  <mat-card-header>
+                    <mat-card-title>NMRbox Publications</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      Lists of NMRbox research journal and publications
+                    </p>
+                    <br/>
+                    <a routerLink="/pages/publications">Read more</a>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
 
-            <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/acknowledge-us">
-              <mat-card class="sw-card tile-card-short">
-                <mat-card-header>
-                  <mat-card-title>Acknowledge NMRbox</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <p>
-                    How to acknowledge NMRbox
-                  </p>
-                  <br/>
-                  <a routerLink="/pages/acknowledge-us">Read More</a>
-                </mat-card-content>
-              </mat-card>
-            </mat-grid-tile>
-          </mat-grid-list>
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/acknowledge-us">
+                <mat-card class="sw-card tile-card-short">
+                  <mat-card-header>
+                    <mat-card-title>Acknowledge NMRbox</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      How to acknowledge NMRbox
+                    </p>
+                    <br/>
+                    <a routerLink="/pages/acknowledge-us">Read More</a>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
+            </mat-grid-list>
 
+          </div>
         </div>
-      </div>
+      </ng-template>
     </mat-tab>
 
     <mat-tab id="com-support" label="Community" class="co-sub-icon co-icon-med co-icon-support">
+      <ng-template matTabContent>
 
-    <div id="com-support-nmrbox" class="grid-outer-wrapper">
-      <div class="grid-content-wrapper">
-      <h3 class="blue">NMRbox Community</h3>
+        <div id="com-support-nmrbox" class="grid-outer-wrapper">
+          <div class="grid-content-wrapper">
+            <h3 class="blue">NMRbox Community</h3>
 
-        <mat-grid-list class="support-list grid-dashed" cols="2" rowHeight="180px">
-          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/overview">
-            <mat-card class="sw-card tile-card-short">
-              <mat-card-header>
-                <mat-card-title>Center Overview</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <p>
-                  An comprehensive overview of the NMRbox center mission and objectives.
-                </p>
-                <br/>
-                <!--<a href="/">Read more</a>-->
-                <a routerLink="/pages/overview">Read More</a>
-              </mat-card-content>
-            </mat-card>
-          </mat-grid-tile>
+            <mat-grid-list class="support-list grid-dashed" cols="2" rowHeight="180px">
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/overview">
+                <mat-card class="sw-card tile-card-short">
+                  <mat-card-header>
+                    <mat-card-title>Center Overview</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      An comprehensive overview of the NMRbox center mission and objectives.
+                    </p>
+                    <br/>
+                    <!--<a href="/">Read more</a>-->
+                    <a routerLink="/pages/overview">Read More</a>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
 
-          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/initiating-a-collaboration">
-            <mat-card class="sw-card tile-card-short">
-              <mat-card-header>
-                <mat-card-title>Collaboration with NMRbox Team</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <p>
-                  Instruction of how to initiate a collaboration with the NMRbox Team.
-                </p>
-                <br/>
-                <a routerLink="/pages/initiating-a-collaboration">Read More</a>
-              </mat-card-content>
-            </mat-card>
-          </mat-grid-tile>
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/initiating-a-collaboration">
+                <mat-card class="sw-card tile-card-short">
+                  <mat-card-header>
+                    <mat-card-title>Collaboration with NMRbox Team</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      Instruction of how to initiate a collaboration with the NMRbox Team.
+                    </p>
+                    <br/>
+                    <a routerLink="/pages/initiating-a-collaboration">Read More</a>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
 
-          <mat-grid-tile class="tile-solid tile-transparent">
-            <mat-card class="sw-card tile-card-short">
-              <mat-card-header>
-                <mat-card-title>Forum</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <p>
-                  Follow the NMRbox community conversations on our <a href="https://groups.google.com/forum/#!forum/nmrbox" target="_blank">Google group</a>
-                </p>
-              </mat-card-content>
-            </mat-card>
-          </mat-grid-tile>
+              <mat-grid-tile class="tile-solid tile-transparent">
+                <mat-card class="sw-card tile-card-short">
+                  <mat-card-header>
+                    <mat-card-title>Forum</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      Follow the NMRbox community conversations on our <a
+                      href="https://groups.google.com/forum/#!forum/nmrbox" target="_blank">Google group</a>
+                    </p>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
 
-          <mat-grid-tile class="tile-solid tile-transparent">
-            <mat-card class="sw-card tile-card-short">
-              <mat-card-header>
-                <mat-card-title>Social Media</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <p>
-                  Follow the NMRbox community conversations on our <a href="https://twitter.com/@NMRbox" target="_blank">Twitter page</a>
-                </p>
-              </mat-card-content>
-            </mat-card>
-          </mat-grid-tile>
+              <mat-grid-tile class="tile-solid tile-transparent">
+                <mat-card class="sw-card tile-card-short">
+                  <mat-card-header>
+                    <mat-card-title>Social Media</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      Follow the NMRbox community conversations on our <a href="https://twitter.com/@NMRbox"
+                                                                          target="_blank">Twitter page</a>
+                    </p>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
 
-          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/newsletters">
-            <mat-card class="sw-card tile-card-short">
-              <mat-card-header>
-                <mat-card-title>NMRbox Newsletter</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <p>
-                  Our first edition of the "Inside NMRbox" newsletter is now available
-                </p>
-                <br/>
-                <a routerLink="/pages/newsletters">Read more</a>
-              </mat-card-content>
-            </mat-card>
-          </mat-grid-tile>
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/newsletters">
+                <mat-card class="sw-card tile-card-short">
+                  <mat-card-header>
+                    <mat-card-title>NMRbox Newsletter</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      Our first edition of the "Inside NMRbox" newsletter is now available
+                    </p>
+                    <br/>
+                    <a routerLink="/pages/newsletters">Read more</a>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
 
-      </mat-grid-list>
-      </div>
-    </div>
-  </mat-tab>
+            </mat-grid-list>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
 
 
-  <mat-tab label="Teams">
-    <div class="grid-outer-wrapper">
-      <div class="grid-content-wrapper">
-        <h3 class="blue">Teams</h3>
+    <mat-tab label="Teams">
+      <ng-template matTabContent>
+        <div class="grid-outer-wrapper">
+          <div class="grid-content-wrapper">
+            <h3 class="blue">Teams</h3>
 
-        <mat-grid-list class="support-list grid-dashed workflow-list" cols="3" rowHeight="180px">
-          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/people-leadership">
-            <mat-card class="sw-card tile-card-short">
-              <mat-card-header>
-                <mat-card-title>Leadership</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <p>
-                  Information about the leaders of the NMRbox project.
-                </p>
-                <br/>
-                <a routerLink="/pages/people-leadership">Read more</a>
-              </mat-card-content>
-            </mat-card>
-          </mat-grid-tile>
+            <mat-grid-list class="support-list grid-dashed workflow-list" cols="3" rowHeight="180px">
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/people-leadership">
+                <mat-card class="sw-card tile-card-short">
+                  <mat-card-header>
+                    <mat-card-title>Leadership</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      Information about the leaders of the NMRbox project.
+                    </p>
+                    <br/>
+                    <a routerLink="/pages/people-leadership">Read more</a>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
 
-          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/people-all-staff">
-            <mat-card class="sw-card tile-card-short">
-              <mat-card-header>
-                <mat-card-title>Staff</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <p>
-                  A list of the NMRbox staff members.
-                </p>
-                <br/>
-                <a routerLink="/pages/people-all-staff">Read More</a>
-              </mat-card-content>
-            </mat-card>
-          </mat-grid-tile>
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/people-all-staff">
+                <mat-card class="sw-card tile-card-short">
+                  <mat-card-header>
+                    <mat-card-title>Staff</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      A list of the NMRbox staff members.
+                    </p>
+                    <br/>
+                    <a routerLink="/pages/people-all-staff">Read More</a>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
 
-          <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/people-eab">
-            <mat-card class="sw-card tile-card-short">
-              <mat-card-header>
-                <mat-card-title>Advisory</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <p>
-                  The advisory board members.
-                </p>
-                <br/>
-                <a routerLink="/pages/people-eab">Read More</a>
-              </mat-card-content>
-            </mat-card>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
-    </div>
-  </mat-tab>
-
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/people-eab">
+                <mat-card class="sw-card tile-card-short">
+                  <mat-card-header>
+                    <mat-card-title>Advisory</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      The advisory board members.
+                    </p>
+                    <br/>
+                    <a routerLink="/pages/people-eab">Read More</a>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
 
 
     <!--<mat-tab id="com-blog" label="Blog" class="co-sub-icon co-icon-med co-icon-blog">
@@ -314,5 +328,5 @@
     </div>
   </mat-tab>-->
 
-</mat-tab-group>
+  </mat-tab-group>
 </div>

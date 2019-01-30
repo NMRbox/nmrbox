@@ -7,12 +7,14 @@
   <mat-tab-group (selectedIndexChange)="selectedIndexChange($event)" [(selectedIndex)]="tabIndex">
 
     <mat-tab label="FAQs">
-      <div class="grid-outer-wrapper">
-        <div class="grid-content-wrapper">
-          <h3 class="blue">NMRbox FAQs</h3>
-          <app-faqs></app-faqs>
+      <ng-template matTabContent>
+        <div class="grid-outer-wrapper">
+          <div class="grid-content-wrapper">
+            <h3 class="blue">NMRbox FAQs</h3>
+            <app-faqs></app-faqs>
+          </div>
         </div>
-      </div>
+      </ng-template>
     </mat-tab>
 
     <!--<mat-tab label="Tutorials">
@@ -27,105 +29,108 @@
     </mat-tab>-->
 
     <mat-tab label="Documentation">
+      <ng-template matTabContent>
+        <div class="grid-outer-wrapper">
+          <div class="grid-content-wrapper">
+            <h3 class="blue">Software documentation</h3>
 
-      <div class="grid-outer-wrapper">
-        <div class="grid-content-wrapper">
-          <h3 class="blue">Software documentation</h3>
+            <mat-grid-list class="support-list grid-dashed" cols="2" rowHeight="180px">
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/documentation">
+                <mat-card class="sw-card tile-card-short">
+                  <mat-card-header>
+                    <mat-card-title>Getting started</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      NMRbox Documentation
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </p>
+                    <br/>
+                    <!--<a href="/">Read more</a>-->
+                    <a routerLink="/pages/documentation">Read More</a>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
 
-          <mat-grid-list class="support-list grid-dashed" cols="2" rowHeight="180px">
-            <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/documentation">
-              <mat-card class="sw-card tile-card-short">
-                <mat-card-header>
-                  <mat-card-title>Getting started</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <p>
-                    NMRbox Documentation
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </p>
-                  <br/>
-                  <!--<a href="/">Read more</a>-->
-                  <a routerLink="/pages/documentation">Read More</a>
-                </mat-card-content>
-              </mat-card>
-            </mat-grid-tile>
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/licensing">
+                <mat-card class="sw-card tile-card-short">
+                  <mat-card-header>
+                    <mat-card-title>Licensing</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      NMRbox User License
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </p>
+                    <br/>
+                    <a routerLink="/pages/licensing">Read More</a>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
 
-            <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/licensing">
-              <mat-card class="sw-card tile-card-short">
-                <mat-card-header>
-                  <mat-card-title>Licensing</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <p>
-                    NMRbox User License
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </p>
-                  <br/>
-                  <a routerLink="/pages/licensing">Read More</a>
-                </mat-card-content>
-              </mat-card>
-            </mat-grid-tile>
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/nihresources">
+                <mat-card class="sw-card tile-card-short">
+                  <mat-card-header>
+                    <mat-card-title>NIH Resources</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      NIH Biomedical Technology Resources
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </p>
+                    <br/>
+                    <a routerLink="/pages/nihresources">Read more</a>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
 
-            <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/nihresources">
-              <mat-card class="sw-card tile-card-short">
-                <mat-card-header>
-                  <mat-card-title>NIH Resources</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <p>
-                    NIH Biomedical Technology Resources
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </p>
-                  <br/>
-                  <a routerLink="/pages/nihresources">Read more</a>
-                </mat-card-content>
-              </mat-card>
-            </mat-grid-tile>
+              <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/release-notes">
+                <mat-card class="sw-card tile-card-short">
+                  <mat-card-header>
+                    <mat-card-title>Release Notes</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      Release notes for the various NMRbox releases.
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </p>
+                    <br/>
+                    <a routerLink="/pages/release-notes">Read more</a>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
 
-            <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/release-notes">
-              <mat-card class="sw-card tile-card-short">
-                <mat-card-header>
-                  <mat-card-title>Release Notes</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <p>
-                    Release notes for the various NMRbox releases.
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </p>
-                  <br/>
-                  <a routerLink="/pages/release-notes">Read more</a>
-                </mat-card-content>
-              </mat-card>
-            </mat-grid-tile>
-
-          </mat-grid-list>
+            </mat-grid-list>
+          </div>
         </div>
-      </div>
+      </ng-template>
     </mat-tab>
 
     <mat-tab label="Contact Us">
+      <ng-template matTabContent>
 
-      <div class="grid-outer-wrapper">
-        <div class="grid-content-wrapper">
-          <app-embedded-static-detail [pageURL]="'contact-us'"></app-embedded-static-detail>
+        <div class="grid-outer-wrapper">
+          <div class="grid-content-wrapper">
+            <app-embedded-static-detail [pageURL]="'contact-us'"></app-embedded-static-detail>
+          </div>
         </div>
-      </div>
+      </ng-template>
     </mat-tab>
 
   </mat-tab-group>
