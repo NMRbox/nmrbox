@@ -8,7 +8,7 @@
 
     <mat-tab>
       <ng-template mat-tab-label>
-        <img *ngIf="selectedIndex!=0 && selectedIndex != null" src="/assets/icons/tab_menu/events-off.svg" alt="Events">
+        <img *ngIf="selectedIndex != 0 && selectedIndex != null" src="/assets/icons/tab_menu/events-off.svg" alt="Events">
         <img *ngIf="selectedIndex == 0 || selectedIndex == null" src="/assets/icons/tab_menu/events-on.svg" alt="Events">
       </ng-template>
 
@@ -89,8 +89,8 @@
 
     <mat-tab>
       <ng-template mat-tab-label>
-        <img *ngIf="selectedIndex!=1" src="/assets/icons/tab_menu/publications-off.svg" alt="Publications">
-        <img *ngIf="selectedIndex==1" src="/assets/icons/tab_menu/publications-on.svg" alt="Publications">
+        <img *ngIf="selectedIndex != 1 " src="/assets/icons/tab_menu/publications-off.svg" alt="Publications">
+        <img *ngIf="selectedIndex == 1" src="/assets/icons/tab_menu/publications-on.svg" alt="Publications">
       </ng-template>
 
       <ng-template matTabContent>
@@ -136,7 +136,11 @@
       </ng-template>
     </mat-tab>
 
-    <mat-tab id="com-support" label="Community" class="co-sub-icon co-icon-med co-icon-support">
+    <mat-tab id="com-support" class="co-sub-icon co-icon-med co-icon-support">
+      <ng-template mat-tab-label>
+        <img *ngIf="selectedIndex != 2" src="/assets/icons/tab_menu/connect-off.svg" alt="Publications">
+        <img *ngIf="selectedIndex == 2" src="/assets/icons/tab_menu/connect-on.svg" alt="Publications">
+      </ng-template>
       <ng-template matTabContent>
 
         <div id="com-support-nmrbox" class="grid-outer-wrapper">
@@ -227,8 +231,8 @@
 
     <mat-tab>
       <ng-template mat-tab-label>
-        <img *ngIf="selectedIndex!=3" src="/assets/icons/tab_menu/teams-off.svg" alt="Teams">
-        <img *ngIf="selectedIndex==3" src="/assets/icons/tab_menu/teams-on.svg" alt="Teams">
+        <img *ngIf="selectedIndex != 3" src="/assets/icons/tab_menu/teams-off.svg" alt="Teams">
+        <img *ngIf="selectedIndex == 3" src="/assets/icons/tab_menu/teams-on.svg" alt="Teams">
       </ng-template>
 
       <ng-template matTabContent>
