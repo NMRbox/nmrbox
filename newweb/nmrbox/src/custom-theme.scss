@@ -487,55 +487,9 @@ mat-select {
 }
 
 .mat-tab-labels {
-  width: 910px !important;
+  width: 1000px !important;
   margin: auto !important;
 }
-
-/*
-.mat-tab-label {
-  color: transparent !important;
-  padding: 0px 0px !important;
-  display: inline-block;
-  margin-right: 30px;
-  background-color: transparent !important;
-  width: 130px;
-  min-width: 130px !important;
-  height: 60px;
-  background-repeat: no-repeat;
-  background-size: 360px 60px;
-  background-position: -180px 5px;
-  opacity: 1.0;
-}*/
-
-
-
-
-/*
-app-team-list {
-  .mat-tab-label {
-    background-position: 0px 5px;
-  }
-  .mat-tab-label-active {
-    background-position: -180px 5px;
-  }
-  .mat-tab-label:nth-of-type(1) {
-    background-image: url('./assets/icons/team-icon-leadership-240x40.svg');
-  }
-  .mat-tab-label:nth-of-type(2) {
-    background-image: url('./assets/icons/team-icon-integral-240x40.svg');
-  }
-  .mat-tab-label:nth-of-type(3) {
-    background-image: url('./assets/icons/team-icon-about-240x40.svg');
-  }
-  .mat-tab-label:nth-of-type(2) {
-    background-image: url('./assets/icons/team-icon-research-240x40.svg');
-  }
-
-  mat-tab-body {
-    background-size: 90%;
-    background: url('/assets/bg-graphics/bg-graphic-team.png') no-repeat 0px -300px;
-  }
-}*/
 
 app-team-list {
   .mat-tab-label-active {
@@ -566,6 +520,22 @@ app-team-list {
   z-index: 1;
 }
 
+.section-banner-new {
+  position: relative;
+  display: block;
+  height: 125px;
+  left: 50%;
+  margin-left: -450px;
+  z-index: 1;
+
+  img {
+    max-height: calc(100% - 2em);
+    width: auto;
+    margin-top: 1em;
+    margin-bottom: 1em
+  }
+}
+
 .section-banner-bg {
   position: absolute;
   top: 50px;
@@ -578,22 +548,6 @@ app-team-list {
 
 .section-banner-software {
   background-image: url('./assets/section-banners/software-banner.png');
-}
-
-.section-banner-software-trimmed {
-  background-image: url('./assets/section-banners/software-banner-trimmed.png');
-}
-
-.section-banner-community {
-  background-image: url('./assets/section-banners/community-banner.png');
-}
-
-.section-banner-support {
-  background-image: url('./assets/section-banners/support-banner.png');
-}
-
-.section-banner-support-new {
-  background-image: url('/assets/section-banners/support-header-1000x156.png');
 }
 
 .section-banner-team {
