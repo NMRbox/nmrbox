@@ -28,11 +28,6 @@ mat-grid-list {
   margin: 10px auto;
   padding: 10px;
 
-  .standard-card {
-    width: calc(100% - 30px);
-    height: calc(100% - 30px);
-  }
-
   .workshop-card {
     width: 450px;
     height: 215px;
@@ -43,7 +38,6 @@ mat-grid-list {
       font-weight: bold;
       background: #d9edf7;
       padding: 20px 10px;
-
     }
 
     .mat-card-title {

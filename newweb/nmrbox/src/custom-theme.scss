@@ -536,6 +536,11 @@ app-team-list {
   }
 }
 
+.standard-card {
+  width: calc(100% - 30px);
+  height: calc(100% - 30px);
+}
+
 .section-banner-bg {
   position: absolute;
   top: 50px;
@@ -818,9 +823,11 @@ a:focus, a:active {
   outline: none;
 }
 
-/* These might not be appropriate
+/* These might not be appropriate as they harm accessibility
  See: https://github.com/angular/material2/issues/5903
- */
+
+They make the active tab seem lit up by default.
+
 .mat-tab-label-active{
   background-color: rgba(0,0,0,0) !important;
   opacity: 1 !important;
@@ -829,3 +836,4 @@ a:focus, a:active {
 .mat-tab-link:not(.mat-tab-label-active):focus {
   background: none !important;
 }
+*/
