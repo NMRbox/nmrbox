@@ -20,7 +20,7 @@ import {AppComponent} from './app.component';
 import {SoftwareDetailComponent} from './software/software-detail.component';
 import {SoftwareListComponent} from './software/software-list.component';
 import {StaticPageComponent} from './static/static-page.component';
-import {CommunityListComponent} from './community/community-list.component';
+import {CommunityComponent} from './community/community.component';
 import {TeamListComponent} from './team/team-list.component';
 import {HomeComponent} from './home/home.component';
 import {SignupComponent} from './authentication/signup.component';
@@ -68,7 +68,7 @@ import {SafeHtmlPipe} from './pipes/safe-html.pipe';
     SoftwareDetailComponent,
     SoftwareListComponent,
     StaticPageComponent,
-    CommunityListComponent,
+    CommunityComponent,
     TeamListComponent,
     HomeComponent,
     SignupComponent,

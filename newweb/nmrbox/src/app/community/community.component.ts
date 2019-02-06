@@ -7,11 +7,11 @@ import {CommunityService} from './community.service';
 import {AuthenticationService} from '../authentication/authentication.service';
 
 @Component({
-  selector: 'app-community-list',
-  templateUrl: './community-list.component.html',
-  styleUrls: ['./community-list.component.scss']
+  selector: 'app-community',
+  templateUrl: './community.component.html',
+  styleUrls: ['./community.component.scss']
 })
-export class CommunityListComponent implements OnInit {
+export class CommunityComponent implements OnInit {
 
   upcoming: EventModel[];
   completed: EventModel[];

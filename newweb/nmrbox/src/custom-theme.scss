@@ -442,7 +442,12 @@ mat-toolbar, .mat-tab-label, .mat-card {
   padding: 10px !important;
 }
 
+/*
 .mat-card:not([class*="mat-elevation-z"]) {
+  box-shadow: none !important;
+}*/
+
+.sw-card {
   box-shadow: none !important;
 }
 

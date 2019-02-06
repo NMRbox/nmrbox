@@ -24,32 +24,13 @@
 }
 
 mat-grid-list {
-  max-width: auto; /* constrained by tab container */
   width: 100%; /* constrained by tab container */
   margin: 10px auto;
   padding: 10px;
 
-  .sw-card {
-    min-width: 200px;
-    /*margin: 5px;
-    padding-right: 10px;*/
-
-    /*.mat-card-title {
-      font-weight: bold;
-    }
-    .mat-card-content {
-      !*min-height: 105px;*!
-      font-weight: 400;
-    }
-    ul.icon-list {
-      height: 65px;
-      bottom: 10px;
-      position: absolute;
-    }
-    p {
-      line-height: 1em;
-      margin-bottom: 5px;
-    }*/
+  .standard-card {
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
   }
 
   .workshop-card {

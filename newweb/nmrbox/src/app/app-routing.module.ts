@@ -6,7 +6,7 @@ import {HomeComponent} from './home/home.component';
 import {SoftwareListComponent} from './software/software-list.component';
 import {SoftwareDetailComponent} from './software/software-detail.component';
 import {StaticPageComponent} from './static/static-page.component';
-import {CommunityListComponent} from './community/community-list.component';
+import {CommunityComponent} from './community/community.component';
 import {SupportComponent} from './support/support.component';
 import {TeamListComponent} from './team/team-list.component';
 import {SignupComponent} from './authentication/signup.component';
@@ -22,8 +22,8 @@ const routes: Routes = [
   {path: 's/:slug', component: SoftwareDetailComponent},
   {path: 'software/:filterType/:filter', component: SoftwareListComponent},
   {path: 'pages/:pageUrl', component: StaticPageComponent},
-  {path: 'community', component: CommunityListComponent},
-  {path: 'community/:index', component: CommunityListComponent},
+  {path: 'community', component: CommunityComponent},
+  {path: 'community/:index', component: CommunityComponent},
   {path: 'support', component: SupportComponent},
   {path: 'support/:index', component: SupportComponent},
   {path: 'team', component: TeamListComponent},
