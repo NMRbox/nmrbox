@@ -390,6 +390,7 @@ mat-toolbar {
   }
 }
 
+
 mat-toolbar.toolbar-transparent {
   background-color: $nmrbox-gray-light;
 }
@@ -584,6 +585,10 @@ app-team-list {
 
 .section-banner-support {
   background-image: url('./assets/section-banners/support-banner.png');
+}
+
+.section-banner-support-new {
+  background-image: url('/assets/section-banners/support-header-1000x156.png');
 }
 
 .section-banner-team {
@@ -854,3 +859,14 @@ a:focus, a:active {
   outline: none;
 }
 
+/* These might not be appropriate
+ See: https://github.com/angular/material2/issues/5903
+ */
+.mat-tab-label-active{
+  background-color: rgba(0,0,0,0) !important;
+  opacity: 1 !important;
+}
+
+.mat-tab-link:not(.mat-tab-label-active):focus {
+  background: none !important;
+}
