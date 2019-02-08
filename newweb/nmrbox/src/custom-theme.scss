@@ -525,7 +525,7 @@ app-team-list {
   display: block;
   height: 125px;
   left: 50%;
-  margin-left: -450px;
+  margin-left: -452px;
   z-index: 1;
 
   img {
@@ -551,13 +551,10 @@ app-team-list {
   z-index: 0;
 }
 
-.section-banner-software {
-  background-image: url('./assets/section-banners/software-banner.png');
-}
-
+/*
 .section-banner-team {
-  background-image: url('./assets/section-banners/team-banner.png');
-}
+  background-image: url('./assets/section-banners/original-team-banner.png');
+}*/
 
 .section-submenu {
   position: relative;
