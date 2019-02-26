@@ -16,7 +16,7 @@ export class FaqsService {
     this.allFAQs = [];
     this.faqs = [];
 
-    const url = environment.appUrl + `/` + environment.faqsUrl;
+    const url = environment.appUrl + '/' + environment.faqsUrl;
     const parent = this;
     this.http.get(url).pipe(
       map(response => {

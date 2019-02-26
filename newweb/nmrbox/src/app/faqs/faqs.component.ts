@@ -13,20 +13,24 @@ export class FaqsComponent implements OnInit, AfterViewChecked {
   public notifications: any = {message: '', type: ''};
   slug: string;
   term: string;
+  scrolled: boolean;
 
   constructor(
     private route: ActivatedRoute,
     public faqService: FaqsService,
     private router: Router
   ) {
+    this.scrolled = false;
   }
 
   // Scrolls to the active FAQ
   ngAfterViewChecked() {
-    const el = document.getElementById('active');
-    if (el) {
-      document.getElementById('active').scrollIntoView();
-      window.scrollBy(0, -20);
+    if (!this.scrolled) {
+      const el = document.getElementById('active');
+      if (el) {
+        document.getElementById('active').scrollIntoView();
+        window.scrollBy(0, -20);
+      }
     }
   }
 
