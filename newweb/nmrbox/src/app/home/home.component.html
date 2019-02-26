@@ -7,6 +7,8 @@
       <img alt="Home banner 2." width=1000 height=400 [src]="appURL + '/files/home-banner-2.png'"/></div>
     <div class="swiper-slide">
       <img alt="Home banner 3." width=1000 height=400 [src]="appURL + '/files/home-banner-3.png'"/></div>
+    <div class="swiper-slide">
+      <img alt="Home banner 4." width=1000 height=400 [src]="appURL + '/files/home-banner-4.png'"/></div>
     <!--<div class="swiper-slide" *ngFor="let event of upcomingEvents">
       <mat-card class="workshop-card">
         <form (ngSubmit)="onWorkshopRegister(event.name)">
@@ -134,54 +136,46 @@
 <section id="home-community" class="page-section blue-bg">
   <div class="content">
     <h1 class="blue">Welcome to the<br/><strong>NMR</strong>box <strong>Community</strong></h1>
-    <p>
-      The <strong>NMR</strong>box Community is your opportunity to: share your experience; ask questions; seek advice
+    <p>The <strong>NMR</strong>box Community is your opportunity to: share your experience; ask questions; seek advice
       and guidance on the software; and learn about upcoming training opportunities.
     </p>
     <mat-grid-list cols="2" rowHeight="150px">
-      <mat-grid-tile class="co-tile">
-        <a id="co-support" class="co-icon-large co-icon-support grid-tile-title" routerLink="/support"></a>
-        <p>It’s all about getting started from workflows, user guides, tutorials, and basic information about NMRbox.
-          We’re here to help you.</p>
+      <mat-grid-tile class="co-tile" routerLink="/community/0">
+        <img src="/assets/icons/tab_menu/events-on.svg" alt="Events" height="64">
+        <span>Conferences. Meetings. Workshops. Our calendar will help you plan ahead.</span>
       </mat-grid-tile>
-      <mat-grid-tile class="co-tile">
-        <a id="co-events" class="co-icon-large co-icon-events grid-tile-title" routerLink="/community/0"></a>
-        <p>Conferences. Meetings. Workshops. Podcasts. Our calendar will help you plan ahead.</p>
+      <mat-grid-tile class="co-tile" routerLink="/community/1">
+        <img src="/assets/icons/tab_menu/publications-on.svg" alt="Publications" height="64">
+        <span>Publications about NMRbox and information on how to cite NMRbox.</span>
       </mat-grid-tile>
-      <mat-grid-tile class="co-tile">
-        <a id="co-forum" class="co-icon-large co-icon-forum grid-tile-title" routerLink="/community/2"></a>
-        <p>Find out what your colleagues are saying. Add your voice.</p>
+      <mat-grid-tile class="co-tile" routerLink="/community/2">
+        <img src="/assets/icons/tab_menu/connect-on.svg" alt="Connect" height="64">
+        <span>Get involved in the NMRbox project.</span>
       </mat-grid-tile>
-      <!--<mat-grid-tile class="co-tile">
-          <a id="co-blog" class="co-icon-large co-icon-blog grid-tile-title" (click)="gotoSection('community','3'); $event.stopPropagation();"></a>
-          <p>Find out what’s going on in the world of biomolecular NMR. Checkout this month’s featured Researcher. Keep current with the latest case studies and new software.
-      </p>
-      </mat-grid-tile>-->
+      <mat-grid-tile class="co-tile" routerLink="/community/3">
+        <img src="/assets/icons/tab_menu/teams-on.svg" alt="Teams" height="64">
+        <span>Learn about the people behind NMRbox.</span>
+      </mat-grid-tile>
     </mat-grid-list>
   </div>
 </section>
 <section id="home-team" class="page-section orange-bg">
   <div class="content">
-    <h1 class="white">Learn more about our<br/><strong>NMR</strong>box <strong>team</strong></h1>
+    <h1 class="white">Get access to <br/><strong>NMR</strong>box <strong>support</strong></h1>
+    <p>We're here to help.</p>
     <mat-grid-list cols="2" rowHeight="150px">
-      <mat-grid-tile class="team-tile">
-        <a id="team-leadership" class="team-icon-large team-icon-leadership grid-tile-title"
-           routerLink="/community/4"></a>
-        <p>The NMRbox leadership is experienced and diverse. We are devoted to transforming how the NMR Community
-          utilizes computational tools.</p>
+      <mat-grid-tile class="co-tile" routerLink="/support/0">
+        <img src="/assets/icons/tab_menu/FAQ-on.svg" alt="FAQs" height="64">
+        <span>Frequently asked questions about NMRbox.</span>
       </mat-grid-tile>
-      <!--<mat-grid-tile class="team-tile">
-          <a id="team-research" class="team-icon-large team-icon-research grid-tile-title" (click)="gotoSection('team','1'); $event.stopPropagation();"></a>
-          <p>Without these colleagues NMRbox would be just an empty box.
-          </p>
-      </mat-grid-tile>-->
-      <mat-grid-tile class="team-tile">
-        <a id="team-integral" class="team-icon-large team-icon-integral grid-tile-title" routerLink="/community/4"></a>
-        <p>These colleagues bring NMRbox features to reality. Updating. Integrating. Making our lives easier.</p>
+      <mat-grid-tile class="co-tile" routerLink="/support/1">
+        <img src="/assets/icons/tab_menu/documentation-on.svg" alt="Documentation" height="64">
+        <span>It’s all about getting started from workflows, user guides, tutorials, and basic information about NMRbox.
+            We’re here to help you.</span>
       </mat-grid-tile>
-      <mat-grid-tile class="team-tile">
-        <a id="team-about" class="team-icon-large team-icon-about grid-tile-title" routerLink="/community/4"></a>
-        <p>Perspective and direction from the community.</p>
+      <mat-grid-tile class="co-tile" routerLink="/support/2">
+        <img src="/assets/icons/tab_menu/contact-on.svg" alt="Contact Us" height="64">
+        <span>Get in touch with the NMRbox team for support.</span>
       </mat-grid-tile>
     </mat-grid-list>
   </div>

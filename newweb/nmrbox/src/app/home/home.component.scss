@@ -68,8 +68,15 @@ $nmrbox-blue-dark: #3A4C51;
       padding-right: 25%;
     }
   }
+
+  mat-grid-tile:hover {
+    span {
+      text-decoration: underline;
+    }
+  }
   mat-grid-tile {
     text-align: left;
+    cursor: pointer;
 
     .grid-tile-title {
       position: absolute;
@@ -97,6 +104,15 @@ $nmrbox-blue-dark: #3A4C51;
       text-align: left;
       left: 0px;
       padding-right: 20%;
+    }
+    span {
+      color: #ffffff;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    img {
+      min-width: 200px;
+      max-width: 200px;
     }
   }
 }
