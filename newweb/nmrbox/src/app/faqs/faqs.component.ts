@@ -52,7 +52,7 @@ export class FaqsComponent implements OnInit, AfterViewChecked {
       this.slug = undefined;
     } else {
       this.slug = slug;
-      this.router.navigate(['faqs', slug]);
+      this.router.navigate(['support', '0', slug]);
     }
   }
 

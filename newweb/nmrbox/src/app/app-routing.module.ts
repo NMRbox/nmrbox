@@ -13,7 +13,6 @@ import {SignupComponent} from './authentication/signup.component';
 import {SigninComponent} from './authentication/signin.component';
 import {UserDashboardComponent} from './user-dashboard/user-dashboard.component';
 import {ProfileUpdateComponent} from './user-dashboard/profile-update.component';
-import {FaqsComponent} from './faqs/faqs.component';
 import {ForgetPasswordComponent} from './password-management/forget-password.component';
 
 const routes: Routes = [
@@ -26,6 +25,7 @@ const routes: Routes = [
   {path: 'community/:index', component: CommunityComponent},
   {path: 'support', component: SupportComponent},
   {path: 'support/:index', component: SupportComponent},
+  {path: 'support/:index/:slug', component: SupportComponent},
   {path: 'team', component: TeamListComponent},
   {path: 'team/:index', component: TeamListComponent},
   {path: 'signup', component: SignupComponent},
@@ -34,8 +34,6 @@ const routes: Routes = [
   {path: 'forgot-password', component: ForgetPasswordComponent},
   {path: 'user-dashboard', component: UserDashboardComponent},
   {path: 'profile-update', component: ProfileUpdateComponent},
-  {path: 'faqs', component: FaqsComponent},
-  {path: 'faqs/:slug', component: FaqsComponent},
   {path: '**', redirectTo: '/', pathMatch: 'full'}
 ];
 
