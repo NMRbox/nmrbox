@@ -61,9 +61,9 @@ export class SoftwareListComponent implements OnInit {
 
     const slugMapper = {
       'metabolomics': '1', 'protein-dynamics': '2', 'protein-structure': '3',
-      'intrinsically': '4',
+      'intrinsically': '4', 'binding': '5',
       'spectral': '1', 'chemical-shift': '2', 'molecular-modeling': '3', 'structure': '4',
-      'rdc': '5', 'assignment': '6', 'relaxation': '7'
+      'rdc': '5', 'assignment': '6', 'relaxation': '7', 'validation': '8', 'time-domain': '9'
     };
 
 
