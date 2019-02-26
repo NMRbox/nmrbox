@@ -19,24 +19,29 @@
           [value]='null'>Show all
         </mat-option>
         <mat-option
-          value="1"
+          value="21"
           (click)="filterSelections()">
           <img src="/assets/icons/software_menu/rp-icon-metabolomics-menu.svg" alt="Metabolomics" title="Metabolomics" height="30">
         </mat-option>
         <mat-option
-          value="2"
+          value="22"
           (click)="filterSelections()">
           <img src="/assets/icons/software_menu/rp-icon-protein-dynamics-menu.svg" alt="Protein Dynamics" title="Protein Dynamics" height="30">
         </mat-option>
         <mat-option
-          value="3"
+          value="23"
           (click)="filterSelections()">
           <img src="/assets/icons/software_menu/rp-icon-protein-structure-menu.svg" alt="Protein Structure" title="Protein Structure" height="30">
         </mat-option>
         <mat-option
-          value="4"
+          value="24"
           (click)="filterSelections()">
           <img src="/assets/icons/software_menu/rp-icon-intrinsically-menu.svg" alt="Intrinsically Disordered Proteins" title="Intrinsically Disordered Proteins" height="30">
+        </mat-option>
+        <mat-option
+          value="25"
+          (click)="filterSelections()">
+          <p>Binding</p>
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -92,6 +97,16 @@
           (click)="filterSelections()">
           <img src="./assets/icons/software_menu/sw-icon-relaxation-menu.svg" alt="Relaxation" title="Relaxation" height="22">
         </mat-option>
+        <mat-option
+          value="8"
+          (click)="filterSelections()">
+          <p>Validation</p>
+        </mat-option>
+        <mat-option
+          value="9"
+          (click)="filterSelections()">
+          <p>Time-domain data processing</p>
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -126,9 +141,9 @@
           {{software.synopsis}}
         </p>
       </mat-card-content>
-      <ul class="icon-list">
+      <!--<ul class="icon-list">
         <li *ngFor="let type of software.software_type" class="sw-type-icon-small sw-type-icon-{{softwareSlugs[type['id']]}}"></li>
-      </ul>
+      </ul>-->
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>

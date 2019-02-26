@@ -34,20 +34,22 @@ export class SoftwareListComponent implements OnInit {
       '1': 'Spectrum Analysis', '2': 'Chemical Shift',
       '3': 'Molecular Modeling', '4': 'Structure Visualization',
       '5': 'Residual Dipolar Coupling', '6': 'Assignment',
-      '7': 'Relaxation', null: 'Show all'
+      '7': 'Relaxation', '8': 'Validation', '9': 'Time-domain data processing',
+      null: 'Show all'
     };
     this.softwareSlugs = {
       '1': 'spectral', '2': 'chemical', '3': 'molecular', '4': 'structure',
-      '5': 'rdc', '6': 'assignment', '7': 'relaxation'
+      '5': 'rdc', '6': 'assignment', '7': 'relaxation', '8': 'validation',
+      '9': 'time-domain'
     };
     this.researchProblems = {
-      '1': 'Metabolomics', '2': 'Protein Dynamics',
-      '3': 'Protein Structure', '4': 'Intrinsically Disordered Proteins',
-      null: 'Show all'
+      '21': 'Metabolomics', '22': 'Protein Dynamics',
+      '23': 'Protein Structure', '24': 'Intrinsically Disordered Proteins',
+      '25': 'Binding', null: 'Show all'
     };
     this.researchSlugs = {
       '1': 'metabolomics', '2': 'protein-dynamics', '3': 'protein-structure',
-      '4': 'intrinsically',
+      '4': 'intrinsically', '5': 'binding'
     };
     this.activeResearchProblem = null;
     this.activeSoftwareType = null;
