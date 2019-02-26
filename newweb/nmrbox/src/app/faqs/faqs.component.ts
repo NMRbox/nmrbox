@@ -25,11 +25,13 @@ export class FaqsComponent implements OnInit, AfterViewChecked {
 
   // Scrolls to the active FAQ
   ngAfterViewChecked() {
-    if (!this.scrolled) {
-      const el = document.getElementById('active');
-      if (el) {
+
+    const el = document.getElementById('active');
+    if (el) {
+      if (!this.scrolled) {
         document.getElementById('active').scrollIntoView();
         window.scrollBy(0, -20);
+        this.scrolled = true;
       }
     }
   }
@@ -53,6 +55,7 @@ export class FaqsComponent implements OnInit, AfterViewChecked {
     } else {
       this.slug = slug;
       this.router.navigate(['support', '0', slug]);
+      this.scrolled = false;
     }
   }
 
