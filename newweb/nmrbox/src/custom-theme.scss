@@ -834,3 +834,8 @@ They make the active tab seem lit up by default.
   background: none !important;
 }
 */
+
+/* Don't make the page move when the scroll bar appears. */
+html {
+  overflow-y: scroll;
+}
