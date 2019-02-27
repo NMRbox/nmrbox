@@ -69,14 +69,21 @@ $nmrbox-blue-dark: #3A4C51;
     }
   }
 
-  mat-grid-tile:hover {
-    span {
-      text-decoration: underline;
-    }
+  mat-grid-list {
+    margin-top: 1.5em;
   }
+
   mat-grid-tile {
     text-align: left;
-    cursor: pointer;
+
+    figure {
+      width: 100%;
+      height: 100%;
+      figcaption {
+        color: #ffffff;
+        padding-left: 60px;
+      }
+    }
 
     .grid-tile-title {
       position: absolute;
@@ -88,6 +95,7 @@ $nmrbox-blue-dark: #3A4C51;
       font-size: 1.1em;
       display: block;
     }
+
     ul {
       position: absolute;
       top: 2.5em;
@@ -98,6 +106,7 @@ $nmrbox-blue-dark: #3A4C51;
       padding: 0px;
       line-height: 3em;
     }
+
     p {
       position: absolute;
       top: 2.5em;
@@ -105,17 +114,17 @@ $nmrbox-blue-dark: #3A4C51;
       left: 0px;
       padding-right: 20%;
     }
-    span {
-      color: #ffffff;
-      padding-left: 1em;
-      padding-right: 1em;
-    }
-    img {
-      min-width: 200px;
-      max-width: 200px;
-    }
   }
 }
+
+.co-tile:hover {
+  background-color: rgba(0, 0, 0, .1)
+}
+
+.co-tile {
+  cursor: pointer;
+}
+
 
 #home-community .grid-tile-title, #home-team .grid-tile-title {
   width: 240px;
@@ -130,6 +139,7 @@ $nmrbox-blue-dark: #3A4C51;
       left: 49px;
     }
   }
+
   mat-grid-tile.team-tile {
     p {
       color: $nmrbox-dark-gray;
@@ -142,6 +152,7 @@ $nmrbox-blue-dark: #3A4C51;
     margin-bottom: 5px;
     margin-left: -2px;
   }
+
   p {
     padding-right: 0.5%;
     padding-bottom: 40px;
@@ -158,10 +169,12 @@ swiper {
       border-right: 5px solid $nmrbox-blue-dark;
 
     }
+
     img {
       width: 900px;
       height: 362px;
     }
+
     .swiper-slide-next, .swiper-slide-prev {
       opacity: 0.1;
       -moz-opacity: 0.1;
@@ -171,6 +184,7 @@ swiper {
       background: rgba(0, 0, 0, 0.8); /* An 80% opaque black background */
     }
   }
+
   .swiper-button-next, .swiper-button-prev {
     display: none;
   }
@@ -191,16 +205,19 @@ swiper {
     padding: 20px 10px;
 
   }
+
   .mat-card-title {
     font-weight: bold;
     font-size: 16px;
     line-height: 2%;
     margin: 6px 0;
   }
+
   mat-card-content {
     padding: 10px;
     line-height: 5%;
   }
+
   p {
     margin-bottom: 5px;
   }

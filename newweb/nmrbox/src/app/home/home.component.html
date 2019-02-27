@@ -65,9 +65,9 @@
       tools for finding the software you need, documentation and tutorials for getting the most out of the software, and
       cloud-based virtual machines for executing the software.
     </p>
-    <a routerLink="/support/0"><strong>NMR</strong>box support</a>
+    <!--<a routerLink="/support/0"><strong>NMR</strong>box support</a>
     &nbsp;&nbsp;|&nbsp;&nbsp;
-    <a routerLink="/community/2"><strong>NMR</strong>box under the hood</a>
+    <a routerLink="/community/2"><strong>NMR</strong>box under the hood</a>-->
   </div>
 </section>
 <section id="home-software" class="page-section white-bg">
@@ -80,19 +80,19 @@
       <mat-grid-tile id="rp-tile">
         <h2 class="grid-tile-title">Research problems</h2>
         <mat-grid-list class="software-list" cols="1" rowHeight="60px">
-          <mat-grid-tile class="rp-tile">
+          <mat-grid-tile class="rp-tile co-tile">
             <a id="rs-metabolomics" class="rp-icon-large rp-icon-metabolomics"
                routerLink="/software/research/metabolomics"></a>
           </mat-grid-tile>
-          <mat-grid-tile class="rp-tile">
+          <mat-grid-tile class="rp-tile co-tile">
             <a id="rs-protein-dynamics" class="rp-icon-large rp-icon-protein-dynamics"
                routerLink="/software/research/protein-dynamics"></a>
           </mat-grid-tile>
-          <mat-grid-tile class="rp-tile">
+          <mat-grid-tile class="rp-tile co-tile">
             <a id="rs-protein-structure" class="rp-icon-large rp-icon-protein-structure"
                routerLink="/software/research/protein-structure"></a>
           </mat-grid-tile>
-          <mat-grid-tile class="rp-tile">
+          <mat-grid-tile class="rp-tile co-tile">
             <a id="rs-intrinsically" class="rp-icon-large rp-icon-intrinsically"
                routerLink="/software/research/intrinsically"></a>
           </mat-grid-tile>
@@ -101,30 +101,30 @@
       <mat-grid-tile id="st-tile">
         <h2 class="grid-tile-title">Software types</h2>
         <mat-grid-list class="software-list" cols="2" rowHeight="60px">
-          <mat-grid-tile class="software-type-tile">
+          <mat-grid-tile class="software-type-tile co-tile">
             <a id="sw-spectral" class="sw-type-icon-large sw-type-icon-spectral"
                routerLink="/software/software/spectral"></a>
           </mat-grid-tile>
-          <mat-grid-tile class="software-type-tile">
+          <mat-grid-tile class="software-type-tile co-tile">
             <a id="sw-chemical-shift" class="sw-type-icon-large sw-type-icon-chemical-shift"
                routerLink="/software/software/chemical-shift"></a>
           </mat-grid-tile>
-          <mat-grid-tile class="software-type-tile">
+          <mat-grid-tile class="software-type-tile co-tile">
             <a id="sw-molecular-modeling" class="sw-type-icon-large sw-type-icon-molecular-modeling"
                routerLink="/software/software/molecular-modeling"></a>
           </mat-grid-tile>
-          <mat-grid-tile class="software-type-tile">
+          <mat-grid-tile class="software-type-tile co-tile">
             <a id="sw-structure" class="sw-type-icon-large sw-type-icon-structure"
                routerLink="/software/software/structure"></a>
           </mat-grid-tile>
-          <mat-grid-tile class="software-type-tile">
+          <mat-grid-tile class="software-type-tile co-tile">
             <a id="sw-rdc" class="sw-type-icon-large sw-type-icon-rdc" routerLink="/software/software/rdc"></a>
           </mat-grid-tile>
-          <mat-grid-tile class="software-type-tile">
+          <mat-grid-tile class="software-type-tile co-tile">
             <a id="sw-assignment" class="sw-type-icon-large sw-type-icon-assignment"
                routerLink="/software/software/assignment"></a>
           </mat-grid-tile>
-          <mat-grid-tile class="software-type-tile">
+          <mat-grid-tile class="software-type-tile co-tile">
             <a id="sw-relaxation" class="sw-type-icon-large sw-type-icon-relaxation"
                routerLink="/software/software/relaxation"></a>
           </mat-grid-tile>
@@ -141,41 +141,55 @@
     </p>
     <mat-grid-list cols="2" rowHeight="150px">
       <mat-grid-tile class="co-tile" routerLink="/community/0">
-        <img src="/assets/icons/tab_menu/events-on.svg" alt="Events" height="64">
-        <span>Conferences. Meetings. Workshops. Our calendar will help you plan ahead.</span>
+        <figure>
+          <img src="/assets/icons/tab_menu/events-on.svg" alt="Events" height="64">
+          <figcaption>Conferences. Meetings. Workshops. Our calendar will help you plan ahead.</figcaption>
+        </figure>
       </mat-grid-tile>
       <mat-grid-tile class="co-tile" routerLink="/community/1">
-        <img src="/assets/icons/tab_menu/publications-on.svg" alt="Publications" height="64">
-        <span>Publications about NMRbox and information on how to cite NMRbox.</span>
+        <figure>
+          <img src="/assets/icons/tab_menu/publications-on.svg" alt="Publications" height="64">
+          <figcaption>Publications about NMRbox and information on how to cite NMRbox.</figcaption>
+        </figure>
       </mat-grid-tile>
       <mat-grid-tile class="co-tile" routerLink="/community/2">
-        <img src="/assets/icons/tab_menu/connect-on.svg" alt="Connect" height="64">
-        <span>Get involved in the NMRbox project.</span>
+        <figure>
+          <img src="/assets/icons/tab_menu/connect-on.svg" alt="Connect" height="64">
+          <figcaption>Get involved in the NMRbox project.</figcaption>
+        </figure>
       </mat-grid-tile>
       <mat-grid-tile class="co-tile" routerLink="/community/3">
-        <img src="/assets/icons/tab_menu/teams-on.svg" alt="Teams" height="64">
-        <span>Learn about the people behind NMRbox.</span>
+        <figure>
+          <img src="/assets/icons/tab_menu/teams-on.svg" alt="Teams" height="64">
+          <figcaption>Learn about the people behind NMRbox.</figcaption>
+        </figure>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
 </section>
 <section id="home-team" class="page-section orange-bg">
   <div class="content">
-    <h1 class="white">Get access to <br/><strong>NMR</strong>box <strong>support</strong></h1>
+    <h1 class="white">Get access to <br/><strong>NMR</strong>box <strong>Support</strong></h1>
     <p>We're here to help.</p>
     <mat-grid-list cols="2" rowHeight="150px">
       <mat-grid-tile class="co-tile" routerLink="/support/0">
-        <img src="/assets/icons/tab_menu/FAQ-on.svg" alt="FAQs" height="64">
-        <span>Frequently asked questions about NMRbox.</span>
+        <figure>
+          <img src="/assets/icons/tab_menu/FAQ-on.svg" alt="FAQs" height="64">
+          <figcaption>Frequently asked questions about NMRbox.</figcaption>
+        </figure>
       </mat-grid-tile>
       <mat-grid-tile class="co-tile" routerLink="/support/1">
-        <img src="/assets/icons/tab_menu/documentation-on.svg" alt="Documentation" height="64">
-        <span>It’s all about getting started from workflows, user guides, tutorials, and basic information about NMRbox.
-            We’re here to help you.</span>
+        <figure>
+          <img src="/assets/icons/tab_menu/documentation-on.svg" alt="Documentation" height="64">
+          <figcaption>It’s all about getting started from workflows, user guides, tutorials, and basic information about NMRbox.
+            We’re here to help you.</figcaption>
+        </figure>
       </mat-grid-tile>
       <mat-grid-tile class="co-tile" routerLink="/support/2">
-        <img src="/assets/icons/tab_menu/contact-on.svg" alt="Contact Us" height="64">
-        <span>Get in touch with the NMRbox team for support.</span>
+        <figure>
+          <img src="/assets/icons/tab_menu/contact-on.svg" alt="Contact Us" height="64">
+          <figcaption>Get in touch with the NMRbox team for support.</figcaption>
+        </figure>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
