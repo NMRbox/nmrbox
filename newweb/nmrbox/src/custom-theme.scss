@@ -128,6 +128,12 @@ a:hover {
   h1, h2, h3, p, li {
     color: #fff;
   }
+
+  figure {
+    figcaption {
+      padding-left: 68px;
+    }
+  }
 }
 
 .blue-med-light-bg {
@@ -167,6 +173,12 @@ a:hover {
   color: #fff;
   h1, h2, h3, p {
     color: #fff;
+  }
+
+  figure {
+    figcaption {
+      padding-left: 60px;
+    }
   }
 }
 
