@@ -31,16 +31,17 @@ export class SoftwareListComponent implements OnInit {
   ) {
     this.filteredList = [];
     this.softwareTypes = {
-      '1': 'Spectrum Analysis', '2': 'Chemical Shift',
+      '1': 'Spectrum Analysis', '2': 'Predictor',
       '3': 'Molecular Modeling', '4': 'Structure Visualization',
       '5': 'Residual Dipolar Coupling', '6': 'Assignment',
       '7': 'Relaxation', '8': 'Validation', '9': 'Time-domain data processing',
+      '10': 'Tools / Utilities', '11': 'SAXS / CryoEM',
       null: 'Show all'
     };
     this.softwareSlugs = {
       '1': 'spectral', '2': 'chemical', '3': 'molecular', '4': 'structure',
       '5': 'rdc', '6': 'assignment', '7': 'relaxation', '8': 'validation',
-      '9': 'time-domain'
+      '9': 'time-domain', '10': 'tools', '11': 'saxs-cryoem'
     };
     this.researchProblems = {
       '21': 'Metabolomics', '22': 'Protein Dynamics',
@@ -63,7 +64,8 @@ export class SoftwareListComponent implements OnInit {
       'metabolomics': '1', 'protein-dynamics': '2', 'protein-structure': '3',
       'intrinsically': '4', 'binding': '5',
       'spectral': '1', 'chemical-shift': '2', 'molecular-modeling': '3', 'structure': '4',
-      'rdc': '5', 'assignment': '6', 'relaxation': '7', 'validation': '8', 'time-domain': '9'
+      'rdc': '5', 'assignment': '6', 'relaxation': '7', 'validation': '8', 'time-domain': '9',
+      'tools': '10', 'saxs-cryoem': '11'
     };
 
 
