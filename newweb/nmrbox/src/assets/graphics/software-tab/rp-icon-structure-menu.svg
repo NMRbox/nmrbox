@@ -13,12 +13,12 @@
    id="Layer_1"
    x="0px"
    y="0px"
-   width="63.145836"
+   width="61.371998"
    height="23.533894"
-   viewBox="0 0 63.145836 23.533894"
+   viewBox="0 0 61.371998 23.533894"
    enable-background="new 0 0 240 40"
    xml:space="preserve"
-   sodipodi:docname="rp-icon-dynamics-menu.svg"
+   sodipodi:docname="rp-icon-structure-menu.svg"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"><metadata
      id="metadata350"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
@@ -41,7 +41,7 @@
      fit-margin-right="2"
      fit-margin-bottom="2"
      inkscape:zoom="12.792484"
-     inkscape:cx="23.008783"
+     inkscape:cx="17.784067"
      inkscape:cy="12.544575"
      inkscape:window-x="2738"
      inkscape:window-y="124"
@@ -142,7 +142,7 @@
            id="tspan4549"
            x="14.307422"
            y="16.079311"
-           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:10.66666698px;font-family:Avenir;-inkscape-font-specification:'Avenir, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;writing-mode:lr-tb;text-anchor:start;fill:#777777;fill-opacity:1;stroke-width:0.71876061px">Dynamics</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:10.66666698px;font-family:Avenir;-inkscape-font-specification:'Avenir, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;writing-mode:lr-tb;text-anchor:start;fill:#777777;fill-opacity:1;stroke-width:0.71876061px">Structure</tspan></text>
 </g><circle
        id="circle241"
        r="1.1422229"
