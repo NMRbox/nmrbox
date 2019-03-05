@@ -49,8 +49,8 @@ export class SoftwareListComponent implements OnInit {
       '25': 'Binding', null: 'Show all'
     };
     this.researchSlugs = {
-      '1': 'metabolomics', '2': 'protein-dynamics', '3': 'protein-structure',
-      '4': 'intrinsically', '5': 'binding'
+      '21': 'metabolomics', '22': 'protein-dynamics', '23': 'protein-structure',
+      '24': 'intrinsically', '25': 'binding'
     };
     this.activeResearchProblem = null;
     this.activeSoftwareType = null;
@@ -61,8 +61,8 @@ export class SoftwareListComponent implements OnInit {
     this.getSoftwareList();
 
     const slugMapper = {
-      'metabolomics': '1', 'protein-dynamics': '2', 'protein-structure': '3',
-      'intrinsically': '4', 'binding': '5',
+      'metabolomics': '21', 'protein-dynamics': '22', 'protein-structure': '23',
+      'intrinsically': '24', 'binding': '25',
       'spectral': '1', 'chemical-shift': '2', 'molecular-modeling': '3', 'structure': '4',
       'rdc': '5', 'assignment': '6', 'relaxation': '7', 'validation': '8', 'time-domain': '9',
       'tools': '10', 'saxs-cryoem': '11'
@@ -131,6 +131,8 @@ export class SoftwareListComponent implements OnInit {
         this.filteredList.push(software);
       }
     }
+
+    console.log(this.activeResearchProblem);
   }
 
   // Get the full software list

@@ -36,6 +36,6 @@ export class TeamListComponent implements OnInit {
       index = 0;
     }
     this.tabIndex = index;
-    this.router.navigate(['/team', index]);
+    this.router.navigate(['/team-tab', index]);
   }
 }
