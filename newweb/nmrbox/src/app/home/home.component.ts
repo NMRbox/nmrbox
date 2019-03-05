@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 import {EventModel} from '../community/event.model';
 import {CommunityService} from '../community/community.service';
 import {AuthenticationService} from '../authentication/authentication.service';
+import {SoftwareService} from '../software/software.service';
 
 @Component({
   selector: 'app-home-page',
@@ -13,6 +14,8 @@ export class HomeComponent implements OnInit {
 
   appURL: string;
   upcomingEvents: EventModel[];
+  softwareTypeFrequency: Array<Array<string>>;
+
   public notifications: any = {message: '', type: ''};
 
   config: Object = {
@@ -30,8 +33,10 @@ export class HomeComponent implements OnInit {
   };
 
   constructor(public communityService: CommunityService,
-              public authService: AuthenticationService) {
+              public authService: AuthenticationService,
+              public softwareService: SoftwareService) {
     this.upcomingEvents = [];
+    this.softwareService.softwareTypeFrequency.subscribe(softwareTypeFrequency => this.softwareTypeFrequency = softwareTypeFrequency);
   }
 
   ngOnInit(): void {

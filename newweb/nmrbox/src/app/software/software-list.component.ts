@@ -58,8 +58,6 @@ export class SoftwareListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getSoftwareList();
-
     const slugMapper = {
       'metabolomics': '21', 'protein-dynamics': '22', 'protein-structure': '23',
       'intrinsically': '24', 'binding': '25',
@@ -68,8 +66,12 @@ export class SoftwareListComponent implements OnInit {
       'tools': '10', 'saxs-cryoem': '11'
     };
 
-
     const parent = this;
+    this.softwareService.software.subscribe(softwareList => {
+        parent.softwareList = softwareList;
+        parent.filterSelections();
+      }
+    );
     this.route.params.subscribe(function (params) {
       if (params['filterType'] === 'software') {
         parent.activeSoftwareType = slugMapper[params['filter']];
@@ -131,17 +133,6 @@ export class SoftwareListComponent implements OnInit {
         this.filteredList.push(software);
       }
     }
-
-    console.log(this.activeResearchProblem);
-  }
-
-  // Get the full software list
-  getSoftwareList(): void {
-    this.softwareService.getSoftwareList().then(softwareList => {
-        this.softwareList = softwareList;
-        this.filterSelections();
-      }
-    );
   }
 
   resetSelections(): void {
