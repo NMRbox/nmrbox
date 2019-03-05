@@ -33,8 +33,7 @@ export class FaqsService {
     for (const faq of this.allFAQs) {
       if (faq.question.toLowerCase().indexOf(term) > -1) {
         this.faqs.push(faq);
-      }
-      if (faq.answer.toLowerCase().indexOf(term) > -1) {
+      } else if (faq.answer.toLowerCase().indexOf(term) > -1) {
         this.faqs.push(faq);
       }
     }
