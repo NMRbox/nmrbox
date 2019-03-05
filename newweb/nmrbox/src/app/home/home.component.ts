@@ -36,7 +36,10 @@ export class HomeComponent implements OnInit {
               public authService: AuthenticationService,
               public softwareService: SoftwareService) {
     this.upcomingEvents = [];
-    this.softwareService.softwareTypeFrequency.subscribe(softwareTypeFrequency => this.softwareTypeFrequency = softwareTypeFrequency);
+    this.softwareService.softwareTypeFrequency.subscribe(softwareTypeFrequency => {
+      this.softwareTypeFrequency = softwareTypeFrequency;
+      console.log(this.softwareTypeFrequency);
+    });
   }
 
   ngOnInit(): void {

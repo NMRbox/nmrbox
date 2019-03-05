@@ -4,7 +4,6 @@ import {ActivatedRoute} from '@angular/router';
 import {SoftwareModel} from './software.model';
 import {SoftwareService} from './software.service';
 
-
 @Component({
   selector: 'app-my-software-list',
   templateUrl: './software-list.component.html',
@@ -12,8 +11,6 @@ import {SoftwareService} from './software.service';
 })
 export class SoftwareListComponent implements OnInit {
 
-  softwareTypes: {};
-  researchProblems: {};
   activeSoftwareType;
   activeResearchProblem;
   activeNameSearch;
@@ -21,37 +18,12 @@ export class SoftwareListComponent implements OnInit {
   softwareList: SoftwareModel[];
 
   /* Routing filters */
-  private researchSlugs;
-  private softwareSlugs;
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private softwareService: SoftwareService
   ) {
     this.filteredList = [];
-    this.softwareTypes = {
-      '1': 'Spectrum Analysis', '2': 'Predictor',
-      '3': 'Molecular Modeling', '4': 'Structure Visualization',
-      '5': 'Residual Dipolar Coupling', '6': 'Assignment',
-      '7': 'Relaxation', '8': 'Validation', '9': 'Time-domain data processing',
-      '10': 'Tools / Utilities', '11': 'SAXS / CryoEM',
-      null: 'Show all'
-    };
-    this.softwareSlugs = {
-      '1': 'spectral', '2': 'chemical', '3': 'molecular', '4': 'structure',
-      '5': 'rdc', '6': 'assignment', '7': 'relaxation', '8': 'validation',
-      '9': 'time-domain', '10': 'tools', '11': 'saxs-cryoem'
-    };
-    this.researchProblems = {
-      '21': 'Metabolomics', '22': 'Protein Dynamics',
-      '23': 'Protein Structure', '24': 'Intrinsically Disordered Proteins',
-      '25': 'Binding', null: 'Show all'
-    };
-    this.researchSlugs = {
-      '21': 'metabolomics', '22': 'protein-dynamics', '23': 'protein-structure',
-      '24': 'intrinsically', '25': 'binding'
-    };
     this.activeResearchProblem = null;
     this.activeSoftwareType = null;
     this.activeNameSearch = null;

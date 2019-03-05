@@ -53,3 +53,7 @@ mat-grid-list {
   width: calc(100% - 30px);
   height: calc(100% - 30px);
 }
+
+.software-selector-dropdown {
+  min-width: calc(100% + 60px) !important;
+}

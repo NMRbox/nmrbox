@@ -11,6 +11,29 @@ export class SoftwareService {
   public softwareTypeFrequency: BehaviorSubject<Array<Array<string>>>;
   public software: BehaviorSubject<SoftwareModel[]>;
 
+  public softwareTypes = {
+    '1': 'Spectrum Analysis', '2': 'Predictor',
+    '3': 'Molecular Modeling', '4': 'Structure Visualization',
+    '5': 'Residual Dipolar Coupling', '6': 'Relaxation',
+    '7': 'Data Translator', '8': 'Validation', '9': 'Time-domain data processing',
+    '10': 'Tools / Utilities', '11': 'SAXS / CryoEM',
+    null: 'Show all'
+  };
+  public softwareSlugs = {
+    '1': 'spectral-analysis', '2': 'predictor', '3': 'molecular-modeling', '4': 'structure-visualization',
+    '5': 'rdc', '6': 'relaxation', '7': 'data-translator', '8': 'validation',
+    '9': 'time-domain', '10': 'tools', '11': 'saxs-cryoem'
+  };
+  public researchProblems = {
+    '21': 'Metabolomics', '22': 'Protein Dynamics',
+    '23': 'Protein Structure', '24': 'Intrinsically Disordered Proteins',
+    '25': 'Binding', null: 'Show all'
+  };
+  public researchSlugs = {
+    '21': 'metabolomics', '22': 'protein-dynamics', '23': 'protein-structure',
+    '24': 'intrinsically', '25': 'binding'
+  };
+
   constructor(private http: HttpClient) {
     this.softwareTypeFrequency = new BehaviorSubject([]);
     this.software = new BehaviorSubject([]);
