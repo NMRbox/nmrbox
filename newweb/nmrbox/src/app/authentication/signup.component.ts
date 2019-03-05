@@ -4,7 +4,7 @@ import {NgForm} from '@angular/forms';
 import {AuthenticationService} from './authentication.service';
 
 /* Import country updater code */
-import * as crs from '../../javascript/crs.min';
+import * as crs from '../../assets/javascript/crs.min';
 
 @Component({
   selector: 'app-signup',

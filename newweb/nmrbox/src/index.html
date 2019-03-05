@@ -8,29 +8,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
-  <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">-->
 
+  <!--
+  These are now built into the project
   <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.js"></script>
+  <script src="https://npmcdn.com/web-animations-js@2.2.1"></script>
+  -->
+
+  <!-- Swiper js -->
+  <script src="/assets/javascript/swiper.min.js"></script>
 
   <!-- Polyfill for Web Animations -->
-  <script src="https://npmcdn.com/web-animations-js@2.2.1"></script>
-
+  <script src="/assets/javascript/web-animations-js@2.2.1.min.js"></script>
 </head>
+
 <body class="mat-app-background">
   <app-root></app-root>
 </body>
 <footer>
   <div class="footer-wrapper">
-    <md-grid-tile id="footer-logo">
+    <mat-grid-tile id="footer-logo">
       <span class="nmrbox-logo-med-light"></span>
-    </md-grid-tile>
-    <md-grid-tile id="footer-text">
-        <a href="http://www.btrportal.org/">NIH Biomedical Resource Portal</a>
-        <br>
-        &copy;&nbsp;<script>new Date().getFullYear()>2010&&document.write(new Date().getFullYear());</script>&nbsp;NMRbox
-    </md-grid-tile>
+    </mat-grid-tile>
+    <mat-grid-tile id="footer-text">
+      <p><a href="http://www.btrportal.org/">NIH Biomedical Resource Portal</a></p>
+      <p><a href="#/pages/contact-us">Contact us</a></p>
+      <p><a href="#/signup">Register for an account</a></p>
+      <p>&copy;&nbsp;<script>new Date().getFullYear() > 2010 && document.write(new Date().getFullYear());</script>&nbsp;NMRbox</p>
+    </mat-grid-tile>
   </div>
 </footer>
 </html>

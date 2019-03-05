@@ -5,7 +5,7 @@ import {AuthenticationService} from '../authentication/authentication.service';
 import {PersonModel} from '../authentication/person.model';
 
 /* Import country updater code */
-import * as crs from '../../javascript/crs.min';
+import * as crs from '../../assets/javascript/crs.min';
 
 @Component({
   selector: 'app-profile-update',
