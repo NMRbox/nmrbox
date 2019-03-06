@@ -111,6 +111,14 @@
                                                         </td>
                                                     </tr>
                                                     <tr *ngIf="showHide">
+                                                      <td colspan="2">
+                                                        <p>Password requirements: The password must be a minimum of 8
+                                                          characters and include a character from 3 of the following 4
+                                                          groups: upper case, lower case, numbers, and symbols. Furthermore,
+                                                          the characters '&' and '$' are not allowed.</p>
+                                                      </td>
+                                                    </tr>
+                                                    <tr *ngIf="showHide">
                                                         <td>New Password: </td>
                                                         <td>
                                                           <label>
@@ -132,6 +140,7 @@
                                                             </span>
                                                         </td>
                                                     </tr>
+
                                                     <!--<tr>
                                                         <td>Classification Groups</td>
                                                         <td>
