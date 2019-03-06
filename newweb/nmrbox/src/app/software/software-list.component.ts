@@ -82,7 +82,7 @@ export class SoftwareListComponent implements OnInit {
     }
     const lowerName = name.toLowerCase();
     return software.short_title.toLowerCase().includes(lowerName) || software.long_title.toLowerCase().includes(lowerName) ||
-      software.description.toLowerCase().includes(lowerName) || software.synopsis.toLowerCase().includes(lowerName);
+      software.synopsis.toLowerCase().includes(lowerName);
   }
 
   // Filter the software based on the menu
