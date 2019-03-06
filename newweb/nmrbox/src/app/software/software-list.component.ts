@@ -80,7 +80,9 @@ export class SoftwareListComponent implements OnInit {
     if (name === null) {
       return true;
     }
-    return software.short_title.toLowerCase().includes(name.toLowerCase());
+    const lowerName = name.toLowerCase();
+    return software.short_title.toLowerCase().includes(lowerName) || software.long_title.toLowerCase().includes(lowerName) ||
+      software.description.toLowerCase().includes(lowerName) || software.synopsis.toLowerCase().includes(lowerName);
   }
 
   // Filter the software based on the menu
