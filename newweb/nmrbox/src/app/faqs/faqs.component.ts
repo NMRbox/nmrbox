@@ -2,6 +2,7 @@ import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 /* import service files */
 import {FaqsService} from './faqs.service';
+import {FaqsModel} from './faqs.model';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class FaqsComponent implements OnInit, AfterViewChecked {
   slug: string;
   term: string;
   scrolled: boolean;
+  faqs: Array<FaqsModel>;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,6 +40,10 @@ export class FaqsComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
 
+    this.faqService.allFAQs.subscribe(faqs => {
+      this.faqs = faqs;
+    });
+
     /* Determine if they are viewing a specific FAQ */
     const parent = this;
     this.route.params.subscribe(function (params) {
@@ -60,6 +66,6 @@ export class FaqsComponent implements OnInit, AfterViewChecked {
   }
 
   searchFAQs(term: string): void {
-    this.faqService.searchFAQs(term);
+    this.faqs = this.faqService.searchFAQs(term);
   }
 }

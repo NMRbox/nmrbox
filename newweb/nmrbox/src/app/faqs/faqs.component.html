@@ -20,7 +20,7 @@
       </div>
 
       <div class="container card-box">
-        <mat-card *ngFor="let faq of faqService.faqs">
+        <mat-card *ngFor="let faq of faqs">
           <div *ngIf="faq.slug==slug" id="active"></div>
           <div>
             <div (click)="toggleSlug(faq.slug)">
