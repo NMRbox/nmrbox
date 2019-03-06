@@ -28,8 +28,15 @@ export class CommunityComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /* Workshops */
-    this.getEventsList();
+
+    // Keep the events lists up to date locally
+    this.communityService.upcomingEvents.subscribe(upcomingEvents => {
+      this.upcoming = upcomingEvents;
+    });
+
+    this.communityService.pastEvents.subscribe(pastEvents => {
+      this.completed = pastEvents;
+    });
 
     // Tabs: go to specific subsection
     this.route.params.subscribe(params => {
@@ -50,19 +57,12 @@ export class CommunityComponent implements OnInit {
     this.router.navigate(['/community', index]);
   }
 
-  getEventsList(): void {
-    this.communityService.getAllEvents().then(events => {
-      this.upcoming = events[0] as EventModel[];
-      this.completed = events[1] as EventModel[];
-    });
-  }
-
   onWorkshopRegister(workshopName) {
     this.authService.workshopRegister(workshopName)
       .subscribe(
         response => this.notifications = response,
         error => this.notifications = error,
-        () => this.getEventsList()
+        () => this.communityService.updateEvents()
       );
   }
 }

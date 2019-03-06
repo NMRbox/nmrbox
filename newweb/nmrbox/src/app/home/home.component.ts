@@ -38,18 +38,14 @@ export class HomeComponent implements OnInit {
     this.upcomingEvents = [];
     this.softwareService.softwareTypeFrequency.subscribe(softwareTypeFrequency => {
       this.softwareTypeFrequency = softwareTypeFrequency;
-      console.log(this.softwareTypeFrequency);
     });
   }
 
   ngOnInit(): void {
     this.appURL = environment.appUrl;
-    this.getEventsList();
-  }
 
-  getEventsList(): void {
-    this.communityService.getAllEvents().then(events => {
-      this.upcomingEvents = events[0] as EventModel[];
+    this.communityService.upcomingEvents.subscribe(upcomingEvents => {
+      this.upcomingEvents = upcomingEvents;
     });
   }
 
@@ -59,7 +55,7 @@ export class HomeComponent implements OnInit {
       .subscribe(
         response => this.notifications = response,
         error => this.notifications = error,
-        () => this.getEventsList()
+        () => this.communityService.updateEvents()
       );
   }
 }
