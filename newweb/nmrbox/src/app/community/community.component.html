@@ -71,7 +71,8 @@
           <div class="grid-content-wrapper">
             <h2 class="blue">Past Events</h2>
             <mat-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
-              <mat-grid-tile class="tile-solid" *ngFor="let event of completed">
+              <a [href]="event.url" target="_blank" *ngFor="let event of completed">
+                <mat-grid-tile class="tile-solid" >
                 <mat-card class="workshop-card">
                   <mat-card-header>
                     <mat-card-title>{{event.title}}</mat-card-title>
@@ -79,10 +80,10 @@
                   <mat-card-content>
                     <p>{{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}</p>
                     <p>{{event.location}}</p>
-                    <p><a [href]="event.url">More information</a></p>
                   </mat-card-content>
                 </mat-card>
               </mat-grid-tile>
+              </a>
             </mat-grid-list>
           </div>
         </div>
@@ -108,8 +109,6 @@
                   </mat-card-header>
                   <mat-card-content>
                     <p>Lists of NMRbox research journal and publications</p>
-                    <br/>
-                    <a routerLink="/pages/publications">Read more</a>
                   </mat-card-content>
                 </mat-card>
               </mat-grid-tile>
@@ -121,8 +120,6 @@
                   </mat-card-header>
                   <mat-card-content>
                     <p>How to acknowledge NMRbox</p>
-                    <br/>
-                    <a routerLink="/pages/acknowledge-us">Read More</a>
                   </mat-card-content>
                 </mat-card>
               </mat-grid-tile>
@@ -152,8 +149,6 @@
                   </mat-card-header>
                   <mat-card-content>
                     <p>An comprehensive overview of the NMRbox center mission and objectives.</p>
-                    <br/>
-                    <a routerLink="/pages/overview">Read More</a>
                   </mat-card-content>
                 </mat-card>
               </mat-grid-tile>
@@ -165,37 +160,38 @@
                   </mat-card-header>
                   <mat-card-content>
                     <p>Instruction of how to initiate a collaboration with the NMRbox Team.</p>
-                    <br/>
-                    <a routerLink="/pages/initiating-a-collaboration">Read More</a>
                   </mat-card-content>
                 </mat-card>
               </mat-grid-tile>
 
-              <mat-grid-tile class="tile-solid tile-transparent">
-                <mat-card class="standard-card tile-card-short">
-                  <mat-card-header>
-                    <mat-card-title>Forum</mat-card-title>
-                  </mat-card-header>
-                  <mat-card-content>
-                    <p>Follow the NMRbox community conversations on our
-                      <a href="https://groups.google.com/forum/#!forum/nmrbox" target="_blank">Google group</a>
-                    </p>
-                  </mat-card-content>
-                </mat-card>
-              </mat-grid-tile>
+              <a href="https://groups.google.com/forum/#!forum/nmrbox" target="_blank">
+                <mat-grid-tile class="tile-solid tile-transparent">
+                  <mat-card class="standard-card tile-card-short">
+                    <mat-card-header>
+                      <mat-card-title>Forum</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                      <p>Follow the NMRbox community conversations on our Google group.
+                      </p>
+                    </mat-card-content>
+                  </mat-card>
+                </mat-grid-tile>
+              </a>
 
-              <mat-grid-tile class="tile-solid tile-transparent">
-                <mat-card class="standard-card tile-card-short">
-                  <mat-card-header>
-                    <mat-card-title>Social Media</mat-card-title>
-                  </mat-card-header>
-                  <mat-card-content>
-                    <p>Follow the NMRbox community conversations on our
-                      <a href="https://twitter.com/@NMRbox" target="_blank">Twitter page</a>
-                    </p>
-                  </mat-card-content>
-                </mat-card>
-              </mat-grid-tile>
+              <a href="https://twitter.com/@NMRbox" target="_blank">
+                <mat-grid-tile class="tile-solid tile-transparent">
+                  <mat-card class="standard-card tile-card-short">
+                    <mat-card-header>
+                      <mat-card-title>Social Media</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                      <p>Follow the NMRbox community conversations on our
+                        Twitter page.
+                      </p>
+                    </mat-card-content>
+                  </mat-card>
+                </mat-grid-tile>
+              </a>
 
               <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/newsletters">
                 <mat-card class="standard-card tile-card-short">
@@ -204,8 +200,6 @@
                   </mat-card-header>
                   <mat-card-content>
                     <p>Our first edition of the "Inside NMRbox" newsletter is now available</p>
-                    <br/>
-                    <a routerLink="/pages/newsletters">Read more</a>
                   </mat-card-content>
                 </mat-card>
               </mat-grid-tile>
@@ -236,8 +230,6 @@
                   </mat-card-header>
                   <mat-card-content>
                     <p>Information about the leaders of the NMRbox project.</p>
-                    <br/>
-                    <a routerLink="/pages/people-leadership">Read more</a>
                   </mat-card-content>
                 </mat-card>
               </mat-grid-tile>
@@ -249,8 +241,6 @@
                   </mat-card-header>
                   <mat-card-content>
                     <p>A list of the NMRbox staff members.</p>
-                    <br/>
-                    <a routerLink="/pages/people-all-staff">Read More</a>
                   </mat-card-content>
                 </mat-card>
               </mat-grid-tile>
@@ -262,8 +252,6 @@
                   </mat-card-header>
                   <mat-card-content>
                     <p>The advisory board members.</p>
-                    <br/>
-                    <a routerLink="/pages/people-eab">Read More</a>
                   </mat-card-content>
                 </mat-card>
               </mat-grid-tile>
