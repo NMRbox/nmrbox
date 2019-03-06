@@ -30,13 +30,7 @@ export class SoftwareListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const slugMapper = {
-      'metabolomics': '21', 'protein-dynamics': '22', 'protein-structure': '23',
-      'intrinsically': '24', 'binding': '25',
-      'spectral': '1', 'chemical-shift': '2', 'molecular-modeling': '3', 'structure': '4',
-      'rdc': '5', 'assignment': '6', 'relaxation': '7', 'validation': '8', 'time-domain': '9',
-      'tools': '10', 'saxs-cryoem': '11'
-    };
+
 
     const parent = this;
     this.softwareService.software.subscribe(softwareList => {
@@ -46,9 +40,9 @@ export class SoftwareListComponent implements OnInit {
     );
     this.route.params.subscribe(function (params) {
       if (params['filterType'] === 'software') {
-        parent.activeSoftwareType = slugMapper[params['filter']];
+        parent.activeSoftwareType = parent.softwareService.slugMapper[params['filter']];
       } else if (params['filterType'] === 'research') {
-        parent.activeResearchProblem = slugMapper[params['filter']];
+        parent.activeResearchProblem = parent.softwareService.slugMapper[params['filter']];
       } else if (params['filterType'] === 'name') {
         parent.activeNameSearch = params['filter'];
       }

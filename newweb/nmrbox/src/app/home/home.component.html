@@ -76,68 +76,34 @@
     <p>
       You can choose by category. Or you can view <a routerLink="/software">all software</a>.
     </p>
-    <mat-grid-list cols="2" rowHeight="320px">
+    <mat-grid-list cols="2" rowHeight="380px">
       <mat-grid-tile id="rp-tile">
         <h2 class="grid-tile-title">Research problems</h2>
         <mat-grid-list class="software-list" cols="1" rowHeight="60px">
-          <mat-grid-tile class="rp-tile co-tile">
-            <a id="rs-metabolomics" class="rp-icon-large rp-icon-metabolomics"
-               routerLink="/software/research/metabolomics"></a>
+          <mat-grid-tile *ngFor="let index of ['21','22','23','24','25']" class="co-tile"
+                         [routerLink]="['/software', 'research', softwareService.researchSlugs[index]]">
+            <figure>
+              <img src="/assets/graphics/software-tab/rp-icon-{{softwareService.researchSlugs[index]}}-menu.svg"
+                   [alt]="softwareService.researchProblems[index]"
+                   [title]="softwareService.researchProblems[index]"
+                   height="50">
+            </figure>
           </mat-grid-tile>
-          <mat-grid-tile class="rp-tile co-tile">
-            <a id="rs-protein-dynamics" class="rp-icon-large rp-icon-protein-dynamics"
-               routerLink="/software/research/protein-dynamics"></a>
-          </mat-grid-tile>
-          <mat-grid-tile class="rp-tile co-tile">
-            <a id="rs-protein-structure" class="rp-icon-large rp-icon-protein-structure"
-               routerLink="/software/research/protein-structure"></a>
-          </mat-grid-tile>
-          <mat-grid-tile class="rp-tile co-tile">
-            <a id="rs-intrinsically" class="rp-icon-large rp-icon-intrinsically"
-               routerLink="/software/research/intrinsically"></a>
-          </mat-grid-tile>
-
         </mat-grid-list>
       </mat-grid-tile>
       <mat-grid-tile id="st-tile">
-        <h2 class="grid-tile-title">Software types</h2>
-        <mat-grid-list class="software-list" cols="2" rowHeight="45px">
-          <mat-grid-tile class="software-type-tile co-tile">
-            <a id="sw-spectral" class="sw-type-icon-large sw-type-icon-spectral"
-               routerLink="/software/software/spectral"></a>
+        <h2 class="grid-tile-title">Most common software types</h2>
+        <mat-grid-list class="software-list" cols="1" rowHeight="60px">
+          <mat-grid-tile *ngFor="let s of softwareTypeFrequency.slice(0,5)" class="co-tile"
+                         [routerLink]="['/software', 'software', softwareService.softwareSlugs[s[0]]]">
+            <figure>
+              <img src="/assets/graphics/software-tab/sw-icon-{{softwareService.softwareSlugs[s[0]]}}-menu.svg"
+                   [alt]="softwareService.softwareTypes[s[0]]"
+                   [title]="softwareService.softwareTypes[s[0]]"
+                   height="30">
+              <figcaption>{{s[1]}} software packages.</figcaption>
+            </figure>
           </mat-grid-tile>
-          <mat-grid-tile class="software-type-tile co-tile">
-            <a id="sw-chemical-shift" class="sw-type-icon-large sw-type-icon-chemical-shift"
-               routerLink="/software/software/predictor"></a>
-          </mat-grid-tile>
-          <mat-grid-tile class="software-type-tile co-tile">
-            <a id="sw-molecular-modeling" class="sw-type-icon-large sw-type-icon-molecular-modeling"
-               routerLink="/software/software/molecular-modeling"></a>
-          </mat-grid-tile>
-          <mat-grid-tile class="software-type-tile co-tile">
-            <a id="sw-structure" class="sw-type-icon-large sw-type-icon-structure"
-               routerLink="/software/software/structure"></a>
-          </mat-grid-tile>
-          <mat-grid-tile class="software-type-tile co-tile">
-            <a id="sw-rdc" class="sw-type-icon-large sw-type-icon-rdc" routerLink="/software/software/rdc"></a>
-          </mat-grid-tile>
-          <mat-grid-tile class="software-type-tile co-tile">
-            <a id="sw-assignment" class="sw-type-icon-large sw-type-icon-assignment"
-               routerLink="/software/software/assignment"></a>
-          </mat-grid-tile>
-          <mat-grid-tile class="software-type-tile co-tile">
-            <a id="sw-relaxation" class="sw-type-icon-large sw-type-icon-relaxation"
-               routerLink="/software/software/relaxation"></a>
-          </mat-grid-tile>
-          <mat-grid-tile class="software-type-tile co-tile">
-            <a id="sw-validation" class="sw-type-icon-large sw-type-icon-validation"
-               routerLink="/software/software/validation"></a>
-          </mat-grid-tile>
-
-          <!--<mat-grid-tile *ngFor="let s of softwareTypeFrequency">
-            <p>{{s}}</p>
-          </mat-grid-tile>-->
-
         </mat-grid-list>
       </mat-grid-tile>
     </mat-grid-list>

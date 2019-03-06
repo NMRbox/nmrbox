@@ -34,6 +34,14 @@ export class SoftwareService {
     '24': 'intrinsically', '25': 'binding'
   };
 
+  public slugMapper = {
+    'metabolomics': '21', 'protein-dynamics': '22', 'protein-structure': '23',
+    'intrinsically': '24', 'binding': '25',
+    'spectral-analysis': '1', 'predictor': '2', 'molecular-modeling': '3', 'structure-visualization': '4',
+    'rdc': '5', 'relaxation': '6', 'data-translator': '7', 'validation': '8', 'time-domain': '9',
+    'tools': '10', 'saxs-cryoem': '11'
+  };
+
   constructor(private http: HttpClient) {
     this.softwareTypeFrequency = new BehaviorSubject([]);
     this.software = new BehaviorSubject([]);
@@ -59,11 +67,11 @@ export class SoftwareService {
 
     for (const oneSoftware of software){
       for (const softwareType of oneSoftware.software_type){
-        if (softwareType['label'] in packageFrequency) {
-          packageFrequency[softwareType['label']] += 1;
+        if (softwareType['id'] in packageFrequency) {
+          packageFrequency[softwareType['id']] += 1;
         } else {
-          packageFrequency[softwareType['label']] = 1;
-          packageList.push(softwareType['label']);
+          packageFrequency[softwareType['id']] = 1;
+          packageList.push(softwareType['id']);
         }
       }
     }

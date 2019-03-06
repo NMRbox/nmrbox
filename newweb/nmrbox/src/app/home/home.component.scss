@@ -23,14 +23,10 @@ $nmrbox-blue-dark: #3A4C51;
   border-right: 2px solid #c1c1c1;
   margin-left: -30px;
   max-width: 350px;
-
-  h2 {
-    margin-left: 30px;
-  }
 }
 
 #st-tile {
-  margin-left: -50px;
+  margin-left: -90px;
 }
 
 .software-type-tile {
@@ -126,6 +122,10 @@ $nmrbox-blue-dark: #3A4C51;
 }
 
 #home-team figcaption {
+  color: #000000;
+}
+
+#home-software figcaption {
   color: #000000;
 }
 
