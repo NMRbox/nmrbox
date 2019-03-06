@@ -425,6 +425,10 @@ mat-toolbar, .mat-tab-label, .mat-card {
   border-top: 0px;
 }
 
+.mat-tab-label:hover {
+  background: rgba(0,0,0,.1);
+}
+
 .mat-grid-tile.tile-solid {
   background-color: transparent;
 }
@@ -508,7 +512,6 @@ app-team-list {
   display: block;
   height: 125px;
   width: 1000px;
-  overflow: none;
   background-size: 1000px 125px;
   background-repeat: no-repeat;
   left: 50%;
