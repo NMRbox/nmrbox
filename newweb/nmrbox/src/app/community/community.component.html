@@ -23,10 +23,12 @@
                  [innerHTML]="notifications.message | safeHtml">
             </div>
             <br>
-            <h2 class="blue">Upcoming</h2>
+            <h2 *ngIf="upcoming" class="blue">Upcoming events</h2>
+            <h2 *ngIf="!upcoming">No upcoming events</h2>
             <mat-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
-              <h3 *ngIf="!upcoming">No upcoming events.</h3>
-              <mat-grid-tile class="tile-solid" *ngFor="let event of upcoming">
+
+              <a [href]="event.url" target="_blank" *ngFor="let event of upcoming">
+              <mat-grid-tile class="tile-solid">
                 <mat-card class="workshop-card">
                   <form (ngSubmit)="onWorkshopRegister(event.name)">
                     <mat-card-header>
@@ -63,6 +65,7 @@
                   </form>
                 </mat-card>
               </mat-grid-tile>
+              </a>
             </mat-grid-list>
           </div>
         </div>
