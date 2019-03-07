@@ -14,6 +14,7 @@ import {SigninComponent} from './authentication/signin.component';
 import {UserDashboardComponent} from './user-dashboard/user-dashboard.component';
 import {ProfileUpdateComponent} from './user-dashboard/profile-update.component';
 import {ForgetPasswordComponent} from './password-management/forget-password.component';
+import {FilesComponent} from './files/files.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path: 'forgot-password', component: ForgetPasswordComponent},
   {path: 'user-dashboard', component: UserDashboardComponent},
   {path: 'profile-update', component: ProfileUpdateComponent},
+  {path: 'files/:filename', component: FilesComponent},
   {path: '**', redirectTo: '/', pathMatch: 'full'}
 ];
 

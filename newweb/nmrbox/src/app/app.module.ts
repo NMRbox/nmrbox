@@ -47,6 +47,7 @@ import {SupportComponent} from './support/support.component';
 import {StaticPageService} from './static/static-page.service';
 import {EmbeddedStaticComponent} from './static/embedded-static.component';
 import {SafeHtmlPipe} from './pipes/safe-html.pipe';
+import { FilesComponent } from './files/files.component';
 
 @NgModule({
   imports: [
@@ -80,7 +81,8 @@ import {SafeHtmlPipe} from './pipes/safe-html.pipe';
     FaqsComponent,
     SupportComponent,
     EmbeddedStaticComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    FilesComponent
   ],
   providers: [
     SoftwareService,
