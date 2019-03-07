@@ -39,7 +39,7 @@ const routes: Routes = [
 
 @NgModule({
   // using hash location strategy for more consistent deep linking
-  imports: [RouterModule.forRoot(routes, {useHash: true, scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

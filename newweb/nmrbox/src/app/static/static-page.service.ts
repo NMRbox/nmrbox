@@ -21,7 +21,7 @@ export class StaticPageService {
               environment.appUrl + '/files/$3"');
             // The 'not a period' at the beginning is to prevent overwriting file URLs created above
             response['data']['content'] = response['data']['content'].replace(/https*:\/\/nmrbox.org\/([a-zA-Z0-9-]+)/g,
-              '/#/pages/$1');
+              '/pages/$1');
 
             return response['data'] as StaticPageModel;
           } else {
