@@ -73,7 +73,7 @@
 
 <!-- Software registry listings -->
 <mat-grid-list class="software-list" cols="3" rowHeight="250px">
-  <mat-grid-tile class="tile-dashed" *ngFor="let software of filteredList"
+  <mat-grid-tile [ngClass]="{'tile-dashed': true, 'center-tile': (i+2) % 3 == 0}" *ngFor="let software of filteredList; let i = index"
                  (click)="gotoDetail(software); $event.stopPropagation()">
     <mat-card class="sw-card">
       <mat-card-header>
