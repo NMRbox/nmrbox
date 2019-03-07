@@ -16,7 +16,7 @@
    id="svg3667"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"
    sodipodi:docname="community-header.svg"
-   inkscape:export-filename="/Users/adam/Dropbox/NMRBox/web-graphics/community-header-97h.png"
+   inkscape:export-filename="/Users/adam/ADS/SVN/working/nmrbox/trunk/newweb/nmrbox/src/assets/graphics/community-tab/community-header-97h.png"
    inkscape:export-xdpi="48.11071"
    inkscape:export-ydpi="48.11071">
   <defs
@@ -78,10 +78,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.3971421"
-     inkscape:cx="619.83673"
+     inkscape:cx="407.97567"
      inkscape:cy="96.776787"
      inkscape:document-units="mm"
-     inkscape:current-layer="g929"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="2504"
      inkscape:window-height="1395"
@@ -114,12 +114,12 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;line-height:125%;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#595959;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="-68.401001"
+       x="-69.134521"
        y="142.00024"
        id="text4617"><tspan
          sodipodi:role="line"
          id="tspan4615"
-         x="-68.401001"
+         x="-69.134521"
          y="142.00024"
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:9.17222214px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin, Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;writing-mode:lr-tb;text-anchor:start;fill:#595959;fill-opacity:1;stroke-width:0.26458332px">Follow the amazing research that is happening all around the World.</tspan></text>
     <text
@@ -147,12 +147,12 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;line-height:125%;font-family:Calibri;-inkscape-font-specification:'Calibri, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#848484;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="-66.625359"
+       x="-69.168388"
        y="104.6974"
        id="text4437"><tspan
          sodipodi:role="line"
          id="tspan4435"
-         x="-66.625359"
+         x="-69.168388"
          y="104.6974"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.11111069px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:-0.71966666px;writing-mode:lr-tb;text-anchor:start;fill:#848484;fill-opacity:1;stroke-width:0.26458332px"><tspan
            style="letter-spacing:-0.88370836px;fill:#848484;fill-opacity:1"
