@@ -2,7 +2,6 @@
 .sw-filters-container {
   .sw-filters {
     width: 100%;
-    max-width: auto; /* constrained by tab container */
     margin: 0px auto;
   }
 }
@@ -32,8 +31,8 @@ mat-grid-list {
     width: 450px;
     height: 215px;
     margin: 20px;
-    /* background: #f4f4f4; */
-    border: 1px solid #d9edf7;
+    /* background: #f4f4f4;
+    border: 1px solid #d9edf7;*/
     mat-card-header {
       font-weight: bold;
       background: #d9edf7;
@@ -85,9 +84,9 @@ mat-grid-list.support-list {
   border: 0px;
 }
 
-.mat-grid-tile:hover mat-card {
+/*.mat-grid-tile:hover mat-card {
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12) !important;
-}
+}*/
 
 /* Community */
 .mat-card-header {
