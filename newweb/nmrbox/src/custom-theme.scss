@@ -227,15 +227,15 @@ a:hover {
 }
 
 .nmrbox-logo-small-dark, .nmrbox-logo-med-dark, .nmrbox-logo-large-dark {
-  background-image: url('assets/graphics/sitewide/nmrbox-logo-dark-240x40.svg');
+  background-image: url('assets/graphics/sitewide/nmrbox-logo-dark-240x40-outline.svg');
 }
 
 .nmrbox-logo-small-light, .nmrbox-logo-med-light, .nmrbox-logo-large-light {
-  background-image: url('assets/graphics/sitewide/nmrbox-logo-light-240x40.svg');
+  background-image: url('assets/graphics/sitewide/nmrbox-logo-light-240x40-outline.svg');
 }
 
 .nmrbox-logo-small-blue, .nmrbox-logo-med-blue, .nmrbox-logo-large-blue {
-  background-image: url('assets/graphics/sitewide/nmrbox-logo-dark-240x40.svg');
+  background-image: url('assets/graphics/sitewide/nmrbox-logo-dark-240x40-outline.svg');
 }
 
 /* Icons */
@@ -307,66 +307,6 @@ ul.icon-list {
   height: 80px;
   background-size: 480px 80px;
   background-position: 0 10px;
-}
-
-.team-icon-about {
-  background-image: url('assets/graphics/team-tab/team-icon-about-240x40.svg');
-}
-
-.team-icon-integral {
-  background-image: url('assets/graphics/team-tab/team-icon-integral-240x40.svg');
-}
-
-.team-icon-leadership {
-  background-image: url('assets/graphics/team-tab/team-icon-leadership-240x40.svg');
-}
-
-.team-icon-research {
-  background-image: url('assets/graphics/team-tab/team-icon-research-240x40.svg');
-}
-/*
-.sw-type-icon-spectral {
-  background-image: url('assets/graphics/software-tab/sw-icon-spectral-menu.svg');
-}
-
-.sw-type-icon-assignment {
-  background-image: url('assets/graphics/software-tab/sw-icon-assignment-menu.svg');
-}
-
-.sw-type-icon-relaxation {
-  background-image: url('assets/graphics/software-tab/sw-icon-relaxation-menu.svg');
-}
-
-.sw-type-icon-chemical-shift {
-  background-image: url('assets/graphics/software-tab/sw-icon-chemical-menu.svg');
-}
-
-.sw-type-icon-molecular-modeling {
-  background-image: url('assets/graphics/software-tab/sw-icon-molecular-modeling-menu.svg');
-}
-
-.sw-type-icon-structure {
-  background-image: url('assets/graphics/software-tab/sw-icon-spectral-menu.svg');
-}*/
-
-.sw-type-icon-rdc, .sw-type-icon-residual-dipole-coupling {
-  background-image: url('assets/graphics/software-tab/sw-icon-rdc-menu.svg');
-}
-
-.rp-icon-metabolomics {
-  background-image: url('assets/graphics/software-tab/rp-icon-metabolomics-menu.svg');
-}
-
-.rp-icon-protein-dynamics {
-  background-image: url('assets/graphics/software-tab/rp-icon-protein-dynamics-menu.svg');
-}
-
-.rp-icon-protein-structure {
-  background-image: url('assets/graphics/software-tab/rp-icon-protein-structure-menu.svg');
-}
-
-.rp-icon-intrinsically {
-  background-image: url('assets/graphics/software-tab/rp-icon-intrinsically-menu.svg');
 }
 
 /*** MATERIAL CUSTOM STYLES ***/

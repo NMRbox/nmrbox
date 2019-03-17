@@ -83,7 +83,7 @@
           <mat-grid-tile *ngFor="let index of ['21','22','23','24','25']" class="co-tile"
                          [routerLink]="['/software', 'research', softwareService.researchSlugs[index]]">
             <figure>
-              <img src="/assets/graphics/software-tab/rp-icon-{{softwareService.researchSlugs[index]}}-menu.svg"
+              <img src="/assets/graphics/software-tab/rp-icon-{{softwareService.researchSlugs[index]}}-menu-outline.svg"
                    [alt]="softwareService.researchProblems[index]"
                    [title]="softwareService.researchProblems[index]"
                    height="50">
@@ -97,7 +97,7 @@
           <mat-grid-tile *ngFor="let s of softwareTypeFrequency.slice(0,5)" class="co-tile"
                          [routerLink]="['/software', 'software', softwareService.softwareSlugs[s[0]]]">
             <figure>
-              <img src="/assets/graphics/software-tab/sw-icon-{{softwareService.softwareSlugs[s[0]]}}-menu.svg"
+              <img src="/assets/graphics/software-tab/sw-icon-{{softwareService.softwareSlugs[s[0]]}}-menu-outline.svg"
                    [alt]="softwareService.softwareTypes[s[0]]"
                    [title]="softwareService.softwareTypes[s[0]]"
                    height="30">
