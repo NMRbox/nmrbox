@@ -8,7 +8,7 @@
       <mat-select [(ngModel)]="activeResearchProblem" placeholder="Research problem">
         <mat-select-trigger>
           <img
-            src="./assets/graphics/software-tab/rp-icon-{{softwareService.researchSlugs[activeResearchProblem]}}-menu.svg"
+            src="./assets/graphics/software-tab/rp-icon-{{softwareService.researchSlugs[activeResearchProblem]}}-menu-outline.svg"
             [alt]="softwareService.researchProblems[activeResearchProblem]"
             [title]="softwareService.researchProblems[activeResearchProblem]"
             *ngIf="activeResearchProblem">
@@ -18,7 +18,7 @@
           *ngFor="let index of ['21','22','23','24','25']"
           [value]="index"
           (click)="filterSelections()">
-          <img src="./assets/graphics/software-tab/rp-icon-{{softwareService.researchSlugs[index]}}-menu.svg"
+          <img src="./assets/graphics/software-tab/rp-icon-{{softwareService.researchSlugs[index]}}-menu-outline.svg"
                [alt]="softwareService.researchProblems[index]"
                [title]="softwareService.researchProblems[index]" height="30">
         </mat-option>
@@ -33,7 +33,7 @@
         [(ngModel)]="activeSoftwareType"
         panelClass="software-selector-dropdown">
         <mat-select-trigger>
-          <img src="./assets/graphics/software-tab/sw-icon-{{softwareService.softwareSlugs[activeSoftwareType]}}-menu.svg"
+          <img src="./assets/graphics/software-tab/sw-icon-{{softwareService.softwareSlugs[activeSoftwareType]}}-menu-outline.svg"
                [alt]="softwareService.softwareTypes[activeSoftwareType]"
                [title]="softwareService.softwareTypes[activeSoftwareType]"
                *ngIf="activeSoftwareType">
@@ -46,7 +46,7 @@
           *ngFor="let index of ['1','2','3','4','5','6','7','8','9','10','11']"
           [value]="index"
           (click)="filterSelections()">
-          <img src="./assets/graphics/software-tab/sw-icon-{{softwareService.softwareSlugs[index]}}-menu.svg"
+          <img src="./assets/graphics/software-tab/sw-icon-{{softwareService.softwareSlugs[index]}}-menu-outline.svg"
                [alt]="softwareService.softwareTypes[index]"
                [title]="softwareService.softwareTypes[index]" height="22">
         </mat-option>
