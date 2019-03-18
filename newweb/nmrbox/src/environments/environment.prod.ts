@@ -2,7 +2,7 @@ export const environment = {
   production: true,
 
   // URLs
-  appUrl: 'https://apidev.nmrbox.org',
+  appUrl: 'https://api.nmrbox.org',
   passResetUrl: 'password-reset',
   downloadableVMUrl: 'downloadable-vm',
   personUrl: 'person',
