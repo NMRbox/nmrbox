@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {EventModel} from './event.model';
 import {CommunityService} from './community.service';
 import {AuthenticationService} from '../authentication/authentication.service';
+import {ResponsiveService} from '../responsive.service';
 
 @Component({
   selector: 'app-community',
@@ -23,7 +24,8 @@ export class CommunityComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private communityService: CommunityService,
-    public authService: AuthenticationService
+    public authService: AuthenticationService,
+    public responsiveService: ResponsiveService
   ) {
   }
 

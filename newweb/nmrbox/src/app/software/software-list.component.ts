@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
 import {SoftwareModel} from './software.model';
 import {SoftwareService} from './software.service';
+import {ResponsiveService} from '../responsive.service';
 
 @Component({
   selector: 'app-my-software-list',
@@ -21,7 +22,8 @@ export class SoftwareListComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private softwareService: SoftwareService
+    private softwareService: SoftwareService,
+    public responsiveService: ResponsiveService
   ) {
     this.filteredList = [];
     this.activeResearchProblem = null;

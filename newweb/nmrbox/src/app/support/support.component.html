@@ -46,7 +46,7 @@
           <div class="grid-content-wrapper">
             <h3 class="blue">Software documentation</h3>
 
-            <mat-grid-list class="support-list grid-dashed" cols="2" rowHeight="180px">
+            <mat-grid-list class="support-list grid-dashed" [cols]="responsiveService.columns" rowHeight="180px">
               <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/documentation">
                 <mat-card class="standard-card tile-card-short">
                   <mat-card-header>

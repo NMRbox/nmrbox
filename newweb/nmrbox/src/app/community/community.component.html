@@ -25,7 +25,7 @@
             <br>
             <h2 *ngIf="upcoming" class="blue">Upcoming events</h2>
             <h2 *ngIf="!upcoming">No upcoming events</h2>
-            <mat-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
+            <mat-grid-list class="software-list" [cols]="responsiveService.columns" rowHeight="225px" gutterSize="2">
 
               <a [href]="event.url" target="_blank" *ngFor="let event of upcoming">
               <mat-grid-tile class="tile-solid">
@@ -73,7 +73,7 @@
         <div class="grid-outer-wrapper blue-med-light-bg">
           <div class="grid-content-wrapper">
             <h2 class="blue">Past Events</h2>
-            <mat-grid-list class="software-list" cols="2" rowHeight="225px" gutterSize="2">
+            <mat-grid-list class="software-list" [cols]="responsiveService.columns" rowHeight="225px" gutterSize="2">
               <a [href]="event.url" target="_blank" *ngFor="let event of completed">
                 <mat-grid-tile class="tile-solid" >
                 <mat-card class="workshop-card">
@@ -104,7 +104,7 @@
           <div class="grid-content-wrapper">
             <h3 class="blue">Publications</h3>
 
-            <mat-grid-list class="support-list grid-dashed workflow-list" cols="2" rowHeight="180px">
+            <mat-grid-list class="support-list grid-dashed workflow-list" [cols]="responsiveService.columns" rowHeight="180px">
               <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/publications">
                 <mat-card class="standard-card tile-card-short">
                   <mat-card-header>
@@ -144,7 +144,7 @@
           <div class="grid-content-wrapper">
             <h3 class="blue">NMRbox Community</h3>
 
-            <mat-grid-list class="support-list grid-dashed" cols="2" rowHeight="180px">
+            <mat-grid-list class="support-list grid-dashed" [cols]="responsiveService.columns" rowHeight="180px">
               <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/overview">
                 <mat-card class="standard-card tile-card-short">
                   <mat-card-header>
@@ -225,7 +225,7 @@
           <div class="grid-content-wrapper">
             <h3 class="blue">Teams</h3>
 
-            <mat-grid-list class="support-list grid-dashed workflow-list" cols="2" rowHeight="180px">
+            <mat-grid-list class="support-list grid-dashed workflow-list" [cols]="responsiveService.columns" rowHeight="180px">
               <mat-grid-tile class="tile-solid tile-transparent" routerLink="/pages/people-leadership">
                 <mat-card class="standard-card tile-card-short">
                   <mat-card-header>

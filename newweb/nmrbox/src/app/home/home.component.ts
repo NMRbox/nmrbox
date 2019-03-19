@@ -4,6 +4,7 @@ import {EventModel} from '../community/event.model';
 import {CommunityService} from '../community/community.service';
 import {AuthenticationService} from '../authentication/authentication.service';
 import {SoftwareService} from '../software/software.service';
+import {ResponsiveService} from '../responsive.service';
 
 @Component({
   selector: 'app-home-page',
@@ -12,7 +13,6 @@ import {SoftwareService} from '../software/software.service';
 })
 export class HomeComponent implements OnInit {
 
-  breakpoint: number;
   appURL: string;
   upcomingEvents: EventModel[];
   softwareTypeFrequency: Array<Array<string>>;
@@ -35,12 +35,12 @@ export class HomeComponent implements OnInit {
 
   constructor(public communityService: CommunityService,
               public authService: AuthenticationService,
-              public softwareService: SoftwareService) {
+              public softwareService: SoftwareService,
+              public responsiveService: ResponsiveService) {
     this.upcomingEvents = [];
     this.softwareService.softwareTypeFrequency.subscribe(softwareTypeFrequency => {
       this.softwareTypeFrequency = softwareTypeFrequency;
     });
-    this.breakpoint = 2;
   }
 
   ngOnInit(): void {
@@ -49,11 +49,6 @@ export class HomeComponent implements OnInit {
     this.communityService.upcomingEvents.subscribe(upcomingEvents => {
       this.upcomingEvents = upcomingEvents;
     });
-    this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
-  }
-
-  onResize(event) {
-    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 2;
   }
 
   onWorkshopRegister(workshopName) {

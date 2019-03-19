@@ -35,6 +35,7 @@ import {SoftwareService} from './software/software.service';
 import {CommunityService} from './community/community.service';
 import {AuthenticationService} from './authentication/authentication.service';
 import {FaqsService} from './faqs/faqs.service';
+import {ResponsiveService} from './responsive.service';
 
 // Router
 import {AppRoutingModule} from './app-routing.module';
@@ -86,7 +87,8 @@ import { FilesComponent } from './files/files.component';
     CommunityService,
     AuthenticationService,
     FaqsService,
-    StaticPageService
+    StaticPageService,
+    ResponsiveService
   ],
   bootstrap: [AppComponent]
 })

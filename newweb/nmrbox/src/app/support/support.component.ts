@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
+import {ResponsiveService} from '../responsive.service';
 
 @Component({
   selector: 'app-support',
@@ -14,6 +15,7 @@ export class SupportComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    public responsiveService: ResponsiveService
   ) {
   }
 
