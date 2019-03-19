@@ -76,7 +76,7 @@
     <p>
       You can choose by category. Or you can view <a routerLink="/software">all software</a>.
     </p>
-    <mat-grid-list cols="2" rowHeight="380px">
+    <mat-grid-list [cols]="breakpoint" rowHeight="380px" (window:resize)="onResize($event)">
       <mat-grid-tile id="rp-tile">
         <h2 class="grid-tile-title">Research problems</h2>
         <mat-grid-list class="software-list" cols="1" rowHeight="60px">
@@ -115,7 +115,7 @@
     <p>The <strong>NMR</strong>box Community is your opportunity to: share your experience; ask questions; seek advice
       and guidance on the software; and learn about upcoming training opportunities.
     </p>
-    <mat-grid-list cols="2" rowHeight="150px">
+    <mat-grid-list [cols]="breakpoint" rowHeight="150px">
       <mat-grid-tile class="co-tile" routerLink="/community/0">
         <figure>
           <img src="/assets/graphics/community-tab/events-on-outline.svg" alt="Events" height="64">
@@ -147,7 +147,7 @@
   <div class="content">
     <h1 class="white">Get access to <br/><strong>NMR</strong>box <strong>Support</strong></h1>
     <p>We're here to help.</p>
-    <mat-grid-list cols="2" rowHeight="150px">
+    <mat-grid-list [cols]="breakpoint" rowHeight="150px">
       <mat-grid-tile class="co-tile" routerLink="/support/0">
         <figure>
           <img src="/assets/graphics/support-tab/FAQ-on-black-outline.svg" alt="FAQs" height="64">

@@ -12,6 +12,7 @@ import {SoftwareService} from '../software/software.service';
 })
 export class HomeComponent implements OnInit {
 
+  breakpoint: number;
   appURL: string;
   upcomingEvents: EventModel[];
   softwareTypeFrequency: Array<Array<string>>;
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit {
     this.softwareService.softwareTypeFrequency.subscribe(softwareTypeFrequency => {
       this.softwareTypeFrequency = softwareTypeFrequency;
     });
+    this.breakpoint = 2;
   }
 
   ngOnInit(): void {
@@ -47,6 +49,11 @@ export class HomeComponent implements OnInit {
     this.communityService.upcomingEvents.subscribe(upcomingEvents => {
       this.upcomingEvents = upcomingEvents;
     });
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
+  }
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 2;
   }
 
   onWorkshopRegister(workshopName) {
