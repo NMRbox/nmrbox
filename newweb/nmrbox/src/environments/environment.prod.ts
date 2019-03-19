@@ -15,5 +15,7 @@ export const environment = {
   forgotPassUrl: 'password-forgot',
   forgotPassConfirmUrl: 'password-forgot-confirm',
   softwareRegistryUrl: 'registry',
-  softwareRegistryMetaUrl: 'registry/software-metadata'
+  softwareRegistryMetaUrl: 'registry/software-metadata',
+
+  mobileURL: 'https://m.nmrbox.org'
 };

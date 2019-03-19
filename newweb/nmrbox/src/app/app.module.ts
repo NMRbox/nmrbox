@@ -9,7 +9,7 @@ import {
   MatButtonModule, MatCheckboxModule, MatInputModule,
   MatRadioModule, MatSelectModule, MatMenuModule, MatSidenavModule,
   MatToolbarModule, MatListModule, MatGridListModule, MatCardModule,
-  MatTabsModule, MatChipsModule
+  MatTabsModule, MatChipsModule, MatSnackBarModule
 } from '@angular/material';
 
 // 3rd Party Modules
@@ -55,11 +55,8 @@ import { FilesComponent } from './files/files.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatButtonModule, MatCheckboxModule,
-    MatInputModule, MatRadioModule, MatSelectModule,
-    MatMenuModule, MatSidenavModule, MatToolbarModule,
-    MatListModule, MatGridListModule, MatTabsModule, MatCardModule,
-    MatChipsModule,
+    MatButtonModule, MatCheckboxModule, MatInputModule, MatRadioModule, MatSelectModule, MatMenuModule, MatSidenavModule, MatToolbarModule,
+    MatListModule, MatGridListModule, MatTabsModule, MatCardModule, MatSnackBarModule, MatChipsModule,
     SwiperModule,
     AppRoutingModule,
     CommonModule,
