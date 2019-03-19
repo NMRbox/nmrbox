@@ -43,9 +43,9 @@
      inkscape:window-height="1157"
      id="namedview4"
      showgrid="false"
-     inkscape:zoom="5.9916667"
-     inkscape:cx="120"
-     inkscape:cy="20"
+     inkscape:zoom="8.4603003"
+     inkscape:cx="157.57432"
+     inkscape:cy="30.458971"
      inkscape:window-x="104"
      inkscape:window-y="32"
      inkscape:window-maximized="0"
@@ -97,13 +97,13 @@
                style="stroke-width:1.33500755">NMR</tspan></text>
 <text
              id="text38"
-             style="font-variant:normal;font-weight:300;font-stretch:normal;font-size:14.99059963px;font-family:'Libre Franklin Light';-inkscape-font-specification:LibreFranklin-Light;writing-mode:lr-tb;fill:#757575;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.33500755"
+             style="font-variant:normal;font-weight:300;font-stretch:normal;font-size:14.99059963px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Light';writing-mode:lr-tb;fill:#757575;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.33500755;font-style:normal;"
              transform="matrix(1,0,0,-1,34.628286,25.5889)"><tspan
                id="tspan36"
                sodipodi:role="line"
                y="0"
                x="0 8.0349617 15.949999"
-               style="stroke-width:1.33500755">box</tspan></text>
+               style="stroke-width:1.33500755;-inkscape-font-specification:'Libre Franklin Light';font-family:'Libre Franklin';font-weight:300;font-style:normal;font-stretch:normal;font-variant:normal;">box</tspan></text>
 </g></g><g
          transform="translate(198.4245,37.0184)"
          id="g40"
@@ -147,5 +147,5 @@
                sodipodi:role="line"
                y="0"
                x="0 8.0349617 15.949999"
-               style="stroke-width:1.33500755">box</tspan></text>
+               style="stroke-width:1.33500755;-inkscape-font-specification:'Libre Franklin Light';font-family:'Libre Franklin';font-weight:300;font-style:normal;font-stretch:normal;font-variant:normal">box</tspan></text>
 </g></g></g></g></svg>

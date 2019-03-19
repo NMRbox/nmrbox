@@ -15,7 +15,7 @@
    width="240"
    height="40"
    viewBox="0 0 240 39.999999"
-   sodipodi:docname="nmrbox-logo-dark-240x40.svg"
+   sodipodi:docname="nmrbox-logo-light-240x40.svg"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"><metadata
      id="metadata8"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
@@ -44,7 +44,7 @@
      id="namedview4"
      showgrid="false"
      inkscape:zoom="5.9916667"
-     inkscape:cx="120"
+     inkscape:cx="68.511822"
      inkscape:cy="20"
      inkscape:window-x="117"
      inkscape:window-y="54"
@@ -103,7 +103,7 @@
                sodipodi:role="line"
                y="0"
                x="0 8.0349617 15.949999"
-               style="stroke-width:1.33500755;fill:#ffffff;fill-opacity:1">box</tspan></text>
+               style="stroke-width:1.33500755;fill:#ffffff;fill-opacity:1;-inkscape-font-specification:'Libre Franklin Light';font-family:'Libre Franklin';font-weight:300;font-style:normal;font-stretch:normal;font-variant:normal">box</tspan></text>
 </g></g><g
          transform="translate(198.4245,37.0184)"
          id="g40"
@@ -147,5 +147,5 @@
                sodipodi:role="line"
                y="0"
                x="0 8.0349617 15.949999"
-               style="stroke-width:1.33500755">box</tspan></text>
+               style="stroke-width:1.33500755;-inkscape-font-specification:'Libre Franklin Light';font-family:'Libre Franklin';font-weight:300;font-style:normal;font-stretch:normal;font-variant:normal">box</tspan></text>
 </g></g></g></g></svg>
