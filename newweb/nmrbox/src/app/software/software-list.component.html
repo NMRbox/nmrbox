@@ -72,8 +72,10 @@
 </div>
 
 <!-- Software registry listings -->
-<mat-grid-list class="software-list" [cols]="responsiveService.columns + 1" rowHeight="250px">
-  <mat-grid-tile [ngClass]="{'tile-dashed': true, 'center-tile': (i+2) % 3 == 0}" *ngFor="let software of filteredList; let i = index"
+<mat-grid-list [cols]="responsiveService.columns + 1" rowHeight="250px">
+  <mat-grid-tile [ngClass]="{'tile-dashed': true,
+                             'center-tile': (i+2) % 3 == 0 && responsiveService.columns > 1,
+                             'first-tile': (i+2) % 2 == 0 && responsiveService.columns == 1}" *ngFor="let software of filteredList; let i = index"
                  (click)="gotoDetail(software); $event.stopPropagation()">
     <mat-card class="sw-card">
       <mat-card-header>

@@ -358,11 +358,6 @@ mat-toolbar, .mat-tab-label, .mat-card {
   background-color: transparent;
 }
 
-.center-tile {
-  border-right: 1px dashed;
-  border-left: 1px dashed;
-}
-
 .mat-grid-tile.tile-dashed-row, .tile-dashed:nth-of-type(3), .tile-dashed:nth-of-type(6), .tile-dashed:nth-of-type(9), .tile-dashed:nth-of-type(12), .tile-dashed:nth-of-type(15), .tile-dashed:nth-of-type(18) {
   border-right: 0px;
 }
