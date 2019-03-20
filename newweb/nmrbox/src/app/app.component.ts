@@ -14,7 +14,7 @@ export class AppComponent {
   // The "unused" responsiveService is here to ensure the small screen pop-up always occurs
   constructor(
     public authService: AuthenticationService,
-    private responsiveService: ResponsiveService
+    public responsiveService: ResponsiveService
   ) {
   }
 
