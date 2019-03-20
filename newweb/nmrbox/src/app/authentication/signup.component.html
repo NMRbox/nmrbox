@@ -20,7 +20,7 @@
             <form (ngSubmit)="onSignup(f)" #f="ngForm" autocomplete="off">
               <div class="form-group col-lg-6">
                 <div class="form-group">
-                  <label for="first_name" class="control-label">First Name</label>
+                  <label for="first_name" class="control-label">First Name *</label>
                   <input ngModel class="form-control form-control" maxlength="32" required="required"
                          id="first_name" name="first_name" type="text">
                 </div>
@@ -28,7 +28,7 @@
 
               <div class="form-group col-lg-6">
                 <div class="form-group">
-                  <label for="last_name" class="control-label">Last Name</label>
+                  <label for="last_name" class="control-label">Last Name *</label>
                   <input ngModel class="form-control form-control" maxlength="64" required="required"
                          id="last_name" name="last_name" type="text">
                 </div>
@@ -36,7 +36,7 @@
 
               <div class="form-group col-lg-12">
                 <div class="form-group">
-                  <label for="email_institution" class="control-label">Email (institutional account)</label>
+                  <label for="email_institution" class="control-label">Email (institutional account) *</label>
                   <input ngModel class="form-control form-control" maxlength="255" required="required"
                          id="email_institution" name="email_institution" type="email">
                 </div>
@@ -52,7 +52,7 @@
               </div>
 
               <div class="form-group col-lg-12">
-                <div class="form-group"><label for="job_title" class="control-label">Job Title</label>
+                <div class="form-group"><label for="job_title" class="control-label">Job Title *</label>
                   <select ngModel class="form-control form-control select_pi" maxlength="32" required="required"
                           id="job_title" name="job_title">
                     <option value="" selected="selected">Please Select</option>
@@ -69,7 +69,7 @@
 
               <div class="form-group col-lg-6">
                 <div class="form-group">
-                  <label for="institution" class="control-label">Institution</label>
+                  <label for="institution" class="control-label">Institution *</label>
                   <input ngModel class="form-control form-control" maxlength="256" required="required"
                          id="institution" name="institution" type="text">
                 </div>
@@ -77,7 +77,7 @@
 
               <div class="form-group col-lg-6">
                 <div class="form-group">
-                  <label for="institution_type" class="control-label">Institution Type</label>
+                  <label for="institution_type" class="control-label">Institution Type *</label>
                   <select ngModel class="form-control form-control" maxlength="256" required="required"
                           id="institution_type" name="institution_type">
                     <option value="" selected="selected">Please Select</option>
@@ -91,7 +91,7 @@
 
               <div class="form-group col-lg-6">
                 <div class="form-group">
-                  <label for="department" class="control-label">Department</label>
+                  <label for="department" class="control-label">Department *</label>
                   <input ngModel class="form-control form-control" maxlength="256" required="required"
                          id="department" name="department" type="text">
                 </div>
@@ -99,7 +99,7 @@
 
               <div class="form-group col-lg-6">
                 <div class="form-group">
-                  <label for="pi" class="control-label">PI</label>
+                  <label for="pi" class="control-label">PI *</label>
                   <input ngModel class="form-control form-control" maxlength="64" required="required" id="pi"
                          name="pi" type="text">
                 </div>
@@ -107,7 +107,7 @@
 
               <div class="form-group col-lg-12">
                 <div class="form-group">
-                  <label for="address1" class="control-label">Address Line 1</label>
+                  <label for="address1" class="control-label">Address Line 1 *</label>
                   <input ngModel class="form-control form-control" maxlength="128" required="required"
                          id="address1" name="address1" type="text">
                 </div>
@@ -132,7 +132,7 @@
               <div class="form-group col-lg-6">
 
                 <div class="form-group">
-                  <label class="control-label" for="country">Country</label>
+                  <label class="control-label" for="country">Country *</label>
                   <select ngModel name="country" id="country" class="crs-country form-control"
                           data-region-id="state_province"
                           data-default-value-option="true" data-default-value="United States" required="required">
@@ -142,7 +142,7 @@
 
               <div class="form-group col-lg-6">
                 <div class="form-group">
-                  <label class="control-label" for="state_province">State or Province</label>
+                  <label class="control-label" for="state_province">State or Province *</label>
                   <select ngModel name="state_province" class="form-control" id="state_province"
                           data-show-default-option="true"
                           data-default-option="Select State or Province"
@@ -153,7 +153,7 @@
 
               <div class="form-group col-lg-6">
                 <div class="form-group">
-                  <label for="city" class="control-label">City</label>
+                  <label for="city" class="control-label">City *</label>
                   <input ngModel class="form-control form-control" maxlength="64" required="required" id="city"
                          name="city" type="text">
                 </div>
@@ -161,7 +161,7 @@
 
               <div class="form-group col-lg-6">
                 <div class="form-group">
-                  <label for="zip_code" class="control-label">Zip Code</label>
+                  <label for="zip_code" class="control-label">Zip Code *</label>
                   <input ngModel class="form-control form-control" maxlength="32" required="required" id="zip_code"
                          name="zip_code" type="text">
                 </div>
@@ -169,7 +169,7 @@
 
               <div class="form-group col-lg-12">
                 <div class="form-group">
-                  <label for="time_zone_id" class="control-label">Time Zone</label>
+                  <label for="time_zone_id" class="control-label">Time Zone *</label>
                   <select ngModel required="required" class="form-control" id="time_zone_id" name="time_zone_id">
                     <option value="1">Africa/Abidjan</option>
                     <option value="2">Africa/Accra</option>
@@ -658,7 +658,8 @@
 
               <div class="form-group col-lg-12">
                 <div class="form-group">
-                  <input [disabled]="!f.valid" class="btn btn-primary btn-lg btn-block " type="submit"
+                  <label *ngIf="!f.valid" for="form_submit" class="control-label">Please complete all required fields to register</label>
+                  <input [disabled]="!f.valid" class="btn btn-primary btn-lg btn-block " type="submit" id="form_submit"
                          value="Register">
                 </div>
               </div>
