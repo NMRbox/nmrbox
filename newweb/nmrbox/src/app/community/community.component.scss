@@ -1,3 +1,5 @@
+@import "../../custom-theme.scss";
+
 /* Filters: Community only */
 .sw-filters-container {
   .sw-filters {
@@ -94,4 +96,9 @@ mat-grid-list.support-list {
 mat-card-title {
   font-size: 16px;
   font-weight: bold;
+}
+
+::ng-deep mat-tab-header {
+  background-color: $nmrbox-blue;
+  color: #fff;
 }
