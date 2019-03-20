@@ -72,12 +72,6 @@ mat-grid-list.support-list {
   margin-left: 2px;
 }
 
-#com-support-nmrbox .grid-content-wrapper {
-  mat-grid-list {
-    margin-left: -15px;
-  }
-}
-
 .mat-grid-tile:hover {
   cursor: pointer;
   box-shadow: none !important;
@@ -95,29 +89,6 @@ mat-grid-list.support-list {
   margin-bottom: 5px;
   height: 25px;
   overflow: hidden;
-}
-
-.co-submenu {
-  width: 940px;
-  display: block;
-  margin: 0px auto;
-  list-style: none;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 300;
-
-  strong {
-    font-weight: 500;
-  }
-
-  li {
-    padding-top: 0px;
-    display: inline-block;
-    margin-right: 20px;
-  }
-  .co-icon-med {
-    background-position: 0px 11px;
-  }
 }
 
 mat-card-title {

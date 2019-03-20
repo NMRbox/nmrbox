@@ -1,243 +1,263 @@
 <div class="page-wrapper">
-    <mat-toolbar class="toolbar-transparent">
-        <div class="menu-wrapper">
-            <div><br><br>
-
-            </div>
-            <span class="page-title">My Account</span>
-        </div>
-    </mat-toolbar>
-    <div class="page-details">
-        <div class="nmrbox-custom-container container">
-            <div class="row">
-
-                <div class="col-lg-12">
-
-                    <!--<div class="alert alert-info">
-                        <a href="#" class="close" data-dismiss="alert">&times;</a>
-                        <p>Welcome to your NMRbox user dashboard!  This interface is under active development and additional tools / panels that provide user-specific information will be posted here.</p>
-                    </div>-->
-
-                    <div class="alert alert-info" *ngIf="authService.isAdmin">
-                        <p>Access the administrative section using the button - <a [href]="apiURL + '/admin'" class="btn btn-md btn-primary"><i class="fa fa-cog fa-lg"> Admin Panel</i></a></p>
-                    </div>
-
-                    <div *ngIf="notifications?.message && notifications.type"
-                         class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}"
-                         [innerHTML]="notifications.message | safeHtml">
-                    </div>
-
-                    <div class="row" *ngIf="person">
-
-                        <div class="col-sm-12 col-md-6 toppad">
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Profile - {{person.first_name}}&nbsp;{{person.last_name}}</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class=" col-md-12 col-lg-12 ">
-                                            <table class="table table-user-information">
-                                                <tbody>
-                                                <tr>
-                                                    <td>Preferred Email:</td>
-                                                    <td><a href="mailto: {{person.email}}">{{person.email}}</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Institution:</td>
-                                                    <td>{{person.institution}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Department</td>
-                                                    <td>{{person.department}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Principal Investigator:</td>
-                                                    <td>{{person.pi}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Address</td>
-                                                    <td>{{person.address1}}<br>{{person.city}}, {{person.state_province}} {{person.zip_code}}</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel-footer">
-                                    <div class="text-right">
-                                        <a class="btn btn-md btn-primary" routerLink="/profile-update" routerLinkActive="active">Update Profile</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-6 toppad">
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">User Account</h3>
-                                </div>
-                                <form (ngSubmit)="onPasswordResetSubmit(passReset)" #passReset="ngForm">
-                                    <div class="panel-body">
-                                        <div class="row">
-
-                                            <div class=" col-md-12 col-lg-12 ">
-                                                <table class="table table-user-information">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>User ID:</td>
-                                                        <td>{{person.nmrbox_acct}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Institutional Email: </td>
-                                                        <td><a href="mailto: {{person.email_institution}}">{{person.email_institution}}</a></td>
-                                                    </tr>
-                                                    <tr *ngIf="!showHide">
-                                                        <td>Password: </td>
-                                                        <td>
-                                                            <span>******</span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr *ngIf="showHide">
-                                                        <td>Current Password: </td>
-                                                        <td>
-                                                          <label>
-                                                            <input type="password" name="old_password" autocomplete="off" required ngModel>
-                                                          </label>
-                                                          <span id="show_pass_box" style="cursor:pointer;">
-                                                                <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
-                                                            </span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr *ngIf="showHide">
-                                                      <td colspan="2">
-                                                        <p>Password requirements: The password must be a minimum of 8
-                                                          characters and include a character from 3 of the following 4
-                                                          groups: upper case, lower case, numbers, and symbols. Furthermore,
-                                                          the characters '&' and '$' are not allowed.</p>
-                                                      </td>
-                                                    </tr>
-                                                    <tr *ngIf="showHide">
-                                                        <td>New Password: </td>
-                                                        <td>
-                                                          <label>
-                                                            <input type="password" name="new_password" class="password" autocomplete="off" ngModel required>
-                                                          </label>
-                                                          <span style="cursor:pointer;">
-                                                                <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
-                                                            </span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr *ngIf="showHide">
-                                                        <td>Confirm New Password: </td>
-                                                        <td>
-                                                          <label>
-                                                            <input type="password" name="conf_password" class="password" autocomplete="off" ngModel required>
-                                                          </label>
-                                                          <span id="" style="cursor:pointer;">
-                                                                <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
-                                                            </span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <!--<tr>
-                                                        <td>Classification Groups</td>
-                                                        <td>
-                                                          <ng-container *ngFor="let classification of person.classifications">
-                                                            <div *ngIf="classification.web_role" [title]="classification.definition">
-                                                                {{classification.name}}
-                                                            </div>
-                                                          </ng-container>
-                                                        </td>
-                                                    </tr>-->
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel-footer">
-                                      <div class="text-right">
-                                        <a class="btn btn-md btn-primary" *ngIf="!showHide" (click)="changeShowStatus()">Password Reset</a>
-                                        <input class="btn btn-md btn-primary right-pad" *ngIf="showHide" [disabled]="!passReset.valid" type="submit" (click)="onPasswordResetSubmit(passReset)" value="Save">
-                                        <a class="btn btn-md btn-primary" *ngIf="showHide" (click)="changeShowStatus()">Cancel</a>
-                                      </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="row" *ngIf="person">
-                        <div class="welcome text-left">
-                            <h3 class="text-left">Request Downloadable VM</h3>
-                        </div>
-                        <div class="row"><br>
-
-                            <form #downloadVM="ngForm" (ngSubmit)="onDownloadVMSubmit(downloadVM)">
-
-                                <div class="form-group col-lg-12">
-                                    The following form allows you to request a downloadable copy of NMRbox that you can run on your local workstation.  After you submit the form, you will receive an email with a custom link for downloading your VM.  This process may take several hours.
-                                </div>
-
-                                <div class="form-group col-lg-12">
-                                    Please select the VM version you wish to download:
-                                </div>
-
-                                <div class="form-group col-lg-6">
-                                    <div class="form-group "><label for="vm_id" class="control-label">VM Versions</label>
-                                        <select class="form-control form-control select_pi" maxlength="32" required="required" id="vm_id" name="vm_id" ngModel>
-                                            <option value="">Please Select</option>
-                                            <option *ngFor="let vm of person.downloadableVm" [value]="vm[0]">{{vm[1]}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-goup col-lg-12">
-                                    We will create a user account inside the VM.  Please select your desired username and password:
-                                </div>
-
-                                <div class="form-group col-lg-6">
-                                    <div class="form-group ">
-                                        <label for="vm_username" class="control-label">VM username</label>
-                                        <input class="form-control form-control" maxlength="64" id="vm_username" name="vm_username" type="text" [ngModel]="person.nmrbox_acct" autocomplete="off" required="required">
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-lg-6">
-                                    <div class="form-group ">
-                                        <label for="vm_password" class="control-label">VM Password</label>
-                                        <input class="form-control form-control" maxlength="32" id="vm_password" name="vm_password" type="password" required="required" ngModel>
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-lg-12">
-                                    Note: The username and password do not have to be the same as your NMRbox account.  You can choose whatever you like.  Your account will be given root privileges allowing you to make additional changes, as needed.
-                                </div>
-
-                                <div *ngIf="notifications?.message && notifications.type"
-                                     [ngClass]="{'alert-error': notifications.type == 'danger',
-                                                 'alert-success': notifications.type == 'success', 'col-lg-12': true}"
-                                     class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}"
-                                     [innerHTML]="notifications.message | safeHtml">
-                                </div>
-
-                                <div class="form-group col-lg-4">
-                                    <div class="form-group">
-                                        <input [disabled]="!downloadVM.valid" class="btn btn-primary btn-lg btn-block" type="submit" value="Request Downloadable VM">
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
+  <mat-toolbar class="toolbar-transparent">
+    <div class="menu-wrapper">
+      <div>
+        <br><br>
+      </div>
+      <span class="page-title">My Account</span>
     </div>
+  </mat-toolbar>
+  <div class="page-details">
+    <div class="nmrbox-custom-container container">
+      <div class="row">
+
+        <div class="col-lg-12">
+
+          <!--<div class="alert alert-info">
+              <a href="#" class="close" data-dismiss="alert">&times;</a>
+              <p>Welcome to your NMRbox user dashboard!  This interface is under active development and additional tools / panels that provide user-specific information will be posted here.</p>
+          </div>-->
+
+          <div class="alert alert-info" *ngIf="authService.isAdmin">
+            <p>Access the administrative section using the button -
+              <a [href]="apiURL + '/admin'" class="btn btn-md btn-primary"><i
+                class="fa fa-cog fa-lg"> Admin Panel</i></a></p>
+          </div>
+
+          <div *ngIf="notifications?.message && notifications.type"
+               class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}"
+               [innerHTML]="notifications.message | safeHtml">
+          </div>
+
+          <div class="row" *ngIf="person">
+
+            <div class="col-sm-12 col-md-6">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Profile - {{person.first_name}}&nbsp;{{person.last_name}}</h3>
+                </div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class=" col-md-12 col-lg-12 ">
+                      <table class="table table-user-information">
+                        <tbody>
+                        <tr>
+                          <td>Preferred Email:</td>
+                          <td><a href="mailto: {{person.email}}">{{person.email}}</a></td>
+                        </tr>
+                        <tr>
+                          <td>Institution:</td>
+                          <td>{{person.institution}}</td>
+                        </tr>
+                        <tr>
+                          <td>Department</td>
+                          <td>{{person.department}}</td>
+                        </tr>
+                        <tr>
+                          <td>Principal Investigator:</td>
+                          <td>{{person.pi}}</td>
+                        </tr>
+                        <tr>
+                          <td>Address</td>
+                          <td>{{person.address1}}<br>{{person.city}}, {{person.state_province}} {{person.zip_code}}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-footer">
+                  <div class="text-right">
+                    <a class="btn btn-md btn-primary" routerLink="/profile-update" routerLinkActive="active">Update
+                      Profile</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">User Account</h3>
+                </div>
+                <form (ngSubmit)="onPasswordResetSubmit(passReset)" #passReset="ngForm">
+                  <div class="panel-body">
+                    <div class="row">
+
+                      <div class=" col-md-12 col-lg-12 ">
+                        <table class="table table-user-information">
+                          <tbody>
+                          <tr>
+                            <td>User ID:</td>
+                            <td>{{person.nmrbox_acct}}</td>
+                          </tr>
+                          <tr>
+                            <td>Institutional Email:</td>
+                            <td><a href="mailto: {{person.email_institution}}">{{person.email_institution}}</a></td>
+                          </tr>
+                          <tr *ngIf="!showHide">
+                            <td>Password:</td>
+                            <td>
+                              <span>******</span>
+                            </td>
+                          </tr>
+
+                          <tr *ngIf="showHide">
+                            <td>Current Password:</td>
+                            <td>
+                              <label>
+                                <input type="password" name="old_password" autocomplete="off" required ngModel>
+                              </label>
+                              <span id="show_pass_box" style="cursor:pointer;">
+                                <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
+                              </span>
+                            </td>
+                          </tr>
+                          <tr *ngIf="showHide">
+                            <td colspan="2">
+                              <p>Password requirements: The password must be a minimum of 8
+                                characters and include a character from 3 of the following 4
+                                groups: upper case, lower case, numbers, and symbols. Furthermore,
+                                the characters '&' and '$' are not allowed.</p>
+                            </td>
+                          </tr>
+                          <tr *ngIf="showHide">
+                            <td>New Password:</td>
+                            <td>
+                              <label>
+                                <input type="password" name="new_password" class="password" autocomplete="off" ngModel
+                                       required>
+                              </label>
+                              <span style="cursor:pointer;">
+                                <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
+                              </span>
+                            </td>
+                          </tr>
+                          <tr *ngIf="showHide">
+                            <td>Confirm New Password:</td>
+                            <td>
+                              <label>
+                                <input type="password" name="conf_password" class="password" autocomplete="off" ngModel
+                                       required>
+                              </label>
+                              <span id="" style="cursor:pointer;">
+                                <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
+                              </span>
+                            </td>
+                          </tr>
+
+                          <!--<tr>
+                              <td>Classification Groups</td>
+                              <td>
+                                <ng-container *ngFor="let classification of person.classifications">
+                                  <div *ngIf="classification.web_role" [title]="classification.definition">
+                                      {{classification.name}}
+                                  </div>
+                                </ng-container>
+                              </td>
+                          </tr>-->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel-footer">
+                    <div class="text-right">
+                      <a class="btn btn-md btn-primary" *ngIf="!showHide" (click)="changeShowStatus()">Password
+                        Reset</a>
+                      <input class="btn btn-md btn-primary right-pad" *ngIf="showHide" [disabled]="!passReset.valid"
+                             type="submit" (click)="onPasswordResetSubmit(passReset)" value="Save">
+                      <a class="btn btn-md btn-primary" *ngIf="showHide" (click)="changeShowStatus()">Cancel</a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row" *ngIf="person">
+            <div class="col-sm-12 col-lg-12">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Request Downloadable VM</h3>
+                </div>
+                <div class="panel-body">
+                  <div class="row">
+
+                    <form #downloadVM="ngForm" (ngSubmit)="onDownloadVMSubmit(downloadVM)">
+
+                      <div class="form-group col-lg-12">
+                        The following form allows you to request a downloadable copy of NMRbox that you can run
+                        on your local workstation. After you submit the form, you will receive an email with a
+                        custom link for downloading your VM. This process may take several hours.
+                      </div>
+
+                      <div class="form-group col-lg-12">
+                        Please select the VM version you wish to download:
+                      </div>
+
+                      <div class="form-group col-lg-12">
+                        <div class="form-group "><label for="vm_id" class="control-label">VM Versions</label>
+                          <select class="form-control form-control select_pi" maxlength="32" required="required"
+                                  id="vm_id" name="vm_id" ngModel>
+                            <option value="">Please Select</option>
+                            <option *ngFor="let vm of person.downloadableVm" [value]="vm[0]">{{vm[1]}}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form-goup col-lg-12">
+                        We will create a user account inside the VM. Please select your desired username and
+                        password:
+                      </div>
+
+                      <div class="form-group col-lg-12">
+                        <div class="form-group ">
+                          <label for="vm_username" class="control-label">VM username</label>
+                          <input class="form-control form-control" maxlength="64" id="vm_username"
+                                 name="vm_username" type="text" [ngModel]="person.nmrbox_acct"
+                                 autocomplete="off" required="required">
+                        </div>
+                      </div>
+
+                      <div class="form-group col-lg-12">
+                        <div class="form-group ">
+                          <label for="vm_password" class="control-label">VM Password</label>
+                          <input class="form-control form-control" maxlength="32" id="vm_password"
+                                 name="vm_password" type="password" required="required" ngModel>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-lg-12">
+                        Note: The username and password do not have to be the same as your NMRbox account. You
+                        can choose whatever you like. Your account will be given root privileges allowing you to
+                        make additional changes, as needed.
+                      </div>
+
+                      <div *ngIf="notifications?.message && notifications.type"
+                           [ngClass]="{'alert-error': notifications.type == 'danger',
+                                                 'alert-success': notifications.type == 'success', 'col-lg-12': true}"
+                           class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}"
+                           [innerHTML]="notifications.message | safeHtml">
+                      </div>
+
+                      <div class="form-group col-lg-12">
+                        <div class="form-group">
+                          <input [disabled]="!downloadVM.valid" class="btn btn-primary btn-lg btn-block"
+                                 type="submit" value="Request Downloadable VM">
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 

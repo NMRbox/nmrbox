@@ -1,25 +1,12 @@
-.table-borderless td,
-.table-borderless th {
-  border: 0 !important;
-}
-
 .example-full-width {
   width: 95%;
   margin: 0 !important;
 }
 
 mat-card {
-  width: 75%;
+  max-width: 800px;
   margin: 10px 0px;
   border: 1px solid #48b0e3;
-}
-
-mat-card mat-card-header {
-  width: 80%;
-}
-
-mat-card mat-card-header mat-card-title {
-
 }
 
 .left-pad {
