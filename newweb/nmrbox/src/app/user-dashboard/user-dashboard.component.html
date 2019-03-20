@@ -216,6 +216,13 @@
                                     Note: The username and password do not have to be the same as your NMRbox account.  You can choose whatever you like.  Your account will be given root privileges allowing you to make additional changes, as needed.
                                 </div>
 
+                                <div *ngIf="notifications?.message && notifications.type"
+                                     [ngClass]="{'alert-error': notifications.type == 'danger',
+                                                 'alert-success': notifications.type == 'success', 'col-lg-12': true}"
+                                     class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}"
+                                     [innerHTML]="notifications.message | safeHtml">
+                                </div>
+
                                 <div class="form-group col-lg-4">
                                     <div class="form-group">
                                         <input [disabled]="!downloadVM.valid" class="btn btn-primary btn-lg btn-block" type="submit" value="Request Downloadable VM">
