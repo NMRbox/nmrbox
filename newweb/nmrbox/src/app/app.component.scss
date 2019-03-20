@@ -20,8 +20,7 @@ h2 {
 
 .mat-toolbar.mat-primary {
   background-color: #475a63;
-  height: 55px;
-  min-height: 55px;
+  min-height: 50px !important;
 
   nav {
     a, span {
@@ -53,11 +52,6 @@ h2 {
       }
     }
 
-    #nav-tab-logo {
-      top: -113px;
-      margin-left: -35px;
-    }
-
     /* Nav: active & hover state */
     a:hover, a.active, .nmrbox-logo-small-light:hover {
       span {
@@ -86,6 +80,7 @@ h2 {
 
 nav.secondary-navbar {
   float: right;
+  margin-right: 1em;
 
   a {
     min-width: auto !important;
@@ -104,28 +99,6 @@ nav.secondary-navbar {
   width: 910px;
   margin: auto;
 }
-
-/*
-nav a {
-  padding: 5px 10px;
-  text-decoration: none;
-  margin-top: 10px;
-  display: inline-block;
-  background-color: #eee;
-  border-radius: 4px;
-}
-nav a:visited, a:link {
-  color: #fff;
-  background-color: #999;
-}
-nav a:hover {
-  color: #fff;
-}
-nav a.active {
-  color: #fff;
-  background-color: #666;
-}
-*/
 
 .half_em {
   padding-left: .5em !important;

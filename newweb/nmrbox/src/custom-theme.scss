@@ -306,18 +306,6 @@ ul.icon-list {
   background: #fff;
 }
 
-/* Material Toolbar */
-mat-toolbar {
-  .page-title {
-    line-height: 1em;
-    font-size: 18px;
-    font-weight: 200;
-    color: #919191;
-    margin-left: 10px;
-  }
-}
-
-
 mat-toolbar.toolbar-transparent {
   background-color: $nmrbox-gray-light;
 }
@@ -326,9 +314,8 @@ mat-toolbar, .mat-tab-label, .mat-card {
   font-family: 'Libre Franklin', sans-serif;
 }
 
-.mat-toolbar .mat-toolbar-row, .mat-toolbar.mat-primary[_ngcontent-c0] {
+.mat-toolbar-row {
   height: 50px !important;
-  min-height: 50px !important;
 }
 
 .mat-button:hover .mat-button-focus-overlay, .mat-button:hover .mat-button-ripple:hover {

@@ -1,5 +1,6 @@
 <mat-toolbar color="primary">
 
+  <mat-toolbar-row>
     <div class="nav-wrapper">
       <nav class="main-navbar">
         <a mat-button routerLink="/" routerLinkActive="active"
@@ -35,17 +36,9 @@
           </span>
           <span>Support</span>
         </a>
-        <!--<a mat-button routerLink="/team-tab/0" routerLinkActive="active">
-          <span class="nav-tab">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <polygon points="50,5  100,5  125,30  125,80  100,105  50,105  25,80  25, 30"></polygon>
-            </svg>
-          </span>
-          <span>Team</span>
-        </a>-->
       </nav>
-      <span class="spacer"></span>
-      <nav class="secondary-navbar">
+
+      <nav class="secondary-navbar" *ngIf="!responsiveService.isMobile">
         <span *ngIf="!this.authService.userID">
           <a mat-button routerLink="/signin" routerLinkActive="active">Sign in</a>
           <span class="half_em">|</span>
@@ -58,7 +51,22 @@
         </span>
       </nav>
     </div>
-  <div>
-  </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row *ngIf="responsiveService.isMobile">
+    <div class="nav-wrapper">
+    <nav class="secondary-navbar">
+        <span *ngIf="!this.authService.userID">
+          <a mat-button routerLink="/signin" routerLinkActive="active">Sign in</a>
+          <span class="half_em"></span>
+          <a mat-button routerLink="/signup" routerLinkActive="active">Sign up</a>
+        </span>
+      <span *ngIf="this.authService.userID">
+          <a mat-button routerLink="/user-dashboard" routerLinkActive="active">My Account</a>
+          <span class="half_em"></span>
+          <a mat-button (click)="signOut()" routerLinkActive="active">Sign out</a>
+        </span>
+    </nav>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>
