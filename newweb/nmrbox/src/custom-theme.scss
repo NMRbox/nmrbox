@@ -396,6 +396,9 @@ mat-select {
 /* Material Tabs */
 .mat-tab-header {
   border: 0px;
+  margin-left: -5px;
+  background-color: $nmrbox-blue;
+  color: #fff;
 }
 
 .mat-ink-bar {

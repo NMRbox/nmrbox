@@ -1,10 +1,7 @@
-@import "../../custom-theme.scss";
-
 /* Filters: Community only */
 .sw-filters-container {
   .sw-filters {
     width: 100%;
-    max-width: auto; /* constrained by tab container */
     margin: 0px auto;
   }
 }
@@ -298,10 +295,4 @@ mat-card-title {
     list-style: none;
     padding: 0px;
   }
-}
-
-
-::ng-deep mat-tab-header {
-  background-color: $nmrbox-blue;
-  color: #fff;
 }
