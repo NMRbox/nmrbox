@@ -714,6 +714,13 @@ a:focus, a:active {
   outline: none;
 }
 
+
+.half-em {
+  padding-left: .5em !important;
+  padding-right: .5em !important;
+}
+
+
 /* These might not be appropriate as they harm accessibility
  See: https://github.com/angular/material2/issues/5903
 

@@ -63,11 +63,14 @@
     <p>
       <strong>NMR</strong>box is a resource for biomolecular NMR (Nuclear Magnetic Resonance) software. It provides
       tools for finding the software you need, documentation and tutorials for getting the most out of the software, and
-      cloud-based virtual machines for executing the software.
+      cloud-based virtual machines for executing the software. <br><br>
+      <a routerLink="/signup"> Sign up</a> for an account, or <a routerLink="/signin"> log in</a>. <br><br>
+      <a href="https://api.nmrbox.org/files/benefits-users.pdf" target="_blank">User benefits</a>
+      <span class="half-em">|</span>
+      <a href="https://api.nmrbox.org/files/benefits-developers.pdf" target="_blank">Developer benefits</a>
+      <span class="half-em">|</span>
+      <a routerLink="/pages/overview">Center overview</a>
     </p>
-    <!--<a routerLink="/support/0"><strong>NMR</strong>box support</a>
-    &nbsp;&nbsp;|&nbsp;&nbsp;
-    <a routerLink="/community/2"><strong>NMR</strong>box under the hood</a>-->
   </div>
 </section>
 <section id="home-software" class="page-section white-bg">
@@ -167,6 +170,32 @@
           <figcaption>Get in touch with the NMRbox team for support.</figcaption>
         </figure>
       </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</section>
+<section id="funding" class="page-section gray-bg">
+  <div class="content">
+    <h1>The Center</h1>
+    <p><strong>NMR</strong>box is developed by the National Center for Biomolecular NMR Data
+      Processing and Analysis, a collaboration among UConn Health and the University of Wisconsin. The Center is a
+      Biomedical Technology Research Resource (BTRR), supported by the National Institutes of Health (NIH) / National
+      Institute of General Medical Sciences (NIGMS), grant 1P41GM111135.</p>
+
+    <mat-grid-list [cols]="responsiveService.columns" rowHeight="150px">
+      <a href="https://uconn.edu/" target="_blank">
+        <mat-grid-tile class="co-tile">
+          <figure>
+            <img height="150" alt="UConn Logo" src="/assets/graphics/home-page/UCH.svg">
+          </figure>
+        </mat-grid-tile>
+      </a>
+      <a href="https://www.wisc.edu/" target="_blank">
+        <mat-grid-tile class="co-tile">
+          <figure>
+            <img height="150" class="left-pad-2em" alt="UW Madison Logo" src="/assets/graphics/home-page/UW.svg">
+          </figure>
+        </mat-grid-tile>
+      </a>
     </mat-grid-list>
   </div>
 </section>
