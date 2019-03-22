@@ -45,15 +45,6 @@ $nmrbox-app-theme: mat-light-theme($nmrbox-app-primary, $nmrbox-app-accent, $nmr
 */
 @include angular-material-theme($nmrbox-app-theme);
 
-html,body
-{
-  width: 100%;
-  height: 100%;
-  margin: 0px;
-  padding: 0px;
-  overflow-x: hidden;
-}
-
 app-root {
   min-height: 750px;
   display: block;
