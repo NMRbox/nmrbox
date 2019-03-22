@@ -2,16 +2,14 @@
 
 $nmrbox-blue-gray: #a4bbc1;
 
-.test {
-  width: 100px;
-  max-height: 37.31px;
-}
-
 .mat-toolbar.mat-primary {
   background-color: #475a63;
   min-height: 50px !important;
 
   nav {
+    display: inline-flex;
+    width: 100%;
+
     a, span {
       color: $nmrbox-blue-gray;
       font-weight: 300;
@@ -19,6 +17,12 @@ $nmrbox-blue-gray: #a4bbc1;
       margin-right: .5em;
       padding: 0;
       outline: none;
+      img.active {
+        display: none;
+      }
+      img.inactive {
+        display: inherit;
+      }
     }
 
     /* Nav: active & hover state */
@@ -26,6 +30,13 @@ $nmrbox-blue-gray: #a4bbc1;
       text-decoration: none;
       span {
         color: #fff;
+      }
+
+      img.inactive {
+        display: none;
+      }
+      img.active {
+        display: inherit;
       }
     }
 
@@ -38,6 +49,11 @@ $nmrbox-blue-gray: #a4bbc1;
 .mat-toolbar-row {
   position: relative;
   max-width: 955px;
-  width: 955px;
   margin: auto;
+}
+
+.fill-space {
+  // This fills the remaining space, by using flexbox.
+  // Every toolbar row uses a flexbox row layout.
+  flex: 1 1 auto;
 }

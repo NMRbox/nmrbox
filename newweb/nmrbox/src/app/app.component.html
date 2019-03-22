@@ -1,18 +1,17 @@
 <mat-toolbar color="primary">
 
   <mat-toolbar-row>
-      <nav class="nav-bar">
-        <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <!--<img class="nmrbox-logo-small-light-fix" src="/assets/graphics/sitewide/nmrbox-logo-light-240x40-outline.svg" alt="">-->
-          <div class="test">
-            <div class="nmrbox-logo-small-light"></div>
-          </div>
-        </a>
-        <a mat-button routerLink="/software" routerLinkActive="active"><span>Software</span></a>
-        <a mat-button routerLink="/community/0" routerLinkActive="active"><span>Community</span></a>
+    <nav>
+      <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <img class="inactive" src="/assets/graphics/sitewide/nmrbox-logo-light-solo-desat-outline.svg" alt="">
+        <img class="active" src="/assets/graphics/sitewide/nmrbox-logo-light-solo-outline.svg" alt="">
+      </a>
+      <a mat-button routerLink="/software" routerLinkActive="active"><span>Software</span></a>
+      <a mat-button routerLink="/community/0" routerLinkActive="active"><span>Community</span></a>
+      <a mat-button routerLink="/support/0" routerLinkActive="active"><span>Support</span></a>
 
-        <ng-container  *ngIf="!responsiveService.isMobile">
-        <a mat-button routerLink="/support/0" routerLinkActive="active"><span>Support</span></a>
+      <ng-container *ngIf="!responsiveService.isMobile">
+        <span class="fill-space"></span>
         <a *ngIf="!this.authService.userID" mat-button routerLink="/signin" routerLinkActive="active">
           <span>Sign in</span>
         </a>
@@ -25,28 +24,26 @@
         <a *ngIf="this.authService.userID" mat-button (click)="signOut()" routerLinkActive="active">
           <span>Sign out</span>
         </a>
-        </ng-container>
-      </nav>
+      </ng-container>
+    </nav>
   </mat-toolbar-row>
 
-
   <mat-toolbar-row *ngIf="responsiveService.isMobile">
-    <div class="nav-wrapper">
-    <nav class="nav-bar">
-      <a mat-button routerLink="/support/0" routerLinkActive="active"><span>Support</span></a>
-      <a *ngIf="!this.authService.userID" mat-button routerLink="/signin" routerLinkActive="active">
-        <span>Sign in</span>
-      </a>
-      <a *ngIf="this.authService.userID" mat-button routerLink="/user-dashboard" routerLinkActive="active">
-        <span>My Account</span>
-      </a>
-      <a *ngIf="!this.authService.userID" mat-button routerLink="/signup" routerLinkActive="active">
-        <span>Sign up</span>
-      </a>
-      <a *ngIf="this.authService.userID" mat-button (click)="signOut()" routerLinkActive="active">
-        <span>Sign out</span>
-      </a>
-    </nav>
+    <div>
+      <nav>
+        <a *ngIf="!this.authService.userID" mat-button routerLink="/signin" routerLinkActive="active">
+          <span>Sign in</span>
+        </a>
+        <a *ngIf="this.authService.userID" mat-button routerLink="/user-dashboard" routerLinkActive="active">
+          <span>My Account</span>
+        </a>
+        <a *ngIf="!this.authService.userID" mat-button routerLink="/signup" routerLinkActive="active">
+          <span>Sign up</span>
+        </a>
+        <a *ngIf="this.authService.userID" mat-button (click)="signOut()" routerLinkActive="active">
+          <span>Sign out</span>
+        </a>
+      </nav>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
