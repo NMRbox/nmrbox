@@ -2,20 +2,9 @@
 
 $nmrbox-blue-gray: #a4bbc1;
 
-.no-blue-box {
-  outline:none;
-}
-
-h1 {
-  font-size: 2em;
-  margin-bottom: 0;
-}
-
-h2 {
-  font-size: 1.5em;
-  color: #888;
-  margin-top: 0;
-  padding-top: 0;
+.test {
+  width: 100px;
+  max-height: 37.31px;
 }
 
 .mat-toolbar.mat-primary {
@@ -26,76 +15,29 @@ h2 {
     a, span {
       color: $nmrbox-blue-gray;
       font-weight: 300;
-      min-width: 95px;
-      padding: 0px;
-    }
-    .nmrbox-logo-small-light {
-      opacity: 0.7;
-      display: block;
-      height: 37.5px;
-      width: 95px;
-      background-position: 0px 5px;
-    }
-
-    .nav-tab {
-      position: absolute;
-      top: -105px;
-      left: 0px;
-      margin-left: -27px;
-      width: 90px;
-      max-width: 90px;
-
-      polygon {
-        stroke: $nmrbox-blue-gray;
-        fill: $nmrbox-blue-gray;
-        stroke-width: 1;
-      }
+      margin-left: .5em;
+      margin-right: .5em;
+      padding: 0;
+      outline: none;
     }
 
     /* Nav: active & hover state */
-    a:hover, a.active, .nmrbox-logo-small-light:hover {
+    a:hover, a:focus, a:active, .active {
+      text-decoration: none;
       span {
-        background-color: transparent;
         color: #fff;
-        opacity: 1;
-      }
-      polygon {
-        stroke: #fff;
-        fill: #fff;
       }
     }
-  }
 
-  .main-navbar {
-    margin-left: 2px;
-    .mat-button {
-      margin-left: -8px;
+    a:hover {
+      background-color: rgba(0, 0, 0, .1);
     }
   }
 }
 
-.main-navbar {
-  float: left;
-}
-
-nav.secondary-navbar {
-  float: right;
-  margin-right: 1em;
-
-  a {
-    min-width: auto !important;
-  }
-  a, span {
-    color: $nmrbox-blue-gray;
-  }
-  a:hover {
-    color: #fff;
-  }
-}
-
-.nav-wrapper {
+.mat-toolbar-row {
   position: relative;
-  max-width: 910px;
-  width: 910px;
+  max-width: 955px;
+  width: 955px;
   margin: auto;
 }

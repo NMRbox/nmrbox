@@ -1,70 +1,51 @@
 <mat-toolbar color="primary">
 
   <mat-toolbar-row>
-    <div class="nav-wrapper">
-      <nav class="main-navbar">
-        <a mat-button routerLink="/" routerLinkActive="active"
-           [routerLinkActiveOptions]="{ exact: true }" class="no-blue-box">
-          <span class="nav-tab">
-              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <polygon points="50,5  100,5  125,30  125,80  100,105  50,105  25,80  25, 30"></polygon>
-              </svg>
-          </span>
-          <span class="nmrbox-logo-small-light no-blue-box">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <nav class="nav-bar">
+        <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <!--<img class="nmrbox-logo-small-light-fix" src="/assets/graphics/sitewide/nmrbox-logo-light-240x40-outline.svg" alt="">-->
+          <div class="test">
+            <div class="nmrbox-logo-small-light"></div>
+          </div>
         </a>
-        <a mat-button routerLink="/software" routerLinkActive="active" class="no-blue-box">
-          <span class="nav-tab">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <polygon points="50,5  100,5  125,30  125,80  100,105  50,105  25,80  25, 30"></polygon>
-            </svg>
-          </span>
-          <span>Software</span>
-        </a>
-        <a mat-button routerLink="/community/0" routerLinkActive="active" class="no-blue-box">
-          <span class="nav-tab">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <polygon points="50,5  100,5  125,30  125,80  100,105  50,105  25,80  25, 30"></polygon>
-            </svg>
-          </span>
-          <span>Community</span>
-        </a>
-        <a mat-button routerLink="/support/0" routerLinkActive="active" class="no-blue-box">
-          <span class="nav-tab">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <polygon points="50,5  100,5  125,30  125,80  100,105  50,105  25,80  25, 30"></polygon>
-            </svg>
-          </span>
-          <span>Support</span>
-        </a>
-      </nav>
+        <a mat-button routerLink="/software" routerLinkActive="active"><span>Software</span></a>
+        <a mat-button routerLink="/community/0" routerLinkActive="active"><span>Community</span></a>
 
-      <nav class="secondary-navbar" *ngIf="!responsiveService.isMobile">
-        <span *ngIf="!this.authService.userID">
-          <a mat-button routerLink="/signin" routerLinkActive="active">Sign in</a>
-          <span class="half-em">|</span>
-          <a mat-button routerLink="/signup" routerLinkActive="active">Sign up</a>
-        </span>
-        <span *ngIf="this.authService.userID">
-          <a mat-button routerLink="/user-dashboard" routerLinkActive="active">My Account</a>
-          <span class="half-em">|</span>
-          <a mat-button (click)="signOut()" routerLinkActive="active">Sign out</a>
-        </span>
+        <ng-container  *ngIf="!responsiveService.isMobile">
+        <a mat-button routerLink="/support/0" routerLinkActive="active"><span>Support</span></a>
+        <a *ngIf="!this.authService.userID" mat-button routerLink="/signin" routerLinkActive="active">
+          <span>Sign in</span>
+        </a>
+        <a *ngIf="this.authService.userID" mat-button routerLink="/user-dashboard" routerLinkActive="active">
+          <span>My Account</span>
+        </a>
+        <a *ngIf="!this.authService.userID" mat-button routerLink="/signup" routerLinkActive="active">
+          <span>Sign up</span>
+        </a>
+        <a *ngIf="this.authService.userID" mat-button (click)="signOut()" routerLinkActive="active">
+          <span>Sign out</span>
+        </a>
+        </ng-container>
       </nav>
-    </div>
   </mat-toolbar-row>
+
+
   <mat-toolbar-row *ngIf="responsiveService.isMobile">
     <div class="nav-wrapper">
-    <nav class="secondary-navbar">
-        <span *ngIf="!this.authService.userID">
-          <a mat-button routerLink="/signin" routerLinkActive="active">Sign in</a>
-          <span class="half-em"></span>
-          <a mat-button routerLink="/signup" routerLinkActive="active">Sign up</a>
-        </span>
-      <span *ngIf="this.authService.userID">
-          <a mat-button routerLink="/user-dashboard" routerLinkActive="active">My Account</a>
-          <span class="half-em"></span>
-          <a mat-button (click)="signOut()" routerLinkActive="active">Sign out</a>
-        </span>
+    <nav class="nav-bar">
+      <a mat-button routerLink="/support/0" routerLinkActive="active"><span>Support</span></a>
+      <a *ngIf="!this.authService.userID" mat-button routerLink="/signin" routerLinkActive="active">
+        <span>Sign in</span>
+      </a>
+      <a *ngIf="this.authService.userID" mat-button routerLink="/user-dashboard" routerLinkActive="active">
+        <span>My Account</span>
+      </a>
+      <a *ngIf="!this.authService.userID" mat-button routerLink="/signup" routerLinkActive="active">
+        <span>Sign up</span>
+      </a>
+      <a *ngIf="this.authService.userID" mat-button (click)="signOut()" routerLinkActive="active">
+        <span>Sign out</span>
+      </a>
     </nav>
     </div>
   </mat-toolbar-row>
