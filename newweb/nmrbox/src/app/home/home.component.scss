@@ -135,6 +135,15 @@ $nmrbox-blue-dark: #3A4C51;
   margin-bottom: 20px;
 }
 
+#funding .content div {
+  text-align: center;
+  margin: auto;
+
+  img:hover {
+    background-color: rgba(0,0,0,.1);
+  }
+}
+
 .page-section#home-community, .page-section#home-team {
   mat-grid-tile {
     p {
