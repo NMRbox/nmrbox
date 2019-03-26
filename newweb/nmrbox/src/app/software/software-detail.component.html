@@ -34,13 +34,13 @@
       <div>
         <h3><strong>NMR</strong>box Version</h3>
         <section>
-          <p *ngFor="let type of softwareMetaData.nmrbox_version" class="">{{type}}</p>
+          <p *ngFor="let type of softwareMetaData.software_versions" class="">{{type[0]}}</p>
         </section>
       </div>
       <div>
         <h3><strong>Software</strong> Version</h3>
         <section>
-          <p *ngFor="let type of softwareMetaData.software_version" class="">{{type}}</p>
+          <p *ngFor="let version of softwareMetaData.software_versions" class="">{{version[1]}}</p>
         </section>
       </div>
     </section>

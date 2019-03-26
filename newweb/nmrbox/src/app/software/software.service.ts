@@ -111,7 +111,16 @@ export class SoftwareService {
       .toPromise()
       .then(response => {
           if (response && response['data']) {
-            return response['data'] as SoftwareMetadataModel;
+            const SoftwareMetadata = response['data'] as SoftwareMetadataModel;
+            const SoftwareVersions = [];
+            for (const index in SoftwareMetadata.nmrbox_version) {
+              if (SoftwareMetadata.nmrbox_version.hasOwnProperty(index)) {
+                SoftwareVersions.push([SoftwareMetadata.nmrbox_version[index], SoftwareMetadata.software_version[index][0]]);
+              }
+            }
+            SoftwareVersions.sort((a, b) => a[0].localeCompare(b[0]));
+            SoftwareMetadata.software_versions = SoftwareVersions;
+            return SoftwareMetadata;
           } else {
             return {} as SoftwareMetadataModel;
           }
