@@ -25,6 +25,7 @@ const routes: Routes = [
   {path: 'pages/:pageUrl', component: StaticPageComponent},
   {path: 'community', component: CommunityComponent},
   {path: 'community/:index', component: CommunityComponent},
+  {path: 'events', component: CommunityComponent},
   {path: 'support', component: SupportComponent},
   {path: 'support/:index', component: SupportComponent},
   {path: 'support/:index/:slug', component: SupportComponent},
