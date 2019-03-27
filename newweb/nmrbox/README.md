@@ -31,6 +31,10 @@ automatically reload if you change any of the source files.
 
 First make sure you have sourced the node environment as described
  [above](#running-the-server-locally).
+ 
+Then check the configuration in `./src/app/environments/environment.prod.ts` is correct.
+This mainly means checking that the value of `appUrl` is correct. `appUrl` should point to
+the location of the Laravel back-end server.
 
 Run `ng build --prod` to build the project. The built project will
 be stored in the `dist/` directory. To deploy the server, simply copy all the files in the
