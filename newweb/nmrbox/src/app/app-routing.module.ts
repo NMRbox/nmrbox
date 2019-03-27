@@ -19,6 +19,7 @@ import {FilesComponent} from './files/files.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'software', component: SoftwareListComponent},
+  {path: 'registry', component: SoftwareListComponent},
   {path: 's/:slug', component: SoftwareDetailComponent},
   {path: 'software/:filterType/:filter', component: SoftwareListComponent},
   {path: 'pages/:pageUrl', component: StaticPageComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path: 'team-tab', component: TeamListComponent},
   {path: 'team-tab/:index', component: TeamListComponent},
   {path: 'signup', component: SignupComponent},
+  {path: 'login', component: SigninComponent},
   {path: 'signin', component: SigninComponent},
   {path: 'signout', component: SigninComponent},
   {path: 'forgot-password', component: ForgetPasswordComponent},
