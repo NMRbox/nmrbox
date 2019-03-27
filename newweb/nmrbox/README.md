@@ -32,16 +32,16 @@ automatically reload if you change any of the source files.
 First make sure you have sourced the node environment as described
  [above](#running-the-server-locally).
 
-Run `ng build --prod  --output-path built` to build the project. The built project will
-be stored in the `built/` directory. To deploy the server, simply copy all the files in the
-`built` directory to your web server, and then use the following nginx configuration:
+Run `ng build --prod` to build the project. The built project will
+be stored in the `dist/` directory. To deploy the server, simply copy all the files in the
+`dist` directory to your web server, and then use the following nginx configuration:
 
 
 ```
 server {
     listen 443 ssl default_server;
 
-    root /path/to/files/in/built;
+    root /path/to/files/in/dist;
     index index.php index.html index.htm;
     client_max_body_size 64M;
 
