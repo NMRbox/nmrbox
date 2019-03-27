@@ -1,42 +1,79 @@
-# NMRbox Angular-Heroku App
-
-This project is a clone of 'Angular-Heroku Boilerplate App' `git@gitlab.com:visallimedia/angular-heroku-boilerplate.git`, which was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.1.
-
-VERSION 0.6 - Styling
+# NMRbox Angular App
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Initial set up
 
-### Code scaffolding
+If you've just checkout out this code, you must first set up your local development environment.
+Make sure that you have python3 installed, and then run the following
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+```bash
+./setup_development_environment.sh
+```
 
-### Build
+This will set up a virtual node environment and also install the node modules needed for
+the project. This one needs to be ran once.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+## Running the server locally
 
-### Running unit tests
+First, make sure you followed the [initial set up instructions](#initial-set-up). Then you must
+always activate your local node environment:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+source ./node_env/bin/activate
+```
 
-### Running end-to-end tests
+This will put the correct node and ng binaries in your path. Then, run `ng serve` 
+to launch the dev server. Navigate to `http://localhost:4200/`. The app will 
+automatically reload if you change any of the source files.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+## Build and release
 
-### Further help
+First make sure you have sourced the node environment as described
+ [above](#running-the-server-locally).
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Run `ng build --prod  --output-path built` to build the project. The built project will
+be stored in the `built/` directory. To deploy the server, simply copy all the files in the
+`built` directory to your web server, and then use the following nginx configuration:
 
-## Remote Heroku server
 
-Create Heroku server instance by running `heroku create` and then `heroku open` to view the new site in the browser. 
+```
+server {
+    listen 443 ssl default_server;
 
-Commit changes and run `git push heroku master` to re-build the node environment and angular app.
+    root /path/to/files/in/built;
+    index index.php index.html index.htm;
+    client_max_body_size 64M;
 
-NOTE: unique scripts are defined in package.json to run `ng build -prod` and move build files to root directory.
+    server_name nmrbox.org www.nmrbox.org web.nmrbox.org;
+    ssl_certificate /etc/letsencrypt/live/nmrbox.org/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/nmrbox.org/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
-## GitLab updates
+    location / {
+        try_files $uri$args $uri$args/ /index.html;
+    }
+}
 
-Run `git push origin master`
+server {
+    listen 80 default_server;
+    server_name nmrbox.org www.nmrbox.org web.nmrbox.org;
+
+    return 301 https://$host$request_uri;
+}
+
+```
+
+The important thing to notice in the configuration above, which is not normally present,
+are the lines:
+
+```
+location / {
+        try_files $uri$args $uri$args/ /index.html;
+    }
+```
+
+These ensure that when the client browser requests `nmrbox.org/pages/community` the nginx
+server instead returns the file `/index.html` which is necessary since the `/pages/community`
+part of the URL is interpreted inside of the client Angular code.
