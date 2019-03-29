@@ -6,6 +6,29 @@ import {AuthenticationService} from '../authentication/authentication.service';
 import {SoftwareService} from '../software/software.service';
 import {ResponsiveService} from '../responsive.service';
 
+class Banner {
+  imageURL: string;
+  linkURL: string;
+  altValue: string;
+
+  constructor(imageUrl, linkURL, altValue) {
+    this.imageURL = imageUrl;
+    this.linkURL = linkURL;
+    this.altValue = altValue;
+  }
+}
+
+function choose(choices) {
+  const choice: Banner = choices.splice(Math.floor(Math.random() * choices.length), 1)[0];
+  // Alternate between bear and t-rex for Jon
+  if (choice.imageURL.indexOf('dino') > -1) {
+    if (Math.random() >= 0.5) {
+      choice.imageURL = choice.imageURL.replace('dino', 'bear');
+    }
+  }
+  return choice;
+}
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home.component.html',
@@ -16,6 +39,13 @@ export class HomeComponent implements OnInit {
   appURL: string;
   upcomingEvents: EventModel[];
   softwareTypeFrequency: Array<Array<string>>;
+  bannerList: Array<Banner>;
+  softwareBanners: Array<Banner> =
+    [new Banner('https://api.nmrbox.org/files/developer-banner-gerard.png', '/s/spectrum-translator', 'Gerard Weatherby'),
+     new Banner('https://api.nmrbox.org/files/developer-banner-alexandre.png', 'http://www.bonvinlab.org/software/haddock2.2/',
+       'Alexandre  Bonvin'),
+     new Banner('https://api.nmrbox.org/files/developer-banner-frank.png', '/s/nmrpipe', 'Frank Delaglio'),
+     new Banner('https://api.nmrbox.org/files/developer-banner-jon-dino.jpg', '/s/bmrb-cs-rosetta', 'Jon Wedell')];
 
   public notifications: any = {message: '', type: ''};
 
@@ -41,6 +71,11 @@ export class HomeComponent implements OnInit {
     this.softwareService.softwareTypeFrequency.subscribe(softwareTypeFrequency => {
       this.softwareTypeFrequency = softwareTypeFrequency;
     });
+
+    this.bannerList = [new Banner('https://api.nmrbox.org/files/event-banner-60th-enc.png', 'https://www.enc-conference.org/',
+      '60th ENC')];
+    this.bannerList.push(choose(this.softwareBanners));
+    this.bannerList.push(choose(this.softwareBanners));
   }
 
   ngOnInit(): void {
