@@ -19,7 +19,7 @@
           <span>My Account</span>
         </a>
         <a *ngIf="!this.authService.userID" mat-button routerLink="/signup" routerLinkActive="active">
-          <span>Sign up</span>
+          <span><strong>Sign up</strong></span>
         </a>
         <a *ngIf="this.authService.userID" mat-button (click)="signOut()" routerLinkActive="active">
           <span>Sign out</span>
@@ -38,7 +38,7 @@
           <span>My Account</span>
         </a>
         <a *ngIf="!this.authService.userID" mat-button routerLink="/signup" routerLinkActive="active">
-          <span>Sign up</span>
+          <span><strong>Sign up</strong></span>
         </a>
         <a *ngIf="this.authService.userID" mat-button (click)="signOut()" routerLinkActive="active">
           <span>Sign out</span>
