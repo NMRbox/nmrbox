@@ -17,6 +17,7 @@
         <div class="divider divider-dashed"></div>
         <div class="grid-outer-wrapper gray-bg">
           <div class="grid-content-wrapper">
+            <!--<div class="alert alert-info">Click on an event tile for more information.</div>-->
             <div *ngIf="notifications?.message && notifications.type"
                  class="alert alert-{{ notifications.type == 'error' ? 'danger' : 'success' }}"
                  [innerHTML]="notifications.message | safeHtml">
@@ -37,16 +38,17 @@
                       <p>{{event.start_date | date:'longDate'}} - {{event.end_date | date:'longDate'}}</p>
                       <p>{{event.location}}</p>
                       <ng-container *ngIf="event.attendance_max != null">
-                        <p *ngIf="event.attendance !== null">Attendance - {{event.attendance}}
+                        <p *ngIf="event.attendance !== null && event.attendance_max != 0">Attendance - {{event.attendance}}
                           /{{event.attendance_max}}</p>
-                        <p *ngIf="event.attendance === null">Max attendance - {{event.attendance_max}}</p>
-                        <p><a [href]="event.url" target="_blank">More information</a></p>
+                        <p *ngIf="event.attendance_max == 0">Attendance - {{event.attendance}}</p>
+                        <p *ngIf="event.attendance === null && event.attendance_max != 0">Max attendance - {{event.attendance_max}}</p>
                         <div *ngIf="authService.userID; else signin">
                           <button *ngIf="authService.hasClassification(event.name); else register"
                                   class="btn btn-primary" disabled type="button">You are already registered!
                           </button>
                           <ng-template #register>
-                            <button *ngIf="event.attendance_max > event.attendance; else disable_button"
+                            <button *ngIf="event.attendance_max > event.attendance ||
+                                           event.attendance_max == 0; else disable_button"
                                     class="btn btn-primary" type="submit">Register
                             </button>
                             <ng-template #disable_button>
