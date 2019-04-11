@@ -39,7 +39,7 @@
                       <p>{{event.location}}</p>
                       <ng-container *ngIf="event.attendance_max != null">
                         <p *ngIf="event.attendance !== null && event.attendance_max != 0">Attendance - {{event.attendance}}
-                          /{{event.attendance_max}}</p>
+                          / {{event.attendance_max}}</p>
                         <p *ngIf="event.attendance_max == 0">Attendance - {{event.attendance}}</p>
                         <p *ngIf="event.attendance === null && event.attendance_max != 0">Max attendance - {{event.attendance_max}}</p>
                         <div *ngIf="authService.userID; else signin">
