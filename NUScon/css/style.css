@@ -1,0 +1,98 @@
+body {
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+.green {
+    padding: 50px;
+    background-color: rgba(152, 222, 194, 0.6);
+    font-size: 18px;
+    text-shadow: 0.5px 0.5px 0.5px #FFFFFF;
+}
+
+.white {
+    padding: 50px;
+    background-color: rgba(255, 255, 255, 0.6);
+    font-size: 18px;
+    text-shadow: 0.5px 0.5px 0.5px #FFFFFF;
+}
+
+.heading {
+    font-size: 32px;
+    font-weight: bold;
+    font-style: italic;
+    color: rgb(86, 86, 86)
+}
+
+.subheading {
+    font-size: 27px;
+    font-weight: bold;
+    color: rgb(86, 86, 86)
+}
+
+.subheading2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(86, 86, 86)
+}
+
+.tab {
+    margin-left:2em;
+}
+
+.code {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.code_tab {
+    margin-left:2em;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.footer {
+    padding-top: 1000px;
+    text-align: center;
+    width:100%;
+}
+
+.footer2 {
+    text-align: center;
+    width:100%;
+}
+
+.challenge_footer {
+    padding-top: 10px;
+    text-align: center;  
+    width:100%;
+    bottom: 0;
+    position: fixed;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ol {
+    list-style-position: inside;
+    margin: 0;
+    padding: 0;
+}
+
+table, th, td {
+   border: 1px solid black;
+}
+
+th, td {
+    padding: 5px;
+}
+
+th {
+    text-align: center;
+}

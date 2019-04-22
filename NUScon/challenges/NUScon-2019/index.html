@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>NUScon</title>
+  
+  <link rel='stylesheet prefetch' href='/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/images/favicon.ico" />
+
+</head>
+
+<body>
+
+  <html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Scrolling Nav</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" style="background-image: url('/images/NUScon_Background.png'); background-repeat: repeat-y;">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/"><img src=/images/NUScon_logo_small.png /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a class="page-scroll" href="/"></a>
+                    </li>
+                    <li>
+                      <a class="page-scroll" href="/#Participate">Participate</a>
+                    </li>
+                    <li>
+                      <a class="page-scroll" href="/challenges">Challenges</a>
+                    </li>
+                    <li>
+                      <a class="page-scroll" href="/rules/">Rules</a>
+                    </li>
+                    <li>
+                      <a class="page-scroll" href="/#Acknowledgements">Acknowledgements</a>
+                    </li>
+                    <li>
+                      <a class="page-scroll" href="mailto:info@nuscon.org?Subject=NUScon%20Inquiry">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    
+    <div class="white" id="top">
+      <span class="heading">NUScon 2019</span><br><br>
+      Challenge open date: March 28, 2018<br>
+      Challenge close date: August 1, 2018<br><br>
+      NUS spectral reconstruction for 3D NOESY-HSQC spectra with pre-defined sample schedules<br>
+    </div>
+    <div class="green" id="Short Description">
+      <span class="heading">Short Description</span><br><br>
+      The challenges presented here examine NUS spectra reconstructions from two uniformly sampled 3D NOESY-HSQC
+      spectra sub-sampled with three different sample schedule types at three different sample coverages.
+      Spectral reconstructions will be scored in three categories; <b>Fidelity</b>, a combination of
+      frequency and amplitude accuracy, <b>Detection</b>, a combination of detection of signals and
+      resolution, and a <b>Combined</b> Fidelity + Detection score.<br><br>
+    </div>
+    <div class="white" id="Experimental Data">
+      <span class="heading">Experimental Data</span><br><br>
+      <u>Proteins</u><br><br>
+      <table style="width:100%;">
+        <tr>
+          <th><b>Protein</b></th>
+          <th><b>tm</b></th>
+          <th><b>Description</b></th>
+        </tr>
+        <tr>
+          <td>Protein&nbsp;A</td>
+          <td>5&nbsp;ns</td>
+          <td>89 amino acid protein with residues 1-56 comprising a small well folded protein fused with a linker and an IDP</td>
+        </tr>
+        <tr>
+          <td>Protein&nbsp;C</td>
+          <td>7.5&nbsp;ns</td>
+          <td>107 amino acid protein, 12 kDa that is well folded, well behaved</td>
+        </tr>
+      </table><br>
+      <u>Experiments and Sample Coverage</u><br><br>
+      <table style="width:100%;">
+        <tr>
+          <th rowspan="2"><b>Protein</b></th>
+          <th rowspan="2"><b>Experiment</b></th>
+          <th rowspan="2"><b>t1&nbsp;x&nbsp;t2</b></th>
+          <th colspan="3"><b>Sampling Coverage [# of lines (% of FIDs)]</b></th>
+        </tr>
+        <tr>
+          <th><b>Challenging<b></th>
+          <th><b>Moderate<b></th>
+          <th><b>Conservative<b></th>
+        </tr>
+        <tr>
+          <td>Protein&nbsp;A</td>
+          <td>13C NOESY-HSQC</td>
+          <td>93&nbsp;x&nbsp;150</td>
+          <td>1000&nbsp;(7.2%)</td>
+          <td>2000&nbsp;(14.3%)</td>
+          <td>3000&nbsp;(21.5%)</td>
+        </tr>
+        <tr>
+          <td>Protein&nbsp;C</td>
+          <td>15N NOESY-HSQC</td>
+          <td>180&nbsp;x&nbsp;70</td>
+          <td>1500&nbsp;(11.9%)</td>
+          <td>3000&nbsp;(23.8%)</td>
+          <td>4500&nbsp;(35.7%)</td>
+        </tr>
+      </table><br>
+      Each of the 3 coverage levels noted above is used to generate sample schedules of the following types:<br>
+      <ul style="list-style-type: disc; padding: 0 30px; margin: 0 20px 0 0;">
+        <li>random</li>
+        <li>exponentially biased</li>
+        <li>Poisson gap</li>
+      </ul>
+      This results in 9 sample schedules for each of the 2 experiments, for a total of 18 sample schedules.
+      These schedules are provided as examples to be used for the development of your processing script.
+      The scoring of this challenge will be based on a new series of sample schedules that match the
+      parameters stated here, but simply vary the random seed.<br><br>
+      <u>NMRbox Resources</u><br><br>
+      All spectra are located in subfolders of <span class="code">/NUScon/challenges/challenge_2</span><br>
+      Each of these subfolders contains the uniformly sampled data ( <span class="code">US_data</span> ) for the experiement and a directory of example sample schedules ( <span class="code">sample_schedules</span> ). These sample schedules have been generated inside NMRbox utilizing a script, which is available to all contestants at <span class="code">/NUScon/utilities/makeNUS</span>. All sample schedules include the t1=0, t2=0 FID and the FID collected at the maximum increment along the t1 and t2 dimensions.<br>
+    </div>
+    <div class="green" id="Submissions">
+      <span class="heading">Submissions</span><br><br>
+      A template script for this challenge is provided in NMRbox at: <span class="code">/NUScon/challenges/challenge_2/nuscon2018_generic.com</span><br>
+      You should refer to the header inside the template script and the NMRbox rules for complete details on how to proceed.
+    </div>
+    <div class="white" id="Awards">
+      <span class="heading">Awards</span><br><br>
+      Awards will be given to the &ldquo;best&rdquo; Fidelity score, the &ldquo;best&rdquo; Detection score, and the &ldquo;best&rdquo; combined score.
+      See the <a href=../../rules/>rules document</a> for additional details.<br>
+    </div>
+    <div class="footer2" id="Footer">
+      &copy; 2019 NUScon
+    </div>
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- Scrolling Nav JavaScript -->
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/scrolling-nav.js"></script>
+
+</body>
+
+</html>
+  <script src='/js/jquery-2.2.4.min.js'></script>
+  <script  src="/js/index.js"></script>

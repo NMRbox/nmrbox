@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>NUScon</title>
+
+  <link rel='stylesheet prefetch' href='/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/images/favicon.ico" />
+  
+</head>
+
+<body>
+
+  <html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Scrolling Nav</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" style="background-image: url('/images/NUScon_Background.png'); background-repeat: repeat-y;">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/"><img src=/images/NUScon_logo_small.png /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a class="page-scroll" href="/"></a>
+                    </li>
+                    <li>
+                      <a class="page-scroll" href="../#Participate">Participate</a>
+                    </li>
+                    <li>
+                      <a class="page-scroll" href="../#Challenges">Challenges</a>
+                    </li>
+                    <li>
+                      <a class="page-scroll" href="#">Rules</a>
+                    </li>
+                    <li>
+                      <a class="page-scroll" href="../#Acknowledgements">Acknowledgements</a>
+                    </li>
+                    <li>
+                      <a class="page-scroll" href="mailto:info@nuscon.org?Subject=NUScon%20Inquiry">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    
+    <div class="white" id="top">  
+      <span class="heading">NUScon Rules</span><br><br>
+      This document serves to convey the intentions and spirit of the first annual NUScon competition.
+      The <a href=/board/>organizers</a> have prepared this document as guidance for participants, but reserve the right to change
+      these specifications as they deem necessary in order to maintain the integrity of the competition
+      and best serve the NMR community.<br><br>These rules and associated scoring metrics are also provided as PDFs: <a href=/rules.pdf>Rules</a> | <a href=/metrics.pdf>Scoring Metrics</a>
+    </div>
+    <div class="green" id="Scope">
+      <span class="subheading">Scope</span><br><br>
+      <span class="subheading2">Intent</span><br>
+      The intent of NUScon is to pose NUS challenge questions and solicit solutions from the NMR community in order to identify best practices for sampling and spectral reconstructions for a select set of 3D experiments.<br><br>
+      <span class="subheading2">Approach</span><br>
+      A public set of uniformly sampled (US) data and sample schedules define the challenge problems.
+      Contestants submit processing scripts that operate on nonuniformly sampled (NUS) data, which is
+      obtained by subsampling the US data with the provided sample schedules. The scoring of submissions
+      is driven by a set of private synthetic peak lists and private sample schedules. The private synthetic
+      peaks, which match the characteristics of the public US data, are injected into the US data, which is
+      then subsampled with private sample schedules that match the same characteristics of the public schedules,
+      but vary by random seed. The ability of each submitted script to recover the synthetic peaks is scored by
+      metrics of sensitivity, resolution, frequency accuracy, and intensity accuracy. The best performing entries
+      are awarded cash prizes from a pool of $25,000, made available through a very generous donation from
+      David and Miriam Donoho.<br><br>
+      <span class="subheading2">Deliverables</span><br>
+      A manuscript that presents a summary of the competition results, including a discussion of the winning
+      methodologies will be prepared.  The following resources employed by the competition will be made available
+      through NMRbox:<br>
+      <ul style="list-style-type: disc; padding: 0 30px; margin: 0 20px 0 0;">
+        <li>uniformly sampled data sets</li>
+        <li>public and private sample schedules</li>
+        <li>repository of script submissions</li>
+        <li>synthetic peak injection scripts</li>
+        <li>sub-sampling scripts</li>
+        <li>scoring metrics</li>
+      </ul><br>
+      <span class="subheading2">Eligibility</span><br>
+      All NMRbox users, <i>including</i> NUScon organizers and their labs are eligible to submit entries and to win prizes.  The NUScon organizers responsible for creating the private synthetic peak lists will be ineligible to win prizes. Individuals or teams may submit entries.  If submitting a team entry, do so from the NMRbox account of one member and include a list of all team members, as instructed in the Submission section.<br><br>
+      <span class="subheading2">Overview</span><br>
+      This is a brief outline of the contest.  The details are addressed in the subsequent sections:<br>
+      <ul style="list-style-type: disc; padding: 0 30px; margin: 0 20px 0 0;">
+        <li>Contestant workflow:</li>
+        <ul style="list-style-type: circle; padding: 0 30px; margin: 0 20px 0 0;">
+          <li>Access uniformly sampled data for a given challenge problem</li>
+          <li>Write a processing script</li>
+          <li>Pair it with a sample schedule (or generate your own if the challenge permits)</li>
+          <li>Submit</li>
+        </ul>
+        <li>Evaluation workflow:</li>
+        <ul style="list-style-type: circle; padding: 0 30px; margin: 0 20px 0 0;">
+          <li>Access uniformly sampled data for a given challenge problem</li>
+          <li>For each synthetic peak list:</li>
+          <ul style="list-style-type: square; padding: 0 30px; margin: 0 20px 0 0;">
+            <li>Inject the synthetic peaks into the US data</li>
+            <li>Subsample US data with private sample schedule to produce NUS data</li>
+            <li>Apply contestant's processing script to NUS data</li>
+            <li>Peak pick the region containing the synthetic peaks and store recovered peak list</li>
+            <li>Apply metrics to recovered peak lists</li>
+          </ul>
+          <li>Perform scoring</li>
+        </ul>
+      </ul>
+    </div>
+    <div class="white" id="Data">
+      <span class="subheading">Data</span><br><br>
+      <span class="subheading2">Challenge Problems</span><br>
+      The challenge problems are listed on the NUScon <a href=https://nuscon.org/challenges>Challenges Page</a>.<br>
+      The problems include triple resonance experiments (HNCA and HNCACB) and NOESY experiments (15N-NOESY and 13C-NOESY).
+      The proteins studied in each experiment are denoted "A", "B", etc.<br><br>
+      <span class="subheading2">NMRbox Resources</span><br>
+      Resources for the contestants are located at the following locations on the NMRbox platform:<br><br>
+      <table style="width:100%; border: 0px none black; border-collapse: collapse;">
+      <tr>
+        <td style="border: 0px none;" colspan=2><span class="code">/NUScon</span></td>
+      </tr>
+      <tr>
+        <td style="border: 0px none;" colspan=2><span class="code_tab">/challenges</span></td>
+      </tr>
+      <tr>
+        <td style="border: 0px none;"><div class="tab"><div class="code_tab">/challenges_&lt;#&gt;.tar.gz</div></div></td>
+        <td style="border: 0px none;">zipped archive of the challenge (good to <i>download</i>)</td>
+      </tr>
+      <tr>
+        <td style="border: 0px none;"><div class="tab"><div class="code_tab">/challenges_&lt;#&gt;</div></div></td>
+        <td style="border: 0px none;">unpacked challenge (good to <i>browse</i>)</td>
+      </tr>
+      <tr>
+        <td style="border: 0px none;"><div class="tab"><div class="tab"><div class="code_tab">/&lt;protein&gt;-&lt;experiment&gt;</div></div></div></td>
+        <td style="border: 0px none;">sub-folder for specific experiment</td>
+      </tr>
+      <tr>
+        <td style="border: 0px none;"><div class="tab"><div class="tab"><div class="tab"><div class="code_tab">/sample_schedules</div></div></div></div></td>
+        <td style="border: 0px none;">example sample schedules</td>
+      </tr>
+      <tr>
+        <td style="border: 0px none;"><div class="tab"><div class="tab"><div class="tab"><div class="code_tab">/US_data</div></div></div></div></td>
+        <td style="border: 0px none;">uniformly sampled data</td>
+      </tr>
+      <tr>
+        <td style="border: 0px none;"><div class="tab"><div class="tab"><div class="tab"><div class="tab"><div class="code_tab">fid.com</div></div></div></div></td>
+        <td style="border: 0px none;">convert time data to nmrPipe format (produces <span class="code">/fid</span>)</td>
+      </tr>
+      <tr>
+        <td style="border: 0px none;"><div class="tab"><div class="tab"><div class="tab"><div class="tab"><div class="code_tab">nmr_ft.com</div></div></div></div></td>
+        <td style="border: 0px none;">process time data (produces <span class="code">/ft</span> and <span class="code">/ftproj</span>)</td>
+      </tr>
+      <tr>
+        <td style="border: 0px none;" colspan=2><div class="tab"><div class="tab"><div class="tab"><div class="tab"><div class="code_tab">/fid</div></div></div></div></td>
+      </tr>
+      <tr>
+        <td style="border: 0px none;" colspan=2><div class="tab"><div class="tab"><div class="tab"><div class="tab"><div class="code_tab">/ft</div></div></div></div></td>
+      </tr>
+      <tr>
+        <td style="border: 0px none;" colspan=2><div class="tab"><div class="tab"><div class="tab"><div class="tab"><div class="code_tab">/ftproj</div></div></div></div></td>
+      </tr>
+      <tr>
+        <td style="border: 0px none;"><div class="tab"><div class="code_tab">/nuscon2018_generic.com</div></div></td>
+        <td style="border: 0px none;">template for contestants to build their processing script</td>
+      </tr>
+      <tr>
+        <td style="border: 0px none;"><div class="tab"><div class="code_tab">/submissions</div></div></td>
+        <td style="border: 0px none;">directory for contestant submissions</td>
+      </tr>
+      <tr>
+        <td style="border: 0px none;" colspan=2><div class="code_tab">/utilities</div></td>
+      </tr>
+      </table><br>
+      Challenge problems may be browsed in the <span class="code">/NUScon</span> folder, but to work on a challenge problem, a contestant should copy the corresponding compressed archive file to their account as follows:<br><br>
+      <ul style="list-style-type: decimal; padding: 0 30px; margin: 0 20px 0 0;">
+        <li>Open a terminal (which will by default open to your home folder)</li>
+        <li>Execute the following command: <span class="code">tar -xf /NUScon/challenges/challenge_1.tar.gz</span></li>
+      </ul><br>
+      Explanation of tar command:
+      <table style="width:100%;">
+        <tr>
+          <td><span class="code">-x</span></td>
+          <td>e<b>x</b>tract files from an archive</td>
+        </tr>
+        <tr>
+          <td><span class="code">-f</span></td>
+          <td>use an archive <b>f</b>ile</td>
+        </tr>
+        <tr>
+          <td><span class="code">/NUScon/challenges/challenge_1.tar.gz</span></td>
+          <td>location of file</td>
+        </tr>
+      </table><br>
+      The tar files do <i>not</i> contain the <span class="code">/fid</span> and <span class="code">/ft</span> directories noted above (to reduce file size).  These directories may by reproduced in your copy of the challenge data by running <span class="code">fid.com</span> and <span class="code">nmr_ft.com</span>, respectively.<br><br>
+      <span class="subheading2">Sample Schedules</span><br>
+      For challenge problems that require the use of a provided sample schedule, the following schemes are used:<br>
+      <ul style="list-style-type: disc; padding: 0 30px; margin: 0 20px 0 0;">
+        <li>random</li>
+        <li>exponential bias</li>
+        <li>Poisson gap</li>
+      </ul><br>
+      Each sampling scheme will be used to provide sample schedules at 3 levels of coverage, which will be determined by the experiment type and characteristics of the data.
+      These sample schedules are used for developing a submission. Additional sample schedules following the same parameters as provided above, but varying the random seed value,
+      will be generated for scoring the submissions.  These are kept blind from the contestants and will be generated at the time of scoring.<br><br>
+      <span class="subheading2">Processing Scripts for Uniform Data</span><br>
+      The NUScon organizers will proved a script for processing each uniform experimental data set. This script includes several parameters
+      that the contestant may use for guidance in writing their submission script. Some parameters (as noted below) are not allowed to be adjusted.<br>
+    </div>
+    <div class="green" id="Submission">
+      <span class="subheading">Submission</span><br><br>
+      <span class="subheading2">Building your submission</span><br>
+      A template script for your submission is provided for each challenge problem.  The challenges are posted <a href=/challenges/">here</a>, and each one provides the location of its template script within NMRbox.<br><br>
+      <span class="subheading2">Requirements for submission script filename</span><br>
+      <ul style="list-style-type: disc; padding: 0 30px; margin: 0 20px 0 0;">
+        <li>Contestants should build their submissions by making a copy of the template for each of the experimental data sets of a particular challenge problem.  You must name your script according to the following format:<br><span class="code">&lt;username&gt;_&lt;molecule&gt;_&lt;experiment&gt;.com</span><br><br>
+Where the parts of the filename are defined as:<br>
+<span class="tab"><span class="code">&lt;username&gt;</span><span class="tab"><span class="tab">your NMRbox username (e.g. ssmith for Sally Smith)</span></span></span><br>
+<span class="tab"><span class="code">&lt;molecule&gt;</span><span class="tab"><span class="tab">the molecule name (e.g. proteinA)</span></span></span><br>
+<span class="tab"><span class="code">&lt;experiment&gt;</span><span class="tab"><span class="tab">NMR experiment type (e.g. HNCA)</span></span></span><br><br>
+For each experimental data set, you have two options:<br><br>
+<b>Option #1:</b> Paste your processing commands directly into a copy of the template.  This modified template is your complete submission for the data set.<br><br>
+<b>Option #2:</b> Modify your copy of the template to call your processing commands, which are in a separate auxiliary script(s).  You will then submit your modified copy of the template along with your auxiliary script(s).  The auxiliary script(s) should be named according to the format:<br>
+<span class="tab"><span class="code">&lt;username&gt;_&lt;molecule&gt;_&lt;experiment&gt;_&lt;description&gt;.com</span></span><br><br>
+Where the parts of the filename are as defined above, with the addition of <br>
+<span class="tab"><span class="code">&lt;description&gt;</span><span class="tab"><span class="tab">a label for the script to help you identify it (don’t include spaces or underscores)</span></span><br><br>
+If NMRbox user Sally Smith (username ssmith) chooses option #1, she might submit a single script named:<br>
+<span class="tab"><span class="code">ssmith_proteinA_HNCA.com</span></span><br><br>
+If Sally chooses option #2, she might submit the following scripts:<br>
+<span class="tab"><span class="code">ssmith_proteinA_HNCA.com</span></span><br>
+<span class="tab"><span class="code">ssmith_proteinA_HNCA_msa2d.com</span> (maxent processing script called by the first script)</span><br></li>
+        <li>If you are submitting as a team, the <span class="code">&lt;username&gt;</span> tag should be for one member of the team.  All team members should be documented in the script as instructed below.</li>
+        <li>The submission template takes NUS data in NMRpipe format as an input to the <span class="code">-in</span> flag.  You can generate example data to work with while developing your submission by (1) running the fid.com conversion script to generate the uniformly sampled data in NMRpipe format, and (2) subsampling the uniform data according to a sample schedule using the script at: <span class="code">/NUScon/utilities/us2nus.com</span>.  This uniformly sampled data and sample schedules needed by these scripts are provided for each experimental data set within each challenge.</li>
+        <li>Prior to copying, we recommend that users set their file permissions to restrict access from other contestants. This can be accomplished with the chmod command. For example: <span class="code">chmod 600 ssmith_proteinA_HNCA.com</span></li>
+
+      </ul><br>
+      <span class="subheading2">Requirements for submission script inputs and outputs</span><br>
+      The following requirements are intended to standardize and streamline the scoring procedure.<br>
+      <ul style="list-style-type: disc; padding: 0 30px; margin: 0 20px 0 0;">
+        <li>Please refer to the header of the template for specific information about the required inputs and outputs of a valid submission.</li>
+        <li>All scripts must run on the current production version of NMRbox.</li>
+        <li>The spectrum produced by the user script must follow the same layout as the US spectrum (as specified in <span class="code">nmr_ft.com</span>).</li>
+        <li>The spectrum produced by the user script must use the same referencing values as the US spectrum (as specified in <span class="code">nmr_ft.com</span>).</li>
+        <li>The spectrum produced by the user script must not exceed a final size larger than “rounding up” each dimension to the next Fourier number and 3 zero fills.</li>
+        <ul style="list-style-type: circle; padding: 0 30px; margin: 0 20px 0 0;">
+          <li>Example 1: A dimension with 60 points may not exceed 512 points.</li>
+          <li>Example 2: A dimension with 64 points may not exceed 512 points.</li>
+        </ul>
+        <li>Imaginaries must be deleted from the final reconstruction.  If appropriate, it is preferred that imaginaries be removed from the acquisition dimension after phasing and processing.</li>
+        <li>Process the acquisition dimension and extract the region of interest based on ppm values.</li>
+      </ul><br>
+      <span class="subheading2">Requirements for submission script documentation</span><br>
+      <ul style="list-style-type: disc; padding: 0 30px; margin: 0 20px 0 0;">
+        <li>The submission template includes a variable definition for “TEAM” following the information header.  The NMRbox account name of all people contributing to the submission should be entered here as a space-separated list.</li>
+        <li>The submission template includes a variable definition for “DESCRIPTION” following the information header.  A short (3 sentences maximum) description of the motivation for the approach should be entered here.  This description may be made public with the submitted script so that members of the NMRbox community may effectively search and filter the submissions for reconstruction methods that interest them.</li>
+        <li>It is expected that the submission script is well-commented with descriptions for parameter choices.</li>
+      </ul><br>
+      <span class="subheading2">Ethics</span><br>
+      Contestants must abide by the NUScon ethics statement:<br>
+      <span class="tab"><i>Any script that is not "reasonable" or tries to cheat the challenge problem is disqualified.</i></span><br><br>
+      This includes, but is not limited to, the following:<br>
+      <ul style="list-style-type: disc; padding: 0 30px; margin: 0 20px 0 0;">
+        <li>methods that utilize data not selected by the sample schedule</li>
+        <li>methods whose compute time is greater than reasonable</li>
+        <li>methods that rely on computations performed on the challenge data outside of the submitted processing script</li>
+      </ul>
+    </div>
+    <div class="white" id="Scoring">
+      <span class="subheading">Scoring</span><br><br>
+      <span class="subheading2">Synthetic Peak Lists</span><br>
+      There will be multiple synthetic peak lists created to probe the spectral properties identified by the metrics.  The synthetic peak lists are generated by a subgroup of the NUScon organizers and will be kept private until the NUScon competition closes.  The principles that guide the construction of the synthetic peak lists are as follows:<BR>
+      <table style="width:100%;">
+        <tr>
+          <td><i>Number</i></td>
+          <td>Peak lists contain relatively few peaks, so as not to significantly alter the spectral density of the data set.</td>
+        </tr>
+        <tr>
+          <td><i>Location</i></td>
+          <td>Peaks are injected in empty regions of the uniform data set.</td>
+        </tr>
+        <tr>
+          <td><i>Characteristics</i></td>
+          <td>Synthetic peaks are constructed with amplitudes, linewidth, shape, phase, and distortions similar to those observed in the corresponding uniform data set.</td>
+        </tr>
+        <tr>
+          <td><i>NOESYs</i></td>
+          <td>For 3D NOESYs, the cross-peaks are accompanied by the corresponding diagonal signal, who’s amplitude is typical for the diagonals in the uniform spectrum.  The diagonal peaks and cross-peaks have amplitudes, linewidth, shape, phase, and distortions similar to those observed in the corresponding uniform data set. The diagonal peaks are not used for the scoring metrics and thus may overlap with other signals in the spectrum.</td>
+        </tr>
+      </table><br>
+      <span class="subheading2">Peak Picking</span><br>
+      A single "standard" peak picking script using nmrPipe will be used on all spectra. The peak picking script enlarges the local neighborhood size according to the number of zero fills.  This ensures that the identification of peaks is not biased by variations in digital resolution. The peak picking script will be posted in in NMRbox at: <span class="code">/NUScon/utilities</span><br><br>
+      <span class="subheading2">Metrics and Scoring</span><br>
+      The following categories are scored:<br>
+      <ul style="list-style-type: disc; padding: 0 30px; margin: 0 20px 0 0;">
+      <li><i>Fidelity</i></li>
+        <ul style="list-style-type: circle; padding: 0 30px; margin: 0 20px 0 0;">
+          <li>frequency accuracy</li>
+          <li>intensity accuracy</li>
+        </ul>
+      <li><i>Detection</i></li>
+        <ul style="list-style-type: circle; padding: 0 30px; margin: 0 20px 0 0;">
+          <li>recover true positives</li>
+          <li>suppress false positives</li>
+          <li>resolve closely spaced peaks</li>
+        </ul>
+      </ul>
+      These metrics are explicitly defined in the accompanying <a href=/metrics.pdf>Scoring Metrics</a>.<br><br>
+      <span class="subheading2">Scoring Categories</span><br>
+      The metrics defined above are used in conjunction to determine scores for the following categories:<br>
+      <ul style="list-style-type: disc; padding: 0 30px; margin: 0 20px 0 0;">
+      <li><i>Fidelity</i></li>
+        <ul style="list-style-type: circle; padding: 0 30px; margin: 0 20px 0 0;">
+          <li>frequency accuracy</li>
+          <li>intensity accuracy</li>
+        </ul>
+      <li><i>Detection</i></li>
+        <ul style="list-style-type: circle; padding: 0 30px; margin: 0 20px 0 0;">
+          <li>recover true positives</li>
+          <li>suppress false positives</li>
+          <li>resolve closely spaced peaks</li>
+        </ul>
+      </ul><br>
+      <span class="subheading2">Awards</span><br>
+      For each challenge problem, there are funds allocated for awards in Fidelity, Detection, and Best Overall. The number of awards given in each category will depend on the number of submissions and the extent to which submissions separate themselves in quality from the others. The <a href=/board>NUScon organizing committee</a> reserves all rights to adjust this format and their say is final.<br>
+    </div>
+    <div class="green" id="Legal">
+      <span class="subheading">Legal</span><br><br>
+      Disclaimer: Certain commercial equipment, instruments, methods, and materials are identified in this project. Such identification does not imply recommendation nor endorsement by UConn Health nor the National Institute of Standards and Technology, nor does it imply that the materials, equipment, or methods identified are necessarily the best available for the purpose.
+    </div> 
+    <div class="footer2" id="Footer">  
+      &copy; 2018 NUScon
+    </div>
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- Scrolling Nav JavaScript -->
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/scrolling-nav.js"></script>
+
+</body>
+
+</html>
+  <script src='/js/jquery-2.2.4.min.js'></script>
+  <script  src="/js/index.js"></script>
