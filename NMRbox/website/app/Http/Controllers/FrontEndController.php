@@ -296,7 +296,7 @@ class FrontEndController extends Controller
                             $is_admin = true;
                             Session::put('user_is_admin', $is_admin);
 
-                            return View::make('admin');
+                            Redirect::to('admin')->with('success', 'You have successfully logged in!')
                         } else {
                             return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
                         }
