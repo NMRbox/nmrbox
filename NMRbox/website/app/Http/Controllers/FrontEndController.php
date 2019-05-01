@@ -221,7 +221,7 @@ class FrontEndController extends Controller
         // Is the user logged in?
         //if (Sentinel::check()) {
         if (Session::has('person')) {
-            return Redirect::route('admin');
+            return Redirect::route('dashboard');
         }
 
         if( Session::has('username')){
