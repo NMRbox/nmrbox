@@ -221,7 +221,7 @@ class FrontEndController extends Controller
         // Is the user logged in?
         //if (Sentinel::check()) {
         if (Session::has('person')) {
-            return Redirect::route('my-account');
+            return Redirect::route('admin');
         }
 
         if( Session::has('username')){
@@ -296,7 +296,7 @@ class FrontEndController extends Controller
                             $is_admin = true;
                             Session::put('user_is_admin', $is_admin);
 
-                            return View::make('admin/index');
+                            return View::make('admin');
                         } else {
                             return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
                         }
