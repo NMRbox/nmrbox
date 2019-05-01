@@ -295,13 +295,12 @@ class FrontEndController extends Controller
                         if ($value->name == 'admin'){
                             $is_admin = true;
                             Session::put('user_is_admin', $is_admin);
+
+                            return View::make('admin/index');
+                        } else {
+                            return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
                         }
                     }
-                    return View::make('admin/index');
-
-                    return Redirect::route("my-account")
-                        ->with('success', Lang::get('auth/message.login.success'))
-                        ;
                 }
                 //return redirect()->back()->withSuccess(Lang::get('auth/message.login.success'));
 
