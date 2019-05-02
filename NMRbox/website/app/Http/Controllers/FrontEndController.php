@@ -278,14 +278,16 @@ class FrontEndController extends Controller
                     return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
                 }
 
-                // Adding person table information into session
+                // Flush person session and adding person table information into session
+                if( Session::has( 'person' ) ) {
+                    Session::flush();
+                }
                 Session::put('person', $person);
 
                 // Adding JWT-Auth Token
                 $token = JWTAuth::fromUser($person);
                 $set_token = JWTAuth::setToken($token);
                 $parse_token = JWTAuth::getToken();
-                //$parse_token = Sentinel::login($person);
 
                 if ($parse_token == true)
                 {
