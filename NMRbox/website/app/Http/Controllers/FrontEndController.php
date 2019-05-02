@@ -298,7 +298,7 @@ class FrontEndController extends Controller
 
                             Redirect::to('admin')->with('success', 'You have successfully logged in!');
                         } else {
-                            return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
+                            Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
                         }
                     }
                 }
