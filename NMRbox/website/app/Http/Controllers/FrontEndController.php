@@ -353,7 +353,7 @@ class FrontEndController extends Controller
 
 
         // Redirect to the users page
-        return Redirect::to('homepage')->with('success', 'You have successfully logged out!');
+        return Redirect::to('dashboard')->with('success', 'You have successfully logged out!');
     }
 
     /**
