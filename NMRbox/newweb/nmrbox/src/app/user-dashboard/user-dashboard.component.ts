@@ -45,7 +45,7 @@ export class UserDashboardComponent implements OnInit {
 
   onDownloadVMSubmit(form: NgForm): void {
 
-    this.authService.submitDownloadVM(form.value.vm_id, form.value.vm_username, form.value.vm_password)
+    this.authService.submitDownloadVM(form.value.vm_id, form.value.vm_username, 'CHANGEME')
       .subscribe(
         response => this.notifications = response,
         error => this.notifications = error.error

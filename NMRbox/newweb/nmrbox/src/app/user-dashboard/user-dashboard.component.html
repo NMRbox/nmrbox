@@ -199,7 +199,7 @@
 
                       <div class="form-group col-lg-12">
                         <div class="form-group "><label for="vm_id" class="control-label">VM Versions</label>
-                          <select class="form-control form-control select_pi" maxlength="32" required="required"
+                          <select class="form-control form-control select_pi" required="required"
                                   id="vm_id" name="vm_id" ngModel>
                             <option value="">Please Select</option>
                             <option *ngFor="let vm of person.downloadableVm" [value]="vm[0]">{{vm[1]}}</option>
@@ -207,9 +207,9 @@
                         </div>
                       </div>
 
+
                       <div class="form-goup col-lg-12">
-                        We will create a user account inside the VM. Please select your desired username and
-                        password:
+                        We will create a user account inside the VM. Please select your desired username:
                       </div>
 
                       <div class="form-group col-lg-12">
@@ -221,16 +221,17 @@
                         </div>
                       </div>
 
+                      <!--
                       <div class="form-group col-lg-12">
                         <div class="form-group ">
                           <label for="vm_password" class="control-label">VM Password</label>
                           <input class="form-control form-control" maxlength="32" id="vm_password"
                                  name="vm_password" type="password" required="required" ngModel>
                         </div>
-                      </div>
+                      </div> -->
 
                       <div class="form-group col-lg-12">
-                        Note: The username and password do not have to be the same as your NMRbox account. You
+                        Note: The username does not have to be the same as your NMRbox account. You
                         can choose whatever you like. Your account will be given root privileges allowing you to
                         make additional changes, as needed.
                       </div>
