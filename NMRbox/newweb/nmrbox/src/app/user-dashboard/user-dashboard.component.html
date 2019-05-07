@@ -188,9 +188,11 @@
                     <form #downloadVM="ngForm" (ngSubmit)="onDownloadVMSubmit(downloadVM)">
 
                       <div class="form-group col-lg-12">
-                        The following form allows you to request a downloadable copy of NMRbox that you can run
-                        on your local workstation. After you submit the form, you will receive an email with a
-                        custom link for downloading your VM. This process may take several hours.
+                        The following form allows you to request a downloadable copy of NMRbox that you can
+                        run on your local workstation.  The username you pick below does not have to be the
+                        same as your NMRbox account.  We will set an auto-generated password for this account.
+                        When your VM is ready, we will send you an email with a custom link for downloading your VM.
+                        This process may take several hours.
                       </div>
 
                       <div class="form-group col-lg-12">
@@ -228,13 +230,13 @@
                           <input class="form-control form-control" maxlength="32" id="vm_password"
                                  name="vm_password" type="password" required="required" ngModel>
                         </div>
-                      </div> -->
+                      </div>
 
                       <div class="form-group col-lg-12">
                         Note: The username does not have to be the same as your NMRbox account. You
                         can choose whatever you like. Your account will be given root privileges allowing you to
                         make additional changes, as needed.
-                      </div>
+                      </div> -->
 
                       <div *ngIf="notifications?.message && notifications.type"
                            [ngClass]="{'alert-error': notifications.type == 'danger',
