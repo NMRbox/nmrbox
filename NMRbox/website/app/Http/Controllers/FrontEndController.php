@@ -212,15 +212,8 @@ class FrontEndController extends Controller
      */
     public function getLogin(Request $request)
     {
-        /* Retrieving user details from token */
-        //$token = JWTAuth::getToken();
-        //$user = $this->getAuthenticatedUser();
-        //dd(Session::all());
-
-
         // Is the user logged in?
-        //if (Session::has('person')) {
-        if(!Session::has('person') &&  !Session::has('token') && !Session::has('user_is_admin')) {
+        if (Session::has('person')) {
             return Redirect::route('dashboard');
         }
 

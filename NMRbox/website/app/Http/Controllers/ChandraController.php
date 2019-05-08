@@ -33,12 +33,12 @@ class ChandraController extends Controller {
 
     public function showHome()
     {
-        if(!Session::has('person') &&  !Session::has('token') && !Session::has('user_is_admin')) {
+        /*if(!Session::has('person') &&  !Session::has('token') && !Session::has('user_is_admin')) {
             //return Redirect::route('login/'.$request->user);
             return Redirect::route('login');
-        } else {
+        } else {*/
             return View::make('admin/index');
-        }
+        //}
     }
 
     public function showView($name=null)
