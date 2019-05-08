@@ -323,11 +323,7 @@ class FrontEndController extends Controller
         //Sentinel::logout(null, true);
 
         //clear the admin session value
-        if(Session::has('user_is_admin')){
-            Session::flush();
-        }
-
-        if(Session::has('person')){
+        if( Session::has('user_is_admin') || Session::has('person') || Session::has('user_id_admin') ){
             Session::flush();
         }
 
@@ -339,7 +335,7 @@ class FrontEndController extends Controller
 
 
         // Redirect to the users page
-        return Redirect::to('dashboard')->with('success', 'You have successfully logged out!');
+        return Redirect::to('login')->with('success', 'You have successfully logged out!');
     }
 
     /**
