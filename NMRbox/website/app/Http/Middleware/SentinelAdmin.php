@@ -23,11 +23,9 @@ class SentinelAdmin
         if($request->username)
             Session::put('username', $request->username);
 
-        if(!Session::has('person') &&  !Session::has('token') && !Session::has('user_is_admin')) {
-            //return Redirect::route('login/'.$request->user);
-            return Redirect::route('login');
+        if(Session::has('person') &&  Session::has('token') && Session::has('user_is_admin')) {
+            return $next($request);
         }
 
-        return $next($request);
     }
 }
