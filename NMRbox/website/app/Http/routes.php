@@ -352,12 +352,12 @@ Route::group(array('prefix' => 'person'), function () {
 });*/
 
 # Login
-//Route::group(array('prefix' => 'login', 'middleware' => 'SentinelAdmin'), function () {
+Route::group(array('middleware' => 'SentinelAdmin'), function () {
     //Route::get('/{username}', array('as' => 'dashboard','uses' => 'ChandraController@showHome'));
     //Route::get('/', array('as' => 'dashboard','uses' => 'ChandraController@showHome'));
-Route::get('login', array('as' => 'login', 'uses' => 'FrontEndController@getLogin'));
-Route::post('login', 'FrontEndController@postLogin');
-//});
+    Route::get('login', array('as' => 'login', 'uses' => 'FrontEndController@getLogin'));
+    Route::post('login', 'FrontEndController@postLogin');
+});
 
 # Logout
 Route::get('logout', array('as' => 'logout','uses' => 'FrontEndController@getLogout'));
