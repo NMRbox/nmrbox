@@ -219,8 +219,8 @@ class FrontEndController extends Controller
 
 
         // Is the user logged in?
-        //if (Sentinel::check()) {
-        if (Session::has('person')) {
+        //if (Session::has('person')) {
+        if(!Session::has('person') &&  !Session::has('token') && !Session::has('user_is_admin')) {
             return Redirect::route('dashboard');
         }
 
@@ -229,8 +229,6 @@ class FrontEndController extends Controller
         } else {
             $user['username'] = null;
         }
-
-
 
         // Show the login page
         return View::make('login', compact('user'));
@@ -262,11 +260,11 @@ class FrontEndController extends Controller
 
         try {
             // Adding custom LDAP library class and authenticating
-            /*$ldap = new Ldap;
-            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));*/
+            $ldap = new Ldap;
+            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
 
             /* Test (Localhost login code to skip LDAP authentication) */
-            $ldap_login = true;
+            //$ldap_login = true;
             /* Eof Test */
 
             // LDAP login response
