@@ -212,11 +212,6 @@ class FrontEndController extends Controller
      */
     public function getLogin(Request $request)
     {
-        // Is the user logged in?
-        if (Session::has('person')) {
-            return Redirect::route('dashboard');
-        }
-
         if( Session::has('username')){
             $user['username'] = Session::get('username');
         } else {
