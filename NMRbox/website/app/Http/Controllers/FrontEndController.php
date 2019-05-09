@@ -285,7 +285,7 @@ class FrontEndController extends Controller
                             Session::put('user_is_admin', $is_admin);
                         }
                         echo "<pre>";
-                        print_r(Session::all());
+                        print_r(Session::has('user_is_admin'));
                         echo "</pre>";
                         die();
                         if( Session::has('user_is_admin')) {
