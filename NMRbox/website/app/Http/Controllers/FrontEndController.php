@@ -246,7 +246,7 @@ class FrontEndController extends Controller
             return Redirect::back()->withInput()->withErrors($validator);
         }
 
-        try {
+        //try {
             // Adding custom LDAP library class and authenticating
             $ldap = new Ldap;
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
@@ -289,19 +289,16 @@ class FrontEndController extends Controller
                             Redirect::to('admin/people')->with('success', 'You have successfully logged in!');
                         } else {
                             Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
-                            //return redirect()->back()->withError(Lang::get('auth/message.login.error'));
                         }
                     }
                 }
-                //return redirect()->back()->withSuccess(Lang::get('auth/message.login.success'));
-
             } else {
                 return redirect()->back()->withError(Lang::get('auth/message.login.error'));
             }
-        } catch (\Illuminate\Database\QueryException $e) {
+        /*} catch (\Illuminate\Database\QueryException $e) {
             //dd($e);
             return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
-        }
+        }*/
     }
 
     /**
