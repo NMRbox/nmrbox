@@ -212,11 +212,11 @@ class FrontEndController extends Controller
      */
     public function getLogin(Request $request)
     {
-        if( Session::has('username')){
+        /*if( Session::has('username')){
             $user['username'] = Session::get('username');
         } else {
             $user['username'] = null;
-        }
+        }*/
 
         // Show the login page
         return View::make('login', compact('user'));
