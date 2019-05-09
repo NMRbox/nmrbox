@@ -23,11 +23,11 @@ class SentinelAdmin
         if($request->username)
             Session::put('username', $request->username);
 
-        if(empty(Session::get('person')) &&  empty(Session::get('token')) && empty(Session::get('user_is_admin'))) {
+        /*if(empty(Session::get('person')) &&  empty(Session::get('token')) && empty(Session::get('user_is_admin'))) {
             //return Redirect::route('login/'.$request->user);
             Session::flush();
             return Redirect::route('login');
-        }
+        }*/
 
         return $next($request);
     }
