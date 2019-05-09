@@ -284,7 +284,10 @@ class FrontEndController extends Controller
                             $is_admin = true;
                             Session::put('user_is_admin', $is_admin);
                         }
-
+                        echo "<pre>";
+                        print_r(Session::all());
+                        echo "</pre>";
+                        die();
                         if( Session::has('user_is_admin')) {
                             Redirect::to('admin')->with('success', 'You have successfully logged in!');
                         } else {
