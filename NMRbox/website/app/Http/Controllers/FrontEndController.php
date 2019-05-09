@@ -261,12 +261,14 @@ class FrontEndController extends Controller
                 $username = $request->input('username');
                 $person = Person::where('nmrbox_acct', $username)->first();
                 if(!$person) {
-                    return response()->json([
-                        'message' => Lang::get('auth/message.account_not_found'),
-                        'type' => 'error'
-                    ], 401);
+                    return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
                 }
 
+                // Flush person session and adding person table information into session
+                if( Session::has( 'person' ) ) {
+                    Session::flush();
+                }
+                Session::put('person', $person);
 
                 // Adding JWT-Auth Token
                 $token = JWTAuth::fromUser($person);
@@ -280,27 +282,19 @@ class FrontEndController extends Controller
                     foreach ($user_classification as $key => $value) {
                         if ($value->name == 'admin'){
                             $is_admin = true;
+                            Session::put('user_is_admin', $is_admin);
+                        }
+
+                        if( Session::has('user_is_admin')) {
+                            Redirect::to('admin')->with('success', 'You have successfully logged in!');
+                        } else {
+                            Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
+                            //return redirect()->back()->withError(Lang::get('auth/message.login.error'));
                         }
                     }
                 }
+                //return redirect()->back()->withSuccess(Lang::get('auth/message.login.success'));
 
-                // Adding person table information into session
-                $user_data = array(
-                    'token' => $token,
-                    'user_is_admin' => ( $is_admin == true ? true : false ),
-                    'person_id' => Session::getId(),
-                    'user' => $person->id,
-                    'message' => Lang::get('auth/message.login.success'),
-                    'type' => 'success'
-                );
-
-                $request->session()->push('person', $user_data);
-
-                if( Session::has('user_is_admin')) {
-                    Redirect::to('admin')->with('success', 'You have successfully logged in!');
-                } else {
-                    Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
-                }
             } else {
                 return redirect()->back()->withError(Lang::get('auth/message.login.error'));
             }
@@ -919,6 +913,25 @@ class FrontEndController extends Controller
                     'type' => 'error'
                 ], 400);
             }
+        /*} catch (\Illuminate\Database\QueryException $e) {
+            return response()->json([
+                'message' => Lang::get('auth/message.account_not_found'),
+                'type' => 'error'
+            ], 400);
+        } catch (\ErrorException $e) {
+            // trigger an email to support@nmrbox.org
+            $data = array("Password malfunction detected.");
+
+            // Send the registration acknowledge email
+            Mail::send('emails.server-malfunction', $data, function ($m) {
+                $m->to(env('NMRBOX_SUPPORT_EMAIL'));
+                $m->subject('Buildserver malfunction detected');
+            });
+            return response()->json([
+                'message' => Lang::get('auth/message.server_conn_error'),
+                'type' => 'error'
+            ], 401);
+        }*/
     }
 
     /**
