@@ -31,7 +31,7 @@ class ChandraController extends Controller {
     }
 
     public function showHome() {
-        return View::make('admin/index');
+        return View::make('admin/');
     }
 
     public function showHomepage($name=null) {
