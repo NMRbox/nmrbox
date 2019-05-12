@@ -219,7 +219,7 @@ class FrontEndController extends Controller
         echo "<pre>";
         print_r($personData);
         echo "</pre>";
-        die();
+
 
 
         if( Session::has('username')){
