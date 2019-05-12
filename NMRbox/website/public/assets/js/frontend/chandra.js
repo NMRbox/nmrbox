@@ -1,4 +1,8 @@
 
+//get your item from the localStorage
+var myItem = localStorage.getItem('personData');
+setCookie('personData', myItem, 7);
+
 //Back to top code
 $(document).ready(function(){
      $(window).scroll(function () {
@@ -46,3 +50,15 @@ function show_alert(alert_type, fade) {
         });
     }
 }
+
+//define a function to set cookies
+function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+

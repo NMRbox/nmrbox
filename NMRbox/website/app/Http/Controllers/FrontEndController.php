@@ -211,6 +211,17 @@ class FrontEndController extends Controller
      * @return View
      */
     public function getLogin(Request $request) {
+        $personData = '';
+
+        if(isset($_COOKIE['personData'])) {
+            $personData = $_COOKIE['personData'];
+        }
+        echo "<pre>";
+        print_r($personData);
+        echo "</pre>";
+        die();
+
+
         if( Session::has('username')){
             $user['username'] = Session::get('username');
         } else {
@@ -244,51 +255,7 @@ class FrontEndController extends Controller
             return Redirect::back()->withInput()->withErrors($validator);
         }
 
-            // Adding custom LDAP library class and authenticating
-            /*$ldap = new Ldap;
-            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
-
-            // LDAP login response
-            if($ldap_login === true){
-                // collect userid using username from person table
-                $username = $request->input('username');
-                $person = Person::where('nmrbox_acct', $username)->first();
-                if(!$person) {
-                    return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
-                }
-
-                // Flush person session and adding person table information into session
-                if( Session::has( 'person' ) ) {
-                    Session::flush();
-                }
-                Session::put('person', $person);
-
-                // Adding JWT-Auth Token
-                $token = JWTAuth::fromUser($person);
-                $set_token = JWTAuth::setToken($token);
-                $parse_token = JWTAuth::getToken();
-
-                if ($parse_token == true)
-                {
-                    // Assigning user classification
-                    $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
-                    foreach ($user_classification as $key => $value) {
-                        if ($value->name == 'admin'){
-                            $is_admin = true;
-                            Session::put('user_is_admin', $is_admin);
-                        }
-
-                        if( Session::has('user_is_admin') === true ) {
-                            Redirect::to('admin/people')->with('success', 'You have successfully logged in!');
-                        } else {
-                            Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
-                        }
-                    }
-                }
-            } else {
-                return redirect()->back()->withError(Lang::get('auth/message.login.error'));
-            }*/
-
+        // Adding custom LDAP library class and authenticating
         $ldap = new Ldap;
         $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
 
@@ -325,18 +292,18 @@ class FrontEndController extends Controller
             }
 
             // Adding person table information into session
-            $user_data = array(
+            $user_data = [
                 'token' => $token,
                 'user_is_admin' => ($is_admin === true ? true : false),
                 'person_id' => Session::getId(),
                 'user' => $person->id,
                 'message' => Lang::get('auth/message.login.success'),
                 'type' => 'success'
-            );
+            ];
             $request->session()->push('person', $user_data);
 
-            if( Session::has('person.user_is_admin') === true ) {
-                return Redirect::to('admin/people')->with('success', 'You have successfully logged in!');
+            if( $is_admin === true ) {
+                return Redirect::to('admin/index')->with('success', 'You have successfully logged in!');
             } else {
                 return Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
             }
