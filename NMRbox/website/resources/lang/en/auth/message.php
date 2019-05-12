@@ -13,6 +13,7 @@ return array(
     'account_banned'         => 'This user account is banned.',
     'server_conn_error'      => 'We are sorry.  We seem to be having a technical difficulty.  Please check back again later.',
     'not_autorized'          => 'Sorry! You are not authorized to access this page.',
+    'not_autorized_admin'    => 'You are not authorized to access admin portal.',
 
     'login' => array(
         'error'   => 'Username or password is incorrect, please try again.',
