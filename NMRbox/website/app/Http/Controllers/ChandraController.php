@@ -22,8 +22,7 @@ class ChandraController extends Controller {
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         // CSRF Protection
         $this->beforeFilter('csrf', array('on' => 'post'));
 
@@ -31,16 +30,11 @@ class ChandraController extends Controller {
         $this->messageBag = new MessageBag;
     }
 
-    public function showHome()
-    {
-        if( Session::has( 'username' ) || Session::has( 'user' ) ) {
-            $person = Person::where( (Session::has( 'username' ) ? ['nmrbox_acct' => Session::get('username') : || Session::has( 'user' )'nmrbox_acct', $username)->first();
-        }
+    public function showHome() {
         return View::make('admin/index');
     }
 
-    public function showHomepage($name=null)
-    {
+    public function showHomepage($name=null) {
         // this is a special case for the home page. If more special cases arise, refactor into a more structured solution
         if($name == '') {
             $name = 'homepage';
@@ -66,8 +60,7 @@ class ChandraController extends Controller {
         }
     }
 
-    public function getPage( $name=null )
-    {
+    public function getPage( $name=null ) {
         if( Page::where('slug', '=', $name)->exists() ) {
             // $name is the page's slug
             $page = Page::where('slug', $name)->get()->first();
