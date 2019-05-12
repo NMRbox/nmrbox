@@ -210,8 +210,7 @@ class FrontEndController extends Controller
      *
      * @return View
      */
-    public function getLogin(Request $request)
-    {
+    public function getLogin(Request $request) {
         if( Session::has('username')){
             $user['username'] = Session::get('username');
         } else {
@@ -229,8 +228,7 @@ class FrontEndController extends Controller
      */
 
 
-    public function postLogin(Request $request)
-    {
+    public function postLogin(Request $request) {
         // Declare the rules for the form validation
         $rules = array(
             'username'    => 'required',
@@ -352,8 +350,7 @@ class FrontEndController extends Controller
      *
      * @return Redirect
      */
-    public function getLogout(Request $request)
-    {
+    public function getLogout(Request $request) {
         // Log the user out
         //Sentinel::logout(null, true);
 
@@ -376,8 +373,7 @@ class FrontEndController extends Controller
     /**
      * get user details and display
      */
-    public function myAccount(Request $request)
-    {
+    public function myAccount(Request $request) {
         //dd(Session::all());
         /* Retrieving user details from token */
 
@@ -868,8 +864,7 @@ class FrontEndController extends Controller
         return $person;
     }
 
-    public function signin(Request $request)
-    {
+    public function signin(Request $request) {
         // Declare the rules for the form validation
         $rules = array(
             'username'    => 'required',
@@ -951,8 +946,7 @@ class FrontEndController extends Controller
      *
      * @return Redirect
      */
-    public function signOut(Request $request)
-    {
+    public function signOut(Request $request) {
         // Log the user out
         Sentinel::logout(null, true);
 
