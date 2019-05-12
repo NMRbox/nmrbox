@@ -211,17 +211,6 @@ class FrontEndController extends Controller
      * @return View
      */
     public function getLogin(Request $request) {
-        $personData = '';
-
-        if(isset($_COOKIE['personData'])) {
-            $personData = $_COOKIE['personData'];
-        }
-        echo "<pre>";
-        print_r($personData);
-        echo "</pre>";
-
-
-
         if( Session::has('username')){
             $user['username'] = Session::get('username');
         } else {
@@ -276,7 +265,43 @@ class FrontEndController extends Controller
             }
 
 
-            // Adding JWT-Auth Token
+           // collect userid using username from person table
+           $username = $request->input('username');
+           $person = Person::where('nmrbox_acct', $username)->first();
+           if(!$person) {
+               return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
+           }
+
+           // Flush person session and adding person table information into session
+           if( Session::has( 'person' ) ) {
+               Session::flush();
+           }
+           Session::put('person', $person);
+
+           // Adding JWT-Auth Token
+           $token = JWTAuth::fromUser($person);
+           $set_token = JWTAuth::setToken($token);
+           $parse_token = JWTAuth::getToken();
+
+           if ($parse_token == true) {
+               // Assigning user classification
+               $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
+               foreach ($user_classification as $key => $value) {
+                   if ($value->name == 'admin') {
+                       $is_admin = true;
+                       Session::put('user_is_admin', $is_admin);
+                   }
+
+                   /*if (Session::has('user_is_admin') === true) {
+                       Redirect::to('admin/people')->with('success', 'You have successfully logged in!');
+                   } else {
+                       Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
+                   }*/
+               }
+           }
+
+
+            /*// Adding JWT-Auth Token
             $token = JWTAuth::fromUser($person);
             $set_token = JWTAuth::setToken($token);
             $parse_token = JWTAuth::getToken();
@@ -300,7 +325,7 @@ class FrontEndController extends Controller
                 'message' => Lang::get('auth/message.login.success'),
                 'type' => 'success'
             ];
-            $request->session()->push('person', $user_data);
+            $request->session()->push('person', $user_data);*/
 
             if( $is_admin === true ) {
                 return Redirect::to('admin/index')->with('success', 'You have successfully logged in!');
