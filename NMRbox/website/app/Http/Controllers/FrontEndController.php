@@ -327,7 +327,7 @@ class FrontEndController extends Controller
             // Adding person table information into session
             $user_data = array(
                 'token' => $token,
-                'user_is_admin' => ($is_admin == true ? true : false),
+                'user_is_admin' => ($is_admin === true ? true : false),
                 'person_id' => Session::getId(),
                 'user' => $person->id,
                 'message' => Lang::get('auth/message.login.success'),
@@ -335,7 +335,7 @@ class FrontEndController extends Controller
             );
             $request->session()->push('person', $user_data);
 
-            if( Session::has('user_is_admin') === true ) {
+            if( Session::has('person.user_is_admin') === true ) {
                 return Redirect::to('admin/people')->with('success', 'You have successfully logged in!');
             } else {
                 return Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
