@@ -341,7 +341,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 
     //Remaining pages will be called from below controller method
     //in real world scenario, you may be required to define all routes manually
-    Route::get('{name?}', 'ChandraController@showView');
+    Route::get('{name?}', 'ChandraController@showHome');
 
 });
 
