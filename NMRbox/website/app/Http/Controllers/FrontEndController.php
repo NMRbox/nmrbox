@@ -336,9 +336,9 @@ class FrontEndController extends Controller
             $request->session()->push('person', $user_data);
 
             if( Session::has('user_is_admin') === true ) {
-                Redirect::to('admin/people')->with('success', 'You have successfully logged in!');
+                return Redirect::to('admin/people')->with('success', 'You have successfully logged in!');
             } else {
-                Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
+                return Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
             }
         } else {
             return redirect()->back()->withError(Lang::get('auth/message.login.error'));
