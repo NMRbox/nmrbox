@@ -283,6 +283,8 @@ class FrontEndController extends Controller
            $set_token = JWTAuth::setToken($token);
            $parse_token = JWTAuth::getToken();
 
+           $is_admin = false;
+
            if ($parse_token == true) {
                // Assigning user classification
                $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
