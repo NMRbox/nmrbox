@@ -246,18 +246,13 @@ class FrontEndController extends Controller
             return Redirect::back()->withInput()->withErrors($validator);
         }
 
-        //try {
             // Adding custom LDAP library class and authenticating
-            $ldap = new Ldap;
+            /*$ldap = new Ldap;
             $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
-
-            /* Test (Localhost login code to skip LDAP authentication) */
-            //$ldap_login = true;
-            /* Eof Test */
 
             // LDAP login response
             if($ldap_login === true){
-                /* collect userid using username from person table */
+                // collect userid using username from person table
                 $username = $request->input('username');
                 $person = Person::where('nmrbox_acct', $username)->first();
                 if(!$person) {
@@ -294,11 +289,62 @@ class FrontEndController extends Controller
                 }
             } else {
                 return redirect()->back()->withError(Lang::get('auth/message.login.error'));
+            }*/
+
+        $ldap = new Ldap;
+        $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
+
+        /* Test (Localhost login code to skip LDAP authentication) */
+        //$ldap_login = true;
+        /* Eof Test */
+
+        // LDAP login response
+        if($ldap_login === true) {
+            /* collect userid using username from person table */
+            $username = $request->input('username');
+            $person = Person::where('nmrbox_acct', $username)->first();
+            if (!$person) {
+                return response()->json([
+                    'message' => Lang::get('auth/message.account_not_found'),
+                    'type' => 'error'
+                ], 401);
             }
-        /*} catch (\Illuminate\Database\QueryException $e) {
-            //dd($e);
-            return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
-        }*/
+
+
+            // Adding JWT-Auth Token
+            $token = JWTAuth::fromUser($person);
+            $set_token = JWTAuth::setToken($token);
+            $parse_token = JWTAuth::getToken();
+
+            if ($parse_token == true) {
+                // Assigning user classification
+                $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
+                foreach ($user_classification as $key => $value) {
+                    if ($value->name == 'admin') {
+                        $is_admin = true;
+                    }
+                }
+            }
+
+            // Adding person table information into session
+            $user_data = array(
+                'token' => $token,
+                'user_is_admin' => ($is_admin == true ? true : false),
+                'person_id' => Session::getId(),
+                'user' => $person->id,
+                'message' => Lang::get('auth/message.login.success'),
+                'type' => 'success'
+            );
+            $request->session()->push('person', $user_data);
+
+            if( Session::has('user_is_admin') === true ) {
+                Redirect::to('admin/people')->with('success', 'You have successfully logged in!');
+            } else {
+                Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
+            }
+        } else {
+            return redirect()->back()->withError(Lang::get('auth/message.login.error'));
+        }
     }
 
     /**
@@ -810,7 +856,6 @@ class FrontEndController extends Controller
                 // Fetching the user data from person table
                 $user_id = $value['user'];
                 $person = Person::where('id', $user_id)->get()->first();
-                //$person[] = ;
                 // TODO: needs to update person session key with session ID.
                 Session::put('token', $session_payload['person'][$key]);
                 Session::put('person', $person);
@@ -899,25 +944,6 @@ class FrontEndController extends Controller
                     'type' => 'error'
                 ], 400);
             }
-        /*} catch (\Illuminate\Database\QueryException $e) {
-            return response()->json([
-                'message' => Lang::get('auth/message.account_not_found'),
-                'type' => 'error'
-            ], 400);
-        } catch (\ErrorException $e) {
-            // trigger an email to support@nmrbox.org
-            $data = array("Password malfunction detected.");
-
-            // Send the registration acknowledge email
-            Mail::send('emails.server-malfunction', $data, function ($m) {
-                $m->to(env('NMRBOX_SUPPORT_EMAIL'));
-                $m->subject('Buildserver malfunction detected');
-            });
-            return response()->json([
-                'message' => Lang::get('auth/message.server_conn_error'),
-                'type' => 'error'
-            ], 401);
-        }*/
     }
 
     /**

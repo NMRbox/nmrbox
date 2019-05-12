@@ -33,7 +33,27 @@ class ChandraController extends Controller {
 
     public function showHome()
     {
-        return View::make('admin/index');
+        /*if( Session::has( 'username' ) || Session::has( 'user' ) ) {
+            $person = Person::where( (Session::has( 'username' ) ? ['nmrbox_acct' => Session::get('username')] : ['id' => Session::get('user')]))->first();
+            Session::put('person', $person);
+        }*/
+
+        if( Session::has( 'person' ) ) {
+            $person_session = Session::get('person');
+
+            $auth = new FrontEndController();
+            $auth->sessionPlayLoad($person_session['user']);
+        }
+
+        if ( Session::get('user_is_admin') === true ) {
+            return View::make('admin/index');
+        } else {
+            return response()->json([
+                'message' => Lang::get('auth/message.login.error'),
+                'type' => 'error'
+            ], 400);
+        }
+
     }
 
     public function showHomepage($name=null)
