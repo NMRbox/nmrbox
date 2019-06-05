@@ -275,22 +275,25 @@ class FrontEndController extends Controller
            if(!$person) {
                return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
            } else {
-	           // Flush person session and adding person table information into session
-	           if( Session::has( 'person' ) ) {
-		           Session::flush();
-	           }
-	           Session::put('person', $person);
 
-	           // Adding JWT-Auth Token
-	           $token = JWTAuth::fromUser($person);
-	           JWTAuth::setToken($token);
-	           JWTAuth::getToken();
 
 	           // Assigning user classification
 	           $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
 	           foreach ($user_classification as $key => $value) {
 		           if ($value->name == 'admin') {
 			           $is_admin = true;
+
+			           // Flush person session and adding person table information into session
+			           if( Session::has( 'person' ) ) {
+				           Session::flush();
+			           }
+			           Session::put('person', $person);
+
+			           // Adding JWT-Auth Token
+			           $token = JWTAuth::fromUser($person);
+			           JWTAuth::setToken($token);
+			           JWTAuth::getToken();
+
 			           Session::put('user_is_admin', $is_admin);
 		           }
 	           }
