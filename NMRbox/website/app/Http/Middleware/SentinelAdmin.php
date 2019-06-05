@@ -26,7 +26,7 @@ class SentinelAdmin {
 		echo "<pre>";
 		print_r(Session::all());
 		echo "</pre>";
-		die;
+
 		if ( Session::has( 'user_is_admin' ) === false ) {
 			var_dump(Session::has('user_id_admin'));
 			// Destroying the session
@@ -34,6 +34,7 @@ class SentinelAdmin {
 
 			return Redirect::route( 'login' );
 		}
+		die;
 
 		return $next( $request );
 	}
