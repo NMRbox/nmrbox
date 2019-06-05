@@ -254,31 +254,31 @@ class FrontEndController extends Controller
 
         // LDAP login response
         if($ldap_login === true) {
-            /* collect userid using username from person table */
-            $username = $request->input('username');
-            $person = Person::where('nmrbox_acct', $username)->first();
-            if (!$person) {
-                return response()->json([
-                    'message' => Lang::get('auth/message.account_not_found'),
-                    'type' => 'error'
-                ], 401);
-            }
+			/* collect userid using username from person table */
+			$username = $request->input('username');
+			$person = Person::where('nmrbox_acct', $username)->first();
+			if (!$person) {
+			    return response()->json([
+			        'message' => Lang::get('auth/message.account_not_found'),
+			        'type' => 'error'
+			    ], 401);
+			}
 
 
-           // collect userid using username from person table
-           $username = $request->input('username');
-           $person = Person::where('nmrbox_acct', $username)->first();
+			// collect userid using username from person table
+			$username = $request->input('username');
+			$person = Person::where('nmrbox_acct', $username)->first();
 
-           // Initializing admin access as false.
-           $is_admin = false;
+			// Initializing admin access as false.
+			$is_admin = false;
 
-           if(!$person) {
-               return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
-           } else {
-	           	// Assigning user classification
-	           $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
-	           foreach ($user_classification as $key => $value) {
-		           if ($value->name == 'admin') {
+			if(!$person) {
+			   return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
+			} else {
+			    // Assigning user classification
+			   $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
+			   foreach ($user_classification as $key => $value) {
+			       if ($value->name == 'admin') {
 			           $is_admin = true;
 
 			           // Flush person session and adding person table information into session
@@ -293,19 +293,15 @@ class FrontEndController extends Controller
 			           JWTAuth::getToken();
 
 			           Session::put('user_is_admin', $is_admin);
-		           }
-	           }
-           }
-           echo "<pre>";
-           print_r(Session::all());
-           echo "</pre>";
-           die;
+			       }
+			   }
+			}
 
-            if( $is_admin === true ) {
-                return Redirect::to('admin/')->with('success', 'You have successfully logged in!');
-            } else {
-                return Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
-            }
+			if( $is_admin === true ) {
+			    return Redirect::to('admin/')->with('success', 'You have successfully logged in!');
+			} else {
+			    return Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
+			}
         } else {
             return redirect()->back()->withError(Lang::get('auth/message.login.error'));
         }
