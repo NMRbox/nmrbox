@@ -298,6 +298,10 @@ class FrontEndController extends Controller
 		           }
 	           }
            }
+           echo "<pre>";
+           print_r(Session::all());
+           echo "</pre>";
+           die;
 
             if( $is_admin === true ) {
                 return Redirect::to('admin/')->with('success', 'You have successfully logged in!');
