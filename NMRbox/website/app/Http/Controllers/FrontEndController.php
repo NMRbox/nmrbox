@@ -216,10 +216,6 @@ class FrontEndController extends Controller
         } else {
             $user['username'] = null;
         }
-        echo "<pre>";
-        print_r(Session::all());
-        echo "</pre>";
-        die;
 
         // Show the login page
         return View::make('login', compact('user'));
