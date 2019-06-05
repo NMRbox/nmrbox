@@ -23,20 +23,12 @@ class SentinelAdmin {
 			Session::put( 'username', $request->username );
 		}
 
-		echo "<pre>";
-		print_r(Session::all());
-		echo "</pre>";
-
 		if ( Session::has( 'user_is_admin' ) === false ) {
-			var_dump(Session::get('user_id_admin'));
-			var_dump(Session::has('user_id_admin'));
-			die;
 			// Destroying the session
 			Session::flush();
 
 			return Redirect::route( 'login' );
 		}
-
 
 		return $next( $request );
 	}
