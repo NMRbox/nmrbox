@@ -29,12 +29,13 @@ class SentinelAdmin {
 
 		if ( Session::has( 'user_is_admin' ) === false ) {
 			var_dump(Session::has('user_id_admin'));
+			die;
 			// Destroying the session
 			Session::flush();
 
 			return Redirect::route( 'login' );
 		}
-		die;
+
 
 		return $next( $request );
 	}
