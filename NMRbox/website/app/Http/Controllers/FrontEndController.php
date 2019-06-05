@@ -275,9 +275,7 @@ class FrontEndController extends Controller
            if(!$person) {
                return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
            } else {
-
-
-	           // Assigning user classification
+	           	// Assigning user classification
 	           $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
 	           foreach ($user_classification as $key => $value) {
 		           if ($value->name == 'admin') {
