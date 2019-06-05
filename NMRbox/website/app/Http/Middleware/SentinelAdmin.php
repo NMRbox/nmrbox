@@ -28,6 +28,7 @@ class SentinelAdmin {
 		echo "</pre>";
 
 		if ( Session::has( 'user_is_admin' ) === false ) {
+			var_dump(Session::get('user_id_admin'));
 			var_dump(Session::has('user_id_admin'));
 			die;
 			// Destroying the session
