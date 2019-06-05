@@ -268,66 +268,33 @@ class FrontEndController extends Controller
            // collect userid using username from person table
            $username = $request->input('username');
            $person = Person::where('nmrbox_acct', $username)->first();
-           if(!$person) {
-               return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
-           }
 
-           // Flush person session and adding person table information into session
-           if( Session::has( 'person' ) ) {
-               Session::flush();
-           }
-           Session::put('person', $person);
-
-           // Adding JWT-Auth Token
-           $token = JWTAuth::fromUser($person);
-           $set_token = JWTAuth::setToken($token);
-           $parse_token = JWTAuth::getToken();
-
+           // Initializing admin access as false.
            $is_admin = false;
 
-           if ($parse_token == true) {
-               // Assigning user classification
-               $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
-               foreach ($user_classification as $key => $value) {
-                   if ($value->name == 'admin') {
-                       $is_admin = true;
-                       Session::put('user_is_admin', $is_admin);
-                   }
+           if(!$person) {
+               return redirect()->back()->withError(Lang::get('auth/message.account_not_found'));
+           } else {
+	           // Flush person session and adding person table information into session
+	           if( Session::has( 'person' ) ) {
+		           Session::flush();
+	           }
+	           Session::put('person', $person);
 
-                   /*if (Session::has('user_is_admin') === true) {
-                       Redirect::to('admin/people')->with('success', 'You have successfully logged in!');
-                   } else {
-                       Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
-                   }*/
-               }
+	           // Adding JWT-Auth Token
+	           $token = JWTAuth::fromUser($person);
+	           JWTAuth::setToken($token);
+	           JWTAuth::getToken();
+
+	           // Assigning user classification
+	           $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
+	           foreach ($user_classification as $key => $value) {
+		           if ($value->name == 'admin') {
+			           $is_admin = true;
+			           Session::put('user_is_admin', $is_admin);
+		           }
+	           }
            }
-
-
-            /*// Adding JWT-Auth Token
-            $token = JWTAuth::fromUser($person);
-            $set_token = JWTAuth::setToken($token);
-            $parse_token = JWTAuth::getToken();
-
-            if ($parse_token == true) {
-                // Assigning user classification
-                $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
-                foreach ($user_classification as $key => $value) {
-                    if ($value->name == 'admin') {
-                        $is_admin = true;
-                    }
-                }
-            }
-
-            // Adding person table information into session
-            $user_data = [
-                'token' => $token,
-                'user_is_admin' => ($is_admin === true ? true : false),
-                'person_id' => Session::getId(),
-                'user' => $person->id,
-                'message' => Lang::get('auth/message.login.success'),
-                'type' => 'success'
-            ];
-            $request->session()->push('person', $user_data);*/
 
             if( $is_admin === true ) {
                 return Redirect::to('admin/')->with('success', 'You have successfully logged in!');
@@ -383,13 +350,6 @@ class FrontEndController extends Controller
         }
 
         $person = Person::where('id', Session::get('person')->id)->get()->first();
-        //dd($user);
-
-        // taking user information from token and skipping Sentinel check
-        /*$user = Sentinel::getUser();
-        dd($user);
-        // the person attached to the user
-        $person = Person::where('id', $user->id)->get()->first();*/
 
         // fetching all classification groups
         $classifications = Classification::All();
@@ -412,8 +372,6 @@ class FrontEndController extends Controller
      */
     public function editProfile()
     {
-        //dd(Session::get('person')->id);
-        //$user = Sentinel::getUser();
         $user = Session::get('person');
 
         // person details
