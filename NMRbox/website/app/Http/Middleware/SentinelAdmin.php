@@ -27,7 +27,8 @@ class SentinelAdmin {
 			// Destroying the session
 			Session::flush();
 
-			return Redirect::route( 'login' );
+			//return Redirect::route( 'login' );
+			return Redirect::to('login')->with('error', 'You are not authorized to access admin portal!');
 		}
 
 		return $next( $request );
