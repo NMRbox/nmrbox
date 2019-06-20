@@ -808,10 +808,15 @@ class FrontEndController extends Controller
         $session_payload = unserialize(base64_decode($session_data->payload));
 
         // Replacing session variable for cross domain access
-        foreach ( $session_payload as $key => $value ) {
+        foreach ( $session_payload as $key => $data ) {
 		  echo "<pre>";
-		  print_r($value['person']);
+		  print_r($data);
 		  echo "</pre>";
+		  foreach ( $data as $key =>  $value ) {
+		  	echo "<pre>";
+		  	print_r($value['person_id']);
+		  	echo "</pre>";
+		  }
 		    /*if( $value == $id ) {
                 // Fetching the user data from person table
                 $user_id = $value['user'];
