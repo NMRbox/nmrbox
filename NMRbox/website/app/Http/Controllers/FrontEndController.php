@@ -806,21 +806,10 @@ class FrontEndController extends Controller
 
         // Retrieving session payload
         $session_payload = unserialize(base64_decode($session_data->payload));
-        echo "<pre>";
-        print_r($id);
-        echo "</pre>";
-        echo "<pre>";
-        print_r($session_payload);
-        echo "</pre>";
-
 
         // Replacing session variable for cross domain access
-        foreach ( $session_payload['person'] as $key => $value ) {
-			echo "<pre>";
-			print_r($key);
-			print_r($value);
-			echo "</pre>";
-            /*if( $value == $id ) {
+        foreach ( $session_payload as $key => $value ) {
+		    if( $value['person_id'] == $id ) {
                 // Fetching the user data from person table
                 $user_id = $value['user'];
                 $person = Person::where('id', $user_id)->get()->first();
@@ -830,8 +819,11 @@ class FrontEndController extends Controller
                 if( $value['user_is_admin'] == true ) {
                     Session::put('user_is_admin', true);
                 }
-            }*/
+            }
         }
+        echo "<pre>";
+        print_r(Session::all());
+        echo "</pre>";
         die;
 
         return $person;
