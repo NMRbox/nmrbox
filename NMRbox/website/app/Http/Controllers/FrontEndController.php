@@ -808,21 +808,16 @@ class FrontEndController extends Controller
         $session_payload = unserialize(base64_decode($session_data->payload));
 
         // Replacing session variable for cross domain access
-        foreach ( $session_payload as $key => $data ) {
-		  echo "<pre>";
-		  print_r($data);
-		  echo "</pre>";
-		  if( is_array($data)) {
-
-		  foreach ( $data as $value ) {
-		  	echo "<pre>";
-		  	print_r($value['person_id']);
-		  	echo "</pre>";
-		  }
-		  }
-		    /*if( $value == $id ) {
+        foreach ( $session_payload['person'] as $key => $value ) {
+        	echo "<pre>";
+        	print_r($key);
+        	echo "</pre>";
+        	echo "<pre>";
+        	print_r('- ' . $value);
+        	echo "</pre>";
+		    /*if( $key == 'person_id' && $value == $id ) {
                 // Fetching the user data from person table
-                $user_id = $value['user'];
+                $user_id = $['user'];
                 $person = Person::where('id', $user_id)->get()->first();
                 // TODO: needs to update person session key with session ID.
                 Session::put('token', $session_payload['person'][$key]);
@@ -832,9 +827,6 @@ class FrontEndController extends Controller
                 }
             }*/
         }
-        /*echo "<pre>";
-        print_r(Session::all());
-        echo "</pre>";*/
         die;
 
         return $person;
