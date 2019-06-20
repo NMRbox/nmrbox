@@ -285,22 +285,8 @@ class FrontEndController extends Controller
 			           if( Session::has( 'person' ) ) {
 				           Session::flush();
 			           }
+			           // Assigning session var.
 			           Session::put('person', $person);
-
-				       // Adding JWT-Auth Token
-				       /*$token = JWTAuth::fromUser($person);
-				       JWTAuth::setToken($token);
-				       JWTAuth::getToken();
-
-				       $user_data = array(
-					       'token' => $token,
-					       'user_is_admin' => $is_admin,
-					       'person_id' => Session::getId(),
-					       'user' => $person->id,
-					       'message' => Lang::get('auth/message.login.success'),
-					       'type' => 'success'
-				       );
-				       session::put('person', $user_data);*/
 				       Session::put('user_is_admin', $is_admin);
 			       }
 			   }
@@ -871,40 +857,32 @@ class FrontEndController extends Controller
 			    foreach ($user_classification as $key => $value) {
 				    if ($value->name == 'admin') {
 					    $is_admin = true;
-
-					    // Flush person session and adding person table information into session
-					    if( Session::has( 'person' ) ) {
-						    Session::flush();
-					    }
-					    Session::put('person', $person);
-
-					    // Adding JWT-Auth Token
-					    $token = JWTAuth::fromUser($person);
-					    JWTAuth::setToken($token);
-					    JWTAuth::getToken();
-
-					    $user_data = array(
-						    'token' => $token,
-						    'user_is_admin' => $is_admin,
-						    'person_id' => Session::getId(),
-						    'user' => $person->id,
-						    'message' => Lang::get('auth/message.login.success'),
-						    'type' => 'success'
-					    );
-					    session::put('person', $user_data);
-					    //Session::put('user_is_admin', $is_admin);
 				    }
+
+				    // Flush person session and adding person table information into session
+				    if( Session::has( 'person' ) ) {
+					    Session::flush();
+				    }
+				    Session::put('person', $person);
+
+				    // Adding JWT-Auth Token
+				    $token = JWTAuth::fromUser($person);
+				    JWTAuth::setToken($token);
+				    JWTAuth::getToken();
+
+				    $user_data = array(
+					    'token' => $token,
+					    'user_is_admin' => $is_admin,
+					    'person_id' => Session::getId(),
+					    'user' => $person->id,
+					    'message' => Lang::get('auth/message.login.success'),
+					    'type' => 'success'
+				    );
+				    session::put('person', $user_data);
 			    }
 		    }
 
-		    if( $is_admin === true ) {
-		    	return response()->json($user_data, 200);
-		    } else {
-		    	return response()->json([
-				    'message' => 'You are not authorized to access admin portal!',
-				    'type' => 'error'
-			    ], 401);
-		    }
+		    return response()->json($user_data, 200);
 	    } else {
 	    	return response()->json([
 			    'message' => Lang::get('auth/message.login.error'),
