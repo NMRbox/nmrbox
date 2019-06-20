@@ -807,13 +807,18 @@ class FrontEndController extends Controller
         // Retrieving session payload
         $session_payload = unserialize(base64_decode($session_data->payload));
         echo "<pre>";
+        print_r($id);
+        echo "</pre>";
+        echo "<pre>";
         print_r($session_payload);
         echo "</pre>";
-        die;
+
 
         // Replacing session variable for cross domain access
         foreach ( $session_payload['person'] as $key => $value ) {
-
+			echo "<pre>";
+			print_r($value);
+			echo "</pre>";
             if( $value['person_id'] == $id ) {
                 // Fetching the user data from person table
                 $user_id = $value['user'];
@@ -826,6 +831,7 @@ class FrontEndController extends Controller
                 }
             }
         }
+        die;
 
         return $person;
     }
