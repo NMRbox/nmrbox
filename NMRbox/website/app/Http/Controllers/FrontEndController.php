@@ -817,6 +817,7 @@ class FrontEndController extends Controller
         // Replacing session variable for cross domain access
         foreach ( $session_payload['person'] as $key => $value ) {
 			echo "<pre>";
+			print_r($value);
 			print_r($value['person_id']);
 			echo "</pre>";
             /*if( $value['person_id'] == $id ) {
