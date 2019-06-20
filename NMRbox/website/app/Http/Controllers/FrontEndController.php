@@ -288,7 +288,7 @@ class FrontEndController extends Controller
 			           Session::put('person', $person);
 
 				       // Adding JWT-Auth Token
-				       $token = JWTAuth::fromUser($person);
+				       /*$token = JWTAuth::fromUser($person);
 				       JWTAuth::setToken($token);
 				       JWTAuth::getToken();
 
@@ -300,7 +300,7 @@ class FrontEndController extends Controller
 					       'message' => Lang::get('auth/message.login.success'),
 					       'type' => 'success'
 				       );
-				       session::put('person', $user_data);
+				       session::put('person', $user_data);*/
 				       Session::put('user_is_admin', $is_admin);
 			       }
 			   }
