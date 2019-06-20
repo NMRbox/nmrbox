@@ -806,15 +806,16 @@ class FrontEndController extends Controller
 
         // Retrieving session payload
         $session_payload = unserialize(base64_decode($session_data->payload));
-        $person_session = [
-	        $session_payload['person']
-        ];
+        echo "<pre>";
+        print_r($session_payload);
+        echo "</pre>";
+        die;
 
         // Replacing session variable for cross domain access
-        foreach ( $person_session as $key => $value ) {
-		    if( $key == 'person_id' && $value == $id ) {
+        foreach ( $session_payload['person'] as $key => $value ) {
+		    if( $value['person_id'] == $id ) {
                 // Fetching the user data from person table
-                $user_id = $['user'];
+                $user_id = $value['user'];
                 $person = Person::where('id', $user_id)->get()->first();
                 // TODO: needs to update person session key with session ID.
                 Session::put('token', $session_payload['person'][$key]);
