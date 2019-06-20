@@ -811,7 +811,7 @@ class FrontEndController extends Controller
         echo "</pre>";
 
         // Replacing session variable for cross domain access
-	    if( ! emptty ($session_payload['person'] ) ) {
+	    if( ! empty ($session_payload['person'] ) ) {
 	    	$person_session_data = $session_payload['person'];
 	    	// Fetching the user data from person table
             $user_id = $person_session_data['user'];
