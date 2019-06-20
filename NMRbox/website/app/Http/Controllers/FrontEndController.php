@@ -287,12 +287,21 @@ class FrontEndController extends Controller
 			           }
 			           Session::put('person', $person);
 
-			           // Adding JWT-Auth Token
-			           $token = JWTAuth::fromUser($person);
-			           JWTAuth::setToken($token);
-			           JWTAuth::getToken();
+				       // Adding JWT-Auth Token
+				       $token = JWTAuth::fromUser($person);
+				       JWTAuth::setToken($token);
+				       JWTAuth::getToken();
 
-			           Session::put('user_is_admin', $is_admin);
+				       $user_data = array(
+					       'token' => $token,
+					       'user_is_admin' => $is_admin,
+					       'person_id' => Session::getId(),
+					       'user' => $person->id,
+					       'message' => Lang::get('auth/message.login.success'),
+					       'type' => 'success'
+				       );
+				       session::put('person', $user_data);
+				       //Session::put('user_is_admin', $is_admin);
 			       }
 			   }
 			}
@@ -891,21 +900,15 @@ class FrontEndController extends Controller
 		    }
 
 		    if( $is_admin === true ) {
-		    	echo "is_admin true";
-		    	die;
-			    return response()->json($user_data, 200);
+		    	return response()->json($user_data, 200);
 		    } else {
-		    	echo "is_admin_false";
-		    	die;
-			    return response()->json([
+		    	return response()->json([
 				    'message' => 'You are not authorized to access admin portal!',
 				    'type' => 'error'
 			    ], 401);
 		    }
 	    } else {
-	    	echo "ldap failed";
-	    	die;
-		    return response()->json([
+	    	return response()->json([
 			    'message' => Lang::get('auth/message.login.error'),
 			    'type' => 'error'
 		    ], 401);
