@@ -806,6 +806,10 @@ class FrontEndController extends Controller
 
         // Retrieving session payload
         $session_payload = unserialize(base64_decode($session_data->payload));
+        echo "<pre>";
+        print_r($session_payload);
+        echo "</pre>";
+        die;
 
         // Replacing session variable for cross domain access
         foreach ( $session_payload['person'] as $key => $value ) {
