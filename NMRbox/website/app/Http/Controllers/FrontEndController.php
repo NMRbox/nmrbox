@@ -302,6 +302,10 @@ class FrontEndController extends Controller
 				       );
 				       session::put('person', $user_data);*/
 				       Session::put('user_is_admin', $is_admin);
+				       echo "<pre>";
+				       print_r(Session::all());
+				       echo "</pre>";
+				       die;
 			       }
 			   }
 			}
