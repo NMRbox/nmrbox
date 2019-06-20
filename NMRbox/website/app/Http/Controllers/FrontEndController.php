@@ -817,10 +817,10 @@ class FrontEndController extends Controller
         // Replacing session variable for cross domain access
         foreach ( $session_payload['person'] as $key => $value ) {
 			echo "<pre>";
+			print_r($key);
 			print_r($value);
-			//print_r($value);
 			echo "</pre>";
-            if( $value == $id ) {
+            /*if( $value == $id ) {
                 // Fetching the user data from person table
                 $user_id = $value['user'];
                 $person = Person::where('id', $user_id)->get()->first();
@@ -830,7 +830,7 @@ class FrontEndController extends Controller
                 if( $value['user_is_admin'] == true ) {
                     Session::put('user_is_admin', true);
                 }
-            }
+            }*/
         }
         die;
 
