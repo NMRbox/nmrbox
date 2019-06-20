@@ -885,7 +885,7 @@ class FrontEndController extends Controller
 						    'type' => 'success'
 					    );
 					    session::put('person', $user_data);
-					    Session::put('user_is_admin', $is_admin);
+					    //Session::put('user_is_admin', $is_admin);
 				    }
 			    }
 		    }
