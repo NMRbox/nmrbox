@@ -305,12 +305,12 @@ class FrontEndController extends Controller
 				       echo "<pre>";
 				       print_r(Session::all());
 				       echo "</pre>";
-				       die;
+
 			       }
 			   }
 			}
 			echo "<pre>";
-			print_r($is_admin);
+			var_dump($is_admin);
 			echo "</pre>";
 			die;
 
