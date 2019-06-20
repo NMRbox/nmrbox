@@ -23,7 +23,7 @@ class SentinelAdmin {
 			Session::put( 'username', $request->username );
 		}
 
-		if ( Session::has( 'user_is_admin' ) === false || Session::has( 'person.user_is_admin' ) === false ) {
+		if ( Session::has( 'user_is_admin' ) === false ) {
 			// Destroying the session
 			Session::flush();
 
