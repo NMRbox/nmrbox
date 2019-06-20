@@ -812,10 +812,13 @@ class FrontEndController extends Controller
 		  echo "<pre>";
 		  print_r($data);
 		  echo "</pre>";
-		  foreach ( $data as $key =>  $value ) {
+		  if( is_array($data)) {
+
+		  foreach ( $data as $value ) {
 		  	echo "<pre>";
 		  	print_r($value['person_id']);
 		  	echo "</pre>";
+		  }
 		  }
 		    /*if( $value == $id ) {
                 // Fetching the user data from person table
