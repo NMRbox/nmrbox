@@ -836,62 +836,74 @@ class FrontEndController extends Controller
             ], 401);
         }
 
-        //try {
-            // Adding custom LDAP library class and authenticating
-            $ldap = new Ldap;
-            $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
+	    // Adding custom LDAP library class and authenticating
+	    $ldap = new Ldap;
+	    $ldap_login = $ldap->ldap_authenticate(Input::only('username', 'password'));
 
-            /* Test (Localhost login code to skip LDAP authentication) */
-            //$ldap_login = true;
-            /* Eof Test */
+	    /* Test (Localhost login code to skip LDAP authentication) */
+	    //$ldap_login = true;
+	    /* Eof Test */
 
-            // LDAP login response
-            if($ldap_login === true){
-                /* collect userid using username from person table */
-                $username = $request->input('username');
-                $person = Person::where('nmrbox_acct', $username)->first();
-                if(!$person) {
-                    return response()->json([
-                        'message' => Lang::get('auth/message.account_not_found'),
-                        'type' => 'error'
-                    ], 401);
-                }
+	    // LDAP login response
+	    if($ldap_login === true) {
+		    // collect userid using username from person table
+		    $username = $request->input('username');
+		    $person = Person::where('nmrbox_acct', $username)->first();
 
+		    // Initializing admin access as false.
+		    $is_admin = false;
 
-                // Adding JWT-Auth Token
-                $token = JWTAuth::fromUser($person);
-                $set_token = JWTAuth::setToken($token);
-                $parse_token = JWTAuth::getToken();
+		    if(!$person) {
+			    return response()->json([
+				    'message' => Lang::get('auth/message.account_not_found'),
+				    'type' => 'error'
+			    ], 401);
+		    } else {
+			    // Assigning user classification
+			    $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
+			    foreach ($user_classification as $key => $value) {
+				    if ($value->name == 'admin') {
+					    $is_admin = true;
 
-                if ($parse_token == true)
-                {
-                    // Assigning user classification
-                    $user_classification = ClassificationPerson::where('person_id', $person->id)->get();
-                    foreach ($user_classification as $key => $value) {
-                        if ($value->name == 'admin'){
-                            $is_admin = true;
-                        }
-                    }
-                }
+					    // Flush person session and adding person table information into session
+					    if( Session::has( 'person' ) ) {
+						    Session::flush();
+					    }
+					    Session::put('person', $person);
 
-                // Adding person table information into session
-                $user_data = array(
-                    'token' => $token,
-                    'user_is_admin' => ( $is_admin == true ? true : false ),
-                    'person_id' => Session::getId(),
-                    'user' => $person->id,
-                    'message' => Lang::get('auth/message.login.success'),
-                    'type' => 'success'
-                );
-                $request->session()->push('person', $user_data);
+					    // Adding JWT-Auth Token
+					    $token = JWTAuth::fromUser($person);
+					    JWTAuth::setToken($token);
+					    JWTAuth::getToken();
 
-                return response()->json($user_data, 200);
-            } else {
-                return response()->json([
-                    'message' => Lang::get('auth/message.login.error'),
-                    'type' => 'error'
-                ], 400);
-            }
+					    $user_data = array(
+						    'token' => $token,
+						    'user_is_admin' => $is_admin,
+						    'person_id' => Session::getId(),
+						    'user' => $person->id,
+						    'message' => Lang::get('auth/message.login.success'),
+						    'type' => 'success'
+					    );
+					    session::put('person', $user_data);
+					    Session::put('user_is_admin', $is_admin);
+				    }
+			    }
+		    }
+
+		    if( $is_admin === true ) {
+			    return response()->json($user_data, 200);
+		    } else {
+			    return response()->json([
+				    'message' => 'You are not authorized to access admin portal!',
+				    'type' => 'error'
+			    ], 401);
+		    }
+	    } else {
+		    return response()->json([
+			    'message' => Lang::get('auth/message.login.error'),
+			    'type' => 'error'
+		    ], 401);
+	    }
     }
 
     /**
