@@ -302,17 +302,9 @@ class FrontEndController extends Controller
 				       );
 				       session::put('person', $user_data);*/
 				       Session::put('user_is_admin', $is_admin);
-				       echo "<pre>";
-				       print_r(Session::all());
-				       echo "</pre>";
-
 			       }
 			   }
 			}
-			echo "<pre>";
-			var_dump($is_admin);
-			echo "</pre>";
-			die;
 
 			if( $is_admin === true ) {
 			    return Redirect::to('admin/')->with('success', 'You have successfully logged in!');
