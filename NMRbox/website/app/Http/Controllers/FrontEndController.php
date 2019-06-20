@@ -809,22 +809,23 @@ class FrontEndController extends Controller
         echo "<pre>";
         print_r($session_payload);
         echo "</pre>";
-        die;
 
         // Replacing session variable for cross domain access
-        foreach ( $session_payload['person'] as $key => $value ) {
-		    if( $value['person_id'] == $id ) {
-                // Fetching the user data from person table
-                $user_id = $value['user'];
-                $person = Person::where('id', $user_id)->get()->first();
-                // TODO: needs to update person session key with session ID.
-                Session::put('token', $session_payload['person'][$key]);
-                Session::put('person', $person);
-                if( $value['user_is_admin'] == true ) {
-                    Session::put('user_is_admin', true);
-                }
+	    if( ! emptty ($session_payload['person'] ) ) {
+	    	$person_session_data = $session_payload['person'];
+	    	// Fetching the user data from person table
+            $user_id = $person_session_data['user'];
+            $person = Person::where('id', $user_id)->get()->first();
+            Session::put('token', $person_session_data['token']);
+            Session::put('person', $person);
+            if( $person_session_data['user_is_admin'] == true ) {
+                Session::put('user_is_admin', true);
             }
-        }
+
+	    }
+		echo "<pre>";
+		print_r(Session::all());
+		echo "</pre>";
         die;
 
         return $person;
