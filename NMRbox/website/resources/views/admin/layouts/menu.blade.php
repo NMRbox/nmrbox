@@ -96,20 +96,6 @@
                 </li>
             </ul>
         </li>
-        {{--<li class="menu-dropdown {{ (Request::is('admin/users') || Request::is('admin/users/create') || Request::is('admin/users/*') || Request::is('admin/deleted_users') ? 'active' : '') }}">
-            <a href="#">
-                <i class="menu-icon  fa fa-fw fa-user"></i>
-                <span>Users</span>
-                <span class="fa arrow"></span>
-            </a>
-            <ul class="sub-menu">
-                <li {{ (Request::is('admin/users') ? 'class=active' : '') }}>
-                    <a href="{{ URL::to('admin/users') }}">
-                        Users
-                    </a>
-                </li>
-            </ul>
-        </li>--}}
         <li class="menu-dropdown {{ (Request::is('admin/vm') || Request::is('admin/vm/create') || Request::is('admin/vm/*') || Request::is('admin/vmdownload') || Request::is('admin/vmdownload/*') ? 'active' : '') }}">
             <a href="#">
                 <i class="menu-icon  fa fa-fw fa-cubes"></i>
@@ -122,11 +108,11 @@
                         VM Index
                     </a>
                 </li>
-                <li {{ (Request::is('admin/vmdownload') ? 'class=active' : '') }}>
+                {{--<li {{ (Request::is('admin/vmdownload') ? 'class=active' : '') }}>
                     <a href="{{ URL::to('admin/vmdownload') }}">
                         VM Downloads Index
                     </a>
-                </li>
+                </li>--}}
             </ul>
         </li>
         <li class="menu-dropdown {{ (Request::is('admin/workshop') || Request::is('admin/groups') ? 'active' : '') }}">
