@@ -68,6 +68,10 @@
       <span class="half-em">|</span>
       <a routerLink="/pages/overview">Center overview</a>
     </p>
+    <div *ngIf="announcements">
+      <h4>NMRbox announcements:</h4>
+      <span [innerHTML]="announcements | safeHtml"></span>
+    </div>
   </div>
 </section>
 <section id="home-software" class="page-section white-bg">

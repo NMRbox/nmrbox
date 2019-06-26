@@ -5,6 +5,7 @@ import {CommunityService} from '../community/community.service';
 import {AuthenticationService} from '../authentication/authentication.service';
 import {SoftwareService} from '../software/software.service';
 import {ResponsiveService} from '../responsive.service';
+import {StaticPageService} from '../static/static-page.service';
 
 class Banner {
   imageURL: string;
@@ -37,6 +38,7 @@ function choose(choices) {
 export class HomeComponent implements OnInit {
 
   appURL: string;
+  announcements: string;
   upcomingEvents: EventModel[];
   softwareTypeFrequency: Array<Array<string>>;
   bannerList: Array<Banner>;
@@ -66,7 +68,8 @@ export class HomeComponent implements OnInit {
   constructor(public communityService: CommunityService,
               public authService: AuthenticationService,
               public softwareService: SoftwareService,
-              public responsiveService: ResponsiveService) {
+              public responsiveService: ResponsiveService,
+              public staticPageService: StaticPageService) {
     this.upcomingEvents = [];
     this.softwareService.softwareTypeFrequency.subscribe(softwareTypeFrequency => {
       this.softwareTypeFrequency = softwareTypeFrequency;
@@ -76,6 +79,7 @@ export class HomeComponent implements OnInit {
       '60th ENC')];
     this.bannerList.push(choose(this.softwareBanners));
     this.bannerList.push(choose(this.softwareBanners));
+    this.announcements = null;
   }
 
   ngOnInit(): void {
@@ -83,6 +87,13 @@ export class HomeComponent implements OnInit {
 
     this.communityService.upcomingEvents.subscribe(upcomingEvents => {
       this.upcomingEvents = upcomingEvents;
+    });
+
+    this.staticPageService.getPageContent('announcements').then(response => {
+      // Make sure that there is an active announcement. (There are always some HTML tags.)
+      if (response['content'].length > 15) {
+        this.announcements = response['content'];
+      }
     });
   }
 
