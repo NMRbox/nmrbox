@@ -84,7 +84,7 @@
                   <div class="panel-body">
                     <div class="row">
 
-                      <div class=" col-md-12 col-lg-12 ">
+                      <div class="col-md-12 col-lg-12">
                         <table class="table table-user-information">
                           <tbody>
                           <tr>
@@ -106,12 +106,8 @@
                             <td>Current Password:</td>
                             <td>
                               <label>
-                                <input type="password" name="old_password" autocomplete="off" required ngModel>
+                                <input type="password" name="old_password" autocomplete="off" required ngModel appPassword>
                               </label>
-                              <span id="show_pass_box" style="cursor:pointer;">
-                                <i data-target="conf_pass" class="fa fa-eye fa-1x showHide"></i>
-                                <img data-target="conf_pass" src="/assets/graphics/sitewide/eye.svg" alt="An example icon" style="width:24px;height:24px" />
-                              </span>
                             </td>
                           </tr>
                           <tr *ngIf="showHide">
@@ -127,11 +123,8 @@
                             <td>
                               <label>
                                 <input type="password" name="new_password" class="password" autocomplete="off" ngModel
-                                       required>
+                                       required appPassword>
                               </label>
-                              <span style="cursor:pointer;">
-                                <img data-target="conf_pass" src="/assets/graphics/sitewide/eye.svg" alt="An example icon" style="width:24px;height:24px" />
-                              </span>
                             </td>
                           </tr>
                           <tr *ngIf="showHide">
@@ -139,11 +132,8 @@
                             <td>
                               <label>
                                 <input type="password" name="conf_password" class="password" autocomplete="off" ngModel
-                                       required>
+                                       required appPassword>
                               </label>
-                              <span id="" style="cursor:pointer;">
-                                <img data-target="conf_pass" src="/assets/graphics/sitewide/eye.svg" alt="An example icon" style="width:24px;height:24px" />
-                              </span>
                             </td>
                           </tr>
 

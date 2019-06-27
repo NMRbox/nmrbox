@@ -9,7 +9,7 @@ import {
   MatButtonModule, MatCheckboxModule, MatInputModule,
   MatRadioModule, MatSelectModule, MatMenuModule, MatSidenavModule,
   MatToolbarModule, MatListModule, MatGridListModule, MatCardModule,
-  MatTabsModule, MatChipsModule, MatIconModule
+  MatTabsModule, MatChipsModule
 } from '@angular/material';
 
 // 3rd Party Modules
@@ -49,6 +49,7 @@ import {StaticPageService} from './static/static-page.service';
 import {EmbeddedStaticComponent} from './static/embedded-static.component';
 import {SafeHtmlPipe} from './pipes/safe-html.pipe';
 import {FilesComponent} from './files/files.component';
+import {AppPasswordDirective} from './app-password.directive';
 
 @NgModule({
   imports: [
@@ -57,7 +58,7 @@ import {FilesComponent} from './files/files.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule, MatCheckboxModule, MatInputModule, MatRadioModule, MatSelectModule, MatMenuModule, MatSidenavModule, MatToolbarModule,
-    MatListModule, MatGridListModule, MatTabsModule, MatCardModule, MatChipsModule, MatIconModule,
+    MatListModule, MatGridListModule, MatTabsModule, MatCardModule, MatChipsModule,
     SwiperModule,
     AppRoutingModule,
     CommonModule,
@@ -80,7 +81,8 @@ import {FilesComponent} from './files/files.component';
     SupportComponent,
     EmbeddedStaticComponent,
     SafeHtmlPipe,
-    FilesComponent
+    FilesComponent,
+    AppPasswordDirective
   ],
   providers: [
     SoftwareService,
