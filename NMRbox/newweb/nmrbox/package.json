@@ -30,7 +30,7 @@
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "angular2-useful-swiper": "^4.0.3",
-    "axios": "^0.16.2",
+    "axios": "^0.19.0",
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
     "codelyzer": "^4.5.0",
